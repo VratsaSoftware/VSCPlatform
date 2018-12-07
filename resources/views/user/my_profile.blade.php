@@ -102,18 +102,45 @@
 								<p class="edit-social"><input type="text" id="dribbble" name="dribbble" value="{{$social->link}}"></p>
 							@endif
 							@if($social->SocialName->name == 'behance')
-							<a href="{{$social->link}}" class="behance"><img src="./images/profile/behance-icon.svg" alt="be"></a>
-							<p class="edit-social"><input type="text" id="behance" name="behance" value="{{$social->link}}"></p>
+								<a href="{{$social->link}}" class="behance"><img src="./images/profile/behance-icon.svg" alt="be"></a>
+								<p class="edit-social"><input type="text" id="behance" name="behance" value="{{$social->link}}"></p>
 							@endif
 						@endforeach
 					</div>
 					<button type="submit" name="submit" value="submit" class="edit-btn btn btn-success social-edit">
 							<i class="fas fa-pencil-alt"></i>
 						</button>
+						<a href="#modal" class="btn btn-success add-social">
+							<i class="fas fa-plus"></i>
+						</a>
 				</div>
 			</div>
 		</div>
 	</div>
+
+	<!-- modal for adding social -->
+    <div id="modal">
+                <div class="modal-content print-body">
+                  <div class="modal-header">
+                    <h2></h2>
+                  </div>
+                  <div class="copy text-center">
+                    
+                    <p>
+                      <select name="add-social" id="add-social">
+                      </select>
+                    </p>
+
+                    </form>
+                  </div>
+                  <div class="cf footer">
+                    <div><i class="fas fa-print fa-2x"></i></div>
+                    <a href="#" class="btn close-modal">Затвори</a>
+                  </div>
+            </div>
+            <div class="overlay"></div>
+          </div>
+  <!-- end of modal -->
 
 	<div class="section">
 		<div class="courses col-md-12 d-flex flex-row flex-wrap justify-content-between">
