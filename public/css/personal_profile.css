@@ -57,6 +57,7 @@ body{
   width: 3vw;
   margin-right: 1vw;
   border-radius: 50%;
+  max-height: 3vw;
 }
 
 .navbar-nav > li:nth-child(1){

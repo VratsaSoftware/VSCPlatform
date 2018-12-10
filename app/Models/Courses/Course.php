@@ -9,6 +9,7 @@ use App\Models\Courses\CourseLecturer;
 class Course extends Model
 {
     protected $table = 'courses';
+    protected $dates = ['starts','ends'];
 
     public function Modules(){
     	return $this->hasMany(CourseModule::class);

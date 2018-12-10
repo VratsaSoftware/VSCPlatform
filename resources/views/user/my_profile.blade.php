@@ -46,7 +46,13 @@
 						</button></div>
 				<div class="col-md-6 header-pic">
 					<div class="col-md-12">
-						<img src="{{asset('images/user-pics/'.Auth::user()->picture)}}" alt="profile-pic" class="profile-pic">
+						@if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
+							<img src="{{asset('images/women-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
+						@elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
+							<img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
+						@else
+							<img src="{{asset('images/user-pics/'.Auth::user()->picture)}}" alt="profile-pic" class="profile-pic">
+						@endif
 						<button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
 							<i class="fas fa-pencil-alt"></i>
 						</button>
@@ -76,73 +82,63 @@
 							<i class="fas fa-pencil-alt"></i>
 						</button>
 				</div>
-
+				<script type="text/javascript">
+					function loadSocialSrc(name,link){
+						$('.'+name).attr('href',link);
+						$('#'+name).val(link);
+					}
+				</script>
 				<div class="col-md-4 header-contacts text-right">
 					<div class="col-md-12">
-						
+						<a href="#" class="facebook"><img src="./images/profile/facebook-icon.svg" alt="fb"></a>
+						<p class="edit-social"><input type="text" id="facebook" name="facebook" value=""></p>
+						<a href="#" class="linkedin"><img src="./images/profile/linkdin-icon.svg" alt="li"></a>
+						<p class="edit-social"><input type="text" id="linkedin" name="linkedin" value=""></p>
+						<a href="#" class="github"><img src="./images/profile/github-icon.svg" alt="gh"></a>
+						<p class="edit-social"><input type="text" id="github" name="github" value=""></p>
+						<a href="#" class="skype"><img src="./images/profile/skype-icon.svg" alt="sk"></a>
+						<p class="edit-social"><input type="text" id="skype" name="skype" value=""></p>
+						<a href="#" class="dribbble"><img src="./images/profile/dribble-icon.svg" alt="dr"></a>
+						<p class="edit-social"><input type="text" id="dribbble" name="dribbble" value=""></p>
+						<a href="#" class="behance"><img src="./images/profile/behance-icon.svg" alt="be"></a>
+						<p class="edit-social"><input type="text" id="behance" name="behance" value=""></p>
 						@foreach($social_links as $social)
 							@if($social->SocialName->name == 'facebook')
-								<a href="{{$social->link}}" class="facebook"><img src="./images/profile/facebook-icon.svg" alt="fb"></a>
-								<p class="edit-social"><input type="text" id="facebook" name="facebook" value="{{$social->link}}"></p>
-							@endif
-							@if($social->SocialName->name == 'linkedin')
-								<a href="{{$social->link}}" class="linkedin"><img src="./images/profile/linkdin-icon.svg" alt="li"></a>
-							<p class="edit-social"><input type="text" id="linkedin" name="linkedin" value="{{$social->link}}"></p>
-							@endif
-							@if($social->SocialName->name == 'github')
-								<a href="{{$social->link}}" class="github"><img src="./images/profile/github-icon.svg" alt="gh"></a>
-								<p class="edit-social"><input type="text" id="github" name="github" value="{{$social->link}}"></p>
-							@endif
-							@if($social->SocialName->name == 'skype')
-								<a href="{{$social->link}}" class="skype"><img src="./images/profile/skype-icon.svg" alt="sk"></a>
-								<p class="edit-social"><input type="text" id="skype" name="skype" value="{{$social->link}}"></p>
-							@endif
-							@if($social->SocialName->name == 'dribbble')
-								<a href="{{$social->link}}" class="dribbble"><img src="./images/profile/dribble-icon.svg" alt="dr"></a>
-								<p class="edit-social"><input type="text" id="dribbble" name="dribbble" value="{{$social->link}}"></p>
-							@endif
-							@if($social->SocialName->name == 'behance')
-								<a href="{{$social->link}}" class="behance"><img src="./images/profile/behance-icon.svg" alt="be"></a>
-								<p class="edit-social"><input type="text" id="behance" name="behance" value="{{$social->link}}"></p>
+								<script type="text/javascript">
+									loadSocialSrc('facebook','{!! $social->link !!}');
+								</script>
+							@elseif($social->SocialName->name == 'linkedin')
+								<script type="text/javascript">
+									loadSocialSrc('linkedin','{!! $social->link !!}');
+								</script>
+							@elseif($social->SocialName->name == 'github')
+								<script type="text/javascript">
+									loadSocialSrc('github','{!! $social->link !!}');
+								</script>
+							@elseif($social->SocialName->name == 'skype')
+								<script type="text/javascript">
+									loadSocialSrc('skype','{!! $social->link !!}');
+								</script>
+							@elseif($social->SocialName->name == 'dribbble')
+								<script type="text/javascript">
+									loadSocialSrc('dribbble','{!! $social->link !!}');
+								</script>
+							@elseif($social->SocialName->name == 'behance')
+								<script type="text/javascript">
+									loadSocialSrc('behance','{!! $social->link !!}');
+								</script>
 							@endif
 						@endforeach
 					</div>
 					<button type="submit" name="submit" value="submit" class="edit-btn btn btn-success social-edit">
 							<i class="fas fa-pencil-alt"></i>
 						</button>
-						<a href="#modal" class="btn btn-success add-social">
-							<i class="fas fa-plus"></i>
-						</a>
 				</div>
 			</div>
 		</div>
 	</div>
-
-	<!-- modal for adding social -->
-    <div id="modal">
-                <div class="modal-content print-body">
-                  <div class="modal-header">
-                    <h2></h2>
-                  </div>
-                  <div class="copy text-center">
-                    
-                    <p>
-                      <select name="add-social" id="add-social">
-                      </select>
-                    </p>
-
-                    </form>
-                  </div>
-                  <div class="cf footer">
-                    <div><i class="fas fa-print fa-2x"></i></div>
-                    <a href="#" class="btn close-modal">Затвори</a>
-                  </div>
-            </div>
-            <div class="overlay"></div>
-          </div>
-  <!-- end of modal -->
-
-	<div class="section">
+	@forelse($certificates as $certificate)
+     			<div class="section">
 		<div class="courses col-md-12 d-flex flex-row flex-wrap justify-content-between">
 
 			<div class="col-md-6 left-card d-flex flex-row flex-wrap text-center">
@@ -262,6 +258,9 @@
 			</div>
 		</div>
 	</div>
+    @empty
+    
+    @endforelse
 
 	<div class="section">
 	<div class="stats col-md-12 d-flex flex-row flex-wrap justify-content-between">
@@ -575,5 +574,21 @@
 			$('.alert').toggle("slide");
 		},4000);
 	});
+</script>
+
+<script type="text/javascript">
+ function imagePreview(input){
+ var ext = input.files[0]['name'].substring(input.files[0]['name'].lastIndexOf('.') + 1).toLowerCase();
+if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")){
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        $('.profile-pic').attr('src', e.target.result);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+}else{
+     alert('Файлът трябва да е картинка/снимка!');
+}
+}
 </script>
 @endsection

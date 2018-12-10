@@ -23,7 +23,7 @@ $(document).ready(function(){
 			var oldText = $(this).prev('span').text();
 			if($(this).parent().find('img').hasClass('profile-pic') && !$(this).parent().find('img').hasClass('edit-img')){
 				$(this).parent().find('img').addClass('edit-img');
-				$(this).parent().find('img').after('<p class="input-img"><input type="file" id="picture" name="picture"></p>');
+				$(this).parent().find('img').after('<p class="input-img"><input type="file" id="picture" name="picture" onChange="imagePreview(this);"></p>');
 				$(this).find('i').removeClass('fa-pencil-alt').addClass('fa-save');
 				$(this).removeClass('edit-btn');
 				e.preventDefault();

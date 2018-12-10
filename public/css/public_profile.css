@@ -353,6 +353,7 @@ body{
 	.header-pic > div > img{
 		min-width: 25vw;
 		max-width: 25vw;
+		max-height: 25vw
 	}
 
 	.header-pic{

@@ -84,15 +84,22 @@ class UserController extends Controller
             'email' => ['sometimes','unique:users']
         ]);
         if(Input::hasFile('picture')){
-            $userPic=Input::file('picture');
+            $userPic = Input::file('picture');
             $image = Image::make($userPic->getRealPath());
-            $name=time()."_".$userPic->getClientOriginalName();
+            $name = time()."_".$userPic->getClientOriginalName();
+            $name = str_replace(' ', '', $name);
+            $name = md5($name);
             $oldImage = public_path().'/images/user-pics/'.$user->picture;
             if(File::exists($oldImage)) {
                 File::delete($oldImage);
             }
             $user->picture = $name;
-            $image->save(public_path().'/images/user-pics/'.$name,60);
+            if ($userPic->getClientOriginalExtension() == 'gif') {
+                copy($userPic->getRealPath(), public_path().'/images/user-pics/'.$name);
+            }
+            else {
+                $image->save(public_path().'/images/user-pics/'.$name,50);
+            }
         }
         if($request->has('name')){
             $name = explode(" ", $data['name']);
