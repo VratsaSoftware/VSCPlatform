@@ -121,6 +121,10 @@ class UserController extends Controller
         return redirect()->route('myProfile')->with('success', $message);
     }
 
+    public function updateEducation(Request $request){
+        dd($request);
+    }
+
     /**
      * Remove the specified resource from storage.
      *

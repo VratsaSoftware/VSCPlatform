@@ -21,5 +21,6 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/myProfile', 'HomeController@index')->name('myProfile');
 	Route::resource('user', 'Users\UserController')->names('user');
+	Route::post('/user/education/','Users\UserController@updateEducation')->name('update.education');
 });
 

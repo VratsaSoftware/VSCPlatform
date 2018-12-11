@@ -10,6 +10,7 @@ use App\Models\Courses\Course;
 use App\Models\Courses\CourseModule;
 use App\Models\Courses\CourseLecturer;
 use App\Models\Users\SocialLink;
+use App\Models\Users\EducationType;
 
 class HomeController extends Controller
 {
@@ -23,17 +24,25 @@ class HomeController extends Controller
         $userId = Auth::user()->id;
         $isAdmin = Auth::user()->isAdmin();
         $isLecturer = Auth::user()->isLecturer();
-        $isOnCourse = Course::with('Modules','Modules.ModulesStudent','Modules.ModulesStudent.User')->whereHas('Modules.ModulesStudent',function ($query) use($userId) {
-            $query->where('user_id',$userId);
-        })->get();
-        $socialLinks = SocialLink::with('SocialName')->where('user_id',$userId)->get();
+        $hasEducation = Auth::user()->hasEducation();
+        $hasCertification = Auth::user()->hasCertification();
+        $isOnCourse = Auth::user()->isOnCourse();
+        $socialLinks = Auth::user()->getSocialLinks();
+
+        $educationTypes = EducationType::all();
+        $education = [];
         $certificates = [];
-        if(Auth::user()->hasCertification()){
+        $course = [];
+        if($hasEducation){
+            $education = Auth::user()->getEducation();
+        }
+        if($hasCertification){
             $certificates = Auth::user()->getCertificates();
         }
-        if(!$isOnCourse->isEmpty()){
-            return view('user.my_profile',['courses' => $isOnCourse,'social_links' => $socialLinks,'certificates' => $certificates]);
+        if($isOnCourse){
+            $course = Auth::user()->getCourse();
         }
+
         if($isAdmin){
             $courses = Course::all();
             return view('user.my_profile',['courses' => $courses,'social_links' => $socialLinks,'certificates' => $certificates]);
@@ -44,6 +53,6 @@ class HomeController extends Controller
             })->get();
             return view('user.my_profile',['courses' => $courses,'social_links' => $socialLinks,'certificates' => $certificates]);
         }
-        return view('user.my_profile',['courses' => [],'social_links' => $socialLinks,'certificates' => $certificates]);
+        return view('user.my_profile',['courses' => $course,'social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes]);
     }
 }

@@ -330,7 +330,15 @@ input:checked + .slider:before {
 }
 
 .edu-type{
+  margin-top: 1vw;
+  margin-bottom: 1vw;
+  text-align: center;
   font-weight: bold;
+  border-radius: 5px !important;
+}
+
+.edit-edu{
+  display: none;
 }
 /*end of switch*/
 /*end of header*/

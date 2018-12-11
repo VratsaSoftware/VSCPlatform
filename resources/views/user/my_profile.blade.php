@@ -77,7 +77,7 @@
 
 				<div class="col-md-4 mail">
 					<img src="./images/mail-icon.png" alt="mail-icon" class="img-fluid">
-					<span class="mail-txt">{{ucfirst(Auth::user()->email)}}</span>
+					<span class="mail-txt">{{Auth::user()->email}}</span>
 					<button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
 							<i class="fas fa-pencil-alt"></i>
 						</button>
@@ -129,6 +129,7 @@
 								</script>
 							@endif
 						@endforeach
+
 					</div>
 					<button type="submit" name="submit" value="submit" class="edit-btn btn btn-success social-edit">
 							<i class="fas fa-pencil-alt"></i>
@@ -136,15 +137,21 @@
 				</div>
 			</div>
 		</div>
+		</form>
 	</div>
-	@forelse($certificates as $certificate)
-     			<div class="section">
+		
+		<!-- certifications boxes -->
+     	<div class="section">
 		<div class="courses col-md-12 d-flex flex-row flex-wrap justify-content-between">
-
+			@forelse($certificates as $certificate)
 			<div class="col-md-6 left-card d-flex flex-row flex-wrap text-center">
 				<div class="col-md-12 left-card-wrap">
 					<div class="col-md-12 left-title">
-						<span>Програмиране</span>
+						@if(!is_null($certificate['Courses']))
+							<span>{{ mb_strtoupper($certificate['Courses']->name) }}</span>
+						@else
+							<span>{{ mb_strtoupper($certificate->course_name) }}</span>
+						@endif
 						<span class="title-icons">
 							<img src="./images/profile/tick-icon.png" alt="tick" class="img-fluid">
 						</span>
@@ -187,19 +194,39 @@
 					</div>
 
 					<div class="col-md-12 left-bold">
-						<span>ПРОГРАМИРАНЕ</span><br/>
-						<span>Уеб Разработка с PHP</span>
+						<br/>
+						@if(!is_null($certificate['Courses']))
+							<span>{{ mb_strtoupper($certificate['Courses']->name) }}</span>
+						@else
+							<span>{{ mb_strtoupper($certificate->course_name) }}</span>
+						@endif
 					</div>
 
-					<div class="col-md-12 left-stats">
-						<span>Юни 2019</span>
-
-						<span>Лектор: Емилиян Кадийски</span>
+					<div class="col-md-12 left-stats d-flex flex-row flex-wrap">
+						<div class="col-md-4 text-left">
+						@if(!is_null($certificate['Courses']))
+							<span>{{ mb_strtoupper($certificate['Courses']->starts->format('Y-m-d')) }}</span>
+							<br/>
+							<span>{{ mb_strtoupper($certificate['Courses']->ends->format('Y-m-d')) }}</span>
+						@else
+							<span>{{ mb_strtoupper($certificate->started->format('Y-m-d')) }} - {{ mb_strtoupper($certificate->finished->format('Y-m-d')) }}</span>
+						@endif
+						</div>
+						
+						<div class="col-md-8 text-center d-flex flex-row flex-wrap">
+						@forelse ($certificate['Courses']['Lecturers'] as $lecturer)
+						    <span class="col-md-8 text-right">Лектор:</span>
+						    <span class="col-md-4 text-right" style="padding:0"> {{$lecturer['User']->name}} {{$lecturer['User']->last_name}}</span>
+						    <br/>
+						@empty
+						    <span></span>
+						@endforelse
+						</div>
 					</div>
 				</div>
 			</div>
 
-			<div class="col-md-6 right-card d-flex flex-row flex-wrap text-center">
+			<!-- <div class="col-md-6 right-card d-flex flex-row flex-wrap text-center">
 				<div class="col-md-12 right-card-wrap">
 					<div class="col-md-12 right-title">
 						<span>Програмиране</span>
@@ -255,13 +282,13 @@
 						<span>Лектор: Емилиян Кадийски</span>
 					</div>
 				</div>
-			</div>
+			</div> -->
+			@empty
+    
+   			@endforelse
 		</div>
 	</div>
-    @empty
     
-    @endforelse
-
 	<div class="section">
 	<div class="stats col-md-12 d-flex flex-row flex-wrap justify-content-between">
 		<div class="col-md-4 d-flex flex-row flex-wrap text-center stats-box-wrap">
@@ -307,16 +334,46 @@
 				</div>
 
 				<div class="col-md-12 stats-text">
-					<span class="edu">
-						<span class="edu-from-old">2010/10/10</span> - <span class="edu-to">2010/11/11</span> <br>
-						<span class="edu-type">Висше</span> <br> 
-						<span class="edu-place">Философия СУ Климент Охридски</span>
-					</span><br/>
-					<span class="edu">
-						<span class="edu-from-old">2010/10/10</span> - <span class="edu-to">2010/10/10</span> <br>
-						<span class="edu-type">Основно</span> <br> 
-						<span class="edu-place">Философия СУ Климент Охридски</span>
-					</span><br/>
+					<form action="{{route('update.education')}}" id="edu-form" name="edu-form" method="POST">
+						
+					{{ csrf_field() }}
+					@forelse ($education as $edu)
+					    <span class="edu">
+							<span class="live-edu">{{$edu->y_from->format('Y-m-d')}}</span> - <span class="live-edu">{{$edu->y_to->format('Y-m-d')}}</span> <br>
+								<input type="date" id="y_from" name="y_from" class="edu-type edit-edu" value="{{$edu->y_from->format('Y-m-d') ?? null}}"><br/>
+								<input type="date" id="y_to" name="y_to" class="edu-type edit-edu" value="{{$edu->y_to->format('Y-m-d') ?? null}}"><br/>
+
+							<span class="edu-type live-edu">{{$edu['EduType']->type}}</span> <br>
+								<select id="edu-type" name="edu-type" class="edu-type edit-edu">
+									@forelse ($eduTypes as $type)
+										@if($edu->cl_education_type_id === $type->id)
+											<option value="{{$type->id}}" selected>{{$type->type}}</option>
+										@else
+											<option value="{{$type->id}}">{{$type->type}}</option>
+										@endif
+									@empty
+										<option value="0" disabled selected>няма опции</option>
+									@endforelse
+								</select>
+
+							<span class="edu-type live-edu">{{$edu['EduInstitution']->type}} {{$edu['EduInstitution']->name}}</span><br>
+								<select name="edu-institution-type" id="edu-institution-type" class="edu-type edit-edu">
+									@foreach(Config::get('institutionTypes') as $type)
+										<option value="{{$type}}">{{$type}}</option>
+									@endforeach
+								</select>
+								<input type="text" id="institution_name" name="institution_name" value="{{$edu['EduInstitution']->name}}" class="edu-type edit-edu">
+
+							<span class="live-edu">Специалност :<br/> {{$edu['EduSpeciality']->name}}</span><br>
+								<input type="text" name="specialty" id="specialty" value="{{$edu['EduSpeciality']->name}}" class="edu-type edit-edu">
+							<span class="live-edu">Коментар :<br/> {{$edu->description}}</span><br>
+								<textarea name="edu-description" id="edu-description" placeholder="{{$edu->description}}" style="overflow:auto;resize:none" rows="5" class="edit-edu" form="edu-form"></textarea>
+						</span><br/>
+						<p><button id="submit" name="submit" value="запази" class="btn btn-success edit-edu submit-edu"><i class="fas fa-save"></i></button></p>
+					@empty
+					    <span class="edu">Няма въведена информация</span>
+					@endforelse
+					</form>
 				</div>
 			</div>
 		</div>

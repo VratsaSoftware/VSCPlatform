@@ -11,7 +11,7 @@ class UserEducationTypeSeeder extends Seeder
      */
     public function run()
     {
-        $types = ['vocational education','bachelor','master','phd'];
+        $types = ['Средно Образование','Професионално Образование','Бакалавър','Магистърска Степен','Докторска степен'];
         foreach ($types as $key => $type) {
             App\Models\Users\EducationType::create([
                 'type' => $type,

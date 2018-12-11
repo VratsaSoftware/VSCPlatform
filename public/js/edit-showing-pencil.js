@@ -106,19 +106,24 @@ $(document).ready(function(){
 			var elements = $(this).parent().parent().parent().parent().parent().find('.stats-text').find('.edu');
 			if(!$(this).hasClass('edit-opened')){
 				$(this).addClass('edit-opened');
-
-				elements.each(function( index ) {
-				  $(this).append('<div class="edu-boxes"><p>От:<br><input type="date" name="edu-from" value="'+$(this).find('edu-from').html()+'"></p><p>До:<br><input type="date" name="edu-то"></p><p>Образование:<br><select id="edu-type"><option>Основно</option><option>Средно</option><option>Висше</option><option>Друго</option></select></p><p><textarea placeholder="институция, у-ще, университет ...."></textarea></p><p><img src="./images/profile/add-icon.png" width="10%" height="10%" class="add-text"></p></div>');
-				});
-				$(this).parent().parent().parent().parent().parent().find('.stats-text').append('<p><button class="btn btn-success save-edit-box">запази</button></p>');
+				$('.live-edu').fadeOut();
+				$('.edit-edu').fadeIn();
+				// elements.each(function( index ) {
+				//   $(this).append('<div class="edu-boxes"><p>От:<br><input type="date" name="edu-from" value="'+$(this).find('edu-from').html()+'"></p><p>До:<br><input type="date" name="edu-то"></p><p>Образование:<br><select id="edu-type"><option>Основно</option><option>Средно</option><option>Висше</option><option>Друго</option></select></p><p><textarea placeholder="институция, у-ще, университет ...."></textarea></p><p><img src="./images/profile/add-icon.png" width="10%" height="10%" class="add-text"></p></div>');
+				// });
+				// $(this).parent().parent().parent().parent().parent().find('.stats-text').append('<p><button class="btn btn-success save-edit-box">запази</button></p>');
 			}else{
 				$(this).removeClass('edit-opened');
 				
 			}
 
 			$('.add-text').on('click', function(){
-				console.log($(this).parent().parent().html());
+				// console.log($(this).parent().parent().html());
 				$(this).parent().parent().append($(this).parent().parent().clone(true));
 			});
 		});
+
+		// $('.submit-edu').on('click', function(e){
+		// 	$('#edu-form').submit();
+		// });
 	})

@@ -11,7 +11,7 @@ class CourseLecturer extends Model
     protected $table = 'courses_lecturers';
 
     public function User(){
-    	return $this->belongsToMany(User::class);
+    	return $this->hasOne(User::class,'id','user_id');
     }
 
     public function Courses(){

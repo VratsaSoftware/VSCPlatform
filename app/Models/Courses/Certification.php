@@ -13,14 +13,14 @@ class Certification extends Model
     protected $dates = ['started','finished'];
 
     public function Users(){
-    	return $this->hasMany(User::class);
+    	return $this->hasMany(User::class,'id','user_id');
     }
 
     public function Courses(){
-    	return $this->hasMany(Course::class);
+    	return $this->hasOne(Course::class,'id','course_id');
     }
 
     public function Modules(){
-    	return $this->hasMany(Modules::class);
+    	return $this->hasMany(Modules::class,'id','module_id');
     }
 }

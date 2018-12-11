@@ -17,6 +17,7 @@ class CreateCourseCertificationsTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();
             $table->integer('course_id')->unsigned()->nullable();
+            $table->string('course_name')->nullable();
             $table->string('name')->nullable();
             $table->string('last_name')->nullable();
             $table->dateTime('started')->nullable();
@@ -24,6 +25,7 @@ class CreateCourseCertificationsTable extends Migration
             $table->string('lecturers')->nullabe();
             $table->bigInteger('score')->nullabe();
             $table->enum('is_module',['1','0'])->default('0');
+            $table->string('module_name')->nullable();
             $table->integer('module_id')->unsigned()->nullable();
             $table->longText('certification_number');
             $table->timestamps();

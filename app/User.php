@@ -9,6 +9,10 @@ use App\Models\Users\Role;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Courses\CourseLecturer;
 use App\Models\Courses\Certification;
+use App\Models\Courses\Course;
+use App\Models\Courses\CourseModule;
+use App\Models\Users\Education;
+use App\Models\Users\SocialLink;
 
 class User extends Authenticatable
 {
@@ -50,6 +54,28 @@ class User extends Authenticatable
         return true;
     }
 
+    public function isOnCourse(){
+        $userId = Auth::user()->id;
+        $isOnCourse = Course::with('Modules','Modules.ModulesStudent','Modules.ModulesStudent.User')->whereHas('Modules.ModulesStudent',function ($query) use($userId) {
+            $query->where('user_id',$userId);
+        })->get();
+        if(!$isOnCourse->isEmpty()){
+            return true;
+        }
+        return false;
+    }
+
+    public function getCourse(){
+        $userId = Auth::user()->id;
+        return Course::with('Modules','Modules.ModulesStudent','Modules.ModulesStudent.User')->whereHas('Modules.ModulesStudent',function ($query) use($userId) {
+            $query->where('user_id',$userId);
+        })->get();
+    }
+
+    public function getSocialLinks(){
+        return SocialLink::with('SocialName')->where('user_id',Auth::user()->id)->get();
+    }
+
     public function isLecturer(){
         $isLecturer = CourseLecturer::where('user_id',Auth::user()->id)->first();
         if($isLecturer){
@@ -67,6 +93,18 @@ class User extends Authenticatable
     }
 
     public function getCertificates(){
-        return Certification::where('user_id',Auth::user()->id)->get();
+        return Certification::with('Users','Courses.Lecturers.User','Modules')->where('user_id',Auth::user()->id)->get();
+    }
+
+    public function hasEducation(User $user = null){
+        $findEdu = Education::where('user_id',Auth::user()->id)->get();
+        if(!$findEdu->isEmpty()){
+            return true;
+        }
+        return false;
+    }
+
+    public function getEducation(){
+        return Education::with('Users','EduType','EduInstitution','EduSpeciality')->where('user_id',Auth::user()->id)->get();
     }
 }
