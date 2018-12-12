@@ -3,6 +3,18 @@ body{
 	padding: 0;
 	background: #F7F7F7;
 }
+body::-webkit-scrollbar {
+    width: 1em;
+}
+ 
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+body::-webkit-scrollbar-thumb {
+  background-color: #1B8500;
+  outline: 1px solid slategrey;
+}
 
 @font-face {
 	font-family: Ubuntu;
@@ -128,10 +140,32 @@ body{
 }
 
 .stats-text{
-	margin-top: 2vw;
+	margin-top: 7vw;
 	color: #919AA3;
 	padding-left: 5vw;
     padding-right: 5vw;
+    height: 20vw;
+    overflow-y: auto;
+}
+
+.stats-text::-webkit-scrollbar {
+    width: 3px;
+}
+ 
+.stats-text::-webkit-scrollbar-track {
+	border-radius: 4px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+ 
+.stats-text::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: #1B8500;
+  outline: 1px solid slategrey;
+}
+
+.edu-comment{
+	display: block;
+    overflow-wrap: break-word;
 }
 
 .stats-text > span:nth-child(1){

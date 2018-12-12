@@ -123,7 +123,20 @@ $(document).ready(function(){
 			});
 		});
 
-		// $('.submit-edu').on('click', function(e){
-		// 	$('#edu-form').submit();
-		// });
+		$('.create-btn').on('click', function(e){
+			e.preventDefault();
+			$('.edu-no-info').fadeOut();
+			$(this).fadeOut();
+			$('.create-form').fadeIn();
+		});
+
+		$('.edu-add-new').on('click', function(e){
+			e.preventDefault();
+			$('.edu-no-info').fadeOut();
+			$(this).fadeOut();
+			if($('.create-form').is(":visible")){
+				$('.create-form').last().after($('.create-form').first().clone(true));
+			}
+			$('.create-form').fadeIn();
+		});
 	})

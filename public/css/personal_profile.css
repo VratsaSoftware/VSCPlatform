@@ -340,6 +340,20 @@ input:checked + .slider:before {
 .edit-edu{
   display: none;
 }
+
+.create-btn{
+  margin-top: 1vw;
+}
+.live-edu{
+  display: block;
+}
+.create-form{
+  display: none;
+}
+
+.edu-y-from, .edu-y-to{
+  display: inline-block;
+}
 /*end of switch*/
 /*end of header*/
 

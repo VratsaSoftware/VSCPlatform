@@ -334,17 +334,16 @@
 				</div>
 
 				<div class="col-md-12 stats-text">
-					<form action="{{route('update.education')}}" id="edu-form" name="edu-form" method="POST">
-						
-					{{ csrf_field() }}
 					@forelse ($education as $edu)
+					<form action="{{route('update.education')}}" id="edu-form" name="edu-form" method="POST" class="update_form">
+						{{ csrf_field() }}
 					    <span class="edu">
-							<span class="live-edu">{{$edu->y_from->format('Y-m-d')}}</span> - <span class="live-edu">{{$edu->y_to->format('Y-m-d')}}</span> <br>
+							<span class="edu-type live-edu edu-y-from">{{$edu->y_from->format('Y-m-d')}}&nbsp;/&nbsp;</span><span class="edu-type live-edu edu-y-to">{{$edu->y_to->format('Y-m-d')}}</span> <br>
 								<input type="date" id="y_from" name="y_from" class="edu-type edit-edu" value="{{$edu->y_from->format('Y-m-d') ?? null}}"><br/>
 								<input type="date" id="y_to" name="y_to" class="edu-type edit-edu" value="{{$edu->y_to->format('Y-m-d') ?? null}}"><br/>
 
-							<span class="edu-type live-edu">{{$edu['EduType']->type}}</span> <br>
-								<select id="edu-type" name="edu-type" class="edu-type edit-edu">
+							<span class="live-edu">{{$edu['EduType']->type}}</span> <br>
+								<select id="edu_type" name="edu_type" class="edu-type edit-edu">
 									@forelse ($eduTypes as $type)
 										@if($edu->cl_education_type_id === $type->id)
 											<option value="{{$type->id}}" selected>{{$type->type}}</option>
@@ -357,23 +356,76 @@
 								</select>
 
 							<span class="edu-type live-edu">{{$edu['EduInstitution']->type}} {{$edu['EduInstitution']->name}}</span><br>
-								<select name="edu-institution-type" id="edu-institution-type" class="edu-type edit-edu">
+								<select name="edu_institution_type" id="edu_institution_type" class="edu-type edit-edu">
 									@foreach(Config::get('institutionTypes') as $type)
-										<option value="{{$type}}">{{$type}}</option>
+										@if((string)$edu['EduInstitution']->type === (string)$type)
+											<option value="{{$type}}" selected>{{$type}}</option>
+										@else
+											<option value="{{$type}}">{{$type}}</option>
+										@endif
 									@endforeach
 								</select>
 								<input type="text" id="institution_name" name="institution_name" value="{{$edu['EduInstitution']->name}}" class="edu-type edit-edu">
 
-							<span class="live-edu">Специалност :<br/> {{$edu['EduSpeciality']->name}}</span><br>
-								<input type="text" name="specialty" id="specialty" value="{{$edu['EduSpeciality']->name}}" class="edu-type edit-edu">
-							<span class="live-edu">Коментар :<br/> {{$edu->description}}</span><br>
-								<textarea name="edu-description" id="edu-description" placeholder="{{$edu->description}}" style="overflow:auto;resize:none" rows="5" class="edit-edu" form="edu-form"></textarea>
+							<span class="live-edu">Специалност :</span><br/>
+							@if(isset($edu['EduSpeciality']->name))
+								<span class="edu-type live-edu">{{$edu['EduSpeciality']->name}}</span><br>
+									<input type="text" name="specialty" id="specialty" value="{{$edu['EduSpeciality']->name}}" class="edu-type edit-edu">
+							@else
+								<span class="edu-type live-edu">няма</span><br/>
+								<input type="text" name="specialty" id="specialty" value="няма" class="edu-type edit-edu">
+							@endif
+							<span class="live-edu">Коментар :</span><br/>
+							<span class="edu-type live-edu edu-comment">{{$edu->description}}</span><br>
+								<textarea name="edu_description" id="edu_description" placeholder="{{$edu->description}}" style="overflow:auto;resize:none" rows="5" class="edit-edu" form="edu-form">{{$edu->description}}</textarea>
 						</span><br/>
-						<p><button id="submit" name="submit" value="запази" class="btn btn-success edit-edu submit-edu"><i class="fas fa-save"></i></button></p>
+
+						<input type="hidden" id="edu_id" name="edu_id" value="{{$edu->id}}">
+
+						<button id="submit" name="submit" value="запази" class="btn btn-success edit-edu submit-edu"><i class="fas fa-save"></i></button><button class="btn btn-info edit-edu edu-add-new"><i class="fas fa-plus"></i></button>
+						</form>
+						<br/>
+							<form action="{{ route('delete.education',$edu->id) }}" method="POST" onsubmit="return ConfirmDelete()" id="delete-edu">
+	                       {{ method_field('DELETE') }}
+	                       {{ csrf_field() }}
+	                       <button type="submit" class="btn btn-danger edit-edu" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
+	            			</form>
 					@empty
-					    <span class="edu">Няма въведена информация</span>
+					    <span class="edu edu-no-info">Няма въведена информация</span><br>
+					    <button class="btn btn-success create-btn"><i class="fas fa-plus"></i></button>
 					@endforelse
-					</form>
+					<span class="create-form">
+							<form action="{{route('create.education')}}" id="edu-form" name="edu-form" method="POST">
+							{{ csrf_field() }}
+					    	Година от:
+					    	<input type="date" id="y_from" name="y_from" class="edu-type" value=""><br/>
+					    	Година до:
+							<input type="date" id="y_to" name="y_to" class="edu-type" value="" ><br/>
+							
+							<select id="edu_type" name="edu_type" class="edu-type">
+								@forelse ($eduTypes as $type)
+									<option value="{{$type->id}}">{{$type->type}}</option>
+								@empty
+									<option value="0" disabled selected>няма опции</option>
+								@endforelse
+							</select>
+							
+							<select name="edu_institution_type" id="edu_institution_type" class="edu-type">
+								@foreach(Config::get('institutionTypes') as $type)
+									<option value="{{$type}}">{{$type}}</option>
+								@endforeach
+							</select>
+							
+							<input type="text" name="institution_name" id="institution_name" value="" class="edu-type" placeholder="име на институцията...">
+
+							<input type="text" name="specialty" id="specialty" value="" class="edu-type" placeholder="специалност...">
+
+							<textarea name="edu_description" id="edu_description" placeholder="коментар..." style="overflow:auto;resize:none" rows="5" class="" form="edu-form-create"></textarea>
+
+							<p><button id="submit" name="submit" value="запази" class="btn btn-success"><i class="fas fa-save"></i></button> <button class="btn btn-info edit-edu edu-add-new"><i class="fas fa-plus"></i></button></p>
+							</form>
+					    </span>
+					
 				</div>
 			</div>
 		</div>
@@ -648,4 +700,14 @@ if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jp
 }
 }
 </script>
+<script>
+      function ConfirmDelete()
+      {
+          var x = confirm("Сигурни ли сте че искате да изтриете ?");
+          if (x)
+            return true;
+        else
+            return false;
+     }
+</script> 
 @endsection

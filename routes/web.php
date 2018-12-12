@@ -21,6 +21,8 @@ Auth::routes();
 Route::group(['middleware' => 'auth'], function () {
 	Route::get('/myProfile', 'HomeController@index')->name('myProfile');
 	Route::resource('user', 'Users\UserController')->names('user');
-	Route::post('/user/education/','Users\UserController@updateEducation')->name('update.education');
+	Route::post('/user/update/education/','Users\UserController@updateEducation')->name('update.education');
+	Route::post('/user/create/education/','Users\UserController@createEducation')->name('create.education');
+	Route::delete('/user/delete/education/{education}','Users\UserController@deleteEducation')->name('delete.education');
 });
 

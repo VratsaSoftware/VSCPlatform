@@ -28,4 +28,19 @@ class Education extends Model
     public function EduSpeciality(){
     	return $this->hasOne(EducationSpeciality::class,'id','specialty_id');
     }
+
+    public static function isExisting($userId, $request){
+        $isExisting = Education::where([
+            ['user_id',$userId],
+            ['y_from',$request->y_from],
+            ['y_to',$request->y_to],
+            ['cl_education_type_id',$request->edu_type],
+            ['institution_id',$request->institution_id],
+            ['specialty_id',$request->specialty_id],
+        ])->first();
+        if(is_null($isExisting) || empty($isExisting)){
+            return false;
+        }
+        return true;
+    }
 }
