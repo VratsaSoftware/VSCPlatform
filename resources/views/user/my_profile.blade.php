@@ -292,7 +292,7 @@
 	<div class="section">
 	<div class="stats col-md-12 d-flex flex-row flex-wrap justify-content-between">
 		<div class="col-md-4 d-flex flex-row flex-wrap text-center stats-box-wrap">
-			<div class="col-md-12 stats-box">
+			<div class="col-md-12 stats-box edu-wrapper">
 				<div class="col-md-12 stats-title">
 					<span>Образование</span>
 					<span class="edit-right-menu"><i class="fas fa-ellipsis-v"></i></span>
@@ -304,12 +304,16 @@
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
-								  <input type="checkbox">
+								  @if(Auth::user()->isVisible('образование'))
+								   <input type="checkbox" class="edu-visibility" checked>
+								  @else
+									<input type="checkbox" class="edu-visibility">
+								  @endif
 								  <span class="slider round"></span>
 								</label>
 							</div>
 
-							<div class="col-md-8">
+							<!-- <div class="col-md-8">
 									<span class="public-switch">Публично видимо</span> 
 							</div>
 							<div class="col-md-4">
@@ -317,7 +321,7 @@
 								  <input type="checkbox">
 								  <span class="slider round"></span>
 								</label>
-							</div>
+							</div> -->
 
 							<div class="col-md-8">
 								<span class="public-switch">Редакция</span> 
@@ -365,8 +369,9 @@
 										@endif
 									@endforeach
 								</select>
-								<input type="text" id="institution_name" name="institution_name" value="{{$edu['EduInstitution']->name}}" class="edu-type edit-edu">
-
+								<input type="text" id="institution_name" name="institution_name" value="{{$edu['EduInstitution']->name}}" class="edu-type edit-edu institution_name">
+								<p class="suggestion-ins-name"></p>
+								<span class="autocomplete-inst-name"></span>
 							<span class="live-edu">Специалност :</span><br/>
 							@if(isset($edu['EduSpeciality']->name))
 								<span class="edu-type live-edu">{{$edu['EduSpeciality']->name}}</span><br>
@@ -709,5 +714,55 @@ if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jp
         else
             return false;
      }
-</script> 
+</script>
+<script>
+	$('.edu-visibility').on('change', function(){
+		 var isChecked = $(this).is(":checked");
+
+		 ajaxVisibility('образование', isChecked);
+	});
+
+	function ajaxVisibility(type, visibility){
+		$.ajax({
+			headers: {
+    		   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  			},
+		    type: "POST",
+		    url: '/user/change/section/visibility',
+		    data:{type:type,visibility:visibility},
+		success: function(data, textStatus, xhr) {
+        	if(xhr.status == 200){
+        		
+        	}
+    	}
+    	});
+	}
+</script>
+
+<script type="text/javascript">
+	$('#institution_name').keypress(function(){
+		$.ajax({
+			headers: {
+    		   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+  			},
+		    type: "GET",
+		    url: '/user/institution/name/autocomplete',
+		    data:{search:this.value},
+		success: function(data, textStatus, xhr) {
+        	console.log(data);
+        	
+        	$.each(data, function() {
+			  $.each(this, function(k, v) {
+				$('#institution_name').next('p').append('<p class="auto-ins-name">'+v+'</p>');
+			  });
+			});
+    	}
+    	});
+
+    	$('.auto-ins-name').on('click', function(){
+    		$('#institution_name').val($(this).text());
+    	});
+	});
+
+</script>
 @endsection

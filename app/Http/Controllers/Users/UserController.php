@@ -19,6 +19,7 @@ use App\Models\Users\EducationType;
 use App\Models\Users\Education;
 use App\Models\Users\EducationInstitution;
 use App\Models\Users\EducationSpeciality;
+use App\Models\Users\VisibleInformation;
 
 class UserController extends Controller
 {
@@ -131,8 +132,8 @@ class UserController extends Controller
     {
         $request['valid_instTypes'] = \Config::get('institutionTypes');
         $data = $request->validate([
-            'y_from' => 'required|date_format:Y-m-d',
-            'y_to' => 'required|date_format:Y-m-d',
+            'y_from' => 'required|date|date_format:Y-m-d',
+            'y_to' => 'required|date|date_format:Y-m-d',
             'edu_type' => 'required|numeric',
             'edu_institution_type' => "required|in_array:valid_instTypes.*",
             'institution_name' => 'required|string',
@@ -171,8 +172,8 @@ class UserController extends Controller
     {
         $request['valid_instTypes'] = \Config::get('institutionTypes');
         $data = $request->validate([
-            'y_from' => 'required|date_format:Y-m-d',
-            'y_to' => 'required|date_format:Y-m-d',
+            'y_from' => 'required|date|date_format:Y-m-d',
+            'y_to' => 'required|date|date_format:Y-m-d',
             'edu_type' => 'required|numeric',
             'edu_institution_type' => "required|in_array:valid_instTypes.*",
             'institution_name' => 'required|string',
@@ -201,6 +202,42 @@ class UserController extends Controller
         $education->delete();
         $message = __('Успешно изтрито Образование!');
         return redirect()->route('myProfile')->with('success', $message);
+    }
+
+    public function changeVisibility(Request $request)
+    {   
+        $type = json_decode(json_encode($request->type));
+        $visibility = json_decode(json_encode($request->visibility));
+
+        if(in_array($type, \Config::get('userInformationTypes'))){
+            $changeVis = VisibleInformation::where([
+                    ['user_id', Auth::user()->id],
+                    ['information_type',$type]
+            ])->first();
+            if(!is_null($changeVis)){
+                $changeVis->visible = $visibility;
+                $changeVis->save();
+                return;
+            }
+            $insVis = new VisibleInformation;
+            $insVis->user_id = Auth::user()->id;
+            $insVis->information_type = $type;
+            $insVis->visible = $visibility;
+            $insVis->save();
+        }
+    }
+
+     public function institutionNameAutocomplete(Request $request)
+    {
+        $term = json_decode(json_encode($request->search));
+
+        $queries = EducationInstitution::where('name', 'like', '%'.$term.'%')->take(6)->get();
+
+        foreach ($queries as $query)
+        {
+            $results[] = ['name' => $query->name]; //you can take custom values as you want
+        }
+        return $results;
     }
 
     /**

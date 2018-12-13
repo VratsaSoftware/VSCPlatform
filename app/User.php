@@ -13,6 +13,7 @@ use App\Models\Courses\Course;
 use App\Models\Courses\CourseModule;
 use App\Models\Users\Education;
 use App\Models\Users\SocialLink;
+use App\Models\Users\VisibleInformation;
 
 class User extends Authenticatable
 {
@@ -106,5 +107,20 @@ class User extends Authenticatable
 
     public function getEducation(){
         return Education::with('Users','EduType','EduInstitution','EduSpeciality')->where('user_id',Auth::user()->id)->get();
+    }
+
+    public function isVisible($type){
+        if(in_array($type, \Config::get('userInformationTypes'))){
+            $visibleCheck = VisibleInformation::where([
+                    ['user_id', Auth::user()->id],
+                    ['information_type',$type],
+                    ['visible',true]
+            ])->first();
+            if(!is_null($visibleCheck)){
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 }

@@ -22,7 +22,6 @@ class CreateUsersEducationTable extends Migration
             $table->integer('institution_id')->unsigned()->nullable();
             $table->integer('specialty_id')->unsigned()->nullable();
             $table->longText('description')->nullable();
-            $table->enum('is_public',['1','0'])->default('0');
             $table->timestamps();
             $table->softDeletes();
 

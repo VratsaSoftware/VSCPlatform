@@ -47,6 +47,7 @@
 	<meta property="og:title"              content="Враца Софтуер Общество" />
 	<meta property="og:description"        content="Развиваме дигитална индустрия във Враца" />
 	<meta property="og:image"              content="./images/vso-logo-bg-original.png" />
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 </head>
 <body>
 	@include('layouts.top-bar')

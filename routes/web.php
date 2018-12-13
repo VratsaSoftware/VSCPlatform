@@ -24,5 +24,10 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::post('/user/update/education/','Users\UserController@updateEducation')->name('update.education');
 	Route::post('/user/create/education/','Users\UserController@createEducation')->name('create.education');
 	Route::delete('/user/delete/education/{education}','Users\UserController@deleteEducation')->name('delete.education');
+
+	//changing visibility of a user section
+	Route::post('/user/change/section/visibility', 'Users\UserController@changeVisibility');
+	//institution name autocomplete
+	Route::get('/user/institution/name/autocomplete','Users\UserController@institutionNameAutocomplete')->name('edu.institution');
 });
 

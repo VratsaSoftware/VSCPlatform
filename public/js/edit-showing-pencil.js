@@ -118,7 +118,6 @@ $(document).ready(function(){
 			}
 
 			$('.add-text').on('click', function(){
-				// console.log($(this).parent().parent().html());
 				$(this).parent().parent().append($(this).parent().parent().clone(true));
 			});
 		});
@@ -130,13 +129,17 @@ $(document).ready(function(){
 			$('.create-form').fadeIn();
 		});
 
+		var eduFormscloned = 0;
 		$('.edu-add-new').on('click', function(e){
 			e.preventDefault();
 			$('.edu-no-info').fadeOut();
-			$(this).fadeOut();
 			if($('.create-form').is(":visible")){
-				$('.create-form').last().after($('.create-form').first().clone(true));
+				$('.create-form').last().after($('.create-form').last().clone(true));
 			}
 			$('.create-form').fadeIn();
+			eduFormscloned++;
+			if(eduFormscloned > 5){
+				$('.edu-add-new').fadeOut();
+			}
 		});
 	})
