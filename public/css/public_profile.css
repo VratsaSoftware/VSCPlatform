@@ -144,8 +144,12 @@ body::-webkit-scrollbar-thumb {
 	color: #919AA3;
 	padding-left: 5vw;
     padding-right: 5vw;
-    height: 20vw;
+    height: 30vw;
     overflow-y: auto;
+}
+
+.soon-sections{
+	height: 20vw !important;
 }
 
 .stats-text::-webkit-scrollbar {
@@ -432,8 +436,8 @@ body::-webkit-scrollbar-thumb {
 	}
 
 	.stats-img{
-		margin-top: 3vw;
-		margin-bottom: 3vw;
+		margin-top: 5vw;
+		margin-bottom: 5vw;
 	}
 
 	.stats-text{
@@ -538,6 +542,10 @@ body::-webkit-scrollbar-thumb {
 	}
 
 	.stats-text{
-		font-size: 1vw;
+		font-size: 1.3vw;
+	}
+
+	.stats-box > div > img{
+		height: 4.5vw;
 	}
 }

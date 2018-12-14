@@ -375,7 +375,8 @@
 							<span class="live-edu">Специалност :</span><br/>
 							@if(isset($edu['EduSpeciality']->name))
 								<span class="edu-type live-edu">{{$edu['EduSpeciality']->name}}</span><br>
-									<input type="text" name="specialty" id="specialty" value="{{$edu['EduSpeciality']->name}}" class="edu-type edit-edu">
+									<input type="text" name="specialty" id="specialty" value="{{$edu['EduSpeciality']->name}}" class="edu-type edit-edu specialty">
+									<p class="suggestion-ins-name"></p>
 							@else
 								<span class="edu-type live-edu">няма</span><br/>
 								<input type="text" name="specialty" id="specialty" value="няма" class="edu-type edit-edu">
@@ -421,12 +422,13 @@
 								@endforeach
 							</select>
 							
-							<input type="text" name="institution_name" id="institution_name" value="" class="edu-type institution_name" placeholder="име на институцията...">
+							<input type="text" name="institution_name" id="institution_name" value="{{old('institution_name')}}" class="edu-type institution_name" placeholder="име на институцията...">
 							<p class="suggestion-ins-name"></p>
 
-							<input type="text" name="specialty" id="specialty" value="" class="edu-type" placeholder="специалност...">
+							<input type="text" name="specialty" id="specialty" value="{{old('specialty')}}" class="edu-type specialty" placeholder="специалност...">
+							<p class="suggestion-ins-name"></p>
 
-							<textarea name="edu_description" id="edu_description" placeholder="коментар..." style="overflow:auto;resize:none" rows="5" class="" form="edu-form-create"></textarea>
+							<textarea name="edu_description" id="edu_description" placeholder="коментар..." style="overflow:auto;resize:none" rows="5" class="" form="edu-form-create" value="{{old('edu_description')}}"></textarea>
 
 							<p><button id="submit" name="submit" value="запази" class="btn btn-success"><i class="fas fa-save"></i></button> <button class="btn btn-info edit-edu edu-add-new"><i class="fas fa-plus"></i></button></p>
 							</form>
@@ -577,8 +579,7 @@
 				</div>
 
 				<div class="col-md-12 stats-text">
-					<span>2006-2010 <br> Философия СУ Климент Охридски</span><br/>
-					<span>2010-2013 <br> Програмиране Различни онлайн курсове</span>
+					<img src="./images/soon.png" alt="coming-soon" class="img-fluid responsive soon-sections">
 				</div>
 			</div>
 		</div>
@@ -626,8 +627,7 @@
 				</div>
 
 				<div class="col-md-12 stats-text">
-					<span>2006-2010 <br> Философия СУ Климент Охридски</span><br/>
-					<span>2010-2013 <br> Програмиране Различни онлайн курсове</span>
+					<img src="./images/soon.png" alt="coming-soon" class="img-fluid responsive soon-sections">
 				</div>
 			</div>
 		</div>
@@ -675,8 +675,7 @@
 				</div>
 
 				<div class="col-md-12 stats-text">
-					<span>Модул 1<br> Отличие: 100%</span><br/>
-					<span>Модул 2 <br> Мн. Добър : 80%</span>
+					<img src="./images/soon.png" alt="coming-soon" class="img-fluid responsive soon-sections">
 				</div>
 			</div>
 		</div>
@@ -743,45 +742,85 @@ if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jp
 <script type="text/javascript">
 	$('.institution_name').bind('input keypress', function(){
 		var inputval = $(this).val();
+		var input = $(this);
 		inputval = inputval.length;
-		console.log(inputval);
+		var type = 'institution';
+		// console.log(inputval);
+		if(inputval > 3){
+			getSuggestions(input, inputval, type, $(this).val());
+		}
+
+    	$('.auto-ins-name').on('click', function(){
+    		$(this).prev('.institution_name').val($(this).text());
+    	});
+	});
+
+	$('.institution_name').keyup(function() {
+		var inputval = $(this).val();
+		inputval = inputval.length;
+		var input = $(this);
+		var type = 'institution';
+		// getSuggestions(input, inputval, type, $(this).val());
+		  if(!$(this).val() && inputval < 1 && inputval == 0){
+		  	$(this).next('.suggestion-ins-name').html('');
+		  }
+	});
+
+	//specialties suggestions
+	$('.specialty').bind('input keypress', function(){
+		var inputval = $(this).val();
+		var input = $(this);
+		inputval = inputval.length;
+		var type = 'specialty';
+		// console.log(inputval);
+		if(inputval > 3){
+			getSuggestions(input, inputval, type, $(this).val());
+		}
+
+    	$('.auto-ins-name').on('click', function(){
+    		$(this).parent().prev('.specialty').val($(this).text());
+    	});
+	});
+
+	$('.specialty').keyup(function() {
+		var inputval = $(this).val();
+		inputval = inputval.length;
+		var input = $(this);
+		var type = 'specialty';
+		// getSuggestions(input, inputval, type, $(this).val());
+		  if(!$(this).val() && inputval < 1 && inputval == 0){
+		  	$(this).next('.suggestion-ins-name').html('');
+		  }
+	});
+
+	//ajax call for suggestions accepts the input who needs suggestion, length of the letters, type of information, and the string to search for 
+	function getSuggestions(input, inputLength, type, search){
+		// console.log(search);
 		$.ajax({
 			headers: {
     		   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
   			},
 		    type: "GET",
-		    url: '/user/institution/name/autocomplete',
-		    data:{search:this.value},
+		    url: '/user/education/autocomplete',
+		    data:{search:search,type:type},
 			success: function(data, textStatus, xhr) {
-	        	// console.log(data.length);
+	        	// console.log(data);
 	        	
-	        	if(data.length > 0 && inputval > 0 && inputval !== 0){
-	        		$('#institution_name').next('p').html('');
+	        	if(data.length > 0 && inputLength > 0 && inputLength !== 0){
+	        		input.next('.suggestion-ins-name').html('');
 		        	$.each(data, function() {
 					  $.each(this, function(k, v) {
-						$('#institution_name').next('p').append('<p class="auto-ins-name">'+v+'</p>');
+						input.next('.suggestion-ins-name').append('<p class="auto-ins-name">'+v+'</p>');
 						$('.auto-ins-name').on('click', function(){
-				    		$('#institution_name').val($(this).text());
+				    		input.val($(this).text());
 				    	});
 					  });
 					});
 	        	}else{
-	        		$('#institution_name').next('p').html('');
+	        		input.next('.suggestion-ins-name').html('');
 	        	}
 	    	}
     	});
-
-    	$('.auto-ins-name').on('click', function(){
-    		$('#institution_name').val($(this).text());
-    	});
-	});
-
-	$('#institution_name').keyup(function() {
-		var inputval = $(this).val();
-		inputval = inputval.length;
-		  if(!$(this).val() && inputval < 1 && inputval == 0){
-		  	$('#institution_name').next('p').html('');
-		  }
-	});
+	}
 </script>
 @endsection

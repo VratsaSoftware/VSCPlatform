@@ -227,10 +227,22 @@ class UserController extends Controller
         }
     }
 
-     public function institutionNameAutocomplete(Request $request)
+     public function eduAutocomplete(Request $request)
     {
-        $term = json_decode(json_encode($request->search));
-        $queries = EducationInstitution::where('name', 'like', '%'.$term.'%')->take(3)->get();
+        $term = $request->search;
+        if('institution' == $request->type){
+            $queries = EducationInstitution::where('name', 'like', $term.'%')
+            ->orWhere('name', 'like', '%'.$term.'%')
+            ->orWhere('name', 'like', '%'.$term)
+            ->take(3)
+            ->get();
+        }else{
+            $queries = EducationSpeciality::where('name', 'like', $term.'%')
+            ->orWhere('name', 'like', '%'.$term.'%')
+            ->orWhere('name', 'like', '%'.$term)
+            ->take(3)
+            ->get();
+        }
         $results = [];
         if(!$queries->isEmpty()){
             foreach ($queries as $query){

@@ -28,6 +28,6 @@ Route::group(['middleware' => 'auth'], function () {
 	//changing visibility of a user section
 	Route::post('/user/change/section/visibility', 'Users\UserController@changeVisibility');
 	//institution name autocomplete
-	Route::get('/user/institution/name/autocomplete','Users\UserController@institutionNameAutocomplete')->name('edu.institution');
+	Route::get('/user/education/autocomplete','Users\UserController@eduAutocomplete')->name('edu.institution');
 });
 

@@ -135,6 +135,8 @@ $(document).ready(function(){
 			$('.edu-no-info').fadeOut();
 			if($('.create-form').is(":visible")){
 				$('.create-form').last().after($('.create-form').last().clone(true));
+				$('.create-form').last().find('.suggestion-ins-name').html('');
+				$('.create-form').last().find('#institution_name').val('');
 			}
 			$('.create-form').fadeIn();
 			eduFormscloned++;
