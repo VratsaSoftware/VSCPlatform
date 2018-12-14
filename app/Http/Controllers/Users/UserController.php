@@ -230,12 +230,12 @@ class UserController extends Controller
      public function institutionNameAutocomplete(Request $request)
     {
         $term = json_decode(json_encode($request->search));
-
-        $queries = EducationInstitution::where('name', 'like', '%'.$term.'%')->take(6)->get();
-
-        foreach ($queries as $query)
-        {
-            $results[] = ['name' => $query->name]; //you can take custom values as you want
+        $queries = EducationInstitution::where('name', 'like', '%'.$term.'%')->take(3)->get();
+        $results = [];
+        if(!$queries->isEmpty()){
+            foreach ($queries as $query){
+                    $results[] = ['name' => $query->name];
+            }
         }
         return $results;
     }

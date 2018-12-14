@@ -421,7 +421,8 @@
 								@endforeach
 							</select>
 							
-							<input type="text" name="institution_name" id="institution_name" value="" class="edu-type" placeholder="име на институцията...">
+							<input type="text" name="institution_name" id="institution_name" value="" class="edu-type institution_name" placeholder="име на институцията...">
+							<p class="suggestion-ins-name"></p>
 
 							<input type="text" name="specialty" id="specialty" value="" class="edu-type" placeholder="специалност...">
 
@@ -740,7 +741,10 @@ if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jp
 </script>
 
 <script type="text/javascript">
-	$('#institution_name').keypress(function(){
+	$('.institution_name').bind('input keypress', function(){
+		var inputval = $(this).val();
+		inputval = inputval.length;
+		console.log(inputval);
 		$.ajax({
 			headers: {
     		   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -748,15 +752,23 @@ if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jp
 		    type: "GET",
 		    url: '/user/institution/name/autocomplete',
 		    data:{search:this.value},
-		success: function(data, textStatus, xhr) {
-        	console.log(data);
-        	
-        	$.each(data, function() {
-			  $.each(this, function(k, v) {
-				$('#institution_name').next('p').append('<p class="auto-ins-name">'+v+'</p>');
-			  });
-			});
-    	}
+			success: function(data, textStatus, xhr) {
+	        	// console.log(data.length);
+	        	
+	        	if(data.length > 0 && inputval > 0 && inputval !== 0){
+	        		$('#institution_name').next('p').html('');
+		        	$.each(data, function() {
+					  $.each(this, function(k, v) {
+						$('#institution_name').next('p').append('<p class="auto-ins-name">'+v+'</p>');
+						$('.auto-ins-name').on('click', function(){
+				    		$('#institution_name').val($(this).text());
+				    	});
+					  });
+					});
+	        	}else{
+	        		$('#institution_name').next('p').html('');
+	        	}
+	    	}
     	});
 
     	$('.auto-ins-name').on('click', function(){
@@ -764,5 +776,12 @@ if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jp
     	});
 	});
 
+	$('#institution_name').keyup(function() {
+		var inputval = $(this).val();
+		inputval = inputval.length;
+		  if(!$(this).val() && inputval < 1 && inputval == 0){
+		  	$('#institution_name').next('p').html('');
+		  }
+	});
 </script>
 @endsection
