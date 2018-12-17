@@ -294,7 +294,7 @@
 		<div class="col-md-4 d-flex flex-row flex-wrap text-center stats-box-wrap">
 			<div class="col-md-12 stats-box edu-wrapper">
 				<div class="col-md-12 stats-title">
-					<span>Образование</span>
+					<span>Образование &nbsp;</span>
 					<span class="edit-right-menu"><i class="fas fa-ellipsis-v"></i></span>
 					<div class="col-md-12 flex-row flex-wrap text-right edit-items-wrap">
 						<div class="col-md-5"></div>
@@ -305,9 +305,9 @@
 							<div class="col-md-4">
 								<label class="switch">
 								  @if(Auth::user()->isVisible('образование'))
-								   <input type="checkbox" class="edu-visibility" checked>
+								   	<input type="checkbox" class="edu-visibility" checked>
 								  @else
-									<input type="checkbox" class="edu-visibility">
+									 	<input type="checkbox" class="edu-visibility">
 								  @endif
 								  <span class="slider round"></span>
 								</label>
@@ -439,9 +439,9 @@
 		</div>
 
 		<div class="col-md-4 d-flex flex-row flex-wrap text-center stats-box-wrap">
-			<div class="col-md-12 stats-box">
+			<div class="col-md-12 stats-box work-wrapper">
 				<div class="col-md-12 stats-title">
-					<span>Работен Опит</span>
+					<span>Работен Опит &nbsp;</span>
 					<span class="edit-right-menu"><i class="fas fa-ellipsis-v"></i></span>
 					<div class="col-md-12 flex-row flex-wrap text-right edit-items-wrap">
 						<div class="col-md-5"></div>
@@ -451,17 +451,11 @@
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
-								  <input type="checkbox">
-								  <span class="slider round"></span>
-								</label>
-							</div>
-
-							<div class="col-md-8">
-									<span class="public-switch">Публично видимо</span>
-							</div>
-							<div class="col-md-4">
-								<label class="switch">
-								  <input type="checkbox">
+									@if(Auth::user()->isVisible('работен опит'))
+								    <input type="checkbox" class="work-visibility" checked>
+								  @else
+									  <input type="checkbox" class="work-visibility">
+								  @endif
 								  <span class="slider round"></span>
 								</label>
 							</div>
@@ -715,13 +709,20 @@ if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jp
             return false;
      }
 </script>
+<script type="text/javascript">
+		$('.edu-visibility').on('change', function(){
+			 var isChecked = $(this).is(":checked");
+			 visibilityIcons('образование',isChecked);
+			 ajaxVisibility('образование', isChecked);
+		});
+
+		$('.work-visibility').on('change', function(){
+			 var isChecked = $(this).is(":checked");
+			 visibilityIcons('работен опит',isChecked);
+			 ajaxVisibility('работен опит', isChecked);
+		});
+</script>
 <script>
-	$('.edu-visibility').on('change', function(){
-		 var isChecked = $(this).is(":checked");
-
-		 ajaxVisibility('образование', isChecked);
-	});
-
 	function ajaxVisibility(type, visibility){
 		$.ajax({
 			headers: {
@@ -732,7 +733,7 @@ if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jp
 		    data:{type:type,visibility:visibility},
 		success: function(data, textStatus, xhr) {
         	if(xhr.status == 200){
-
+						//success
         	}
     	}
     	});
@@ -795,7 +796,6 @@ if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jp
 
 	//ajax call for suggestions accepts the input who needs suggestion, length of the letters, type of information, and the string to search for
 	function getSuggestions(input, inputLength, type, search){
-		console.log(search);
 		$.ajax({
 			headers: {
     		   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -821,6 +821,45 @@ if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jp
 	        	}
 	    	}
     	});
+	}
+</script>
+
+//calling the function for  eye visibility icons loading
+<script type="text/javascript">
+ $(function(){
+	 var eduVis = $('.edu-visibility').is(":checked");
+	 var workVis = $('.work-visibility').is(":checked");
+	 visibilityIcons('образование',eduVis);
+	 visibilityIcons('работен опит',workVis)
+ });
+</script>
+
+//function to set eye visibility icons on sections
+<script type="text/javascript">
+	function visibilityIcons(tag,isChecked){
+		switch (tag) {
+			case 'образование':
+					if(isChecked){
+						$('.edu-wrapper > .stats-title > span:first-child').find('i').remove();
+						$('.edu-wrapper > .stats-title > span:first-child').append('<i class="fas fa-eye"></i>');
+					}else{
+						$('.edu-wrapper > .stats-title > span:first-child').find('i').remove();
+						$('.edu-wrapper > .stats-title > span:first-child').append('<i class="fas fa-eye-slash"></i>');
+					}
+				break;
+			case 'работен опит':
+					if(isChecked){
+						$('.work-wrapper > .stats-title > span:first-child').find('i').remove();
+						$('.work-wrapper > .stats-title > span:first-child').append('<i class="fas fa-eye"></i>');
+					}else{
+						$('.work-wrapper > .stats-title > span:first-child').find('i').remove();
+						$('.work-wrapper > .stats-title > span:first-child').append('<i class="fas fa-eye-slash"></i>');
+					}
+				break;
+			default:
+
+		}
+
 	}
 </script>
 @endsection

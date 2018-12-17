@@ -28,11 +28,14 @@ class HomeController extends Controller
         $hasCertification = Auth::user()->hasCertification();
         $isOnCourse = Auth::user()->isOnCourse();
         $socialLinks = Auth::user()->getSocialLinks();
+        $hasWorkExp = Auth::user()->hasWorkExp();
+
 
         $educationTypes = EducationType::all();
         $education = [];
         $certificates = [];
         $course = [];
+        $workExp = [];
         if($hasEducation){
             $education = Auth::user()->getEducation();
         }
@@ -41,6 +44,9 @@ class HomeController extends Controller
         }
         if($isOnCourse){
             $course = Auth::user()->getCourse();
+        }
+        if ($hasWorkExp) {
+           $workExp = Auth::user()->getWorkExp();
         }
 
         if($isAdmin){
@@ -53,6 +59,6 @@ class HomeController extends Controller
             })->get();
             return view('user.my_profile',['courses' => $courses,'social_links' => $socialLinks,'certificates' => $certificates]);
         }
-        return view('user.my_profile',['courses' => $course,'social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes]);
+        return view('user.my_profile',['courses' => $course,'social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes,'workExp' => $workExp]);
     }
 }

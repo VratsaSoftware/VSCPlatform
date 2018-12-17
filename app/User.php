@@ -14,6 +14,9 @@ use App\Models\Courses\CourseModule;
 use App\Models\Users\Education;
 use App\Models\Users\SocialLink;
 use App\Models\Users\VisibleInformation;
+use App\Models\Users\WorkCompany;
+use App\Models\Users\WorkExperience;
+use App\Models\Users\WorkPosition;
 
 class User extends Authenticatable
 {
@@ -122,5 +125,19 @@ class User extends Authenticatable
             return false;
         }
         return false;
+    }
+
+    public function hasWorkExp(){
+      $hasWorkExp = WorkExperience::where([
+              ['user_id', Auth::user()->id],
+      ])->first();
+      if(!is_null($hasWorkExp)){
+          return true;
+      }
+      return false;
+    }
+
+    public function getWorkExp(){
+      return WorkExperience::where('user_id',Auth::user()->id)->with('Companies','Positions')->get();
     }
 }
