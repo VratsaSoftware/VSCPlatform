@@ -3,7 +3,7 @@
 @section('content')
 <div class="content-wrap">
 <div class="section">
-	<form action="{{ route('user.update',Auth::user()->id) }}" method="post" id="update_user" 
+	<form action="{{ route('user.update',Auth::user()->id) }}" method="post" id="update_user"
 		enctype="multipart/form-data" files="true">
 			{{ method_field('PUT') }}
 			{{ csrf_field() }}
@@ -40,7 +40,7 @@
 			</div>
 			<div class="col-md-12 header-name d-flex flex-row flex-wrap">
 				<div class="col-md-3 name-wrap">
-					<span class="name">{{ucfirst(Auth::user()->name)}} {{ucfirst(Auth::user()->last_name)}}</span> 
+					<span class="name">{{ucfirst(Auth::user()->name)}} {{ucfirst(Auth::user()->last_name)}}</span>
 					<button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
 							<i class="fas fa-pencil-alt"></i>
 						</button></div>
@@ -139,7 +139,7 @@
 		</div>
 		</form>
 	</div>
-		
+
 		<!-- certifications boxes -->
      	<div class="section">
 		<div class="courses col-md-12 d-flex flex-row flex-wrap justify-content-between">
@@ -160,7 +160,7 @@
 						<div class="col-md-5"></div>
 						<div class="col-md-7 d-flex flex-row flex-wrap edit-items text-right">
 							<div class="col-md-8">
-								<span class="public-switch">Публично видимо</span> 
+								<span class="public-switch">Публично видимо</span>
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
@@ -170,7 +170,7 @@
 							</div>
 
 							<div class="col-md-8">
-									<span class="public-switch">Публично видимо</span> 
+									<span class="public-switch">Публично видимо</span>
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
@@ -180,7 +180,7 @@
 							</div>
 
 							<div class="col-md-8">
-								<span class="public-switch">Редакция</span> 
+								<span class="public-switch">Редакция</span>
 							</div>
 							<div class="col-md-4 pencil">
 								<a href=""><i class="fas fa-pencil-alt fa-2x"></i></a>
@@ -212,7 +212,7 @@
 							<span>{{ mb_strtoupper($certificate->started->format('Y-m-d')) }} - {{ mb_strtoupper($certificate->finished->format('Y-m-d')) }}</span>
 						@endif
 						</div>
-						
+
 						<div class="col-md-8 text-center d-flex flex-row flex-wrap">
 						@forelse ($certificate['Courses']['Lecturers'] as $lecturer)
 						    <span class="col-md-8 text-right">Лектор:</span>
@@ -238,7 +238,7 @@
 						<div class="col-md-5"></div>
 						<div class="col-md-7 d-flex flex-row flex-wrap edit-items text-right">
 							<div class="col-md-8">
-								<span class="public-switch">Публично видимо</span> 
+								<span class="public-switch">Публично видимо</span>
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
@@ -248,7 +248,7 @@
 							</div>
 
 							<div class="col-md-8">
-									<span class="public-switch">Публично видимо</span> 
+									<span class="public-switch">Публично видимо</span>
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
@@ -258,7 +258,7 @@
 							</div>
 
 							<div class="col-md-8">
-								<span class="public-switch">Редакция</span> 
+								<span class="public-switch">Редакция</span>
 							</div>
 							<div class="col-md-4 pencil">
 								<a href=""><i class="fas fa-pencil-alt fa-2x"></i></a>
@@ -284,11 +284,11 @@
 				</div>
 			</div> -->
 			@empty
-    
+
    			@endforelse
 		</div>
 	</div>
-    
+
 	<div class="section">
 	<div class="stats col-md-12 d-flex flex-row flex-wrap justify-content-between">
 		<div class="col-md-4 d-flex flex-row flex-wrap text-center stats-box-wrap">
@@ -300,7 +300,7 @@
 						<div class="col-md-5"></div>
 						<div class="col-md-7 d-flex flex-row flex-wrap edit-items text-right">
 							<div class="col-md-8">
-								<span class="public-switch">Публично видимо</span> 
+								<span class="public-switch">Публично видимо</span>
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
@@ -314,7 +314,7 @@
 							</div>
 
 							<!-- <div class="col-md-8">
-									<span class="public-switch">Публично видимо</span> 
+									<span class="public-switch">Публично видимо</span>
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
@@ -324,7 +324,7 @@
 							</div> -->
 
 							<div class="col-md-8">
-								<span class="public-switch">Редакция</span> 
+								<span class="public-switch">Редакция</span>
 							</div>
 							<div class="col-md-4 pencil">
 								<a href="" class="education-edit"><i class="fas fa-pencil-alt fa-2x"></i></a>
@@ -407,7 +407,7 @@
 					    	<input type="date" id="y_from" name="y_from" class="edu-type" value=""><br/>
 					    	Година до:
 							<input type="date" id="y_to" name="y_to" class="edu-type" value="" ><br/>
-							
+
 							<select id="edu_type" name="edu_type" class="edu-type">
 								@forelse ($eduTypes as $type)
 									<option value="{{$type->id}}">{{$type->type}}</option>
@@ -415,13 +415,13 @@
 									<option value="0" disabled selected>няма опции</option>
 								@endforelse
 							</select>
-							
+
 							<select name="edu_institution_type" id="edu_institution_type" class="edu-type">
 								@foreach(Config::get('institutionTypes') as $type)
 									<option value="{{$type}}">{{$type}}</option>
 								@endforeach
 							</select>
-							
+
 							<input type="text" name="institution_name" id="institution_name" value="{{old('institution_name')}}" class="edu-type institution_name" placeholder="име на институцията...">
 							<p class="suggestion-ins-name"></p>
 
@@ -433,7 +433,7 @@
 							<p><button id="submit" name="submit" value="запази" class="btn btn-success"><i class="fas fa-save"></i></button> <button class="btn btn-info edit-edu edu-add-new"><i class="fas fa-plus"></i></button></p>
 							</form>
 					    </span>
-					
+
 				</div>
 			</div>
 		</div>
@@ -447,7 +447,7 @@
 						<div class="col-md-5"></div>
 						<div class="col-md-7 d-flex flex-row flex-wrap edit-items text-right">
 							<div class="col-md-8">
-								<span class="public-switch">Публично видимо</span> 
+								<span class="public-switch">Публично видимо</span>
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
@@ -457,7 +457,7 @@
 							</div>
 
 							<div class="col-md-8">
-									<span class="public-switch">Публично видимо</span> 
+									<span class="public-switch">Публично видимо</span>
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
@@ -467,7 +467,7 @@
 							</div>
 
 							<div class="col-md-8">
-								<span class="public-switch">Редакция</span> 
+								<span class="public-switch">Редакция</span>
 							</div>
 							<div class="col-md-4 pencil">
 								<a href=""><i class="fas fa-pencil-alt fa-2x"></i></a>
@@ -496,7 +496,7 @@
 						<div class="col-md-5"></div>
 						<div class="col-md-7 d-flex flex-row flex-wrap edit-items text-right">
 							<div class="col-md-8">
-								<span class="public-switch">Публично видимо</span> 
+								<span class="public-switch">Публично видимо</span>
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
@@ -506,7 +506,7 @@
 							</div>
 
 							<div class="col-md-8">
-									<span class="public-switch">Публично видимо</span> 
+									<span class="public-switch">Публично видимо</span>
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
@@ -516,7 +516,7 @@
 							</div>
 
 							<div class="col-md-8">
-								<span class="public-switch">Редакция</span> 
+								<span class="public-switch">Редакция</span>
 							</div>
 							<div class="col-md-4 pencil">
 								<a href=""><i class="fas fa-pencil-alt fa-2x"></i></a>
@@ -545,7 +545,7 @@
 						<div class="col-md-5"></div>
 						<div class="col-md-7 d-flex flex-row flex-wrap edit-items text-right">
 							<div class="col-md-8">
-								<span class="public-switch">Публично видимо</span> 
+								<span class="public-switch">Публично видимо</span>
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
@@ -555,7 +555,7 @@
 							</div>
 
 							<div class="col-md-8">
-									<span class="public-switch">Публично видимо</span> 
+									<span class="public-switch">Публично видимо</span>
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
@@ -565,7 +565,7 @@
 							</div>
 
 							<div class="col-md-8">
-								<span class="public-switch">Редакция</span> 
+								<span class="public-switch">Редакция</span>
 							</div>
 							<div class="col-md-4 pencil">
 								<a href=""><i class="fas fa-pencil-alt fa-2x"></i></a>
@@ -593,7 +593,7 @@
 						<div class="col-md-5"></div>
 						<div class="col-md-7 d-flex flex-row flex-wrap edit-items text-right">
 							<div class="col-md-8">
-								<span class="public-switch">Публично видимо</span> 
+								<span class="public-switch">Публично видимо</span>
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
@@ -603,7 +603,7 @@
 							</div>
 
 							<div class="col-md-8">
-									<span class="public-switch">Публично видимо</span> 
+									<span class="public-switch">Публично видимо</span>
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
@@ -613,7 +613,7 @@
 							</div>
 
 							<div class="col-md-8">
-								<span class="public-switch">Редакция</span> 
+								<span class="public-switch">Редакция</span>
 							</div>
 							<div class="col-md-4 pencil">
 								<a href=""><i class="fas fa-pencil-alt fa-2x"></i></a>
@@ -641,7 +641,7 @@
 						<div class="col-md-5"></div>
 						<div class="col-md-7 d-flex flex-row flex-wrap edit-items text-right">
 							<div class="col-md-8">
-								<span class="public-switch">Публично видимо</span> 
+								<span class="public-switch">Публично видимо</span>
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
@@ -651,7 +651,7 @@
 							</div>
 
 							<div class="col-md-8">
-									<span class="public-switch">Публично видимо</span> 
+									<span class="public-switch">Публично видимо</span>
 							</div>
 							<div class="col-md-4">
 								<label class="switch">
@@ -661,7 +661,7 @@
 							</div>
 
 							<div class="col-md-8">
-								<span class="public-switch">Редакция</span> 
+								<span class="public-switch">Редакция</span>
 							</div>
 							<div class="col-md-4 pencil">
 								<a href=""><i class="fas fa-pencil-alt fa-2x"></i></a>
@@ -732,7 +732,7 @@ if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jp
 		    data:{type:type,visibility:visibility},
 		success: function(data, textStatus, xhr) {
         	if(xhr.status == 200){
-        		
+
         	}
     	}
     	});
@@ -793,9 +793,9 @@ if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jp
 		  }
 	});
 
-	//ajax call for suggestions accepts the input who needs suggestion, length of the letters, type of information, and the string to search for 
+	//ajax call for suggestions accepts the input who needs suggestion, length of the letters, type of information, and the string to search for
 	function getSuggestions(input, inputLength, type, search){
-		// console.log(search);
+		console.log(search);
 		$.ajax({
 			headers: {
     		   'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -805,7 +805,7 @@ if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jp
 		    data:{search:search,type:type},
 			success: function(data, textStatus, xhr) {
 	        	// console.log(data);
-	        	
+
 	        	if(data.length > 0 && inputLength > 0 && inputLength !== 0){
 	        		input.next('.suggestion-ins-name').html('');
 		        	$.each(data, function() {
