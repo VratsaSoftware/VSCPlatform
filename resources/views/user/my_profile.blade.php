@@ -334,7 +334,7 @@
 				</div>
 
 				<div class="col-md-12 stats-img">
-					<img src="./images/profile/education-icon.png" alt="education" class="img-fluid">
+					<img src="./images/profile/edu-1.png" alt="education" class="img-fluid">
 				</div>
 
 				<div class="col-md-12 stats-text">
@@ -342,12 +342,12 @@
 					<form action="{{route('update.education')}}" id="edu-form" name="edu-form" method="POST" class="update_form">
 						{{ csrf_field() }}
 					    <span class="edu">
-							<span class="edu-type live-edu edu-y-from">{{$edu->y_from->format('Y-m-d')}}&nbsp;/&nbsp;</span><span class="edu-type live-edu edu-y-to">{{$edu->y_to->format('Y-m-d')}}</span> <br>
-								<input type="date" id="y_from" name="y_from" class="edu-type edit-edu" value="{{$edu->y_from->format('Y-m-d') ?? null}}"><br/>
-								<input type="date" id="y_to" name="y_to" class="edu-type edit-edu" value="{{$edu->y_to->format('Y-m-d') ?? null}}"><br/>
+							<span class="section-el-bold live-edu edu-y-from">{{$edu->y_from->format('Y-m-d')}}&nbsp;/&nbsp;</span><span class="section-el-bold live-edu edu-y-to">{{$edu->y_to->format('Y-m-d')}}</span> <br>
+								<input type="date" id="y_from" name="y_from" class="section-el-bold edit-edu" value="{{$edu->y_from->format('Y-m-d') ?? null}}"><br/>
+								<input type="date" id="y_to" name="y_to" class="section-el-bold edit-edu" value="{{$edu->y_to->format('Y-m-d') ?? null}}"><br/>
 
 							<span class="live-edu">{{$edu['EduType']->type}}</span> <br>
-								<select id="edu_type" name="edu_type" class="edu-type edit-edu">
+								<select id="edu_type" name="edu_type" class="section-el-bold edit-edu">
 									@forelse ($eduTypes as $type)
 										@if($edu->cl_education_type_id === $type->id)
 											<option value="{{$type->id}}" selected>{{$type->type}}</option>
@@ -359,8 +359,8 @@
 									@endforelse
 								</select>
 
-							<span class="edu-type live-edu">{{$edu['EduInstitution']->type}} {{$edu['EduInstitution']->name}}</span><br>
-								<select name="edu_institution_type" id="edu_institution_type" class="edu-type edit-edu">
+							<span class="section-el-bold live-edu">{{$edu['EduInstitution']->type}} {{$edu['EduInstitution']->name}}</span><br>
+								<select name="edu_institution_type" id="edu_institution_type" class="section-el-bold edit-edu">
 									@foreach(Config::get('institutionTypes') as $type)
 										@if((string)$edu['EduInstitution']->type === (string)$type)
 											<option value="{{$type}}" selected>{{$type}}</option>
@@ -369,20 +369,20 @@
 										@endif
 									@endforeach
 								</select>
-								<input type="text" id="institution_name" name="institution_name" value="{{$edu['EduInstitution']->name}}" class="edu-type edit-edu institution_name">
+								<input type="text" id="institution_name" name="institution_name" value="{{$edu['EduInstitution']->name}}" class="section-el-bold edit-edu institution_name">
 								<p class="suggestion-ins-name"></p>
 								<span class="autocomplete-inst-name"></span>
 							<span class="live-edu">Специалност :</span><br/>
 							@if(isset($edu['EduSpeciality']->name))
-								<span class="edu-type live-edu">{{$edu['EduSpeciality']->name}}</span><br>
-									<input type="text" name="specialty" id="specialty" value="{{$edu['EduSpeciality']->name}}" class="edu-type edit-edu specialty">
+								<span class="section-el-bold live-edu">{{$edu['EduSpeciality']->name}}</span><br>
+									<input type="text" name="specialty" id="specialty" value="{{$edu['EduSpeciality']->name}}" class="section-el-bold edit-edu specialty">
 									<p class="suggestion-ins-name"></p>
 							@else
-								<span class="edu-type live-edu">няма</span><br/>
-								<input type="text" name="specialty" id="specialty" value="няма" class="edu-type edit-edu">
+								<span class="section-el-bold live-edu">няма</span><br/>
+								<input type="text" name="specialty" id="specialty" value="няма" class="section-el-bold edit-edu">
 							@endif
 							<span class="live-edu">Коментар :</span><br/>
-							<span class="edu-type live-edu edu-comment">{{$edu->description}}</span><br>
+							<span class="section-el-bold live-edu edu-comment">{{$edu->description}}</span><br>
 								<textarea name="edu_description" id="edu_description" placeholder="{{$edu->description}}" style="overflow:auto;resize:none" rows="5" class="edit-edu" form="edu-form">{{$edu->description}}</textarea>
 						</span><br/>
 
@@ -390,12 +390,14 @@
 
 						<button id="submit" name="submit" value="запази" class="btn btn-success edit-edu submit-edu"><i class="fas fa-save"></i></button><button class="btn btn-info edit-edu edu-add-new"><i class="fas fa-plus"></i></button>
 						</form>
+
 						<br/>
-							<form action="{{ route('delete.education',$edu->id) }}" method="POST" onsubmit="return ConfirmDelete()" id="delete-edu">
+						<form action="{{ route('delete.education',$edu->id) }}" method="POST" onsubmit="return ConfirmDelete()" id="delete-edu">
 	                       {{ method_field('DELETE') }}
 	                       {{ csrf_field() }}
 	                       <button type="submit" class="btn btn-danger edit-edu" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
-	            			</form>
+	            		</form>
+                        <hr>
 					@empty
 					    <span class="edu edu-no-info">Няма въведена информация</span><br>
 					    <button class="btn btn-success create-btn"><i class="fas fa-plus"></i></button>
@@ -404,11 +406,11 @@
 							<form action="{{route('create.education')}}" id="edu-form" name="edu-form" method="POST">
 							{{ csrf_field() }}
 					    	Година от:
-					    	<input type="date" id="y_from" name="y_from" class="edu-type" value=""><br/>
+					    	<input type="date" id="y_from" name="y_from" class="section-el-bold" value="{{old('y_from')}}"><br/>
 					    	Година до:
-							<input type="date" id="y_to" name="y_to" class="edu-type" value="" ><br/>
+							<input type="date" id="y_to" name="y_to" class="section-el-bold" value="{{old('y_to')}}" ><br/>
 
-							<select id="edu_type" name="edu_type" class="edu-type">
+							<select id="edu_type" name="edu_type" class="section-el-bold">
 								@forelse ($eduTypes as $type)
 									<option value="{{$type->id}}">{{$type->type}}</option>
 								@empty
@@ -416,16 +418,16 @@
 								@endforelse
 							</select>
 
-							<select name="edu_institution_type" id="edu_institution_type" class="edu-type">
+							<select name="edu_institution_type" id="edu_institution_type" class="section-el-bold">
 								@foreach(Config::get('institutionTypes') as $type)
 									<option value="{{$type}}">{{$type}}</option>
 								@endforeach
 							</select>
 
-							<input type="text" name="institution_name" id="institution_name" value="{{old('institution_name')}}" class="edu-type institution_name" placeholder="име на институцията...">
+							<input type="text" name="institution_name" id="institution_name" value="{{old('institution_name')}}" class="section-el-bold institution_name" placeholder="име на институцията...">
 							<p class="suggestion-ins-name"></p>
 
-							<input type="text" name="specialty" id="specialty" value="{{old('specialty')}}" class="edu-type specialty" placeholder="специалност...">
+							<input type="text" name="specialty" id="specialty" value="{{old('specialty')}}" class="section-el-bold specialty" placeholder="специалност...">
 							<p class="suggestion-ins-name"></p>
 
 							<textarea name="edu_description" id="edu_description" placeholder="коментар..." style="overflow:auto;resize:none" rows="5" class="" form="edu-form-create" value="{{old('edu_description')}}"></textarea>
@@ -464,19 +466,70 @@
 								<span class="public-switch">Редакция</span>
 							</div>
 							<div class="col-md-4 pencil">
-								<a href=""><i class="fas fa-pencil-alt fa-2x"></i></a>
+								<a href="#" class="work-edit"><i class="fas fa-pencil-alt fa-2x"></i></a>
 							</div>
 						</div>
 					</div>
 				</div>
 
 				<div class="col-md-12 stats-img">
-					<img src="./images/profile/exp-icon.png" alt="education" class="img-fluid">
+					<img src="./images/profile/work-2.png" alt="education" class="img-fluid">
 				</div>
 
 				<div class="col-md-12 stats-text">
-					<span>2013-2016 <br>Косер Враца Студио за дизайн и предпечат</span><br/>
-					<span>2016-днес <br>Програмиста Изработка на уеб сайтове</span>
+					@forelse ($workExp as $exp)
+						<form action="{{route('update.work.experience')}}" id="work-form-update" name="work-form-update" method="POST" class="update_form_work">
+							{{ csrf_field() }}
+                            <input type="hidden" name="work_id" value="{{$exp->id}}">
+							<span class="section-el-bold work-years live-work">{{$exp->y_from->format('Y-m-d')}}&nbsp;/&nbsp;</span><span class="section-el-bold live-work">{{$exp->y_to->format('Y-m-d')}}</span><br/>
+                            <input type="date" id="y_from" name="y_from" class="section-el-bold edit-work" value="{{$exp->y_from->format('Y-m-d') ?? null}}"><br/>
+                            <input type="date" id="y_to" name="y_to" class="section-el-bold edit-work" value="{{$exp->y_to->format('Y-m-d') ?? null}}"><br/>
+
+                            <span class="section-el-bold work-company live-work">{{ucfirst($exp['Company']->name)}}</span><br/>
+                            <input type="text" name="work_company" id="work_company" value="{{$exp['Company']->name}}" class="section-el-bold edit-work"><br />
+
+                            <span class="live-work">Позиция :</span><br/>
+                            <span class="section-el-bold work-position live-work">{{$exp['Position']->position}}</span><br/>
+                            <input type="text" name="work_position" id="work_position" value="{{$exp['Position']->position}}" class="section-el-bold edit-work"><br />
+
+                            <span class="live-work">Описание :</span><br/>
+                            <span class="section-el-bold work-description live-work">{{$exp->description}}</span>
+                            <textarea name="work_description" id="work_description" placeholder="{{$exp->description}}" style="overflow:auto;resize:none" rows="5" class="edit-work" form="work-form-update">{{$exp->description}}</textarea>
+                            <p>
+                                <button id="submit" name="submit" value="запази" class="btn btn-success edit-work"><i class="fas fa-save"></i></button>
+                                <button class="btn btn-info edit-work work-add-new"><i class="fas fa-plus"></i></button>
+                            </p>
+                        </form>
+						<form action="{{ route('delete.work.experience',$exp->id) }}" method="POST" onsubmit="return ConfirmDelete()" id="delete-edu">
+	                       {{ method_field('DELETE') }}
+	                       {{ csrf_field() }}
+	                       <button type="submit" class="btn btn-danger edit-work" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
+	            		</form>
+                        <hr>
+					@empty
+                        <span class="edu work-no-info">Няма въведена информация</span><br>
+					    <button class="btn btn-success create-btn-work"><i class="fas fa-plus"></i></button>
+					@endforelse
+                    <span class="create-form-work">
+                        <form action="{{route('create.work.experience')}}" id="work-form-create" name="work-form-create" method="POST">
+                        {{ csrf_field() }}
+                        Година от:
+                        <input type="date" id="y_from" name="y_from" class="section-el-bold" value="{{old('y_from')}}"><br/>
+                        Година до:
+                        <input type="date" id="y_to" name="y_to" class="section-el-bold" value="{{old('y_to')}}"><br/>
+
+                        <input type="text" class="section-el-bold" name="work_company" value="{{old('work_company')}}" id="work_company" placeholder="Компания/Фирма...">
+
+                        <input type="text" class="section-el-bold" name="work_position" value="{{old('work_position')}}" id="work_position" placeholder="Позиция...">
+
+                        <textarea name="description" id="description" placeholder="описание..." style="overflow:auto;resize:none" rows="5" class="section-el-bold" form="work-form-create"></textarea><br />
+
+                        <p>
+                            <button id="submit" name="submit" value="запази" class="btn btn-success"><i class="fas fa-save"></i></button>
+                             <button class="btn btn-info edit-work work-add-new"><i class="fas fa-plus"></i></button>
+                         </p>
+                        </form>
+                    </span>
 				</div>
 			</div>
 		</div>
@@ -520,7 +573,7 @@
 				</div>
 
 				<div class="col-md-12 stats-img">
-					<img src="./images/profile/interes-icon.png" alt="education" class="img-fluid">
+					<img src="./images/profile/interest-1.png" alt="education" class="img-fluid">
 				</div>
 
 				<div class="col-md-12 stats-text">
@@ -859,7 +912,6 @@ if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jp
 			default:
 
 		}
-
 	}
 </script>
 @endsection

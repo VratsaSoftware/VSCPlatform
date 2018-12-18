@@ -6,7 +6,11 @@ $(document).ready(function(){
 				$(this).next('.edit-items-wrap').css('display','flex');
 				$(this).next('.edit-items-wrap').addClass('box-opened')
 				$(this).css('color','#f00');
+				$(this).find('i').removeClass('fas fa-ellipsis-v');
+				$(this).find('i').addClass('fas fa-times');
 			}else{
+				$(this).find('i').removeClass('fas fa-times');
+				$(this).find('i').addClass('fas fa-ellipsis-v');
 				$(this).next('.edit-items-wrap').removeClass('box-opened');
 				$(this).next('.edit-items-wrap').css('display','none');
 				$(this).css('color','#000');
@@ -29,7 +33,7 @@ $(document).ready(function(){
 				e.preventDefault();
 				// $(this).removeClass('save-edit');
 			}
-			$('.loader-wrapper').css('display','flex').fadeOut();
+			$('.loader-wrapper').css('display','flex').fadeOut('slow');
 			if($(this).hasClass('edit-btn')){
 					e.preventDefault();
 					$(this).removeClass('edit-btn');
@@ -60,7 +64,7 @@ $(document).ready(function(){
 			}
 		});
 
-		//adding textareas to the boxes with options 
+		//adding textareas to the boxes with options
 		$('.edit-bio').on('click', function(e){
 			e.preventDefault();
 			var oldText = $(this).parent().parent().find('.bio-text').text();
@@ -75,51 +79,15 @@ $(document).ready(function(){
 			}
 		});
 
-
-		// text area inserts
-		// $('.pencil > a').on('click', function(e){
-		// 	e.preventDefault();
-		// 	if(!$(this).hasClass('edit-opened')){
-		// 		$(this).addClass('edit-opened');
-		// 		var elements = $(this).parent().parent().parent().parent().parent().find('.stats-text').find('span');
-		// 		elements.after('<p class="edit-box"><textarea rows="5" cols="30">'+elements.text()+'</textarea></p>');
-		// 		$(this).parent().parent().parent().parent().parent().find('.stats-text').append('<p><img src="./images/profile/add-icon.png" width="10%" height="10%" class="add-text"></p>');
-		// 		$(this).parent().parent().parent().parent().parent().find('.stats-text').append('<p><button class="btn btn-success save-edit-box">запази</button></p>');
-		// 	}else{
-		// 		// $(this).removeClass('edit-opened');
-		// 	}
-		// 	$('.add-text').on('click', function(){
-		// 		$(this).parent().prev('.edit-box').after('<p class="edit-box"><textarea rows="5" cols="30"></textarea></p>');
-		// 	});
-
-		// 	$('.save-edit-box').on('click', function(){
-		// 		// $(this).parent().parent().css({
-		// 		// 	'background':'url(./images/loaders/load-16.gif)',
-		// 		// 	'background-repeat': 'no-repeat',
-  //   // 				'background-position': 'center', 
-		// 		// });
-		// 	});
-		// });
-		// 
 		$('.education-edit').on('click', function(e){
 			e.preventDefault();
-			var elements = $(this).parent().parent().parent().parent().parent().find('.stats-text').find('.edu');
 			if(!$(this).hasClass('edit-opened')){
 				$(this).addClass('edit-opened');
 				$('.live-edu').fadeOut();
 				$('.edit-edu').fadeIn();
-				// elements.each(function( index ) {
-				//   $(this).append('<div class="edu-boxes"><p>От:<br><input type="date" name="edu-from" value="'+$(this).find('edu-from').html()+'"></p><p>До:<br><input type="date" name="edu-то"></p><p>Образование:<br><select id="edu-type"><option>Основно</option><option>Средно</option><option>Висше</option><option>Друго</option></select></p><p><textarea placeholder="институция, у-ще, университет ...."></textarea></p><p><img src="./images/profile/add-icon.png" width="10%" height="10%" class="add-text"></p></div>');
-				// });
-				// $(this).parent().parent().parent().parent().parent().find('.stats-text').append('<p><button class="btn btn-success save-edit-box">запази</button></p>');
 			}else{
 				$(this).removeClass('edit-opened');
-				
 			}
-
-			$('.add-text').on('click', function(){
-				$(this).parent().parent().append($(this).parent().parent().clone(true));
-			});
 		});
 
 		$('.create-btn').on('click', function(e){
@@ -142,6 +110,37 @@ $(document).ready(function(){
 			eduFormscloned++;
 			if(eduFormscloned > 5){
 				$('.edu-add-new').fadeOut();
+			}
+		});
+
+        //work section
+        $('.work-edit').on('click', function(e){
+            e.preventDefault();
+            $('.live-work').fadeOut();
+            $('.edit-work').fadeIn();
+        });
+
+        $('.create-btn-work').on('click', function(e){
+            e.preventDefault();
+            $('.work-no-info').fadeOut();
+            $(this).fadeOut();
+            $('.create-form-work').fadeIn();
+        });
+
+
+        var workFormsCloned = 0;
+		$('.work-add-new').on('click', function(e){
+			e.preventDefault();
+			$('.work-no-info').fadeOut();
+			if($('.create-form-work').is(":visible")){
+				$('.create-form-work').last().after($('.create-form-work').last().clone(true));
+				$('.create-form-work').last().find('.suggestion-ins-name').html('');
+				$('.create-form-work').last().find('#institution_name').val('');
+			}
+			$('.create-form-work').fadeIn();
+			workFormsCloned++;
+			if(workFormsCloned > 5){
+				$('.work-add-new').fadeOut();
 			}
 		});
 	})

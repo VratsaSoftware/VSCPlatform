@@ -20,6 +20,9 @@ use App\Models\Users\Education;
 use App\Models\Users\EducationInstitution;
 use App\Models\Users\EducationSpeciality;
 use App\Models\Users\VisibleInformation;
+use App\Models\Users\WorkCompany;
+use App\Models\Users\WorkExperience;
+use App\Models\Users\WorkPosition;
 
 class UserController extends Controller
 {
@@ -150,7 +153,7 @@ class UserController extends Controller
         $request['institution_id'] = $eduInstitution->id;
         $request['specialty_id'] = $eduSpeciality->id;
         $existing = Education::isExisting(Auth::user()->id, $request);
-        if(!$existing){
+        if (!$existing) {
             $insEdu = new Education;
             $insEdu->user_id = Auth::user()->id;
             $insEdu->y_from = $request->y_from;
@@ -198,23 +201,84 @@ class UserController extends Controller
         return redirect()->route('myProfile')->with('success', $message);
     }
 
-    public function deleteEducation(Education $education){
+    public function deleteEducation(Education $education)
+    {
         $education->delete();
         $message = __('Успешно изтрито Образование!');
         return redirect()->route('myProfile')->with('success', $message);
     }
 
+    public function createWorkExperience(Request $request)
+    {
+        $data = $request->validate([
+            'y_from' => 'required|date|date_format:Y-m-d',
+            'y_to' => 'required|date|date_format:Y-m-d',
+            'work_company' => 'required|string',
+            'work_position' => "required|string",
+        ]);
+
+        $createWorkExp = new WorkExperience;
+        $createWorkExp->user_id = Auth::user()->id;
+        $createWorkExp->y_from = $request->y_from;
+        $createWorkExp->y_to = $request->y_to;
+        $workCompany = WorkCompany::firstOrCreate(
+            ['name' => $request->work_company]
+        );
+        $createWorkExp->company_id = $workCompany->id;
+        $createWorkExp->description = $request->description;
+        $workPosition = WorkPosition::firstOrCreate(
+            ['position' => $request->work_position]
+        );
+        $createWorkExp->position_id = $workPosition->id;
+        $createWorkExp->save();
+        $message = __('Успешно добавен Работен Опит!');
+        return redirect()->route('myProfile')->with('success', $message);
+    }
+
+    public function updateWorkExperience(Request $request)
+    {
+        $data = $request->validate([
+            'y_from' => 'required|date|date_format:Y-m-d',
+            'y_to' => 'required|date|date_format:Y-m-d',
+            'work_company' => 'required|string',
+            'work_position' => "required|string",
+        ]);
+
+        $updWorkExp = WorkExperience::find($request->work_id);
+        $updWorkExp->y_from = $request->y_from;
+        $updWorkExp->y_to = $request->y_to;
+        $workCompany = WorkCompany::firstOrCreate(
+            ['name' => $request->work_company]
+        );
+        $updWorkExp->company_id = $workCompany->id;
+        $updWorkExp->description = $request->work_description;
+        $workPosition = WorkPosition::firstOrCreate(
+            ['position' => $request->work_position]
+        );
+        $updWorkExp->position_id = $workPosition->id;
+        $updWorkExp->save();
+        $message = __('Успешно направени промени в секция Работен Опит!');
+        return redirect()->route('myProfile')->with('success', $message);
+    }
+
+    public function deleteWorkExperience(WorkExperience $experience)
+    {
+        $experience->delete();
+        $message = __('Успешно изтрит Работен Опит!');
+        return redirect()->route('myProfile')->with('success', $message);
+    }
+
     public function changeVisibility(Request $request)
-    {   
+    {
         $type = json_decode(json_encode($request->type));
         $visibility = json_decode(json_encode($request->visibility));
 
-        if(in_array($type, \Config::get('userInformationTypes'))){
+        if (in_array($type, \Config::get('userInformationTypes'))) {
             $changeVis = VisibleInformation::where([
                     ['user_id', Auth::user()->id],
                     ['information_type',$type]
             ])->first();
-            if(!is_null($changeVis)){
+            if (!is_null($changeVis)) {
                 $changeVis->visible = $visibility;
                 $changeVis->save();
                 return;
@@ -227,16 +291,16 @@ class UserController extends Controller
         }
     }
 
-     public function eduAutocomplete(Request $request)
+    public function eduAutocomplete(Request $request)
     {
         $term = $request->search;
-        if('institution' == $request->type){
+        if ('institution' == $request->type) {
             $queries = EducationInstitution::where('name', 'like', $term.'%')
             ->orWhere('name', 'like', '%'.$term.'%')
             ->orWhere('name', 'like', '%'.$term)
             ->take(3)
             ->get();
-        }else{
+        } else {
             $queries = EducationSpeciality::where('name', 'like', $term.'%')
             ->orWhere('name', 'like', '%'.$term.'%')
             ->orWhere('name', 'like', '%'.$term)
@@ -244,9 +308,9 @@ class UserController extends Controller
             ->get();
         }
         $results = [];
-        if(!$queries->isEmpty()){
-            foreach ($queries as $query){
-                    $results[] = ['name' => $query->name];
+        if (!$queries->isEmpty()) {
+            foreach ($queries as $query) {
+                $results[] = ['name' => $query->name];
             }
         }
         return $results;

@@ -36,29 +36,29 @@ class HomeController extends Controller
         $certificates = [];
         $course = [];
         $workExp = [];
-        if($hasEducation){
+        if ($hasEducation) {
             $education = Auth::user()->getEducation();
         }
-        if($hasCertification){
+        if ($hasCertification) {
             $certificates = Auth::user()->getCertificates();
         }
-        if($isOnCourse){
+        if ($isOnCourse) {
             $course = Auth::user()->getCourse();
         }
         if ($hasWorkExp) {
-           $workExp = Auth::user()->getWorkExp();
+            $workExp = Auth::user()->getWorkExp();
         }
 
-        if($isAdmin){
+        if ($isAdmin) {
             $courses = Course::all();
-            return view('user.my_profile',['courses' => $courses,'social_links' => $socialLinks,'certificates' => $certificates]);
+            return view('user.my_profile', ['courses' => $courses,'social_links' => $socialLinks,'certificates' => $certificates]);
         }
-        if($isLecturer){
-            $courses = Course::with('Lecturers')->whereHas('Lecturers',function($query) use ($userId){
-                $query->where('user_id',$userId);
+        if ($isLecturer) {
+            $courses = Course::with('Lecturers')->whereHas('Lecturers', function ($query) use ($userId) {
+                $query->where('user_id', $userId);
             })->get();
-            return view('user.my_profile',['courses' => $courses,'social_links' => $socialLinks,'certificates' => $certificates]);
+            return view('user.my_profile', ['courses' => $courses,'social_links' => $socialLinks,'certificates' => $certificates]);
         }
-        return view('user.my_profile',['courses' => $course,'social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes,'workExp' => $workExp]);
+        return view('user.my_profile', ['courses' => $course,'social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes,'workExp' => $workExp]);
     }
 }

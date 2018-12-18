@@ -12,7 +12,7 @@ body{
     z-index: 1;
     top: 0;
     left: 0;
-    background:#fff; 
+    background:#fff;
     /*overflow-x: hidden;*/
     padding: 1vw;
     box-shadow: inset -1px 0px 0px #DDDDDD;
@@ -185,6 +185,7 @@ body{
   float: right;
   z-index: 9999;
   cursor: pointer;
+  width: 10px;
 }
 
 .edit-btn, .add-social{
@@ -329,19 +330,27 @@ input:checked + .slider:before {
   border-radius: 5px !important;
 }
 
-.edu-type{
-  margin-top: 1vw;
+.section-el-bold{
+  margin-top: 1px;
   margin-bottom: 1vw;
   text-align: center;
   font-weight: bold;
   border-radius: 5px !important;
 }
 
-.edit-edu{
+.work-company, .work-position{
+    display: block;
+}
+
+.edit-edu, .edit-work{
   display: none;
 }
 
-.edu-add-new{
+.work-years{
+    display: inline-block;
+}
+
+.edu-add-new, .work-add-new{
   margin-left: 1vw;
 }
 
@@ -356,13 +365,13 @@ input:checked + .slider:before {
   font-family: Comfortaa;
 }
 
-.create-btn{
+.create-btn, .create-btn-work{
   margin-top: 1vw;
 }
 .live-edu{
   display: block;
 }
-.create-form{
+.create-form, .create-form-work{
   display: none;
 }
 
@@ -381,7 +390,7 @@ input:checked + .slider:before {
   .sidenav a{
     font-size: 3vw;
   }
-  
+
   .navbar-nav > li:nth-child(1) > img{
     width:5vw;
   }
@@ -421,7 +430,7 @@ input:checked + .slider:before {
   .sidenav > li:not(:first-child){
     margin-bottom: 3vw;
   }
-  
+
   .nested-nav > ul > li{
    margin-left: -5vw;
    margin-bottom: 1vw;
@@ -439,7 +448,7 @@ input:checked + .slider:before {
   .pencil > a > i {
     font-size: 5vw;
   }
-} 
+}
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
@@ -483,7 +492,7 @@ input:checked + .slider:before {
   .pencil > a > i {
     font-size: 5vw;
   }
-} 
+}
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
@@ -499,7 +508,7 @@ input:checked + .slider:before {
   .pencil > a > i {
     font-size: 2vw;
   }
-} 
+}
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
@@ -535,7 +544,7 @@ input:checked + .slider:before {
     font-size: 0.9vw;
     font-weight: normal;
   }
-} 
+}
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {

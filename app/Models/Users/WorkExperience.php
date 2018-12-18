@@ -8,14 +8,17 @@ use App\Models\Users\WorkPosition;
 
 class WorkExperience extends Model
 {
-  protected $table = 'work_experience';
-  protected $guarded = [];
+    protected $table = 'work_experience';
+    protected $guarded = [];
+    protected $dates = ['y_from','y_to'];
 
-  public function Companies(){
-    return $this->hasMany(WorkCompany::class,'id','company_id');
-  }
+    public function Company()
+    {
+        return $this->hasOne(WorkCompany::class, 'id', 'company_id');
+    }
 
-  public function Positions(){
-    return $this->hasMany(WorkPosition::class,'id','position_id');
-  }
+    public function Position()
+    {
+        return $this->hasOne(WorkPosition::class, 'id', 'position_id');
+    }
 }
