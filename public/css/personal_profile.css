@@ -18,6 +18,11 @@ body{
     box-shadow: inset -1px 0px 0px #DDDDDD;
 }
 
+.load-sections{
+    left: 5vw;
+    /* display: none; */
+}
+
 .sidenav a {
    /* padding: 6px 8px 6px 16px;*/
     text-decoration: none;
@@ -328,6 +333,13 @@ input:checked + .slider:before {
 .edu-boxes > p > input, .edu-boxes > p > textarea, .edu-boxes > p > select{
   margin-top: 1vw;
   border-radius: 5px !important;
+}
+
+.edu-comment, .work-description{
+    height: 10vw;
+    overflow-x: auto;
+    display: block;
+    overflow-wrap: break-word;
 }
 
 .section-el-bold{

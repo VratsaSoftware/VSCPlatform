@@ -4,7 +4,7 @@ body{
 	background: #F7F7F7;
 }
 body::-webkit-scrollbar {
-    width: 1em;
+    width: 10px;
 }
 
 body::-webkit-scrollbar-track {
@@ -142,35 +142,34 @@ body::-webkit-scrollbar-thumb {
 .stats-text{
 	margin-top: 7vw;
 	color: #919AA3;
-	padding-left: 5vw;
-    padding-right: 5vw;
+	padding-left: 2vw;
+    padding-right: 2vw;
     height: 30vw;
     overflow-y: auto;
+}
+
+.stats-text > form > i {
+    color:#1B8500;
 }
 
 .soon-sections{
 	height: 20vw !important;
 }
 
-.stats-text::-webkit-scrollbar {
+.stats-text::-webkit-scrollbar, .edu-comment::-webkit-scrollbar, .work-description::-webkit-scrollbar , #edu_description::-webkit-scrollbar, #work_description::-webkit-scrollbar{
     width: 3px;
     height: 4px;
 }
 
-.stats-text::-webkit-scrollbar-track {
+.stats-text::-webkit-scrollbar-track, .edu-comment::-webkit-scrollbar-track, .work-description::-webkit-scrollbar-track, #edu_description::-webkit-scrollbar-track, #work_description::-webkit-scrollbar-track {
 	border-radius: 4px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
 }
 
-.stats-text::-webkit-scrollbar-thumb {
+.stats-text::-webkit-scrollbar-thumb, .edu-comment::-webkit-scrollbar-thumb, .work-description::-webkit-scrollbar-thumb, #edu_description::-webkit-scrollbar-thumb, #work_description::-webkit-scrollbar-thumb{
   border-radius: 4px;
   background-color: #1B8500;
   outline: 1px solid slategrey;
-}
-
-.edu-comment{
-	display: block;
-    overflow-wrap: break-word;
 }
 
 .stats-text > span:nth-child(1){
@@ -548,7 +547,13 @@ body::-webkit-scrollbar-thumb {
 
 	.stats-box > div > img{
 		height: 5.5vw;
+        border:3px solid #1B8500;
+        border-radius: 5px 20px 5px;
 	}
+
+    .stats-box > div > img:hover{
+        background: #f2f4f5;
+    }
 
     .stats-box > div > img:first-of-type{
         height: 6vw;
