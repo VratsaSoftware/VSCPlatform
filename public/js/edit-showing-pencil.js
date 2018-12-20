@@ -8,7 +8,7 @@ $(document).ready(function() {
             $(this).css('color', '#f00');
             $(this).find('i').removeClass('fas fa-ellipsis-v');
             $(this).find('i').addClass('fas fa-times');
-            $(this).parent().parent().css('box-shadow', '0px 10px 50px rgba(7, 42, 68, 0.25)');
+            // $(this).parent().parent().css('box-shadow', '0px 10px 50px rgba(7, 42, 68, 0.25)');
         } else {
             $(this).find('i').removeClass('fas fa-times');
             $(this).find('i').addClass('fas fa-ellipsis-v');
@@ -27,7 +27,7 @@ $(document).ready(function() {
             $(this).parent().parent().find('.add-text').parent().remove();
             $(this).parent().parent().find('.save-edit-box').parent().remove();
             $(this).next('.edit-items-wrap').find('.edit-items').find('.pencil').find('a').removeClass('edit-opened');
-            $(this).parent().parent().css('box-shadow', '0px 10px 50px rgba(7, 42, 68, 0.12)');
+            // $(this).parent().parent().css('box-shadow', '0px 10px 50px rgba(7, 42, 68, 0.12)');
         }
     });
 
@@ -149,6 +149,36 @@ $(document).ready(function() {
             $('.create-form-work').last().find('#institution_name').val('');
         }
         $('.create-form-work').fadeIn();
+        workFormsCloned++;
+        if (workFormsCloned > 5) {
+            $('.work-add-new').fadeOut();
+        }
+    });
+
+    //interests section
+    $('.int-edit').on('click', function(e) {
+        e.preventDefault();
+        $('.live-int').fadeOut();
+        $('.edit-int').fadeIn();
+    });
+
+    $('.create-btn-int').on('click', function(e) {
+        e.preventDefault();
+        $('.work-no-info').fadeOut();
+        $(this).fadeOut();
+        $('.create-form-work').fadeIn();
+    });
+
+
+    var workFormsCloned = 0;
+    $('.int-add-new').on('click', function(e) {
+        e.preventDefault();
+        $('.int-no-info').fadeOut();
+        if ($('.create-form-int').is(":visible")) {
+            $('.create-form-int').last().after($('.create-form-int').last().clone(true));
+            $('.create-form-int').last().find('.suggestion-ins-name').html('');
+        }
+        $('.create-form-int').fadeIn();
         workFormsCloned++;
         if (workFormsCloned > 5) {
             $('.work-add-new').fadeOut();

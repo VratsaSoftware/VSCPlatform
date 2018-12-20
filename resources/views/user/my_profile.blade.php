@@ -291,7 +291,7 @@
                                 @empty
                                 <option value="0" disabled selected>няма опции</option>
                                 @endforelse
-                            </select>
+                            </select> <br />
 
                             <i class="fas fa-school"></i>
                             <span class="section-el-bold live-edu">{{$edu['EduInstitution']->type}} <br /> {{ucwords($edu['EduInstitution']->name)}}</span><br>
@@ -421,7 +421,7 @@
 
                             <i class="fas fa-building"></i><br />
                             <span class="section-el-bold work-company live-work">{{ucfirst($exp['Company']->name)}}</span>
-                            <input type="text" name="work_company" id="work_company" value="{{$exp['Company']->name}}" class="section-el-bold edit-work">
+                            <input type="text" name="work_company" id="work_company" value="{{$exp['Company']->name}}" class="section-el-bold edit-work"><br />
 
                             <i class="fas fa-id-card"></i>
                             <span class="live-work"><br />Позиция :</span><br />
@@ -472,9 +472,9 @@
             </div>
 
             <div class="col-md-4 d-flex flex-row flex-wrap text-center stats-box-wrap">
-                <div class="col-md-12 stats-box">
+                <div class="col-md-12 stats-box interest-wrapper">
                     <div class="col-md-12 stats-title">
-                        <span>Интереси</span>
+                        <span>Интереси &nbsp;</span>
                         <span class="edit-right-menu"><i class="fas fa-ellipsis-v"></i></span>
                         <div class="col-md-12 flex-row flex-wrap text-right edit-items-wrap">
                             <div class="col-md-5"></div>
@@ -484,17 +484,11 @@
                                 </div>
                                 <div class="col-md-4">
                                     <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-8">
-                                    <span class="public-switch">Публично видимо</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="switch">
-                                        <input type="checkbox">
+                                        @if(Auth::user()->isVisible('интереси'))
+                                        <input type="checkbox" class="interest-visibility" checked>
+                                        @else
+                                        <input type="checkbox" class="interest-visibility">
+                                        @endif
                                         <span class="slider round"></span>
                                     </label>
                                 </div>
@@ -503,7 +497,7 @@
                                     <span class="public-switch">Редакция</span>
                                 </div>
                                 <div class="col-md-4 pencil">
-                                    <a href=""><i class="fas fa-pencil-alt fa-2x"></i></a>
+                                    <a href="#" class="int-edit"><i class="fas fa-pencil-alt fa-2x"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -514,8 +508,28 @@
                     </div>
 
                     <div class="col-md-12 stats-text">
-                        <span>JavaScript<br> CSS</span><br />
-                        <span>Football <br> Плуване</span>
+                        @forelse($hobbies as $hobbie)
+                        <form action="">
+                            <i class="fas fa-bullseye"></i>
+                            <br />
+                            @if(is_null($hobbie['Interests']))
+                            <span class="section-el-bold live-int-others">{{ucfirst($hobbie->others)}}</span>
+                            <br />
+                            <br />
+                            <hr>
+                            @else
+                            <span class="section-el-bold live-int-type">{{ucfirst($hobbie['Interests']['Type']->type)}}</span>
+                            <br />
+                            <br />
+                            <i class="fas fa-dot-circle"></i>
+                            <br />
+                            <span class="section-el-bold live-int-name">{{ucfirst($hobbie['Interests']->name)}}</span>
+                            <hr>
+                            @endif
+                        </form>
+                        @empty
+
+                        @endforelse
                     </div>
                 </div>
             </div>
@@ -549,7 +563,7 @@
                     </div>
 
                     <div class="col-md-12 stats-img">
-                        <img src="./images/profile/events-icon.png" alt="education" class="img-fluid">
+                        <img src="./images/profile/events-2.png" alt="education" class="img-fluid">
                     </div>
 
                     <div class="col-md-12 stats-text">
@@ -587,7 +601,7 @@
                     </div>
 
                     <div class="col-md-12 stats-img">
-                        <img src="./images/profile/mentor-program-icon.png" alt="education" class="img-fluid">
+                        <img src="./images/profile/mentor-program-icon4.png" alt="education" class="img-fluid">
                     </div>
 
                     <div class="col-md-12 stats-text">
@@ -625,7 +639,7 @@
                     </div>
 
                     <div class="col-md-12 stats-img">
-                        <img src="./images/profile/grades-icon.png" alt="education" class="img-fluid">
+                        <img src="./images/profile/grades-icon3.png" alt="education" class="img-fluid">
                     </div>
 
                     <div class="col-md-12 stats-text">
@@ -679,6 +693,12 @@
         var isChecked = $(this).is(":checked");
         visibilityIcons('работен опит', isChecked);
         ajaxVisibility('работен опит', isChecked);
+    });
+
+    $('.interest-visibility').on('change', function() {
+        var isChecked = $(this).is(":checked");
+        visibilityIcons('интереси', isChecked);
+        ajaxVisibility('интереси', isChecked);
     });
 </script>
 <script>
@@ -806,17 +826,19 @@
     }
 </script>
 
-//calling the function for eye visibility icons loading
+<!-- //calling the function for eye visibility icons loading -->
 <script type="text/javascript">
     $(function() {
         var eduVis = $('.edu-visibility').is(":checked");
         var workVis = $('.work-visibility').is(":checked");
+        var interestVis = $('.interest-visibility').is(":checked");
         visibilityIcons('образование', eduVis);
         visibilityIcons('работен опит', workVis)
+        visibilityIcons('интереси', interestVis);
     });
 </script>
 
-//function to set eye visibility icons on sections
+<!-- //function to set eye visibility icons on sections -->
 <script type="text/javascript">
     function visibilityIcons(tag, isChecked) {
         switch (tag) {
@@ -842,6 +864,18 @@
                 } else {
                     $('.work-wrapper > .stats-title > span:first-child').find('i').remove();
                     $('.work-wrapper > .stats-title > span:first-child').append('<i class="fas fa-eye-slash"></i>');
+                }
+                break;
+            case 'интереси':
+                $('.interest-wrapper').stop().fadeTo(100, 0.3, function() {
+                    $(this).fadeTo(500, 1.0);
+                });
+                if (isChecked) {
+                    $('.interest-wrapper > .stats-title > span:first-child').find('i').remove();
+                    $('.interest-wrapper > .stats-title > span:first-child').append('<i class="fas fa-eye"></i>');
+                } else {
+                    $('.interest-wrapper > .stats-title > span:first-child').find('i').remove();
+                    $('.interest-wrapper > .stats-title > span:first-child').append('<i class="fas fa-eye-slash"></i>');
                 }
                 break;
             default:

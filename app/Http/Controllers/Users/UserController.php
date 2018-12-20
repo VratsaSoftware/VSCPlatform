@@ -268,6 +268,14 @@ class UserController extends Controller
         return redirect()->route('myProfile')->with('success', $message);
     }
 
+    public function deleteHobbie(Hobbie $hobbie)
+    {
+        dd($hobbie);
+        $experience->delete();
+        $message = __('Успешно изтрит интерес/хоби!');
+        return redirect()->route('myProfile')->with('success', $message);
+    }
+
     public function changeVisibility(Request $request)
     {
         $type = json_decode(json_encode($request->type));

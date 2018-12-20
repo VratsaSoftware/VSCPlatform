@@ -11,6 +11,9 @@ use App\Models\Courses\CourseModule;
 use App\Models\Courses\CourseLecturer;
 use App\Models\Users\SocialLink;
 use App\Models\Users\EducationType;
+use App\Models\Users\InterestsType;
+use App\Models\Users\Interest;
+use App\Models\Users\Hobbie;
 
 class HomeController extends Controller
 {
@@ -29,6 +32,7 @@ class HomeController extends Controller
         $isOnCourse = Auth::user()->isOnCourse();
         $socialLinks = Auth::user()->getSocialLinks();
         $hasWorkExp = Auth::user()->hasWorkExp();
+        $hasHobbies = Auth::user()->hasHobbies();
 
 
         $educationTypes = EducationType::all();
@@ -36,6 +40,10 @@ class HomeController extends Controller
         $certificates = [];
         $course = [];
         $workExp = [];
+        $interestTypes = InterestsType::all();
+        $interests = Interest::all();
+        $hobbies = [];
+        $interests = [];
         if ($hasEducation) {
             $education = Auth::user()->getEducation();
         }
@@ -48,6 +56,9 @@ class HomeController extends Controller
         if ($hasWorkExp) {
             $workExp = Auth::user()->getWorkExp();
         }
+        if ($hasHobbies) {
+            $hobbies = Auth::user()->getHobbies();
+        }
 
         if ($isAdmin) {
             $courses = Course::all();
@@ -59,6 +70,6 @@ class HomeController extends Controller
             })->get();
             return view('user.my_profile', ['courses' => $courses,'social_links' => $socialLinks,'certificates' => $certificates]);
         }
-        return view('user.my_profile', ['courses' => $course,'social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes,'workExp' => $workExp]);
+        return view('user.my_profile', ['courses' => $course,'social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes,'workExp' => $workExp,'hobbies' => $hobbies]);
     }
 }

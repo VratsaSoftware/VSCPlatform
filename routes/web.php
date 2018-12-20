@@ -32,6 +32,11 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/user/update/work/experience', 'Users\UserController@updateWorkExperience')->name('update.work.experience');
     Route::delete('/user/delete/work/{experience}', 'Users\UserController@deleteWorkExperience')->name('delete.work.experience');
 
+    //users hobbies/interests section
+    // Route::post('/user/create/work/experience', 'Users\UserController@createWorkExperience')->name('create.work.experience');
+    // Route::post('/user/update/work/experience', 'Users\UserController@updateWorkExperience')->name('update.work.experience');
+    Route::delete('/user/delete/hobbie/{hobbie}', 'Users\UserController@deleteHobbie')->name('delete.hobbie');
+
 
     //changing visibility of a user section
     Route::post('/user/change/section/visibility', 'Users\UserController@changeVisibility');

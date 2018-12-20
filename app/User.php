@@ -17,6 +17,7 @@ use App\Models\Users\VisibleInformation;
 use App\Models\Users\WorkCompany;
 use App\Models\Users\WorkExperience;
 use App\Models\Users\WorkPosition;
+use App\Models\Users\Hobbie;
 
 class User extends Authenticatable
 {
@@ -154,5 +155,19 @@ class User extends Authenticatable
     public function getWorkExp()
     {
         return WorkExperience::where('user_id', Auth::user()->id)->with('Company', 'Position')->get();
+    }
+
+    public function hasHobbies()
+    {
+        $hasHobbies = Hobbie::where('user_id', Auth::user()->id)->first();
+        if (!is_null($hasHobbies)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function getHobbies()
+    {
+        return Hobbie::where('user_id', Auth::user()->id)->with('Interests.Type')->get();
     }
 }
