@@ -184,4 +184,37 @@ $(document).ready(function() {
             $('.work-add-new').fadeOut();
         }
     });
+
+    //interests section
+    // $('.int-edit').on('click', function(e) {
+    //     e.preventDefault();
+    //     $('.live-int').fadeOut();
+    //     $('.edit-int').fadeIn();
+    // });
+
+    $('.create-btn-hobbie').on('click', function(e) {
+        e.preventDefault();
+        $('.hobbies-no-info').fadeOut();
+        $(this).fadeOut();
+        $('.create-form-hobbies').fadeIn();
+    });
+
+
+    var hobbieFormsCloned = 0;
+    $('.hobbie-add-new').on('click', function(e) {
+        e.preventDefault();
+        $('.int-no-info').fadeOut();
+        if ($('.create-form-hobbies').is(":visible")) {
+            $('.create-form-hobbies').last().after($('.create-form-hobbies').last().clone(true));
+            $('.create-form-hobbies').last().find('.other-interests').fadeOut();
+            $('.create-form-hobbies').last().find('#hobbies-form-create').attr('id', 'hobbies-form-create-' + (hobbieFormsCloned + 10));
+            $('.create-form-hobbies').last().find('#hobbies-form-create').attr('class', 'form-creation-cloning');
+            $('.create-form-hobbies').last().find('.suggestion-ins-name').html('');
+        }
+        $('.create-form-hobbies').fadeIn();
+        hobbieFormsCloned++;
+        if (hobbieFormsCloned > 5) {
+            $('.hobbie-add-new').fadeOut();
+        }
+    });
 })

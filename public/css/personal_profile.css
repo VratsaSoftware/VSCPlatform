@@ -369,6 +369,15 @@ input:checked+.slider:before {
     display: none;
 }
 
+.select-int-del {
+    display: none;
+}
+
+.select-del-int:hover {
+    color: red;
+    cursor: pointer;
+}
+
 .work-years {
     display: inline-block;
 }
@@ -396,7 +405,7 @@ input:checked+.slider:before {
     display: block;
 }
 
-.create-form, .create-form-work {
+.create-form, .create-form-work, .create-form-hobbies, .interests {
     display: none;
 }
 

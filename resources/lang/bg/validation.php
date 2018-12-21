@@ -186,5 +186,9 @@ return [
         'work_company'             => 'Компания',
         'work_position'            => 'Позиция',
         'work_description'         => 'Работно описание',
+        'work_description'         => 'Работно описание',
+        'int_type'                 => 'Тип на интерес',
+        'interests'                => 'Интерес/и',
+        'int_other'                => 'Друг интерес',
     ],
 ];

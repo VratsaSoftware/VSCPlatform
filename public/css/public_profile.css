@@ -146,7 +146,7 @@ body::-webkit-scrollbar-thumb {
     overflow-y: auto;
 }
 
-.stats-text>form>i {
+.stats-text>form>i, .stats-text>span>i, .stats-text>i, #hobbies-form-create>i, #edu-form-create-1>i, #work-form-create-1>i, #hobbies-form-create>p>i, .create-form-hobbies>form>p>i {
     color: #1B8500;
 }
 
@@ -154,17 +154,17 @@ body::-webkit-scrollbar-thumb {
     height: 20vw !important;
 }
 
-.stats-text::-webkit-scrollbar, .edu-comment::-webkit-scrollbar, .work-description::-webkit-scrollbar, #edu_description::-webkit-scrollbar, #work_description::-webkit-scrollbar {
+.stats-text::-webkit-scrollbar, .edu-comment::-webkit-scrollbar, .work-description::-webkit-scrollbar, #edu_description::-webkit-scrollbar, #work_description::-webkit-scrollbar, .other-interests::-webkit-scrollbar {
     width: 3px;
     height: 4px;
 }
 
-.stats-text::-webkit-scrollbar-track, .edu-comment::-webkit-scrollbar-track, .work-description::-webkit-scrollbar-track, #edu_description::-webkit-scrollbar-track, #work_description::-webkit-scrollbar-track {
+.stats-text::-webkit-scrollbar-track, .edu-comment::-webkit-scrollbar-track, .work-description::-webkit-scrollbar-track, #edu_description::-webkit-scrollbar-track, #work_description::-webkit-scrollbar-track, .other-interests::-webkit-scrollbar-track {
     border-radius: 4px;
     -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
 }
 
-.stats-text::-webkit-scrollbar-thumb, .edu-comment::-webkit-scrollbar-thumb, .work-description::-webkit-scrollbar-thumb, #edu_description::-webkit-scrollbar-thumb, #work_description::-webkit-scrollbar-thumb {
+.stats-text::-webkit-scrollbar-thumb, .edu-comment::-webkit-scrollbar-thumb, .work-description::-webkit-scrollbar-thumb, #edu_description::-webkit-scrollbar-thumb, #work_description::-webkit-scrollbar-thumb, .other-interests::-webkit-scrollbar-thumb {
     border-radius: 4px;
     background-color: #1B8500;
     outline: 1px solid #778899;

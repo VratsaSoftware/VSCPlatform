@@ -8,6 +8,7 @@ use App\User;
 
 class Hobbie extends Model
 {
+    protected $guarded = [];
     protected $table = 'users_hobbies';
 
     public function Interests()

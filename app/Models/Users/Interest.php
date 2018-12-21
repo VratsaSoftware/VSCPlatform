@@ -7,6 +7,7 @@ use App\Models\Users\InterestsType;
 
 class Interest extends Model
 {
+    protected $guarded = [];
     protected $table = 'cl_users_interests';
 
     public function Type()

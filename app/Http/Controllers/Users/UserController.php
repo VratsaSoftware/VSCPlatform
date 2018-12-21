@@ -23,6 +23,8 @@ use App\Models\Users\VisibleInformation;
 use App\Models\Users\WorkCompany;
 use App\Models\Users\WorkExperience;
 use App\Models\Users\WorkPosition;
+use App\Models\Users\Hobbie;
+use App\Models\Users\Interest;
 
 class UserController extends Controller
 {
@@ -268,10 +270,38 @@ class UserController extends Controller
         return redirect()->route('myProfile')->with('success', $message);
     }
 
+    public function createHobbies(Request $request)
+    {
+        $data = $request->validate([
+            'int_type' => 'required|numeric|min:1',
+            'interests' => 'sometimes|numeric|min:1',
+            'int_other' => 'sometimes|string|max:255',
+        ]);
+
+        if (!empty($request->interests)) {
+            $interest = Interest::find($request->interests);
+            $interestCheck = Interest::firstOrCreate(
+                ['cl_users_interest_type_id' => $request->int_type,'name' => $interest->name]
+            );
+        }
+
+        if (!empty($request->int_other)) {
+            $interestCheck = Interest::firstOrCreate(
+                ['cl_users_interest_type_id' => $request->int_type,'name' => $request->int_other]
+            );
+        }
+
+        $insertHobbie = Hobbie::firstOrCreate(
+            ['cl_interest_id' => $interestCheck->id,'user_id' => Auth::user()->id]
+        );
+
+        $message = __('Успешно добавени интереси/хобита!');
+        return redirect()->route('myProfile')->with('success', $message);
+    }
+
     public function deleteHobbie(Hobbie $hobbie)
     {
-        dd($hobbie);
-        $experience->delete();
+        $hobbie->delete();
         $message = __('Успешно изтрит интерес/хоби!');
         return redirect()->route('myProfile')->with('success', $message);
     }
@@ -322,6 +352,11 @@ class UserController extends Controller
             }
         }
         return $results;
+    }
+
+    public function getInterests($type)
+    {
+        return response()->json(Interest::where('cl_users_interest_type_id', $type)->get());
     }
 
     /**

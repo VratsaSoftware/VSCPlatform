@@ -17,7 +17,6 @@ class CreateUsersHobbiesTable extends Migration
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();
             $table->integer('cl_interest_id')->unsigned()->nullable();
-            $table->longText('others')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

@@ -41,7 +41,6 @@ class HomeController extends Controller
         $course = [];
         $workExp = [];
         $interestTypes = InterestsType::all();
-        $interests = Interest::all();
         $hobbies = [];
         $interests = [];
         if ($hasEducation) {
@@ -70,6 +69,6 @@ class HomeController extends Controller
             })->get();
             return view('user.my_profile', ['courses' => $courses,'social_links' => $socialLinks,'certificates' => $certificates]);
         }
-        return view('user.my_profile', ['courses' => $course,'social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes,'workExp' => $workExp,'hobbies' => $hobbies]);
+        return view('user.my_profile', ['courses' => $course,'social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes,'workExp' => $workExp,'hobbies' => $hobbies,'interestTypes' => $interestTypes]);
     }
 }

@@ -336,21 +336,24 @@
                         <button class="btn btn-success create-btn"><i class="fas fa-plus"></i></button>
                         @endforelse
                         <span class="create-form">
-                            <form action="{{route('create.education')}}" id="edu-form-create-{{$edu->id}}" name="edu-form" method="POST">
+                            <form action="{{route('create.education')}}" id="edu-form-create-1" name="edu-form" method="POST">
                                 {{ csrf_field() }}
+                                <i class="far fa-calendar-alt"></i><br />
                                 Година от:
                                 <input type="date" id="y_from" name="y_from" class="section-el-bold" value="{{old('y_from')}}"><br />
                                 Година до:
                                 <input type="date" id="y_to" name="y_to" class="section-el-bold" value="{{old('y_to')}}"><br />
 
+                                <i class="fas fa-user-graduate"></i><br />
                                 <select id="edu_type" name="edu_type" class="section-el-bold">
                                     @forelse ($eduTypes as $type)
                                     <option value="{{$type->id}}">{{$type->type}}</option>
                                     @empty
                                     <option value="0" disabled selected>няма опции</option>
                                     @endforelse
-                                </select>
+                                </select><br />
 
+                                <i class="fas fa-school"></i><br />
                                 <select name="edu_institution_type" id="edu_institution_type" class="section-el-bold">
                                     @foreach(Config::get('institutionTypes') as $type)
                                     <option value="{{$type}}">{{$type}}</option>
@@ -360,10 +363,12 @@
                                 <input type="text" name="institution_name" id="institution_name" value="{{old('institution_name')}}" class="section-el-bold institution_name" placeholder="име на институцията...">
                                 <p class="suggestion-ins-name"></p>
 
+                                <i class="fas fa-address-card"></i><br>
                                 <input type="text" name="specialty" id="specialty" value="{{old('specialty')}}" class="section-el-bold specialty" placeholder="специалност...">
                                 <p class="suggestion-ins-name"></p>
 
-                                <textarea name="edu_description" id="edu_description" placeholder="коментар..." style="overflow:auto;resize:none" rows="5" class="section-el-bold" form="edu-form-create-{{$edu->id}}" value="{{old('edu_description')}}"></textarea>
+                                <i class="fas fa-comment"></i><br />
+                                <textarea name="edu_description" id="edu_description" placeholder="коментар..." style="overflow:auto;resize:none" rows="5" class="section-el-bold" form="edu-form-create-1" value="{{old('edu_description')}}"></textarea>
 
                                 <p><button id="submit" name="submit" value="запази" class="btn btn-success"><i class="fas fa-save"></i></button> <button class="btn btn-info edit-edu edu-add-new"><i class="fas fa-plus"></i></button></p>
                             </form>
@@ -448,18 +453,22 @@
                         <button class="btn btn-success create-btn-work"><i class="fas fa-plus"></i></button>
                         @endforelse
                         <span class="create-form-work">
-                            <form action="{{route('create.work.experience')}}" id="work-form-create-{{$exp->id}}" name="work-form-create" method="POST">
+                            <form action="{{route('create.work.experience')}}" id="work-form-create-1" name="work-form-create" method="POST">
                                 {{ csrf_field() }}
+                                <i class="far fa-calendar-alt"></i><br />
                                 Година от:
                                 <input type="date" id="y_from" name="y_from" class="section-el-bold" value="{{old('y_from')}}"><br />
                                 Година до:
                                 <input type="date" id="y_to" name="y_to" class="section-el-bold" value="{{old('y_to')}}"><br />
 
-                                <input type="text" class="section-el-bold" name="work_company" value="{{old('work_company')}}" id="work_company" placeholder="Компания/Фирма...">
+                                <i class="fas fa-building"></i><br />
+                                <input type="text" class="section-el-bold" name="work_company" value="{{old('work_company')}}" id="work_company" placeholder="Компания/Фирма..."><br />
 
-                                <input type="text" class="section-el-bold" name="work_position" value="{{old('work_position')}}" id="work_position" placeholder="Позиция...">
+                                <i class="fas fa-id-card"></i><br />
+                                <input type="text" class="section-el-bold" name="work_position" value="{{old('work_position')}}" id="work_position" placeholder="Позиция..."><br />
 
-                                <textarea name="description" id="description" placeholder="описание..." style="overflow:auto;resize:none" rows="5" class="section-el-bold" form="work-form-create-{{$exp->id}}"></textarea><br />
+                                <i class="fas fa-align-left"></i><br />
+                                <textarea name="description" id="description" placeholder="описание..." style="overflow:auto;resize:none" rows="5" class="section-el-bold" form="work-form-create-1"></textarea><br />
 
                                 <p>
                                     <button id="submit" name="submit" value="запази" class="btn btn-success"><i class="fas fa-save"></i></button>
@@ -509,11 +518,13 @@
 
                     <div class="col-md-12 stats-text">
                         @forelse($hobbies as $hobbie)
-                        <form action="">
+                        <form action="{{ route('delete.hobbie',$hobbie->id) }}" method="POST" onsubmit="return ConfirmDelete()" id="delete-edu">
+                            {{ method_field('DELETE') }}
+                            {{ csrf_field() }}
                             <i class="fas fa-bullseye"></i>
                             <br />
                             @if(is_null($hobbie['Interests']))
-                            <span class="section-el-bold live-int-others">{{ucfirst($hobbie->others)}}</span>
+                            <span class="section-el-bold live-int_others">{{ucfirst($hobbie->others)}}</span>
                             <br />
                             <br />
                             <hr>
@@ -524,12 +535,41 @@
                             <i class="fas fa-dot-circle"></i>
                             <br />
                             <span class="section-el-bold live-int-name">{{ucfirst($hobbie['Interests']->name)}}</span>
+                            <button type="submit" class="btn btn-danger edit-int" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            <button class="btn btn-info edit-hobbie hobbie-add-new"><i class="fas fa-plus"></i></button>
                             <hr>
-                            @endif
                         </form>
-                        @empty
+                        @endif
 
+                        @empty
+                        <span class="edu hobbies-no-info">Няма въведена информация</span><br>
+                        <button class="btn btn-success create-btn-hobbie"><i class="fas fa-plus"></i></button>
                         @endforelse
+                        <span class="create-form-hobbies">
+                            <form action="{{route('create.hobbies')}}" id="hobbies-form-create" name="hobbies-form-create" method="POST">
+                                {{ csrf_field() }}
+                                <p>
+                                    <i class="fas fa-bullseye"></i>
+                                    <p />
+                                    <select name="int_type" id="int_type" class="section-el-bold int_type">
+                                        <option value="0" disabled selected>Тип/Разновидност</option>
+                                        @foreach($interestTypes as $type)
+                                        <option value="{{$type->id}}" class="int-type-select">{{$type->type}}</option>
+                                        @endforeach
+                                    </select><br />
+
+                                    <p>
+                                        <i class="fas fa-dot-circle"></i>
+                                    </p>
+                                    <select name="interests" id="interests" class="interests section-el-bold">
+
+                                    </select>
+                                    <p>
+                                        <button id="submit" name="submit" value="запази" class="btn btn-success"><i class="fas fa-save"></i></button>
+                                        <button class="btn btn-info edit-hobbie hobbie-add-new"><i class="fas fa-plus"></i></button>
+                                    </p>
+                            </form>
+                        </span>
                     </div>
                 </div>
             </div>
@@ -879,8 +919,41 @@
                 }
                 break;
             default:
-
         }
     }
 </script>
+
+<script type="text/javascript">
+    $('.int_type').on('change', function() {
+        var type = this.value;
+        var txt = this.options[this.selectedIndex].text.trim();
+        getInterests($(this), type, txt);
+    });
+
+    function getInterests(input, type, txt) {
+        if (txt != 'друго' && txt != 'Друго' && txt != 'Други' && txt != 'други') {
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                type: "GET",
+                url: '/interest/' + type,
+                success: function(data, textStatus, xhr) {
+                    if (data) {
+                        $.each(data, function(key, value) {
+                            $('.interests:last').fadeIn();
+                            $('.interests:last').find('.ajax-load-interests').remove();
+                            $('.interests:last').append('<option class="ajax-load-interests" value="' + value.id + '">' + value.name + '</option>');
+                        });
+                    }
+                }
+            });
+        } else {
+            $('.interests').fadeOut();
+            $('.interests:last').after('<textarea name="int_other" id="int_other" class="section-el-bold other-interests" placeholder="опишете..." style="overflow:auto;resize:none" rows="5" class="" form="' + $('.interests:last').parent().attr(
+                'id') + '"></textarea>');
+        }
+    }
+</script>
+
 @endsection
