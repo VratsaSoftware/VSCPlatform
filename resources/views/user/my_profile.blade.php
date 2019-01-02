@@ -238,7 +238,7 @@
                 <div class="col-md-12 stats-box edu-wrapper">
                     <div class="col-md-12 stats-title">
                         <span>Образование &nbsp;</span>
-                        <span class="edit-right-menu"><i class="fas fa-ellipsis-v"></i></span>
+                        <span class="edit-right-menu edu-edit-options"><i class="fas fa-ellipsis-v"></i></span>
                         <div class="col-md-12 flex-row flex-wrap text-right edit-items-wrap">
                             <div class="col-md-5"></div>
                             <div class="col-md-7 d-flex flex-row flex-wrap edit-items text-right">
@@ -318,7 +318,9 @@
                             @endif
                             <i class="fas fa-comment"></i>
                             <span class="live-edu">Коментар :</span>
+                            @if(!empty($edu->description))
                             <span class="section-el-bold live-edu edu-comment">{{$edu->description}}</span>
+                            @endif
                             <textarea name="edu_description" id="edu_description" placeholder="{{$edu->description}}" style="overflow:auto;resize:none" rows="5" class="edit-edu" form="edu-form-{{$edu->id}}">{{$edu->description}}</textarea>
                             <p>
                                 <button id="submit" name="submit" value="запази" class="btn btn-success edit-edu submit-edu"><i class="fas fa-save"></i></button>
@@ -382,7 +384,7 @@
                 <div class="col-md-12 stats-box work-wrapper">
                     <div class="col-md-12 stats-title">
                         <span>Работен Опит &nbsp;</span>
-                        <span class="edit-right-menu"><i class="fas fa-ellipsis-v"></i></span>
+                        <span class="edit-right-menu work-edit-options"><i class="fas fa-ellipsis-v"></i></span>
                         <div class="col-md-12 flex-row flex-wrap text-right edit-items-wrap">
                             <div class="col-md-5"></div>
                             <div class="col-md-7 d-flex flex-row flex-wrap edit-items text-right">
@@ -424,18 +426,21 @@
                             <input type="date" id="y_from" name="y_from" class="section-el-bold edit-work" value="{{$exp->y_from->format('Y-m-d') ?? null}}"><br />
                             <input type="date" id="y_to" name="y_to" class="section-el-bold edit-work" value="{{$exp->y_to->format('Y-m-d') ?? null}}"><br />
 
-                            <i class="fas fa-building"></i><br />
+                            <i class="fas fa-building"></i>
+                            <span><br />Компания :</span><br />
                             <span class="section-el-bold work-company live-work">{{ucfirst($exp['Company']->name)}}</span>
                             <input type="text" name="work_company" id="work_company" value="{{$exp['Company']->name}}" class="section-el-bold edit-work"><br />
 
                             <i class="fas fa-id-card"></i>
-                            <span class="live-work"><br />Позиция :</span><br />
+                            <span><br />Позиция :</span><br />
                             <span class="section-el-bold work-position live-work">{{$exp['Position']->position}}</span>
                             <input type="text" name="work_position" id="work_position" value="{{$exp['Position']->position}}" class="section-el-bold edit-work"><br />
 
                             <i class="fas fa-align-left"></i>
-                            <span class="live-work"><br />Описание :</span><br />
+                            <span><br />Описание :</span><br />
+                            @if(!empty($exp->description))
                             <span class="section-el-bold work-description live-work">{{$exp->description}}</span>
+                            @endif
                             <textarea name="work_description" id="work_description" placeholder="{{$exp->description}}" style="overflow:auto;resize:none" rows="5" class="edit-work" form="work-form-update-{{$exp->id}}">{{$exp->description}}</textarea>
                             <p>
                                 <button id="submit" name="submit" value="запази" class="btn btn-success edit-work"><i class="fas fa-save"></i></button>
@@ -484,7 +489,7 @@
                 <div class="col-md-12 stats-box interest-wrapper">
                     <div class="col-md-12 stats-title">
                         <span>Интереси &nbsp;</span>
-                        <span class="edit-right-menu"><i class="fas fa-ellipsis-v"></i></span>
+                        <span class="edit-right-menu interests-edit-options"><i class="fas fa-ellipsis-v"></i></span>
                         <div class="col-md-12 flex-row flex-wrap text-right edit-items-wrap">
                             <div class="col-md-5"></div>
                             <div class="col-md-7 d-flex flex-row flex-wrap edit-items text-right">
@@ -535,7 +540,7 @@
                             <i class="fas fa-dot-circle"></i>
                             <br />
                             <span class="section-el-bold live-int-name">{{ucfirst($hobbie['Interests']->name)}}</span>
-                            <button type="submit" class="btn btn-danger edit-int" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                            <button type="submit" class="btn btn-danger edit-hobbie" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
                             <button class="btn btn-info edit-hobbie hobbie-add-new"><i class="fas fa-plus"></i></button>
                             <hr>
                         </form>
@@ -581,24 +586,6 @@
                         <span class="edit-right-menu"><i class="fas fa-ellipsis-v"></i></span>
                         <div class="col-md-12 flex-row flex-wrap text-right edit-items-wrap">
                             <div class="col-md-5"></div>
-                            <div class="col-md-7 d-flex flex-row flex-wrap edit-items text-right">
-                                <div class="col-md-8">
-                                    <span class="public-switch">Публично видимо</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-8">
-                                    <span class="public-switch">Редакция</span>
-                                </div>
-                                <div class="col-md-4 pencil">
-                                    <a href="#"><i class="fas fa-pencil-alt fa-2x"></i></a>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -607,7 +594,7 @@
                     </div>
 
                     <div class="col-md-12 stats-text">
-                        <img src="./images/soon.png" alt="coming-soon" class="img-fluid responsive soon-sections">
+                        <img src="./images/soon2.png" alt="coming-soon" class="img-fluid responsive soon-sections">
                     </div>
                 </div>
             </div>
@@ -619,24 +606,6 @@
                         <span class="edit-right-menu"><i class="fas fa-ellipsis-v"></i></span>
                         <div class="col-md-12 flex-row flex-wrap text-right edit-items-wrap">
                             <div class="col-md-5"></div>
-                            <div class="col-md-7 d-flex flex-row flex-wrap edit-items text-right">
-                                <div class="col-md-8">
-                                    <span class="public-switch">Публично видимо</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-8">
-                                    <span class="public-switch">Редакция</span>
-                                </div>
-                                <div class="col-md-4 pencil">
-                                    <a href="#"><i class="fas fa-pencil-alt fa-2x"></i></a>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -645,7 +614,7 @@
                     </div>
 
                     <div class="col-md-12 stats-text">
-                        <img src="./images/soon.png" alt="coming-soon" class="img-fluid responsive soon-sections">
+                        <img src="./images/soon2.png" alt="coming-soon" class="img-fluid responsive soon-sections">
                     </div>
                 </div>
             </div>
@@ -657,24 +626,6 @@
                         <span class="edit-right-menu"><i class="fas fa-ellipsis-v"></i></span>
                         <div class="col-md-12 flex-row flex-wrap text-right edit-items-wrap">
                             <div class="col-md-5"></div>
-                            <div class="col-md-7 d-flex flex-row flex-wrap edit-items text-right">
-                                <div class="col-md-8">
-                                    <span class="public-switch">Публично видимо</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-8">
-                                    <span class="public-switch">Редакция</span>
-                                </div>
-                                <div class="col-md-4 pencil">
-                                    <a href="#"><i class="fas fa-pencil-alt fa-2x"></i></a>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
@@ -683,37 +634,21 @@
                     </div>
 
                     <div class="col-md-12 stats-text">
-                        <img src="./images/soon.png" alt="coming-soon" class="img-fluid responsive soon-sections">
+                        <img src="./images/soon2.png" alt="coming-soon" class="img-fluid responsive soon-sections">
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<!-- sliding closing efect on alert messages -->
 <script>
     $(function() {
         setTimeout(function() {
             $('.alert').toggle("slide");
         }, 4000);
     });
-</script>
 
-<script type="text/javascript">
-    function imagePreview(input) {
-        var ext = input.files[0]['name'].substring(input.files[0]['name'].lastIndexOf('.') + 1).toLowerCase();
-        if (input.files && input.files[0] && (ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg")) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-                $('.profile-pic').attr('src', e.target.result);
-            }
-
-            reader.readAsDataURL(input.files[0]);
-        } else {
-            alert('Файлът трябва да е картинка/снимка!');
-        }
-    }
-</script>
-<script>
     function ConfirmDelete() {
         var x = confirm("Сигурни ли сте че искате да изтриете ?");
         if (x)
@@ -722,238 +657,20 @@
             return false;
     }
 </script>
-<script type="text/javascript">
-    $('.edu-visibility').on('change', function() {
-        var isChecked = $(this).is(":checked");
-        visibilityIcons('образование', isChecked);
-        ajaxVisibility('образование', isChecked);
-    });
 
-    $('.work-visibility').on('change', function() {
-        var isChecked = $(this).is(":checked");
-        visibilityIcons('работен опит', isChecked);
-        ajaxVisibility('работен опит', isChecked);
-    });
+<!-- //preview picture before saving for profile picture -->
+<script src="./js/profile-picture-preview.js" charset="utf-8" async></script>
 
-    $('.interest-visibility').on('change', function() {
-        var isChecked = $(this).is(":checked");
-        visibilityIcons('интереси', isChecked);
-        ajaxVisibility('интереси', isChecked);
-    });
-</script>
-<script>
-    function ajaxVisibility(type, visibility) {
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            type: "POST",
-            url: '/user/change/section/visibility',
-            data: {
-                type: type,
-                visibility: visibility
-            },
-            success: function(data, textStatus, xhr) {
-                if (xhr.status == 200) {
-                    //success
-                }
-            }
-        });
-    }
-</script>
+<!-- //visibility of sections check and change -->
+<script src="./js/profile-visibility-check.js" charset="utf-8" async></script>
 
-<script type="text/javascript">
-    $('.institution_name').bind('input keypress mouseenter', function() {
-        var inputval = $(this).val();
-        var input = $(this);
-        inputval = inputval.length;
-        var type = 'institution';
-        // console.log(inputval);
-        if (inputval > 3) {
-            getSuggestions(input, inputval, type, $(this).val());
-        }
-
-        $('.auto-ins-name').on('click', function() {
-            $(this).prev('.institution_name').val($(this).text());
-        });
-
-        $('.auto-ins-name').bind('mouseleave mouseout focusout', function() {
-            $(this).parent().html('');
-        });
-    });
-
-    $('.institution_name').keyup(function() {
-        var inputval = $(this).val();
-        inputval = inputval.length;
-        var input = $(this);
-        var type = 'institution';
-        // getSuggestions(input, inputval, type, $(this).val());
-        if (!$(this).val() && inputval < 1 && inputval == 0) {
-            $(this).next('.suggestion-ins-name').html('');
-        }
-    });
-
-    //specialties suggestions
-    $('.specialty').bind('input keypress mouseenter', function() {
-        var inputval = $(this).val();
-        var input = $(this);
-        inputval = inputval.length;
-        var type = 'specialty';
-        // console.log(inputval);
-        if (inputval > 3) {
-            getSuggestions(input, inputval, type, $(this).val());
-        }
-
-        $('.auto-ins-name-specialty').on('click', function() {
-            $(this).parent().prev('.specialty').val($(this).text());
-        });
-
-        $('.auto-ins-name-specialty').bind('mouseleave mouseout focusout', function() {
-            $(this).parent().html('');
-        });
-    });
-
-    $('.specialty').keyup(function() {
-        var inputval = $(this).val();
-        inputval = inputval.length;
-        var input = $(this);
-        var type = 'specialty';
-        // getSuggestions(input, inputval, type, $(this).val());
-        if (!$(this).val() && inputval < 1 && inputval == 0) {
-            $(this).next('.suggestion-ins-name').html('');
-        }
-    });
-
-    //ajax call for suggestions accepts the input who needs suggestion, length of the letters, type of information, and the string to search for
-    function getSuggestions(input, inputLength, type, search) {
-        $.ajax({
-            headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            type: "GET",
-            url: '/user/education/autocomplete',
-            data: {
-                search: search,
-                type: type
-            },
-            success: function(data, textStatus, xhr) {
-                // console.log(data);
-
-                if (data.length > 0 && inputLength > 0 && inputLength !== 0) {
-                    input.next('.suggestion-ins-name').html('');
-                    $.each(data, function() {
-                        $.each(this, function(k, v) {
-                            if (input.is(":focus")) {
-                                if (input.hasClass('institution_name')) {
-                                    input.next('.suggestion-ins-name').append('<p class="auto-ins-name">' + v + '</p>');
-                                    $('.auto-ins-name').on('click', function() {
-                                        input.val($(this).text());
-                                    });
-                                } else {
-                                    input.next('.suggestion-ins-name').append('<p class="auto-ins-name-specialty">' + v + '</p>');
-                                    $('.auto-ins-name-specialty').on('click', function() {
-                                        input.val($(this).text());
-                                    });
-                                }
-                            }
-                        });
-                    });
-                } else {
-                    input.next('.suggestion-ins-name').html('');
-                }
-            }
-        });
-    }
-</script>
-
-<!-- //calling the function for eye visibility icons loading -->
-<script type="text/javascript">
-    $(function() {
-        var eduVis = $('.edu-visibility').is(":checked");
-        var workVis = $('.work-visibility').is(":checked");
-        var interestVis = $('.interest-visibility').is(":checked");
-        visibilityIcons('образование', eduVis);
-        visibilityIcons('работен опит', workVis)
-        visibilityIcons('интереси', interestVis);
-    });
-</script>
+<!-- //ajax suggestions for edu section institution and specialty -->
+<script src="./js/profile-edu-suggestions.js" charset="utf-8" async></script>
 
 <!-- //function to set eye visibility icons on sections -->
-<script type="text/javascript">
-    function visibilityIcons(tag, isChecked) {
-        switch (tag) {
-            case 'образование':
-                $('.edu-wrapper').stop().fadeTo(100, 0.3, function() {
-                    $(this).fadeTo(500, 1.0);
-                });
-                if (isChecked) {
-                    $('.edu-wrapper > .stats-title > span:first-child').find('i').remove();
-                    $('.edu-wrapper > .stats-title > span:first-child').append('<i class="fas fa-eye"></i>');
-                } else {
-                    $('.edu-wrapper > .stats-title > span:first-child').find('i').remove();
-                    $('.edu-wrapper > .stats-title > span:first-child').append('<i class="fas fa-eye-slash"></i>');
-                }
-                break;
-            case 'работен опит':
-                $('.work-wrapper').stop().fadeTo(100, 0.3, function() {
-                    $(this).fadeTo(500, 1.0);
-                });
-                if (isChecked) {
-                    $('.work-wrapper > .stats-title > span:first-child').find('i').remove();
-                    $('.work-wrapper > .stats-title > span:first-child').append('<i class="fas fa-eye"></i>');
-                } else {
-                    $('.work-wrapper > .stats-title > span:first-child').find('i').remove();
-                    $('.work-wrapper > .stats-title > span:first-child').append('<i class="fas fa-eye-slash"></i>');
-                }
-                break;
-            case 'интереси':
-                $('.interest-wrapper').stop().fadeTo(100, 0.3, function() {
-                    $(this).fadeTo(500, 1.0);
-                });
-                if (isChecked) {
-                    $('.interest-wrapper > .stats-title > span:first-child').find('i').remove();
-                    $('.interest-wrapper > .stats-title > span:first-child').append('<i class="fas fa-eye"></i>');
-                } else {
-                    $('.interest-wrapper > .stats-title > span:first-child').find('i').remove();
-                    $('.interest-wrapper > .stats-title > span:first-child').append('<i class="fas fa-eye-slash"></i>');
-                }
-                break;
-            default:
-        }
-    }
-</script>
+<script src="./js/profile-initial-visibility-sections.js" charset="utf-8" async></script>
 
-<script type="text/javascript">
-    $('.int_type').on('change', function() {
-        var type = this.value;
-        var txt = this.options[this.selectedIndex].text.trim();
-        getInterests($(this), type, txt);
-    });
-
-    function getInterests(input, type, txt) {
-        if (txt != 'друго' && txt != 'Друго' && txt != 'Други' && txt != 'други') {
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                type: "GET",
-                url: '/interest/' + type,
-                success: function(data, textStatus, xhr) {
-                    if (data) {
-                        $.each(data, function(key, value) {
-                            $('.interests:last').fadeIn();
-                            $('.interests:last').find('.ajax-load-interests').remove();
-                            $('.interests:last').append('<option class="ajax-load-interests" value="' + value.id + '">' + value.name + '</option>');
-                        });
-                    }
-                }
-            });
-        } else {
-            $('.interests').fadeOut();
-            $('.interests:last').after('<textarea name="int_other" id="int_other" class="section-el-bold other-interests" placeholder="опишете..." style="overflow:auto;resize:none" rows="5" class="" form="' + $('.interests:last').parent().attr(
-                'id') + '"></textarea>');
-        }
-    }
-</script>
+<!-- ajax load interest by type -->
+<script src="./js/profile-interests-ajax-load.js" charset="utf-8" async></script>
 
 @endsection

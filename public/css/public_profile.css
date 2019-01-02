@@ -19,11 +19,13 @@ body::-webkit-scrollbar-thumb {
 
 @font-face {
     font-family: Ubuntu;
+    font-display: optional;
     src: url(fonts/ubuntu/Ubuntu-Regular.ttf);
 }
 
 @font-face {
     font-family: Comfortaa;
+    font-display: optional;
     src: url(fonts/comfortaa/Comfortaa-Regular.ttf);
 }
 

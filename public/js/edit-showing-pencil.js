@@ -12,14 +12,15 @@ $(document).ready(function() {
         } else {
             $(this).find('i').removeClass('fas fa-times');
             $(this).find('i').addClass('fas fa-ellipsis-v');
-            $('.create-form').fadeOut();
-            $('.create-form-work').fadeOut();
-            $('.edit-edu').fadeOut();
-            $('.edit-work').fadeOut();
-            $('.live-edu').fadeIn();
-            $('.live-work').fadeIn();
-            $('.suggestion-ins-name').html('');
-            $('.auto-ins-name').html('');
+            $(this).parent().parent().parent().find('.create-form').fadeOut();
+            $(this).parent().parent().parent().find('.create-form-work').fadeOut();
+            $(this).parent().parent().parent().find('.create-form-hobbies').fadeOut();
+            $(this).parent().parent().parent().find('.edit-edu').fadeOut();
+            $(this).parent().parent().parent().find('.edit-work').fadeOut();
+            $(this).parent().parent().parent().find('.live-edu').fadeIn();
+            $(this).parent().parent().parent().find('.live-work').fadeIn();
+            $(this).parent().parent().parent().find('.suggestion-ins-name').html('');
+            $(this).parent().parent().parent().find('.auto-ins-name').html('');
             $(this).next('.edit-items-wrap').removeClass('box-opened');
             $(this).next('.edit-items-wrap').css('display', 'none');
             $(this).css('color', '#000');
@@ -27,7 +28,21 @@ $(document).ready(function() {
             $(this).parent().parent().find('.add-text').parent().remove();
             $(this).parent().parent().find('.save-edit-box').parent().remove();
             $(this).next('.edit-items-wrap').find('.edit-items').find('.pencil').find('a').removeClass('edit-opened');
-            // $(this).parent().parent().css('box-shadow', '0px 10px 50px rgba(7, 42, 68, 0.12)');
+
+            if ($(this).hasClass('edu-edit-options') && !$(this).parent().parent().parent().find('.edu-no-info').is(":visible")) {
+                $(this).parent().parent().parent().find('.edu-no-info').fadeIn();
+                $(this).parent().parent().parent().find('.create-btn').fadeIn();
+            }
+
+            if ($(this).hasClass('work-edit-options') && !$(this).parent().parent().parent().find('.work-no-info').is(":visible")) {
+                $(this).parent().parent().parent().find('.work-no-info').fadeIn();
+                $(this).parent().parent().parent().find('.create-btn-work').fadeIn();
+            }
+
+            if ($(this).hasClass('interests-edit-options') && !$(this).parent().parent().parent().find('.hobbies-no-info').is(":visible")) {
+                $(this).parent().parent().parent().find('.hobbies-no-info').fadeIn();
+                $(this).parent().parent().parent().find('.create-btn-hobbie').fadeIn();
+            }
         }
     });
 
@@ -41,7 +56,14 @@ $(document).ready(function() {
             $(this).find('i').removeClass('fa-pencil-alt').addClass('fa-save');
             $(this).removeClass('edit-btn');
             e.preventDefault();
-            // $(this).removeClass('save-edit');
+            $(this).find('i').parent().after('<button class="btn btn-danger btn-close-top-edit-img"><i class="fas fa-times"></i></button>');
+            $('.btn-close-top-edit-img').on('click', function(e) {
+                e.preventDefault();
+                $(this).prev('button').prev('.input-img').remove();
+                $(this).fadeOut('fast');
+                $(this).prev('button').find('i').removeClass('fa-save').addClass('fa-pencil-alt');
+                $(this).parent().find('img').removeClass('edit-img');
+            });
         }
         $('.loader-wrapper').css('display', 'flex').fadeOut('slow');
         if ($(this).hasClass('edit-btn')) {
@@ -57,9 +79,21 @@ $(document).ready(function() {
                 $(this).prev('span').html('<br><input type="text" class="edit-user-items" id="email" name="email" value="' + oldText + '"></br>');
             }
             if ($(this).prev('span').hasClass('name')) {
-                $(this).prev('span').html('<br><input type="text" class="edit-user-items" id="name" name="name" value="' + oldText + '"></br>');
+                $(this).prev('span').html('<p class="edit-live-name"></p><input type="text" class="edit-user-items" id="name" name="name" value="' + oldText + '"></br>');
+                $('#name').bind('input keypress', function() {
+                    $('.edit-live-name').html($(this).val());
+                });
             }
             $(this).find('i').removeClass('fa-pencil-alt').addClass('fa-save');
+            $(this).find('i').parent().after('<button class="btn btn-danger btn-close-top-edit"><i class="fas fa-times"></i></button>');
+
+            $('.btn-close-top-edit').on('click', function(e) {
+                e.preventDefault();
+                $(this).prev('button').prev('span').html(oldText);
+                $(this).fadeOut('fast');
+                $(this).prev('button').find('i').removeClass('fa-save').addClass('fa-pencil-alt');
+                $(this).prev('button').addClass('edit-btn');
+            });
         }
     });
 
@@ -72,6 +106,11 @@ $(document).ready(function() {
             $(this).find('i').removeClass('fa-pencil-alt').addClass('fa-save');
             $('.loader-wrapper').css('display', 'flex').fadeOut();
         }
+        $('.btn-close-top-edit').on('click', function(e) {
+            e.preventDefault();
+            $('.edit-social').fadeOut();
+            $('.social-edit').removeClass('editing');
+        });
     });
 
     //adding textareas to the boxes with options
@@ -155,42 +194,12 @@ $(document).ready(function() {
         }
     });
 
-    //interests section
+    // hobbies section
     $('.int-edit').on('click', function(e) {
         e.preventDefault();
-        $('.live-int').fadeOut();
-        $('.edit-int').fadeIn();
+        $('.live-hobbie').fadeOut();
+        $('.edit-hobbie').fadeIn();
     });
-
-    $('.create-btn-int').on('click', function(e) {
-        e.preventDefault();
-        $('.work-no-info').fadeOut();
-        $(this).fadeOut();
-        $('.create-form-work').fadeIn();
-    });
-
-
-    var workFormsCloned = 0;
-    $('.int-add-new').on('click', function(e) {
-        e.preventDefault();
-        $('.int-no-info').fadeOut();
-        if ($('.create-form-int').is(":visible")) {
-            $('.create-form-int').last().after($('.create-form-int').last().clone(true));
-            $('.create-form-int').last().find('.suggestion-ins-name').html('');
-        }
-        $('.create-form-int').fadeIn();
-        workFormsCloned++;
-        if (workFormsCloned > 5) {
-            $('.work-add-new').fadeOut();
-        }
-    });
-
-    //interests section
-    // $('.int-edit').on('click', function(e) {
-    //     e.preventDefault();
-    //     $('.live-int').fadeOut();
-    //     $('.edit-int').fadeIn();
-    // });
 
     $('.create-btn-hobbie').on('click', function(e) {
         e.preventDefault();
@@ -209,7 +218,7 @@ $(document).ready(function() {
             $('.create-form-hobbies').last().find('.other-interests').fadeOut();
             $('.create-form-hobbies').last().find('#hobbies-form-create').attr('id', 'hobbies-form-create-' + (hobbieFormsCloned + 10));
             $('.create-form-hobbies').last().find('#hobbies-form-create').attr('class', 'form-creation-cloning');
-            $('.create-form-hobbies').last().find('.suggestion-ins-name').html('');
+            $('.create-form-hobbies').last().find('#hobbies-form-create-' + (hobbieFormsCloned + 10)).find('#interests').fadeOut('fast');
         }
         $('.create-form-hobbies').fadeIn();
         hobbieFormsCloned++;
