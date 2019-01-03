@@ -1,66 +1,62 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-<head>
-	<meta charset="UTF-8">
 
-	<title>@yield('title')</title>
+    <head>
+        <meta charset="UTF-8">
 
-	<link rel="stylesheet" href="{{ asset('/css/bootstrap.css') }}">
+        <title>@yield('title')</title>
 
-	<link rel="stylesheet" href="{{ asset('/css/bootstrap-grid.css') }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-	<link rel="stylesheet" href="{{ asset('/css/public_profile.css') }}">
+        <!-- favicon -->
+        <link rel="shortcut icon" type="image/png" href="{{ asset('/images/vso-png-white.png') }}" />
 
-	<link rel="stylesheet" href="{{ asset('/css/personal_profile.css') }}">
+        <!-- facebook -->
+        <meta property="og:url" content="" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Враца Софтуер Общество" />
+        <meta property="og:description" content="Развиваме дигитална индустрия във Враца" />
+        <meta property="og:image" content="./images/vso-logo-bg-original.png" />
+        <meta name="Description" content="Author: VSC 2018">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+    </head>
 
-	<link rel="stylesheet" href="{{ asset('/css/lecturer_interviews.css') }}">
+    <body>
+        <!-- JQuery -->
+        <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
 
-    <link rel="stylesheet" href="{{ asset('/css/lecturer_courses.css') }}">
+        @include('layouts.top-bar')
 
-    <link rel="stylesheet" href="{{ asset('/css/lecturer_course_options.css') }}">
+        @if(Auth::user()->isAdmin())
+            @include('admin.left-bar')
+            @elseif(Auth::user()->isLecturer())
+                @include('lecturer.left-bar')
+                @else
+                @include('user.left-bar')
+                @endif
 
-    <link rel="stylesheet" href="{{ asset('/css/personal_events.css') }}">
+                @yield('content')
+                <script>
+                    $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+                        options.async = true;
+                    });
+                </script>
+    </body>
+    <script type="text/javascript">
+        $(function() {
+            $('head').append('<link rel="stylesheet" href="./css/bootstrap-grid.min.css">');
+            $('head').append('<link rel="stylesheet" href="./css/font-awesome.min.css">');
+            $('head').append('<link rel="stylesheet" href="./css/bootstrap.min.css" />');
 
-    <link rel="stylesheet" href="{{ asset('/css/personal_course_options.css') }}">
+            $('<script/>', {
+                type: 'text/javascript',
+                src: './js/fixed-left-top-menu.js'
+            }).appendTo('body');
+            $('<script/>', {
+                type: 'text/javascript',
+                src: './js/edit-showing-pencil.js'
+            }).appendTo('body');
+        });
+    </script>
 
-    <!-- <link rel="stylesheet" href="{{ asset('/css/admin_filter_users.css') }}"> -->
-
-	<link rel="stylesheet" href="{{ asset('/css/font-awesome.css') }}">
-
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-	<!-- JQuery -->
-	<script type="text/javascript" src="{{ asset('/js/jquery-3.3.1.js') }}"></script>
-
-	<!-- scroll -->
-	<script type="text/javascript" src="{{ asset('/js/jquery-sectionsnap.js') }}"></script>
-
-	<!-- favicon -->
-	<link rel="shortcut icon" type="image/png" href="{{ asset('/images/vso-png-white.png') }}"/>
-
-	<!-- font-aweseome -->
-	
-
-	<!-- facebook -->
-	<meta property="og:url"                content="" />
-	<meta property="og:type"               content="website" />
-	<meta property="og:title"              content="Враца Софтуер Общество" />
-	<meta property="og:description"        content="Развиваме дигитална индустрия във Враца" />
-	<meta property="og:image"              content="./images/vso-logo-bg-original.png" />
-</head>
-<body>
-	@include('layouts.top-bar')
-
-	@if(Auth::user()->isAdmin())
-		@include('admin.left-bar')
-	@elseif(Auth::user()->isLecturer())
-		@include('lecturer.left-bar')
-	@else
-		@include('user.left-bar')
-	@endif
-
-	@yield('content')
-<script src="{{ asset('/js/fixed-left-top-menu.js') }}"></script>
-<script src="{{ asset('/js/edit-showing-pencil.js') }}"></script>
-</body>
 </html>

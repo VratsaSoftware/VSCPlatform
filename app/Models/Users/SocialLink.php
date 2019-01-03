@@ -26,16 +26,20 @@ class SocialLink extends Model
     	$skype = Social::where('name','skype')->first();
     	$dribbble = Social::where('name','dribbble')->first();
     	$behance = Social::where('name','behance')->first();
-
+        // dd($request);
     	$changeFacebook = SocialLink::where([
     		['user_id',$user_id],
     		['cl_social_id',$facebook->id],
     	])->first();
     	if($changeFacebook){
+            if(empty($request->facebook)){
+                $changeFacebook->delete();
+                return;
+            }
     		$changeFacebook->link = $request->facebook;
     		$changeFacebook->save();
     	}else{
-    		if($request->has('facebook')){
+    		if(!empty($request->facebook)){
 	    		$insertFacebook = new SocialLink;
 	    		$insertFacebook->user_id = $user_id;
 	    		$insertFacebook->cl_social_id = $facebook->id;
@@ -49,10 +53,14 @@ class SocialLink extends Model
     		['cl_social_id',$linkedin->id],
     	])->first();
     	if($changelinkedin){
-    		$changelinkedin->link = $request->facebook;
+            if(empty($request->linkedin)){
+                $changelinkedin->delete();
+                return;
+            }
+    		$changelinkedin->link = $request->linkedin;
     		$changelinkedin->save();
     	}else{
-    		if($request->has('linkedin')){
+    		if(!empty($request->linkedin)){
 	    		$insertLinkedin = new SocialLink;
 	    		$insertLinkedin->user_id = $user_id;
 	    		$insertLinkedin->cl_social_id = $linkedin->id;
@@ -66,10 +74,14 @@ class SocialLink extends Model
     		['cl_social_id',$github->id],
     	])->first();
     	if($changeGithub){
-    		$changeGithub->link = $request->facebook;
+            if(empty($request->github)){
+                $changeGithub->delete();
+                return;
+            }
+    		$changeGithub->link = $request->github;
     		$changeGithub->save();
     	}else{
-    		if($request->has('github')){
+    		if(!empty($request->github)){
 	    		$insertGithub = new SocialLink;
 	    		$insertGithub->user_id = $user_id;
 	    		$insertGithub->cl_social_id = $github->id;
@@ -83,10 +95,14 @@ class SocialLink extends Model
     		['cl_social_id',$skype->id],
     	])->first();
     	if($changeSkype){
+            if(empty($request->skype)){
+                $changeSkype->delete();
+                return;
+            }
     		$changeSkype->link = $request->skype;
     		$changeSkype->save();
     	}else{
-    		if($request->has('skype')){
+    		if(!empty($request->skype)){
 	    		$insertSkype = new SocialLink;
 	    		$insertSkype->user_id = $user_id;
 	    		$insertSkype->cl_social_id = $skype->id;
@@ -100,10 +116,14 @@ class SocialLink extends Model
     		['cl_social_id',$dribbble->id],
     	])->first();
     	if($changeDribbble){
+            if(empty($request->dribbble)){
+                $changeDribbble->delete();
+                return;
+            }
     		$changeDribbble->link = $request->dribbble;
     		$changeDribbble->save();
     	}else{
-    		if($request->has('dribbble')){
+    		if(!empty($request->dribbble)){
 	    		$insertDribbble = new SocialLink;
 	    		$insertDribbble->user_id = $user_id;
 	    		$insertDribbble->cl_social_id = $dribbble->id;
@@ -117,10 +137,14 @@ class SocialLink extends Model
     		['cl_social_id',$behance->id],
     	])->first();
     	if($changeBehance){
+            if(empty($request->behance)){
+                $changeBehance->delete();
+                return;
+            }
     		$changeBehance->link = $request->behance;
     		$changeBehance->save();
     	}else{
-    		if($request->has('behance')){
+    		if(!empty($request->behance)){
 	    		$insertBehance = new SocialLink;
 	    		$insertBehance->user_id = $user_id;
 	    		$insertBehance->cl_social_id = $behance->id;

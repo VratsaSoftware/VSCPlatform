@@ -11,7 +11,7 @@ class UserInterestsTypeSeeder extends Seeder
      */
     public function run()
     {
-        $types = ['programming','design','digital_marketing','entrepreneurship','sports','other'];
+        $types = ['Програмиране','Дизайн','Дигитален Маркетинг','Предприемачеството','Спорт','други'];
         foreach ($types as $key => $type) {
             App\Models\Users\InterestsType::create([
                 'type' => $type,

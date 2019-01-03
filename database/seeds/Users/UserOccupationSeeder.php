@@ -11,7 +11,7 @@ class UserOccupationSeeder extends Seeder
      */
     public function run()
     {
-        $occupations = ['student(highschool)','student(university)','employed','unemployed','part-time','other'];
+        $occupations = ['ученик-гимназия','ученик-университет','работещ','безработен','по-часово','друго'];
         foreach ($occupations as $key => $occupation) {
             App\Models\Users\Occupation::create([
                 'occupation' => $occupation,

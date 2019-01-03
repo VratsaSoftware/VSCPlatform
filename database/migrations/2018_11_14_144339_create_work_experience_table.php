@@ -16,8 +16,8 @@ class CreateWorkExperienceTable extends Migration
         Schema::create('work_experience', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();
-            $table->dateTime('y_from')->nullable();
-            $table->dateTime('y_to')->nullable();
+            $table->date('y_from')->nullable();
+            $table->date('y_to')->nullable();
             $table->integer('company_id')->unsigned()->nullable();
             $table->longText('description')->nullable();
             $table->integer('position_id')->unsigned()->nullable();

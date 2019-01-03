@@ -15,7 +15,7 @@ class CreateUsersInstitutionsTable extends Migration
     {
         Schema::create('users_institutions', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('type', ['high_school', 'vocational_school','vocational_center','college','university']);
+            $table->enum('type', ['гимназия', 'професионална гимназия','професионален център','колеж','университет']);
             $table->string('name');
             $table->timestamps();
             $table->softDeletes();

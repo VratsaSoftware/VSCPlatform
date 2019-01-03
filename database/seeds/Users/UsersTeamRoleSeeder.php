@@ -11,7 +11,7 @@ class UsersTeamRoleSeeder extends Seeder
      */
     public function run()
     {
-        $roles = ['captain','member'];
+        $roles = ['капитан','участник'];
         foreach ($roles as $key => $role) {
             App\Models\Users\UsersTeamRole::create([
                 'role' => $role,

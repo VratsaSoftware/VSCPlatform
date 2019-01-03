@@ -1,124 +1,229 @@
-$(document).ready(function(){
-		//3 dots showing options
-		$('.edit-right-menu').on('click', function(){
-			var oldText = $(this).parent().parent().find('.stats-text').html();
-			if(!$(this).next('.edit-items-wrap').hasClass('box-opened')){
-				$(this).next('.edit-items-wrap').css('display','flex');
-				$(this).next('.edit-items-wrap').addClass('box-opened')
-				$(this).css('color','#f00');
-			}else{
-				$(this).next('.edit-items-wrap').removeClass('box-opened');
-				$(this).next('.edit-items-wrap').css('display','none');
-				$(this).css('color','#000');
-				$(this).parent().parent().find('.edu-boxes').remove();
-				$(this).parent().parent().find('.add-text').parent().remove();
-				$(this).parent().parent().find('.save-edit-box').parent().remove();
-				$(this).next('.edit-items-wrap').find('.edit-items').find('.pencil').find('a').removeClass('edit-opened');
-			}
-		});
+$(document).ready(function() {
+    //3 dots showing options
+    $('.edit-right-menu').on('click', function() {
+        var oldText = $(this).parent().parent().find('.stats-text').html();
+        if (!$(this).next('.edit-items-wrap').hasClass('box-opened')) {
+            $(this).next('.edit-items-wrap').css('display', 'flex');
+            $(this).next('.edit-items-wrap').addClass('box-opened')
+            $(this).css('color', '#f00');
+            $(this).find('i').removeClass('fas fa-ellipsis-v');
+            $(this).find('i').addClass('fas fa-times');
+            // $(this).parent().parent().css('box-shadow', '0px 10px 50px rgba(7, 42, 68, 0.25)');
+        } else {
+            $(this).find('i').removeClass('fas fa-times');
+            $(this).find('i').addClass('fas fa-ellipsis-v');
+            $(this).parent().parent().parent().find('.create-form').fadeOut();
+            $(this).parent().parent().parent().find('.create-form-work').fadeOut();
+            $(this).parent().parent().parent().find('.create-form-hobbies').fadeOut();
+            $(this).parent().parent().parent().find('.edit-edu').fadeOut();
+            $(this).parent().parent().parent().find('.edit-work').fadeOut();
+            $(this).parent().parent().parent().find('.live-edu').fadeIn();
+            $(this).parent().parent().parent().find('.live-work').fadeIn();
+            $(this).parent().parent().parent().find('.suggestion-ins-name').html('');
+            $(this).parent().parent().parent().find('.auto-ins-name').html('');
+            $(this).next('.edit-items-wrap').removeClass('box-opened');
+            $(this).next('.edit-items-wrap').css('display', 'none');
+            $(this).css('color', '#000');
+            $(this).parent().parent().find('.edu-boxes').remove();
+            $(this).parent().parent().find('.add-text').parent().remove();
+            $(this).parent().parent().find('.save-edit-box').parent().remove();
+            $(this).next('.edit-items-wrap').find('.edit-items').find('.pencil').find('a').removeClass('edit-opened');
 
-		//adding inputs
-		$('.edit-btn').on('click',function(e){
-			// $(this).addClass('save-edit');
-			var oldText = $(this).prev('span').text();
-			if($(this).parent().find('img').hasClass('profile-pic') && !$(this).parent().find('img').hasClass('edit-img')){
-				$(this).parent().find('img').addClass('edit-img');
-				$(this).parent().find('img').after('<p class="input-img"><input type="file" id="picture" name="picture"></p>');
-				$(this).find('i').removeClass('fa-pencil-alt').addClass('fa-save');
-				$(this).removeClass('edit-btn');
-				e.preventDefault();
-				// $(this).removeClass('save-edit');
-			}
-			$('.loader-wrapper').css('display','flex').fadeOut();
-			if($(this).hasClass('edit-btn')){
-					e.preventDefault();
-					$(this).removeClass('edit-btn');
-					if($(this).prev('span').hasClass('location')){
-						$(this).prev('span').html('<br><input type="text" class="edit-user-items" id="location" name="location" value="'+oldText+'"></br>');
-					}
-					if($(this).prev('span').hasClass('birthday')){
-						$(this).prev('span').html('<br><input type="date" class="edit-user-items" id="dob" name="dob" value="'+oldText+'"></br>');
-					}
-					if($(this).prev('span').hasClass('mail-txt')){
-						$(this).prev('span').html('<br><input type="text" class="edit-user-items" id="email" name="email" value="'+oldText+'"></br>');
-					}
-					if($(this).prev('span').hasClass('name')){
-						$(this).prev('span').html('<br><input type="text" class="edit-user-items" id="name" name="name" value="'+oldText+'"></br>');
-					}
-				$(this).find('i').removeClass('fa-pencil-alt').addClass('fa-save');
-			}
-		});
+            if ($(this).hasClass('edu-edit-options') && !$(this).parent().parent().parent().find('.edu-no-info').is(":visible")) {
+                $(this).parent().parent().parent().find('.edu-no-info').fadeIn();
+                $(this).parent().parent().parent().find('.create-btn').fadeIn();
+            }
 
-		//social networks adding fields
-		$('.social-edit').on('click', function(e){
-			if(!$(this).hasClass('editing')){
-				e.preventDefault();
-				$(this).addClass('editing');
-				$('.edit-social').show();
-				$(this).find('i').removeClass('fa-pencil-alt').addClass('fa-save');
-				$('.loader-wrapper').css('display','flex').fadeOut();
-			}
-		});
+            if ($(this).hasClass('work-edit-options') && !$(this).parent().parent().parent().find('.work-no-info').is(":visible")) {
+                $(this).parent().parent().parent().find('.work-no-info').fadeIn();
+                $(this).parent().parent().parent().find('.create-btn-work').fadeIn();
+            }
 
-		//adding textareas to the boxes with options 
-		$('.edit-bio').on('click', function(e){
-			e.preventDefault();
-			var oldText = $(this).parent().parent().find('.bio-text').text();
-			if(!$(this).hasClass('editing')){
-					$(this).addClass('editing');
-					$(this).parent().parent().find('.bio-text').html('<p class="edit-box"><textarea rows="20" cols="30">'+$(this).parent().parent().find('.bio-text').html()+'</textarea></p>');
-					$(this).find('i').removeClass('fa-pencil-alt').addClass('fa-save');
-			}else{
-				$(this).find('i').removeClass('fa-save').addClass('fa-pencil-alt');
-				$(this).parent().parent().find('.bio-text').html(oldText);
-				$('.loader-wrapper').css('display','flex').fadeOut();
-			}
-		});
+            if ($(this).hasClass('interests-edit-options') && !$(this).parent().parent().parent().find('.hobbies-no-info').is(":visible")) {
+                $(this).parent().parent().parent().find('.hobbies-no-info').fadeIn();
+                $(this).parent().parent().parent().find('.create-btn-hobbie').fadeIn();
+            }
+        }
+    });
+
+    //adding inputs
+    $('.edit-btn').on('click', function(e) {
+        // $(this).addClass('save-edit');
+        var oldText = $(this).prev('span').text();
+        if ($(this).parent().find('img').hasClass('profile-pic') && !$(this).parent().find('img').hasClass('edit-img')) {
+            $(this).parent().find('img').addClass('edit-img');
+            $(this).parent().find('img').after('<p class="input-img"><input type="file" id="picture" name="picture" onChange="imagePreview(this);"></p>');
+            $(this).find('i').removeClass('fa-pencil-alt').addClass('fa-save');
+            $(this).removeClass('edit-btn');
+            e.preventDefault();
+            $(this).find('i').parent().after('<button class="btn btn-danger btn-close-top-edit-img"><i class="fas fa-times"></i></button>');
+            $('.btn-close-top-edit-img').on('click', function(e) {
+                e.preventDefault();
+                $(this).prev('button').prev('.input-img').remove();
+                $(this).fadeOut('fast');
+                $(this).prev('button').find('i').removeClass('fa-save').addClass('fa-pencil-alt');
+                $(this).parent().find('img').removeClass('edit-img');
+            });
+        }
+        $('.loader-wrapper').css('display', 'flex').fadeOut('slow');
+        if ($(this).hasClass('edit-btn')) {
+            e.preventDefault();
+            $(this).removeClass('edit-btn');
+            if ($(this).prev('span').hasClass('location')) {
+                $(this).prev('span').html('<br><input type="text" class="edit-user-items" id="location" name="location" value="' + oldText + '"></br>');
+            }
+            if ($(this).prev('span').hasClass('birthday')) {
+                $(this).prev('span').html('<br><input type="date" class="edit-user-items" id="dob" name="dob" value="' + oldText + '"></br>');
+            }
+            if ($(this).prev('span').hasClass('mail-txt')) {
+                $(this).prev('span').html('<br><input type="text" class="edit-user-items" id="email" name="email" value="' + oldText + '"></br>');
+            }
+            if ($(this).prev('span').hasClass('name')) {
+                $(this).prev('span').html('<p class="edit-live-name"></p><input type="text" class="edit-user-items" id="name" name="name" value="' + oldText + '"></br>');
+                $('#name').bind('input keypress', function() {
+                    $('.edit-live-name').html($(this).val());
+                });
+            }
+            $(this).find('i').removeClass('fa-pencil-alt').addClass('fa-save');
+            $(this).find('i').parent().after('<button class="btn btn-danger btn-close-top-edit"><i class="fas fa-times"></i></button>');
+
+            $('.btn-close-top-edit').on('click', function(e) {
+                e.preventDefault();
+                $(this).prev('button').prev('span').html(oldText);
+                $(this).fadeOut('fast');
+                $(this).prev('button').find('i').removeClass('fa-save').addClass('fa-pencil-alt');
+                $(this).prev('button').addClass('edit-btn');
+            });
+        }
+    });
+
+    //social networks adding fields
+    $('.social-edit').on('click', function(e) {
+        if (!$(this).hasClass('editing')) {
+            e.preventDefault();
+            $(this).addClass('editing');
+            $('.edit-social').show();
+            $(this).find('i').removeClass('fa-pencil-alt').addClass('fa-save');
+            $('.loader-wrapper').css('display', 'flex').fadeOut();
+        }
+        $('.btn-close-top-edit').on('click', function(e) {
+            e.preventDefault();
+            $('.edit-social').fadeOut();
+            $('.social-edit').removeClass('editing');
+        });
+    });
+
+    //adding textareas to the boxes with options
+    $('.edit-bio').on('click', function(e) {
+        e.preventDefault();
+        var oldText = $(this).parent().parent().find('.bio-text').text();
+        if (!$(this).hasClass('editing')) {
+            $(this).addClass('editing');
+            $(this).parent().parent().find('.bio-text').html('<p class="edit-box"><textarea rows="20" cols="30">' + $(this).parent().parent().find('.bio-text').html() + '</textarea></p>');
+            $(this).find('i').removeClass('fa-pencil-alt').addClass('fa-save');
+        } else {
+            $(this).find('i').removeClass('fa-save').addClass('fa-pencil-alt');
+            $(this).parent().parent().find('.bio-text').html(oldText);
+            $('.loader-wrapper').css('display', 'flex').fadeOut();
+        }
+    });
+
+    $('.education-edit').on('click', function(e) {
+        e.preventDefault();
+        $(this).parent().parent().parent().fadeOut().css('display', 'none');
+        if (!$(this).hasClass('edit-opened')) {
+            $(this).addClass('edit-opened');
+            $('.live-edu').fadeOut();
+            $('.edit-edu').fadeIn();
+        } else {
+            $(this).removeClass('edit-opened');
+        }
+    });
+
+    $('.create-btn').on('click', function(e) {
+        e.preventDefault();
+        $('.edu-no-info').fadeOut();
+        $(this).fadeOut();
+        $('.create-form').fadeIn();
+    });
+
+    var eduFormscloned = 0;
+    $('.edu-add-new').on('click', function(e) {
+        e.preventDefault();
+        $('.edu-no-info').fadeOut();
+        if ($('.create-form').is(":visible")) {
+            $('.create-form').last().after($('.create-form').last().clone(true));
+            $('.create-form').last().find('.suggestion-ins-name').html('');
+            $('.create-form').last().find('#institution_name').val('');
+        }
+        $('.create-form').fadeIn();
+        eduFormscloned++;
+        if (eduFormscloned > 5) {
+            $('.edu-add-new').fadeOut();
+        }
+    });
+
+    //work section
+    $('.work-edit').on('click', function(e) {
+        e.preventDefault();
+        $('.live-work').fadeOut();
+        $('.edit-work').fadeIn();
+    });
+
+    $('.create-btn-work').on('click', function(e) {
+        e.preventDefault();
+        $('.work-no-info').fadeOut();
+        $(this).fadeOut();
+        $('.create-form-work').fadeIn();
+    });
 
 
-		// text area inserts
-		// $('.pencil > a').on('click', function(e){
-		// 	e.preventDefault();
-		// 	if(!$(this).hasClass('edit-opened')){
-		// 		$(this).addClass('edit-opened');
-		// 		var elements = $(this).parent().parent().parent().parent().parent().find('.stats-text').find('span');
-		// 		elements.after('<p class="edit-box"><textarea rows="5" cols="30">'+elements.text()+'</textarea></p>');
-		// 		$(this).parent().parent().parent().parent().parent().find('.stats-text').append('<p><img src="./images/profile/add-icon.png" width="10%" height="10%" class="add-text"></p>');
-		// 		$(this).parent().parent().parent().parent().parent().find('.stats-text').append('<p><button class="btn btn-success save-edit-box">запази</button></p>');
-		// 	}else{
-		// 		// $(this).removeClass('edit-opened');
-		// 	}
-		// 	$('.add-text').on('click', function(){
-		// 		$(this).parent().prev('.edit-box').after('<p class="edit-box"><textarea rows="5" cols="30"></textarea></p>');
-		// 	});
+    var workFormsCloned = 0;
+    $('.work-add-new').on('click', function(e) {
+        e.preventDefault();
+        $('.work-no-info').fadeOut();
+        if ($('.create-form-work').is(":visible")) {
+            $('.create-form-work').last().after($('.create-form-work').last().clone(true));
+            $('.create-form-work').last().find('.suggestion-ins-name').html('');
+            $('.create-form-work').last().find('#institution_name').val('');
+        }
+        $('.create-form-work').fadeIn();
+        workFormsCloned++;
+        if (workFormsCloned > 5) {
+            $('.work-add-new').fadeOut();
+        }
+    });
 
-		// 	$('.save-edit-box').on('click', function(){
-		// 		// $(this).parent().parent().css({
-		// 		// 	'background':'url(./images/loaders/load-16.gif)',
-		// 		// 	'background-repeat': 'no-repeat',
-  //   // 				'background-position': 'center', 
-		// 		// });
-		// 	});
-		// });
-		// 
-		$('.education-edit').on('click', function(e){
-			e.preventDefault();
-			var elements = $(this).parent().parent().parent().parent().parent().find('.stats-text').find('.edu');
-			if(!$(this).hasClass('edit-opened')){
-				$(this).addClass('edit-opened');
+    // hobbies section
+    $('.int-edit').on('click', function(e) {
+        e.preventDefault();
+        $('.live-hobbie').fadeOut();
+        $('.edit-hobbie').fadeIn();
+    });
 
-				elements.each(function( index ) {
-				  $(this).append('<div class="edu-boxes"><p>От:<br><input type="date" name="edu-from" value="'+$(this).find('edu-from').html()+'"></p><p>До:<br><input type="date" name="edu-то"></p><p>Образование:<br><select id="edu-type"><option>Основно</option><option>Средно</option><option>Висше</option><option>Друго</option></select></p><p><textarea placeholder="институция, у-ще, университет ...."></textarea></p><p><img src="./images/profile/add-icon.png" width="10%" height="10%" class="add-text"></p></div>');
-				});
-				$(this).parent().parent().parent().parent().parent().find('.stats-text').append('<p><button class="btn btn-success save-edit-box">запази</button></p>');
-			}else{
-				$(this).removeClass('edit-opened');
-				
-			}
+    $('.create-btn-hobbie').on('click', function(e) {
+        e.preventDefault();
+        $('.hobbies-no-info').fadeOut();
+        $(this).fadeOut();
+        $('.create-form-hobbies').fadeIn();
+    });
 
-			$('.add-text').on('click', function(){
-				console.log($(this).parent().parent().html());
-				$(this).parent().parent().append($(this).parent().parent().clone(true));
-			});
-		});
-	})
+
+    var hobbieFormsCloned = 0;
+    $('.hobbie-add-new').on('click', function(e) {
+        e.preventDefault();
+        $('.int-no-info').fadeOut();
+        if ($('.create-form-hobbies').is(":visible")) {
+            $('.create-form-hobbies').last().after($('.create-form-hobbies').last().clone(true));
+            $('.create-form-hobbies').last().find('.other-interests').fadeOut();
+            $('.create-form-hobbies').last().find('#hobbies-form-create').attr('id', 'hobbies-form-create-' + (hobbieFormsCloned + 10));
+            $('.create-form-hobbies').last().find('#hobbies-form-create').attr('class', 'form-creation-cloning');
+            $('.create-form-hobbies').last().find('#hobbies-form-create-' + (hobbieFormsCloned + 10)).find('#interests').fadeOut('fast');
+        }
+        $('.create-form-hobbies').fadeIn();
+        hobbieFormsCloned++;
+        if (hobbieFormsCloned > 5) {
+            $('.hobbie-add-new').fadeOut();
+        }
+    });
+})

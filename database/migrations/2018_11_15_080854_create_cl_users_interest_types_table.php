@@ -15,7 +15,7 @@ class CreateClUsersInterestTypesTable extends Migration
     {
         Schema::create('cl_users_interest_types', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('type', ['programming','design','digital_marketing','entrepreneurship','sports','other']);
+            $table->string('type');
             $table->timestamps();
             $table->softDeletes();
         });
