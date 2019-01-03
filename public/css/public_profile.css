@@ -19,13 +19,13 @@ body::-webkit-scrollbar-thumb {
 
 @font-face {
     font-family: Ubuntu;
-    font-display: optional;
+    font-display: block;
     src: url(fonts/ubuntu/Ubuntu-Regular.ttf);
 }
 
 @font-face {
     font-family: Comfortaa;
-    font-display: optional;
+    font-display: block;
     src: url(fonts/comfortaa/Comfortaa-Regular.ttf);
 }
 
@@ -141,7 +141,7 @@ body::-webkit-scrollbar-thumb {
 
 .stats-text {
     margin-top: 7vw;
-    color: #919AA3;
+    color: #0a0a0a;
     padding-left: 2vw;
     padding-right: 2vw;
     height: 30vw;

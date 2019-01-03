@@ -6,29 +6,12 @@
 
         <title>@yield('title')</title>
 
-        <link rel="stylesheet" href="{{ asset('/css/bootstrap.min.css') }}">
-
-        <link rel="stylesheet" href="{{ asset('/css/bootstrap-grid.min.css') }}">
-
-        <link rel="stylesheet" href="" id="public_profile_css">
-
-        <link rel="stylesheet" href="{{ asset('/css/personal_profile.css') }}">
-
-        <link rel="stylesheet" href="{{ asset('/css/font-awesome.min.css') }}">
-
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-        <!-- JQuery -->
-        <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
-
-        <!-- scroll -->
-        <script type="text/javascript" src="{{ asset('/js/jquery-sectionsnap.js') }}" async></script>
 
         <!-- favicon -->
         <link rel="shortcut icon" type="image/png" href="{{ asset('/images/vso-png-white.png') }}" />
 
         <!-- font-aweseome -->
-
 
         <!-- facebook -->
         <meta property="og:url" content="" />
@@ -37,9 +20,13 @@
         <meta property="og:description" content="Развиваме дигитална индустрия във Враца" />
         <meta property="og:image" content="./images/vso-logo-bg-original.png" />
         <meta name="csrf-token" content="{{ csrf_token() }}">
+        <meta name="Description" content="Author: VSC 2018">
     </head>
 
     <body>
+        <!-- JQuery -->
+        <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
+
         @include('layouts.top-bar')
 
         @if(Auth::user()->isAdmin())
@@ -51,12 +38,28 @@
                 @endif
 
                 @yield('content')
-                <script src="{{ asset('/js/fixed-left-top-menu.js') }}"></script>
-                <script src="{{ asset('/js/edit-showing-pencil.js') }}"></script>
+                <script>
+                    $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+                        options.async = true;
+                    });
+                </script>
     </body>
     <script type="text/javascript">
         $(function() {
-            $('#public_profile_css').attr('href', './css/public_profile.css');
+            $('head').append('<link rel="stylesheet" href="./css/bootstrap-grid.min.css">');
+            $('head').append('<link rel="stylesheet" href="./css/font-awesome.min.css">');
+            $('head').append('<link rel="stylesheet" href="./css/bootstrap.min.css" />');
+            $('head').append('<link rel="stylesheet" href="./css/public_profile.css" />');
+            $('head').append('<link rel="stylesheet" href="./css/personal_profile.css" />');
+
+            $('<script/>', {
+                type: 'text/javascript',
+                src: './js/fixed-left-top-menu.js'
+            }).appendTo('body');
+            $('<script/>', {
+                type: 'text/javascript',
+                src: './js/edit-showing-pencil.js'
+            }).appendTo('body');
         });
     </script>
 

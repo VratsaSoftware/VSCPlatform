@@ -277,8 +277,8 @@
                             <input type="hidden" name="edu_id" value="{{$edu->id}}">
                             <i class="far fa-calendar-alt"></i><br />
                             <span class="section-el-bold live-edu edu-y-from">{{$edu->y_from->format('Y-m-d')}}&nbsp;/&nbsp;</span><span class="section-el-bold live-edu edu-y-to">{{$edu->y_to->format('Y-m-d')}}</span> <br>
-                            <input type="date" id="y_from" name="y_from" class="section-el-bold edit-edu" value="{{$edu->y_from->format('Y-m-d') ?? null}}"><br />
-                            <input type="date" id="y_to" name="y_to" class="section-el-bold edit-edu" value="{{$edu->y_to->format('Y-m-d') ?? null}}"><br />
+                            <input type="date" id="edu_y_from" name="y_from" class="section-el-bold edit-edu" value="{{$edu->y_from->format('Y-m-d') ?? null}}"><br />
+                            <input type="date" id="edu_y_to" name="y_to" class="section-el-bold edit-edu" value="{{$edu->y_to->format('Y-m-d') ?? null}}"><br />
                             <i class="fas fa-user-graduate"></i>
                             <span class="live-edu">{{$edu['EduType']->type}}</span> <br>
                             <select id="edu_type" name="edu_type" class="section-el-bold edit-edu">
@@ -323,7 +323,7 @@
                             @endif
                             <textarea name="edu_description" id="edu_description" placeholder="{{$edu->description}}" style="overflow:auto;resize:none" rows="5" class="edit-edu" form="edu-form-{{$edu->id}}">{{$edu->description}}</textarea>
                             <p>
-                                <button id="submit" name="submit" value="запази" class="btn btn-success edit-edu submit-edu"><i class="fas fa-save"></i></button>
+                                <button name="submit" value="запази" class="btn btn-success edit-edu submit-edu"><i class="fas fa-save"></i></button>
                                 <button class="btn btn-info edit-edu edu-add-new"><i class="fas fa-plus"></i></button>
                             </p>
                         </form>
@@ -342,9 +342,9 @@
                                 {{ csrf_field() }}
                                 <i class="far fa-calendar-alt"></i><br />
                                 Година от:
-                                <input type="date" id="y_from" name="y_from" class="section-el-bold" value="{{old('y_from')}}"><br />
+                                <input type="date" id="edu_y_from" name="y_from" class="section-el-bold" value="{{old('y_from')}}"><br />
                                 Година до:
-                                <input type="date" id="y_to" name="y_to" class="section-el-bold" value="{{old('y_to')}}"><br />
+                                <input type="date" id="edu_y_to" name="y_to" class="section-el-bold" value="{{old('y_to')}}"><br />
 
                                 <i class="fas fa-user-graduate"></i><br />
                                 <select id="edu_type" name="edu_type" class="section-el-bold">
@@ -372,7 +372,7 @@
                                 <i class="fas fa-comment"></i><br />
                                 <textarea name="edu_description" id="edu_description" placeholder="коментар..." style="overflow:auto;resize:none" rows="5" class="section-el-bold" form="edu-form-create-1" value="{{old('edu_description')}}"></textarea>
 
-                                <p><button id="submit" name="submit" value="запази" class="btn btn-success"><i class="fas fa-save"></i></button> <button class="btn btn-info edit-edu edu-add-new"><i class="fas fa-plus"></i></button></p>
+                                <p><button name="submit" value="запази" class="btn btn-success"><i class="fas fa-save"></i></button> <button class="btn btn-info edit-edu edu-add-new"><i class="fas fa-plus"></i></button></p>
                             </form>
                         </span>
 
@@ -443,7 +443,7 @@
                             @endif
                             <textarea name="work_description" id="work_description" placeholder="{{$exp->description}}" style="overflow:auto;resize:none" rows="5" class="edit-work" form="work-form-update-{{$exp->id}}">{{$exp->description}}</textarea>
                             <p>
-                                <button id="submit" name="submit" value="запази" class="btn btn-success edit-work"><i class="fas fa-save"></i></button>
+                                <button name="submit" value="запази" class="btn btn-success edit-work"><i class="fas fa-save"></i></button>
                                 <button class="btn btn-info edit-work work-add-new"><i class="fas fa-plus"></i></button>
                             </p>
                         </form>
@@ -476,7 +476,7 @@
                                 <textarea name="description" id="description" placeholder="описание..." style="overflow:auto;resize:none" rows="5" class="section-el-bold" form="work-form-create-1"></textarea><br />
 
                                 <p>
-                                    <button id="submit" name="submit" value="запази" class="btn btn-success"><i class="fas fa-save"></i></button>
+                                    <button name="submit" value="запази" class="btn btn-success"><i class="fas fa-save"></i></button>
                                     <button class="btn btn-info edit-work work-add-new"><i class="fas fa-plus"></i></button>
                                 </p>
                             </form>
@@ -570,7 +570,7 @@
 
                                     </select>
                                     <p>
-                                        <button id="submit" name="submit" value="запази" class="btn btn-success"><i class="fas fa-save"></i></button>
+                                        <button name="submit" value="запази" class="btn btn-success"><i class="fas fa-save"></i></button>
                                         <button class="btn btn-info edit-hobbie hobbie-add-new"><i class="fas fa-plus"></i></button>
                                     </p>
                             </form>
