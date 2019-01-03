@@ -58,6 +58,10 @@ body {
     margin-right: 1vw;
 }
 
+.navbar {
+    position: fixed !important;
+}
+
 .navbar-nav>li:nth-child(1)>img {
     width: 3vw;
     margin-right: 1vw;
@@ -211,7 +215,7 @@ input[type=text], input[type=date] {
     margin-bottom: 1vw;
     max-width: 15vw;
     text-align: center;
-    border-radius: 2px;
+    border-radius: 5px;
     border: 1px solid;
 }
 

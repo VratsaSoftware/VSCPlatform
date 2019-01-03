@@ -142,10 +142,12 @@ body::-webkit-scrollbar-thumb {
 .stats-text {
     margin-top: 7vw;
     color: #0a0a0a;
+    padding-top: 1vw;
     padding-left: 2vw;
     padding-right: 2vw;
     height: 30vw;
     overflow-y: auto;
+    border-top: 1px outset;
 }
 
 .stats-text>form>i, .stats-text>span>i, .stats-text>i, #hobbies-form-create>i, #edu-form-create-1>i, #work-form-create-1>i, #hobbies-form-create>p>i, .create-form-hobbies>form>p>i {

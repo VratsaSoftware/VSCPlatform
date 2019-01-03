@@ -277,8 +277,8 @@
                             <input type="hidden" name="edu_id" value="{{$edu->id}}">
                             <i class="far fa-calendar-alt"></i><br />
                             <span class="section-el-bold live-edu edu-y-from">{{$edu->y_from->format('Y-m-d')}}&nbsp;/&nbsp;</span><span class="section-el-bold live-edu edu-y-to">{{$edu->y_to->format('Y-m-d')}}</span> <br>
-                            <input type="date" id="edu_y_from" name="y_from" class="section-el-bold edit-edu" value="{{$edu->y_from->format('Y-m-d') ?? null}}"><br />
-                            <input type="date" id="edu_y_to" name="y_to" class="section-el-bold edit-edu" value="{{$edu->y_to->format('Y-m-d') ?? null}}"><br />
+                            <input type="date" id="edu_y_from-live" name="y_from" class="section-el-bold edit-edu" value="{{$edu->y_from->format('Y-m-d') ?? null}}"><br />
+                            <input type="date" id="edu_y_to-live" name="y_to" class="section-el-bold edit-edu" value="{{$edu->y_to->format('Y-m-d') ?? null}}"><br />
                             <i class="fas fa-user-graduate"></i>
                             <span class="live-edu">{{$edu['EduType']->type}}</span> <br>
                             <select id="edu_type" name="edu_type" class="section-el-bold edit-edu">
@@ -304,7 +304,7 @@
                                 @endif
                                 @endforeach
                             </select>
-                            <input type="text" id="institution_name" name="institution_name" value="{{$edu['EduInstitution']->name}}" class="section-el-bold edit-edu institution_name">
+                            <input type="text" id="institution_name_live" name="institution_name" value="{{$edu['EduInstitution']->name}}" class="section-el-bold edit-edu institution_name">
                             <p class="suggestion-ins-name"></p>
                             <i class="fas fa-address-card"></i>
                             <span class="live-edu">Специалност :</span>
@@ -314,7 +314,7 @@
                             <p class="suggestion-ins-name"></p>
                             @else
                             <span class="section-el-bold live-edu">няма</span><br />
-                            <input type="text" name="specialty" id="specialty" value="няма" class="section-el-bold edit-edu">
+                            <input type="text" name="specialty" id="specialty_live" value="няма" class="section-el-bold edit-edu">
                             @endif
                             <i class="fas fa-comment"></i>
                             <span class="live-edu">Коментар :</span>
@@ -347,7 +347,7 @@
                                 <input type="date" id="edu_y_to" name="y_to" class="section-el-bold" value="{{old('y_to')}}"><br />
 
                                 <i class="fas fa-user-graduate"></i><br />
-                                <select id="edu_type" name="edu_type" class="section-el-bold">
+                                <select id="edu_type_live" name="edu_type" class="section-el-bold">
                                     @forelse ($eduTypes as $type)
                                     <option value="{{$type->id}}">{{$type->type}}</option>
                                     @empty
@@ -356,7 +356,7 @@
                                 </select><br />
 
                                 <i class="fas fa-school"></i><br />
-                                <select name="edu_institution_type" id="edu_institution_type" class="section-el-bold">
+                                <select name="edu_institution_type" id="edu_institution_type_live" class="section-el-bold">
                                     @foreach(Config::get('institutionTypes') as $type)
                                     <option value="{{$type}}">{{$type}}</option>
                                     @endforeach
@@ -423,18 +423,18 @@
                             <input type="hidden" name="work_id" value="{{$exp->id}}">
                             <i class="far fa-calendar-alt"></i><br />
                             <span class="section-el-bold work-years live-work">{{$exp->y_from->format('Y-m-d')}}&nbsp;/&nbsp;</span><span class="section-el-bold live-work">{{$exp->y_to->format('Y-m-d')}}</span><br />
-                            <input type="date" id="y_from" name="y_from" class="section-el-bold edit-work" value="{{$exp->y_from->format('Y-m-d') ?? null}}"><br />
-                            <input type="date" id="y_to" name="y_to" class="section-el-bold edit-work" value="{{$exp->y_to->format('Y-m-d') ?? null}}"><br />
+                            <input type="date" id="y_from_work" name="y_from" class="section-el-bold edit-work" value="{{$exp->y_from->format('Y-m-d') ?? null}}"><br />
+                            <input type="date" id="y_to_work" name="y_to" class="section-el-bold edit-work" value="{{$exp->y_to->format('Y-m-d') ?? null}}"><br />
 
                             <i class="fas fa-building"></i>
                             <span><br />Компания :</span><br />
                             <span class="section-el-bold work-company live-work">{{ucfirst($exp['Company']->name)}}</span>
-                            <input type="text" name="work_company" id="work_company" value="{{$exp['Company']->name}}" class="section-el-bold edit-work"><br />
+                            <input type="text" name="work_company" id="work_company_live" value="{{$exp['Company']->name}}" class="section-el-bold edit-work"><br />
 
                             <i class="fas fa-id-card"></i>
                             <span><br />Позиция :</span><br />
                             <span class="section-el-bold work-position live-work">{{$exp['Position']->position}}</span>
-                            <input type="text" name="work_position" id="work_position" value="{{$exp['Position']->position}}" class="section-el-bold edit-work"><br />
+                            <input type="text" name="work_position" id="work_position_live" value="{{$exp['Position']->position}}" class="section-el-bold edit-work"><br />
 
                             <i class="fas fa-align-left"></i>
                             <span><br />Описание :</span><br />
@@ -647,6 +647,9 @@
         setTimeout(function() {
             $('.alert').toggle("slide");
         }, 4000);
+
+        $('head').append('<link rel="stylesheet" href="./css/public_profile.css" />');
+        $('head').append('<link rel="stylesheet" href="./css/personal_profile.css" />');
     });
 
     function ConfirmDelete() {

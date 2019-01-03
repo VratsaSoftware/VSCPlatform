@@ -11,16 +11,14 @@
         <!-- favicon -->
         <link rel="shortcut icon" type="image/png" href="{{ asset('/images/vso-png-white.png') }}" />
 
-        <!-- font-aweseome -->
-
         <!-- facebook -->
         <meta property="og:url" content="" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Враца Софтуер Общество" />
         <meta property="og:description" content="Развиваме дигитална индустрия във Враца" />
         <meta property="og:image" content="./images/vso-logo-bg-original.png" />
-        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta name="Description" content="Author: VSC 2018">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
 
     <body>
@@ -49,8 +47,6 @@
             $('head').append('<link rel="stylesheet" href="./css/bootstrap-grid.min.css">');
             $('head').append('<link rel="stylesheet" href="./css/font-awesome.min.css">');
             $('head').append('<link rel="stylesheet" href="./css/bootstrap.min.css" />');
-            $('head').append('<link rel="stylesheet" href="./css/public_profile.css" />');
-            $('head').append('<link rel="stylesheet" href="./css/personal_profile.css" />');
 
             $('<script/>', {
                 type: 'text/javascript',
