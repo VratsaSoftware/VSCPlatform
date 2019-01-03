@@ -647,9 +647,6 @@
         setTimeout(function() {
             $('.alert').toggle("slide");
         }, 4000);
-
-        $('head').append('<link rel="stylesheet" href="./css/public_profile.css" />');
-        $('head').append('<link rel="stylesheet" href="./css/personal_profile.css" />');
     });
 
     function ConfirmDelete() {

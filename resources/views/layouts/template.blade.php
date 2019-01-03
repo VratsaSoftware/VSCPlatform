@@ -47,6 +47,8 @@
             $('head').append('<link rel="stylesheet" href="./css/bootstrap-grid.min.css">');
             $('head').append('<link rel="stylesheet" href="./css/font-awesome.min.css">');
             $('head').append('<link rel="stylesheet" href="./css/bootstrap.min.css" />');
+            $('head').append('<link rel="stylesheet" href="./css/personal_profile.css" />');
+            $('head').append('<link rel="stylesheet" href="./css/public_profile.css" />');
 
             $('<script/>', {
                 type: 'text/javascript',
