@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Courses\CourseLecturer;
 use App\Models\Courses\Certification;
 use App\Models\Courses\Course;
-use App\Models\Courses\CourseModule;
+use App\Models\CourseModules\Module;
 use App\Models\Users\Education;
 use App\Models\Users\SocialLink;
 use App\Models\Users\VisibleInformation;

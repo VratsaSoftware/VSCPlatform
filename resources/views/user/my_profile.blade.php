@@ -659,18 +659,18 @@
 </script>
 
 <!-- //preview picture before saving for profile picture -->
-<script src="./js/profile-picture-preview.js" charset="utf-8" async></script>
+<script src="{{asset('/js/profile-picture-preview.js')}}" charset="utf-8" async></script>
 
 <!-- //visibility of sections check and change -->
-<script src="./js/profile-visibility-check.js" charset="utf-8" async></script>
+<script src="{{asset('/js/profile-visibility-check.js')}}" charset="utf-8" async></script>
 
 <!-- //ajax suggestions for edu section institution and specialty -->
-<script src="./js/profile-edu-suggestions.js" charset="utf-8" async></script>
+<script src="{{asset('/js/profile-edu-suggestions.js')}}" charset="utf-8" async></script>
 
 <!-- //function to set eye visibility icons on sections -->
-<script src="./js/profile-initial-visibility-sections.js" charset="utf-8" async></script>
+<script src="{{asset('/js/profile-initial-visibility-sections.js')}}" charset="utf-8" async></script>
 
 <!-- ajax load interest by type -->
-<script src="./js/profile-interests-ajax-load.js" charset="utf-8" async></script>
+<script src="{{asset('/js/profile-interests-ajax-load.js')}}" charset="utf-8" async></script>
 
 @endsection

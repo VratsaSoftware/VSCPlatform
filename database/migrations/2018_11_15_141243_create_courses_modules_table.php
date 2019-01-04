@@ -16,8 +16,11 @@ class CreateCoursesModulesTable extends Migration
         Schema::create('courses_modules', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('course_id')->unsigned()->nullable();
+            $table->integer('order');
             $table->string('name');
             $table->longText('description');
+            $table->dateTime('starts')->nullable();
+            $table->dateTime('ends')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

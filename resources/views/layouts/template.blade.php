@@ -41,23 +41,19 @@
                         options.async = true;
                     });
                 </script>
+                <script src="{{asset('/js/fixed-left-top-menu.js')}}"></script>
+                <script src="{{asset('/js/edit-showing-pencil.js')}}"></script>
     </body>
     <script type="text/javascript">
         $(function() {
-            $('head').append('<link rel="stylesheet" href="./css/bootstrap-grid.min.css">');
-            $('head').append('<link rel="stylesheet" href="./css/font-awesome.min.css">');
-            $('head').append('<link rel="stylesheet" href="./css/bootstrap.min.css" />');
-            $('head').append('<link rel="stylesheet" href="./css/personal_profile.css" />');
-            $('head').append('<link rel="stylesheet" href="./css/public_profile.css" />');
-
-            $('<script/>', {
-                type: 'text/javascript',
-                src: './js/fixed-left-top-menu.js'
-            }).appendTo('body');
-            $('<script/>', {
-                type: 'text/javascript',
-                src: './js/edit-showing-pencil.js'
-            }).appendTo('body');
+            $('head').append('<link rel="stylesheet" href="{{asset('/css/bootstrap-grid.min.css')}}" />');
+            $('head').append('<link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}" />');
+            $('head').append('<link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />');
+            $('head').append('<link rel="stylesheet" href="{{asset('/css/public_profile.css')}}" />');
+            $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_profile.css')}}" />');
+            $('head').append('<link rel="stylesheet" href="{{asset('/css/lecturer_course_options.css')}}" />');
+            $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_events.css')}}" />');
+            $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_course_options.css')}}" />');
         });
     </script>
 

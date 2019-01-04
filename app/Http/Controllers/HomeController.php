@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CourseModules\ModulesStudent;
 use App\Models\Courses\Course;
-use App\Models\Courses\CourseModule;
+use App\Models\CourseModules\Module;
 use App\Models\Courses\CourseLecturer;
 use App\Models\Users\SocialLink;
 use App\Models\Users\EducationType;
