@@ -12,7 +12,6 @@
                     <p>{{ session('success') }}</p>
                 </div>
             </p>
-
             @endif
             @if ($errors->any())
             <div class="alert alert-danger">
@@ -27,7 +26,6 @@
             <p>
                 <div class="alert alert-danger">
                     <button type="button" class="close" data-dismiss="alert">
-                        <i class="ace-icon fa fa-times"></i>
                     </button>
                     <p>{{ $message }}</p>
                 </div>

@@ -34,7 +34,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     //users hobbies/interests section
     Route::post('/user/create/hobbies', 'Users\UserController@createHobbies')->name('create.hobbies');
-    // Route::post('/user/update/work/experience', 'Users\UserController@updateWorkExperience')->name('update.work.experience');
     Route::delete('/user/delete/hobbie/{hobbie}', 'Users\UserController@deleteHobbie')->name('delete.hobbie');
     Route::get('/interest/{type}', 'Users\UserController@getInterests')->name('get.interest');
 
@@ -44,7 +43,10 @@ Route::group(['middleware' => 'auth'], function () {
     //institution name autocomplete
     Route::get('/user/education/autocomplete', 'Users\UserController@eduAutocomplete')->name('edu.institution');
 
-    //user course operations
-    Route::get('/user/{user}/course/{course}', 'Courses\CourseController@show')->name('user.course');
-    Route::get('/user/{user}/course/{course}/module/{module}/lections', 'Courses\LectionController@show')->name('user.module.lections');
+    //logged in users can see only their courses,modules
+    Route::group(['middleware' => 'isOnCourse'], function () {
+        //user course operations
+        Route::get('/user/{user}/course/{course}', 'Courses\CourseController@show')->name('user.course');
+        Route::get('/user/{user}/course/{course}/module/{module}/lections', 'Courses\LectionController@show')->name('user.module.lections');
+    });
 });

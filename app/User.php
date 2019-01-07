@@ -75,6 +75,19 @@ class User extends Authenticatable
         return false;
     }
 
+    public function isOnThisCourse($course)
+    {
+        $userId = Auth::user()->id;
+        $isOnCourse = Course::with('Modules', 'Modules.ModulesStudent')->whereHas('Modules.ModulesStudent', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })->find($course);
+
+        if ($isOnCourse) {
+            return true;
+        }
+        return false;
+    }
+
     public function getCourse()
     {
         $userId = Auth::user()->id;

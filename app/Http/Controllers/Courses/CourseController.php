@@ -50,13 +50,9 @@ class CourseController extends Controller
      */
     public function show(User $user, Course $course)
     {
-        if (Auth::user()->id === $user->id) {
-            $modules = Course::getModules($course->id);
-            $courses = Auth::user()->getCourse();
-            return view('user.my_course', ['courses' => $courses,'course' => $course,'modules' => $modules]);
-        }
-        $message = __('Нямате право да достъпите този линк!');
-        return redirect()->route('myProfile')->with('error', $message);
+        $modules = Course::getModules($course->id);
+        $courses = Auth::user()->getCourse();
+        return view('user.my_course', ['courses' => $courses,'course' => $course,'modules' => $modules]);
     }
 
     /**

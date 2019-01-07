@@ -61,14 +61,14 @@ class HomeController extends Controller
 
         if ($isAdmin) {
             $courses = Course::all();
-            return view('user.my_profile', ['courses' => $courses,'social_links' => $socialLinks,'certificates' => $certificates]);
+            return view('user.my_profile', ['social_links' => $socialLinks,'certificates' => $certificates]);
         }
         if ($isLecturer) {
             $courses = Course::with('Lecturers')->whereHas('Lecturers', function ($query) use ($userId) {
                 $query->where('user_id', $userId);
             })->get();
-            return view('user.my_profile', ['courses' => $courses,'social_links' => $socialLinks,'certificates' => $certificates]);
+            return view('user.my_profile', ['social_links' => $socialLinks,'certificates' => $certificates]);
         }
-        return view('user.my_profile', ['courses' => $course,'social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes,'workExp' => $workExp,'hobbies' => $hobbies,'interestTypes' => $interestTypes]);
+        return view('user.my_profile', ['social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes,'workExp' => $workExp,'hobbies' => $hobbies,'interestTypes' => $interestTypes]);
     }
 }

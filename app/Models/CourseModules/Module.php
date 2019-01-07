@@ -28,7 +28,7 @@ class Module extends Model
 
     public function getNameAttribute($value)
     {
-        return strtoupper($value);
+        return mb_strtoupper($value);
     }
 
     public static function getLections($module)

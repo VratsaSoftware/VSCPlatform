@@ -18,6 +18,16 @@ class Lection extends Model
 
     public function Video()
     {
-        return $this->hasMany(LectionVideo::class, 'id');
+        return $this->hasOne(LectionVideo::class, 'id', 'lections_video_id');
+    }
+
+    public function getTitleAttribute($value)
+    {
+        return ucwords($value);
+    }
+
+    public function getDescriptionAttribute($value)
+    {
+        return ucwords($value, '.');
     }
 }
