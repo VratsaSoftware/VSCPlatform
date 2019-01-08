@@ -37,7 +37,7 @@
                 </div>
                 <div class="col-md-12 header-name d-flex flex-row flex-wrap">
                     <div class="col-md-3 name-wrap">
-                        <span class="name">{{ucfirst(Auth::user()->name)}} {{ucfirst(Auth::user()->last_name)}}</span>
+                        <span class="name">{{Auth::user()->name}} {{Auth::user()->last_name}}</span>
                         <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
                             <i class="fas fa-pencil-alt"></i>
                         </button></div>
@@ -59,14 +59,14 @@
                 <div class="information-wrap col-md-12 d-flex flex-row flex-wrap">
                     <div class="col-md-2 location-wrap text-left">
                         <img src="./images/profile/location-icon.png" alt="map-icon">
-                        <span class="location">{{ucfirst(Auth::user()->location)}}</span>
+                        <span class="location">{{Auth::user()->location}}</span>
                         <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
                     </div>
                     <div class="col-md-2 birthday-wrap text-left">
                         <img src="./images/profile/birthday-cake-icon.png" alt="birthday-icon">
-                        <span class="birthday">{{ucfirst(Auth::user()->dob)}}</span>
+                        <span class="birthday">{{Auth::user()->dob}}</span>
                         <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
@@ -426,7 +426,7 @@
 
                             <i class="fas fa-building"></i>
                             <span><br />Компания :</span><br />
-                            <span class="section-el-bold work-company live-work">{{ucfirst($exp['Company']->name)}}</span>
+                            <span class="section-el-bold work-company live-work">{{$exp['Company']->name}}</span>
                             <input type="text" name="work_company" id="work_company_live" value="{{$exp['Company']->name}}" class="section-el-bold edit-work"><br />
 
                             <i class="fas fa-id-card"></i>
@@ -527,17 +527,17 @@
                             <i class="fas fa-bullseye"></i>
                             <br />
                             @if(is_null($hobbie['Interests']))
-                            <span class="section-el-bold live-int_others">{{ucfirst($hobbie->others)}}</span>
+                            <span class="section-el-bold live-int_others">{{$hobbie->others}}</span>
                             <br />
                             <br />
                             <hr>
                             @else
-                            <span class="section-el-bold live-int-type">{{ucfirst($hobbie['Interests']['Type']->type)}}</span>
+                            <span class="section-el-bold live-int-type">{{$hobbie['Interests']['Type']->type}}</span>
                             <br />
                             <br />
                             <i class="fas fa-dot-circle"></i>
                             <br />
-                            <span class="section-el-bold live-int-name">{{ucfirst($hobbie['Interests']->name)}}</span>
+                            <span class="section-el-bold live-int-name">{{$hobbie['Interests']->name}}</span>
                             <button type="submit" class="btn btn-danger edit-hobbie" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
                             <button class="btn btn-info edit-hobbie hobbie-add-new"><i class="fas fa-plus"></i></button>
                             <hr>
@@ -641,12 +641,6 @@
 </div>
 <!-- sliding closing efect on alert messages -->
 <script>
-    $(function() {
-        setTimeout(function() {
-            $('.alert').toggle("slide");
-        }, 4000);
-    });
-
     function ConfirmDelete() {
         var x = confirm("Сигурни ли сте че искате да изтриете ?");
         if (x)

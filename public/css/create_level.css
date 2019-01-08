@@ -56,6 +56,9 @@ input[type=text], textarea, .options-title {
 .lecture-options>div>a, .read-more {
     color: #1C8800;
     font-weight: bold;
+    /* padding: 6px;
+    border-radius: 6px;
+    border: 1px solid; */
 }
 
 .read-more:hover {

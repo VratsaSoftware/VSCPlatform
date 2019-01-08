@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Courses\Course;
 use App\Models\CourseModules\Module;
+use App\Models\CourseModules\Lection;
+use App\Models\CourseModules\LectionComment;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -48,11 +50,11 @@ class LectionController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user, Course $course, Module $module)
+    public function show($user = 0, Course $course, Module $module)
     {
         $lections = Module::getLections($module->id);
         if (!$lections->isEmpty()) {
-            return view('course.lections', ['module' => $module,'lections' => $lections]);
+            return view('course.lections', ['module' => $module->load('Course'),'lections' => $lections]);
         }
 
         $message = __('Няма добавени лекции за този модул!');
@@ -91,5 +93,20 @@ class LectionController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function addComment(Request $request, User $user, Course $course, Module $module, Lection $lection)
+    {
+        $isAllowed = Auth::user()->isOnThisCourse($course->id);
+        if ($isAllowed) {
+            $insComment = LectionComment::firstOrCreate(
+                ['course_lection_id' => $lection->id,'user_id' => $user->id],
+                ['comment' => $request->comment]
+            );
+            $message = __('Успешно изпратен коментар за лекция '.$lection->title.' !');
+            return redirect()->route('user.module.lections', ['user' => $user->id,'course' => $course->id,'module' => $module->id])->with('success', $message);
+        }
+        $message = __('Нямате право да достъпите този ресурс!');
+        return redirect()->route('user.module.lections', ['user' => $user->id,'course' => $course->id,'module' => $module->id])->with('error', $message);
     }
 }

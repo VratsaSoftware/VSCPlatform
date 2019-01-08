@@ -48,10 +48,13 @@ class CourseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user, Course $course)
+    public function show($user = 0, Course $course)
     {
         $modules = Course::getModules($course->id);
-        $courses = Auth::user()->getCourse();
+        $courses = [];
+        if (Auth::user()) {
+            $courses = Auth::user()->getCourse();
+        }
         return view('user.my_course', ['courses' => $courses,'course' => $course,'modules' => $modules]);
     }
 

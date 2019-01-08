@@ -1,11 +1,27 @@
 @extends('layouts.template')
-@section('title', 'Лекции')
+@section('title', 'Лекции модул - '.$module->name)
 @section('content')
 <div class="content-wrap">
     <div class="section">
+        @if (!empty(Session::get('success')))
+        <p>
+            <div class="alert alert-success">
+                <p>{{ session('success') }}</p>
+            </div>
+        </p>
+        @endif
+        @if ($message = Session::get('error'))
+        <p>
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert">
+                </button>
+                <p>{{ $message }}</p>
+            </div>
+        </p>
+        @endif
         <div class="col-md-12 level-title-holder d-flex flex-row flex-wrap">
             <div class="col-md-12 text-center">
-                {{$module->name}}
+                {{$module->Course->name}} - {{$module->name}}
             </div>
         <div class="col-md-12 lvl-program-holder d-flex flex-row flex-wrap">
             <div class="col-md-12 lvl-title text-center">Учебна Програма <i class="fas fa-book-open"></i>&nbsp;{{count($lections)}}</div>
@@ -25,7 +41,7 @@
                     </div>
                     <div class="cf footer">
                         <div></div>
-                        <a href="#" class="btn close-modal">Затвори</a>
+                        <a href="#close" class="btn close-modal">Затвори</a>
                     </div>
                 </div>
                 <div class="overlay"></div>
@@ -40,7 +56,19 @@
                 </div>
                 <div class="col-md-11 lecture-txt">
                     <span class="lection-title">{{$lection->title}}</span>
-                    <span>{{$lection->first_date->format('d-m-Y')}} / {{$lection->second_date->format('d-m-Y')}}</span><br>
+                    <span>
+                        @if($lection->first_date)
+                            {{$lection->first_date->format('d-m-Y')}}
+                        @else
+                            <i class="fas fa-times"></i>
+                        @endif
+                         /
+                        @if($lection->second_date)
+                            {{$lection->second_date->format('d-m-Y')}}
+                        @else
+                            <i class="fas fa-times"></i>
+                        @endif
+                     </span><br>
                     @if(strlen($lection->description) > 250)
                     <span class="lection-description">{{mb_substr($lection->description,0,250)}}...<a href="#modal" data="{{$lection->description}}" class="read-more">още</a></span>
                 @else
@@ -52,7 +80,7 @@
                              @if($lection->Video()->exists())
                                  <a href="#modal">видео</a>
                              @else
-                                <a href="#" style="cursor:not-allowed">видео</a>
+                                <span class="empty-data">видео</span>
                              @endif
                             <div class="col-md-12 video-holder">
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
@@ -64,23 +92,38 @@
                             </div>
                         </div>
                         <div class="col-md-3 presentation-lecture">
-                            <a href="{{asset('/slides-'.$lection->id.'/'.$lection->presentation)}}" target="__blank">слайдове </a>
+                            @if($lection->presentation)
+                                <a href="{{asset('/slides-'.$lection->id.'/'.$lection->presentation)}}" target="__blank">слайдове </a>
+                            @else
+                                <span class="empty-data">слайдове</span>
+                            @endif
                         </div>
                         <div class="col-md-3 homework-lecture">
-                            <a href="{{asset('/homework-'.$lection->id.'/'.$lection->homework_criteria)}}" target="__blank">за домашно </a>
+                            @if($lection->homework_criteria)
+                                <a href="{{asset('/homework-'.$lection->id.'/'.$lection->homework_criteria)}}" target="__blank">за домашно </a>
+                            @else
+                                <span class="empty-data">за домашно</span>
+                            @endif
                         </div>
                         <div class="col-md-3 edit-lecture comment">
+                            @if(Auth::user() && !Auth::user()->isCommented($lection->id))
                             <a href="#modal">коментар</a>
                             <div class="col-md-12 comment-holder">
                                 <div class="col-md-12 d-flex flex-row flex-wrap text-center">
                                     <div class="col-md-12 video-title">{{$lection->title}}</div>
                                     <div class="col-md-12 text-center">
-                                        <form action="">
+                                        <form action="{{route('user.module.lection.comment',['user' => Auth::user()->id,'course' => $module->Course->id,'module' => $module->id,'lection' => $lection->id])}}" id="comment_form" name="comment_form" method="POST">
+                                            {{ csrf_field() }}
                                             <textarea name="comment" id="comment" cols="30" rows="10" placeholder="остави коментар"></textarea><br>
                                         </form>
                                     </div>
                                 </div>
                             </div>
+                        @elseif(!Auth::user())
+                                <span class="empty-data">коментар</span>
+                        @else
+                                <span class="empty-data">вече сте коментирали</span>
+                        @endif
                         </div>
                     </div>
                 </div>
@@ -93,6 +136,7 @@
 </div>
 <script>
         $(function(){
+            var offset;
             $('#modal').css('display','none');
             $('head').append('<link rel="stylesheet" href="{{asset('/css/create_level.css')}}" />');
             $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_events.css')}}" />');
@@ -108,8 +152,11 @@
 
             $('.comment > a').on('click', function() {
                 $('.copy > p').html($(this).next('.comment-holder').html());
-                $('.modal-content > .cf > div').html('<input class="btn close-modal" type="submit" name="submit" value="Изпрати">');
+                $('.modal-content > .cf > div').html('<input class="btn close-modal" type="submit" name="submit" id="send_comment" value="Изпрати">');
                 $('#modal').show();
+                $('#send_comment').on('click',function(){
+                    $('#comment_form').submit();
+                });
             });
 
             $('.read-more').on('click',function(){

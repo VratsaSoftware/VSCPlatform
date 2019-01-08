@@ -14,7 +14,7 @@
 
 Route::get('/', function () {
     return view('auth.login');
-});
+})->name('home');
 
 Auth::routes();
 
@@ -37,16 +37,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::delete('/user/delete/hobbie/{hobbie}', 'Users\UserController@deleteHobbie')->name('delete.hobbie');
     Route::get('/interest/{type}', 'Users\UserController@getInterests')->name('get.interest');
 
-
     //changing visibility of a user section
     Route::post('/user/change/section/visibility', 'Users\UserController@changeVisibility');
     //institution name autocomplete
     Route::get('/user/education/autocomplete', 'Users\UserController@eduAutocomplete')->name('edu.institution');
-
-    //logged in users can see only their courses,modules
-    Route::group(['middleware' => 'isOnCourse'], function () {
-        //user course operations
-        Route::get('/user/{user}/course/{course}', 'Courses\CourseController@show')->name('user.course');
-        Route::get('/user/{user}/course/{course}/module/{module}/lections', 'Courses\LectionController@show')->name('user.module.lections');
-    });
 });
+
+//user course operations
+Route::get('/user/{user?}/course/{course}', 'Courses\CourseController@show')->name('user.course');
+Route::get('/user/{user?}/course/{course}/module/{module}/lections', 'Courses\LectionController@show')->name('user.module.lections');
+Route::post('/user/{user?}/course/{course}/module/{module}/lection/{lection}/comment', 'Courses\LectionController@addComment')->name('user.module.lection.comment');

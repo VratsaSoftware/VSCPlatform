@@ -31,4 +31,9 @@ class Course extends Model
     {
         return Module::where('course_id', $course)->with('Lections')->get();
     }
+
+    public function getNameAttribute($value)
+    {
+        return mb_convert_case($value, MB_CASE_TITLE, 'UTF-8');
+    }
 }

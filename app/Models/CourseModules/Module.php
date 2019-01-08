@@ -3,6 +3,7 @@
 namespace App\Models\CourseModules;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Models\Courses\Course;
 use App\Models\Courses\Certification;
 use App\Models\CourseModules\Lection;
 
@@ -11,6 +12,10 @@ class Module extends Model
     protected $table = 'courses_modules';
     protected $dates = ['starts','ends'];
 
+    public function Course()
+    {
+        return $this->hasOne(Course::class, 'id', 'course_id');
+    }
     public function Certifications()
     {
         return $this->hasMany(Certification::class, 'module_id');

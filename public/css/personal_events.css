@@ -245,6 +245,10 @@
     font-size: 2vw;
 }
 
+.empty-data {
+    color: #D3D3D3;
+}
+
 /*QUERY's
 -------------------------------------------------------------------------------------------*/
 /* Extra small devices (phones, 600px and down) */
@@ -288,7 +292,7 @@
     }
 
     #modal:target {
-        top: 60%;
+        /* top: 60%; */
     }
 
     .modal-header>h2 {

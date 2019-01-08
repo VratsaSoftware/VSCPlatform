@@ -13,17 +13,21 @@
                         {{$module->name}}
                     </div>
                     <div class="event-body col-md-12 text-center">
-                        <a href="{{route('user.module.lections',['user' => Auth::user()->id,'course' => $course->id,'module' => $module->id])}}">
-                            @if($module->starts->lt(\Carbon\Carbon::now()) && $module->ends->gt(\Carbon\Carbon::now()))
-                                @if($module->Lections()->exists())
+                        @if($module->Lections()->exists())
+                            @if(Auth::user())
+                                <a href="{{route('user.module.lections',['user' => Auth::user()->id,'course' => $course->id,'module' => $module->id])}}">
+                            @else
+                                <a href="{{route('user.module.lections',['user' => 0,'course' => $course->id,'module' => $module->id])}}">
+                            @endif
+                                @if($module->starts->lt(\Carbon\Carbon::now()) && $module->ends->gt(\Carbon\Carbon::now()))
                                     <div class="event-body-text button-signed">
-                                        @else
-                                        <div class="event-body-text levels-btn">
-                                            @endif
-                                            Прегледай
-                                        </div>
-                                        @endif
-                        </a>
+                                @else
+                                    <div class="event-body-text levels-btn">
+                                @endif
+                                    Прегледай
+                                    </div>
+                            </a>
+                        @endif
                         <img src="{{asset('/images/course/'.$course->picture)}}" alt="">
                     </div>
                     @if($module->starts->lt(\Carbon\Carbon::now()) && $module->ends->gt(\Carbon\Carbon::now()))

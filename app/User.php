@@ -11,6 +11,8 @@ use App\Models\Courses\CourseLecturer;
 use App\Models\Courses\Certification;
 use App\Models\Courses\Course;
 use App\Models\CourseModules\Module;
+use App\Models\CourseModules\Lection;
+use App\Models\CourseModules\LectionComment;
 use App\Models\Users\Education;
 use App\Models\Users\SocialLink;
 use App\Models\Users\VisibleInformation;
@@ -182,5 +184,32 @@ class User extends Authenticatable
     public function getHobbies()
     {
         return Hobbie::where('user_id', Auth::user()->id)->with('Interests.Type')->get();
+    }
+
+    public function isCommented($lection)
+    {
+        $commented = LectionComment::where([
+            ['course_lection_id',$lection],
+            ['user_id',Auth::user()->id],
+            ])->first();
+        if (!is_null($commented)) {
+            return true;
+        }
+        return false;
+    }
+
+    public function getNameAttribute($value)
+    {
+        return mb_convert_case($value, MB_CASE_TITLE, 'UTF-8');
+    }
+
+    public function getLastNameAttribute($value)
+    {
+        return mb_convert_case($value, MB_CASE_TITLE, 'UTF-8');
+    }
+
+    public function getLocationAttribute($value)
+    {
+        return mb_convert_case($value, MB_CASE_TITLE, 'UTF-8');
     }
 }

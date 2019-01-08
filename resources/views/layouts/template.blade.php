@@ -27,14 +27,15 @@
 
         @include('layouts.top-bar')
 
-        @if(Auth::user()->isAdmin())
+        @if(Auth::user() && Auth::user()->isAdmin())
             @include('admin.left-bar')
-            @elseif(Auth::user()->isLecturer())
-                @include('lecturer.left-bar')
-                @else
-                @include('user.left-bar')
-                @endif
-
+        @endif
+        @if(Auth::user() && Auth::user()->isLecturer())
+            @include('lecturer.left-bar')
+        @endif
+        @if(Auth::user())
+            @include('user.left-bar')
+        @endif
                 @yield('content')
                 <script>
                     $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
@@ -43,6 +44,7 @@
                 </script>
                 <script src="{{asset('/js/fixed-left-top-menu.js')}}"></script>
                 <script src="{{asset('/js/edit-showing-pencil.js')}}"></script>
+                <script src="{{asset('/js/slide-alerts.js')}}"></script>
     </body>
     <script type="text/javascript">
         $(function() {
