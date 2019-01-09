@@ -55,7 +55,7 @@ class CourseController extends Controller
         if (Auth::user()) {
             $courses = Auth::user()->getCourse();
         }
-        return view('user.my_course', ['courses' => $courses,'course' => $course,'modules' => $modules]);
+        return view('course.course', ['courses' => $courses,'course' => $course,'modules' => $modules]);
     }
 
     /**

@@ -38,6 +38,6 @@ class Module extends Model
 
     public static function getLections($module)
     {
-        return Lection::where('course_modules_id', $module)->with('Video')->get();
+        return Lection::where('course_modules_id', $module)->with('Video')->oldest('order')->get();
     }
 }

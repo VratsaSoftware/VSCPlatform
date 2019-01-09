@@ -29,7 +29,7 @@ class Course extends Model
 
     public static function getModules($course)
     {
-        return Module::where('course_id', $course)->with('Lections')->get();
+        return Module::where('course_id', $course)->with('Lections')->oldest('order')->get();
     }
 
     public function getNameAttribute($value)

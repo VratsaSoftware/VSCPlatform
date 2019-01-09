@@ -18,9 +18,10 @@ class CreateCoursesTable extends Migration
             $table->string('name');
             $table->string('picture');
             $table->longText('description');
-            $table->string('modules_num');
+            $table->bigInteger('modules_num');
             $table->dateTime('starts');
             $table->dateTime('ends');
+            $table->string('visibility');
             $table->timestamps();
             $table->softDeletes();
         });

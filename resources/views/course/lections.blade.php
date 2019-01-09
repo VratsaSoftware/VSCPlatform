@@ -26,7 +26,7 @@
         <div class="col-md-12 lvl-program-holder d-flex flex-row flex-wrap">
             <div class="col-md-12 lvl-title text-center">Учебна Програма <i class="fas fa-book-open"></i>&nbsp;{{count($lections)}}</div>
             <!-- modal for editing elements -->
-            <div id="modal" style="position:fixed">
+            <div id="modal">
                 <div class="modal-content print-body">
                     <div class="modal-header">
                         <h2></h2>
@@ -52,7 +52,7 @@
             <div class="col-md-12 lectures-wrapper d-flex flex-row flex-wrap">
                 <div class="col-md-1 lecture-img text-center">
                     <img src="{{asset('/images/student-hat.png')}}" alt="lecturer-icon" class="img-fluid"><br>
-                    <span>{{$key + 1}}</span>
+                    <span>{{$lection->order}}</span>
                 </div>
                 <div class="col-md-11 lecture-txt">
                     <span class="lection-title">{{$lection->title}}</span>
@@ -69,16 +69,24 @@
                             <i class="fas fa-times"></i>
                         @endif
                      </span><br>
-                    @if(strlen($lection->description) > 250)
-                    <span class="lection-description">{{mb_substr($lection->description,0,250)}}...<a href="#modal" data="{{$lection->description}}" class="read-more">още</a></span>
+
+                @if(!Auth::user() && $lection->visibility != Config::get('courseVisibility.public'))
+                    <span class="lection-description">Тази лекция не е публична!</span>
+                    <div class="cf footer text-center">
+                        <a href="{{route('home')}}" class="btn close-modal">ВХОД</a>
+                    </div>
                 @else
-                    <span class="lection-description">{{$lection->description}}</span>
-                @endif
+
+                    @if(strlen($lection->description) > 250)
+                        <span class="lection-description">{{mb_substr($lection->description,0,250)}}...<a href="#modal" data="{{$lection->description}}" class="read-more">още</a></span>
+                    @else
+                        <span class="lection-description">{{$lection->description}}</span>
+                    @endif
                     <br>
                     <div class="col-md-12 lecture-options text-center d-flex flex-row flex-wrap">
                         <div class="col-md-3 video-lecture">
                              @if($lection->Video()->exists())
-                                 <a href="#modal">видео</a>
+                                 <a data-toggle="modal" data-target="#modal" href="#modal">видео</a>
                              @else
                                 <span class="empty-data">видео</span>
                              @endif
@@ -126,6 +134,7 @@
                         @endif
                         </div>
                     </div>
+                @endif
                 </div>
             </div>
             <!-- end of one lecture -->
@@ -160,17 +169,28 @@
             });
 
             $('.read-more').on('click',function(){
-                $('.modal-header').find('h2').html($('.lection-title').html());
+                $('.modal-header').find('h2').html($(this).parent().parent().find('.lection-title').html());
                 $('.copy > p').html($(this).attr('data'));
                 $('#modal').show();
             });
 
             //empty modal on close button click
             $('.close-modal').on('click', function() {
+                closeModal();
+            });
+
+            $(document).keyup(function(e) {
+                 if (e.key === "Escape" && $('#modal').is(':visible')) {
+                     closeModal();
+                }
+            });
+
+            function closeModal(){
                 $('#modal').hide();
                 $('.copy > p').html(' ');
                 $('.modal-content > .cf > div').html(' ');
-            });
+            }
+
         });
     </script>
 @endsection
