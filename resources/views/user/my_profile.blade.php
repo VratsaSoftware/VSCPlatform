@@ -12,7 +12,6 @@
                     <p>{{ session('success') }}</p>
                 </div>
             </p>
-
             @endif
             @if ($errors->any())
             <div class="alert alert-danger">
@@ -27,7 +26,6 @@
             <p>
                 <div class="alert alert-danger">
                     <button type="button" class="close" data-dismiss="alert">
-                        <i class="ace-icon fa fa-times"></i>
                     </button>
                     <p>{{ $message }}</p>
                 </div>
@@ -39,7 +37,7 @@
                 </div>
                 <div class="col-md-12 header-name d-flex flex-row flex-wrap">
                     <div class="col-md-3 name-wrap">
-                        <span class="name">{{ucfirst(Auth::user()->name)}} {{ucfirst(Auth::user()->last_name)}}</span>
+                        <span class="name">{{Auth::user()->name}} {{Auth::user()->last_name}}</span>
                         <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
                             <i class="fas fa-pencil-alt"></i>
                         </button></div>
@@ -61,14 +59,14 @@
                 <div class="information-wrap col-md-12 d-flex flex-row flex-wrap">
                     <div class="col-md-2 location-wrap text-left">
                         <img src="./images/profile/location-icon.png" alt="map-icon">
-                        <span class="location">{{ucfirst(Auth::user()->location)}}</span>
+                        <span class="location">{{Auth::user()->location}}</span>
                         <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
                     </div>
                     <div class="col-md-2 birthday-wrap text-left">
                         <img src="./images/profile/birthday-cake-icon.png" alt="birthday-icon">
-                        <span class="birthday">{{ucfirst(Auth::user()->dob)}}</span>
+                        <span class="birthday">{{Auth::user()->dob}}</span>
                         <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
@@ -154,38 +152,6 @@
                         <span class="title-icons">
                             <img src="./images/profile/tick-icon.png" alt="tick" class="img-fluid">
                         </span>
-                        <span class="edit-right-menu"><i class="fas fa-ellipsis-v"></i></span>
-                        <div class="col-md-12 flex-row flex-wrap text-right edit-items-wrap">
-                            <div class="col-md-5"></div>
-                            <div class="col-md-7 d-flex flex-row flex-wrap edit-items text-right">
-                                <div class="col-md-8">
-                                    <span class="public-switch">Публично видимо</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-8">
-                                    <span class="public-switch">Публично видимо</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-8">
-                                    <span class="public-switch">Редакция</span>
-                                </div>
-                                <div class="col-md-4 pencil">
-                                    <a href=""><i class="fas fa-pencil-alt fa-2x"></i></a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="col-md-12 left-subtitle">
@@ -202,17 +168,17 @@
                     </div>
 
                     <div class="col-md-12 left-stats d-flex flex-row flex-wrap">
-                        <div class="col-md-4 text-left">
+                        <div class="col-md-5 text-left">
                             @if(!is_null($certificate['Courses']))
                             <span>{{ mb_strtoupper($certificate['Courses']->starts->format('Y-m-d')) }}</span>
-                            <br />
+                            /
                             <span>{{ mb_strtoupper($certificate['Courses']->ends->format('Y-m-d')) }}</span>
                             @else
                             <span>{{ mb_strtoupper($certificate->started->format('Y-m-d')) }} - {{ mb_strtoupper($certificate->finished->format('Y-m-d')) }}</span>
                             @endif
                         </div>
 
-                        <div class="col-md-8 text-center d-flex flex-row flex-wrap">
+                        <div class="col-md-7 text-center d-flex flex-row flex-wrap">
                             @forelse ($certificate['Courses']['Lecturers'] as $lecturer)
                             <span class="col-md-8 text-right">Лектор:</span>
                             <span class="col-md-4 text-right" style="padding:0"> {{$lecturer['User']->name}} {{$lecturer['User']->last_name}}</span>
@@ -428,7 +394,7 @@
 
                             <i class="fas fa-building"></i>
                             <span><br />Компания :</span><br />
-                            <span class="section-el-bold work-company live-work">{{ucfirst($exp['Company']->name)}}</span>
+                            <span class="section-el-bold work-company live-work">{{$exp['Company']->name}}</span>
                             <input type="text" name="work_company" id="work_company_live" value="{{$exp['Company']->name}}" class="section-el-bold edit-work"><br />
 
                             <i class="fas fa-id-card"></i>
@@ -529,17 +495,17 @@
                             <i class="fas fa-bullseye"></i>
                             <br />
                             @if(is_null($hobbie['Interests']))
-                            <span class="section-el-bold live-int_others">{{ucfirst($hobbie->others)}}</span>
+                            <span class="section-el-bold live-int_others">{{$hobbie->others}}</span>
                             <br />
                             <br />
                             <hr>
                             @else
-                            <span class="section-el-bold live-int-type">{{ucfirst($hobbie['Interests']['Type']->type)}}</span>
+                            <span class="section-el-bold live-int-type">{{$hobbie['Interests']['Type']->type}}</span>
                             <br />
                             <br />
                             <i class="fas fa-dot-circle"></i>
                             <br />
-                            <span class="section-el-bold live-int-name">{{ucfirst($hobbie['Interests']->name)}}</span>
+                            <span class="section-el-bold live-int-name">{{$hobbie['Interests']->name}}</span>
                             <button type="submit" class="btn btn-danger edit-hobbie" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
                             <button class="btn btn-info edit-hobbie hobbie-add-new"><i class="fas fa-plus"></i></button>
                             <hr>
@@ -643,12 +609,6 @@
 </div>
 <!-- sliding closing efect on alert messages -->
 <script>
-    $(function() {
-        setTimeout(function() {
-            $('.alert').toggle("slide");
-        }, 4000);
-    });
-
     function ConfirmDelete() {
         var x = confirm("Сигурни ли сте че искате да изтриете ?");
         if (x)
@@ -659,18 +619,18 @@
 </script>
 
 <!-- //preview picture before saving for profile picture -->
-<script src="./js/profile-picture-preview.js" charset="utf-8" async></script>
+<script src="{{asset('/js/profile-picture-preview.js')}}" charset="utf-8" async></script>
 
 <!-- //visibility of sections check and change -->
-<script src="./js/profile-visibility-check.js" charset="utf-8" async></script>
+<script src="{{asset('/js/profile-visibility-check.js')}}" charset="utf-8" async></script>
 
 <!-- //ajax suggestions for edu section institution and specialty -->
-<script src="./js/profile-edu-suggestions.js" charset="utf-8" async></script>
+<script src="{{asset('/js/profile-edu-suggestions.js')}}" charset="utf-8" async></script>
 
 <!-- //function to set eye visibility icons on sections -->
-<script src="./js/profile-initial-visibility-sections.js" charset="utf-8" async></script>
+<script src="{{asset('/js/profile-initial-visibility-sections.js')}}" charset="utf-8" async></script>
 
 <!-- ajax load interest by type -->
-<script src="./js/profile-interests-ajax-load.js" charset="utf-8" async></script>
+<script src="{{asset('/js/profile-interests-ajax-load.js')}}" charset="utf-8" async></script>
 
 @endsection

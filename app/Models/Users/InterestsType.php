@@ -13,4 +13,9 @@ class InterestsType extends Model
     {
         return $this->belongsTo(Interest::class, 'cl_users_interest_type_id', 'id');
     }
+
+    public function getTypeAttribute($value)
+    {
+        return mb_convert_case($value, MB_CASE_TITLE, 'UTF-8');
+    }
 }

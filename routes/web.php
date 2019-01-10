@@ -14,7 +14,7 @@
 
 Route::get('/', function () {
     return view('auth.login');
-});
+})->name('home');
 
 Auth::routes();
 
@@ -34,13 +34,16 @@ Route::group(['middleware' => 'auth'], function () {
 
     //users hobbies/interests section
     Route::post('/user/create/hobbies', 'Users\UserController@createHobbies')->name('create.hobbies');
-    // Route::post('/user/update/work/experience', 'Users\UserController@updateWorkExperience')->name('update.work.experience');
     Route::delete('/user/delete/hobbie/{hobbie}', 'Users\UserController@deleteHobbie')->name('delete.hobbie');
     Route::get('/interest/{type}', 'Users\UserController@getInterests')->name('get.interest');
-
 
     //changing visibility of a user section
     Route::post('/user/change/section/visibility', 'Users\UserController@changeVisibility');
     //institution name autocomplete
     Route::get('/user/education/autocomplete', 'Users\UserController@eduAutocomplete')->name('edu.institution');
 });
+
+//user course operations
+Route::get('/user/{user?}/course/{course}', 'Courses\CourseController@show')->name('user.course');
+Route::get('/user/{user?}/course/{course}/module/{module}/lections', 'Courses\LectionController@show')->name('user.module.lections');
+Route::post('/user/{user?}/course/{course}/module/{module}/lection/{lection}/comment', 'Courses\LectionController@addComment')->name('user.module.lection.comment');

@@ -27,38 +27,35 @@
 
         @include('layouts.top-bar')
 
-        @if(Auth::user()->isAdmin())
+        @if(Auth::user() && Auth::user()->isAdmin())
             @include('admin.left-bar')
-            @elseif(Auth::user()->isLecturer())
-                @include('lecturer.left-bar')
-                @else
-                @include('user.left-bar')
-                @endif
-
+        @endif
+        @if(Auth::user() && Auth::user()->isLecturer())
+            @include('lecturer.left-bar')
+        @endif
+        @if(Auth::user())
+            @include('user.left-bar')
+        @endif
                 @yield('content')
                 <script>
                     $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
                         options.async = true;
                     });
                 </script>
+                <script src="{{asset('/js/fixed-left-top-menu.js')}}"></script>
+                <script src="{{asset('/js/edit-showing-pencil.js')}}"></script>
+                <script src="{{asset('/js/slide-alerts.js')}}"></script>
     </body>
     <script type="text/javascript">
         $(function() {
-            $('head').append('<link rel="stylesheet" href="./css/bootstrap-grid.min.css">');
-            $('head').append('<link rel="stylesheet" href="./css/font-awesome.min.css">');
-            $('head').append('<link rel="stylesheet" href="./css/bootstrap.min.css" />');
-            $('head').append('<link rel="stylesheet" href="./css/personal_profile.css" />');
-            $('head').append('<link rel="stylesheet" href="./css/public_profile.css" />');
-
-            $('<script/>', {
-                type: 'text/javascript',
-                src: './js/fixed-left-top-menu.js'
-            }).appendTo('body');
-            $('<script/>', {
-                type: 'text/javascript',
-                src: './js/edit-showing-pencil.js'
-            }).appendTo('body');
-        });
+                    $('head').append('<link rel="stylesheet" href="{{asset('/css/bootstrap-grid.min.css')}}" />');
+                    $('head').append('<link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}" />');
+                    $('head').append('<link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />');
+                    $('head').append('<link rel="stylesheet" href="{{asset('/css/public_profile.css')}}" />');
+                    $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_profile.css')}}" />');
+                    $('head').append('<link rel="stylesheet" href="{{asset('/css/lecturer_course_options.css')}}" />');
+                    $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_events.css')}}" />');
+                    });
     </script>
 
 </html>

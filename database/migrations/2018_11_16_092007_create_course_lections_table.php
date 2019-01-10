@@ -16,6 +16,7 @@ class CreateCourseLectionsTable extends Migration
         Schema::create('course_lections', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('course_modules_id')->unsigned()->nullable();
+            $table->bigInteger('order');
             $table->string('title');
             $table->longText('description');
             $table->dateTime('first_date')->nullable();
@@ -23,6 +24,9 @@ class CreateCourseLectionsTable extends Migration
             $table->integer('lections_video_id')->unsigned()->nullable();
             $table->string('presentation')->nullable();
             $table->string('homework_criteria')->nullable();
+            $table->string('demo')->nullable();
+            $table->string('visibility');
+            $table->string('type')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

@@ -186,7 +186,7 @@ body {
     margin-left: 20vw;
 }
 
-.name-wrap>a, .header-pic>div>a, .text-left>a, .mail>a {
+.name-wrap>a, .header-pic>div>a, .text-left>a, .go-next>a.mail>a {
     /* display: none;*/
     position: absolute;
     font-size: 2vw;
