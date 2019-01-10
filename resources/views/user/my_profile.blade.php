@@ -152,38 +152,6 @@
                         <span class="title-icons">
                             <img src="./images/profile/tick-icon.png" alt="tick" class="img-fluid">
                         </span>
-                        <span class="edit-right-menu"><i class="fas fa-ellipsis-v"></i></span>
-                        <div class="col-md-12 flex-row flex-wrap text-right edit-items-wrap">
-                            <div class="col-md-5"></div>
-                            <div class="col-md-7 d-flex flex-row flex-wrap edit-items text-right">
-                                <div class="col-md-8">
-                                    <span class="public-switch">Публично видимо</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-8">
-                                    <span class="public-switch">Публично видимо</span>
-                                </div>
-                                <div class="col-md-4">
-                                    <label class="switch">
-                                        <input type="checkbox">
-                                        <span class="slider round"></span>
-                                    </label>
-                                </div>
-
-                                <div class="col-md-8">
-                                    <span class="public-switch">Редакция</span>
-                                </div>
-                                <div class="col-md-4 pencil">
-                                    <a href=""><i class="fas fa-pencil-alt fa-2x"></i></a>
-                                </div>
-                            </div>
-                        </div>
                     </div>
 
                     <div class="col-md-12 left-subtitle">
@@ -200,17 +168,17 @@
                     </div>
 
                     <div class="col-md-12 left-stats d-flex flex-row flex-wrap">
-                        <div class="col-md-4 text-left">
+                        <div class="col-md-5 text-left">
                             @if(!is_null($certificate['Courses']))
                             <span>{{ mb_strtoupper($certificate['Courses']->starts->format('Y-m-d')) }}</span>
-                            <br />
+                            /
                             <span>{{ mb_strtoupper($certificate['Courses']->ends->format('Y-m-d')) }}</span>
                             @else
                             <span>{{ mb_strtoupper($certificate->started->format('Y-m-d')) }} - {{ mb_strtoupper($certificate->finished->format('Y-m-d')) }}</span>
                             @endif
                         </div>
 
-                        <div class="col-md-8 text-center d-flex flex-row flex-wrap">
+                        <div class="col-md-7 text-center d-flex flex-row flex-wrap">
                             @forelse ($certificate['Courses']['Lecturers'] as $lecturer)
                             <span class="col-md-8 text-right">Лектор:</span>
                             <span class="col-md-4 text-right" style="padding:0"> {{$lecturer['User']->name}} {{$lecturer['User']->last_name}}</span>

@@ -21,7 +21,12 @@
         @endif
         <div class="col-md-12 level-title-holder d-flex flex-row flex-wrap">
             <div class="col-md-12 text-center">
-                {{$module->Course->name}} - {{$module->name}}
+                <p>
+                    {{$module->name}}
+                </p>
+                <p>
+                    {{$module->Course->description}}
+                </p>
             </div>
         <div class="col-md-12 lvl-program-holder d-flex flex-row flex-wrap">
             <div class="col-md-12 lvl-title text-center">Учебна Програма <i class="fas fa-book-open"></i>&nbsp;{{count($lections)}}</div>
