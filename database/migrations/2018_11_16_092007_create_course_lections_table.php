@@ -24,7 +24,9 @@ class CreateCourseLectionsTable extends Migration
             $table->integer('lections_video_id')->unsigned()->nullable();
             $table->string('presentation')->nullable();
             $table->string('homework_criteria')->nullable();
+            $table->string('demo')->nullable();
             $table->string('visibility');
+            $table->string('type')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

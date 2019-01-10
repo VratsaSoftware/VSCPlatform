@@ -36,6 +36,26 @@ iframe {
     height: 29vw;
 }
 
+.lection-hour {
+    color: #008B8B;
+}
+
+.lection-vacantion {
+    background-color: #98FB98;
+}
+
+.lection-test {
+    background-color: #ADD8E6;
+}
+
+.lecture-options {
+    justify-content: center;
+}
+
+.lection-today {
+    border: 2px solid #FF0000;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     iframe {

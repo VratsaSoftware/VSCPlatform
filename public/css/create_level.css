@@ -97,7 +97,7 @@ input[type=text], textarea, .options-title {
     float: right;
     color: #1C8800;
     font-weight: bold;
-    font-style: italic;
+    /* font-style: italic; */
 }
 
 .save-edit {
