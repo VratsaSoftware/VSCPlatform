@@ -28,7 +28,7 @@ class CourseController extends Controller
      */
     public function create()
     {
-        //
+        return view('course.create');
     }
 
     /**
@@ -39,7 +39,7 @@ class CourseController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
@@ -53,7 +53,7 @@ class CourseController extends Controller
         $modules = Course::getModules($course->id);
         $courses = [];
         if (Auth::user()) {
-            $courses = Auth::user()->getCourse();
+            $courses = Auth::user()->studentGetCourse();
         }
         return view('course.course', ['courses' => $courses,'course' => $course,'modules' => $modules]);
     }

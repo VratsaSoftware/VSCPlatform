@@ -119,9 +119,10 @@ $(document).ready(function() {
         var oldText = $(this).parent().parent().find('.bio-text').text();
         if (!$(this).hasClass('editing')) {
             $(this).addClass('editing');
-            $(this).parent().parent().find('.bio-text').html('<p class="edit-box"><textarea rows="20" cols="30">' + $(this).parent().parent().find('.bio-text').html() + '</textarea></p>');
+            $(this).parent().parent().find('.bio-text').html('<p class="edit-box"><textarea rows="10" cols="60" id="bio" name="bio" style="text-align:left">' + $(this).parent().parent().find('.bio-text').html() + '</textarea></p>');
             $(this).find('i').removeClass('fa-pencil-alt').addClass('fa-save');
         } else {
+            $('#lecturer-bio').submit();
             $(this).find('i').removeClass('fa-save').addClass('fa-pencil-alt');
             $(this).parent().parent().find('.bio-text').html(oldText);
             $('.loader-wrapper').css('display', 'flex').fadeOut();

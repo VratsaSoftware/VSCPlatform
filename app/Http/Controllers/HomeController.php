@@ -50,7 +50,7 @@ class HomeController extends Controller
             $certificates = Auth::user()->getCertificates();
         }
         if ($isOnCourse) {
-            $course = Auth::user()->getCourse();
+            $course = Auth::user()->studentGetCourse();
         }
         if ($hasWorkExp) {
             $workExp = Auth::user()->getWorkExp();
@@ -67,7 +67,8 @@ class HomeController extends Controller
             $courses = Course::with('Lecturers')->whereHas('Lecturers', function ($query) use ($userId) {
                 $query->where('user_id', $userId);
             })->get();
-            return view('user.my_profile', ['social_links' => $socialLinks,'certificates' => $certificates]);
+            $lecturer = CourseLecturer::where('user_id', Auth::user()->id)->first();
+            return view('lecturer.my_profile', ['social_links' => $socialLinks,'courses' => $courses, 'lecturer' => $lecturer]);
         }
         return view('user.my_profile', ['social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes,'workExp' => $workExp,'hobbies' => $hobbies,'interestTypes' => $interestTypes]);
     }

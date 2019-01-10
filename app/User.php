@@ -90,10 +90,18 @@ class User extends Authenticatable
         return false;
     }
 
-    public function getCourse()
+    public function studentGetCourse()
     {
         $userId = Auth::user()->id;
         return Course::with('Modules', 'Modules.ModulesStudent', 'Modules.ModulesStudent.User')->whereHas('Modules.ModulesStudent', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })->get();
+    }
+
+    public function lecturerGetCourses()
+    {
+        $userId = Auth::user()->id;
+        return Course::with('Lecturers')->whereHas('Lecturers', function ($query) use ($userId) {
             $query->where('user_id', $userId);
         })->get();
     }

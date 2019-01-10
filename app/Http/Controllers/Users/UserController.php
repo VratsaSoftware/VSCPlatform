@@ -305,4 +305,14 @@ class UserController extends Controller
     {
         return response()->json(Interest::where('cl_users_interest_type_id', $type)->get());
     }
+
+    public function updateBio(Request $request)
+    {
+        $updateBio = CourseLecturer::where('user_id', Auth::user()->id)->first();
+        $updateBio->bio = $request->bio;
+        $updateBio->save();
+
+        $message = __('Успешно направени промени!');
+        return redirect()->route('myProfile')->with('success', $message);
+    }
 }

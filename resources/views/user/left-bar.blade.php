@@ -19,7 +19,7 @@
         <li class="nested-nav {{ Route::is('user.course') ? 'sidenav-selected' : '' }}">
             <a href="#" id="my-courses"><i class="fas fa-chevron-down"></i>Моите курсове</a>
             <ul>
-                @forelse(Auth::user()->getCourse() as $course)
+                @forelse(Auth::user()->studentGetCourse() as $course)
                     <li><a href="{{ route('user.course',['user' => Auth::user()->id,'course' => $course->id])}}"><img src="{{asset('/images/profile/nav/programming-icon.png')}}" alt="">{{$course->name}}</a></li>
                     @empty
                     <li><a href="#" class="disabled"><img src="{{asset('/images/profile/remove-icon.png')}}" alt="">Нямате записани Курсове</a></li>

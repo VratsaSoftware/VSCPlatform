@@ -41,6 +41,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/user/change/section/visibility', 'Users\UserController@changeVisibility');
     //institution name autocomplete
     Route::get('/user/education/autocomplete', 'Users\UserController@eduAutocomplete')->name('edu.institution');
+
+    // lecturer routes
+    Route::post('/lecturer/update/bio', 'Users\UserController@updateBio')->name('lecturer.update.bio');
+
+
+    //course routes
+    Route::resource('course', 'Courses\CourseController')->names('course');
 });
 
 //user course operations
