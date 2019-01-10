@@ -5,7 +5,7 @@ namespace App\Models\Courses;
 use Illuminate\Database\Eloquent\Model;
 use App\User;
 use App\Models\Courses\Course;
-use App\Models\CourseModules\Modules;
+use App\Models\CourseModules\Module;
 
 class Certification extends Model
 {
