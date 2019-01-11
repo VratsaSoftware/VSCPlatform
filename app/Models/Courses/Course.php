@@ -11,6 +11,7 @@ class Course extends Model
 {
     protected $table = 'courses';
     protected $dates = ['starts','ends'];
+    protected $guarded = [];
 
     public function Modules()
     {

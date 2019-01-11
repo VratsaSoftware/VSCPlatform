@@ -59,6 +59,7 @@
                     $('head').append('<link rel="stylesheet" href="{{asset('/css/lecturer_profile.css')}}" />');
                     $('head').append('<link rel="stylesheet" href="{{asset('/css/create_course.css')}}" />');
                     $('head').append('<link rel="stylesheet" href="{{asset('/css/create_level.css')}}" />');
+                    $('head').append('<link rel="stylesheet" href="{{asset('/css/lecturer_course_options.css')}}" />');
                     });
     </script>
 

@@ -308,7 +308,7 @@ class UserController extends Controller
 
     public function updateBio(Request $request)
     {
-        $updateBio = CourseLecturer::where('user_id', Auth::user()->id)->first();
+        $updateBio = User::find(Auth::user()->id);
         $updateBio->bio = $request->bio;
         $updateBio->save();
 

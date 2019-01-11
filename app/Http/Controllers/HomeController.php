@@ -14,6 +14,7 @@ use App\Models\Users\EducationType;
 use App\Models\Users\InterestsType;
 use App\Models\Users\Interest;
 use App\Models\Users\Hobbie;
+use App\User;
 
 class HomeController extends Controller
 {
@@ -33,7 +34,6 @@ class HomeController extends Controller
         $socialLinks = Auth::user()->getSocialLinks();
         $hasWorkExp = Auth::user()->hasWorkExp();
         $hasHobbies = Auth::user()->hasHobbies();
-
 
         $educationTypes = EducationType::all();
         $education = [];
@@ -67,7 +67,7 @@ class HomeController extends Controller
             $courses = Course::with('Lecturers')->whereHas('Lecturers', function ($query) use ($userId) {
                 $query->where('user_id', $userId);
             })->get();
-            $lecturer = CourseLecturer::where('user_id', Auth::user()->id)->first();
+            $lecturer = User::find(Auth::user()->id);
             return view('lecturer.my_profile', ['social_links' => $socialLinks,'courses' => $courses, 'lecturer' => $lecturer]);
         }
         return view('user.my_profile', ['social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes,'workExp' => $workExp,'hobbies' => $hobbies,'interestTypes' => $interestTypes]);

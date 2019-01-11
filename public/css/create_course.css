@@ -27,7 +27,7 @@
 }
 
 .create-course-button {
-    margin-top: 25vw;
+    /* margin-top: 25vw; */
     margin-bottom: 5vw;
 }
 
@@ -57,6 +57,22 @@
 
 input[type=text], input[type=date] {
     max-width: 100%;
+}
+
+#picture {
+    display: none;
+}
+
+.picture-label:hover {
+    cursor: pointer;
+}
+
+.create-course-btn:hover {
+    text-decoration: none;
+}
+
+.alert-on-course {
+    margin-top: 5vw;
 }
 
 /* Extra small devices (phones, 600px and down) */

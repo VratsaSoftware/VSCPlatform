@@ -18,7 +18,6 @@ class CreateCoursesLecturersTable extends Migration
             $table->integer('course_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned()->nullable();
             $table->integer('course_modules_id')->unsigned()->nullable();
-            $table->longText('bio')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

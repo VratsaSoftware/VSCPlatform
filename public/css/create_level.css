@@ -3,7 +3,7 @@
     margin-top: 10vw;
 }
 
-input[type=text], textarea, .options-title {
+input[type=text], textarea, .options-title, .name-course {
     background: #FFFFFF;
     border: 2px solid #243847;
     box-sizing: border-box;

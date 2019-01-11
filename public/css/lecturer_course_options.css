@@ -1,66 +1,70 @@
 /*options section*/
-a, ul > li > a,  div > li > a{
-	text-decoration: none;
-	color: inherit;
-}
-.options-wrap{
-	margin-top: 10vw;
+a, ul>li>a, div>li>a {
+    text-decoration: none;
+    color: inherit;
 }
 
-.options-wrap > div{
-	margin-bottom: 5vw;
+.options-wrap {
+    margin-top: 10vw;
 }
 
-.levels-title, .levels-btn, .levels-footer{
-	background: #658BA9 !important;
-	border: 1px solid #658BA9 !important;
+.options-wrap>div {
+    margin-bottom: 5vw;
 }
 
-.levels-btn:hover{
-	background: #fff !important;
-	color: #658BA9 !important;
+.levels-title, .levels-btn, .levels-footer {
+    background: #658BA9 !important;
+    border: 1px solid #658BA9 !important;
 }
 
-.text-right > a{
-	display: inline-block;
-	position: relative;
+.levels-btn:hover {
+    background: #fff !important;
+    color: #658BA9 !important;
 }
 
-.text-right > a > i{
-	font-size: 1.5vw;
+.text-right>a {
+    display: inline-block;
+    position: relative;
 }
 
-.right-option:hover, .left-option:hover, .lecturer-holder:hover{
-	box-shadow: 0px 5px 20px rgba(7, 42, 68, 0.5);
-	border-radius: 8px;
+.text-right>a>i {
+    font-size: 1.5vw;
 }
 
-.levels-holder, .lecturers-holder{
-	display: none;
+.right-option:hover, .left-option:hover, .lecturer-holder:hover {
+    box-shadow: 0px 5px 20px rgba(7, 42, 68, 0.5);
+    border-radius: 8px;
 }
 
-.all-students-pool > div > img{
-	float: none;
+.levels-holder, .lecturers-holder {
+    display: none;
 }
 
-.remove-lecturer{
-	margin-top: 0 !important;
-	margin-bottom: 0 !important;
-	position: absolute;
-	z-index: 10;
+.all-students-pool>div>img {
+    float: none;
 }
 
-.remove-lecturer > img{
-	margin-left: 10vw;
+.remove-lecturer {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    position: absolute;
+    z-index: 10;
 }
 
-.remove-lecturer:hover{
-	cursor: pointer;
+.remove-lecturer>img {
+    margin-left: 10vw;
 }
 
-.all-students-pool > div > div{
-	margin-top: 1vw !important;
+.remove-lecturer:hover {
+    cursor: pointer;
 }
 
+.all-students-pool>div>div {
+    margin-top: 1vw !important;
+}
+
+a:hover {
+    text-decoration: none;
+}
 
 /*end of option sections*/

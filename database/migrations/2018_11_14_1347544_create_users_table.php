@@ -23,6 +23,7 @@ class CreateUsersTable extends Migration
             $table->string('sex')->nullable();
             $table->string('picture')->nullable();
             $table->string('password');
+            $table->longText('bio')->nullable();
             $table->integer('cl_occupation_id')->unsigned()->nullable();
             $table->integer('cl_role_id')->unsigned()->nullable();
             $table->rememberToken();

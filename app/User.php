@@ -113,8 +113,13 @@ class User extends Authenticatable
 
     public function isLecturer()
     {
-        $isLecturer = CourseLecturer::where('user_id', Auth::user()->id)->first();
-        if ($isLecturer) {
+        $isOnCourse = CourseLecturer::where('user_id', Auth::user()->id)->first();
+        $role = Role::find(Auth::user()->cl_role_id);
+        $hasRole = true;
+        if ($role->role != 'lecturer') {
+            $hasRole = false;
+        }
+        if ($isOnCourse || $hasRole) {
             return true;
         }
         return false;

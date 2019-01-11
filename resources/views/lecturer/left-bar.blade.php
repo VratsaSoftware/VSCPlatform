@@ -14,13 +14,13 @@
    <li class="disabled"><a href="#" class="disabled">
      <img src="{{asset('/images/profile/nav/results-icon.png')}}" alt="" class="img-fluid">Интервюта</a>
    </li>
-   <li class="nested-nav">
+   <li class="nested-nav {{ Route::is('course.create') ? 'sidenav-selected' : '' }} {{ Route::is('course.show') ? 'sidenav-selected' : '' }}">
      <a href="" id="my-courses"><i class="fas fa-chevron-down"></i>Моите курсове</a>
      <ul>
       <li><a href="{{route('course.create')}}"><img src="{{asset('/images/profile/add-icon.png')}}" alt="add"></i>Добави</a></li>
       @forelse(Auth::user()->lecturerGetCourses() as $course)
         <li>
-            <a href=""><img src="{{asset('/images/profile/nav/programming-icon.png')}}" alt="">{{ucfirst($course->name)}}</a>
+            <a href="{{route('lecturer.show.course',['course' => $course->id])}}"><img src="{{asset('/images/profile/nav/programming-icon.png')}}" alt="">{{ucfirst($course->name)}}</a>
         </li>
       @empty
         <li><a href="#" class="disabled"><img src="{{asset('/images/profile/remove-icon.png')}}" alt="">Нямате Курсове</a></li>

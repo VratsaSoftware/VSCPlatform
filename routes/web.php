@@ -42,15 +42,18 @@ Route::group(['middleware' => 'auth'], function () {
     //institution name autocomplete
     Route::get('/user/education/autocomplete', 'Users\UserController@eduAutocomplete')->name('edu.institution');
 
-    // lecturer routes
-    Route::post('/lecturer/update/bio', 'Users\UserController@updateBio')->name('lecturer.update.bio');
+    Route::group(['middleware' => 'isLecturer'], function () {
+        // lecturer routes
+        Route::post('/lecturer/update/bio', 'Users\UserController@updateBio')->name('lecturer.update.bio');
+        Route::get('/lecturer/show/course/{course}', 'Courses\CourseController@showLecturerCourse')->name('lecturer.show.course');
+        Route::get('/lecturer/module/{module?}/lections', 'Courses\CourseController@showLecturerModule')->name('lecrurer.module.lections');
 
-
-    //course routes
-    Route::resource('course', 'Courses\CourseController')->names('course');
+        //course routes
+        Route::resource('course', 'Courses\CourseController')->names('course');
+    });
 });
 
 //user course operations
-Route::get('/user/{user?}/course/{course}', 'Courses\CourseController@show')->name('user.course');
+Route::get('/user/{user?}/course/{course}', 'Courses\CourseController@showUserCourse')->name('user.course');
 Route::get('/user/{user?}/course/{course}/module/{module}/lections', 'Courses\LectionController@show')->name('user.module.lections');
 Route::post('/user/{user?}/course/{course}/module/{module}/lection/{lection}/comment', 'Courses\LectionController@addComment')->name('user.module.lection.comment');
