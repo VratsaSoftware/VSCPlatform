@@ -2,6 +2,7 @@ $(function(){
         var edit = false;
         $('.edit-lecture > a').on('click', function(e){
           e.preventDefault();
+          $('#modal').show();
           if(!edit){
             $(this).parent().parent().append('<div class="col-md-12 text-center"><button class="btn btn-success save-edit">запази</button></div>');
             $(this).parent().parent().parent().find('span:nth-child(1)').html('<input type="text" value="'+$(this).parent().parent().parent().find('span:nth-child(1)').html()+'">');
@@ -12,6 +13,7 @@ $(function(){
         });
 
         $('.presentation-lecture > a').on('click', function(){
+            $('#modal').show();
           $('.modal-header > h2').text('');
           $('.modal-header > h2').text('Добави Презентация');
           $('.copy > p').html('');
@@ -20,6 +22,7 @@ $(function(){
         });
 
         $('.homework-lecture > a').on('click', function(){
+            $('#modal').show();
           $('.modal-header > h2').text('');
           $('.modal-header > h2').text('Добави Критерии за домашно');
           $('.copy > p').html('');
@@ -28,6 +31,7 @@ $(function(){
         });
 
         $('.video-lecture > a').on('click', function(){
+            $('#modal').show();
           $('.modal-header > h2').text('');
           $('.modal-header > h2').text('Добави Видео');
           $('.copy > p').html('');
@@ -36,6 +40,7 @@ $(function(){
         });
 
         $('.add-lecture > div > a').on('click', function(){
+            $('#modal').show();
           $('.modal-header > h2').text('');
           $('.modal-header > h2').text('Добави Лекция');
           $('.copy > p').html('');
@@ -44,6 +49,7 @@ $(function(){
         });
 
         $('.comments-view > a').on('click', function(){
+            $('#modal').show();
           $('.copy > p').html($(this).next('.comments').html());
         });
 

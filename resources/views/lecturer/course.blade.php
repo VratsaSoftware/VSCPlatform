@@ -4,7 +4,31 @@
     <div class="content-wrap">
           <div class="section">
             <div class="col-md-12 d-flex flex-row flex-wrap options-wrap">
-
+                @if (!empty(Session::get('success')))
+                <p>
+                    <div class="alert alert-success">
+                        <p>{{ session('success') }}</p>
+                    </div>
+                </p>
+                @endif
+                @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                @if ($message = Session::get('error'))
+                <p>
+                    <div class="alert alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">
+                        </button>
+                        <p>{{ $message }}</p>
+                    </div>
+                </p>
+                @endif
               <div class="col-md-6 text-center left-option">
                 <div class="event-title col-md-12">Резултати</div>
                 <div class="event-body col-md-12">
@@ -32,9 +56,9 @@
                     <div class="levels-holder">
                       <div class="list-group">
                           @forelse ($modules as $module)
-                              <a href="{{route('lecrurer.module.lections',['module' => $module->id])}}">
+                              <a href="{{route('module.edit',['module' => $module->id])}}">
                                 <li class="list-group-item list-group-item-action d-flex">
-                                  <div class="col-md-9 text-center">{{$module->order}}:&nbsp;{{$module->name}}</div>
+                                    <div class="col-md-9 text-center module-now">{{$module->order}}:&nbsp;{{$module->name}}</div>
                                   <div class="col-md-3 text-right">
                                     <i class="far fa-list-alt"></i> {{count($module->Lections)}}&nbsp;
                                   </div>
@@ -44,7 +68,7 @@
                               <i class="fas fa-times"></i>
                           @endforelse
 
-                         <a href="{{route('lecrurer.module.lections',['module' => 0])}}">
+                         <a href="{{route('module.create',['course'=> $course->id])}}">
                           <li class="list-group-item list-group-item-action">
                               <img src="{{asset('/images/profile/add-icon.png')}}" alt="add">
                               Добави

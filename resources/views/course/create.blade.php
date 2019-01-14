@@ -51,7 +51,7 @@
                     </p>
                     <p>
                         <label for="visibility">Видимост на курса</label>
-                        <select class="course-visibility" name="visibility" id="visibility">
+                        <select class="course-visibility section-el-bold" name="visibility" id="visibility">
                             @foreach(Config::get('courseVisibility') as $visibility)
                                 <option value="{{strtolower($visibility)}}">{{ucfirst($visibility)}}</option>
                             @endforeach

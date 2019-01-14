@@ -44,11 +44,11 @@
                     <div class="col-md-6 header-pic">
                         <div class="col-md-12">
                             @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
-                            <img src="{{asset('images/women-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
+                                <img src="{{asset('images/women-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
                             @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
-                            <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
+                                <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
                             @else
-                            <img src="{{asset('images/user-pics/'.Auth::user()->picture)}}" alt="profile-pic" class="profile-pic">
+                                <img src="{{asset('images/user-pics/'.Auth::user()->picture)}}" alt="profile-pic" class="profile-pic">
                             @endif
                             <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
                                 <i class="fas fa-pencil-alt"></i>

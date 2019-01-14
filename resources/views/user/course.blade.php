@@ -39,12 +39,13 @@
                             @endif
                         @endif
                         @if(!is_null($module->picture) || !empty($module->picture))
-                            <img src="{{asset('/images/course-'.str_replace(' ', '', strtolower($course->name)).'-'.$course->id.'/modules/'.str_replace(' ', '', strtolower($module->name)).'/'.$module->picture)}}" alt="">
-                        @endif
-                        @if(!is_null($course->picture) || !empty($course->picture))
-                            <img src="{{asset('/images/course-'.str_replace(' ', '', strtolower($course->name)).'-'.$course->id.'/'.$course->picture)}}" alt="">
+                            <img src="{{asset('/images/course-'.str_replace(' ', '', strtolower($course->name)).'-'.$course->id.'/module-'.str_replace(' ', '', strtolower($module->name)).'/'.$module->picture)}}" alt="">
                         @else
-                            <img src="{{asset('/images/img-placeholder.jpg')}}" alt="no photo">
+                            @if(!is_null($course->picture) || !empty($course->picture))
+                                <img src="{{asset('/images/course-'.str_replace(' ', '', strtolower($course->name)).'-'.$course->id.'/'.$course->picture)}}" alt="">
+                            @else
+                                <img src="{{asset('/images/img-placeholder.jpg')}}" alt="no photo">
+                            @endif
                         @endif
                     </div>
                     @if($module->starts->lt(\Carbon\Carbon::now()) && $module->ends->gt(\Carbon\Carbon::now()))

@@ -46,8 +46,10 @@ Route::group(['middleware' => 'auth'], function () {
         // lecturer routes
         Route::post('/lecturer/update/bio', 'Users\UserController@updateBio')->name('lecturer.update.bio');
         Route::get('/lecturer/show/course/{course}', 'Courses\CourseController@showLecturerCourse')->name('lecturer.show.course');
-        Route::get('/lecturer/module/{module?}/lections', 'Courses\CourseController@showLecturerModule')->name('lecrurer.module.lections');
+        Route::get('/lecturer/module/{module?}/lections', 'Courses\ModuleController@showLecturerModule')->name('lecrurer.module.lections');
 
+        Route::resource('module', 'Courses\ModuleController')->names('module');
+        
         //course routes
         Route::resource('course', 'Courses\CourseController')->names('course');
     });

@@ -43,7 +43,7 @@ class User extends Authenticatable
 
     public function Role()
     {
-        return $this->hasOne(Role::class, 'cl_role_id');
+        return $this->hasMany(Role::class, 'id', 'cl_role_id');
     }
 
     public function Lecturer()

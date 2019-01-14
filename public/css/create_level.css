@@ -298,6 +298,7 @@ input[type=range]:focus {
 .all-students-pool>div>img {
     float: left;
     max-width: 10vw;
+    max-height: 10vw;
     border-radius: 50%;
 }
 
@@ -353,6 +354,27 @@ input[type=range]:focus {
     cursor: pointer;
 }
 
+.create-module-btn {
+    margin-top: 5vw;
+}
+
+.result-user {
+    display: none;
+    border: 1px solid #4CAF50;
+    border-radius: 8px;
+}
+
+.exist-module-order, .exist-module-name, .exist-course-name {
+    color: #4CAF50;
+}
+
+.no-exist-modules {
+    color: #f00;
+}
+
+/* #order {
+    display: none;
+} */
 /*end of students section*/
 /*Query's
 --------------------------------------------------------------------------------------------------*/
@@ -395,6 +417,7 @@ input[type=range]:focus {
 
     .all-students-pool>div>img {
         max-width: 30vw;
+        max-height: 10vw;
     }
 
     .student-options>div {
@@ -438,6 +461,7 @@ input[type=range]:focus {
 
     .all-students-pool>div>img {
         max-width: 20vw;
+        max-height: 10vw;
     }
 
     .student-options>div {
@@ -486,6 +510,7 @@ input[type=range]:focus {
 
     .all-students-pool>div>img {
         max-width: 10vw;
+        max-height: 10vw;
     }
 }
 
@@ -529,6 +554,7 @@ input[type=range]:focus {
 
     .all-students-pool>div>img {
         max-width: 10vw;
+        max-height: 10vw;
     }
 }
 

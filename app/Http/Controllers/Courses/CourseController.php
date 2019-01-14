@@ -59,6 +59,7 @@ class CourseController extends Controller
         $name = md5($name);
 
         $data['picture'] = $name;
+        $data['name'] = str_replace(' ', '', strtolower($data['name']));
         $createCourse = Course::create($data);
         $insLecturer = new CourseLecturer;
         $insLecturer->course_id = $createCourse->id;
@@ -97,11 +98,6 @@ class CourseController extends Controller
         $modules = Course::getModules($course->id);
 
         return view('lecturer.course', ['course' => $course,'modules' => $modules]);
-    }
-
-    public function showLecturerModule($module = null)
-    {
-        dd($module);
     }
 
     /**

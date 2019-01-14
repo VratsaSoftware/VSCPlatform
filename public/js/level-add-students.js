@@ -13,10 +13,12 @@
                $(this).parent().parent().parent().removeClass('removed-student').addClass('added-student');
                if(numStudents > -1){
                     numStudents = parseInt($('.added-student').length);
-                    percentAdd = (percentAdd + 5);
+                    percentAdd = (percentAdd + 3);
                     $('.progress-bar').css('width',percentAdd+'%');
                     $('.num-students-now').html(numStudents);
                }
+               var userId = $(this).attr('data');
+               $('#create_module').append('<input type="hidden" id="user-'+userId+'" name="students[]" value="'+$(this).attr('data')+'">');
                showOptions($(this).parent().parent().parent());
             });
 
@@ -25,12 +27,14 @@
                     if($(this).parent().parent().parent().hasClass('added-student')){
                         $(this).parent().parent().parent().removeClass('added-student').addClass('removed-student');
                         numStudents = parseInt($('.added-student').length);
-                        percentAdd = (percentAdd - 5);
+                        percentAdd = (percentAdd - 3);
                         $('.progress-bar').css('width',percentAdd+'%');
                         $('.num-students-now').html(numStudents);
                     }
                }
                $(this).parent().parent().parent().removeClass('added-student').addClass('removed-student');
+               var userId = $(this).attr('data');
+               $('#create_module').find('#user-'+userId).remove();
                showOptions($(this).parent().parent().parent());
             });
 
@@ -39,10 +43,13 @@
 
                 if ($(element).hasClass('added-student')) {
                     $(element).find('.add-student').css('visibility','hidden');
+                    $(element).find('.remove-student').css('visibility','visible').show();
                     $(element).find('.student-options').css('display', 'flex').show();
                     $(element).find('.student-options > .remove-student').css('visibility','visible').show();
-                }else if($(element).hasClass('removed-student')){
+                }
+                if($(element).hasClass('removed-student')){
                     $(element).find('.remove-student').css('visibility','hidden');
+                    $(element).find('.add-student').css('visibility','visible').show();
                     $(element).find('.student-options').css('display', 'flex').show();
                     $(element).find('.student-options > .add-student').css('visibility','visible').show();
                 }else{

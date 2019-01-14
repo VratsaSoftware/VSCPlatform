@@ -11,6 +11,7 @@ class Module extends Model
 {
     protected $table = 'courses_modules';
     protected $dates = ['starts','ends'];
+    protected $guarded = [];
 
     public function Course()
     {
@@ -38,6 +39,6 @@ class Module extends Model
 
     public static function getLections($module)
     {
-        return Lection::where('course_modules_id', $module)->with('Video')->oldest('order')->get();
+        return Lection::where('course_modules_id', $module)->with('Video', 'Comments', 'Comments.Authors')->oldest('order')->get();
     }
 }

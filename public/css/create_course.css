@@ -75,6 +75,11 @@ input[type=text], input[type=date] {
     margin-top: 5vw;
 }
 
+#course-picture {
+    width: 800px;
+    height: 600px;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     #picture {
