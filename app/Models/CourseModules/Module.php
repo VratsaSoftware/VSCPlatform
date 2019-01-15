@@ -39,6 +39,6 @@ class Module extends Model
 
     public static function getLections($module)
     {
-        return Lection::where('course_modules_id', $module)->with('Video', 'Comments', 'Comments.Authors')->oldest('order')->get();
+        return Lection::where('course_modules_id', $module)->with('Video', 'Comments', 'Comments.Author')->oldest('order')->get();
     }
 }

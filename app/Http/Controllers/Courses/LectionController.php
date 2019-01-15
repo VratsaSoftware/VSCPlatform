@@ -8,8 +8,10 @@ use App\Models\Courses\Course;
 use App\Models\CourseModules\Module;
 use App\Models\CourseModules\Lection;
 use App\Models\CourseModules\LectionComment;
+use App\Models\CourseModules\LectionVideo;
 use App\User;
 use Illuminate\Support\Facades\Auth;
+use Redirect;
 
 class LectionController extends Controller
 {
@@ -41,7 +43,7 @@ class LectionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
@@ -81,7 +83,35 @@ class LectionController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'url' => ['sometimes', 'regex:/^(https|http):\/\/(?:www\.)?youtube.com\/embed\/[A-z0-9]+/'],
+            'slides' => 'sometimes|file',
+        ]);
+        $lection = Lection::findOrFail($id);
+        if ($request->has('url')) {
+            $video = LectionVideo::findOrFail($lection->lections_video_id);
+            $video->url = $data['url'];
+            $video->save();
+        }
+        if ($request->has('slides')) {
+            // $lection->presentation = $data['slides'];
+            dd($request);
+        }
+        $lection->save();
+        $message = __('Успешно направени промени!');
+        return redirect()->back()->with('success', $message);
+    }
+
+    public function changeVisibility(Request $request, Lection $lection)
+    {
+        $valid = \Config::get('courseVisibility');
+        if (in_array($request->visibility, $valid)) {
+            $lection->visibility = $request->visibility;
+            $lection->save();
+
+            return response('success', 200);
+        }
+        return response('error', 400);
     }
 
     /**
@@ -92,7 +122,10 @@ class LectionController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $lection = Lection::findOrFail($id);
+        $lection->delete();
+
+        return response('success', 200);
     }
 
     public function addComment(Request $request, User $user, Course $course, Module $module, Lection $lection)

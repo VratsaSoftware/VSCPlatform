@@ -143,10 +143,10 @@ input[type=text], textarea, .options-title, .name-course {
 }
 
 .comment-modal-holder {
-    height: 50vw;
+    /* height: 50vw; */
     width: 100%;
     overflow-x: hidden;
-    overflow-y: scroll;
+    /* overflow-y: scroll; */
 }
 
 .add-option:hover {
@@ -370,6 +370,32 @@ input[type=range]:focus {
 
 .no-exist-modules {
     color: #f00;
+}
+
+.lecture-options>div>a:hover {
+    padding: 0 !important;
+}
+
+.comment-pic-inside-modal {
+    margin-bottom: 5vw;
+}
+
+.copy>p>div>.comments-title {
+    max-height: 10vw;
+    margin-bottom: 5vw;
+    display: block;
+    position: relative;
+}
+
+.modal-comment-pic {
+    max-width: 50%;
+    border-radius: 10%;
+}
+
+.alert {
+    position: absolute;
+    z-index: -10;
+    margin-top: 5vw;
 }
 
 /* #order {

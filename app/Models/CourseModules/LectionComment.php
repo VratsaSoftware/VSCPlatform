@@ -16,8 +16,8 @@ class LectionComment extends Model
         return $this->hasOne(Lection::class);
     }
 
-    public function Authors()
+    public function Author()
     {
-        return $this->hasMany(User::class, 'id', 'user_id');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 }

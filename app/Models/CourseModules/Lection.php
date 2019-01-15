@@ -24,7 +24,7 @@ class Lection extends Model
 
     public function Comments()
     {
-        return $this->hasMany(LectionComment::class, 'id');
+        return $this->hasMany(LectionComment::class, 'course_lection_id');
     }
 
     public function getTitleAttribute($value)

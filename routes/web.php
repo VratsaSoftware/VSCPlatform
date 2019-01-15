@@ -49,9 +49,13 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/lecturer/module/{module?}/lections', 'Courses\ModuleController@showLecturerModule')->name('lecrurer.module.lections');
 
         Route::resource('module', 'Courses\ModuleController')->names('module');
-        
+
         //course routes
         Route::resource('course', 'Courses\CourseController')->names('course');
+
+        //lection routes
+        Route::resource('lection', 'Courses\LectionController')->names('lection');
+        Route::post('change/lection/{lection}/visibility', 'Courses\LectionController@changeVisibility')->name('lection.visibility');
     });
 });
 
