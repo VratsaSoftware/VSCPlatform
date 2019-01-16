@@ -9,6 +9,7 @@ use App\User;
 class ModulesStudent extends Model
 {
     protected $table = 'modules_students';
+    protected $guarded = [];
 
     public function CourseModules()
     {

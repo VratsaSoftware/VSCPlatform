@@ -2,6 +2,7 @@ $('.delete-lection-btn').on('click',function(){
     var element = $(this).parent().parent().parent().parent();
     var done = false;
     var x = confirm("Сигурни ли сте че искате да изтриете ?");
+    var count = $('#lection-count').attr('data-count');
     if (x){
     var url = $('#delete-lection').attr('action');
         $.ajax({
@@ -25,6 +26,7 @@ $('.delete-lection-btn').on('click',function(){
     function deleted(done){
         if(done){
             element.fadeOut().remove();
+            $('#lection-count').html((count -1));
         }
     }
 });

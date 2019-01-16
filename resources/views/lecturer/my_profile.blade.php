@@ -152,15 +152,15 @@
 
     <div class="col-md-5 d-flex flex-row flex-wrap text-center bio-courses">
         <div class="col-md-12 bio-courses-title">Преподавал <a href=""><i class="fas fa-pencil-alt"></i></a></div>
+        @forelse($courses as $course)
         <!-- courses -->
             <div class="col-md-12 lecturer-course-name">
-                @forelse($courses as $course)
                   <span>{{$course->name}} {{$lecturer->created_at->format('Y')}}</span>
                   <img src="./images/profile/tick-icon.png" alt="tick" class="img-fluid">
-                @empty
-                    Няма курсове
-                @endforelse
             </div>
+        @empty
+            Няма курсове
+        @endforelse
     </div>
   </div>
 

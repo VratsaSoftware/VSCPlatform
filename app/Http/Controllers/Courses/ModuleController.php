@@ -12,6 +12,7 @@ use App\User;
 use Illuminate\Support\Facades\Input;
 use Image;
 use File;
+use Validator;
 
 class ModuleController extends Controller
 {
@@ -121,8 +122,8 @@ class ModuleController extends Controller
      */
     public function edit(Module $module)
     {
-        $lections = Module::getLections($module->id);
-        $students = ModulesStudent::where('course_modules_id', $module->id)->get();
+        $lections = Module::getLections($module->id, true);
+        $students = ModulesStudent::where('course_modules_id', $module->id)->with('User')->get();
         $module = $module->load('Course');
 
         return view('course.module.edit', ['module' => $module,'lections' => $lections, 'students' => $students]);
@@ -149,5 +150,31 @@ class ModuleController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function addUser(Request $request)
+    {
+        $data = $request->validate([
+            'mail' => 'required|email',
+            'module_id' => 'required|numeric',
+        ]);
+
+        $user = User::where('email', $request->mail)->first();
+        ModulesStudent::firstOrCreate(
+            ['course_modules_id' => $request->module_id,'user_id' => $user->id]
+        );
+
+        $message = __('Успешно добавен курсист!');
+        return redirect()->back()->with('success', $message);
+    }
+
+    public function removeUser(Request $request)
+    {
+        $student = ModulesStudent::where([
+            ['course_modules_id',$request->module],
+            ['user_id',$request->user],
+        ])->delete();
+
+        return response('success', 200);
     }
 }

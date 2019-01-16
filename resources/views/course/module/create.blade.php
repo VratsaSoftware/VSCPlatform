@@ -36,11 +36,11 @@
             <div class="col-md-12 text-center">
                 <p>
                     <label for="name">Име на модула/нивото</label><br>
-                    <input type="text" id="name" name="name" placeholder="..." class="name-course">
+                    <input type="text" id="name" name="name" placeholder="..." class="name-course" value="{{old('name')}}">
                 </p>
                 <p>
                     <label for="description">Описание</label><br>
-                    <textarea id="description" cols="30" rows="5" name="description" placeholder="кратко описание" style="resize: none;"></textarea>
+                    <textarea id="description" cols="30" rows="5" name="description" placeholder="кратко описание" style="resize: none;" value="{{old('description')}}"></textarea>
                 </p>
                 <p>
                     <label for="starts">Започва</label>

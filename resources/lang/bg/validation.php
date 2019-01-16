@@ -195,5 +195,7 @@ return [
         'picture'                  => 'Картинка/Снимка',
         'course_visibility'        => 'Видимост',
         'url'                      => 'Линк',
+        'demo'                     => 'демо линк',
+        'mail'                     => 'e-mail',
     ],
 ];

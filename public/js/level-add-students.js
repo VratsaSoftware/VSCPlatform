@@ -36,10 +36,41 @@
                var userId = $(this).attr('data');
                $('#create_module').find('#user-'+userId).remove();
                showOptions($(this).parent().parent().parent());
+               if($(this).hasClass('ajax')){
+                   removeStudent($(this).parent().attr('data-url'),$(this).parent().attr('data-module'),$(this).attr('data'));
+                   numStudents = parseInt($('.one-student-holder').length);
+                   percentAdd = (numStudents*3);
+                   $('.progress-bar').css('width',percentAdd+'%');
+                   $('.num-students-now').html(numStudents);
+               }
             });
+
+            function removeStudent(url,onModule,user){
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    type: "POST",
+                    url: url,
+                    data: {
+                        module: onModule,
+                        user: user,
+                    },
+                    success: function(data, textStatus, xhr) {
+                        if (xhr.status == 200) {
+                            console.log(data);
+                        }
+                    }
+                });
+            }
 
             function showOptions(element){
                 $(element).children('img').css('box-shadow','0px 5px 20px rgba(7, 42, 68, 0.5)');
+
+                if($(element).hasClass('removed-student') && $(element).hasClass('ajax')){
+                    $(element).fadeOut().remove();
+                }
+
 
                 if ($(element).hasClass('added-student')) {
                     $(element).find('.add-student').css('visibility','hidden');

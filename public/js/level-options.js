@@ -35,44 +35,83 @@ $(function(){
           }
         });
 
-        $('.add-presentation').on('click', function(){
-            $('#modal').show();
-          $('.modal-header > h2').text('');
-          $('.modal-header > h2').text('Добави Презентация');
-          $('.copy > p').html('');
-          $('.copy > p').html('<form action=""><input type="file">');
-          $('.modal-content > .cf > div').html('<input type="submit" name="submit" value="Изпрати" class="btn close-modal"></form>');
-        });
-
-        $('.add-homework').on('click', function(){
-            $('#modal').show();
-          $('.modal-header > h2').text('');
-          $('.modal-header > h2').text('Добави Критерии за домашно');
-          $('.copy > p').html('');
-          $('.copy > p').html('<form action=""><input type="file">');
-          $('.modal-content > .cf > div').html('<input type="submit" name="submit" value="Изпрати" class="btn close-modal"></form>');
-        });
-
         $('.add-video').on('click', function(){
-            $('#modal').show();
+          var action = $(this).attr('data-url');
+          var lection = $(this).attr('data');
+          $('#modal').show();
           $('.modal-header > h2').text('');
           $('.modal-header > h2').text('Добави Видео');
           $('.copy > p').html('');
-          $('.copy > p').html('<form action=""><label>Линк:</label><br><input type="text">');
-          $('.modal-content > .cf > div').html('<input class="btn close-modal" type="submit" name="submit" value="Изпрати"></form>');
+          $('.copy > p').html('<form action="'+action+'" method="POST" id="video-form"><input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'"><input type="hidden" name="lection" id="lection" value="'+lection+'"><label>Линк:</label><br><input type="text" name="video" id="video"></form>');
+          $('.modal-content > .cf > div').html('<input class="btn close-modal send-video-form" type="submit" name="submit" value="Изпрати">');
+          $('.send-video-form').on('click',function(){
+            $('#video-form').submit();
+          });
+        });
+
+        $('.add-presentation').on('click', function(){
+          var action = $(this).attr('data-url');
+          var lection = $(this).attr('data');
+          $('#modal').show();
+          $('.modal-header > h2').text('');
+          $('.modal-header > h2').text('Добави Презентация');
+          $('.copy > p').html('');
+          $('.copy > p').html('<form action="'+action+'" method="POST" id="slides-form" enctype="multipart/form-data" files="true"><input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'"><input type="hidden" name="lection" id="lection" value="'+lection+'"><label>Файл:</label><br><input type="file" name="slides" id="slides"></form>');
+          $('.modal-content > .cf > div').html('<input class="btn close-modal send-slides-form" type="submit" name="submit" value="Изпрати">');
+
+          $('.send-slides-form').on('click',function(){
+            $('#slides-form').submit();
+          });
+        });
+
+        $('.add-homework').on('click', function(){
+            var action = $(this).attr('data-url');
+            var lection = $(this).attr('data');
+            $('#modal').show();
+            $('.modal-header > h2').text('');
+            $('.modal-header > h2').text('Добави Домашно');
+            $('.copy > p').html('');
+            $('.copy > p').html('<form action="'+action+'" method="POST" id="homework-form" enctype="multipart/form-data" files="true"><input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'"><input type="hidden" name="lection" id="lection" value="'+lection+'"><label>Файл:</label><br><input type="file" name="homework" id="homework"></form>');
+            $('.modal-content > .cf > div').html('<input class="btn close-modal send-homework-form" type="submit" name="submit" value="Изпрати">');
+
+            $('.send-homework-form').on('click',function(){
+              $('#homework-form').submit();
+            });
+        });
+
+        $('.add-demo').on('click', function(){
+            var action = $(this).attr('data-url');
+            var lection = $(this).attr('data');
+            $('#modal').show();
+            $('.modal-header > h2').text('');
+            $('.modal-header > h2').text('Добави Демо');
+            $('.copy > p').html('');
+            $('.copy > p').html('<form action="'+action+'" method="POST" id="demo-form"><input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'"><input type="hidden" name="lection" id="lection" value="'+lection+'"><label>Линк:</label><br><input type="text" name="demo" id="demo"></form>');
+            $('.modal-content > .cf > div').html('<input class="btn close-modal send-demo-form" type="submit" name="submit" value="Изпрати">');
+
+            $('.send-demo-form').on('click',function(){
+              $('#demo-form').submit();
+            });
         });
 
         $('.add-lecture > div > a').on('click', function(){
+            var action = $(this).attr('data-url');
+            var order = $(this).attr('data-order');
+            var module_id = $(this).attr('data-module');
+            var visibility = $('.course-visibility').first().clone(true).find(':selected').removeAttr('selected').end().html();
             $('#modal').show();
           $('.modal-header > h2').text('');
           $('.modal-header > h2').text('Добави Лекция');
           $('.copy > p').html('');
-          $('.copy > p').html('<form action=""><label>Заглавие:</label><br><input type="text"><br><label>дата 1:</label><br><input type="date" name="date1"><br><label>дата 2:</label><br><input type="date" name="date2"><br><br><label>Описание:</label><br><textarea></textarea><br><label>Презентация</label><br><input type="file"><br><br><label>Видео:</label><br><input type="text"><br><br><label>Критерии за домашно</label><br><input type="file">');
-          $('.modal-content > .cf > div').html('<input class="btn close-modal" type="submit" name="submit" value="Добави"></form>');
+          $('.copy > p').html('<form id="create-lection" action="'+action+'" method="POST" enctype="multipart/form-data" files="true"><input type="hidden" name="module" id="module" value="'+module_id+'"><input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'"><p><label>Заглавие:<i class="fas fa-star-of-life req-star"></i></label><br><input type="text" name="title" id="title"></p><br><p><label>дата 1:<i class="fas fa-star-of-life req-star"></i></label><br><input type="datetime-local" id="first_date_create" value="" name="first_date_create"></p><br><p><label>дата 2:<i class="fas fa-star-of-life req-star"></i></label><br><input type="datetime-local" id="second_date_create" value="" name="second_date_create"></p><br><p><label>Описание:<i class="fas fa-star-of-life req-star"></i></label><br><textarea name="description" id="description"></textarea></p><br><p><label for="order">Поредност:</label><input type="number" name="order" id="order" value="'+order+'"></p><br><p><label>Презентация</label><br><input type="file" name="slides" id="slides"></p><br><p><label>Видео:</label><br><input type="text" name="video" id="video"></p><br><p><label>Критерии за домашно</label><br><input type="file" name="homework" id="homework"></p><br><p><label for="demo">Демо</label><input type="text" name="demo" id="demo"><p><br><label for="visibility">Видимост</label><select name="visibility" id="visibility">'+visibility+'</select></form>');
+          $('.modal-content > .cf > div').html('<input class="btn close-modal create-lection-btn" type="submit" name="submit" value="Добави">');
+          $('.create-lection-btn').on('click',function(){
+            $('#create-lection').submit();
+          });
         });
 
         $('.comments-view > a').on('click', function(){
-            $('#modal').show();
+          $('#modal').show();
           $('.copy > p').html($(this).next('.comments').html());
         });
 
@@ -80,7 +119,7 @@ $(function(){
         $('.video-exist').on('click', function() {
             var action = $(this).attr('data-url');
             $('.copy > p').html('<iframe width="auto" height="auto" src=""></iframe>');
-            $('.copy > p').find('iframe').attr('src', $(this).attr('data')).after('<form action="'+action+'" id="change_video" method="POST"><input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'"><input name="_method" type="hidden" value="PUT"><label>Линк:</label><br><input type="text" name="url" id="url" value="'+$(this).attr('data')+'">');
+            $('.copy > p').find('iframe').attr('src', $(this).attr('data')).after('<form action="'+action+'" id="change_video" method="POST"><input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'"><input name="_method" type="hidden" value="PUT"><label>Линк:</label><br><input type="text" name="video" id="video" value="'+$(this).attr('data')+'">');
             $('.modal-header').find('h2').html($(this).next('.video-holder').find('.video-title').html());
             $('.modal-content > .cf > div').html('<input class="btn close-modal" type="submit" name="submit" id="change_video_btn" value="Изпрати"></form>');
             $('#modal').show();
@@ -92,7 +131,29 @@ $(function(){
 
         $('.slides-exist').on('click', function() {
             var action = $(this).attr('data-url');
-            $('.copy > p').html('<form action="'+action+'" id="change_slides" method="POST" enctype="multipart/form-data" files="true"><input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'"><input name="_method" type="hidden" value="PUT"><label>Презентация: '+$(this).attr('data')+'</label><br><input type="file" name="slides" id="slides" value="'+$(this).attr('data')+'">');
+            $('.copy > p').html('<form action="'+action+'" id="change_slides" method="POST" enctype="multipart/form-data" files="true"><input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'"><input name="_method" type="hidden" value="PUT"><label>Презентация: <a class="view-lection-presentation" href="'+$(this).attr('data')+'">виж</a></label><br><input type="file" name="slides" id="slides" value="'+$(this).attr('data')+'">');
+            $('.modal-content > .cf > div').html('<input class="btn close-modal" type="submit" name="submit" id="change_slides_btn" value="Изпрати"></form>');
+            $('#modal').show();
+
+            $('#change_slides_btn').on('click', function(){
+                $('#change_slides').submit();
+            });
+        });
+
+        $('.homework-exist').on('click', function() {
+            var action = $(this).attr('data-url');
+            $('.copy > p').html('<form action="'+action+'" id="change_slides" method="POST" enctype="multipart/form-data" files="true"><input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'"><input name="_method" type="hidden" value="PUT"><label>Домашно: <a class="view-lection-presentation" href="'+$(this).attr('data')+'" target=" _blank">виж</a></label><br><input type="file" name="homework" id="homework" value="'+$(this).attr('data')+'">');
+            $('.modal-content > .cf > div').html('<input class="btn close-modal" type="submit" name="submit" id="change_slides_btn" value="Изпрати"></form>');
+            $('#modal').show();
+
+            $('#change_slides_btn').on('click', function(){
+                $('#change_slides').submit();
+            });
+        });
+
+        $('.demo-exist').on('click', function() {
+            var action = $(this).attr('data-url');
+            $('.copy > p').html('<form action="'+action+'" id="change_slides" method="POST" enctype="multipart/form-data" files="true"><input type="hidden" name="_token" value="'+$('meta[name="csrf-token"]').attr('content')+'"><input name="_method" type="hidden" value="PUT"><label>Демо: <a class="view-lection-presentation" href="'+$(this).attr('data')+'" target=" _blank">виж</a></label><br><input type="text" name="demo" id="demo" value="'+$(this).attr('data')+'">');
             $('.modal-content > .cf > div').html('<input class="btn close-modal" type="submit" name="submit" id="change_slides_btn" value="Изпрати"></form>');
             $('#modal').show();
 
@@ -119,5 +180,9 @@ $(function(){
             edit = false;
             $('#edit-lection-now').remove();
         }
+
+        $('.add-by-mail').on('click', function(){
+            $('#addStudent').submit();
+        });
 
 });

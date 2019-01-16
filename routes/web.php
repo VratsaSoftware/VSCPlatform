@@ -48,7 +48,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::get('/lecturer/show/course/{course}', 'Courses\CourseController@showLecturerCourse')->name('lecturer.show.course');
         Route::get('/lecturer/module/{module?}/lections', 'Courses\ModuleController@showLecturerModule')->name('lecrurer.module.lections');
 
+        //module
         Route::resource('module', 'Courses\ModuleController')->names('module');
+        Route::post('module/add/student', 'Courses\ModuleController@addUser')->name('module.add.student');
+        Route::post('module/remove/student', 'Courses\ModuleController@removeUser')->name('module.remove.student');
 
         //course routes
         Route::resource('course', 'Courses\CourseController')->names('course');

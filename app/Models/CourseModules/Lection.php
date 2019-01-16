@@ -14,7 +14,7 @@ class Lection extends Model
 
     public function Module()
     {
-        return $this->hasMany(Module::class, 'course_modules_id');
+        return $this->hasOne(Module::class, 'id', 'course_modules_id');
     }
 
     public function Video()

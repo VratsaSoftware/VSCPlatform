@@ -138,8 +138,8 @@
         </form>
     {{-- end editing form lecture --}}
     <div class="col-md-12 lvl-program-holder d-flex flex-row flex-wrap">
-        <div class="col-md-12 lvl-title text-center">Учебна Програма <i class="fas fa-book-open"></i>&nbsp;{{count($lections)}}</div>
-    @foreach ($lections as $key => $lection)
+        <div class="col-md-12 lvl-title text-center">Учебна Програма <i class="fas fa-book-open"></i>&nbsp;<span id="lection-count" data-count="{{count($lections)}}">{{count($lections)}}</span></div>
+    @forelse ($lections as $key => $lection)
         @if(empty($lection->type))
             <!-- one lecture -->
             @if($lection->first_date->isToday() || $lection->second_date->isToday())
@@ -180,7 +180,7 @@
                                  @if($lection->Video()->exists())
                                      <a data-toggle="modal" data-target="#modal" href="#modal" class="video-exist" data="{{$lection->Video->url}}" data-url="{{route('lection.update',['lection' => $lection->id])}}">видео</a>
                                  @else
-                                     <a href="#modal" class="add-video" data="{{route('module.update',$lection->id)}}">добави видео </a>
+                                     <a href="#modal" class="add-video empty-data" data-url="{{route('lection.store')}}" data="{{$lection->id}}">добави видео </a>
                                  @endif
                             <div class="col-md-12 video-holder">
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
@@ -190,23 +190,23 @@
                         </div>
                         <div class="col-md-2 presentation-lecture">
                             @if($lection->presentation)
-                                <a href="#modal" data-url="{{route('lection.update',['lection' => $lection->id])}}" data="{{$lection->presentation}}" class="slides-exist">слайдове </a>
+                                <a href="#modal" data-url="{{route('lection.update',['lection' => $lection->id])}}" data="{{asset('/data/course-'.str_replace(' ', '', strtolower($module->Course->name)).'/modules/'.str_replace(' ', '', strtolower($module->name)).'/slides-'.$lection->id.'/'.$lection->presentation)}}" class="slides-exist">слайдове </a>
                             @else
-                                <a href="#modal" class="add-presentation">добави слайдове </a>
+                                <a href="#modal" class="add-presentation empty-data" data-url="{{route('lection.store')}}" data="{{$lection->id}}">добави слайдове </a>
                             @endif
                         </div>
                         <div class="col-md-2 homework-lecture">
                             @if($lection->homework_criteria)
-                                <a href="{{asset('/data/course-'.str_replace(' ', '', strtolower($module->Course->name)).'/modules/'.str_replace(' ', '', strtolower($module->name)).'/homework-'.$lection->id.'/'.$lection->homework_criteria)}}" target="__blank">за домашно </a>
+                                <a href="#modal" data-url="{{route('lection.update',['lection' => $lection->id])}}" data="{{asset('/data/course-'.str_replace(' ', '', strtolower($module->Course->name)).'/modules/'.str_replace(' ', '', strtolower($module->name)).'/homework-'.$lection->id.'/'.$lection->homework_criteria)}}" class="homework-exist">домашно </a>
                             @else
-                                <a href="#modal" class="add-homework">добави домашно </a>
+                                <a href="#modal" class="add-homework empty-data" data-url="{{route('lection.store')}}" data="{{$lection->id}}">добави домашно </a>
                             @endif
                         </div>
                         <div class="col-md-2">
                             @if($lection->demo)
-                                <a href="{{$lection->demo}}" target="__blank">демо </a>
+                                <a href="#modal" data-url="{{route('lection.update',['lection' => $lection->id])}}" data="{{$lection->demo}}" class="demo-exist">демо </a>
                             @else
-                                <a href="#modal" class="add-homework">добави демо </a>
+                                <a href="#modal" class="add-demo empty-data" data-url="{{route('lection.store')}}" data="{{$lection->id}}">добави демо </a>
                             @endif
                         </div>
                         <div class="col-md-1 comments-view">
@@ -287,8 +287,10 @@
             <div class="col-md-12 lectures-wrapper d-flex flex-row flex-wrap lection-test">
                 <div class="col-md-1 lecture-img text-center">
                     <img src="{{asset('/images/test.png')}}" alt="lecturer-icon" class="img-fluid"><br>
-                        <span>{{$lection->order}}</span>
+                        <span class="lection-order">{{$lection->order}}</span>
                 </div>
+                <span class="first-date-no-show" style="display:none">{{$lection->first_date->format('Y-m-d\TH:i:s')}}</span>
+                <span class="second-date-no-show" style="display:none">{{$lection->second_date->format('Y-m-d\TH:i:s')}}</span>
                 <div class="col-md-11 lecture-txt">
                     <span class="lection-title">{{$lection->title}}</span>
                     <span>
@@ -311,23 +313,115 @@
                         <span class="lection-description">{{$lection->description}}</span>
                     @endif
                     <br>
+                    <div class="col-md-12 lecture-options text-center d-flex flex-row flex-wrap">
+                        <div class="col-md-9">
+
+                        </div>
+                        <div class="col-md-2 edit-lecture">
+                                <a href="#modal" data="{{route('lection.update',$lection->id)}}">Редактирай </a>
+                        </div>
+                        <div class="col-md-1 edit-lecture text-right">
+                                <select class="section-el-bold visibility" name="visibility">
+                                    @foreach(Config::get('courseVisibility') as $visibility)
+                                        @if(strtolower($visibility) == strtolower($lection->visibility))
+                                            <option value="{{strtolower($visibility)}}" selected data-url="{{route('lection.visibility',['lection' => $lection->id])}}">{{ucfirst($visibility)}}</option>
+                                        @else
+                                            <option value="{{strtolower($visibility)}}" data-url="{{route('lection.visibility',['lection' => $lection->id])}}">{{ucfirst($visibility)}}</option>
+                                        @endif
+                                    @endforeach
+
+                                </select>
+                        </div>
+                        <div class="col-md-12">
+                            <form action="{{ route('lection.destroy',$lection->id) }}" method="POST"  id="delete-lection">
+                                {{ method_field('DELETE') }}
+                                {{ csrf_field() }}
+                            </form>
+                            <button type="submit" class="btn btn-danger delete-lection-btn" value="DELETE" data="{{$lection->id}}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
                 </div>
             </div>
             <!-- end of test -->
         @endif
-    @endforeach
+        @if($loop->last)
+            <?php $lastOrder = ($lection->order + 1 ); ?>
+        @endif
+    @empty
+
+    @endforelse
 </div>
 
 </div>
 </div>
 <div class="col-md-12 d-flex flex-row flex-wrap add-lecture text-center">
                     <div class="col-md-12">
-                        <a href="#modal">
-                            <img src="{{asset('/images/profile/add-icon.png')}}" alt="add-icon" class="img-fluid">Добави Лекция
+                        <a href="#modal" data-url="{{route('lection.store')}}" data-order="{{{isset($lastOrder)?$lastOrder:1}}}" data-module={{$module->id}}>
+                            <img src="{{asset('/images/profile/add-icon.png')}}" alt="add-icon" class="img-fluid">Добави
                         </a>
                     </div>
-                </div>
+</div>
 
+{{-- students --}}
+<div class="col-md-12 lvl-title text-center">
+    <div class="col-md-12">Курсисти</div>
+    <br>
+    <div class="col-md-12">
+        <label for="mail-search">Добави по мейл:</label>
+        <form class="add-by-mail-form" action="{{route('module.add.student')}}" method="POST" name="addStudent" id="addStudent">
+            {{ csrf_field() }}
+            <input type="email" placeholder="test@test.com" size="30" title="Must be a valid email address" name="mail" />
+            <input type="hidden" name="module_id" id="module_id" value="{{$module->id}}">
+            <img src="{{asset('/images/profile/add-icon.png')}}" alt="add" class="img-fluid add-by-mail">
+        </form>
+    </div>
+</div>
+
+<div class="col-md-12 d-flex flex-row flex-wrap text-center all-students-pool">
+@forelse ($students as $student)
+    <!--  one student -->
+    <div class="col-md-3 d-flex flex-row flex-wrap one-student-holder ajax">
+        <img src="{{asset('images/user-pics/'.$student->User->picture)}}" alt="student-pic" class="img-fluid one-student-pic">
+        <span>
+            {{$student->User->name}}
+
+            {{$student->User->last_name}}
+        </span>
+        <div class="col-md-6">
+            {{$student->User->email}}
+        </div>
+        <div class="col-md-6">
+            <img src="{{asset('/images/profile/location-icon.png')}}" alt="map-icon">
+            <span class="location">
+                {{$student->User->location}}
+            </span>
+        </div>
+        <div class="col-md-12 flex-row flex-wrap student-options">
+            <div class="col-md-6 add-student text-right">
+
+            </div>
+            <div class="col-md-6 remove-student text-left" data-module="{{$module->id}}" data-url="{{route('module.remove.student')}}">
+                <img src="{{asset('/images/profile/remove-icon.png')}}" width="26px" class="remove-student ajax" data="{{$student->User->id}}">
+            </div>
+        </div>
+    </div>
+    <!-- end of one student -->
+    @empty
+    <p>
+        Няма потребители!
+    </p>
+    @endforelse
+</div>
+
+<div class="col-md-12 lvl-title text-center">Брой на това ниво</div>
+<div class="col-md-12">
+    <div class="progress">
+        <div class="progress-bar progress-bar-striped progress-bar-animated bg-danger" role="progressbar" aria-valuenow="{{count($students)*3}}" aria-valuemin="0" aria-valuemax="100" style="width:{{count($students)*3}}%">
+            <span class="num-students-now">{{count($students)}}</span>
+        </div>
+    </div>
+</div>
+{{-- end of students --}}
     <script src="{{asset('/js/create-level-sliders.js')}}"></script>
     <script src="{{asset('/js/level-add-students.js')}}"></script>
     <script src="{{asset('/js/level-options.js')}}"></script>
