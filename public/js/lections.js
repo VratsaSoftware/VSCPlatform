@@ -6,6 +6,29 @@ $(function(){
         $('.copy > p').find('iframe').attr('src', $(this).next('.video-holder').find('.video-url').html());
         $('.modal-header').find('h2').html($(this).next('.video-holder').find('.video-title').html());
         $('#modal').show();
+        var userId = $(this).attr('data-user');
+        if(userId < 1){
+            userId = null;
+        }
+        var videoId = $(this).attr('data-video-id');
+        var url = $(this).attr('data-url');
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: "POST",
+            url: url,
+            data: {
+                user: userId,
+                videoId: videoId
+            },
+            success: function(data, textStatus, xhr) {
+                console.log(data);
+                if (xhr.status == 200) {
+                    //success
+                }
+            }
+        });
     });
 
     $('.comment > a').on('click', function() {

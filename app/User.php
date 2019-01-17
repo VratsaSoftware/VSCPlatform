@@ -95,7 +95,7 @@ class User extends Authenticatable
         $userId = Auth::user()->id;
         return Course::with('Modules', 'Modules.ModulesStudent', 'Modules.ModulesStudent.User')->whereHas('Modules.ModulesStudent', function ($query) use ($userId) {
             $query->where('user_id', $userId);
-        })->get();
+        })->where('visibility', '!=', 'draft')->get();
     }
 
     public function lecturerGetCourses()

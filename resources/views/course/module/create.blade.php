@@ -121,7 +121,11 @@
         @forelse ($users as $user)
         <!--  one student -->
         <div class="col-md-3 d-flex flex-row flex-wrap one-student-holder">
-            <img src="{{asset('images/user-pics/'.$user->picture)}}" alt="student-pic" class="img-fluid one-student-pic">
+            @if($user->picture)
+                <img src="{{asset('images/user-pics/'.$user->picture)}}" alt="student-pic" class="img-fluid one-student-pic">
+            @else
+                <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
+            @endif
             <span>
                 {{$user->name}}
 

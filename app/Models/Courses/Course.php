@@ -28,9 +28,15 @@ class Course extends Model
         return $this->hasMany(Certification::class);
     }
 
-    public static function getModules($course)
+    public static function getModules($course, $isLecturer)
     {
-        return Module::where('course_id', $course)->with('Lections')->oldest('order')->get();
+        if ($isLecturer) {
+            return Module::where('course_id', $course)->with('Lections')->oldest('order')->get();
+        }
+        return Module::where([
+            ['course_id', $course],
+            ['visibility','!=','draft'],
+            ])->with('Lections')->oldest('order')->get();
     }
 
     public function getNameAttribute($value)

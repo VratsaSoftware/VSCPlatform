@@ -96,7 +96,7 @@
                         <div class="col-md-12 lecture-options text-center d-flex flex-row flex-wrap">
                             <div class="col-md-3 video-lecture">
                                      @if($lection->Video()->exists())
-                                         <a data-toggle="modal" data-target="#modal" href="#modal">видео</a>
+                                         <a data-toggle="modal" data-target="#modal" href="#modal" data-user="{{isset(Auth::user()->id)?Auth::user()->id:0}}" data-video-id="{{$lection->Video->id}}" data-url="{{route('lection.video.show')}}">видео</a>
                                      @else
                                         <span class="empty-data">видео</span>
                                      @endif

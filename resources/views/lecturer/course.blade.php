@@ -6,13 +6,13 @@
             <div class="col-md-12 d-flex flex-row flex-wrap options-wrap">
                 @if (!empty(Session::get('success')))
                 <p>
-                    <div class="alert alert-success">
+                    <div class="alert alert-success" style="margin-top:-5vw;">
                         <p>{{ session('success') }}</p>
                     </div>
                 </p>
                 @endif
                 @if ($errors->any())
-                <div class="alert alert-danger">
+                <div class="alert alert-danger" style="margin-top:-5vw;">
                     <ul>
                         @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -22,7 +22,7 @@
                 @endif
                 @if ($message = Session::get('error'))
                 <p>
-                    <div class="alert alert-danger">
+                    <div class="alert alert-danger" style="margin-top:-5vw;">
                         <button type="button" class="close" data-dismiss="alert">
                         </button>
                         <p>{{ $message }}</p>
@@ -30,13 +30,63 @@
                 </p>
                 @endif
               <div class="col-md-6 text-center left-option">
-                <div class="event-title col-md-12">Резултати</div>
+                <div class="event-title col-md-12">Курс {{$course->name}}
+                    @if(strtolower($course->visibility) == 'public')
+                        <i class="fas fa-eye"></i>
+                    @endif
+                    @if(strtolower($course->visibility) == 'private')
+                        <i class="fas fa-eye-slash"></i>
+                    @endif
+                    @if(strtolower($course->visibility) == 'draft')
+                        <i class="fas fa-file"></i>
+                    @endif
+                </div>
                 <div class="event-body col-md-12">
-                  {{-- <a href="./lecturer_courses.html">
+                  <a href="#modal" class="change-vis">
                     <div class="event-body-text">
                       Прегледай
                     </div>
-                  </a> --}}
+                  </a>
+                    <div class="for-modal-course-visibility">
+                        <div class="col-md-12 text-center">
+                            <form action="{{route('course.update',['course' => $course->id])}}" method="POST" class="col-md-12" id="update-course-form" name="update-course-form" enctype="multipart/form-data" files="true">
+                                {{ method_field('PUT') }}
+                                {{ csrf_field() }}
+
+                                <p>
+                                    <label for="name">Име на курса</label><br>
+                                    <input type="text" id="name" name="name" class="name-course" value="{{$course->name}}">
+                                </p>
+                                <p>
+                                    <label for="description">Описание</label><br>
+                                    <textarea id="description" cols="30" rows="5" name="description" placeholder="кратко описание" style="resize: none;">{{$course->description}}</textarea>
+                                </p>
+                                <p>
+                                    <label for="starts">Започва</label>
+                                    <input type="date" name="starts" id="starts" value="{{$course->starts->format('Y-m-d')}}">
+                                </p>
+                                <p>
+                                    <label for="ends">Свършва</label>
+                                    <input type="date" name="ends" id="ends" value="{{$course->ends->format('Y-m-d')}}">
+                                </p>
+                                <p>
+                                    <label for="visibility">Видимост на курса</label>
+                                    <select class="course-visibility" name="visibility">
+                                        @foreach(Config::get('courseVisibility') as $visibility)
+                                            @if(strtolower($visibility) == strtolower($course->visibility))
+                                                </i><option value="{{strtolower($visibility)}}" selected>{{ucfirst($visibility)}}</option>
+                                            @else
+                                                <option value="{{strtolower($visibility)}}">{{ucfirst($visibility)}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </p>
+                                <p class="col-md-12 text-center">
+                                    <input class="btn-update-course" type="submit" name="submit" value="Промени">
+                                </p>
+                            </form>
+                        </div>
+                    </div>
                   <img src="{{asset('/images/chart-bg.jpg')}}" alt="event-body">
                 </div>
                 <div class="event-footer col-md-12 d-flex flex-row flex-wrap">
@@ -54,21 +104,28 @@
                     </div>
                   </a>
                     <div class="levels-holder">
-                      <div class="list-group">
+                      <div class="list-group d-flex flex-row flex-wrap">
                           @forelse ($modules as $module)
-                              <a href="{{route('module.edit',['module' => $module->id])}}">
+                              <a href="{{route('module.edit',['module' => $module->id])}}" class="col-md-11 modules-modal">
                                 <li class="list-group-item list-group-item-action d-flex">
                                     <div class="col-md-9 text-center module-now">{{$module->order}}:&nbsp;{{$module->name}}</div>
-                                  <div class="col-md-3 text-right">
+                                  <div class="col-md-2 text-right">
                                     <i class="far fa-list-alt"></i> {{count($module->Lections)}}&nbsp;
                                   </div>
                                 </li>
                             </a>
+                            <div class="col-md-1 delete-module">
+                                <form action="{{ route('module.destroy',$module->id) }}" method="POST" onsubmit="return ConfirmDelete()" id="delete-edu">
+                                    {{ method_field('DELETE') }}
+                                    {{ csrf_field() }}
+                                    <button type="submit" class="btn btn-danger delete-module-btn" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                </form>
+                            </div>
                           @empty
                               <i class="fas fa-times"></i>
                           @endforelse
 
-                         <a href="{{route('module.create',['course'=> $course->id])}}">
+                         <a href="{{route('module.create',['course'=> $course->id])}}" class="col-md-12">
                           <li class="list-group-item list-group-item-action">
                               <img src="{{asset('/images/profile/add-icon.png')}}" alt="add">
                               Добави
@@ -109,6 +166,9 @@
                                   </form>
                                 </div>
                                 <div class="cf footer">
+                                    <div>
+
+                                    </div>
                                   <a href="#" class="btn close-modal">Затвори</a>
                                 </div>
                           </div>
@@ -121,10 +181,19 @@
                 $('#modal').show();
               });
 
-              $('.lecturer-btn-modal').on("click", function(){
-                $('.copy > p').html($(this).find('.lecturers-holder').html());
+              $('.change-vis').on("click", function(){
+                $('.copy > p').html($(this).next('.for-modal-course-visibility').html());
                 $('#modal').show();
               });
+            </script>
+            <script>
+                function ConfirmDelete() {
+                    var x = confirm("Сигурни ли сте че искате да изтриете МОДУЛА с всичката му информация?");
+                    if (x)
+                        return true;
+                    else
+                        return false;
+                }
             </script>
 
 @endsection

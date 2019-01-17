@@ -9,6 +9,7 @@ use App\Models\CourseModules\Module;
 use App\Models\CourseModules\Lection;
 use App\Models\CourseModules\LectionComment;
 use App\Models\CourseModules\LectionVideo;
+use App\Models\CourseModules\LectionVideoView;
 use App\User;
 use Illuminate\Support\Facades\Auth;
 use Redirect;
@@ -58,7 +59,7 @@ class LectionController extends Controller
             'slides' => 'sometimes|file',
             'homework' => 'sometimes|file',
             'demo' => 'sometimes',['regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
-            'visibility' => 'sometimes|in_array:valid_visibility.*'
+            'visibility' => 'sometimes|in_array:valid_visibility.*',
         ]);
         $store = false;
         if ($request->has('lection')) {
@@ -112,6 +113,10 @@ class LectionController extends Controller
 
         if ($request->has('demo') && !is_null($request->demo) && $store) {
             $lection->demo = $request->demo;
+        }
+
+        if (!is_null($request->type)) {
+            $lection->type = $request->type;
         }
 
         if ($store) {
@@ -277,5 +282,24 @@ class LectionController extends Controller
         }
         $message = __('Нямате право да достъпите този ресурс!');
         return redirect()->route('user.module.lections', ['user' => $user->id,'course' => $course->id,'module' => $module->id])->with('error', $message);
+    }
+
+    public function videoShown(Request $request)
+    {
+        $isExisting = LectionVideoView::where([
+            ['lection_video_id', $request->videoId],
+            ['user_id', $request->user],
+            ])->first();
+        if ($isExisting) {
+            $isExisting->views_count = $isExisting->views_count + 1;
+            $isExisting->save();
+            return response('success', 200);
+        }
+        $addView = new LectionVideoView;
+        $addView->lection_video_id = isset($request->videoId)?$request->videoId:null;
+        $addView->user_id = $request->user;
+        $addView->views_count = 1;
+        $addView->save();
+        return response('success', 200);
     }
 }

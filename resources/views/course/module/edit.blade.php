@@ -33,8 +33,10 @@
             <div class="col-md-12 text-center picture-title">
                 Заглавна Снимка
             </div>
-            <form action="{{route('module.store')}}" method="POST" class="col-md-12" id="create_module" name="create_module" enctype="multipart/form-data">
+            <form action="{{route('module.update',['module'=>$module->id])}}" method="POST" class="col-md-12" id="edit_module" name="create_module" enctype="multipart/form-data">
+                {{ method_field('PUT') }}
                 {{ csrf_field() }}
+                <input type="hidden" name="course_id" value="{{$module->Course->id}}">
                 <div class="col-md-12 picture-holder text-center">
                     <label for="picture">
                         @if(!is_null($module->picture))
@@ -77,7 +79,7 @@
                 </p>
                 <p>
                     <label for="visibility">Видимост на модула/нивото</label>
-                    <select class="course-visibility section-el-bold" name="visibility" id="visibility">
+                    <select class="course-visibility section-el-bold" name="visibility" id="visibility" title="public - видимо от всички,private - трябва да си логнат за да видиш съдържанието, draft - само лекторите виждат съдържанието">
                         @foreach(Config::get('courseVisibility') as $visibility)
                             @if($module->visibility == $visibility)
                                 <option value="{{strtolower($visibility)}}" selected>{{ucfirst($visibility)}}</option>
@@ -87,6 +89,9 @@
                         @endforeach
                     </select>
                 </p>
+                <div class="col-md-12 create-course-button text-center create-module-btn">
+                    <a href="#" onclick="javascript:$('#edit_module').submit()" class="create-course-btn"><span class="create-course">Промени</span></a>
+                </div>
             </div>
         </div>
     </div>
@@ -179,6 +184,27 @@
                         <div class="col-md-2 video-lecture">
                                  @if($lection->Video()->exists())
                                      <a data-toggle="modal" data-target="#modal" href="#modal" class="video-exist" data="{{$lection->Video->url}}" data-url="{{route('lection.update',['lection' => $lection->id])}}">видео</a>
+                                 <br/>
+                                 <a href="#modal" class="video-count">
+                                    <span>видяно:
+                                         <?php $viewed = 0;?>
+                                         @forelse($lection->Video->Viewed as $view)
+                                             <?php
+                                                $viewed += $view->views_count;
+                                             ?>
+                                            <p class="watched-users">
+                                            @forelse($view->User as $watched_user)
+                                                <span class="viewed-user">Потребител :{{$watched_user->name}} {{$watched_user->last_name}} / Видял: <span class="viewed-num">{{$view->views_count}}</span></span>
+                                            @empty
+                                                <span>Потребител :анонимен / Видял: {{$view->views_count}}</span>
+                                            @endforelse
+                                            </p>
+                                         @empty
+                                             <p class="watched-users"><span>никой не е гледал видеото</span></p>
+                                         @endforelse
+                                         {{$viewed}}
+                                    </span>
+                                 </a>
                                  @else
                                      <a href="#modal" class="add-video empty-data" data-url="{{route('lection.store')}}" data="{{$lection->id}}">добави видео </a>
                                  @endif
@@ -219,7 +245,11 @@
                                             <!-- one comment -->
                                             <div class="comment-pic-inside-modal col-md-12 d-flex flex-row flex-wrap">
                                                 <div class="col-md-4">
-                                                    <img src="{{asset('images/user-pics/'.$comment->Author->picture)}}" alt="botev" class="img-fluid modal-comment-pic">
+                                                    @if($comment->Author->picture)
+                                                        <img src="{{asset('images/user-pics/'.$comment->Author->picture)}}" alt="botev" class="img-fluid modal-comment-pic">
+                                                    @else
+                                                        <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="img-fluid modal-comment-pic">
+                                                    @endif
                                                 </div>
                                                 <div class="col-md-4">
 
@@ -259,10 +289,10 @@
                                     <a href="#modal" data="{{route('lection.update',$lection->id)}}">Редактирай </a>
                             </div>
                             <div class="col-md-1 edit-lecture">
-                                    <select class="section-el-bold visibility" name="visibility">
+                                    <select class="section-el-bold visibility" name="visibility" title="public - видимо от всички,private - трябва да си логнат за да видиш съдържанието, draft - само лекторите виждат съдържанието">
                                         @foreach(Config::get('courseVisibility') as $visibility)
                                             @if(strtolower($visibility) == strtolower($lection->visibility))
-                                                <option value="{{strtolower($visibility)}}" selected data-url="{{route('lection.visibility',['lection' => $lection->id])}}">{{ucfirst($visibility)}}</option>
+                                                </i><option value="{{strtolower($visibility)}}" selected data-url="{{route('lection.visibility',['lection' => $lection->id])}}">{{ucfirst($visibility)}}</option>
                                             @else
                                                 <option value="{{strtolower($visibility)}}" data-url="{{route('lection.visibility',['lection' => $lection->id])}}">{{ucfirst($visibility)}}</option>
                                             @endif
@@ -321,7 +351,7 @@
                                 <a href="#modal" data="{{route('lection.update',$lection->id)}}">Редактирай </a>
                         </div>
                         <div class="col-md-1 edit-lecture text-right">
-                                <select class="section-el-bold visibility" name="visibility">
+                                <select class="section-el-bold visibility" name="visibility" title="public - видимо от всички,private - трябва да си логнат за да видиш съдържанието, draft - само лекторите виждат съдържанието">
                                     @foreach(Config::get('courseVisibility') as $visibility)
                                         @if(strtolower($visibility) == strtolower($lection->visibility))
                                             <option value="{{strtolower($visibility)}}" selected data-url="{{route('lection.visibility',['lection' => $lection->id])}}">{{ucfirst($visibility)}}</option>
@@ -381,7 +411,11 @@
 @forelse ($students as $student)
     <!--  one student -->
     <div class="col-md-3 d-flex flex-row flex-wrap one-student-holder ajax">
-        <img src="{{asset('images/user-pics/'.$student->User->picture)}}" alt="student-pic" class="img-fluid one-student-pic">
+        @if($student->User->picture)
+            <img src="{{asset('images/user-pics/'.$student->User->picture)}}" alt="student-pic" class="img-fluid one-student-pic">
+        @else
+            <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
+        @endif
         <span>
             {{$student->User->name}}
 

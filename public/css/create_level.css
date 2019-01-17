@@ -410,6 +410,14 @@ input[type=range]:focus {
     color: #f00;
 }
 
+.viewed-user, .watched-users {
+    display: none;
+}
+
+.viewed-num {
+    color: #f00;
+}
+
 /*end of students section*/
 /*Query's
 --------------------------------------------------------------------------------------------------*/

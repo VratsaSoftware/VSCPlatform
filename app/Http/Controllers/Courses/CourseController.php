@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Input;
 use Image;
 use File;
+use Illuminate\Support\Facades\Storage;
 
 class CourseController extends Controller
 {
@@ -85,7 +86,7 @@ class CourseController extends Controller
      */
     public function showUserCourse($user = 0, Course $course)
     {
-        $modules = Course::getModules($course->id);
+        $modules = Course::getModules($course->id, $isLecturer = false);
         $courses = [];
         if (Auth::user()) {
             $courses = Auth::user()->studentGetCourse();
@@ -95,7 +96,7 @@ class CourseController extends Controller
 
     public function showLecturerCourse(Course $course)
     {
-        $modules = Course::getModules($course->id);
+        $modules = Course::getModules($course->id, $isLecturer = true);
 
         return view('lecturer.course', ['course' => $course,'modules' => $modules]);
     }
@@ -120,7 +121,26 @@ class CourseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request['valid_visibility'] = \Config::get('courseVisibility');
+        $data = $request->validate([
+            'picture2' => 'sometimes|file|image|mimes:jpeg,png,gif,webp,ico,jpg|max:4000',
+            'name' => 'required',
+            'description' => 'sometimes',
+            'starts' => 'required|date_format:Y-m-d',
+            'ends' => 'required|date_format:Y-m-d|after:starts',
+            'visibility' => 'required|in_array:valid_visibility.*'
+        ]);
+        $course = Course::find($id);
+        $oldCourseName = $course->name;
+        $course->name = $request->name;
+        $course->description = $request->description;
+        $course->starts = $request->starts;
+        $course->ends = $request->ends;
+        $course->visibility = $request->visibility;
+        $course->save();
+
+        $message = __('Успешно направени промени!');
+        return redirect()->back()->with('success', $message);
     }
 
     /**

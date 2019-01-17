@@ -61,6 +61,7 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('change/lection/{lection}/visibility', 'Courses\LectionController@changeVisibility')->name('lection.visibility');
     });
 });
+Route::post('/lection/video/shown', 'Courses\LectionController@videoShown')->name('lection.video.show');
 
 //user course operations
 Route::get('/user/{user?}/course/{course}', 'Courses\CourseController@showUserCourse')->name('user.course');

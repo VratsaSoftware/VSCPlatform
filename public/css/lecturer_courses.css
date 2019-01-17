@@ -362,6 +362,27 @@ a {
     display: block;
 }
 
+.delete-module, .delete-module-btn, .btn-update-course {
+    float: none !important;
+    /* padding: .75rem 1.25rem; */
+}
+
+.delete-module {
+    padding-top: 8px;
+}
+
+.modules-modal {
+    margin-bottom: 1vw;
+}
+
+.for-modal-course-visibility {
+    display: none !important;
+}
+
+.event-title>i {
+    float: right;
+}
+
 /*end of students section*/
 /*Query's
 --------------------------------------------------------------------------------------------------------*/

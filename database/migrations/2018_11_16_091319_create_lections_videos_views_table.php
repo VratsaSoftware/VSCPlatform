@@ -18,12 +18,12 @@ class CreateLectionsVideosViewsTable extends Migration
             $table->integer('lection_video_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned()->nullable();
             $table->bigInteger('views_count');
-            $table->bigInteger('runtime');
+            $table->bigInteger('runtime')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('lection_video_id')->references('id')->on('lections_videos')->onDelete('cascade');
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users');
         });
     }
 
