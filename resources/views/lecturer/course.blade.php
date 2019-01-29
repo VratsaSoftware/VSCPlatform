@@ -52,7 +52,27 @@
                             <form action="{{route('course.update',['course' => $course->id])}}" method="POST" class="col-md-12" id="update-course-form" name="update-course-form" enctype="multipart/form-data" files="true">
                                 {{ method_field('PUT') }}
                                 {{ csrf_field() }}
-
+                                
+                                <div class="col-md-12 text-center picture-title">
+                                    Заглавна Снимка
+                                </div>
+                
+                                <div class="col-md-12 picture-holder text-center">
+                                    <label for="picture">
+                                        @if($course->picture)
+                                            <img src="{{asset('/images/course-'.$course->id.'/'.$course->picture)}}" alt="course-pic" class="course-picture-edit">
+                                        @else
+                                            <img src="{{asset('/images/img-placeholder.jpg')}}" alt="course-pic" id="course-picture">
+                                        @endif
+                                        <br>
+                                        (800x600px)
+                                    </label>
+                                </div>
+                                
+                                <div class="col-md-12 picture-button text-center">
+                                    <label class="picture-label" for="picture2"><span class="upload-pic">качи<input type="file" id="picture2" name="picture2" onChange="CourseimagePreview(this);" style="display:none"></span></label>
+                                </div>
+                                <br/>
                                 <p>
                                     <label for="name">Име на курса</label><br>
                                     <input type="text" id="name" name="name" class="name-course" value="{{$course->name}}">
@@ -82,7 +102,7 @@
                                     </select>
                                 </p>
                                 <p class="col-md-12 text-center">
-                                    <input class="btn-update-course" type="submit" name="submit" value="Промени">
+                                    <button type="submit" class="btn btn-success btn-update-course" value="Промени">Промени</button>
                                 </p>
                             </form>
                         </div>
@@ -122,7 +142,7 @@
                                 </form>
                             </div>
                           @empty
-                              <i class="fas fa-times"></i>
+                              <div class="col-md-12 text-center"><i class="fas fa-times"></i></div>
                           @endforelse
 
                          <a href="{{route('module.create',['course'=> $course->id])}}" class="col-md-12">
@@ -167,7 +187,7 @@
                                 </div>
                                 <div class="cf footer">
                                     <div>
-
+                                        <!--<script src="{{asset('js/profile-picture-preview.js')}}"></script>-->
                                     </div>
                                   <a href="#" class="btn close-modal">Затвори</a>
                                 </div>
@@ -195,5 +215,4 @@
                         return false;
                 }
             </script>
-
 @endsection

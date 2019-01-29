@@ -3,8 +3,9 @@ $('.institution_name').bind('input keypress mouseenter', function() {
     var input = $(this);
     inputval = inputval.length;
     var type = 'institution';
+    var url = $(this).attr('data-url');
     if (inputval > 3) {
-        getSuggestions(input, inputval, type, $(this).val());
+        getSuggestions(input, inputval, type, $(this).val(),url);
     }
 
     $('.auto-ins-name').on('click', function() {
@@ -21,7 +22,6 @@ $('.institution_name').keyup(function() {
     inputval = inputval.length;
     var input = $(this);
     var type = 'institution';
-    // getSuggestions(input, inputval, type, $(this).val());
     if (!$(this).val() && inputval < 1 && inputval == 0) {
         $(this).next('.suggestion-ins-name').html('');
     }
@@ -33,9 +33,9 @@ $('.specialty').bind('input keypress mouseenter', function() {
     var input = $(this);
     inputval = inputval.length;
     var type = 'specialty';
-    // console.log(inputval);
+    var url = $(this).attr('data-url');
     if (inputval > 3) {
-        getSuggestions(input, inputval, type, $(this).val());
+        getSuggestions(input, inputval, type, $(this).val(),url);
     }
 
     $('.auto-ins-name-specialty').on('click', function() {
@@ -52,27 +52,24 @@ $('.specialty').keyup(function() {
     inputval = inputval.length;
     var input = $(this);
     var type = 'specialty';
-    // getSuggestions(input, inputval, type, $(this).val());
     if (!$(this).val() && inputval < 1 && inputval == 0) {
         $(this).next('.suggestion-ins-name').html('');
     }
 });
 
 //ajax call for suggestions accepts the input who needs suggestion, length of the letters, type of information, and the string to search for
-function getSuggestions(input, inputLength, type, search) {
+function getSuggestions(input, inputLength, type, search, url) {
     $.ajax({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         },
         type: "GET",
-        url: '/user/education/autocomplete',
+        url: url,
         data: {
             search: search,
             type: type
         },
         success: function(data, textStatus, xhr) {
-            // console.log(data);
-
             if (data.length > 0 && inputLength > 0 && inputLength !== 0) {
                 input.next('.suggestion-ins-name').html('');
                 $.each(data, function() {

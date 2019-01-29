@@ -85,7 +85,7 @@ class UserController extends Controller
         $request['valid_instTypes'] = \Config::get('institutionTypes');
         $data = $request->validate([
             'y_from' => 'required|date|date_format:Y-m-d',
-            'y_to' => 'required|date|date_format:Y-m-d',
+            'y_to' => 'required|date|date_format:Y-m-d|after:y_from',
             'edu_type' => 'required|numeric',
             'edu_institution_type' => "required|in_array:valid_instTypes.*",
             'institution_name' => 'required|string',
@@ -125,7 +125,7 @@ class UserController extends Controller
         $request['valid_instTypes'] = \Config::get('institutionTypes');
         $data = $request->validate([
             'y_from' => 'required|date|date_format:Y-m-d',
-            'y_to' => 'required|date|date_format:Y-m-d',
+            'y_to' => 'required|date|date_format:Y-m-d|after:y_from',
             'edu_type' => 'required|numeric',
             'edu_institution_type' => "required|in_array:valid_instTypes.*",
             'institution_name' => 'required|string',
@@ -230,6 +230,9 @@ class UserController extends Controller
             $interestCheck = Interest::firstOrCreate(
                 ['cl_users_interest_type_id' => $request->int_type,'name' => $interest->name]
             );
+            $insertHobbie = Hobbie::firstOrCreate(
+                ['cl_interest_id' => $interestCheck->id,'user_id' => Auth::user()->id]
+            );
         }
 
         if (!empty($request->int_other)) {
@@ -237,10 +240,6 @@ class UserController extends Controller
                 ['cl_users_interest_type_id' => $request->int_type,'name' => $request->int_other]
             );
         }
-
-        $insertHobbie = Hobbie::firstOrCreate(
-            ['cl_interest_id' => $interestCheck->id,'user_id' => Auth::user()->id]
-        );
 
         $message = __('Успешно добавени интереси/хобита!');
         return redirect()->route('myProfile')->with('success', $message);

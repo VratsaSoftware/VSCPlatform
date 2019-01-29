@@ -30,6 +30,11 @@ function CourseimagePreview(input) {
             }else{
                 var reader = new FileReader();
                 reader.onload = function(e) {
+                    if($('.course-picture-edit').length > 0){
+                        $('.course-picture-edit').each(function( index ) {
+                            $( this ).attr('src', e.target.result);
+                        });
+                    }
                     $('#course-picture').attr('src', e.target.result);
                 }
                 reader.readAsDataURL(input.files[0]);

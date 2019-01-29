@@ -16,6 +16,8 @@
 
 	<link rel="stylesheet" href="{{ asset('/css/font-awesome.css') }}">
 	<script src="{{ asset('/js/login-zoom.js') }}"></script>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
 	@if ($errors->has('name'))
@@ -61,10 +63,10 @@
 		<input type="password" name="password" placeholder="Парола" autocomplete="password">
 		<a href="#" id="login-btn-send">Вход</a>
 		<div id="remember-container">
+			<div id="remember"><label for="checkbox-2-1">Запомни ме</label></div>
 			<input type="checkbox" id="checkbox-2-1" class="checkbox" checked="checked"/>
-			<span id="remember"><label for="checkbox-2-1">Запомни ме</label></span>
-			<span id="forgotten">Забравена парола</span>
-			<span id="register">Регистрация</span>
+			<div id="forgotten">Забравена парола</div>
+			<div id="register">Регистрация</div>
 		</div>
 	</form>
 </div>
@@ -86,7 +88,7 @@
 
 <!-- Register Container -->
 <div id="register-container">
-	<h1><img src="{{ asset('/images/vso-logo-bg-original.png') }}" alt="" class="login-img"></h1>
+	<h1><img src="{{ asset('/images/vso-logo-bg-original.png') }}" alt="" class="register-img"></h1>
 	<span class="close-btn">
 		<i class="fas fa-times"></i>
 	</span>
@@ -189,32 +191,39 @@
 	$(function(){
 		changeBg();
 		setTimeout(function(){
-			changeBg();
+		    if ($(window).width() > 1400) {
+               changeBg();
+            }
 		}, 10000);
 
 		function changeBg(){
+		    console.log($(window).width()+'/'+$(window).height());
 			if($('#container').is(":visible") || $('#forgotten-container').is(":visible") || $('#register-container').is(":visible")){
 				$('html').css({
-					'background-image':'url(../images/loaders/load-23.gif)',
-					'background-size':'60%',
+					'background-image':'url(./images/loaders/load-23.gif)',
+					'background-size':'50%',
 				});
 			}else{
-				$('html').css({
-					'background-image':'url(../images/loaders/load-22.gif)',
-					'background-size':'30%',
-				});
+			    if ($(window).width() > 1400) {
+    				$('html').css({
+    					'background-image':'url(./images/loaders/load-22.gif)',
+    					'background-size':'30%',
+    				});
+			    }
 			}
   			// images for background
   			var items = ["1","2","3","4","5","6"];
   			var item = items[Math.floor(Math.random()*items.length)];
   			setTimeout(function(){
   				$('html').css({
-  					'background-image':'url(../images/bg/login/'+item+'.jpg)',
+  					'background-image':'url(./images/bg/login/'+item+'.jpg)',
   					'background-size':'cover',
   				});
-  			},600);
+  			},500);
   			setTimeout(function(){
-  				changeBg();
+  				if ($(window).width() > 1400) {
+                    changeBg();
+                }
   			}, 10000);
   		};
   	});
@@ -263,6 +272,24 @@
   	})
   </script>
   <script>
+    $(document).on('keypress',function(e) {
+        if(e.which == 13) {
+            if($('#container').is(":visible")){
+                $('#login-form').submit();
+            }else if($('#forgotten-container').is(":visible")){
+                $('#reset-password').submit();
+            }else if($('#register-container').is(":visible")){
+                $('#register-form').submit();
+            }else{
+                $('#login-button').fadeOut("slow",function(){
+        			$("#container").fadeIn();
+        			TweenMax.from("#container", .4, { scale: 0, ease:Sine.easeInOut});
+        			TweenMax.to("#container", .4, { scale: 1, ease:Sine.easeInOut});
+        		});
+            }
+        }
+    });
+    
   	$('#login-btn-send').on('click', function(){
   		$('#login-form').submit();
   	});

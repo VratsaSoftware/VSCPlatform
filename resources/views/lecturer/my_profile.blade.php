@@ -38,7 +38,7 @@
                     <div class="col-md-12 header-name d-flex flex-row flex-wrap">
                         <div class="col-md-3 name-wrap">
                             <span class="name">{{Auth::user()->name}} {{Auth::user()->last_name}}</span>
-                            <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
+                            <button type="submit" value="submit" class="edit-btn btn btn-success" id="submit-name">
                                 <i class="fas fa-pencil-alt"></i>
                             </button></div>
                         <div class="col-md-6 header-pic">
@@ -50,7 +50,7 @@
                                 @else
                                 <img src="{{asset('images/user-pics/'.Auth::user()->picture)}}" alt="profile-pic" class="profile-pic">
                                 @endif
-                                <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
+                                <button type="submit" value="submit" class="edit-btn btn btn-success" id="submit-picture">
                                     <i class="fas fa-pencil-alt"></i>
                                 </button>
                             </div>
@@ -60,14 +60,14 @@
                         <div class="col-md-2 location-wrap text-left">
                             <img src="./images/profile/location-icon.png" alt="map-icon">
                             <span class="location">{{Auth::user()->location}}</span>
-                            <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
+                            <button type="submit" value="submit" class="edit-btn btn btn-success" id="submit-location">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
                         </div>
                         <div class="col-md-2 birthday-wrap text-left">
                             <img src="./images/profile/birthday-cake-icon.png" alt="birthday-icon">
                             <span class="birthday">{{Auth::user()->dob}}</span>
-                            <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
+                            <button type="submit" value="submit" class="edit-btn btn btn-success" id="submit-dob">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
                         </div>
@@ -75,7 +75,7 @@
                         <div class="col-md-4 mail">
                             <img src="./images/mail-icon.png" alt="mail-icon" class="img-fluid">
                             <span class="mail-txt">{{Auth::user()->email}}</span>
-                            <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
+                            <button type="submit" value="submit" class="edit-btn btn btn-success" id="submit-email">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
                         </div>
@@ -128,7 +128,7 @@
                                 @endforeach
 
                             </div>
-                            <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success social-edit">
+                            <button type="submit" value="submit" class="edit-btn btn btn-success social-edit" id="submit-social">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
                         </div>
@@ -144,9 +144,11 @@
             {{ csrf_field() }}
 
             <span class="bio-title">За мен: <a href="" class="edit-bio"><i class="fas fa-pencil-alt"></i></a></span><br>
-            <span class="bio-text">
-                {{$lecturer->bio}}
-            </span>
+            @if(!is_null($lecturer->bio))
+                <span class="bio-text">{{$lecturer->bio}}</span>
+            @else
+                <span class="bio-text"></span>
+            @endif
       </form>
     </div>
 

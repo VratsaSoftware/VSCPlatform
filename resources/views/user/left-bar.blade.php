@@ -8,7 +8,7 @@
                     @else
                     <img src="{{asset('images/user-pics/'.Auth::user()->picture)}}" alt="profile-pic" class="profile-pic">
                     @endif
-                    {{Auth::user()->name}} {{Auth::user()->last_name}}<i class="fas fa-chevron-down"></i>
+                    {{Auth::user()->name}}<i class="fas fa-chevron-down"></i>
         </li>
         <li class="{{ Route::is('myProfile') ? 'sidenav-selected' : '' }}"><a href="{{route('myProfile')}}">
                 <img src="{{asset('/images/profile/nav/my-profile-icon.png')}}" alt="" class="img-fluid">Моят Профил</a>
@@ -20,7 +20,7 @@
             <a href="#" id="my-courses"><i class="fas fa-chevron-down"></i>Моите курсове</a>
             <ul>
                 @forelse(Auth::user()->studentGetCourse() as $course)
-                    <li><a href="{{ route('user.course',['user' => Auth::user()->id,'course' => $course->id])}}"><img src="{{asset('/images/profile/nav/programming-icon.png')}}" alt="">{{$course->name}}</a></li>
+                    <li><a href="{{ route('user.course',['user' => Auth::user()->id,'course' => $course->id])}}"><img src="{{asset('/images/course-'.$course->id.'/'.$course->picture)}}" alt="">{{$course->name}}</a></li>
                     @empty
                     <li><a href="#" class="disabled"><img src="{{asset('/images/profile/remove-icon.png')}}" alt="">Нямате записани Курсове</a></li>
                     @endforelse

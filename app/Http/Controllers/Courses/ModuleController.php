@@ -81,13 +81,11 @@ class ModuleController extends Controller
         $createModule->save();
 
         $course = Course::find($request->course_id);
-        $courseName = str_replace(' ', '', strtolower($course->name));
-        $moduleName = str_replace(' ', '', strtolower($createModule->name));
         if ($modulePic->getClientOriginalExtension() == 'gif') {
-            copy($modulePic->getRealPath(), public_path().'/images/course-'.$courseName.'-'.$course->id.'/module-'.$moduleName.'/'.$name);
+            copy($modulePic->getRealPath(), public_path().'/images/course-'.$course->id.'/module-'.$createModule->id.'/'.$name);
         } else {
-            $folder = mkdir(public_path().'/images/course-'.$courseName.'-'.$course->id.'/module-'.$moduleName, 666, true);
-            $image->save(public_path().'/images/course-'.$courseName.'-'.$course->id.'/module-'.$moduleName.'/'.$name, 50);
+            $folder = mkdir(public_path().'/images/course-'.$course->id.'/module-'.$createModule->id, 0777, true);
+            $image->save(public_path().'/images/course-'.$course->id.'/module-'.$createModule->id.'/'.$name, 50);
         }
 
         if (isset($data['students'])) {
@@ -158,15 +156,13 @@ class ModuleController extends Controller
             $name = str_replace(' ', '', strtolower($name));
             $name = md5($name);
             $course = Course::find($request->course_id);
-            $courseName = str_replace(' ', '', strtolower($course->name));
-            $moduleName = str_replace(' ', '', strtolower($module->name));
-            if (file_exists(public_path().'/images/course-'.$courseName.'-'.$course->id.'/module-'.$moduleName.'/'.$module->picture)) {
-                File::delete(public_path().'/images/course-'.$courseName.'-'.$course->id.'/module-'.$moduleName.'/'.$module->picture);
+            if (file_exists(public_path().'/images/course-'.$course->id.'/module-'.$module->id.'/'.$module->picture)) {
+                File::delete(public_path().'/images/course-'.$course->id.'/module-'.$module->id.'/'.$module->picture);
             }
             if ($modulePic->getClientOriginalExtension() == 'gif') {
-                copy($modulePic->getRealPath(), public_path().'/images/course-'.$courseName.'-'.$course->id.'/module-'.$moduleName.'/'.$name);
+                copy($modulePic->getRealPath(), public_path().'/images/course-'.$course->id.'/module-'.$module->id.'/'.$name);
             } else {
-                $image->save(public_path().'/images/course-'.$courseName.'-'.$course->id.'/module-'.$moduleName.'/'.$name, 50);
+                $image->save(public_path().'/images/course-'.$course->id.'/module-'.$module->id.'/'.$name, 50);
             }
             $module->picture = $name;
         }

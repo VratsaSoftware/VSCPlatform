@@ -60,18 +60,17 @@ class CourseController extends Controller
         $name = md5($name);
 
         $data['picture'] = $name;
-        $data['name'] = str_replace(' ', '', strtolower($data['name']));
         $createCourse = Course::create($data);
         $insLecturer = new CourseLecturer;
         $insLecturer->course_id = $createCourse->id;
         $insLecturer->user_id = Auth::user()->id;
         $insLecturer->save();
-
+        
+        $folder = mkdir(public_path().'/images/course-'.$createCourse->id, 0777, true);
         if ($coursePic->getClientOriginalExtension() == 'gif') {
-            copy($coursePic->getRealPath(), public_path().'/images/course-'.$data['name']);
+            copy($coursePic->getRealPath(), public_path().'/images/course-'.$createCourse->id);
         } else {
-            $folder = mkdir(public_path().'/images/course-'.$data['name'].'-'.$createCourse->id, 666, true);
-            $image->save(public_path().'/images/course-'.$data['name'].'-'.$createCourse->id.'/'.$name, 50);
+            $image->save(public_path().'/images/course-'.$createCourse->id.'/'.$name, 50);
         }
 
         $message = __('Успешно създаден курс '.ucfirst($data['name']).'!');
@@ -131,7 +130,25 @@ class CourseController extends Controller
             'visibility' => 'required|in_array:valid_visibility.*'
         ]);
         $course = Course::find($id);
-        $oldCourseName = $course->name;
+        if(Input::file('picture2')){
+            $coursePic = Input::file('picture2');
+            $image = Image::make($coursePic->getRealPath());
+            $name = time()."_".$coursePic->getClientOriginalName();
+            $name = str_replace(' ', '', strtolower($name));
+            $name = md5($name);
+            
+            if (file_exists(public_path().'/images/course-'.$course->id.'/'.$course->picture)) {
+                File::delete(public_path().'/images/course-'.$course->id.'/'.$course->picture);
+            }
+            
+            if ($coursePic->getClientOriginalExtension() == 'gif') {
+                copy($coursePic->getRealPath(), public_path().'/images/course-'.$course->id.'/'.$name);
+            } else {
+                $image->save(public_path().'/images/course-'.$course->id.'/'.$name, 50);
+            }
+            $course->picture = $name;
+        }
+        
         $course->name = $request->name;
         $course->description = $request->description;
         $course->starts = $request->starts;

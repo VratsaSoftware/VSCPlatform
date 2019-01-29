@@ -3,6 +3,10 @@
     margin-top: 10vw;
 }
 
+.course-picture-edit{
+    max-width:50%;
+}
+
 .picture-holder>img {
     box-shadow: 0px 5px 20px rgba(7, 42, 68, 0.2);
     max-height: 600px;
@@ -59,7 +63,7 @@ input[type=text], input[type=date] {
     max-width: 100%;
 }
 
-#picture {
+#picture-course-title {
     display: none;
 }
 

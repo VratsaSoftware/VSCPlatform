@@ -159,8 +159,8 @@ body::-webkit-scrollbar-thumb {
 }
 
 .stats-text::-webkit-scrollbar, .edu-comment::-webkit-scrollbar, .work-description::-webkit-scrollbar, #edu_description::-webkit-scrollbar, #work_description::-webkit-scrollbar, .other-interests::-webkit-scrollbar {
-    width: 3px;
-    height: 4px;
+    width: 5px;
+    height: 5px;
 }
 
 .stats-text::-webkit-scrollbar-track, .edu-comment::-webkit-scrollbar-track, .work-description::-webkit-scrollbar-track, #edu_description::-webkit-scrollbar-track, #work_description::-webkit-scrollbar-track, .other-interests::-webkit-scrollbar-track {

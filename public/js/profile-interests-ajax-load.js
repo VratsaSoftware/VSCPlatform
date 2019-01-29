@@ -1,23 +1,25 @@
 $('.int_type').on('change', function() {
     var type = this.value;
     var txt = this.options[this.selectedIndex].text.trim();
-    getInterests($(this), type, txt);
+    var url = $(this).attr('data-url');
+    getInterests($(this), type, txt, url);
 });
 
-function getInterests(input, type, txt) {
+function getInterests(input, type, txt, url) {
     if (txt != 'друго' && txt != 'Друго' && txt != 'Други' && txt != 'други') {
         $.ajax({
             headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
             type: "GET",
-            url: '/interest/' + type,
+            url: url+'/'+ type,
             success: function(data, textStatus, xhr) {
+                input.parent().parent().find('.interests').html(' ');
                 if (data) {
                     $.each(data, function(key, value) {
                         input.parent().parent().find('.interests').fadeIn();
                         input.parent().parent().find('.interests').find('.ajax-load-interests').remove();
-                        input.parent().parent().find('.interests').append('<option class="ajax-load-interests" value="' + value.id + '">' + value.name + '</option>');
+                        input.parent().parent().find('.interests').append('<option class="ajax-load-interests-'+key+'" value="' + value.id + '">' + value.name + '</option>');
                     });
                 }
             }

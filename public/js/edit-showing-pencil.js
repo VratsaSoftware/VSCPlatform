@@ -48,10 +48,12 @@ $(document).ready(function() {
 
     //adding inputs
     $('.edit-btn').on('click', function(e) {
-        // $(this).addClass('save-edit');
+
         var oldText = $(this).prev('span').text();
+
         if ($(this).parent().find('img').hasClass('profile-pic') && !$(this).parent().find('img').hasClass('edit-img')) {
             $(this).parent().find('img').addClass('edit-img');
+            var oldSrc = $(this).parent().find('img').attr('src');
             $(this).parent().find('img').after('<p class="input-img"><input type="file" id="picture" name="picture" onChange="imagePreview(this);"></p>');
             $(this).find('i').removeClass('fa-pencil-alt').addClass('fa-save');
             $(this).removeClass('edit-btn');
@@ -63,25 +65,57 @@ $(document).ready(function() {
                 $(this).fadeOut('fast');
                 $(this).prev('button').find('i').removeClass('fa-save').addClass('fa-pencil-alt');
                 $(this).parent().find('img').removeClass('edit-img');
+                $(this).parent().find('img').attr('src',oldSrc);
+                $('.profile-pic').each(function( index ) {
+                            $( this ).attr('src', oldSrc);
+                        });
             });
         }
         $('.loader-wrapper').css('display', 'flex').fadeOut('slow');
         if ($(this).hasClass('edit-btn')) {
             e.preventDefault();
             $(this).removeClass('edit-btn');
-            if ($(this).prev('span').hasClass('location')) {
-                $(this).prev('span').html('<br><input type="text" class="edit-user-items" id="location" name="location" value="' + oldText + '"></br>');
+            if ($(this).prev('span').hasClass('location') && $('#location').not(':visible')) {
+                $(this).prev('span').html($(this).prev('span').html()+'<p class="edit-input"><input type="text" class="edit-user-items" id="location" name="location" value="' + oldText + '"></p>');
+                $('#location').keypress(function(e){
+                    if(e.keyCode == 13)
+                    {
+                        e.preventDefault();
+                        $('#submit-location').click();
+                    }
+                });
+                
             }
-            if ($(this).prev('span').hasClass('birthday')) {
-                $(this).prev('span').html('<br><input type="date" class="edit-user-items" id="dob" name="dob" value="' + oldText + '"></br>');
+            if ($(this).prev('span').hasClass('birthday') && $('#dob').not(':visible')) {
+                $(this).prev('span').html($(this).prev('span').html()+'<p class="edit-input"><input type="date" class="edit-user-items" id="dob" name="dob" value="' + oldText + '"></p>');
+                $('#dob').keypress(function(e){
+                    if(e.keyCode == 13)
+                    {
+                        e.preventDefault();
+                        $('#submit-dob').click();
+                    }
+                });
+                
             }
-            if ($(this).prev('span').hasClass('mail-txt')) {
-                $(this).prev('span').html('<br><input type="text" class="edit-user-items" id="email" name="email" value="' + oldText + '"></br>');
+            if ($(this).prev('span').hasClass('mail-txt') && $('#email').not(':visible')) {
+                $(this).prev('span').html($(this).prev('span').html()+'<p class="edit-input"><input type="text" class="edit-user-items" id="email" name="email" value="' + oldText + '"></p>');
+                $('#email').keypress(function(e){
+                    if(e.keyCode == 13)
+                    {
+                        e.preventDefault();
+                        $('#submit-email').click();
+                    }
+                });
+                
             }
-            if ($(this).prev('span').hasClass('name')) {
-                $(this).prev('span').html('<p class="edit-live-name"></p><input type="text" class="edit-user-items" id="name" name="name" value="' + oldText + '"></br>');
-                $('#name').bind('input keypress', function() {
-                    $('.edit-live-name').html($(this).val());
+            if ($(this).prev('span').hasClass('name') && $('#name').not(':visible')) {
+                $(this).prev('span').html($(this).prev('span').html()+'<p class="edit-input"><input type="text" class="edit-user-items" id="name" name="name" value="' + oldText + '"></p>');
+                $('#name').keypress(function(e){
+                    if(e.keyCode == 13)
+                    {
+                        e.preventDefault();
+                        $('#submit-name').click();
+                    }
                 });
             }
             $(this).find('i').removeClass('fa-pencil-alt').addClass('fa-save');
@@ -89,13 +123,18 @@ $(document).ready(function() {
 
             $('.btn-close-top-edit').on('click', function(e) {
                 e.preventDefault();
-                $(this).prev('button').prev('span').html(oldText);
+                $(this).prev('button').prev('span').find('.edit-input').remove();
                 $(this).fadeOut('fast');
                 $(this).prev('button').find('i').removeClass('fa-save').addClass('fa-pencil-alt');
                 $(this).prev('button').addClass('edit-btn');
             });
         }
     });
+    
+    
+    function updateUser(){
+        $('#update_user').submit();
+    }
 
     //social networks adding fields
     $('.social-edit').on('click', function(e) {
@@ -103,6 +142,13 @@ $(document).ready(function() {
             e.preventDefault();
             $(this).addClass('editing');
             $('.edit-social').show();
+            $('.edit-social').keypress(function(e){
+                if(e.keyCode == 13)
+                {
+                    e.preventDefault();
+                    $('#submit-social').click();
+                }
+            });
             $(this).find('i').removeClass('fa-pencil-alt').addClass('fa-save');
             $('.loader-wrapper').css('display', 'flex').fadeOut();
         }
@@ -119,7 +165,12 @@ $(document).ready(function() {
         var oldText = $(this).parent().parent().find('.bio-text').text();
         if (!$(this).hasClass('editing')) {
             $(this).addClass('editing');
-            $(this).parent().parent().find('.bio-text').html('<p class="edit-box"><textarea rows="10" cols="60" id="bio" name="bio" style="text-align:left">' + $(this).parent().parent().find('.bio-text').html() + '</textarea></p>');
+            if(!$.trim($(this).parent().parent().find('.bio-text').html())==''){
+              $(this).parent().parent().find('.bio-text').html('<p class="edit-box"><textarea rows="10" cols="60" id="bio" name="bio" style="text-align:left">'+$(this).parent().parent().find('.bio-text').html()+'</textarea></p>');  
+            }else{
+              $(this).parent().parent().find('.bio-text').html('<p class="edit-box"><textarea rows="10" cols="60" id="bio" name="bio" style="text-align:left"></textarea></p>');    
+            }
+            
             $(this).find('i').removeClass('fa-pencil-alt').addClass('fa-save');
         } else {
             $('#lecturer-bio').submit();
@@ -131,11 +182,12 @@ $(document).ready(function() {
 
     $('.education-edit').on('click', function(e) {
         e.preventDefault();
-        $(this).parent().parent().parent().fadeOut().css('display', 'none');
+        // $(this).parent().parent().parent().fadeOut().css('display', 'none');
         if (!$(this).hasClass('edit-opened')) {
             $(this).addClass('edit-opened');
             $('.live-edu').fadeOut();
             $('.edit-edu').fadeIn();
+            $(this).parent().parent().parent().stop( true, true ).fadeOut().fadeIn();
         } else {
             $(this).removeClass('edit-opened');
         }
@@ -169,6 +221,7 @@ $(document).ready(function() {
         e.preventDefault();
         $('.live-work').fadeOut();
         $('.edit-work').fadeIn();
+        $(this).parent().parent().parent().stop( true, true ).fadeOut().fadeIn();
     });
 
     $('.create-btn-work').on('click', function(e) {
@@ -200,6 +253,7 @@ $(document).ready(function() {
         e.preventDefault();
         $('.live-hobbie').fadeOut();
         $('.edit-hobbie').fadeIn();
+        $(this).parent().parent().parent().stop( true, true ).fadeOut().fadeIn();
     });
 
     $('.create-btn-hobbie').on('click', function(e) {

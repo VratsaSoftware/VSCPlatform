@@ -40,7 +40,7 @@
                 <div class="col-md-12 picture-holder text-center">
                     <label for="picture">
                         @if(!is_null($module->picture))
-                            <img src="{{asset('/images/course-'.str_replace(' ', '', strtolower($module->Course->name)).'-'.$module->Course->id.'/module-'.str_replace(' ', '', strtolower($module->name)).'/'.$module->picture)}}" alt="course-pic" id="course-picture">
+                            <img src="{{asset('/images/course-'.$module->Course->id.'/module-'.$module->id.'/'.$module->picture)}}" alt="course-pic" id="course-picture">
                         @else
                             <img src="{{asset('/images/img-placeholder.jpg')}}" alt="course-pic" id="course-picture">
                         @endif
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="col-md-12 picture-button text-center">
-                    <label class="picture-label" for="picture"><span class="upload-pic">качи<input type="file" id="picture" name="picture" onChange="CourseimagePreview(this);"></span></label>
+                    <label class="picture-label" for="picture"><span class="upload-pic">качи<input type="file" id="picture" name="picture" onChange="CourseimagePreview(this);" style="display:none"></span></label>
                 </div>
         </div>
 
@@ -147,7 +147,7 @@
     @forelse ($lections as $key => $lection)
         @if(empty($lection->type))
             <!-- one lecture -->
-            @if($lection->first_date->isToday() || $lection->second_date->isToday())
+            @if($lection->first_date->isToday() || !is_null($lection->second_date) && $lection->second_date->isToday())
                 <div class="col-md-12 lectures-wrapper d-flex flex-row flex-wrap lection-today">
             @else
                 <div class="col-md-12 lectures-wrapper d-flex flex-row flex-wrap">
@@ -157,7 +157,11 @@
                         <span class="lection-order">{{$lection->order}}</span>
                 </div>
                 <span class="first-date-no-show" style="display:none">{{$lection->first_date->format('Y-m-d\TH:i:s')}}</span>
-                <span class="second-date-no-show" style="display:none">{{$lection->second_date->format('Y-m-d\TH:i:s')}}</span>
+                @if(!is_null($lection->second_date))
+                    <span class="second-date-no-show" style="display:none">{{$lection->second_date->format('Y-m-d\TH:i:s')}}</span>
+                @else
+                    <span class="second-date-no-show" style="display:none"></span>
+                @endif
                 <div class="col-md-11 lecture-txt">
                     <span class="lection-title">{{$lection->title}}</span>
                     <span>
@@ -216,14 +220,14 @@
                         </div>
                         <div class="col-md-2 presentation-lecture">
                             @if($lection->presentation)
-                                <a href="#modal" data-url="{{route('lection.update',['lection' => $lection->id])}}" data="{{asset('/data/course-'.str_replace(' ', '', strtolower($module->Course->name)).'/modules/'.str_replace(' ', '', strtolower($module->name)).'/slides-'.$lection->id.'/'.$lection->presentation)}}" class="slides-exist">слайдове </a>
+                                <a href="#modal" data-url="{{route('lection.update',['lection' => $lection->id])}}" data="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/slides-'.$lection->id.'/'.$lection->presentation)}}" class="slides-exist">слайдове </a>
                             @else
                                 <a href="#modal" class="add-presentation empty-data" data-url="{{route('lection.store')}}" data="{{$lection->id}}">добави слайдове </a>
                             @endif
                         </div>
                         <div class="col-md-2 homework-lecture">
                             @if($lection->homework_criteria)
-                                <a href="#modal" data-url="{{route('lection.update',['lection' => $lection->id])}}" data="{{asset('/data/course-'.str_replace(' ', '', strtolower($module->Course->name)).'/modules/'.str_replace(' ', '', strtolower($module->name)).'/homework-'.$lection->id.'/'.$lection->homework_criteria)}}" class="homework-exist">домашно </a>
+                                <a href="#modal" data-url="{{route('lection.update',['lection' => $lection->id])}}" data="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/homework-'.$lection->id.'/'.$lection->homework_criteria)}}" class="homework-exist">домашно </a>
                             @else
                                 <a href="#modal" class="add-homework empty-data" data-url="{{route('lection.store')}}" data="{{$lection->id}}">добави домашно </a>
                             @endif
@@ -320,7 +324,11 @@
                         <span class="lection-order">{{$lection->order}}</span>
                 </div>
                 <span class="first-date-no-show" style="display:none">{{$lection->first_date->format('Y-m-d\TH:i:s')}}</span>
-                <span class="second-date-no-show" style="display:none">{{$lection->second_date->format('Y-m-d\TH:i:s')}}</span>
+                @if(!is_null($lection->second_date))
+                    <span class="second-date-no-show" style="display:none">{{$lection->second_date->format('Y-m-d\TH:i:s')}}</span>
+                @else
+                    <span class="second-date-no-show" style="display:none"></span>
+                @endif
                 <div class="col-md-11 lecture-txt">
                     <span class="lection-title">{{$lection->title}}</span>
                     <span>
@@ -330,7 +338,7 @@
                             <i class="fas fa-times"></i>
                         @endif
                          /
-                        @if($lection->second_date)
+                        @if($lection->second_date && !is_null($lection->second_date))
                             &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->second_date->format('H:i')}}</span>
                         @else
                             <i class="fas fa-times"></i>
@@ -416,15 +424,15 @@
         @else
             <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
         @endif
-        <span>
+        <span class="edit-lection-students-pool">
             {{$student->User->name}}
 
             {{$student->User->last_name}}
         </span>
-        <div class="col-md-6">
+        <div class="col-md-6 edit-lection-students-pool">
             {{$student->User->email}}
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6 edit-lection-students-pool">
             <img src="{{asset('/images/profile/location-icon.png')}}" alt="map-icon">
             <span class="location">
                 {{$student->User->location}}

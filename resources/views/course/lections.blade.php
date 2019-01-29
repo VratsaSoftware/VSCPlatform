@@ -111,14 +111,14 @@
                             </div>
                             <div class="col-md-2 presentation-lecture">
                                 @if($lection->presentation)
-                                    <a href="{{asset('/data/course-'.str_replace(' ', '', strtolower($module->Course->name)).'/modules/'.str_replace(' ', '', strtolower($module->name)).'/slides-'.$lection->id.'/'.$lection->presentation)}}" target="__blank">слайдове </a>
+                                    <a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/slides-'.$lection->id.'/'.$lection->presentation)}}" target="__blank">слайдове </a>
                                 @else
                                     <span class="empty-data">слайдове</span>
                                 @endif
                             </div>
                             <div class="col-md-2 homework-lecture">
                                 @if($lection->homework_criteria)
-                                    <a href="{{asset('/data/course-'.str_replace(' ', '', strtolower($module->Course->name)).'/modules/'.str_replace(' ', '', strtolower($module->name)).'/homework-'.$lection->id.'/'.$lection->homework_criteria)}}" target="__blank">за домашно </a>
+                                    <a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/homework-'.$lection->id.'/'.$lection->homework_criteria)}}" target="__blank">за домашно </a>
                                 @else
                                     <span class="empty-data">за домашно</span>
                                 @endif

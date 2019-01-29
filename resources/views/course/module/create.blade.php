@@ -28,7 +28,7 @@
                 </div>
 
                 <div class="col-md-12 picture-button text-center">
-                    <label class="picture-label" for="picture"><span class="upload-pic">качи<input type="file" id="picture" name="picture" onChange="CourseimagePreview(this);"></span></label>
+                    <label class="picture-label" for="picture"><span class="upload-pic">качи<input type="file" id="picture" name="picture" onChange="CourseimagePreview(this);" style="display:none"></span></label>
                 </div>
         </div>
 
@@ -126,15 +126,15 @@
             @else
                 <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
             @endif
-            <span>
+            <span class="edit-lection-students-pool">
                 {{$user->name}}
 
                 {{$user->last_name}}
             </span>
-            <div class="col-md-6">
+            <div class="col-md-6 edit-lection-students-pool">
                 {{$user->email}}
             </div>
-            <div class="col-md-6">
+            <div class="col-md-6 edit-lection-students-pool">
                 <img src="{{asset('/images/profile/location-icon.png')}}" alt="map-icon">
                 <span class="location">
                     {{$user->location}}

@@ -146,9 +146,11 @@ a:hover{
 
 #remember-container{
   position: relative;
-  margin: -5px 20px;
+  /*margin: -5px 20px;*/
   margin-top: 2vw;
   cursor: pointer;
+  text-align:center;
+  padding-left:1vw;
 }
 
 #register-container{
@@ -186,13 +188,13 @@ label{
   margin-left: 2vw;
 }
 
-#remember:hover, , #register-container:hover{
+#remember:hover, #register-container:hover{
   color: #000;
   cursor: pointer;
 }
 
 .checkbox {
-  position: relative;
+  position: absolute;
   cursor: pointer;
 	-webkit-appearance: none;
 	padding: 5px;
@@ -202,7 +204,7 @@ label{
   width: 16px;
   height: 15px;
   margin-top: 0;
-  left: -3vw;
+  left: -1vw;
 }
 
 .checkbox:checked:active {
@@ -225,27 +227,34 @@ label{
 }
 
 #remember{
-  position: absolute;
+  /*position: absolute;*/
   font-size: 13px;
   font-family: 'Comfortaa', sans-serif;
   color: #6ab14f;
   /*top: 7px;*/
-  left: -1vw;
+  /*left: -1vw;*/
   /*padding-top: 1vw;*/
+  float:left;
+  cursor: pointer;
+}
+
+#remember > label:hover{
+    cursor: pointer;
 }
 
 #forgotten{
-  position: absolute;
+  /*position: absolute;*/
   font-size: 12px;
   font-family: 'Comfortaa', sans-serif;
   color: #6ab14f;
-  right:-3vw;
+  /*right:-3vw;*/
   /*top: 8px;*/
   cursor: pointer;
   -webkit-transition: all 2s ease-in-out;
   -moz-transition: all 2s ease-in-out;
   -o-transition: all 2s ease-in-out;
   transition: all 0.2s ease-in-out;
+  float:right;
 }
 
 #city{
@@ -278,12 +287,12 @@ label{
 
 #register{
     display: inline-block;
-    margin-left: 6vw;
+    /* margin-left: 6vw; */
     font-family: Comfortaa;
     color: green;
     font-size: 13px;
-    position: absolute;
-    margin-top: 4vw;
+    /* position: absolute; */
+     margin-top: 4vw; 
     cursor: pointer;
 }
 
@@ -322,4 +331,80 @@ p{
 
 .continue-to-profile{
   margin-top: 8vw;
+}
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    html, body {
+      height: 100vh;
+    }
+   #container, #forgotten-container, #register-container{
+     width:80vw;
+     height:80vw;
+   } 
+   
+   #register{
+       margin-top:10vw;
+       /*margin-left:15vw;*/
+   }
+   
+   #remember{
+       left:2vw;
+   }
+   
+   #remember-container{
+       margin-top:5vw;
+   }
+   
+   #register-container{
+       height:90vh;
+   }
+   
+   .sex-options{
+       padding-left:25vw;
+   }
+   
+   #login-button{
+       width:25vw;
+       height:25vw;
+   }
+   
+   .login-img{
+       width:35vw;
+       margin-left:-15%;
+   }
+   
+   .login-form-img{
+       width:35vw;
+   }
+   
+   .register-img{
+       width:35vw;
+   }
+   #male,#female{
+       width:5vw;
+   }
+   
+   .checkbox{
+       left:25vw;
+   }
+} 
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    
+} 
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    
+} 
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    
+} 
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    
 }

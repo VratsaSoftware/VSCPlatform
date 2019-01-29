@@ -27,7 +27,7 @@
                 </div>
 
                 <div class="col-md-12 picture-button text-center">
-                    <label class="picture-label" for="picture"><span class="upload-pic">качи<input type="file" id="picture" name="picture" onChange="CourseimagePreview(this);"></span></label>
+                    <label class="picture-label" for="picture-course-title"><span class="upload-pic">качи<input type="file" id="picture-course-title" name="picture" onChange="CourseimagePreview(this);"></span></label>
                 </div>
             </div>
 

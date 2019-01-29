@@ -1,0 +1,1 @@
+[29-Jan-2019 04:04:29 CST6CDT] PHP Fatal error:  Cannot use isset() on the result of an expression (you can use "null !== expression" instead) in /home/kartana/public_html/c/vsc-laravel/storage/framework/views/70a281e239884fd5888228a1f94e85da5161d834.php on line 163
