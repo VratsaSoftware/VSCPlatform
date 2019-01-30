@@ -52,11 +52,11 @@
                             <form action="{{route('course.update',['course' => $course->id])}}" method="POST" class="col-md-12" id="update-course-form" name="update-course-form" enctype="multipart/form-data" files="true">
                                 {{ method_field('PUT') }}
                                 {{ csrf_field() }}
-                                
+
                                 <div class="col-md-12 text-center picture-title">
                                     Заглавна Снимка
                                 </div>
-                
+
                                 <div class="col-md-12 picture-holder text-center">
                                     <label for="picture">
                                         @if($course->picture)
@@ -68,7 +68,7 @@
                                         (800x600px)
                                     </label>
                                 </div>
-                                
+
                                 <div class="col-md-12 picture-button text-center">
                                     <label class="picture-label" for="picture2"><span class="upload-pic">качи<input type="file" id="picture2" name="picture2" onChange="CourseimagePreview(this);" style="display:none"></span></label>
                                 </div>

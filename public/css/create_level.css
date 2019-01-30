@@ -418,7 +418,7 @@ input[type=range]:focus {
     color: #f00;
 }
 
-.edit-lection-students-pool{
+.edit-lection-students-pool {
     word-wrap: break-word;
 }
 
@@ -427,10 +427,11 @@ input[type=range]:focus {
 --------------------------------------------------------------------------------------------------*/
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
-    #course-picture{
-        width:25vw;
-        height:25vw;
+    #course-picture {
+        width: 25vw;
+        height: 25vw;
     }
+
     .lvl-title, .level-title-holder, .picture-title {
         margin-top: 20vw;
         margin-bottom: 10vw;
@@ -479,10 +480,11 @@ input[type=range]:focus {
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
-    #course-picture{
-        width:25vw;
-        height:25vw;
+    #course-picture {
+        width: 25vw;
+        height: 25vw;
     }
+
     .lvl-title, .level-title-holder, .picture-title {
         margin-top: 10vw;
         margin-bottom: 5vw;
@@ -527,10 +529,11 @@ input[type=range]:focus {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
-    #course-picture{
-        width:25vw;
-        height:25vw;
+    #course-picture {
+        width: 25vw;
+        height: 25vw;
     }
+
     .lvl-title, .level-title-holder, .picture-title {
         margin-top: 10vw;
         margin-bottom: 5vw;
@@ -575,10 +578,11 @@ input[type=range]:focus {
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
-    #course-picture{
-        width:800px;
-        height:600px;
+    #course-picture {
+        width: 800px;
+        height: 600px;
     }
+
     .lvl-title, .level-title-holder, .picture-title {
         margin-top: 10vw;
         margin-bottom: 5vw;
@@ -623,10 +627,11 @@ input[type=range]:focus {
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
-    #course-picture{
-        width:800px;
-        height:600px;
+    #course-picture {
+        width: 800px;
+        height: 600px;
     }
+
     .lvl-title, .level-title-holder, .picture-title {
         margin-top: 10vw;
         margin-bottom: 2vw;

@@ -73,22 +73,21 @@ class LectionController extends Controller
                 $lection->title = $request->title;
                 try {
                     $lection->first_date = Carbon::parse($request->first_date_create);
-                    if(!is_null($request->second_date_create)){
+                    if (!is_null($request->second_date_create)) {
                         $lection->second_date = Carbon::parse($request->second_date_create);
                     }
+                } catch (\Exception $err) {
+                    $message = __('Невалидна Заявка!');
+                    return redirect()->back()->with('error', $message);
                 }
-                catch (\Exception $err) {
-                   $message = __('Невалидна Заявка!');
-                   return redirect()->back()->with('error', $message);
-                }
-                
+
                 $lection->description = $request->description;
                 $lection->order = $request->order;
                 $lection->visibility = $request->visibility;
                 $lection->save();
                 $lection = Lection::with('Module', 'Module.Course')->findOrFail($lection->id);
                 $store = true;
-            }else{
+            } else {
                 $message = __('Невалидна Заявка!');
                 return redirect()->back()->with('error', $message);
             }
@@ -197,8 +196,7 @@ class LectionController extends Controller
             try {
                 $lection->first_date = Carbon::parse($request->first_date);
                 $lection->second_date = Carbon::parse($request->second_date);
-                }
-            catch (\Exception $err) {
+            } catch (\Exception $err) {
                 $message = __('Невалидна Заявка!');
                 return redirect()->back()->with('error', $message);
             }

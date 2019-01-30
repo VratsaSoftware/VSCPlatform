@@ -533,7 +533,7 @@ input:checked+.slider:before {
         /*display: none;*/
         width: 1.5vw;
     }
-    
+
     .nested-nav>ul>li:not(:first-child)>a>img {
         /*display: none;*/
         width: 2.5vw;

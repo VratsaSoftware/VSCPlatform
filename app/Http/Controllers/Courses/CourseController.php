@@ -65,7 +65,7 @@ class CourseController extends Controller
         $insLecturer->course_id = $createCourse->id;
         $insLecturer->user_id = Auth::user()->id;
         $insLecturer->save();
-        
+
         $folder = mkdir(public_path().'/images/course-'.$createCourse->id, 0777, true);
         if ($coursePic->getClientOriginalExtension() == 'gif') {
             copy($coursePic->getRealPath(), public_path().'/images/course-'.$createCourse->id);
@@ -130,17 +130,17 @@ class CourseController extends Controller
             'visibility' => 'required|in_array:valid_visibility.*'
         ]);
         $course = Course::find($id);
-        if(Input::file('picture2')){
+        if (Input::file('picture2')) {
             $coursePic = Input::file('picture2');
             $image = Image::make($coursePic->getRealPath());
             $name = time()."_".$coursePic->getClientOriginalName();
             $name = str_replace(' ', '', strtolower($name));
             $name = md5($name);
-            
+
             if (file_exists(public_path().'/images/course-'.$course->id.'/'.$course->picture)) {
                 File::delete(public_path().'/images/course-'.$course->id.'/'.$course->picture);
             }
-            
+
             if ($coursePic->getClientOriginalExtension() == 'gif') {
                 copy($coursePic->getRealPath(), public_path().'/images/course-'.$course->id.'/'.$name);
             } else {
@@ -148,7 +148,7 @@ class CourseController extends Controller
             }
             $course->picture = $name;
         }
-        
+
         $course->name = $request->name;
         $course->description = $request->description;
         $course->starts = $request->starts;
