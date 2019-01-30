@@ -304,6 +304,9 @@ input[type=range]:focus {
 
 .all-students-pool {
     font-family: Comfortaa;
+    max-height: 500px;
+    overflow-y: scroll;
+    border: 1px solid darkgray;
 }
 
 .all-students-pool>div {

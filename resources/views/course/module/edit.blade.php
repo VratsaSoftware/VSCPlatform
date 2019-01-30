@@ -450,8 +450,9 @@
     </div>
     <!-- end of one student -->
     @empty
-    <p>
-        Няма потребители!
+    <p class="col-md-12 text-center">
+        Няма курсисти!<br />
+        <img src="{{asset('/images/loaders/load-18.gif')}}" alt="no-students">
     </p>
     @endforelse
 </div>
