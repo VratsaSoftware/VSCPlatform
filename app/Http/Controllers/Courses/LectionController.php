@@ -67,7 +67,7 @@ class LectionController extends Controller
             $lection = Lection::with('Module', 'Module.Course')->findOrFail($request->lection);
             $store = true;
         } else {
-            if (!is_null($request->title) && !is_null($request->first_date_create) && !is_null($request->description)) {
+            if (!is_null($request->title) && !empty($request->title) && !is_null($request->first_date_create) && !empty($request->first_date_create) && !is_null($request->description) && !empty($request->description)) {
                 $lection = new Lection;
                 $lection->course_modules_id = $request->module;
                 $lection->title = $request->title;
@@ -78,7 +78,7 @@ class LectionController extends Controller
                     }
                 } catch (\Exception $err) {
                     $message = __('Невалидна Заявка!');
-                    return redirect()->back()->with('error', $message);
+                    return redirect()->back()->with('error', $message)->withInput(Input::all());
                 }
 
                 $lection->description = $request->description;
@@ -89,7 +89,7 @@ class LectionController extends Controller
                 $store = true;
             } else {
                 $message = __('Невалидна Заявка!');
-                return redirect()->back()->with('error', $message);
+                return redirect()->back()->with('error', $message)->withInput(Input::all());
             }
         }
 

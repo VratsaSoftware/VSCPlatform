@@ -35,19 +35,19 @@
                 <div class="col-md-12 text-center">
                     <p>
                         <label for="name">Име на курса</label><br>
-                        <input type="text" id="name" name="name" placeholder="..." class="name-course">
+                        <input type="text" id="name" name="name" placeholder="..." class="name-course" value="{{old('name')}}">
                     </p>
                     <p>
                         <label for="description">Описание</label><br>
-                        <textarea id="description" cols="30" rows="5" name="description" placeholder="кратко описание" style="resize: none;"></textarea>
+                        <textarea id="description" cols="30" rows="5" name="description" placeholder="кратко описание" style="resize: none;">{{old('description')}}</textarea>
                     </p>
                     <p>
                         <label for="starts">Започва</label>
-                        <input type="date" name="starts" id="starts">
+                        <input type="date" name="starts" id="starts" value="{{old('starts')}}">
                     </p>
                     <p>
                         <label for="ends">Свършва</label>
-                        <input type="date" name="ends" id="ends">
+                        <input type="date" name="ends" id="ends" value="{{old('ends')}}">
                     </p>
                     <p>
                         <label for="visibility">Видимост на курса</label>

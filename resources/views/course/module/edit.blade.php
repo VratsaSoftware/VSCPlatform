@@ -394,7 +394,8 @@
 </div>
 <div class="col-md-12 d-flex flex-row flex-wrap add-lecture text-center">
                     <div class="col-md-12">
-                        <a href="#modal" data-url="{{route('lection.store')}}" data-order="{{{isset($lastOrder)?$lastOrder:1}}}" data-module={{$module->id}}>
+                        <a href="#modal" data-url="{{route('lection.store')}}" data-order="{{{isset($lastOrder)?$lastOrder:1}}}" data-module={{$module->id}} data-old-title="{{old('title')}}" data-old-first="{{old('first_date_create')}}"
+                            data-old-second="{{old('second_date_create')}}" data-old-desc="{{old('description')}}" data-old-order="{{old('order')}}" data-old-video="{{old('video')}}" data-old-demo="{{old('demo')}}">
                             <img src="{{asset('/images/profile/add-icon.png')}}" alt="add-icon" class="img-fluid">Добави
                         </a>
                     </div>
