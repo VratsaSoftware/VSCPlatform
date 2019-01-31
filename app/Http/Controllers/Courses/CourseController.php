@@ -170,7 +170,9 @@ class CourseController extends Controller
     {
         $deleteCourse = Course::find($id);
         $courseDir = public_path().'/images/course-'.$deleteCourse->id;
+        $courseData = public_path().'/data/course-'.$deleteCourse->id;
         File::deleteDirectory($courseDir);
+        File::deleteDirectory($courseData);
         $deleteCourse->delete();
 
         $message = __('Успешно изтрит курс!');
