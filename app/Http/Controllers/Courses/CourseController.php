@@ -168,6 +168,10 @@ class CourseController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleteCourse = Course::find($id);
+        $deleteCourse->delete();
+
+        $message = __('Успешно изтрит курс!');
+        return redirect()->route('myProfile')->with('success', $message);
     }
 }

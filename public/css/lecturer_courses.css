@@ -383,6 +383,15 @@ a {
     float: right;
 }
 
+.for-delete {
+    background: #f00 !important;
+    border: 1px solid #f00 !important;
+}
+
+.delete-course-btn {
+    float: none !important;
+}
+
 /*end of students section*/
 /*Query's
 --------------------------------------------------------------------------------------------------------*/

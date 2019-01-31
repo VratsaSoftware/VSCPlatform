@@ -66,7 +66,7 @@ class HomeController extends Controller
         if ($isLecturer) {
             $courses = Course::with('Lecturers')->whereHas('Lecturers', function ($query) use ($userId) {
                 $query->where('user_id', $userId);
-            })->get();
+            })->orderBy('created_at', 'desc')->get();
             $lecturer = User::find(Auth::user()->id);
             return view('lecturer.my_profile', ['social_links' => $socialLinks,'courses' => $courses, 'lecturer' => $lecturer]);
         }

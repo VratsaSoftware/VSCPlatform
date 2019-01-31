@@ -339,6 +339,7 @@ body::-webkit-scrollbar-thumb {
 
     .information-wrap>div {
         margin-bottom: 3vw;
+        padding-top: 1.5vw;
     }
 
     .courses {

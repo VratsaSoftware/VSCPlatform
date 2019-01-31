@@ -70,7 +70,7 @@
                                 </div>
 
                                 <div class="col-md-12 picture-button text-center">
-                                    <label class="picture-label" for="picture2"><span class="upload-pic">качи<input type="file" id="picture2" name="picture2" onChange="CourseimagePreview(this);" style="display:none"></span></label>
+                                    <input type="file" id="picture2" name="picture2" onChange="CourseimagePreview(this);">
                                 </div>
                                 <br/>
                                 <p>
@@ -91,7 +91,7 @@
                                 </p>
                                 <p>
                                     <label for="visibility">Видимост на курса</label>
-                                    <select class="course-visibility" name="visibility">
+                                    <select class="course-visibility section-el-bold" name="visibility">
                                         @foreach(Config::get('courseVisibility') as $visibility)
                                             @if(strtolower($visibility) == strtolower($course->visibility))
                                                 </i><option value="{{strtolower($visibility)}}" selected>{{ucfirst($visibility)}}</option>
@@ -102,12 +102,7 @@
                                     </select>
                                 </p>
                                 <p class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-success btn-update-course" value="Промени">Промени</button>
-                                    {{-- <form action="{{ route('course.destroy',$course->id) }}" method="POST" onsubmit="return ConfirmDelete()" id="delete-edu">
-                                        {{ method_field('DELETE') }}
-                                        {{ csrf_field() }}
-                                        <button type="submit" class="btn btn-danger" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                    </form> --}}
+                                    <button type="submit" class="btn btn-success btn-update-course" value="Промени" href="#modal">Промени</button>
                                 </p>
                             </form>
                         </div>
@@ -175,7 +170,23 @@
                 @endif
                 </div>
               </div>
-
+              <div class="col-md-12 text-center">
+                  <a href="#modal" class="lvls-btn-modal">
+                    <button type="submit" class="btn btn-danger delete-btn" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                  </a>
+              </div>
+              <div class="delete-form" style="display:none">
+                  <form action="{{ route('course.destroy',$course->id) }}" method="POST" id="delete-course">
+                      {{ method_field('DELETE') }}
+                      {{ csrf_field() }}
+                      <p class="col-md-12 text-center">
+                          <i>Сигурни ли сте че искате да изтриете целия курс (включително модулите и лекциите към него) ?</i>
+                      </p>
+                      <p class="col-md-12 text-center">
+                          <button type="submit" class="btn btn-danger delete-course-btn" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                      </p>
+                  </form>
+              </div>
               <!-- modal for editing elements -->
                   <div id="modal">
                               <div class="modal-content print-body">
@@ -194,7 +205,7 @@
                                     <div>
                                         <!--<script src="{{asset('js/profile-picture-preview.js')}}"></script>-->
                                     </div>
-                                  <a href="#" class="btn close-modal">Затвори</a>
+                                  <a href="#" class="btn close-modal">Затвори&nbsp;</a>
                                 </div>
                           </div>
                           <div class="overlay"></div>
@@ -219,5 +230,26 @@
                     else
                         return false;
                 }
+            </script>
+            <script>
+            $(document).ready(function() {
+                $('.delete-btn').on('click', function(e){
+                  $('.event-title').addClass('for-delete');
+                  $('.event-footer').addClass('for-delete');
+                  $('.event-body-text').addClass('for-delete');
+                  $('.modal-header').html('Изтриване на курс');
+                  $('.copy > p').html();
+                  $('.copy > p').html($('.delete-form').html());
+                  $('.close-modal').append('<i class="fas fa-times"></i>');
+                  $('#modal').show();
+                });
+
+                $('.close-modal').on('click', function(){
+                    $('.event-title').removeClass('for-delete');
+                    $('.event-footer').removeClass('for-delete');
+                    $('.event-body-text').removeClass('for-delete');
+                    $('.close-modal').find('i').remove();
+                });
+            });
             </script>
 @endsection
