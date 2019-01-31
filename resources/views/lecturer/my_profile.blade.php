@@ -157,8 +157,10 @@
         @forelse($courses as $course)
         <!-- courses -->
             <div class="col-md-12 lecturer-course-name">
+                <a href="{{route('lecturer.show.course',['course' => $course->id])}}" class="lecturer-past-courses">
                   <span>{{$course->name}} {{$lecturer->created_at->format('Y')}}</span>
                   <img src="./images/profile/tick-icon.png" alt="tick" class="img-fluid">
+                </a>
             </div>
         @empty
             Няма курсове

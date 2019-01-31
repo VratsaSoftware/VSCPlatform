@@ -47,7 +47,7 @@ textarea {
 
 .bio-courses>div:not(:first-child) {
     border: 1px solid ##1B8500;
-    padding: 3vw;
+    padding: 1vw;
     background: #1B8500;
     border-radius: 10px;
     color: #fff;
@@ -83,6 +83,11 @@ textarea {
 
 .lecturer-course-name {
     max-height: 8vw;
+}
+
+.lecturer-past-courses:hover {
+    text-decoration: none;
+    color: #FCE142;
 }
 
 /*end of about me section*/

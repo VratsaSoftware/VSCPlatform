@@ -57,7 +57,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .header-contacts>div>a>img {
-    width: 4vw;
+    width: 3vw;
 }
 
 .mail>img {
@@ -223,6 +223,8 @@ body::-webkit-scrollbar-thumb {
     .header-pic>div>img {
         min-width: 40vw;
         max-width: 40vw;
+        min-height: 40vw;
+        max-height: 40vw;
     }
 
     .header-contacts {
@@ -315,6 +317,8 @@ body::-webkit-scrollbar-thumb {
     .header-pic>div>img {
         min-width: 30vw;
         max-width: 30vw;
+        min-height: 30vw;
+        max-height: 30vw;
     }
 
     .header-contacts {
@@ -406,7 +410,8 @@ body::-webkit-scrollbar-thumb {
     .header-pic>div>img {
         min-width: 25vw;
         max-width: 25vw;
-        max-height: 25vw
+        max-height: 25vw;
+        min-height: 25vw;
     }
 
     .header-pic {
