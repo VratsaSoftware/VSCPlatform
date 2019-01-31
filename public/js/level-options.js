@@ -1,8 +1,22 @@
 $( function () {
+	$( '.time-input' ).on( 'keyup', function () {
+		if ( $( this ).val() > 24 ) {
+			$( this ).val( 24 );
+		}
+	} );
+	$( '.time-minutes' ).on( 'keyup', function () {
+		if ( $( this ).val() > 59 ) {
+			$( this ).val( 59 );
+		}
+	} );
 	var edit = false;
 	$( '.edit-lecture > a' ).on( 'click', function ( e ) {
 		// e.preventDefault();
 		var first_date = $( this ).parent().parent().parent().parent().find( '.first-date-no-show' ).html();
+		var hours = $( this ).parent().parent().parent().parent().find( '.first-hours-no-show' ).html();
+		var minutes = $( this ).parent().parent().parent().parent().find( '.first-minutes-no-show' ).html();
+		var secondHours = $( this ).parent().parent().parent().parent().find( '.second-hours-no-show' ).html();
+		var secondMinutes = $( this ).parent().parent().parent().parent().find( '.second-minutes-no-show' ).html();
 		var second_date = $( this ).parent().parent().parent().parent().find( '.second-date-no-show' ).html();
 
 		if ( $( this ).parent().parent().parent().find( '.lection-description' ).find( '.read-more' ).length != 0 ) {
@@ -23,6 +37,10 @@ $( function () {
 
 			$( '#edit-lection-now' ).find( '#title' ).val( $( this ).parent().parent().parent().find( 'span:nth-child(1)' ).html() );
 			$( '#edit-lection-now' ).find( '#first_date' ).val( first_date );
+			$( '#edit-lection-now' ).find( '#first_time_hours' ).val( hours );
+			$( '#edit-lection-now' ).find( '#first_time_minutes' ).val( minutes );
+			$( '#edit-lection-now' ).find( '#second_time_hours' ).val( secondHours );
+			$( '#edit-lection-now' ).find( '#second_time_minutes' ).val( secondMinutes );
 			$( '#edit-lection-now' ).find( '#second_date' ).val( second_date );
 			$( '#edit-lection-now' ).find( '#description' ).val( desc );
 			$( '#edit-lection-now' ).find( '#order' ).val( order );
@@ -105,6 +123,8 @@ $( function () {
 		var oldOrder = $( this ).attr( 'data-old-order' );
 		var oldVideo = $( this ).attr( 'data-old-video' );
 		var oldDemo = $( this ).attr( 'data-old-demo' );
+		var oldFirstTime = $( this ).attr( 'data-old-first-time' );
+		var oldSecondTime = $( this ).attr( 'data-old-second-time' );
 		if ( oldOrder.length > 0 ) {
 			order = oldOrder;
 		}
@@ -113,7 +133,17 @@ $( function () {
 		$( '.modal-header > h2' ).text( '' );
 		$( '.modal-header > h2' ).text( 'Добави Лекция' );
 		$( '.copy > p' ).html( '' );
-		$( '.copy > p' ).html( '<form id="create-lection" action="' + action + '" method="POST" enctype="multipart/form-data" files="true"><input type="hidden" name="module" id="module" value="' + module_id + '"><input type="hidden" name="_token" value="' + $( 'meta[name="csrf-token"]' ).attr( 'content' ) + '"><p><label>Заглавие:<i class="fas fa-star-of-life req-star"></i></label><br><input type="text" name="title" id="title" value="' + oldTitle + '"></p><br><p><label>дата 1:<i class="fas fa-star-of-life req-star"></i></label><br><input type="datetime-local" id="first_date_create" value="' + oldFirst + '" name="first_date_create"></p><br><p><label>дата 2:</label><br><input type="datetime-local" id="second_date_create" value="' + oldSecond + '" name="second_date_create"></p><br><p><label>Описание:<i class="fas fa-star-of-life req-star"></i></label><br><textarea name="description" id="description">' + oldDesc + '</textarea></p><br><p><label for="order">Поредност:</label><input type="number" name="order" id="order" value="' + order + '"></p><br><p><label>Презентация</label><br><input type="file" name="slides" id="slides"></p><br><p><label>Видео:</label><br><input type="text" name="video" id="video" value="' + oldVideo + '"></p><br><p><label>Критерии за домашно</label><br><input type="file" name="homework" id="homework"></p><br><p><label for="demo">Демо</label><input type="text" name="demo" id="demo" value="' + oldDemo + '"><p><br><p><label for="visibility">Видимост</label><select class="section-el-bold" name="visibility" id="visibility">' + visibility + '</select></p><br><p><label>Тип:</label><select name="type" class="section-el-bold" id="type"><option value="">Лекция</option><option value="other">Тест/Друго</option></select></p></form>' );
+		$( '.copy > p' ).html( '<form id="create-lection" action="' + action + '" method="POST" enctype="multipart/form-data" files="true"><input type="hidden" name="module" id="module" value="' + module_id + '"><input type="hidden" name="_token" value="' + $( 'meta[name="csrf-token"]' ).attr( 'content' ) + '"><p><label>Заглавие:<i class="fas fa-star-of-life req-star"></i></label><br><input type="text" name="title" id="title" value="' + oldTitle + '"></p><br><p><label>дата 1:<i class="fas fa-star-of-life req-star"></i></label><br><input type="date" id="first_date_create" value="' + oldFirst + '" name="first_date_create"><input type="number" id="first_time_hours" name="first_time_hours" class="time-input" min="1" max="24" title="01 - 24">:<input type="number" id="first_time_minutes" name="first_time_minutes" class="time-minutes" min="1" max="59" title="01-59"></p><br><p><label>дата 2:</label><br><input type="date" id="second_time" value="' + oldSecondTime + '" name="second_date_create"><input type="number" id="second_time_hours" name="second_time_hours" class="time-input" min="1" max="24" title="01 - 24">:<input type="number" id="second_time_minutes" name="second_time_minutes" class="time-minutes" min="1" max="59" title="01-59"></p><br><p><label>Описание:<i class="fas fa-star-of-life req-star"></i></label><br><textarea name="description" id="description">' + oldDesc + '</textarea></p><br><p><label for="order">Поредност:</label><input type="number" name="order" id="order" value="' + order + '"></p><br><p><label>Презентация</label><br><input type="file" name="slides" id="slides"></p><br><p><label>Видео:</label><br><input type="text" name="video" id="video" value="' + oldVideo + '"></p><br><p><label>Критерии за домашно</label><br><input type="file" name="homework" id="homework"></p><br><p><label for="demo">Демо</label><input type="text" name="demo" id="demo" value="' + oldDemo + '"><p><br><p><label for="visibility">Видимост</label><select class="section-el-bold" name="visibility" id="visibility">' + visibility + '</select></p><br><p><label>Тип:</label><select name="type" class="section-el-bold" id="type"><option value="">Лекция</option><option value="other">Тест/Друго</option></select></p></form>' );
+		$( '.time-input' ).on( 'keyup', function () {
+			if ( $( this ).val() > 24 ) {
+				$( this ).val( 24 );
+			}
+		} );
+		$( '.time-minutes' ).on( 'keyup', function () {
+			if ( $( this ).val() > 59 ) {
+				$( this ).val( 59 );
+			}
+		} );
 		$( '.modal-content > .cf > div' ).html( '<input class="btn close-modal create-lection-btn" type="submit" name="submit" value="Добави">' );
 		$( '.create-lection-btn' ).on( 'click', function () {
 			$( '#create-lection' ).submit();

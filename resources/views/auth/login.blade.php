@@ -59,15 +59,17 @@
 
 	<form method="POST" action="{{ route('login') }}" id="login-form">
 		 @csrf
-		<input type="email" name="email" placeholder="E-mail">
-		<input type="password" name="password" placeholder="Парола" autocomplete="password">
-		<a href="#" id="login-btn-send">Вход</a>
-		<div id="remember-container">
-			<div id="remember"><label for="checkbox-2-1">Запомни ме</label></div>
-			<input type="checkbox" id="checkbox-2-1" class="checkbox" checked="checked"/>
-			<div id="forgotten">Забравена парола</div>
-			<div id="register">Регистрация</div>
-		</div>
+        <div>
+    		<input type="email" name="email" placeholder="E-mail" class="email">
+    		<input type="password" name="password" placeholder="Парола" autocomplete="password" class="password">
+    		<a href="#" id="login-btn-send">Вход</a>
+    		<div id="remember-container">
+    			<div id="remember"><label for="checkbox-2-1">Запомни ме</label></div>
+    			<input type="checkbox" id="checkbox-2-1" class="checkbox" checked="checked"/>
+    			<div id="forgotten">Забравена парола</div>
+    			<div id="register">Регистрация</div>
+    		</div>
+        </div>
 	</form>
 </div>
 
@@ -289,7 +291,7 @@
             }
         }
     });
-    
+
   	$('#login-btn-send').on('click', function(){
   		$('#login-form').submit();
   	});

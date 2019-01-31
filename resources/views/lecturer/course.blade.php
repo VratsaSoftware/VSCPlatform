@@ -103,6 +103,11 @@
                                 </p>
                                 <p class="col-md-12 text-center">
                                     <button type="submit" class="btn btn-success btn-update-course" value="Промени">Промени</button>
+                                    {{-- <form action="{{ route('course.destroy',$course->id) }}" method="POST" onsubmit="return ConfirmDelete()" id="delete-edu">
+                                        {{ method_field('DELETE') }}
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-danger" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    </form> --}}
                                 </p>
                             </form>
                         </div>

@@ -130,7 +130,8 @@
             <p>
                 <label for="first_date">Първа дата / Втора дата</label>
             <br/>
-                <input type="datetime-local" id="first_date" value="" name="first_date"> / <input type="datetime-local" id="second_date" value="" name="second_date">
+                <input type="date" id="first_date" value="" name="first_date"><input type="number" id="first_time_hours" name="first_time_hours" class="time-input" min="1" max="24" title="01 - 24">:<input type="number" id="first_time_minutes" name="first_time_minutes" class="time-minutes" min="1" max="59" title="01-59"> <br />/
+                <br /> <input type="date" id="second_date" value="" name="second_date"><input type="number" id="second_time_hours" name="second_time_hours" class="time-input" min="1" max="24" title="01 - 24">:<input type="number" id="second_time_minutes" name="second_time_minutes" class="time-minutes" min="1" max="59" title="01-59">
             </p>
             <p>
                 <label for="description">Описание</label>
@@ -156,9 +157,13 @@
                     <img src="{{asset('/images/student-hat.png')}}" alt="lecturer-icon" class="img-fluid"><br>
                         <span class="lection-order">{{$lection->order}}</span>
                 </div>
-                <span class="first-date-no-show" style="display:none">{{$lection->first_date->format('Y-m-d\TH:i:s')}}</span>
+                <span class="first-date-no-show" style="display:none">{{$lection->first_date->format('Y-m-d')}}</span>
+                 <span class="first-hours-no-show" style="display:none">{{$lection->first_date->format('H')}}</span>
+                 <span class="first-minutes-no-show" style="display:none">{{$lection->first_date->format('i')}}</span>
+                 <span class="second-hours-no-show" style="display:none">{{$lection->second_date->format('H')}}</span>
+                 <span class="second-minutes-no-show" style="display:none">{{$lection->second_date->format('i')}}</span>
                 @if(!is_null($lection->second_date))
-                    <span class="second-date-no-show" style="display:none">{{$lection->second_date->format('Y-m-d\TH:i:s')}}</span>
+                    <span class="second-date-no-show" style="display:none">{{$lection->second_date->format('Y-m-d')}}</span>
                 @else
                     <span class="second-date-no-show" style="display:none"></span>
                 @endif
@@ -323,9 +328,10 @@
                     <img src="{{asset('/images/test.png')}}" alt="lecturer-icon" class="img-fluid"><br>
                         <span class="lection-order">{{$lection->order}}</span>
                 </div>
-                <span class="first-date-no-show" style="display:none">{{$lection->first_date->format('Y-m-d\TH:i:s')}}</span>
+                <span class="first-date-no-show" style="display:none">{{$lection->first_date->format('Y-m-d')}}</span>
+                <span class="first-hours-no-show" style="display:none">{{$lection->first_date->format('h')}}</span>
                 @if(!is_null($lection->second_date))
-                    <span class="second-date-no-show" style="display:none">{{$lection->second_date->format('Y-m-d\TH:i:s')}}</span>
+                    <span class="second-date-no-show" style="display:none">{{$lection->second_date->format('Y-m-d')}}</span>
                 @else
                     <span class="second-date-no-show" style="display:none"></span>
                 @endif
@@ -395,7 +401,7 @@
 <div class="col-md-12 d-flex flex-row flex-wrap add-lecture text-center">
                     <div class="col-md-12">
                         <a href="#modal" data-url="{{route('lection.store')}}" data-order="{{{isset($lastOrder)?$lastOrder:1}}}" data-module={{$module->id}} data-old-title="{{old('title')}}" data-old-first="{{old('first_date_create')}}"
-                            data-old-second="{{old('second_date_create')}}" data-old-desc="{{old('description')}}" data-old-order="{{old('order')}}" data-old-video="{{old('video')}}" data-old-demo="{{old('demo')}}">
+                            data-old-second="{{old('second_date_create')}}" data-old-desc="{{old('description')}}" data-old-order="{{old('order')}}" data-old-video="{{old('video')}}" data-old-demo="{{old('demo')}}" data-old-first-time="{{old('first_time')}}" data-old-second-time="{{old('second_time')}}">
                             <img src="{{asset('/images/profile/add-icon.png')}}" alt="add-icon" class="img-fluid">Добави
                         </a>
                     </div>

@@ -67,14 +67,16 @@ class LectionController extends Controller
             $lection = Lection::with('Module', 'Module.Course')->findOrFail($request->lection);
             $store = true;
         } else {
-            if (!is_null($request->title) && !empty($request->title) && !is_null($request->first_date_create) && !empty($request->first_date_create) && !is_null($request->description) && !empty($request->description)) {
+            if (!is_null($request->title) && !empty($request->title) && !is_null($request->first_date_create) && !is_null($request->first_time_hours) && !is_null($request->first_time_minutes) && !is_null($request->description) && !empty($request->description)) {
                 $lection = new Lection;
                 $lection->course_modules_id = $request->module;
                 $lection->title = $request->title;
                 try {
-                    $lection->first_date = Carbon::parse($request->first_date_create);
+                    $time = $request->first_time_hours.$request->first_time_minutes;
+                    $lection->first_date = Carbon::parse($request->first_date_create.$time);
                     if (!is_null($request->second_date_create)) {
-                        $lection->second_date = Carbon::parse($request->second_date_create);
+                        $second_time = $request->second_time_hours.$request->second_time_minutes;
+                        $lection->second_date = Carbon::parse($request->second_date_create.$second_time);
                     }
                 } catch (\Exception $err) {
                     $message = __('Невалидна Заявка!');
@@ -85,6 +87,7 @@ class LectionController extends Controller
                 $lection->order = $request->order;
                 $lection->visibility = $request->visibility;
                 $lection->save();
+
                 $lection = Lection::with('Module', 'Module.Course')->findOrFail($lection->id);
                 $store = true;
             } else {
@@ -191,11 +194,15 @@ class LectionController extends Controller
         ]);
         $lection = Lection::with('Module', 'Module.Course')->findOrFail($id);
 
-        if ($request->has('title') || $request->has('first_date') || $request->has('second_date') || $request->has('description') || $request->has('order')) {
+        if ($request->has('title') || $request->has('first_date') && $request->has('first_time_hours') && $request->has('first_time_minutes') || $request->has('second_date') && $request->has('second_time_hours') && $request->has('second_time_minutes') || $request->has('description') || $request->has('order')) {
             $lection->title = $request->title;
             try {
-                $lection->first_date = Carbon::parse($request->first_date);
-                $lection->second_date = Carbon::parse($request->second_date);
+                $time = $request->first_time_hours.$request->first_time_minutes;
+                $lection->first_date = Carbon::parse($request->first_date.$time);
+                if (!is_null($request->second_date)) {
+                    $second_time = $request->second_time_hours.$request->second_time_minutes;
+                    $lection->second_date = Carbon::parse($request->second_date.$second_time);
+                }
             } catch (\Exception $err) {
                 $message = __('Невалидна Заявка!');
                 return redirect()->back()->with('error', $message);
