@@ -437,12 +437,14 @@
 @forelse ($students as $student)
     <!--  one student -->
     <div class="col-md-3 d-flex flex-row flex-wrap one-student-holder ajax">
-        @if($student->User->picture)
-            <img src="{{asset('images/user-pics/'.$student->User->picture)}}" alt="student-pic" class="img-fluid one-student-pic">
-        @else
-            <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
-        @endif
-        <span class="edit-lection-students-pool">
+        <div class="col-md-12">
+            @if($student->User->picture)
+                <img src="{{asset('images/user-pics/'.$student->User->picture)}}" alt="student-pic" class="img-fluid one-student-pic">
+            @else
+                <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
+            @endif
+        </div>
+        <span class="edit-lection-students-pool col-md-12">
             {{$student->User->name}}
 
             {{$student->User->last_name}}
@@ -456,7 +458,7 @@
                 {{$student->User->location}}
             </span>
         </div>
-        <div class="col-md-12 flex-row flex-wrap student-options">
+        <div class="col-md-11 flex-row flex-wrap student-options">
             <div class="col-md-6 add-student text-right">
 
             </div>

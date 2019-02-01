@@ -40,7 +40,7 @@ a, ul>li>a, div>li>a {
     display: none;
 }
 
-.all-students-pool>div>img {
+.all-students-pool>div>div>img {
     float: none;
 }
 

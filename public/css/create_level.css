@@ -303,7 +303,7 @@ input[type=range]:focus {
 
 /*end of level options section*/
 /*students section*/
-.all-students-pool>div>img {
+.all-students-pool>div>div>img {
     float: left;
     max-width: 10vw;
     max-height: 10vw;
@@ -342,7 +342,7 @@ input[type=range]:focus {
 }
 
 .student-options>div {
-    margin-top: 0 !important;
+    margin-top: 1vw !important;
 }
 
 .removed-student {
@@ -433,6 +433,11 @@ input[type=range]:focus {
     word-wrap: break-word;
 }
 
+.one-student-pic {
+    width: 25vw;
+    height: 25vw;
+}
+
 /*end of students section*/
 /*Query's
 --------------------------------------------------------------------------------------------------*/
@@ -478,7 +483,7 @@ input[type=range]:focus {
         margin-top: 5vw;
     }
 
-    .all-students-pool>div>img {
+    .all-students-pool>div>div>img {
         max-width: 30vw;
         max-height: 10vw;
     }
@@ -527,7 +532,7 @@ input[type=range]:focus {
         margin-bottom: 4vw;
     }
 
-    .all-students-pool>div>img {
+    .all-students-pool>div>div>img {
         max-width: 20vw;
         max-height: 10vw;
     }
@@ -581,7 +586,7 @@ input[type=range]:focus {
         text-align: center;
     }
 
-    .all-students-pool>div>img {
+    .all-students-pool>div>div>img {
         max-width: 10vw;
         max-height: 10vw;
     }
@@ -630,7 +635,7 @@ input[type=range]:focus {
         /*text-align: center;*/
     }
 
-    .all-students-pool>div>img {
+    .all-students-pool>div>div>img {
         max-width: 10vw;
         max-height: 10vw;
     }
