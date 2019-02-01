@@ -459,6 +459,7 @@
         /*height: auto;*/
         width: 100%;
         min-height: 50%;
+        height: 80%;
     }
 
     .past-events>div>img {

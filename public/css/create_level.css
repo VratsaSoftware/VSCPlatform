@@ -88,6 +88,10 @@ input[type=text], textarea, .options-title, .name-course {
     transition: top ease 0.5s;
 }
 
+.lection-today {
+    border: 1px solid #f00;
+}
+
 .lectures-wrapper:hover {
     box-shadow: none;
     background: #fff;

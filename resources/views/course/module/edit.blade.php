@@ -160,12 +160,14 @@
                 <span class="first-date-no-show" style="display:none">{{$lection->first_date->format('Y-m-d')}}</span>
                  <span class="first-hours-no-show" style="display:none">{{$lection->first_date->format('H')}}</span>
                  <span class="first-minutes-no-show" style="display:none">{{$lection->first_date->format('i')}}</span>
-                 <span class="second-hours-no-show" style="display:none">{{$lection->second_date->format('H')}}</span>
-                 <span class="second-minutes-no-show" style="display:none">{{$lection->second_date->format('i')}}</span>
                 @if(!is_null($lection->second_date))
+                    <span class="second-hours-no-show" style="display:none">{{$lection->second_date->format('H')}}</span>
+                    <span class="second-minutes-no-show" style="display:none">{{$lection->second_date->format('i')}}</span>
                     <span class="second-date-no-show" style="display:none">{{$lection->second_date->format('Y-m-d')}}</span>
                 @else
                     <span class="second-date-no-show" style="display:none"></span>
+                    <span class="second-hours-no-show" style="display:none"></span>
+                    <span class="second-minutes-no-show" style="display:none"></span>
                 @endif
                 <div class="col-md-11 lecture-txt">
                     <span class="lection-title">{{$lection->title}}</span>
@@ -323,17 +325,26 @@
             <!-- end of one lecture -->
         @else
             <!-- start test -->
-            <div class="col-md-12 lectures-wrapper d-flex flex-row flex-wrap lection-test">
+            @if($lection->first_date->isToday() || !is_null($lection->second_date) && $lection->second_date->isToday())
+                <div class="col-md-12 lectures-wrapper d-flex flex-row flex-wrap lection-today lection-test">
+            @else
+                <div class="col-md-12 lectures-wrapper d-flex flex-row flex-wrap lection-test">
+            @endif
                 <div class="col-md-1 lecture-img text-center">
                     <img src="{{asset('/images/test.png')}}" alt="lecturer-icon" class="img-fluid"><br>
                         <span class="lection-order">{{$lection->order}}</span>
                 </div>
                 <span class="first-date-no-show" style="display:none">{{$lection->first_date->format('Y-m-d')}}</span>
-                <span class="first-hours-no-show" style="display:none">{{$lection->first_date->format('h')}}</span>
+                <span class="first-hours-no-show" style="display:none">{{$lection->first_date->format('H')}}</span>
+                <span class="first-minutes-no-show" style="display:none">{{$lection->first_date->format('i')}}</span>
                 @if(!is_null($lection->second_date))
                     <span class="second-date-no-show" style="display:none">{{$lection->second_date->format('Y-m-d')}}</span>
+                    <span class="second-hours-no-show" style="display:none">{{$lection->second_date->format('H')}}</span>
+                    <span class="second-minutes-no-show" style="display:none">{{$lection->second_date->format('i')}}</span>
                 @else
                     <span class="second-date-no-show" style="display:none"></span>
+                    <span class="second-hours-no-show" style="display:none"></span>
+                    <span class="second-minutes-no-show" style="display:none"></span>
                 @endif
                 <div class="col-md-11 lecture-txt">
                     <span class="lection-title">{{$lection->title}}</span>
