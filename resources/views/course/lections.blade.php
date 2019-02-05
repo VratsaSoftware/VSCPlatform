@@ -55,7 +55,7 @@
             @foreach ($lections as $key => $lection)
             @if(is_null($lection->type))
                 <!-- one lecture -->
-                @if($lection->first_date->isToday() || $lection->second_date->isToday())
+                @if($lection->first_date->isToday() || !is_null($lection->second_date) && $lection->second_date->isToday())
                     <div class="col-md-12 lectures-wrapper d-flex flex-row flex-wrap lection-today">
                 @else
                     <div class="col-md-12 lectures-wrapper d-flex flex-row flex-wrap">

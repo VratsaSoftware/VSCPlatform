@@ -41,7 +41,7 @@ class UserController extends Controller
             'name' => 'sometimes',
             'location' => 'sometimes',
             'dob' => 'sometimes|date_format:Y-m-d|before:'.Carbon::now(),
-            'email' => ['sometimes','unique:users']
+            'email' => ['sometimes','unique:users','email']
         ]);
         if (Input::hasFile('picture')) {
             $userPic = Input::file('picture');

@@ -3,10 +3,16 @@ $( function () {
 		if ( $( this ).val() > 24 ) {
 			$( this ).val( 24 );
 		}
+		if ( $( this ).val() < 10 ) {
+			$( this ).val( 00 + $( this ).val() );
+		}
 	} );
 	$( '.time-minutes' ).on( 'keyup', function () {
 		if ( $( this ).val() > 59 ) {
 			$( this ).val( 59 );
+		}
+		if ( $( this ).val() < 10 ) {
+			$( this ).val( 00 + $( this ).val() );
 		}
 	} );
 	var edit = false;
@@ -138,10 +144,16 @@ $( function () {
 			if ( $( this ).val() > 24 ) {
 				$( this ).val( 24 );
 			}
+			if ( $( this ).val() < 10 ) {
+				$( this ).val( 00 + $( this ).val() );
+			}
 		} );
 		$( '.time-minutes' ).on( 'keyup', function () {
 			if ( $( this ).val() > 59 ) {
 				$( this ).val( 59 );
+			}
+			if ( $( this ).val() < 10 ) {
+				$( this ).val( 00 + $( this ).val() );
 			}
 		} );
 		$( '.modal-content > .cf > div' ).html( '<input class="btn close-modal create-lection-btn" type="submit" name="submit" value="Добави">' );

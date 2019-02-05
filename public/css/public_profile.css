@@ -202,6 +202,12 @@ body::-webkit-scrollbar-thumb {
     /* border: 1px dotted grey; */
 }
 
+.beta-img {
+    width: 5vw;
+    /* margin-left: auto;
+    margin-top: -1vw; */
+}
+
 /*end of stats*/
 /*QUERY's
 ----------------------------------------------------------------------------------------------------*/
