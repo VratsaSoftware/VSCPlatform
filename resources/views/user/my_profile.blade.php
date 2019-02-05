@@ -38,19 +38,19 @@
                 <div class="col-md-12 header-name d-flex flex-row flex-wrap">
                     <div class="col-md-3 name-wrap">
                         <span class="name">{{Auth::user()->name}} {{Auth::user()->last_name}}</span>
-                        <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
+                        <button type="submit" value="submit" class="edit-btn btn btn-success" id="submit-name">
                             <i class="fas fa-pencil-alt"></i>
                         </button></div>
                     <div class="col-md-6 header-pic">
                         <div class="col-md-12">
                             @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
-                            <img src="{{asset('images/women-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
+                                <img src="{{asset('images/women-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
                             @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
-                            <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
+                                <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
                             @else
-                            <img src="{{asset('images/user-pics/'.Auth::user()->picture)}}" alt="profile-pic" class="profile-pic">
+                                <img src="{{asset('images/user-pics/'.Auth::user()->picture)}}" alt="profile-pic" class="profile-pic">
                             @endif
-                            <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
+                            <button type="submit" value="submit" class="edit-btn btn btn-success" id="submit-picture">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>
                         </div>
@@ -60,14 +60,14 @@
                     <div class="col-md-2 location-wrap text-left">
                         <img src="./images/profile/location-icon.png" alt="map-icon">
                         <span class="location">{{Auth::user()->location}}</span>
-                        <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
+                        <button type="submit" value="submit" class="edit-btn btn btn-success" id="submit-location">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
                     </div>
                     <div class="col-md-2 birthday-wrap text-left">
                         <img src="./images/profile/birthday-cake-icon.png" alt="birthday-icon">
                         <span class="birthday">{{Auth::user()->dob}}</span>
-                        <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
+                        <button type="submit" value="submit" class="edit-btn btn btn-success" id="submit-dob">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
                     </div>
@@ -75,7 +75,7 @@
                     <div class="col-md-4 mail">
                         <img src="./images/mail-icon.png" alt="mail-icon" class="img-fluid">
                         <span class="mail-txt">{{Auth::user()->email}}</span>
-                        <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success">
+                        <button type="submit" value="submit" class="edit-btn btn btn-success" id="submit-email">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
                     </div>
@@ -87,17 +87,17 @@
                     </script>
                     <div class="col-md-4 header-contacts text-right">
                         <div class="col-md-12">
-                            <a href="#" class="facebook"><img src="./images/profile/facebook-icon.svg" alt="fb"></a>
+                            <a href="#" class="facebook" target=" _blank"><img src="./images/profile/facebook-icon.svg" alt="fb"></a>
                             <p class="edit-social"><input type="text" id="facebook" name="facebook" value=""></p>
-                            <a href="#" class="linkedin"><img src="./images/profile/linkdin-icon.svg" alt="li"></a>
+                            <a href="#" class="linkedin" target=" _blank"><img src="./images/profile/linkdin-icon.svg" alt="li"></a>
                             <p class="edit-social"><input type="text" id="linkedin" name="linkedin" value=""></p>
-                            <a href="#" class="github"><img src="./images/profile/github-icon.svg" alt="gh"></a>
+                            <a href="#" class="github" target=" _blank"><img src="./images/profile/github-icon.svg" alt="gh"></a>
                             <p class="edit-social"><input type="text" id="github" name="github" value=""></p>
-                            <a href="#" class="skype"><img src="./images/profile/skype-icon.svg" alt="sk"></a>
+                            <a href="#" class="skype" target=" _blank"><img src="./images/profile/skype-icon.svg" alt="sk"></a>
                             <p class="edit-social"><input type="text" id="skype" name="skype" value=""></p>
-                            <a href="#" class="dribbble"><img src="./images/profile/dribble-icon.svg" alt="dr"></a>
+                            <a href="#" class="dribbble" target=" _blank"><img src="./images/profile/dribble-icon.svg" alt="dr"></a>
                             <p class="edit-social"><input type="text" id="dribbble" name="dribbble" value=""></p>
-                            <a href="#" class="behance"><img src="./images/profile/behance-icon.svg" alt="be"></a>
+                            <a href="#" class="behance" target=" _blank"><img src="./images/profile/behance-icon.svg" alt="be"></a>
                             <p class="edit-social"><input type="text" id="behance" name="behance" value=""></p>
                             @foreach($social_links as $social)
                             @if($social->SocialName->name == 'facebook')
@@ -128,7 +128,7 @@
                             @endforeach
 
                         </div>
-                        <button type="submit" name="submit" value="submit" class="edit-btn btn btn-success social-edit">
+                        <button type="submit" value="submit" class="edit-btn btn btn-success social-edit" id="submit-social">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
                     </div>
@@ -214,9 +214,9 @@
                                 <div class="col-md-4">
                                     <label class="switch">
                                         @if(Auth::user()->isVisible('образование'))
-                                        <input type="checkbox" class="edu-visibility" checked>
+                                            <input type="checkbox" class="edu-visibility" checked data-url="{{route('user.section.visibility')}}">
                                         @else
-                                        <input type="checkbox" class="edu-visibility">
+                                            <input type="checkbox" class="edu-visibility" data-url="{{route('user.section.visibility')}}">
                                         @endif
                                         <span class="slider round"></span>
                                     </label>
@@ -289,7 +289,7 @@
                             @endif
                             <textarea name="edu_description" id="edu_description" placeholder="{{$edu->description}}" style="overflow:auto;resize:none" rows="5" class="edit-edu" form="edu-form-{{$edu->id}}">{{$edu->description}}</textarea>
                             <p>
-                                <button name="submit" value="запази" class="btn btn-success edit-edu submit-edu"><i class="fas fa-save"></i></button>
+                                <button value="запази" class="btn btn-success edit-edu submit-edu"><i class="fas fa-save"></i></button>
                                 <button class="btn btn-info edit-edu edu-add-new"><i class="fas fa-plus"></i></button>
                             </p>
                         </form>
@@ -328,17 +328,17 @@
                                     @endforeach
                                 </select>
 
-                                <input type="text" name="institution_name" id="institution_name" value="{{old('institution_name')}}" class="section-el-bold institution_name" placeholder="име на институцията...">
+                                <input type="text" name="institution_name" id="institution_name" value="{{old('institution_name')}}" class="section-el-bold institution_name" placeholder="име на институцията..." data-url="{{route('edu.institution')}}">
                                 <p class="suggestion-ins-name"></p>
 
                                 <i class="fas fa-address-card"></i><br>
-                                <input type="text" name="specialty" id="specialty" value="{{old('specialty')}}" class="section-el-bold specialty" placeholder="специалност...">
+                                <input type="text" name="specialty" id="specialty" value="{{old('specialty')}}" class="section-el-bold specialty" placeholder="специалност..." data-url="{{route('edu.institution')}}">
                                 <p class="suggestion-ins-name"></p>
 
                                 <i class="fas fa-comment"></i><br />
                                 <textarea name="edu_description" id="edu_description" placeholder="коментар..." style="overflow:auto;resize:none" rows="5" class="section-el-bold" form="edu-form-create-1" value="{{old('edu_description')}}"></textarea>
 
-                                <p><button name="submit" value="запази" class="btn btn-success"><i class="fas fa-save"></i></button> <button class="btn btn-info edit-edu edu-add-new"><i class="fas fa-plus"></i></button></p>
+                                <p><button value="запази" class="btn btn-success"><i class="fas fa-save"></i></button> <button class="btn btn-info edit-edu edu-add-new"><i class="fas fa-plus"></i></button></p>
                             </form>
                         </span>
 
@@ -360,9 +360,9 @@
                                 <div class="col-md-4">
                                     <label class="switch">
                                         @if(Auth::user()->isVisible('работен опит'))
-                                        <input type="checkbox" class="work-visibility" checked>
+                                            <input type="checkbox" class="work-visibility" checked data-url="{{route('user.section.visibility')}}">
                                         @else
-                                        <input type="checkbox" class="work-visibility">
+                                            <input type="checkbox" class="work-visibility" data-url="{{route('user.section.visibility')}}">
                                         @endif
                                         <span class="slider round"></span>
                                     </label>
@@ -409,7 +409,7 @@
                             @endif
                             <textarea name="work_description" id="work_description" placeholder="{{$exp->description}}" style="overflow:auto;resize:none" rows="5" class="edit-work" form="work-form-update-{{$exp->id}}">{{$exp->description}}</textarea>
                             <p>
-                                <button name="submit" value="запази" class="btn btn-success edit-work"><i class="fas fa-save"></i></button>
+                                <button value="запази" class="btn btn-success edit-work"><i class="fas fa-save"></i></button>
                                 <button class="btn btn-info edit-work work-add-new"><i class="fas fa-plus"></i></button>
                             </p>
                         </form>
@@ -442,7 +442,7 @@
                                 <textarea name="description" id="description" placeholder="описание..." style="overflow:auto;resize:none" rows="5" class="section-el-bold" form="work-form-create-1"></textarea><br />
 
                                 <p>
-                                    <button name="submit" value="запази" class="btn btn-success"><i class="fas fa-save"></i></button>
+                                    <button value="запази" class="btn btn-success"><i class="fas fa-save"></i></button>
                                     <button class="btn btn-info edit-work work-add-new"><i class="fas fa-plus"></i></button>
                                 </p>
                             </form>
@@ -465,9 +465,9 @@
                                 <div class="col-md-4">
                                     <label class="switch">
                                         @if(Auth::user()->isVisible('интереси'))
-                                        <input type="checkbox" class="interest-visibility" checked>
+                                        <input type="checkbox" class="interest-visibility" checked data-url="{{route('user.section.visibility')}}">
                                         @else
-                                        <input type="checkbox" class="interest-visibility">
+                                        <input type="checkbox" class="interest-visibility" data-url="{{route('user.section.visibility')}}">
                                         @endif
                                         <span class="slider round"></span>
                                     </label>
@@ -522,7 +522,7 @@
                                 <p>
                                     <i class="fas fa-bullseye"></i>
                                     <p />
-                                    <select name="int_type" id="int_type" class="section-el-bold int_type">
+                                    <select name="int_type" id="int_type" class="section-el-bold int_type" data-url="{{url('/interest')}}">
                                         <option value="0" disabled selected>Тип/Разновидност</option>
                                         @foreach($interestTypes as $type)
                                         <option value="{{$type->id}}" class="int-type-select">{{$type->type}}</option>
@@ -536,7 +536,7 @@
 
                                     </select>
                                     <p>
-                                        <button name="submit" value="запази" class="btn btn-success"><i class="fas fa-save"></i></button>
+                                        <button value="запази" class="btn btn-success"><i class="fas fa-save"></i></button>
                                         <button class="btn btn-info edit-hobbie hobbie-add-new"><i class="fas fa-plus"></i></button>
                                     </p>
                             </form>

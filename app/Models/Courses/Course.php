@@ -11,6 +11,7 @@ class Course extends Model
 {
     protected $table = 'courses';
     protected $dates = ['starts','ends'];
+    protected $guarded = [];
 
     public function Modules()
     {
@@ -27,13 +28,19 @@ class Course extends Model
         return $this->hasMany(Certification::class);
     }
 
-    public static function getModules($course)
+    public static function getModules($course, $isLecturer)
     {
-        return Module::where('course_id', $course)->with('Lections')->oldest('order')->get();
+        if ($isLecturer) {
+            return Module::where('course_id', $course)->with('Lections')->oldest('order')->get();
+        }
+        return Module::where([
+            ['course_id', $course],
+            ['visibility','!=','draft'],
+            ])->with('Lections')->oldest('order')->get();
     }
 
     public function getNameAttribute($value)
     {
-        return mb_convert_case($value, MB_CASE_TITLE, 'UTF-8');
+        return ucfirst($value);
     }
 }

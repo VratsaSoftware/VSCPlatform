@@ -11,6 +11,7 @@ class Module extends Model
 {
     protected $table = 'courses_modules';
     protected $dates = ['starts','ends'];
+    protected $guarded = [];
 
     public function Course()
     {
@@ -36,8 +37,14 @@ class Module extends Model
         return mb_strtoupper($value);
     }
 
-    public static function getLections($module)
+    public static function getLections($module, $user = null)
     {
-        return Lection::where('course_modules_id', $module)->with('Video')->oldest('order')->get();
+        if (!$user) {
+            return Lection::where([
+                ['course_modules_id', $module],
+                ['visibility', '!=', 'draft'],
+                ])->with('Video', 'Comments', 'Comments.Author')->oldest('order')->get();
+        }
+        return Lection::where('course_modules_id', $module)->with('Video', 'Video.Viewed', 'Video.Viewed.User', 'Comments', 'Comments.Author')->oldest('order')->get();
     }
 }

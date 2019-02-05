@@ -13,7 +13,7 @@ body {
     top: 0;
     left: 0;
     background: #fff;
-    /*overflow-x: hidden;*/
+    overflow: hidden;
     padding: 1vw;
     box-shadow: inset -1px 0px 0px #DDDDDD;
 }
@@ -532,6 +532,11 @@ input:checked+.slider:before {
     .nested-nav>ul>li>a>img {
         /*display: none;*/
         width: 1.5vw;
+    }
+
+    .nested-nav>ul>li:not(:first-child)>a>img {
+        /*display: none;*/
+        width: 2.5vw;
     }
 
     .public-switch {

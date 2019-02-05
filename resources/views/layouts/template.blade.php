@@ -26,14 +26,13 @@
         <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
 
         @include('layouts.top-bar')
-
         @if(Auth::user() && Auth::user()->isAdmin())
             @include('admin.left-bar')
         @endif
         @if(Auth::user() && Auth::user()->isLecturer())
             @include('lecturer.left-bar')
         @endif
-        @if(Auth::user())
+        @if(Auth::user() && !Auth::user()->isLecturer() && !Auth::user()->isAdmin())
             @include('user.left-bar')
         @endif
                 @yield('content')
@@ -45,6 +44,8 @@
                 <script src="{{asset('/js/fixed-left-top-menu.js')}}"></script>
                 <script src="{{asset('/js/edit-showing-pencil.js')}}"></script>
                 <script src="{{asset('/js/slide-alerts.js')}}"></script>
+                <!-- //preview picture before saving -->
+                <script src="{{asset('/js/profile-picture-preview.js')}}" charset="utf-8" async></script>
     </body>
     <script type="text/javascript">
         $(function() {
@@ -53,8 +54,12 @@
                     $('head').append('<link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />');
                     $('head').append('<link rel="stylesheet" href="{{asset('/css/public_profile.css')}}" />');
                     $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_profile.css')}}" />');
-                    $('head').append('<link rel="stylesheet" href="{{asset('/css/lecturer_course_options.css')}}" />');
                     $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_events.css')}}" />');
+                    $('head').append('<link rel="stylesheet" href="{{asset('/css/lecturer_profile.css')}}" />');
+                    $('head').append('<link rel="stylesheet" href="{{asset('/css/create_course.css')}}" />');
+                    $('head').append('<link rel="stylesheet" href="{{asset('/css/create_level.css')}}" />');
+                    $('head').append('<link rel="stylesheet" href="{{asset('/css/lecturer_course_options.css')}}" />');
+                    $('head').append('<link rel="stylesheet" href="{{asset('/css/lecturer_courses.css')}}" />');
                     });
     </script>
 

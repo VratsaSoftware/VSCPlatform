@@ -3,6 +3,31 @@
 @section('content')
 <div class="content-wrap">
     <div class="col-md-12 d-flex flex-row flex-wrap options-wrap">
+        @if (!empty(Session::get('success')))
+                <p>
+                    <div class="alert alert-success" style="margin-top:-5vw;">
+                        <p>{{ session('success') }}</p>
+                    </div>
+                </p>
+                @endif
+                @if ($errors->any())
+                <div class="alert alert-danger" style="margin-top:-5vw;">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+                @endif
+                @if ($message = Session::get('error'))
+                <p>
+                    <div class="alert alert-danger" style="margin-top:-5vw;">
+                        <button type="button" class="close" data-dismiss="alert">
+                        </button>
+                        <p>{{ $message }}</p>
+                    </div>
+                </p>
+                @endif
         @foreach ($modules as $module)
         <div class="col-md-6 right-option">
             @if($module->starts->lt(\Carbon\Carbon::now()) && $module->ends->gt(\Carbon\Carbon::now()))
@@ -38,10 +63,14 @@
                                 </a>
                             @endif
                         @endif
-                        @if(!is_null($module->picture))
-                            <img src="{{asset('/images/course-'.str_replace(' ', '', strtolower($course->name)).'/modules/'.str_replace(' ', '', strtolower($module->name)).'/'.$module->picture)}}" alt="">
+                        @if(!is_null($module->picture) || !empty($module->picture))
+                            <img src="{{asset('/images/course-'.$course->id.'/module-'.$module->id.'/'.$module->picture)}}" alt="">
                         @else
-                            <img src="{{asset('/images/course-'.str_replace(' ', '', strtolower($course->name)).'/'.$course->picture)}}" alt="">
+                            @if(!is_null($course->picture) || !empty($course->picture))
+                                <img src="{{asset('/images/course-'.$course->id.'/'.$course->picture)}}" alt="">
+                            @else
+                                <img src="{{asset('/images/img-placeholder.jpg')}}" alt="no photo">
+                            @endif
                         @endif
                     </div>
                     @if($module->starts->lt(\Carbon\Carbon::now()) && $module->ends->gt(\Carbon\Carbon::now()))

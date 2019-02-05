@@ -43,7 +43,7 @@ class User extends Authenticatable
 
     public function Role()
     {
-        return $this->hasOne(Role::class, 'cl_role_id');
+        return $this->hasMany(Role::class, 'id', 'cl_role_id');
     }
 
     public function Lecturer()
@@ -90,10 +90,18 @@ class User extends Authenticatable
         return false;
     }
 
-    public function getCourse()
+    public function studentGetCourse()
     {
         $userId = Auth::user()->id;
         return Course::with('Modules', 'Modules.ModulesStudent', 'Modules.ModulesStudent.User')->whereHas('Modules.ModulesStudent', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })->where('visibility', '!=', 'draft')->get();
+    }
+
+    public function lecturerGetCourses()
+    {
+        $userId = Auth::user()->id;
+        return Course::with('Lecturers')->whereHas('Lecturers', function ($query) use ($userId) {
             $query->where('user_id', $userId);
         })->get();
     }
@@ -105,8 +113,13 @@ class User extends Authenticatable
 
     public function isLecturer()
     {
-        $isLecturer = CourseLecturer::where('user_id', Auth::user()->id)->first();
-        if ($isLecturer) {
+        $isOnCourse = CourseLecturer::where('user_id', Auth::user()->id)->first();
+        $role = Role::find(Auth::user()->cl_role_id);
+        $hasRole = true;
+        if ($role->role != 'lecturer') {
+            $hasRole = false;
+        }
+        if ($isOnCourse || $hasRole) {
             return true;
         }
         return false;

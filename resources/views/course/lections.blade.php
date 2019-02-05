@@ -55,7 +55,7 @@
             @foreach ($lections as $key => $lection)
             @if(is_null($lection->type))
                 <!-- one lecture -->
-                @if($lection->first_date->isToday() || $lection->second_date->isToday())
+                @if($lection->first_date->isToday() || !is_null($lection->second_date) && $lection->second_date->isToday())
                     <div class="col-md-12 lectures-wrapper d-flex flex-row flex-wrap lection-today">
                 @else
                     <div class="col-md-12 lectures-wrapper d-flex flex-row flex-wrap">
@@ -96,7 +96,7 @@
                         <div class="col-md-12 lecture-options text-center d-flex flex-row flex-wrap">
                             <div class="col-md-3 video-lecture">
                                      @if($lection->Video()->exists())
-                                         <a data-toggle="modal" data-target="#modal" href="#modal">видео</a>
+                                         <a data-toggle="modal" data-target="#modal" href="#modal" data-user="{{isset(Auth::user()->id)?Auth::user()->id:0}}" data-video-id="{{$lection->Video->id}}" data-url="{{route('lection.video.show')}}">видео</a>
                                      @else
                                         <span class="empty-data">видео</span>
                                      @endif
@@ -111,14 +111,14 @@
                             </div>
                             <div class="col-md-2 presentation-lecture">
                                 @if($lection->presentation)
-                                    <a href="{{asset('/data/course-'.str_replace(' ', '', strtolower($module->Course->name)).'/modules/'.str_replace(' ', '', strtolower($module->name)).'/slides-'.$lection->id.'/'.$lection->presentation)}}" target="__blank">слайдове </a>
+                                    <a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/slides-'.$lection->id.'/'.$lection->presentation)}}" target="__blank">слайдове </a>
                                 @else
                                     <span class="empty-data">слайдове</span>
                                 @endif
                             </div>
                             <div class="col-md-2 homework-lecture">
                                 @if($lection->homework_criteria)
-                                    <a href="{{asset('/data/course-'.str_replace(' ', '', strtolower($module->Course->name)).'/modules/'.str_replace(' ', '', strtolower($module->name)).'/homework-'.$lection->id.'/'.$lection->homework_criteria)}}" target="__blank">за домашно </a>
+                                    <a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/homework-'.$lection->id.'/'.$lection->homework_criteria)}}" target="__blank">за домашно </a>
                                 @else
                                     <span class="empty-data">за домашно</span>
                                 @endif
@@ -240,54 +240,12 @@
 
     </div>
 </div>
-<script>
-        $(function(){
-            var offset;
-            $('#modal').css('display','none');
-            $('head').append('<link rel="stylesheet" href="{{asset('/css/create_level.css')}}" />');
-            $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_events.css')}}" />');
-            $('head').append('<link rel="stylesheet" href="{{asset('/css/student_lectures.css')}}" />');
-            $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_course_options.css')}}" />');
-
-            $('.video-lecture > a').on('click', function() {
-                $('.copy > p').html('<iframe width="auto" height="auto" src=""></iframe>');
-                $('.copy > p').find('iframe').attr('src', $(this).next('.video-holder').find('.video-url').html());
-                $('.modal-header').find('h2').html($(this).next('.video-holder').find('.video-title').html());
-                $('#modal').show();
-            });
-
-            $('.comment > a').on('click', function() {
-                $('.copy > p').html($(this).next('.comment-holder').html());
-                $('.modal-content > .cf > div').html('<input class="btn close-modal" type="submit" name="submit" id="send_comment" value="Изпрати">');
-                $('#modal').show();
-                $('#send_comment').on('click',function(){
-                    $('#comment_form').submit();
-                });
-            });
-
-            $('.read-more').on('click',function(){
-                $('.modal-header').find('h2').html($(this).parent().parent().find('.lection-title').html());
-                $('.copy > p').html($(this).attr('data'));
-                $('#modal').show();
-            });
-
-            //empty modal on close button click
-            $('.close-modal').on('click', function() {
-                closeModal();
-            });
-
-            $(document).keyup(function(e) {
-                 if (e.key === "Escape" && $('#modal').is(':visible')) {
-                     closeModal();
-                }
-            });
-
-            function closeModal(){
-                $('#modal').hide();
-                $('.copy > p').html(' ');
-                $('.modal-content > .cf > div').html(' ');
-            }
-
-        });
-    </script>
+<script src="{{asset('/js/lections.js')}}"></script>
+<script type="text/javascript">
+    $(function(){
+        $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_events.css')}}" />');
+        $('head').append('<link rel="stylesheet" href="{{asset('/css/student_lectures.css')}}" />');
+        $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_course_options.css')}}" />');
+    });
+</script>
 @endsection
