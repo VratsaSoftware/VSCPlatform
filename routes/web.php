@@ -13,8 +13,25 @@
 
 
 Route::get('/', function () {
-    return view('auth.login');
+    return view('static.home');
 })->name('home');
+
+// static pages
+Route::get('/about', function () {
+    return view('static.about');
+})->name('about');
+
+Route::get('/programming-courses', function () {
+    return view('static.programming');
+})->name('programmingCourses');
+
+Route::get('/digital-marketing', function () {
+    return view('static.digital_marketing');
+})->name('digitalMarketing');
+
+Route::get('/mission', function () {
+    return view('static.mission');
+})->name('mission');
 
 Auth::routes();
 

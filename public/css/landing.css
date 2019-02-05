@@ -862,6 +862,39 @@ body {
 }
 
 /*end of hamburger*/
+.dropdown-content, .dropdown-content-about {
+    display: none;
+    position: absolute;
+    background-color: #1C8800;
+    min-width: 160px;
+    z-index: 1;
+    margin-left: 5%;
+    border-radius: 10px;
+}
+
+.dropdown-content-about {
+    margin-left: -5%;
+}
+
+/* Links inside the dropdown */
+.dropdown-content>a, .dropdown-content-about>a {
+    color: #fff;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    font-family: Ubuntu;
+}
+
+.dropdown-content>a:hover, .dropdown-content-about>a:hover {
+    font-weight: bolder;
+    /* text-decoration: underline; */
+}
+
+.dropdown-el:hover .dropdown-content, .dropdown-about:hover .dropdown-content-about {
+    background-color: #1C8800;
+    display: block;
+}
+
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /*query's */
 /* Extra small devices (phones, 600px and down) */
