@@ -70,20 +70,9 @@
                 <span id="candidate"><a href="{{route('login')}}">ВХОД</a></span>
             </div>
         </div>
-        <div class="hamburger-wrap col-sm-12 col-md-12 text-center">
-            <button class="hamburger"><img src="{{asset('/images/hamburger-menu.png')}}" alt=""></button>
-            <button class="cross">&#735;</button>
-            <div class="menu col-md-12 col-sm-12 col-xs-12">
-                <ul class="hamburger-nav">
-                    <li class="nav-item"><a href="#">Начало</a></li>
-                    <li class="nav-item"><a href="{{route('about')}}">За нас</a></li>
-                    <li class="nav-item"><a href="{{route('programmingCourses')}}">Програмиране</a></li>
-                    <li class="nav-item"><a href="{{route('digitalMarketing')}}">Дигитален Маркетинг</a></li>
-                    <li class="nav-item"><a href="{{route('login')}}" class="right-mobile">Вход</a></li>
-                    <li class="nav-item"><a href="#" class="right-mobile">Кандидатствай</a></li>
-                </ul>
-            </div>
-        </div>
+        <!-- hamburger -->
+        @include('static.hamburger_menu')
+        <!-- end of hamburger -->
     </div>
     </div>
     <!-- end of header section -->

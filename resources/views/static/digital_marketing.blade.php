@@ -36,19 +36,7 @@
     <div class="section">
         <div id="header" style="background: url(./images/cover-img-smallest.png)">
             <!-- hamburger -->
-            <div class="hamburger-wrap col-sm-12 col-md-12 text-center">
-                <button class="hamburger"><img src="./images/hamburger-menu.png" alt=""></button>
-                <button class="cross">&#735;</button>
-                <div class="menu col-md-12 col-sm-12 col-xs-12">
-                    <ul class="hamburger-nav">
-                        <li class="nav-item"><a href="{{route('home')}}">Начало</a></li>
-                        <li class="nav-item"><a href="{{route('about')}}">За нас</a></li>
-                        <li class="nav-item"><a href="./digital_marketing.html">Дигитален Маркетинг</a></li>
-                        <li class="nav-item"><a href="{{route('login')}}" class="right-mobile">Вход</a></li>
-                        <li class="nav-item"><a href="#" class="right-mobile">Кандидатствай</a></li>
-                    </ul>
-                </div>
-            </div>
+            @include('static.hamburger_menu')
             <!-- end of hamburger -->
             <div class="overlay-marketing">
                 <div id="logo" class="col-md-12 text-center">
@@ -59,7 +47,9 @@
                     <span>Покори върховете на<br /> Дигиталния Маркетинг</span>
                 </div>
                 <div class="header-sub-title col-md-12 text-center">
-                    <span>Кандидатствай от 26 октомври 2018г</span>
+                    <span>Курса започва след</span><br/>
+                </br/>
+                    <span class="timer-digital"><img src="{{asset('/images/loaders/load-29.gif')}}" alt="timer"/></span>
                 </div>
                 <div class="header-button col-md-12 text-center mb-5">
                     <span id="prepare"><a href="#application">Запиши се</a></span>
@@ -339,6 +329,7 @@
     </div>
     <script src="{{asset('/js/hamburger-menu.js')}}"></script>
     <script src="{{asset('/js/program-tabs.js')}}"></script>
+    <script src="{{asset('/js/countdownTimer.js')}}"></script>
     <script>
         $(function() {
             $('.main-nav-list > li > a').on('click', function() {
@@ -365,6 +356,16 @@
                 $("#header-sticky").removeClass('sticky-marketing');
             }
         });
+    </script>
+    <script>
+    // Set the date we're counting down to
+    var programmingDate = new Date("Feb 09, 2019 00:00:00").getTime();
+    var timerClass = '.timer-digital';
+
+    // Update the count down every 1 second
+    var start = setInterval(function() {
+        timer(programmingDate,timerClass)
+    }, 1000);
     </script>
 </body>
 

@@ -100,6 +100,7 @@ a {
     font-family: Ubuntu;
     font-size: 2.1vw;
     letter-spacing: 1px;
+    /* display: none; */
 }
 
 .header-title, .header-sub-title, .header-button {
@@ -116,6 +117,10 @@ a {
     margin-bottom: 5vw;
     display: inline-block;
     margin-top: 7vw;
+}
+
+#prepare:hover {
+    background: #ffd94b;
 }
 
 #prepare>a {
@@ -938,13 +943,61 @@ a {
     border: 1px solid #FF8F29 !important;
 }
 
+.timer-programming, .timer-digital {
+    font-family: Comfortaa;
+    font-size: 5vw;
+    display: block;
+    /* margin-bottom: 10vw; */
+    margin-top: 5vw;
+    /* -webkit-text-stroke: 1px black; */
+}
+
+.timer-programming {
+    -webkit-text-stroke: 1px #128900;
+}
+
+.timer-digital {
+    -webkit-text-stroke: 1px #FF8F29;
+}
+
+.timer-text {
+    font-family: Comfortaa;
+    font-size: 2vw;
+    color: #fff;
+}
+
+.timer-close {
+    color: #f00;
+    -webkit-animation: pulsate 5s ease-out;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-text-stroke: 1px #fff;
+}
+
+@-webkit-keyframes pulsate {
+    0% {
+        color: #f00;
+    }
+
+    50% {
+        color: #ff7f7f;
+    }
+
+    100% {
+        color: #fff;
+    }
+}
+
+.no-show {
+    display: none;
+}
+
 /*end of application section*/
 /*----------------------------------------------------------------------------------------------------*/
 /*QUERY's */
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .header-title, .header-sub-title, .header-button {
-        margin-top: 25vw;
+        margin-top: 5vw;
     }
 
     .header-title {
@@ -1299,6 +1352,10 @@ a {
 @media only screen and (min-width: 1200px) {
     .header-title, .header-sub-title, .header-button {
         margin-top: 5vw;
+    }
+
+    .header-button {
+        margin-top: 1vw;
     }
 
     .header-title {

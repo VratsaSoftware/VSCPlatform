@@ -1,20 +1,10 @@
 <!DOCTYPE html>
 <html lang="bg">
-
 <head>
     <meta charset="UTF-8">
     <title>Враца Софтуер Общество</title>
-    <link rel="stylesheet" href="{{asset('/css/landing.css')}}">
-    <link rel="stylesheet" href="{{asset('/css/bootstrap.css')}}">
-    <link rel="stylesheet" href="{{asset('/css/bootstrap-grid.css')}}">
-    <link rel="stylesheet" href="{{asset('/css/slick.css')}}">
-    <link rel="stylesheet" href="{{asset('/css/slick-theme.css')}}">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- JQuery -->
-    <script type="text/javascript" src="{{asset('/js/jquery-3.3.1.js')}}"></script>
-    <!-- scroll -->
-    <script type="text/javascript" src="{{asset('/js/jquery-sectionsnap.js')}}"></script>
     <!-- favicon -->
     <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png-white.png')}}" />
     <!-- facebook -->
@@ -26,7 +16,10 @@
 </head>
 
 <body>
-    <script src="./js/jquery.morelines.js"></script>
+    <!-- JQuery -->
+    <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
+    <!-- scroll -->
+    <script type="text/javascript" src="{{asset('/js/jquery-sectionsnap.js')}}" async></script>
     <div id="content">
         <!-- header section - nav - gallery -->
         <div class="section">
@@ -71,21 +64,7 @@
                     </div>
                 </div>
             </div>
-            <div class="hamburger-wrap col-sm-12 col-md-12 text-center">
-                <button class="hamburger"><img src="{{asset('/images/hamburger-menu.png')}}" alt=""></button>
-                <button class="cross">&#735;</button>
-                <div class="menu col-md-12 col-sm-12 col-xs-12">
-                    <ul class="hamburger-nav">
-                        <li class="nav-item"><a href="#">Начало</a></li>
-                        <li class="nav-item"><a href="{{route('mission')}}">Мисия</a></li>
-                        <li class="nav-item"><a href="{{route('about')}}">За нас</a></li>
-                        <li class="nav-item"><a href="{{route('programmingCourses')}}">Програмиране</a></li>
-                        <li class="nav-item"><a href="{{route('digitalMarketing')}}">Дигитален Маркетинг</a></li>
-                        <li class="nav-item"><a href="{{route('login')}}" class="right-mobile">Вход</a></li>
-                        <li class="nav-item"><a href="#" class="right-mobile">Кандидатствай</a></li>
-                    </ul>
-                </div>
-            </div>
+            @include('static.hamburger_menu')
         </div>
         <!-- end of header section -->
 
@@ -332,10 +311,19 @@
 
                     <div class="col-md-3"></div>
 
-                    <div class="p-3 col-md-3 sponsors-5"><img src="{{asset('/images/partners/eSkills-For-Future-logo.png')}}" alt="eSkills-For-Future-logo" class="img-fluid"></div>
+                    <div class="p-3 col-md-3 sponsors-9"><img src="{{asset('/images/partners/eSkills-For-Future-logo.png')}}" alt="eSkills-For-Future-logo" class="img-fluid"></div>
 
-                    <div class="p-3 col-md-3 sponsors-6"><img src="{{asset('/images/partners/Startup-logo-main.png')}}" alt="Startup-logo-main" class="img-fluid"></div>
+                    <div class="p-3 col-md-3 sponsors-10"><img src="{{asset('/images/partners/Startup-logo-main.png')}}" alt="Startup-logo-main" class="img-fluid"></div>
                     <div class="col-md-3"></div>
+                </div>
+                <div class="col-md-5">
+
+                </div>
+                <div class="col-md-2 b-description_readmore_button">
+                    Покажи още
+                </div>
+                <div class="col-md-5">
+
                 </div>
                 <!-- end of only 4 visible -->
 
@@ -402,16 +390,16 @@
         </div>
         <!-- end of cookies section -->
 
-        <script src="{{asset('/js/front-gallery.js')}}"></script>
-        <script src="{{asset('/js/custom-gallery.js')}}"></script>
-        <script src="{{asset('/js/scroll.js')}}"></script>
-        <script src="{{asset('/js/numbers-section-trigger.js')}}"></script>
-        <script src="{{asset('/js/filmstrip.js')}}"></script>
-        <script src="{{asset('/js/sponsors.js')}}"></script>
-        <script src="{{asset('/js/students.js')}}"></script>
+        <script src="{{asset('/js/front-gallery.js')}}" async></script>
+        <script src="{{asset('/js/custom-gallery.js')}}" async></script>
+        <script src="{{asset('/js/scroll.js')}}" async></script>
+        <script src="{{asset('/js/numbers-section-trigger.js')}}" async></script>
+        <script src="{{asset('/js/filmstrip.js')}}" async></script>
+        <script src="{{asset('/js/sponsors.js')}}" async></script>
+        <script src="{{asset('/js/students.js')}}" async></script>
         <script src="{{asset('/js/slick.js')}}"></script>
-        <script src="{{asset('/js/right-dot-menu.js')}}"></script>
-        <script src="{{asset('/js/hamburger-menu.js')}}"></script>
+        <script src="{{asset('/js/right-dot-menu.js')}}" async></script>
+        <script src="{{asset('/js/hamburger-menu.js')}}" async></script>
         <script>
             $(function() {
                 $('.main-nav-list > li > a').on('click', function() {
@@ -420,6 +408,15 @@
                     }, 500, 'linear');
                 });
             })
+        </script>
+        <script type="text/javascript">
+            $(function() {
+                $('head').append('<link rel="stylesheet" href="{{asset('/css/landing.css')}}">');
+                $('head').append('<link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}">');
+                $('head').append('<link rel="stylesheet" href="{{asset('/css/bootstrap-grid.min.css')}}">');
+                $('head').append('<link rel="stylesheet" href="{{asset('/css/slick.css')}}">');
+                $('head').append('<link rel="stylesheet" href="{{asset('/css/slick-theme.css')}}">');
+                });
         </script>
 </body>
 
