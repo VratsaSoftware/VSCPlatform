@@ -17,7 +17,7 @@
                 <div class="header-sub-title col-md-12 text-center">
                     <span>Курса започва след</span><br/>
                 </br/>
-                    <span class="timer-programming"><img src="{{asset('/images/loaders/load-28.gif')}}" alt="timer"/></span>
+                    <span class="timer-programming"><img src="{{asset('/images/loaders/load-31.gif')}}" alt="timer"/></span>
                 </div>
                 <div class="header-button col-md-12 text-center mb-5">
                     <span id="prepare"><a href="#application">Запиши се</a></span>
