@@ -76,14 +76,13 @@
     font-family: Comfortaa;
 }
 
-.steps>li:hover {
+/* .steps>li:hover {
     cursor: pointer;
     background: #115200;
     -webkit-border-radius: 50%;
     -moz-border-radius: 50%;
     border-radius: 50%;
-}
-
+} */
 .steps>li:first-child::before {
     display: none;
 }

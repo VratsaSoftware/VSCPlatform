@@ -3,7 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Враца Софтуер Общество</title>
-
+    <meta name="description" content="Развиваме дигитална индустрия във Враца">
+    <meta name="keywords" content="Враца Софтуер,Програмиране,Курсове,Програмисти,Обучения,Враца">
+    <meta name="author" content="ВСО 2019">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- favicon -->
     <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png-white.png')}}" />
@@ -48,11 +50,11 @@
                 </nav>
 
                 <ul id='right-menu'>
-                    <li><a href="#header"><img src="./images/oval.png"></a>
-                    <li><a href="#numbers"><img src="./images/oval.png"></a>
-                    <li><a href="#events"><img src="./images/oval.png"></a>
-                    <li><a href="#partners"><img src="./images/oval.png"></a>
-                    <li><a href="#testimonials"><img src="./images/oval.png"></a>
+                    <li><a href="#header"><img src="{{asset('/images/oval.png')}}" alt="nav-img"></a>
+                    <li><a href="#numbers"><img src="{{asset('/images/oval.png')}}" alt="nav-img"></a>
+                    <li><a href="#events"><img src="{{asset('/images/oval.png')}}" alt="nav-img"></a>
+                    <li><a href="#partners"><img src="{{asset('/images/oval.png')}}" alt="nav-img"></a>
+                    <li><a href="#testimonials"><img src="{{asset('/images/oval.png')}}" alt="nav-img"></a>
                 </ul>
 
                 <div class="row buttons-right col-md-2">
@@ -73,8 +75,8 @@
             <div id="carousel">
                 <div class="slideshow-container">
 
-                    <div class="mySlides">
-                        <img src="{{asset('/images/home-top-slider/hack-vratsa16-smaller.jpg')}}" style="width:100%">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/hack-vratsa16-smaller.jpg')}}" data-loader="{{asset('/images/loaders/load-7.gif')}}">
+                        <img src="{{asset('/images/loaders/load-7.gif')}}" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">9-месечни курсове по програмиране</span>
@@ -91,8 +93,8 @@
                         </div>
                     </div>
 
-                    <div class="mySlides">
-                        <img src="{{asset('/images/home-top-slider/digital-2.png')}}" style="width:100%">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/digital-2.png')}}" data-loader="{{asset('/images/loaders/load-7.gif')}}">
+                        <img src="{{asset('/images/loaders/load-7.gif')}}" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">Безплатен 4-месечен курс по дигитален маркетинг</span>
@@ -108,8 +110,8 @@
                         </div>
                     </div>
 
-                    <div class="mySlides">
-                        <img src="{{asset('/images/home-top-slider/cw-1.jpg')}}" width="100%">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/cw-1.jpg')}}" data-loader="{{asset('/images/loaders/load-7.gif')}}">
+                        <img src="{{asset('/images/loaders/load-7.gif')}}" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">Предстои CodeWeek Враца - най-голямото ИТ събитие на северозапада</span>
@@ -125,8 +127,8 @@
                         </div>
                     </div>
 
-                    <div class="mySlides">
-                        <img src="{{asset('/images/home-top-slider/kids-1.jpg')}}" width="100%">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/kids-1.jpg')}}" data-loader="{{asset('/images/loaders/load-7.gif')}}">
+                        <img src="{{asset('/images/loaders/load-7.gif')}}" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">Ново: ИТ курсове за деца 6-11год. във Враца </span>
@@ -142,8 +144,8 @@
                         </div>
                     </div>
 
-                    <div class="mySlides">
-                        <img src="./images/home-top-slider/telerik_academy_school.jpg" width="100%">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/telerik_academy_school.jpg')}}" data-loader="{{asset('/images/loaders/load-7.gif')}}">
+                        <img src="{{asset('/images/loaders/load-7.gif')}}" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">9 групи на Телерик академия във Враца</span>
@@ -166,11 +168,11 @@
                 <br>
 
                 <div id="thumbnails" class="col-md-12">
-                    <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/vsc-tumb.jpg')}}" width="100%"></span>
-                    <span class="dot" onclick="currentSlide(2)"><img src="{{asset('/images/home-top-slider/digital-thumb.png')}}" width="100%"></span>
-                    <span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/cw-tumb.png')}}" width="100%"></span>
-                    <span class="dot" onclick="currentSlide(4)"><img src="{{asset('/images/home-top-slider/mindhub-tumb.png')}}" width="100%"></span>
-                    <span class="dot" onclick="currentSlide(5)"><img src="{{asset('/images/home-top-slider/telerik-tumb2.png')}}" width="100%"></span>
+                    <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/vsc-tumb.jpg')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(2)"><img src="{{asset('/images/home-top-slider/digital-thumb.png')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/cw-tumb.png')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(4)"><img src="{{asset('/images/home-top-slider/mindhub-tumb.png')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(5)"><img src="{{asset('/images/home-top-slider/telerik-tumb2.png')}}" width="100%" alt="gallery-nav"></span>
                 </div>
 
             </div>
@@ -187,7 +189,7 @@
                         <div class="num-content">нови софтуерни компании с офис във Враца</div>
                     </div>
                     <div class="right-line col-md-1">
-                        <img src="./images/right-num-line.png">
+                        <img src="{{asset('/images/right-num-line.png')}}" alt="line-img">
                     </div>
 
 
@@ -196,7 +198,7 @@
                         <div class="num-content">души посетили наши събития</div>
                     </div>
                     <div class="right-line col-md-1">
-                        <img src="./images/right-num-line.png">
+                        <img src="{{asset('/images/right-num-line.png')}}" alt="line-img">
                     </div>
 
 
@@ -205,7 +207,7 @@
                         <div class="num-content">души започнали курс</div>
                     </div>
                     <div class="right-line col-md-1">
-                        <img src="./images/right-num-line.png">
+                        <img src="{{asset('/images/right-num-line.png')}}" alt="line-img">
                     </div>
 
 
@@ -222,17 +224,17 @@
                 </div>
                 <div class="why-sections d-flex mb-12 flex-row flex-wrap">
                     <div class="why-first-section p-4 col-md-4 text-center">
-                        <img src="{{asset('/images/why-first-icon.png')}}" class="img-fluid">
+                        <img src="{{asset('/images/why-first-icon.png')}}" class="img-fluid" alt="icon-img">
                         <span class="why-first-content">
                             Развиваме дигитална индустрия във Враца, като организираме интересни ИТ събития и курсове по програмиране, дигитален маркетинг и други.
                         </span>
                     </div>
                     <div class="why-second-section p-4 col-md-4 text-center">
-                        <img src="{{asset('/images/why-second-icon.png')}}" class="img-fluid">
+                        <img src="{{asset('/images/why-second-icon.png')}}" class="img-fluid" alt="icon-img">
                         <span class="why-second-content">Преподавателите ни са професионалисти-практици с амбиция да предадат своите знания и опит. </span>
                     </div>
                     <div class="why-third-section p-4 col-md-4 text-center">
-                        <img src="{{asset('/images/why-third-icon.png')}}" class="img-fluid">
+                        <img src="{{asset('/images/why-third-icon.png')}}" class="img-fluid" alt="icon-img">
                         <span class="why-third-content">Получили сме редица национални и международни признания сред, които: Достойни българи 2017г, включване в списъкът на Форбс Европа 30 под 30, Google RISE Awards.</span>
                     </div>
                 </div>
@@ -248,21 +250,21 @@
                 </div>
                 <div class="main-events d-flex mb-12 flex-row col-md-12 flex-wrap">
                     <div class="p-6 col-md-6 text-center main-event-first">
-                        <img src="{{asset('/images/home-events/cw18.png')}}" alt="events">
+                        <img src="{{asset('/images/loaders/load-7.gif')}}" data-img="{{asset('/images/home-events/cw18.png')}}" alt="events">
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-second">
-                        <img src="{{asset('/images/home-events/google-garage.jpg')}}" alt="events">
+                        <img src="{{asset('/images/loaders/load-7.gif')}}" data-img="{{asset('/images/home-events/google-garage.jpg')}}" alt="events">
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-first">
-                        <img src="{{asset('/images/home-events/digital-event.jpg')}}" alt="events">
+                        <img src="{{asset('/images/loaders/load-7.gif')}}" data-img="{{asset('/images/home-events/digital-event.jpg')}}" alt="events">
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-second">
-                        <img src="{{asset('/images/home-events/HackVratsa.jpg')}}" alt="events">
+                        <img src="{{asset('/images/loaders/load-7.gif')}}" data-img="{{asset('/images/home-events/HackVratsa.jpg')}}" alt="events">
                     </div>
                 </div>
 
                 <div class="secondary-events">
-                    <section class="center slider col-md-11">
+                    <section class="center slider col-md-11 filmstrip-events">
                         <div>
                             <img src="{{asset('/images/home-events/cw18.png')}}" alt="events">
                         </div>
@@ -304,16 +306,16 @@
                     <div class="p-3 col-md-3 sponsors-3"><img src="{{asset('/images/partners/vratsa-municipality-logo.jpg')}}" alt="vratsa-municipality-logo" class="img-fluid"></div>
                     <div class="p-3 col-md-3 sponsors-4"><img src="{{asset('/images/partners/Telerik_Academy_Logo.png')}}" alt="Telerik_Academy_Logo" class="img-fluid"></div>
 
-                    <div class="p-3 col-md-3 sponsors-5"><img src="{{asset('/images/partners/mindhub-logo.png')}}" alt="mindhub-logo" class="img-fluid"></div>
-                    <div class="p-3 col-md-3 sponsors-6"><img src="{{asset('/images/partners/CDB-logo.png')}}" alt="Coder Dojo Bulgaria" class="img-fluid"></div>
-                    <div class="p-3 col-md-3 sponsors-7"><img src="{{asset('/images/partners/movebg-logo2.png')}}" alt="movebg-logo" class="img-fluid"></div>
-                    <div class="p-3 col-md-3 sponsors-8"><img src="{{asset('/images/partners/NMD-Logo.gif')}}" alt="NMD-Logo" class="img-fluid"></div>
+                    <div class="p-3 col-md-3 sponsors-5" data-img="{{asset('/images/partners/mindhub-logo.png')}}"><img src=" " alt="mindhub-logo" class="img-fluid"></div>
+                    <div class="p-3 col-md-3 sponsors-6" data-img="{{asset('/images/partners/CDB-logo.png')}}"><img src=" " alt="Coder Dojo Bulgaria" class="img-fluid"></div>
+                    <div class="p-3 col-md-3 sponsors-7" data-img="{{asset('/images/partners/movebg-logo2.png')}}"><img src=" " alt="movebg-logo" class="img-fluid"></div>
+                    <div class="p-3 col-md-3 sponsors-8" data-img="{{asset('/images/partners/NMD-Logo.gif')}}"><img src=" " alt="NMD-Logo" class="img-fluid"></div>
 
                     <div class="col-md-3"></div>
 
-                    <div class="p-3 col-md-3 sponsors-9"><img src="{{asset('/images/partners/eSkills-For-Future-logo.png')}}" alt="eSkills-For-Future-logo" class="img-fluid"></div>
+                    <div class="p-3 col-md-3 sponsors-9" data-img="{{asset('/images/partners/eSkills-For-Future-logo.png')}}"><img src=" " alt="eSkills-For-Future-logo" class="img-fluid"></div>
 
-                    <div class="p-3 col-md-3 sponsors-10"><img src="{{asset('/images/partners/Startup-logo-main.png')}}" alt="Startup-logo-main" class="img-fluid"></div>
+                    <div class="p-3 col-md-3 sponsors-10" data-img="{{asset('/images/partners/Startup-logo-main.png')}}"><img src=" " alt="Startup-logo-main" class="img-fluid"></div>
                     <div class="col-md-3"></div>
                 </div>
                 <div class="col-md-5">
@@ -355,7 +357,7 @@
                 </div>
                 <div class="col-md-12 flex-row justify-content-between d-flex flex-wrap testimonials-students text-center">
                     <div class="p-3 col-md-3 first-student student-1">
-                        <img src="{{asset('/images/home-testimonials/adi-todorova.jpg')}}" alt="student" class="student-img img-fluid">
+                        <img src="{{asset('/images/home-testimonials/adi-todorova.jpg')}}" alt="Adi Todorova" class="student-img img-fluid">
                         <div class="student-comment">Супер готина организация, която помага на всеки който желае да се развие в ИТ сферата. Курсовете им дават добри основи в програмирането, а най-яката част е запознанството нови хора.</div>
                         <div class="student-name">Аделина Тодорова, студент</div>
                     </div>
@@ -389,16 +391,7 @@
             </div>
         </div>
         <!-- end of cookies section -->
-
-        <script src="{{asset('/js/front-gallery.js')}}" async></script>
-        <script src="{{asset('/js/custom-gallery.js')}}" async></script>
-        <script src="{{asset('/js/scroll.js')}}" async></script>
-        <script src="{{asset('/js/numbers-section-trigger.js')}}" async></script>
-        <script src="{{asset('/js/filmstrip.js')}}" async></script>
-        <script src="{{asset('/js/sponsors.js')}}" async></script>
-        <script src="{{asset('/js/students.js')}}" async></script>
         <script src="{{asset('/js/slick.js')}}"></script>
-        <script src="{{asset('/js/right-dot-menu.js')}}" async></script>
         <script src="{{asset('/js/hamburger-menu.js')}}" async></script>
         <script>
             $(function() {
@@ -411,12 +404,37 @@
         </script>
         <script type="text/javascript">
             $(function() {
-                $('head').append('<link rel="stylesheet" href="{{asset('/css/landing.css')}}">');
-                $('head').append('<link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}">');
-                $('head').append('<link rel="stylesheet" href="{{asset('/css/bootstrap-grid.min.css')}}">');
-                $('head').append('<link rel="stylesheet" href="{{asset('/css/slick.css')}}">');
-                $('head').append('<link rel="stylesheet" href="{{asset('/css/slick-theme.css')}}">');
-                });
+                $('head').append('<link rel="preload stylesheet" href="{{asset('/css/landing.css')}}" as="style">');
+                $('head').append('<link rel="preload stylesheet" href="{{asset('/css/bootstrap.min.css')}}" as="style">');
+                $('head').append('<link rel="preload stylesheet" href="{{asset('/css/bootstrap-grid.min.css')}}" as="style">');
+                $('head').append('<link rel="preload stylesheet" href="{{asset('/css/slick.css')}}" as="style">');
+                $('head').append('<link rel="preload stylesheet" href="{{asset('/css/slick-theme.css')}}" as="style">');
+
+                var frontGallery = document.createElement("script");
+                frontGallery.src = "{{asset('/js/front-gallery.js')}}";
+                var customGallery = document.createElement("script");
+                customGallery.src = "{{asset('/js/custom-gallery.js')}}";
+                var scroll = document.createElement("script");
+                scroll.src = "{{asset('/js/scroll.js')}}";
+                var numbers = document.createElement("script");
+                numbers.src = "{{asset('/js/numbers-section-trigger.js')}}";
+                var filmstrip = document.createElement("script");
+                filmstrip.src = "{{asset('/js/filmstrip.js')}}";
+                var sponsors = document.createElement("script");
+                sponsors.src = "{{asset('/js/sponsors.js')}}";
+                var students = document.createElement("script");
+                students.src = "{{asset('/js/students.js')}}";
+                var rightDot = document.createElement("script");
+                rightDot.src = "{{asset('/js/right-dot-menu.js')}}";
+                $('body').append(frontGallery);
+                $('body').append(customGallery);
+                $('body').append(scroll);
+                $('body').append(numbers);
+                $('body').append(filmstrip);
+                $('body').append(sponsors);
+                $('body').append(students);
+                $('body').append(rightDot);
+            });
         </script>
 </body>
 

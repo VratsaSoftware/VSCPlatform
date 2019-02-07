@@ -5,7 +5,7 @@ body {
 }
 
 a {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 
 @font-face {
@@ -71,6 +71,19 @@ a {
 
 .program-mentors>a {
     color: rgba(239, 96, 33, 0.8);
+}
+
+.program-mentors>a:hover {
+    color: rgba(239, 96, 33, 1);
+}
+
+.programming-candidate-btn {
+    border: 1px solid #128900 !important;
+}
+
+.programming-candidate-btn:hover, .programming-candidate-btn:hover a {
+    background: #fff !important;
+    color: #128900 !important;
 }
 
 .program-no-tabs {
@@ -943,6 +956,15 @@ a {
     border: 1px solid #FF8F29 !important;
 }
 
+.marketing-candidate-btn:hover, .marketing-candidate-btn:hover a {
+    background: #fff !important;
+    color: #FF8F29 !important;
+}
+
+.marketing-candidate-btn>a, .programming-candidate-btn>a {
+    padding: 10px;
+}
+
 .timer-programming, .timer-digital {
     font-family: Comfortaa;
     font-size: 5vw;
@@ -950,14 +972,6 @@ a {
     /* margin-bottom: 10vw; */
     margin-top: 5vw;
     /* -webkit-text-stroke: 1px black; */
-}
-
-.timer-programming {
-    -webkit-text-stroke: 1px #128900;
-}
-
-.timer-digital {
-    -webkit-text-stroke: 1px #FF8F29;
 }
 
 .timer-text {
@@ -1096,12 +1110,16 @@ a {
     .details-container {
         margin-top: 10vw;
     }
+
+    .timer-programming, .timer-digital {
+        font-size: 8vw;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     .header-title, .header-sub-title, .header-button {
-        margin-top: 20vw;
+        margin-top: 10vw;
     }
 
     .header-title {
@@ -1187,6 +1205,10 @@ a {
 
     #tabs {
         display: block;
+    }
+
+    .timer-programming, .timer-digital {
+        font-size: 10vw;
     }
 }
 
@@ -1276,6 +1298,14 @@ a {
     #tabs {
         display: block;
     }
+
+    .timer-programming, .timer-digital {
+        font-size: 7vw;
+    }
+
+    .header-title, .header-sub-title, .header-button {
+        margin-top: 10vw;
+    }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
@@ -1346,6 +1376,18 @@ a {
     #tabs {
         display: block;
     }
+
+    .timer-programming {
+        -webkit-text-stroke: 1px #128900;
+    }
+
+    .timer-digital {
+        -webkit-text-stroke: 1px #FF8F29;
+    }
+
+    .timer-programming, .timer-digital {
+        font-size: 6vw;
+    }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
@@ -1392,7 +1434,7 @@ a {
     }
 
     .info-img {
-        padding-top: 4.5vw;
+        padding-top: 5vw;
     }
 
     .info-img>img {
@@ -1442,6 +1484,18 @@ a {
 
     .candidate-imgs {
         display: flex;
+    }
+
+    .timer-programming {
+        -webkit-text-stroke: 1px #128900;
+    }
+
+    .timer-digital {
+        -webkit-text-stroke: 1px #FF8F29;
+    }
+
+    .timer-programming, .timer-digital {
+        font-size: 5vw;
     }
 }
 

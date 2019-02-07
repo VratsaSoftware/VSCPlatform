@@ -1,46 +1,14 @@
-<!DOCTYPE html>
-<html lang="bg">
-
-<head>
-    <meta charset="UTF-8">
-    <title>Програмиране</title>
-
-    <link rel="stylesheet" href="./css/static_courses.css">
-
-    <link rel="stylesheet" href="./css/bootstrap.css">
-
-    <link rel="stylesheet" href="./css/bootstrap-grid.css">
-
-    <link rel="stylesheet" href="./css/personal_application_results.css">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- JQuery -->
-    <script type="text/javascript" src="./js/jquery-3.3.1.js"></script>
-    <script type="text/javascript" src="./js/jquery-ui.js"></script>
-    <!-- scroll -->
-    <script type="text/javascript" src="./js/jquery-sectionsnap.js"></script>
-    <!-- favicon -->
-    <link rel="shortcut icon" type="image/png" href="./images/vso-png-white.png" />
-
-    <!-- facebook -->
-    <meta property="og:url" content="" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Враца Софтуер Общество" />
-    <meta property="og:description" content="Безплатни курсове по програмиране" />
-    <meta property="og:image" content="./images/vso-logo-bg-original.png" />
-</head>
-
-<body>
-
-    <div class="section">
+@extends('static.courses_template')
+@section('title', 'Курсове по Програмиране')
+@section('content')
+<div class="section">
         <div id="header" style="background: url(./images/cover-img.png)">
             <!-- hamburger -->
             @include('static.hamburger_menu')
             <!-- end of hamburger -->
             <div class="overlay">
                 <div id="logo" class="col-md-12 text-center">
-                    <a href="./index.html"><img src="./images/vso-png-white-bigger.png" alt="vso-logo" class="img-fluid"></a>
+                    <a href="./index.html"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="vso-logo" class="img-fluid"></a>
                 </div>
 
                 <div class="header-title col-md-12 text-center">
@@ -396,28 +364,20 @@
     </div>
     </div>
     <div class="col-md-12 text-center">
-        <span id="prepare" class="end-candidate"><a href="#">КАНДИДАТСТВАЙ</a></span>
+        <span id="prepare" class="end-candidate programming-candidate-btn"><a href="#">КАНДИДАТСТВАЙ</a></span>
     </div>
     </div>
-    <script src="{{asset('/js/hamburger-menu.js')}}"></script>
-    <script src="{{asset('/js/program-tabs.js')}}"></script>
-    <script src="{{asset('/js/countdownTimer.js')}}"></script>
+
     <script>
-        $(function() {
-            $('.main-nav-list > li > a').on('click', function() {
-                $('html, body').animate({
-                    scrollTop: $($(this).attr('href')).offset().top
-                }, 500, 'linear');
-            });
+    // Set the date we're counting down to
+    var programmingDate = new Date("Feb 10, 2019 00:00:00").getTime();
+    var timerClass = '.timer-programming';
 
-            $('#prepare > a').on('click', function() {
-                $('html, body').animate({
-                    scrollTop: $($(this).attr('href')).offset().top
-                }, 1000, 'linear');
-            });
-        });
+    // Update the count down every 1 second
+    var start = setInterval(function() {
+        timer(programmingDate,timerClass)
+    }, 1000);
     </script>
-
     <script>
         var headeroffset = $("#header-sticky").offset();
         var sticky = headeroffset.top;
@@ -429,16 +389,4 @@
             }
         });
     </script>
-    <script>
-    // Set the date we're counting down to
-    var programmingDate = new Date("Oct 26, 2019 00:00:00").getTime();
-    var timerClass = '.timer-programming';
-
-    // Update the count down every 1 second
-    var start = setInterval(function() {
-        timer(programmingDate,timerClass)
-    }, 1000);
-    </script>
-</body>
-
-</html>
+@endsection
