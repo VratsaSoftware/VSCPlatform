@@ -11,9 +11,6 @@
     <li class="{{ Route::is('myProfile') ? 'sidenav-selected' : '' }}"><a href="{{route('myProfile')}}">
             <img src="{{asset('/images/profile/nav/my-profile-icon.png')}}" alt="" class="img-fluid">Моят Профил</a>
     </li>
-   <li class="disabled"><a href="#" class="disabled">
-     <img src="{{asset('/images/profile/nav/results-icon.png')}}" alt="" class="img-fluid">Интервюта</a>
-   </li>
    <li class="nested-nav {{ Route::is('course.create') ? 'sidenav-selected' : '' }} {{ Route::is('course.show') ? 'sidenav-selected' : '' }}">
      <a href="" id="my-courses"><i class="fas fa-chevron-down"></i>Моите курсове</a>
      <ul>
@@ -30,15 +27,11 @@
   <li><a href="#" class="disabled">
    <img src="{{asset('/images/profile/nav/grades-icon.png')}}" alt="" class="img-fluid">Онлайн тестове</a>
  </li>
- <li class="disabled"><a href="#" class="disabled">
-   <img src="{{asset('/images/profile/nav/notifications-icon.png')}}" alt="" class="img-fluid">Уведомлнения</a>
- </li>
  <li>
     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
       <i class="fas fa-sign-out-alt fa-1x"></i>
       {{ __('Излизане') }}
     </a>
-
     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
         @csrf
     </form>

@@ -27,16 +27,10 @@
             </ul>
         </li>
         <li class="disabled"><a href="#" class="disabled">
-                <img src="{{asset('/images/profile/nav/grades-icon.png')}}" alt="" class="img-fluid">Бележник</a>
-        </li>
-        <li class="disabled"><a href="#" class="disabled">
                 <img src="{{asset('/images/profile/nav/events-icon.png')}}" alt="" class="img-fluid">Участие в събития</a>
         </li>
         <li class="disabled"><a href="#" class="disabled">
                 <img src="{{asset('/images/profile/nav/mentor-icon.png')}}" alt="" class="img-fluid">Менторска програма</a>
-        </li>
-        <li class="disabled"><a href="#" class="disabled">
-                <img src="{{asset('/images/profile/nav/payment-icon.png')}}" alt="" class="img-fluid">Плащания</a>
         </li>
         <li>
             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

@@ -60,10 +60,13 @@ class UserController extends Controller
                 $image->save(public_path().'/images/user-pics/'.$name, 50);
             }
         }
-        if ($request->has('name')) {
+        if ($request->has('name') && $request->has('name') == trim($request->has('name')) && strpos($request->has('name'), ' ') !== false) {
             $name = explode(" ", $data['name']);
             $user->name = $name[0];
             $user->last_name = $name[1];
+        } else {
+            $user->name = $data['name'];
+            $user->last_name = '';
         }
         if ($request->has('location')) {
             $user->location = $data['location'];
@@ -84,8 +87,8 @@ class UserController extends Controller
     {
         $request['valid_instTypes'] = \Config::get('institutionTypes');
         $data = $request->validate([
-            'y_from' => 'required|date|date_format:Y-m-d',
-            'y_to' => 'required|date|date_format:Y-m-d|after:y_from',
+            'y_from' => 'required|numeric|min:1900|max:2099',
+            'y_to' => 'required|numeric|min:'.((int)$request->y_from-1).'|max:2099',
             'edu_type' => 'required|numeric',
             'edu_institution_type' => "required|in_array:valid_instTypes.*",
             'institution_name' => 'required|string',
@@ -238,6 +241,10 @@ class UserController extends Controller
         if (!empty($request->int_other)) {
             $interestCheck = Interest::firstOrCreate(
                 ['cl_users_interest_type_id' => $request->int_type,'name' => $request->int_other]
+            );
+
+            $insertHobbie = Hobbie::firstOrCreate(
+                ['cl_interest_id' => $interestCheck->id,'user_id' => Auth::user()->id]
             );
         }
 

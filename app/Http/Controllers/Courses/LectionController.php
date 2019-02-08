@@ -297,12 +297,16 @@ class LectionController extends Controller
     {
         $isAllowed = Auth::user()->isOnThisCourse($course->id);
         if ($isAllowed) {
-            $insComment = LectionComment::firstOrCreate(
-                ['course_lection_id' => $lection->id,'user_id' => $user->id],
-                ['comment' => $request->comment]
-            );
-            $message = __('Успешно изпратен коментар за лекция '.$lection->title.' !');
-            return redirect()->route('user.module.lections', ['user' => $user->id,'course' => $course->id,'module' => $module->id])->with('success', $message);
+            if ($request->comment && !is_null($request->comment)) {
+                $insComment = LectionComment::firstOrCreate(
+                    ['course_lection_id' => $lection->id,'user_id' => $user->id],
+                    ['comment' => $request->comment]
+                );
+                $message = __('Успешно изпратен коментар за лекция '.$lection->title.' !');
+                return redirect()->route('user.module.lections', ['user' => $user->id,'course' => $course->id,'module' => $module->id])->with('success', $message);
+            }
+            $message = __('Попълнете полето за коментар!');
+            return redirect()->back()->with('error', $message);
         }
         $message = __('Нямате право да достъпите този ресурс!');
         return redirect()->route('user.module.lections', ['user' => $user->id,'course' => $course->id,'module' => $module->id])->with('error', $message);

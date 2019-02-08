@@ -242,9 +242,9 @@
                             {{ csrf_field() }}
                             <input type="hidden" name="edu_id" value="{{$edu->id}}">
                             <i class="far fa-calendar-alt"></i><br />
-                            <span class="section-el-bold live-edu edu-y-from">{{$edu->y_from->format('Y-m-d')}}&nbsp;/&nbsp;</span><span class="section-el-bold live-edu edu-y-to">{{$edu->y_to->format('Y-m-d')}}</span> <br>
-                            <input type="date" id="edu_y_from-live" name="y_from" class="section-el-bold edit-edu" value="{{$edu->y_from->format('Y-m-d') ?? null}}"><br />
-                            <input type="date" id="edu_y_to-live" name="y_to" class="section-el-bold edit-edu" value="{{$edu->y_to->format('Y-m-d') ?? null}}"><br />
+                            <span class="section-el-bold live-edu edu-y-from">{{$edu->y_from}}&nbsp;/&nbsp;</span><span class="section-el-bold live-edu edu-y-to">{{$edu->y_to}}</span> <br>
+                            <input type="number" id="edu_y_from-live" min="1900" max="2099" step="1" name="y_from" class="section-el-bold edit-edu" value="{{$edu->y_from ?? null}}" title="1900-2099"><br />
+                            <input type="number" id="edu_y_to-live" min="1900" max="2099" step="1"  name="y_to" class="section-el-bold edit-edu" value="{{$edu->y_to ?? null}}" title="1900-2099"><br />
                             <i class="fas fa-user-graduate"></i>
                             <span class="live-edu">{{$edu['EduType']->type}}</span> <br>
                             <select id="edu_type" name="edu_type" class="section-el-bold edit-edu">
@@ -308,9 +308,9 @@
                                 {{ csrf_field() }}
                                 <i class="far fa-calendar-alt"></i><br />
                                 Година от:
-                                <input type="date" id="edu_y_from" name="y_from" class="section-el-bold" value="{{old('y_from')}}"><br />
+                                <input type="number" id="edu_y_from" name="y_from" min="1900" max="2099" class="section-el-bold" value="{{old('y_from')}}" title="1900-2099"><br />
                                 Година до:
-                                <input type="date" id="edu_y_to" name="y_to" class="section-el-bold" value="{{old('y_to')}}"><br />
+                                <input type="number" id="edu_y_to" name="y_to" min="1900" max="2099" class="section-el-bold" value="{{old('y_to')}}" title="1900-2099"><br />
 
                                 <i class="fas fa-user-graduate"></i><br />
                                 <select id="edu_type_live" name="edu_type" class="section-el-bold">
@@ -501,7 +501,6 @@
                             <hr>
                             @else
                             <span class="section-el-bold live-int-type">{{$hobbie['Interests']['Type']->type}}</span>
-                            <br />
                             <br />
                             <i class="fas fa-dot-circle"></i>
                             <br />

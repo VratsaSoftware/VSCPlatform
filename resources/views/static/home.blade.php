@@ -80,17 +80,17 @@
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">9-месечни курсове по програмиране</span>
-                                <p />
-                                <p>
-                                    <span class="slider-subtitle-content">
-                                        Целта на обучението е да придобиете основни познания по програмиране и да имате възможност да започнете стаж в софтуерна компания във Враца! Към момента 20 човека завършили курсовете работят в ИТ сферата във
-                                        Враца и 3 компании отвориха офиси в града.
-                                    </span>
-                                </p>
-                                <p class="btn-content-wrap">
-                                    <span class="title-btns-content"><a href="{{route('programmingCourses')}}">Кандидатствай</a></span>
-                                </p>
+                            <p />
+                            <p>
+                                <span class="slider-subtitle-content">
+                                    Целта на обучението е да придобиете основни познания по програмиране и да имате възможност да започнете стаж в софтуерна компания във Враца! Към момента 20 човека завършили курсовете работят в ИТ сферата във
+                                    Враца и 3 компании отвориха офиси в града.
+                                </span>
+                            </p>
                         </div>
+                        <p class="btn-content-wrap">
+                            <span class="title-btns-content"><a href="{{route('programmingCourses')}}">Кандидатствай</a></span>
+                        </p>
                     </div>
 
                     <div class="mySlides" data-src="{{asset('/images/home-top-slider/digital-2.png')}}" data-loader="{{asset('/images/loaders/load-7.gif')}}">
@@ -98,16 +98,16 @@
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">Безплатен 4-месечен курс по дигитален маркетинг</span>
-                                <p />
-                                <p>
-                                    <span class="slider-subtitle-content">
-                                        Започваме курс по дигитален маркетинг - за първи път във Враца!
-                                    </span>
-                                </p>
-                                <p class="btn-content-wrap">
-                                    <span class="title-btns-content"><a href="{{route('digitalMarketing')}}">Кандидатствай</a></span>
-                                </p>
+                            <p />
+                            <p>
+                                <span class="slider-subtitle-content">
+                                    Започваме курс по дигитален маркетинг - за първи път във Враца!
+                                </span>
+                            </p>
                         </div>
+                        <p class="btn-content-wrap">
+                            <span class="title-btns-content"><a href="{{route('digitalMarketing')}}">Кандидатствай</a></span>
+                        </p>
                     </div>
 
                     <div class="mySlides" data-src="{{asset('/images/home-top-slider/cw-1.jpg')}}" data-loader="{{asset('/images/loaders/load-7.gif')}}">
@@ -115,16 +115,17 @@
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">Предстои CodeWeek Враца - най-голямото ИТ събитие на северозапада</span>
-                                <p />
-                                <p>
-                                    <span class="slider-subtitle-content">На 6-7 октомври Враца ще бъде част от европейската седмица на програмирането. CodeWeek Враца има една основна цел: да те запознае отблизо с най-популярните възможности за
-                                        професионално развитие в 21 век.
-                                    </span>
-                                </p>
-                                <p class="btn-content-wrap">
-                                    <span class="title-btns-content"><a href="http://codeweek.vratsa.net">Запиши се</a></span>
-                                </p>
+                            <p />
+                            <p>
+                                <span class="slider-subtitle-content">
+                                    На 6-7 октомври Враца ще бъде част от европейската седмица на програмирането. CodeWeek Враца има една основна цел: да те запознае отблизо с най-популярните възможности за
+                                    професионално развитие в 21 век.
+                                </span>
+                            </p>
                         </div>
+                        <p class="btn-content-wrap">
+                            <span class="title-btns-content"><a href="http://codeweek.vratsa.net">Кандидатствай</a></span>
+                        </p>
                     </div>
 
                     <div class="mySlides" data-src="{{asset('/images/home-top-slider/kids-1.jpg')}}" data-loader="{{asset('/images/loaders/load-7.gif')}}">
@@ -138,10 +139,10 @@
                                         хъб (mindhub).
                                     </span>
                                 </p>
-                                <p class="btn-content-wrap">
-                                    <span class="title-btns-content"><a href="https://mindhub.bg/" target="_blank">Запиши се</a></span>
-                                </p>
                         </div>
+                        <p class="btn-content-wrap">
+                            <span class="title-btns-content"><a href="https://mindhub.bg/" target="_blank">Кандидатствай</a></span>
+                        </p>
                     </div>
 
                     <div class="mySlides" data-src="{{asset('/images/home-top-slider/telerik_academy_school.jpg')}}" data-loader="{{asset('/images/loaders/load-7.gif')}}">
@@ -155,10 +156,10 @@
                                         програмиране. За ученици 4-12 клас.
                                     </span>
                                 </p>
-                                <p class="btn-content-wrap">
-                                    <span class="title-btns-content"><a href="https://www.telerikacademy.com/school" target="_blank">Кандидатствай</a></span>
-                                </p>
                         </div>
+                        <p class="btn-content-wrap">
+                            <span class="title-btns-content"><a href="https://www.telerikacademy.com/school" target="_blank">Кандидатствай</a></span>
+                        </p>
                     </div>
 
                     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>

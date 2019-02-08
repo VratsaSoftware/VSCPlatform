@@ -23,7 +23,7 @@ $( function () {
 				if ( $( this ).find( 'img' ).length ) {
 					$( this ).find( 'img' ).attr( 'src', ' ' );
 				}
-			}, disappear * 2 );
+			}, disappear );
 			$( '.sponsors-logos>div:nth-child(n+5)' ).each( function ( k, v ) {
 				$( this ).stop( true, true ).delay( disappear ).fadeOut( 'slow' );
 				disappear -= 100;

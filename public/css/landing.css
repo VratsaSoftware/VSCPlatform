@@ -153,7 +153,7 @@ a, .title-btns-content>a {
 }
 
 .btn-content-wrap {
-    margin-top: 3vw;
+    /* margin-top: 3vw; */
 }
 
 .mySlides>img {
@@ -950,7 +950,7 @@ a, .title-btns-content>a {
 
     .slider-subtitle-content {
         margin-top: 10vw;
-        font-size: 3.2vw;
+        font-size: 3.5vw;
     }
 
     .title-btns-content>a {
@@ -1080,6 +1080,18 @@ a, .title-btns-content>a {
     .cookie-sponsor-text {
         padding-left: 30vw;
     }
+
+    .slider-title {
+        margin-top: -23vw;
+    }
+
+    .btn-content-wrap {
+        margin-top: -18vw;
+        /* margin-top: 5vw; */
+        display: table;
+        position: absolute;
+        margin-left: 33%;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
@@ -1110,16 +1122,26 @@ a, .title-btns-content>a {
     }
 
     .slider-subtitle-content {
-        font-size: 2.5vw;
+        font-size: 3.5vw;
         /*line-height:20px;*/
     }
 
     .title-btns-content>a {
-        font-size: 2vw;
+        font-size: 3vw;
     }
 
     .btn-content-wrap {
-        margin-top: 5vw;
+        margin-top: -18vw;
+        /* margin-top: 5vw; */
+        display: table;
+        position: absolute;
+        margin-left: 40%;
+    }
+
+    .title-btns-content {
+        display: table-cell;
+        text-align: center;
+        vertical-align: bottom;
     }
 
     .hamburger {
@@ -1400,7 +1422,7 @@ a, .title-btns-content>a {
     }
 
     .slider-subtitle-content {
-        font-size: 1.5vw;
+        font-size: 2vw;
         /* line-height:25px;
     padding-top: 30vh;*/
     }
@@ -1569,6 +1591,18 @@ a, .title-btns-content>a {
 
     .b-description_readmore_button, .b-description_readmore_button_active {
         display: block;
+    }
+
+    .btn-content-wrap {
+        margin-top: -15vw;
+        /* margin-top: 5vw; */
+        display: table;
+        position: absolute;
+        margin-left: 42%;
+    }
+
+    .slider-subtitle-content {
+        margin-top: 5vw;
     }
 }
 
