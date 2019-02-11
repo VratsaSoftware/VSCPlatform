@@ -126,11 +126,11 @@
                             </script>
                             @endif
                             @endforeach
-
+                            <button type="submit" value="submit" class="edit-btn btn btn-success social-edit" id="submit-social">
+                                <i class="fas fa-pencil-alt"></i>
+                            </button>
                         </div>
-                        <button type="submit" value="submit" class="edit-btn btn btn-success social-edit" id="submit-social">
-                            <i class="fas fa-pencil-alt"></i>
-                        </button>
+
                     </div>
                 </div>
             </div>

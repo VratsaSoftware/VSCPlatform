@@ -342,6 +342,16 @@ p {
     margin-top: 8vw;
 }
 
+#male-label {
+    left: -5%;
+    margin-left: -5%;
+}
+
+#female-label {
+    left: -5%;
+    margin-left: -5%;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     html, body {
@@ -350,7 +360,8 @@ p {
 
     #container, #forgotten-container, #register-container {
         width: 80vw;
-        height: 80vw;
+        height: 50vh;
+        overflow: scroll;
     }
 
     #register {
@@ -394,6 +405,17 @@ p {
 
     #male, #female {
         width: 5vw;
+        left: 1px;
+    }
+
+    #male-label {
+        left: -10px;
+        margin-left: -10px;
+    }
+
+    #female-label {
+        left: 10px;
+        margin-left: 10px;
     }
 
     .checkbox {
@@ -402,7 +424,17 @@ p {
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {}
+@media only screen and (min-width: 600px) {
+    #male-label {
+        left: -10px;
+        margin-left: -10px;
+    }
+
+    #female-label {
+        left: 10px;
+        margin-left: 10px;
+    }
+}
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {}
@@ -412,3 +444,13 @@ p {
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {}
+
+/* biggest */
+@media screen and (min-width: 1900px) {
+
+    a,
+    input {
+        left: 5%;
+        margin-left: 5%;
+    }
+}

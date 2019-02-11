@@ -46,6 +46,10 @@ class UserController extends Controller
         if (Input::hasFile('picture')) {
             $userPic = Input::file('picture');
             $image = Image::make($userPic->getRealPath());
+            if ($image->width() > 1024 || $image->height() > 768) {
+                $message = __('Снимката/Картинката трябва да е с размери до 1024x768px!');
+                return redirect()->back()->with('error', $message);
+            }
             $name = time()."_".$userPic->getClientOriginalName();
             $name = str_replace(' ', '', $name);
             $name = md5($name);
@@ -60,14 +64,19 @@ class UserController extends Controller
                 $image->save(public_path().'/images/user-pics/'.$name, 50);
             }
         }
-        if ($request->has('name') && $request->has('name') == trim($request->has('name')) && strpos($request->has('name'), ' ') !== false) {
+
+        if (!is_null($data['name'])) {
             $name = explode(" ", $data['name']);
-            $user->name = $name[0];
-            $user->last_name = $name[1];
-        } else {
             $user->name = $data['name'];
-            $user->last_name = '';
+            $user->last_name = "";
+            if (isset($name[0]) && isset($name[1])) {
+                $user->name = $name[0];
+                // array_shift($name);
+                // $user->last_name = implode(" ", $name);
+                $user->last_name = $name[1];
+            }
         }
+
         if ($request->has('location')) {
             $user->location = $data['location'];
         }

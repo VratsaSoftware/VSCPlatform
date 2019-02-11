@@ -285,7 +285,7 @@
                                                     {{$comment->comment}}
                                                 </div>
                                                 <div class="col-md-12 text-right">
-                                                     {{$comment->created_at->format('H:i')}}
+                                                     {{$comment->created_at->format('H:i A')}}
                                                 </div>
                                             </div>
                                             <!-- end of one comment -->

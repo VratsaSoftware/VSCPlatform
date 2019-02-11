@@ -20,7 +20,7 @@
             <a href="#" id="my-courses"><i class="fas fa-chevron-down"></i>Моите курсове</a>
             <ul>
                 @forelse(Auth::user()->studentGetCourse() as $course)
-                    <li><a href="{{ route('user.course',['user' => Auth::user()->id,'course' => $course->id])}}"><img src="{{asset('/images/course-'.$course->id.'/'.$course->picture)}}" alt="">{{$course->name}}</a></li>
+                    <li><a href="{{ route('user.course',['user' => Auth::user()->id,'course' => $course->id])}}"><img src="{{asset('/images/course-'.$course->id.'/'.$course->picture)}}" alt="">{{strlen($course->name) < 10 ? $course->name : mb_substr($course->name, 0, 10)."..."}}</a></li>
                     @empty
                     <li><a href="#" class="disabled"><img src="{{asset('/images/profile/remove-icon.png')}}" alt="">Нямате записани Курсове</a></li>
                     @endforelse

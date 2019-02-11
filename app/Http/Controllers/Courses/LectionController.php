@@ -72,14 +72,12 @@ class LectionController extends Controller
                 $lection->course_modules_id = $request->module;
                 $lection->title = $request->title;
                 try {
-                    $time = $request->first_time_hours.$request->first_time_minutes;
-                    $lection->first_date = Carbon::parse($request->first_date_create.$time);
+                    $lection->first_date = $this->parseDateTime($request->first_date_create, $request->first_time_hours, $request->first_time_minutes);
                     if (!is_null($request->second_date_create)) {
-                        $second_time = $request->second_time_hours.$request->second_time_minutes;
-                        $lection->second_date = Carbon::parse($request->second_date_create.$second_time);
+                        $lection->second_date = $this->parseDateTime($request->second_date_create, $request->second_time_hours, $request->second_time_minutes);
                     }
                 } catch (\Exception $err) {
-                    $message = __('Невалидна Заявка!');
+                    $message = __('Невалидна заявка с полетата за дата и час!');
                     return redirect()->back()->with('error', $message)->withInput(Input::all());
                 }
 
@@ -197,15 +195,13 @@ class LectionController extends Controller
         if ($request->has('title') || $request->has('first_date') && $request->has('first_time_hours') && $request->has('first_time_minutes') || $request->has('second_date') && $request->has('second_time_hours') && $request->has('second_time_minutes') || $request->has('description') || $request->has('order')) {
             $lection->title = $request->title;
             try {
-                $time = $request->first_time_hours.$request->first_time_minutes;
-                $lection->first_date = Carbon::parse($request->first_date.$time);
+                $lection->first_date = $this->parseDateTime($request->first_date, $request->first_time_hours, $request->first_time_minutes);
                 if (!is_null($request->second_date)) {
-                    $second_time = $request->second_time_hours.$request->second_time_minutes;
-                    $lection->second_date = Carbon::parse($request->second_date.$second_time);
+                    $lection->second_date = $this->parseDateTime($request->second_date, $request->second_time_hours, $request->second_time_minutes);
                 }
             } catch (\Exception $err) {
-                $message = __('Невалидна Заявка!');
-                return redirect()->back()->with('error', $message);
+                $message = __('Невалидна заявка с полетата за дата и час!');
+                return redirect()->back()->with('error', $message)->withInput(Input::all());
             }
             $lection->description = $request->description;
             $lection->order = $request->order;
@@ -329,5 +325,21 @@ class LectionController extends Controller
         $addView->views_count = 1;
         $addView->save();
         return response('success', 200);
+    }
+
+    public function parseDateTime($date, $hours, $minutes)
+    {
+        $outHours = $hours;
+        $outMinutes = $minutes;
+        if ($hours < 10 && $hours[0] > 0) {
+            $outHours = 0;
+            $outHours.= $hours;
+        }
+        if ($minutes < 10 && $minutes[0] > 0) {
+            $outMinutes = 0;
+            $outMinutes.= $minutes;
+        }
+        $time = $outHours.$outMinutes;
+        return Carbon::parse($date.$time);
     }
 }

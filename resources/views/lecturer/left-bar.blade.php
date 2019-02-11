@@ -17,7 +17,7 @@
       <li><a href="{{route('course.create')}}"><img src="{{asset('/images/profile/add-icon.png')}}" alt="add"></i>Добави</a></li>
       @forelse(Auth::user()->lecturerGetCourses() as $course)
         <li>
-            <a href="{{route('lecturer.show.course',['course' => $course->id])}}"><img src="{{asset('/images/course-'.$course->id.'/'.$course->picture)}}" alt="">{{$course->name}}</a>
+            <a href="{{route('lecturer.show.course',['course' => $course->id])}}"><img src="{{asset('/images/course-'.$course->id.'/'.$course->picture)}}" alt="">{{strlen($course->name) < 10 ? $course->name : mb_substr($course->name, 0, 10)."..."}}</a>
         </li>
       @empty
         <li><a href="#" class="disabled"><img src="{{asset('/images/profile/remove-icon.png')}}" alt="">Нямате Курсове</a></li>

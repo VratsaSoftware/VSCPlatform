@@ -123,8 +123,8 @@
 		</p>
 
 		<p class="sex-options">
-			<label for="male">Мъж</label><input type="radio" name="sex" id="male" value="male">
-			<label for="female">Жена</label><input type="radio" name="sex" id="female" value="female">
+			<label id="male-label" for="male">Мъж</label><input type="radio" name="sex" id="male" value="male">
+			<label id="female-label" for="female">Жена</label><input type="radio" name="sex" id="female" value="female">
 		</p>
 
 		<a href="#" class="orange-btn" id="register-btn-send">Регистрация</a>
