@@ -104,15 +104,15 @@
 			<input type="text" name="last_name" placeholder="Фамилия..." value="{{ old('last_name') }}" required autofocus>
 		</p>
 		<p>
-			<input type="email" name="email" placeholder="Поща..." value="{{ old('email') }}" required>
+			<input type="email" id="register_email" name="email" placeholder="Поща..." value="{{ old('email') }}" required>
 		</p>
 
 		<p>
-			<input type="password" name="password" placeholder="Парола..." autocomplete="password" required>
+			<input type="password" id="register_password" name="password" placeholder="Парола..." autocomplete="password" required>
 		</p>
 
 		<p>
-			<input id="password-confirm" type="password" class="form-control" name="password_confirmation"  placeholder="Повтори парола..." autocomplete="password"  required>
+			<input id="register_password_confirm" type="password" class="form-control" name="password_confirmation"  placeholder="Повтори парола..." autocomplete="password"  required>
 		</p>
 
 		<p>
