@@ -65,7 +65,7 @@ class UserController extends Controller
             }
         }
 
-        if (!is_null($data['name'])) {
+        if (isset($data['name']) && !is_null($data['name'])) {
             $name = explode(" ", $data['name']);
             $user->name = $data['name'];
             $user->last_name = "";

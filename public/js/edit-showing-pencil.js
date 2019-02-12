@@ -93,7 +93,23 @@ $( document ).ready( function () {
 						$( '#submit-dob' ).click();
 					}
 				} );
+				var datefield = document.createElement( "input" )
 
+				datefield.setAttribute( "type", "date" )
+
+				if ( datefield.type != "date" ) { //if browser doesn't support input type="date", load files for jQuery UI Date Picker
+					var datePicker = document.createElement( "script" );
+					datePicker.src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js";
+					$( 'head' ).append( datePicker );
+					$( 'head' ).append( '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.standalone.min.css" as="style">' );
+					$( this ).prev( 'span' ).find( '.edit-input' ).remove();
+					$( this ).prev( 'span' ).html( $( this ).prev( 'span' ).html() + '<p class="edit-input"><input type="text" class="edit-user-items" id="dob" name="dob" value=""></p>' );
+					setTimeout( function () {
+						$( '#dob' ).datepicker( {
+							format: 'yyyy-mm-dd'
+						} );
+					}, 200 );
+				}
 			}
 			if ( $( this ).prev( 'span' ).hasClass( 'mail-txt' ) && $( '#email' ).not( ':visible' ) ) {
 				$( this ).prev( 'span' ).html( $( this ).prev( 'span' ).html() + '<p class="edit-input"><input type="text" class="edit-user-items" id="email" name="email" value="' + oldText + '"></p>' );
