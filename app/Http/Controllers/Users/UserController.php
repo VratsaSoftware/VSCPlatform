@@ -38,8 +38,8 @@ class UserController extends Controller
     {
         $data = $request->validate([
             'picture' => 'file|image|mimes:jpeg,png,gif,webp,ico|max:4000',
-            'name' => 'sometimes',
-            'location' => 'sometimes',
+            'name' => 'sometimes|string|min:3|max:25|regex:/[a-zA-Zа-яА-Я\s]$/',
+            'location' => 'sometimes|min:3|max:10|string|regex:/[a-zA-Zа-яА-Я\s]$/',
             'dob' => 'sometimes|date_format:Y-m-d|before:'.Carbon::now(),
             'email' => ['sometimes','unique:users','email']
         ]);
