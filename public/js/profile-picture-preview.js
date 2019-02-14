@@ -11,8 +11,8 @@ function imagePreview( input ) {
 		img.onload = function () {
 			imgwidth = this.width;
 			imgheight = this.height;
-			if ( imgwidth > maxwidth && imgheight > maxheight ) {
-				alert( 'Файлът трябва да е с размери до 1024x768 пикесла!' )
+			if ( imgwidth < 500 && imgheight < 500 || imgwidth > maxwidth && imgheight > maxheight ) {
+				alert( 'Файлът трябва да е с размери до 1024x768 пикесла и по-големи от 500x500px!' )
 			} else {
 				var reader = new FileReader();
 				reader.onload = function ( e ) {

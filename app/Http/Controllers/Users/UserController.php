@@ -38,16 +38,16 @@ class UserController extends Controller
     {
         $data = $request->validate([
             'picture' => 'file|image|mimes:jpeg,png,gif,webp,ico|max:4000',
-            'name' => 'sometimes|string|min:3|max:25|regex:/[a-zA-Zа-яА-Я\s]$/',
-            'location' => 'sometimes|min:3|max:10|string|regex:/[a-zA-Zа-яА-Я\s]$/',
-            'dob' => 'sometimes|date_format:Y-m-d|before:'.Carbon::now(),
+            'name' => 'sometimes|string|min:3|max:25|alpha',
+            'location' => 'sometimes|min:3|max:10|string|alpha',
+            'dob' => 'sometimes|date_format:Y-m-d|before:'.Carbon::now().'|after:1950-01-01',
             'email' => ['sometimes','unique:users','email']
         ]);
         if (Input::hasFile('picture')) {
             $userPic = Input::file('picture');
             $image = Image::make($userPic->getRealPath());
-            if ($image->width() > 1024 || $image->height() > 768) {
-                $message = __('Снимката/Картинката трябва да е с размери до 1024x768px!');
+            if ($image->width() < 500 || $image->height() < 500|| $image->width() > 1024 || $image->height() > 768) {
+                $message = __('Снимката/Картинката трябва да е с размери до 1024x768px и по-голяма от 500x500px!');
                 return redirect()->back()->with('error', $message);
             }
             $name = time()."_".$userPic->getClientOriginalName();
