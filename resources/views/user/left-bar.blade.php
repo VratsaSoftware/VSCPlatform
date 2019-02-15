@@ -13,9 +13,6 @@
         <li class="{{ Route::is('myProfile') ? 'sidenav-selected' : '' }}"><a href="{{route('myProfile')}}">
                 <img src="{{asset('/images/profile/nav/my-profile-icon.png')}}" alt="" class="img-fluid">Моят Профил</a>
         </li>
-        <li class="disabled"><a href="#" class="disabled">
-                <img src="{{asset('/images/profile/nav/results-icon.png')}}" alt="" class="img-fluid">Резултати от кандидатстване</a>
-        </li>
         <li class="nested-nav {{ Route::is('user.course') ? 'sidenav-selected' : '' }}">
             <a href="#" id="my-courses"><i class="fas fa-chevron-down"></i>Моите курсове</a>
             <ul>
@@ -25,12 +22,6 @@
                     <li><a href="#" class="disabled"><img src="{{asset('/images/profile/remove-icon.png')}}" alt="">Нямате записани Курсове</a></li>
                     @endforelse
             </ul>
-        </li>
-        <li class="disabled"><a href="#" class="disabled">
-                <img src="{{asset('/images/profile/nav/events-icon.png')}}" alt="" class="img-fluid">Участие в събития</a>
-        </li>
-        <li class="disabled"><a href="#" class="disabled">
-                <img src="{{asset('/images/profile/nav/mentor-icon.png')}}" alt="" class="img-fluid">Менторска програма</a>
         </li>
         <li>
             <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">

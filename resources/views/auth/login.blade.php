@@ -104,7 +104,7 @@
 			<input type="text" name="last_name" placeholder="Фамилия..." value="{{ old('last_name') }}" required autofocus>
 		</p>
 		<p>
-			<input type="email" id="register_email" name="email" placeholder="Поща..." value="{{ old('email') }}" required>
+			<input type="email" id="register_email" name="email" placeholder="Електронна поща..." value="{{ old('email') }}" required>
 		</p>
 
 		<p>
@@ -116,16 +116,26 @@
 		</p>
 
 		<p>
-			<label for="location">Град</label>
+			<label for="location">Населено място</label>
 			<select id="location" name="location">
 
 			</select>
 		</p>
 
 		<p class="sex-options">
-			<label id="male-label" for="male">Мъж</label><input type="radio" name="sex" id="male" value="male">
-			<label id="female-label" for="female">Жена</label><input type="radio" name="sex" id="female" value="female">
-		</p>
+            @if(!empty(old('sex')) && old('sex') != 'male')
+                <label id="male-label" for="male">Мъж</label><input type="radio" name="sex" id="male" value="male">
+                <label id="female-label" for="female">Жена</label><input type="radio" name="sex" id="female" value="female" checked="checked">
+            @elseif(!empty(old('sex')) && old('sex') != 'female')
+                <label id="male-label" for="male">Мъж</label><input type="radio" name="sex" id="male" value="male" checked="checked">
+                <label id="female-label" for="female">Жена</label><input type="radio" name="sex" id="female" value="female">
+            @endif
+
+            @if(empty(old('sex')))
+                <label id="male-label" for="male">Мъж</label><input type="radio" name="sex" id="male" value="male">
+			    <label id="female-label" for="female">Жена</label><input type="radio" name="sex" id="female" value="female">
+            @endif
+        </p>
 
 		<a href="#" class="orange-btn" id="register-btn-send">Регистрация</a>
 	</form>
@@ -191,6 +201,7 @@
 <!-- //changing background -->
 <script>
 	$(function(){
+        $('#login-button').click();
 		changeBg();
 		setTimeout(function(){
 		    if ($(window).width() > 1400) {
@@ -235,36 +246,16 @@
   	$(function(){
   		var cities = {
         "0":"Враца",
-        "1": "София",
-        "2": "Пловдив",
-        "3": "Варна",
-        "4": "Бургас",
-        "5": "Русе",
-        "6": "Стара Загора",
-        "7": "Плевен",
-        "8": "Сливен",
-        "9": "Добрич",
-        "10": "Шумен",
-        "11": "Перник",
-        "12": "Хасково",
-        "13": "Монтана",
-        "14": "Мездра",
-        "15": "Ловеч",
-        "16": "Разград",
-        "17": "Борино",
-        "18": "Мадан",
-        "19": "Златоград",
-        "20": "Пазарджик",
-        "21": "Смолян",
-        "22": "Благоевград",
-        "23": "Неделино",
-        "24": "Девин",
-        "25": "Велико Търново",
-        "26": "Видин",
-        "27": "Силистра",
-        "28": "Габрово",
-        "29": "Търговище",
-        "30": "Друго"
+        "1":"Борован",
+        "2":"Бяла Слатина",
+        "3":"Козлодуй",
+        "4":"Криводол",
+        "5":"Мездра",
+        "6":"Мизия",
+        "7":"Оряхово",
+        "8":"Роман",
+        "9":"Хайредин",
+        "10": "Друго"
 		};
   		 var options = [];
 		  $.each( cities, function( key, val ) {

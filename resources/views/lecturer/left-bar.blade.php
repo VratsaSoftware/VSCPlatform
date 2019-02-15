@@ -24,9 +24,6 @@
       @endforelse
     </ul>
   </li>
-  <li><a href="#" class="disabled">
-   <img src="{{asset('/images/profile/nav/grades-icon.png')}}" alt="" class="img-fluid">Онлайн тестове</a>
- </li>
  <li>
     <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
       <i class="fas fa-sign-out-alt fa-1x"></i>

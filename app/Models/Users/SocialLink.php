@@ -29,14 +29,6 @@ class SocialLink extends Model
         $skype = Social::where('name', 'skype')->first();
         $dribbble = Social::where('name', 'dribbble')->first();
         $behance = Social::where('name', 'behance')->first();
-        $data = $request->validate([
-            'facebook' => 'sometimes|url',
-            'linkedin' => 'sometimes|url',
-            'github' => 'sometimes|url',
-            'skype' => 'sometimes|url',
-            'dribble' => 'sometimes|url',
-            'behance' => 'sometimes|url',
-        ]);
         $changeFacebook = SocialLink::where([
             ['user_id',$user_id],
             ['cl_social_id',$facebook->id],

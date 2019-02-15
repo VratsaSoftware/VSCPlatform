@@ -33,6 +33,14 @@ Route::get('/mission', function () {
     return view('static.mission');
 })->name('mission');
 
+Route::get('/reports', function () {
+    return view('static.reports');
+})->name('year_reports');
+
+Route::get('/contacts', function () {
+    return view('static.contacts');
+})->name('contacts');
+
 Auth::routes();
 
 Route::group(['middleware' => 'auth'], function () {

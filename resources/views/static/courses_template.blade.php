@@ -53,14 +53,11 @@
         sectionsnap.src = "{{asset('/js/jquery-sectionsnap.js')}}";
         var hamburger = document.createElement("script");
         hamburger.src = "{{asset('/js/hamburger-menu.js')}}";
-        var programTabs = document.createElement("script");
-        programTabs.src = "{{asset('/js/program-tabs.js')}}";
         var countdownTimer = document.createElement("script");
         countdownTimer.src = "{{asset('/js/countdownTimer.js')}}";
 
         $('body').append(sectionsnap);
         $('body').append(hamburger);
-        $('body').append(programTabs);
         $('body').append(countdownTimer);
     });
 </script>

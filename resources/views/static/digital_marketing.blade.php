@@ -14,19 +14,19 @@
                 <div class="header-title col-md-12 text-center">
                     <span>Покори върховете на<br /> Дигиталния Маркетинг</span>
                 </div>
-                <div class="header-sub-title col-md-12 text-center">
+                {{-- <div class="header-sub-title col-md-12 text-center">
                     <span>Курса започва след</span><br/>
                 </br/>
                     <span class="timer-digital"><img src="{{asset('/images/loaders/load-32.gif')}}" alt="timer"/></span>
-                </div>
-                <div class="header-button col-md-12 text-center mb-5">
+                </div> --}}
+                <div class="header-button col-md-12 text-center mb-5" style="visibility:hidden">
                     <span id="prepare"><a href="#application">Запиши се</a></span>
                 </div>
 
                 <div class="header-menu col-md-12 header-marketing" id="header-sticky">
                     <nav class="text-center">
                         <ul class="d-flex flex-wrap main-nav-list">
-                            <li class="p-3"><img src="./images/vso-png-white-bigger.png" alt="" class="img-fluid"></li>
+                            <li class="p-3"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="" class="img-fluid"></li>
                             <li class="p-3"><a href="{{route('home')}}">Начало</a></li>
                             <li class="p-3"><a href="#information">Информация</a></li>
                             <li class="p-3"><a href="#program">Програма</a></li>
@@ -82,7 +82,7 @@
             </div>
             <div class="col-md-4 info-pic">
                 <div class="info-img">
-                    <img src="./images/digital-marketing-1.jpg" alt="info-pic" class="img-fluid">
+                    <img src="{{asset('/images/digital-marketing-1.jpg')}}" alt="info-pic" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -104,7 +104,7 @@
                                             Основи на маркетинга
                                         </p>
                                     </div>
-                                    <div class="col-md-1 clear-tick tick-marketing"><img src="./images/tick-y-big-orange.png" alt="tick"></div>
+                                    <div class="col-md-1 clear-tick tick-marketing"><img src="{{asset('/images/tick-y-big-orange.png')}}" alt="tick"></div>
                                     <div class="col-md-4 program-info-img info-marketing">
                                         <p class="program-mentors">
                                             <a href="https://www.linkedin.com/in/aleksey-potebnya-7523b152/" target=" _blank">лектор Алексей Потебня</a>
@@ -120,7 +120,7 @@
                                             Създаване на съдържание онлайн
                                         </p>
                                     </div>
-                                    <div class="col-md-1 clear-tick tick-marketing"><img src="./images/tick-y-big-orange.png" alt="tick"></div>
+                                    <div class="col-md-1 clear-tick tick-marketing"><img src="{{asset('/images/tick-y-big-orange.png')}}" alt="tick"></div>
                                     <div class="col-md-4 program-info-img info-marketing">
                                         <p class="program-mentors">
                                             <a href="https://www.linkedin.com/in/ivaylo-yordanov/" target=" _blank">лектор Ивайло Йорданов</a>
@@ -136,7 +136,7 @@
                                             Рекламиране в социални мрежи
                                         </p>
                                     </div>
-                                    <div class="col-md-1 clear-tick tick-marketing"><img src="./images/tick-y-big-orange.png" alt="tick"></div>
+                                    <div class="col-md-1 clear-tick tick-marketing"><img src="{{asset('/images/tick-y-big-orange.png')}}" alt="tick"></div>
                                     <div class="col-md-4 program-info-img info-marketing">
                                         <p class="program-mentors">
                                             <a href="https://www.linkedin.com/in/ivaylo-yordanov/" target=" _blank">лектор Ивайло Йорданов</a>
@@ -144,20 +144,6 @@
                                     </div>
                                 </div>
                                 <!-- end of third lvl -->
-
-                                <!-- fourth lvl -->
-                                <div class="col-md-12 d-flex flex-row flex-wrap">
-                                    <div class="col-md-7 lvl-info lvl-marketing">
-                                        <p class="program-info">
-                                            Всеки модул завършва с тест и проект.
-                                        </p>
-                                    </div>
-                                    <div class="col-md-1 clear-tick tick-marketing"><img src="./images/tick-y-big-orange.png" alt="tick"></div>
-                                    <div class="col-md-4 program-info-img info-marketing">
-                                        <img src="./images/detail-5.png" alt="html-logo" class="code-logos-program" title="Проекти">
-                                    </div>
-                                </div>
-                                <!-- end of fourth lvl -->
                             </div>
                         </div>
                         <!-- end of php tab -->
@@ -173,21 +159,21 @@
             <div class="details-title text-center">Детайли</div>
             <div class="details-container col-md-12 d-flex flex-wrap flex-row">
                 <div class="col-md-4 first-detail text-center">
-                    <img src="./images/detail-1-marketing.png" alt="info-php-second" class="img-fluid">
+                    <img src="{{asset('/images/detail-1-marketing.png')}}" alt="info-php-second" class="img-fluid">
                     <br />
                     <span class="detail-text">
                         Продължителност: 4 месеца
                     </span>
                 </div>
                 <div class="col-md-4 second-detail text-center">
-                    <img src="./images/detail-2-marketing.png" alt="icon" class="img-fluid">
+                    <img src="{{asset('/images/detail-2-marketing.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
                         Интензивност:веднъж през уикенда
                     </span>
                 </div>
                 <div class="col-md-4 third-detail text-center">
-                    <img src="./images/rocket-extra-small-marketing.png" alt="icon" class="img-fluid">
+                    <img src="{{asset('/images/rocket-extra-small-marketing.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
                         Предварителни изисквания: Не е необходима. Курсът е предназначен за начинаещи.
@@ -197,17 +183,17 @@
                 <div class="col-md-2"></div>
 
                 <div class="col-md-3 fourth-detail text-center">
-                    <img src="./images/detail-4-marketing.png" alt="info-php-second" class="img-fluid">
+                    <img src="{{asset('/images/detail-4-marketing.png')}}" alt="info-php-second" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Подготовка вкъщи: ~8 часа
+                        Подготовка вкъщи: ~6 часа / седмично
                     </span>
                 </div>
 
                 <div class="col-md-2"></div>
 
                 <div class="col-md-3 fifth-detail text-center">
-                    <img src="./images/detail-5-marketing.png" alt="icon" class="img-fluid">
+                    <img src="{{asset('/images/detail-5-marketing.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
                         Изпити и проекти: Всяко ниво завършва с изпит и проект.
@@ -219,7 +205,7 @@
                 <div class="col-md-2"></div>
 
                 <div class="col-md-3 sixth-detail text-center">
-                    <img src="./images/detail-6-marketing.png" alt="info-php-second" class="img-fluid">
+                    <img src="{{asset('/images/detail-6-marketing.png')}}" alt="info-php-second" class="img-fluid">
                     <br />
                     <span class="detail-text">
                         Сертификати: Професионален (над 80%) , обикновен (над 50%)
@@ -229,7 +215,7 @@
                 <div class="col-md-2"></div>
 
                 <div class="col-md-3 seventh-detail text-center">
-                    <img src="./images/detail-7-marketing.png" alt="icon" class="img-fluid">
+                    <img src="{{asset('/images/detail-7-marketing.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
                         Менторска програма: Да
@@ -270,29 +256,29 @@
             <div class="candidate-imgs col-md-12 flex-row flex-wrap text-center">
                 <div class="col-md-1"></div>
                 <div class="steps col-md-2 first-candidate-img">
-                    <img src="./images/candidate-img-step-1.png" alt="step" class="img-fluid candidate-img">
+                    <img src="{{asset('/images/candidate-img-step-1.png')}}" alt="step" class="img-fluid candidate-img">
                 </div>
 
                 <div class="steps col-md-2">
-                    <img src="./images/candidate-img-step-2.png" alt="step" class="img-fluid candidate-img">
+                    <img src="{{asset('/images/candidate-img-step-2.png')}}" alt="step" class="img-fluid candidate-img">
                 </div>
                 <div class="steps col-md-2">
-                    <img src="./images/candidate-img-step-3.png" alt="step" class="img-fluid candidate-img">
+                    <img src="{{asset('/images/candidate-img-step-3.png')}}" alt="step" class="img-fluid candidate-img">
                 </div>
                 <div class="steps col-md-2">
-                    <img src="./images/candidate-img-step-4.png" alt="step" class="img-fluid candidate-img">
+                    <img src="{{asset('/images/candidate-img-step-4.png')}}" alt="step" class="img-fluid candidate-img">
                 </div>
                 <div class="steps col-md-2">
-                    <img src="./images/candidate-img-step-5.png" alt="step" class="img-fluid candidate-img">
+                    <img src="{{asset('/images/candidate-img-step-5.png')}}" alt="step" class="img-fluid candidate-img">
                 </div>
                 <div class="col-md-1"></div>
             </div>
         </div>
     </div>
     </div>
-    <div class="col-md-12 text-center">
+    {{-- <div class="col-md-12 text-center">
         <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="#">КАНДИДАТСТВАЙ</a></span>
-    </div>
+    </div> --}}
     </div>
     <script>
     // Set the date we're counting down to
@@ -313,6 +299,15 @@
             } else {
                 $("#header-sticky").removeClass('sticky-marketing');
             }
+        });
+    </script>
+    <script type="text/javascript">
+        $(function(){
+            var programTabs = document.createElement("script");
+            programTabs.src = "{{asset('/js/program-tabs.js')}}";
+
+            $('body').append(programTabs);
+            tickAnimation(2);
         });
     </script>
 @endsection

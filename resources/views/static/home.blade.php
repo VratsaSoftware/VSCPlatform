@@ -30,24 +30,7 @@
                     <h1><a href="{{route('home')}}"><img src="./images/vso-logo-bg-original.png" alt="vso-logo" class="img-responsive main-logo"></a></h1>
                 </div>
 
-                <nav id="main-nav" class="col-md-8">
-                    <ul class="list-inline main-nav-list">
-                        <li class="nav-item dropdown-about">
-                            <a href="#">За нас</a>
-                            <div class="dropdown-content-about">
-                                <a href="{{route('mission')}}">Мисия</a>
-                                <a href="{{route('about')}}">Екип</a>
-                            </div>
-                        </li>
-                        <li class="nav-item dropdown-el">
-                            <a href="#">Обучения</a>
-                            <div class="dropdown-content">
-                                <a href="{{route('programmingCourses')}}">Програмиране</a>
-                                <a href="{{route('digitalMarketing')}}">Дигитален Маркетинг</a>
-                            </div>
-                        </li>
-                    </ul>
-                </nav>
+                @include('static.menu')
 
                 <ul id='right-menu'>
                     <li><a href="#header"><img src="{{asset('/images/oval.png')}}" alt="nav-img"></a>

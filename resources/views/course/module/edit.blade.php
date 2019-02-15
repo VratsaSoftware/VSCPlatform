@@ -174,14 +174,10 @@
                     <span>
                         @if($lection->first_date)
                             &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->first_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->first_date->format('H:i')}}</span>
-                        @else
-                            <i class="fas fa-times"></i>
                         @endif
-                         /
+
                         @if($lection->second_date)
-                            &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->second_date->format('H:i')}}</span>
-                        @else
-                            <i class="fas fa-times"></i>
+                            /&nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->second_date->format('H:i')}}</span>
                         @endif
                      </span><br>
 
@@ -254,40 +250,42 @@
                                         <div class="comments-title col-md-12">Обратна Връзка</div>
                                         @foreach ($lection->Comments as $comment)
                                             <!-- one comment -->
-                                            <div class="comment-pic-inside-modal col-md-12 d-flex flex-row flex-wrap">
-                                                <div class="col-md-4">
-                                                    @if($comment->Author->picture)
-                                                        <img src="{{asset('images/user-pics/'.$comment->Author->picture)}}" alt="botev" class="img-fluid modal-comment-pic">
-                                                    @else
-                                                        <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="img-fluid modal-comment-pic">
-                                                    @endif
-                                                </div>
-                                                <div class="col-md-4">
+                                            @if(!is_null($comment->Author))
+                                                <div class="comment-pic-inside-modal col-md-12 d-flex flex-row flex-wrap">
+                                                    <div class="col-md-4">
+                                                        @if($comment->Author->picture)
+                                                            <img src="{{asset('images/user-pics/'.$comment->Author->picture)}}" alt="botev" class="img-fluid modal-comment-pic">
+                                                        @else
+                                                            <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="img-fluid modal-comment-pic">
+                                                        @endif
+                                                    </div>
+                                                    <div class="col-md-4">
 
-                                                </div>
-                                                <div class="col-md-4">
+                                                    </div>
+                                                    <div class="col-md-4">
 
-                                                </div>
-                                                <div class="col-md-4 text-center">
-                                                    <span class="">{{$comment->Author->name}} {{$comment->Author->last_name}}</span>
-                                                </div>
-                                                <div class="col-md-4">
+                                                    </div>
+                                                    <div class="col-md-4 text-center">
+                                                        <span class="">{{$comment->Author->name}} {{$comment->Author->last_name}}</span>
+                                                    </div>
+                                                    <div class="col-md-4">
 
-                                                </div>
-                                                <div class="col-md-4 text-right">
-                                                    <span class="">{{$comment->created_at->diffForHumans()}}</span>
-                                                </div>
+                                                    </div>
+                                                    <div class="col-md-4 text-right">
+                                                        <span class="">{{$comment->created_at->diffForHumans()}}</span>
+                                                    </div>
 
-                                                <div class="col-md-12">
+                                                    <div class="col-md-12">
 
+                                                    </div>
+                                                    <div class="col-md-12 comment-text">
+                                                        {{$comment->comment}}
+                                                    </div>
+                                                    <div class="col-md-12 text-right">
+                                                         {{$comment->created_at->format('H:i A')}}
+                                                    </div>
                                                 </div>
-                                                <div class="col-md-12 comment-text">
-                                                    {{$comment->comment}}
-                                                </div>
-                                                <div class="col-md-12 text-right">
-                                                     {{$comment->created_at->format('H:i A')}}
-                                                </div>
-                                            </div>
+                                            @endif
                                             <!-- end of one comment -->
                                         @endforeach
                                     </div>
@@ -351,14 +349,10 @@
                     <span>
                         @if($lection->first_date)
                             &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->first_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->first_date->format('H:i')}}</span>
-                        @else
-                            <i class="fas fa-times"></i>
                         @endif
-                         /
+
                         @if($lection->second_date && !is_null($lection->second_date))
-                            &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->second_date->format('H:i')}}</span>
-                        @else
-                            <i class="fas fa-times"></i>
+                             /&nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->second_date->format('H:i')}}</span>
                         @endif
                      </span><br>
 
@@ -436,37 +430,39 @@
 <div class="col-md-12 d-flex flex-row flex-wrap text-center all-students-pool">
 @forelse ($students as $student)
     <!--  one student -->
-    <div class="col-md-3 d-flex flex-row flex-wrap one-student-holder ajax">
-        <div class="col-md-12">
-            @if($student->User->picture)
-                <img src="{{asset('images/user-pics/'.$student->User->picture)}}" alt="student-pic" class="img-fluid one-student-pic">
-            @else
-                <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
-            @endif
-        </div>
-        <span class="edit-lection-students-pool col-md-12">
-            {{$student->User->name}}
+    @if(!is_null($student->User))
+        <div class="col-md-3 d-flex flex-row flex-wrap one-student-holder ajax">
+            <div class="col-md-12">
+                @if($student->User->picture)
+                    <img src="{{asset('images/user-pics/'.$student->User->picture)}}" alt="student-pic" class="img-fluid one-student-pic">
+                @else
+                    <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
+                @endif
+            </div>
+            <span class="edit-lection-students-pool col-md-12">
+                {{$student->User->name}}
 
-            {{$student->User->last_name}}
-        </span>
-        <div class="col-md-6 edit-lection-students-pool">
-            {{$student->User->email}}
-        </div>
-        <div class="col-md-6 edit-lection-students-pool">
-            <img src="{{asset('/images/profile/location-icon.png')}}" alt="map-icon">
-            <span class="location">
-                {{$student->User->location}}
+                {{$student->User->last_name}}
             </span>
-        </div>
-        <div class="col-md-11 flex-row flex-wrap student-options">
-            <div class="col-md-6 add-student text-right">
+            <div class="col-md-6 edit-lection-students-pool">
+                {{$student->User->email}}
+            </div>
+            <div class="col-md-6 edit-lection-students-pool">
+                <img src="{{asset('/images/profile/location-icon.png')}}" alt="map-icon">
+                <span class="location">
+                    {{$student->User->location}}
+                </span>
+            </div>
+            <div class="col-md-11 flex-row flex-wrap student-options">
+                <div class="col-md-6 add-student text-right">
 
-            </div>
-            <div class="col-md-6 remove-student text-left" data-module="{{$module->id}}" data-url="{{route('module.remove.student')}}">
-                <img src="{{asset('/images/profile/remove-icon.png')}}" width="26px" class="remove-student ajax" data="{{$student->User->id}}">
+                </div>
+                <div class="col-md-6 remove-student text-left" data-module="{{$module->id}}" data-url="{{route('module.remove.student')}}">
+                    <img src="{{asset('/images/profile/remove-icon.png')}}" width="26px" class="remove-student ajax" data="{{$student->User->id}}">
+                </div>
             </div>
         </div>
-    </div>
+    @endif
     <!-- end of one student -->
     @empty
     <p class="col-md-12 text-center">

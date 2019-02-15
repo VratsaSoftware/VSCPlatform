@@ -75,15 +75,36 @@ body {
 .team-holder {
     padding-left: 3vw;
     padding-right: 3vw;
+    padding-bottom: 3vw;
 }
 
-#team>div:hover {
+.founders:hover, .leaders:hover {
     box-shadow: 0px 5px 20px rgba(7, 42, 68, 0.1);
+    cursor: help;
+}
+
+.founders:hover {
+    box-shadow: 0px 2px 20px 5px rgba(28, 136, 0, 1) !important;
+    cursor: help;
+}
+
+.leaders:hover {
+    box-shadow: 0px 2px 20px 3px rgba(28, 136, 0, 1) !important;
+    cursor: help;
+}
+
+.teachers:hover {
+    box-shadow: 0px 2px 20px 1px rgba(28, 136, 0, 1) !important;
     cursor: help;
 }
 
 .team-contact {
     left: 5vw !important;
+    margin-bottom: 1vw;
+}
+
+.team-pic {
+    margin-top: 1vw;
 }
 
 .team-holder>img {
@@ -99,7 +120,7 @@ body {
     color: #243847;
     text-shadow: 0px 0px 10px rgba(94, 94, 94, 0.148862);
     letter-spacing: 1px;
-    margin-bottom: 5vw;
+    margin-bottom: 3vw;
 }
 
 .team-title {
@@ -124,6 +145,11 @@ body {
     letter-spacing: 1px;
 }
 
+.founders-title {
+    font-family: Ubuntu;
+    margin-top: 5vw;
+}
+
 /*end of team sections*/
 /*querys
 -----------------------------------------------------------------------------------------------------------------*/
@@ -146,6 +172,10 @@ body {
         font-size: 7.5vw;
         margin-top: 6vw;
         margin-bottom: 14vw;
+    }
+
+    .founders-title {
+        font-size: 8vw;
     }
 
     .team-txt {
@@ -186,6 +216,10 @@ body {
         font-size: 6vw;
         margin-top: 2vw;
         margin-bottom: 5vw;
+    }
+
+    .founders-title {
+        font-size: 7vw;
     }
 
     .team-txt {
@@ -232,6 +266,10 @@ body {
         margin-bottom: 3vw;
     }
 
+    .founders-title {
+        font-size: 3vw;
+    }
+
     .team-txt {
         font-size: 2.2vw;
         /*line-height: 3vw;*/
@@ -272,6 +310,10 @@ body {
         font-size: 2.2vw;
         margin-top: 2vw;
         margin-bottom: 2vw;
+    }
+
+    .founders-title {
+        font-size: 3vw;
     }
 
     .team-txt {
@@ -316,10 +358,14 @@ body {
         margin-bottom: 2vw;
     }
 
+    .founders-title {
+        font-size: 2.5vw;
+    }
+
     .team-txt {
-        font-size: 1.4vw;
+        font-size: 1.2vw;
         line-height: 1.5vw;
-        margin-bottom: 5vw;
+        margin-bottom: 3vw;
     }
 
     .team-contact {
@@ -329,10 +375,10 @@ body {
     }
 
     #team>div {
-        margin-bottom: 3vw;
+        margin-bottom: 1vw;
     }
 
     .team-holder>img {
-        max-width: 7vw;
+        max-width: 10vw;
     }
 }

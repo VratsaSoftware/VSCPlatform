@@ -52,18 +52,7 @@
                 Екипът на Враца Софтуер Общество
             </div>
         </div>
-        <nav id="main-nav" class="col-md-8">
-            <ul class="list-inline main-nav-list">
-                <li class="nav-item"><a href="{{route('home')}}">Начало</a></li>
-                <li class="nav-item dropdown-el">
-                    <a href="#">Обучения</a>
-                    <div class="dropdown-content">
-                        <a href="{{route('programmingCourses')}}">Програмиране</a>
-                        <a href="{{route('digitalMarketing')}}">Дигитален Маркетинг</a>
-                    </div>
-                </li>
-            </ul>
-        </nav>
+        @include('static.menu')
 
         <div class="row buttons-right col-md-2">
             <div id="candidate-btn" class="col-md-2">
@@ -76,30 +65,33 @@
     </div>
     </div>
     <!-- end of header section -->
-
+    <div class="col-md-12 founders-title text-center">
+        Основатели
+    </div>
     <!-- team section -->
     <div class="section">
         <div id="team" class="col-md-12 d-flex flex-row flex-wrap text-center">
-            <div class="col-md-4">
+            <div class="col-md-4 founders">
                 <div class="team-holder">
-                    <img src="{{asset('/images/botev-img.png')}}" alt="team-photo">
+                    <img src="{{asset('/team/ek_pic.jpeg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Емилиян Кадийски
                     </div>
                     <div class="team-txt">
-                        Образование: Магистър по Информатика, ФМИ към СУ; Zend PHP сертификат
-                        Професия: Учител по Програмиране в ПТГ „Н. Й. Вапцаров“ град Враца
+                        Роден във Враца, Емо завършва математическата гимназия в града, след това магистратура по Информатика в СУ “Св. Климент Охридски”. Работи като уеб програмист и през 2011г е част от първата кохорта учители на Заедно в час. През 2013г заедно с двама приятели стартират Враца софтуер общество, организацията развива дигитална индустрия в родния им град, предлагайки курсове по програмиране и интересни ИТ събития.
+                        В момента Емо работи като програмист и като учител в професионалната техническа гимназия “Н. Й. Вапцаров” във Враца, където от 2015г има специалност за програмиране.
+                        Хобитата му са да спортува: футбол, ски, тичане, да пътува и да обикаля сред природата.
                     </div>
-                    <div class="team-contact">
+                    {{-- <div class="team-contact">
                         <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid">
                         <span> hristo.botev@mail.com</span>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 founders">
                 <div class="team-holder">
-                    <img src="{{asset('/images/botev-img.png')}}" alt="team-photo" class="img-fluid">
+                    <img src="{{asset('/images/botev-img.png')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Теодор Костадинов
                     </div>
@@ -108,16 +100,16 @@
                         Христо Ботев е една от именитите фигури в българската революционна дейност, литература и публицистика. Поет и бунтовник, ревностен пазител на националните идеи, той оставя трайна следа в предосвобожденската история на
                         България. Роден е на 6 януари 1848 година в Калофер.
                     </div>
-                    <div class="team-contact">
+                    {{-- <div class="team-contact">
                         <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid">
                         <span> hristo.botev@mail.com</span>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 founders">
                 <div class="team-holder">
-                    <img src="{{asset('/images/botev-img.png')}}" alt="team-photo" class="img-fluid">
+                    <img src="{{asset('/images/botev-img.png')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Илиян Димов
                     </div>
@@ -126,6 +118,32 @@
                         Христо Ботев е една от именитите фигури в българската революционна дейност, литература и публицистика. Поет и бунтовник, ревностен пазител на националните идеи, той оставя трайна следа в предосвобожденската история на
                         България. Роден е на 6 януари 1848 година в Калофер.
                     </div>
+                    {{-- <div class="team-contact">
+                        <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid">
+                        <span> hristo.botev@mail.com</span>
+                    </div> --}}
+                </div>
+            </div>
+
+            <div class="col-md-12 founders-title">
+                Управленски Екип
+            </div>
+
+            <div class="col-md-2">
+
+            </div>
+
+            <div class="col-md-4 leaders">
+                <div class="team-holder">
+                    <img src="{{asset('/images/botev-img.png')}}" alt="team-photo" class="img-fluid team-pic">
+                    <div class="team-title">
+                        Тонко Влахов
+                    </div>
+                    <div class="team-txt">
+                        За мен:
+                        Христо Ботев е една от именитите фигури в българската революционна дейност, литература и публицистика. Поет и бунтовник, ревностен пазител на националните идеи, той оставя трайна следа в предосвобожденската история на
+                        България. Роден е на 6 януари 1848 година в Калофер.
+                    </div>
                     <div class="team-contact">
                         <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid">
                         <span> hristo.botev@mail.com</span>
@@ -133,9 +151,35 @@
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 leaders">
                 <div class="team-holder">
-                    <img src="{{asset('/images/botev-img.png')}}" alt="team-photo" class="img-fluid">
+                    <img src="{{asset('/images/botev-img.png')}}" alt="team-photo" class="img-fluid team-pic">
+                    <div class="team-title">
+                        Иван Стрижлев
+                    </div>
+                    <div class="team-txt">
+                        За мен:
+                        Христо Ботев е една от именитите фигури в българската революционна дейност, литература и публицистика. Поет и бунтовник, ревностен пазител на националните идеи, той оставя трайна следа в предосвобожденската история на
+                        България. Роден е на 6 януари 1848 година в Калофер.
+                    </div>
+                    <div class="team-contact">
+                        <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid">
+                        <span> hristo.botev@mail.com</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+
+            </div>
+
+            <div class="col-md-12 founders-title">
+                Преподаватели
+            </div>
+
+            <div class="col-md-4 teachers">
+                <div class="team-holder">
+                    <img src="{{asset('/images/botev-img.png')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Лилия Михайлова
                     </div>
@@ -144,16 +188,16 @@
                         Христо Ботев е една от именитите фигури в българската революционна дейност, литература и публицистика. Поет и бунтовник, ревностен пазител на националните идеи, той оставя трайна следа в предосвобожденската история на
                         България. Роден е на 6 януари 1848 година в Калофер.
                     </div>
-                    <div class="team-contact">
-                        <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid">
+                    {{-- <div class="team-contact">
+                        <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid team-pic">
                         <span> hristo.botev@mail.com</span>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 teachers">
                 <div class="team-holder">
-                    <img src="{{asset('/images/botev-img.png')}}" alt="team-photo" class="img-fluid">
+                    <img src="{{asset('/images/botev-img.png')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Тихомир Кръстев
                     </div>
@@ -162,16 +206,16 @@
                         Христо Ботев е една от именитите фигури в българската революционна дейност, литература и публицистика. Поет и бунтовник, ревностен пазител на националните идеи, той оставя трайна следа в предосвобожденската история на
                         България. Роден е на 6 януари 1848 година в Калофер.
                     </div>
-                    <div class="team-contact">
-                        <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid">
+                    {{-- <div class="team-contact">
+                        <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid team-pic">
                         <span> hristo.botev@mail.com</span>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
 
-            <div class="col-md-4">
+            <div class="col-md-4 teachers">
                 <div class="team-holder">
-                    <img src="{{asset('/images/1.jpg')}}" alt="team-photo" class="img-fluid">
+                    <img src="{{asset('/images/1.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Милена Томова
                     </div>
@@ -180,10 +224,10 @@
                         Христо Ботев е една от именитите фигури в българската революционна дейност, литература и публицистика. Поет и бунтовник, ревностен пазител на националните идеи, той оставя трайна следа в предосвобожденската история на
                         България. Роден е на 6 януари 1848 година в Калофер.
                     </div>
-                    <div class="team-contact">
-                        <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid">
+                    {{-- <div class="team-contact">
+                        <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid team-pic">
                         <span> hristo.botev@mail.com</span>
-                    </div>
+                    </div> --}}
                 </div>
             </div>
         </div>
