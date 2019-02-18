@@ -42,12 +42,12 @@ class UserController extends Controller
             'location' => 'sometimes|min:3|max:10|string|alpha',
             'dob' => 'sometimes|date_format:Y-m-d|before:'.Carbon::now().'|after:1950-01-01',
             'email' => ['sometimes','unique:users','email'],
-            'facebook' => 'nullable|url',
-            'linkedin' => 'nullable|url',
-            'github' => 'nullable|url',
-            'skype' => 'nullable|url',
-            'dribble' => 'nullable|url',
-            'behance' => 'nullable|url',
+            'facebook' => 'nullable|url|min:5|max:50',
+            'linkedin' => 'nullable|url|min:5|max:50',
+            'github' => 'nullable|url|min:5|max:50',
+            'skype' => 'nullable|url|min:5|max:50',
+            'dribbble' => 'nullable|url|min:5|max:50',
+            'behance' => 'nullable|url|min:5|max:50',
         ]);
         if (Input::hasFile('picture')) {
             $userPic = Input::file('picture');

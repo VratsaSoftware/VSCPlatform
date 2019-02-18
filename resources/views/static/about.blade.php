@@ -153,14 +153,12 @@
 
             <div class="col-md-4 leaders">
                 <div class="team-holder">
-                    <img src="{{asset('/images/botev-img.png')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team/ivan_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Иван Стрижлев
                     </div>
                     <div class="team-txt">
-                        За мен:
-                        Христо Ботев е една от именитите фигури в българската революционна дейност, литература и публицистика. Поет и бунтовник, ревностен пазител на националните идеи, той оставя трайна следа в предосвобожденската история на
-                        България. Роден е на 6 януари 1848 година в Калофер.
+                        Иван е роден и живее във Враца. Завършил е психология в ЮЗУ „Неофит Рилски“. Работил е по специалността си в системата на образованието. Повече от десет години се занимава със създаването и провеждането на тренинг обучения и тиймбилдинги. Хоби му е фотографията, планинарството и графичния дизайн.
                     </div>
                     <div class="team-contact">
                         <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid">
@@ -179,7 +177,7 @@
 
             <div class="col-md-4 teachers">
                 <div class="team-holder">
-                    <img src="{{asset('/images/botev-img.png')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team/lili_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Лилия Михайлова
                     </div>
@@ -190,7 +188,7 @@
                     </div>
                     {{-- <div class="team-contact">
                         <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid team-pic">
-                        <span> hristo.botev@mail.com</span>
+                                <span> hristo.botev@mail.com</span>
                     </div> --}}
                 </div>
             </div>
@@ -202,9 +200,9 @@
                         Тихомир Кръстев
                     </div>
                     <div class="team-txt">
-                        За мен:
-                        Христо Ботев е една от именитите фигури в българската революционна дейност, литература и публицистика. Поет и бунтовник, ревностен пазител на националните идеи, той оставя трайна следа в предосвобожденската история на
-                        България. Роден е на 6 януари 1848 година в Калофер.
+                        Роден във Враца, Тито  завършва СОУ “Христо Ботев” с профил история, след това бакалавър по Публична администрация  в УНСС и магистратура по Мениджмънт в “Икономически университет - Варна”. През пролетта на 2015г е част от първия девет месечен курс на ВСО като курсист и през лятото започва работа като програмист в най-голямата софтуерна компания в града - Инвейтикс. В момента Тито е Senior Android Developer, както и тийм лидер на Java екипа в компанията. От края на 2015г отново е част от девет месечните курсове, но този път като преподавател.
+                        Хобитата му са - футбол, да пътува и игрите.
+
                     </div>
                     {{-- <div class="team-contact">
                         <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid team-pic">
