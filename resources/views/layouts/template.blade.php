@@ -16,7 +16,7 @@
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Враца Софтуер Общество" />
         <meta property="og:description" content="Развиваме дигитална индустрия във Враца" />
-        <meta property="og:image" content="./images/vso-logo-bg-original.png" />
+        <meta property="og:image" content="{{asset('/images/vso-logo-bg-original.png')}}" />
         <meta name="Description" content="Author: VSC 2018">
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>

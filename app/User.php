@@ -20,6 +20,7 @@ use App\Models\Users\WorkCompany;
 use App\Models\Users\WorkExperience;
 use App\Models\Users\WorkPosition;
 use App\Models\Users\Hobbie;
+use App\Notifications\PasswordReset;
 
 class User extends Authenticatable
 {
@@ -224,5 +225,10 @@ class User extends Authenticatable
     public function getLocationAttribute($value)
     {
         return mb_convert_case($value, MB_CASE_TITLE, 'UTF-8');
+    }
+
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new PasswordReset($token));
     }
 }

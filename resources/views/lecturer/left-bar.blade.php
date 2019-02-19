@@ -25,7 +25,7 @@
     </ul>
   </li>
  <li>
-    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+    <a id="logout-btn" class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
       <i class="fas fa-sign-out-alt fa-1x"></i>
       {{ __('Излизане') }}
     </a>

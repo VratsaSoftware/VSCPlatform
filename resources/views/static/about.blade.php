@@ -195,7 +195,7 @@
 
             <div class="col-md-4 teachers">
                 <div class="team-holder">
-                    <img src="{{asset('/images/botev-img.png')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team/tito_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Тихомир Кръстев
                     </div>
