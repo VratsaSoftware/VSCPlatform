@@ -17,7 +17,7 @@
     <meta property="og:image" content="{{asset('/images/vso-logo-bg-original.png')}}" />
 </head>
 
-<body>
+<body style="opacity:0">
     <!-- JQuery -->
     <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
     <!-- scroll -->
@@ -27,7 +27,7 @@
         <div class="section">
             <div id="header" class="col-md-12 col-sm-12 row">
                 <div id="logo" class="col-md-1 col-sm-1">
-                    <h1><a href="{{route('home')}}"><img src="./images/vso-logo-bg-original.png" alt="vso-logo" class="img-responsive main-logo"></a></h1>
+                    <h1><a href="{{route('home')}}"><img src="{{asset('/images/vso-png-big-2.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
                 </div>
 
                 @include('static.menu')
@@ -58,8 +58,8 @@
             <div id="carousel">
                 <div class="slideshow-container">
 
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/hack-vratsa16-smaller.jpg')}}" data-loader="{{asset('/images/loaders/load-7.gif')}}">
-                        <img src="{{asset('/images/loaders/load-7.gif')}}" width="100%" alt="events">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/hack-vratsa16-smaller.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                        <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">9-месечни курсове по програмиране</span>
@@ -76,8 +76,8 @@
                         </p>
                     </div>
 
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/digital-2.png')}}" data-loader="{{asset('/images/loaders/load-7.gif')}}">
-                        <img src="{{asset('/images/loaders/load-7.gif')}}" width="100%" alt="events">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/digital-2.png')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                        <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">Безплатен 4-месечен курс по дигитален маркетинг</span>
@@ -93,26 +93,26 @@
                         </p>
                     </div>
 
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/cw-1.jpg')}}" data-loader="{{asset('/images/loaders/load-7.gif')}}">
-                        <img src="{{asset('/images/loaders/load-7.gif')}}" width="100%" alt="events">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/cw-1.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                        <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
-                                <span class="slider-title">Предстои CodeWeek Враца - най-голямото ИТ събитие на северозапада</span>
+                                <span class="slider-title">CodeWeek Враца - най-голямото ИТ събитие на северозапада</span>
                             <p />
                             <p>
                                 <span class="slider-subtitle-content">
-                                    На 6-7 октомври Враца ще бъде част от европейската седмица на програмирането. CodeWeek Враца има една основна цел: да те запознае отблизо с най-популярните възможности за
+                                    CodeWeek Враца има една основна цел: да те запознае отблизо с най-популярните възможности за
                                     професионално развитие в 21 век.
                                 </span>
                             </p>
                         </div>
                         <p class="btn-content-wrap">
-                            <span class="title-btns-content"><a href="http://codeweek.vratsa.net">Кандидатствай</a></span>
+                            <span class="title-btns-content"><a href="http://codeweek.vratsa.net" target=" _blank">Кандидатствай</a></span>
                         </p>
                     </div>
 
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/kids-1.jpg')}}" data-loader="{{asset('/images/loaders/load-7.gif')}}">
-                        <img src="{{asset('/images/loaders/load-7.gif')}}" width="100%" alt="events">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/kids-1.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                        <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">Ново: ИТ курсове за деца 6-11год. във Враца </span>
@@ -128,8 +128,8 @@
                         </p>
                     </div>
 
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/telerik_academy_school.jpg')}}" data-loader="{{asset('/images/loaders/load-7.gif')}}">
-                        <img src="{{asset('/images/loaders/load-7.gif')}}" width="100%" alt="events">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/telerik_academy_school.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                        <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">9 групи на Телерик академия във Враца</span>
@@ -152,10 +152,10 @@
                 <br>
 
                 <div id="thumbnails" class="col-md-12">
-                    <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/vsc-tumb.jpg')}}" width="100%" alt="gallery-nav"></span>
-                    <span class="dot" onclick="currentSlide(2)"><img src="{{asset('/images/home-top-slider/digital-thumb.png')}}" width="100%" alt="gallery-nav"></span>
-                    <span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/cw-tumb.png')}}" width="100%" alt="gallery-nav"></span>
-                    <span class="dot" onclick="currentSlide(4)"><img src="{{asset('/images/home-top-slider/mindhub-tumb.png')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/vsc-thumb-big.png')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(2)"><img src="{{asset('/images/home-top-slider/digital_thumb_big.png')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/cropped-cweekLogo.png')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(4)"><img src="{{asset('/images/home-top-slider/mind-hub-crop.png')}}" width="100%" alt="gallery-nav"></span>
                     <span class="dot" onclick="currentSlide(5)"><img src="{{asset('/images/home-top-slider/telerik-tumb2.png')}}" width="100%" alt="gallery-nav"></span>
                 </div>
 
@@ -234,16 +234,16 @@
                 </div>
                 <div class="main-events d-flex mb-12 flex-row col-md-12 flex-wrap">
                     <div class="p-6 col-md-6 text-center main-event-first">
-                        <img src="{{asset('/images/loaders/load-7.gif')}}" data-img="{{asset('/images/home-events/cw18.png')}}" alt="events">
+                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/cw18.png')}}" alt="events">
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-second">
-                        <img src="{{asset('/images/loaders/load-7.gif')}}" data-img="{{asset('/images/home-events/google-garage.jpg')}}" alt="events">
+                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/google-garage.jpg')}}" alt="events">
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-first">
-                        <img src="{{asset('/images/loaders/load-7.gif')}}" data-img="{{asset('/images/home-events/digital-event.jpg')}}" alt="events">
+                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/digital-event.jpg')}}" alt="events">
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-second">
-                        <img src="{{asset('/images/loaders/load-7.gif')}}" data-img="{{asset('/images/home-events/HackVratsa.jpg')}}" alt="events">
+                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/HackVratsa.jpg')}}" alt="events">
                     </div>
                 </div>
 
@@ -285,21 +285,21 @@
                 </div>
                 <!-- only 4 visible -->
                 <div class="col-md-12 flex-wrap sponsors-logos b-description_readmore js-description_readmore text-center more-sponsors">
-                    <div class="p-3 col-md-3 sponsors-1"><img src="{{asset('/images/partners/us4bg-logo.png')}}" alt="us4bg-logo" class="img-fluid"></div>
-                    <div class="p-3 col-md-3 sponsors-2"><img src="{{asset('/images/partners/promianata-logo.png')}}" alt="promianata-logo" class="img-fluid"></div>
-                    <div class="p-3 col-md-3 sponsors-3"><img src="{{asset('/images/partners/vratsa-municipality-logo.jpg')}}" alt="vratsa-municipality-logo" class="img-fluid"></div>
-                    <div class="p-3 col-md-3 sponsors-4"><img src="{{asset('/images/partners/Telerik_Academy_Logo.png')}}" alt="Telerik_Academy_Logo" class="img-fluid"></div>
+                    <div class="p-3 col-md-3 sponsors-1"><a href="https://www.us4bg.org/" target=" _blank"><img src="{{asset('/images/partners/us4bg-logo.png')}}" alt="us4bg-logo" class="img-fluid"></a></div>
+                    <div class="p-3 col-md-3 sponsors-2"><a href="https://nova.bg/promyanata" target=" _blank"><img src="{{asset('/images/partners/promianata-logo.png')}}" alt="promianata-logo" class="img-fluid"></a></div>
+                    <div class="p-3 col-md-3 sponsors-3"><a href="http://www.vratza.bg/" target=" _blank"><img src="{{asset('/images/partners/vratsa-municipality-logo.jpg')}}" alt="vratsa-municipality-logo" class="img-fluid"></a></div>
+                    <div class="p-3 col-md-3 sponsors-4"><a href="https://www.telerikacademy.com/" target=" _blank"><img src="{{asset('/images/partners/Telerik_Academy_Logo.png')}}" alt="Telerik_Academy_Logo" class="img-fluid"></a></div>
 
-                    <div class="p-3 col-md-3 sponsors-5" data-img="{{asset('/images/partners/mindhub-logo.png')}}"><img src=" " alt="mindhub-logo" class="img-fluid"></div>
-                    <div class="p-3 col-md-3 sponsors-6" data-img="{{asset('/images/partners/CDB-logo.png')}}"><img src=" " alt="Coder Dojo Bulgaria" class="img-fluid"></div>
-                    <div class="p-3 col-md-3 sponsors-7" data-img="{{asset('/images/partners/movebg-logo2.png')}}"><img src=" " alt="movebg-logo" class="img-fluid"></div>
-                    <div class="p-3 col-md-3 sponsors-8" data-img="{{asset('/images/partners/NMD-Logo.gif')}}"><img src=" " alt="NMD-Logo" class="img-fluid"></div>
+                    <div class="p-3 col-md-3 sponsors-5" data-img="{{asset('/images/partners/mindhub-logo.png')}}"><a href="https://mindhub.bg/" target=" _blank"><img src=" " alt="mindhub-logo" class="img-fluid"></a></div>
+                    <div class="p-3 col-md-3 sponsors-6" data-img="{{asset('/images/partners/CDB-logo.png')}}"><a href="https://www.coderdojo.bg/" target=" _blank"><img src=" " alt="Coder Dojo Bulgaria" class="img-fluid"></a></div>
+                    <div class="p-3 col-md-3 sponsors-7" data-img="{{asset('/images/partners/movebg-logo2.png')}}"><a href="https://move.bg/" target=" _blank"><img src=" " alt="movebg-logo" class="img-fluid"></a></div>
+                    <div class="p-3 col-md-3 sponsors-8" data-img="{{asset('/images/partners/NMD-Logo.gif')}}"><a href="http://nmd.bg/" target=" _blank"><img src=" " alt="NMD-Logo" class="img-fluid"></a></div>
 
                     <div class="col-md-3"></div>
 
-                    <div class="p-3 col-md-3 sponsors-9" data-img="{{asset('/images/partners/eSkills-For-Future-logo.png')}}"><img src=" " alt="eSkills-For-Future-logo" class="img-fluid"></div>
+                    <div class="p-3 col-md-3 sponsors-9" data-img="{{asset('/images/partners/eSkills-For-Future-logo.png')}}"><a href="http://eskills.tto-bait.bg/" target=" _blank"><img src=" " alt="eSkills-For-Future-logo" class="img-fluid"></a></div>
 
-                    <div class="p-3 col-md-3 sponsors-10" data-img="{{asset('/images/partners/Startup-logo-main.png')}}"><img src=" " alt="Startup-logo-main" class="img-fluid"></div>
+                    <div class="p-3 col-md-3 sponsors-10" data-img="{{asset('/images/partners/Startup-logo-main.png')}}"><a href="http://startup.bg/" target=" _blank"><img src=" " alt="Startup-logo-main" class="img-fluid"></a></div>
                     <div class="col-md-3"></div>
                 </div>
                 <div class="col-md-5">
@@ -347,7 +347,7 @@
                     </div>
 
                     <div class="p-3 col-md-3 second-student student-2">
-                        <img src="{{asset('/images/home-testimonials/svetli.jpg')}}" alt="Svetoslav Vasilev" class="student-img img-fluid">
+                        <img src="{{asset('/images/home-testimonials/svetli_170x170.png')}}" alt="Svetoslav Vasilev" class="student-img img-fluid">
                         <div class="student-comment">Невероятен тръмплин, с който можеш да
                             започнеш работа в ИТ Сферата. Лично преминах 9 - месечния PHP курс, след което започнах работа веднага.</div>
                         <div class="student-name">Светослав Василев, програмист</div>
@@ -369,9 +369,10 @@
                 <div class="cookie-text col-md-8">
                     <span class="p-6 col-md-3 col-xs-3 col-sm-3"><img src="{{asset('/images/partners/us4bg-logo-small.png')}}" alt="sponsor" class="img-fluid cookie-sponsor-img"></span>
                     <span class="cookie-sponsor-text">
-                        Генерален партньор за периода 2017-2019г е Фондация Америка за България.
+                        Генерален партньор за периода 2017-2019г е Фондация Америка за България.<br />
                     </span>
                 </div>
+                <div class="col-md-12 text-right">Враца Софтуер Общество &copy; {{\Carbon\Carbon::now()->format('Y')}}</div>
             </div>
         </div>
         <!-- end of cookies section -->

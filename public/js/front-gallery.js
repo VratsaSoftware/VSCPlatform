@@ -35,9 +35,12 @@ function showSlides( n ) {
 
 function loadImg( element ) {
 	$( element ).find( 'img' ).attr( 'src', $( element ).attr( 'data-loader' ) );
+
 	$( element ).find( 'img' ).attr( 'src', $( element ).attr( 'data-src' ) );
+	// $( element ).find( 'img' ).removeClass( 'big-loader' );
 }
 
 function removeImg( element ) {
 	$( element ).find( 'img' ).attr( 'src', ' ' );
+	// $( element ).find( 'img' ).addClass( 'big-loader' );
 }

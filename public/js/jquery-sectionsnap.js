@@ -64,7 +64,7 @@
 			if ( $target ) {
 				animating = true;
 				$( 'html, body' ).animate( {
-					scrollTop: ( $target.offset().top )
+					scrollTop: ( ( $target.offset().top - 20 ) )
 				}, settings.animationTime, function () {
 					window.clearTimeout( scrollTimer );
 					animating = false;

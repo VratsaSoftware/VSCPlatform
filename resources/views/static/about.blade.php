@@ -25,7 +25,7 @@
     <script type="text/javascript" src="{{asset('/js/jquery-sectionsnap.js')}}"></script>
 
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png-white.png')}}" />
+    <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png-big-2.png')}}" />
 
     <!-- facebook -->
     <meta property="og:url" content="" />
@@ -45,7 +45,7 @@
     </div>
     <div id="header" class="col-md-12 col-sm-12 d-flex flex-row flex-wrap header">
         <div id="logo" class="col-md-1 col-sm-1">
-            <h1><a href="{{route('home')}}"><img src="{{asset('/images/vso-png-white.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
+            <h1><a href="{{route('home')}}"><img src="{{asset('/images/vso-png-big-2.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
         </div>
         <div class="col-md-12 text-center d-flex flex-row flex-wrap top-text-wrap content-wrapper">
             <div class="col-md-12 header-about-text">
@@ -218,9 +218,11 @@
                         Милена Томова
                     </div>
                     <div class="team-txt">
-                        За мен:
-                        Христо Ботев е една от именитите фигури в българската революционна дейност, литература и публицистика. Поет и бунтовник, ревностен пазител на националните идеи, той оставя трайна следа в предосвобожденската история на
-                        България. Роден е на 6 януари 1848 година в Калофер.
+                        Завършва първото издание на 9-месечните курсове на Враца Софтуер, направление Уеб разработка с РНР.
+                        “Никога дотогава не бях си представяла, че ще се занимавам с програмиране, още по-малко, че ще преподавам. Мечтаех си да знам много езици. Явно не съм уточнила, че нямам предвид езици за програмиране”.
+                        “Не съм от Враца, а и мястото не е от значение. Важни са хората, които те заобикалят и благодарение на които непрекъснато увеличаваш знанията и се убеждаваш в способностите си.”
+                        В момента води курса по Уеб разработка с РНР.
+                        Zend Certfied Engeneer и Certified Laravel Developer.
                     </div>
                     {{-- <div class="team-contact">
                         <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid team-pic">

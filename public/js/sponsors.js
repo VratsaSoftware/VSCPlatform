@@ -11,7 +11,7 @@ $( function () {
 				appear += 100;
 			} );
 			setTimeout( function () {
-				$( '.b-description_readmore_button' ).html( 'Скрии' );
+				$( '.b-description_readmore_button' ).html( 'Скрий' );
 				showed = true;
 			}, appear );
 

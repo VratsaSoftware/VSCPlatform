@@ -2,6 +2,8 @@ body {
     margin: 0;
     padding: 0;
     background-color: #fff;
+    visibility: visible !important;
+    opacity: 1 !important;
 }
 
 a, .title-btns-content>a {
@@ -131,7 +133,7 @@ a, .title-btns-content>a {
     background: #FFF;
     box-shadow: 0px 5px 20px rgba(7, 42, 68, 0.1);
     border-radius: 8px;
-    padding: 10px;
+    padding: 15px;
 }
 
 #candidate>a:hover {
@@ -261,7 +263,7 @@ a, .title-btns-content>a {
     letter-spacing: 1.25px;
     color: #fff;
     text-decoration: none;
-    padding: 5px 10px 10px 10px;
+    padding: 15px;
     background: #1C8800;
     border-radius: 8px;
 }
@@ -680,12 +682,12 @@ a, .title-btns-content>a {
 }
 
 .first-student:hover, .second-student:hover, .third-student:hover {
-    box-shadow: 0 0 11px rgba(33, 33, 33, .2);
-    cursor: pointer;
+    /* box-shadow: 0 0 11px rgba(33, 33, 33, .2);
+    cursor: pointer; */
 }
 
 .first-student>img:hover, .second-student>img:hover, .third-student>img:hover {
-    box-shadow: 0 0 11px rgba(33, 33, 33, .9);
+    /* box-shadow: 0 0 11px rgba(33, 33, 33, .9); */
 }
 
 .first-student>img, .second-student>img, .third-student>img {
@@ -892,18 +894,18 @@ a, .title-btns-content>a {
     /* position: relative;
     width: 80%; */
     margin-left: 18%;
-    margin-top: -5px;
+    /* margin-top: -5px; */
 }
 
 .dropdown-content-about {
     margin-left: 7%;
-    margin-top: -5px;
+    /* margin-top: -5px; */
 }
 
 /* Links inside the dropdown */
 .dropdown-content>a, .dropdown-content-about>a {
     color: #fff;
-    padding: 6px 16px;
+    padding: 10px 16px;
     text-decoration: none;
     display: block;
     font-family: Ubuntu;
@@ -920,6 +922,15 @@ a, .title-btns-content>a {
 .dropdown-el:hover .dropdown-content, .dropdown-about:hover .dropdown-content-about {
     background-color: #1C8800;
     display: block;
+}
+
+.big-loader {
+    width: 40% !important;
+    /* height: 40% !important; */
+    margin-left: 30% !important;
+    margin-top: 10% !important;
+    height: 60vh !important;
+    margin-bottom: 15vh;
 }
 
 /*-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
@@ -1605,11 +1616,11 @@ a, .title-btns-content>a {
         /* margin-top: 5vw; */
         display: table;
         position: absolute;
-        margin-left: 42%;
+        margin-left: 43%;
     }
 
     .slider-subtitle-content {
-        margin-top: 5vw;
+        margin-top: 10vw;
     }
 }
 
