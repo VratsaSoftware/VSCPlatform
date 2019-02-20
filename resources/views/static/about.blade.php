@@ -213,7 +213,7 @@
 
             <div class="col-md-4 teachers">
                 <div class="team-holder">
-                    <img src="{{asset('/images/1.jpg')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team/milena_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Милена Томова
                     </div>

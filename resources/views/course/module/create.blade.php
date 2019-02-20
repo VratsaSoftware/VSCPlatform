@@ -125,7 +125,11 @@
                 @if($user->picture)
                     <img src="{{asset('images/user-pics/'.$user->picture)}}" alt="student-pic" class="img-fluid one-student-pic">
                 @else
-                    <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
+                    @if($user->sex != 'female')
+                        <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
+                    @else
+                        <img src="{{asset('images/women-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
+                    @endif
                 @endif
             </div>
             <span class="edit-lection-students-pool col-md-12">
