@@ -28,10 +28,10 @@
                         <ul class="d-flex flex-wrap main-nav-list">
                             <li class="p-3"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="" class="img-fluid"></li>
                             <li class="p-3"><a href="{{route('home')}}">Начало</a></li>
-                            <li class="p-3"><a href="#information">Информация</a></li>
-                            <li class="p-3"><a href="#program">Програма</a></li>
-                            <li class="p-3"><a href="#details">Детайли</a></li>
-                            <li class="p-3"><a href="#application">Кандидастване</a></li>
+                            <li class="p-3"><a href="#information-holder">Информация</a></li>
+                            <li class="p-3"><a href="#program-holder">Програма</a></li>
+                            <li class="p-3"><a href="#details-holder">Детайли</a></li>
+                            <li class="p-3"><a href="#application-holder">Кандидастване</a></li>
                             <!-- <li class=""><a href="">Такса</a></li> -->
                         </ul>
                     </nav>
@@ -40,6 +40,9 @@
         </div>
     </div>
 
+    <div id="information-holder">
+
+    </div>
     <div class="section">
         <div id="information" class="d-flex flex-wrap flex-row">
             <div class="col-md-8 d-flex flex-wrap text-center info-text-container">
@@ -88,6 +91,9 @@
         </div>
     </div>
 
+    <div id="program-holder">
+
+    </div>
     <div class="section">
         <div id="program">
             <div class="program-title text-center">ПРОГРАМА</div>
@@ -154,6 +160,9 @@
     </div>
     </div>
 
+    <div id="details-holder">
+
+    </div>
     <div class="section">
         <div id="details" class="marketing-details">
             <div class="details-title text-center">Детайли</div>
@@ -169,7 +178,7 @@
                     <img src="{{asset('/images/detail-2-marketing.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Интензивност:веднъж през уикенда
+                        Честота на провеждане (Интензивност): веднъж през уикенда
                     </span>
                 </div>
                 <div class="col-md-4 third-detail text-center">
@@ -227,6 +236,9 @@
         </div>
     </div>
 
+    <div id="application-holder">
+
+    </div>
     <div class="section">
         <div id="application">
             <div class="application-title text-center">Кандидатстване</div>

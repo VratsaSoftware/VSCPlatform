@@ -6,6 +6,11 @@ body {
     opacity: 1 !important;
 }
 
+.section {
+    visibility: visible !important;
+    opacity: 1 !important;
+}
+
 a, .title-btns-content>a {
     text-decoration: none;
 }

@@ -58,7 +58,7 @@
             <div id="carousel">
                 <div class="slideshow-container">
 
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/hack-vratsa16-smaller.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/programming-pic.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                         <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
@@ -76,7 +76,7 @@
                         </p>
                     </div>
 
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/digital-2.png')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/digital-big.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                         <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
@@ -315,18 +315,18 @@
 
                 <!-- mobile sponsors logo's -->
                 <div class="col-md-12 col-xs-12 col-sm-12 flex-wrap text-center mobile-sponsors">
-                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-1"><img src="{{asset('/images/partners/us4bg-logo.png')}}" alt="us4bg-logo" class="img-fluid"></div>
-                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-2"><img src="{{asset('/images/partners/promianata-logo.png')}}" alt="promianata-logo" class="img-fluid"></div>
-                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-3"><img src="{{asset('/images/partners/vratsa-municipality-logo.jpg')}}" alt="vratsa-municipality-logo" class="img-fluid"></div>
-                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-4"><img src="{{asset('/images/partners/Telerik_Academy_Logo.png')}}" alt="Telerik_Academy_Logo" class="img-fluid"></div>
+                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-1"><a href="https://www.us4bg.org/" target=" _blank"><img src="{{asset('/images/partners/us4bg-logo.png')}}" alt="us4bg-logo" class="img-fluid"></a></div>
+                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-2"><a href="https://nova.bg/promyanata" target=" _blank"><img src="{{asset('/images/partners/promianata-logo.png')}}" alt="promianata-logo" class="img-fluid"></a></div>
+                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-3"><a href="http://www.vratza.bg/" target=" _blank"><img src="{{asset('/images/partners/vratsa-municipality-logo.jpg')}}" alt="vratsa-municipality-logo" class="img-fluid"></a></div>
+                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-4"><a href="https://www.telerikacademy.com/" target=" _blank"><img src="{{asset('/images/partners/Telerik_Academy_Logo.png')}}" alt="Telerik_Academy_Logo" class="img-fluid"></a></div>
 
-                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-5"><img src="{{asset('/images/partners/mindhub-logo.png')}}" alt="mindhub-logo" class="img-fluid"></div>
-                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-6"><img src="{{asset('/images/partners/CDB-logo.png')}}" alt="Coder Dojo Bulgaria" class="img-fluid"></div>
-                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-7"><img src="{{asset('/images/partners/movebg-logo2.png')}}" alt="movebg-logo" class="img-fluid"></div>
-                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-8"><img src="{{asset('/images/partners/NMD-Logo.gif')}}" alt="NMD-Logo" class="img-fluid"></div>
+                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-5"><a href="https://mindhub.bg/" target=" _blank"><img src="{{asset('/images/partners/mindhub-logo.png')}}" alt="mindhub-logo" class="img-fluid"></a></div>
+                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-6"><a href="https://www.coderdojo.bg/" target=" _blank"><img src="{{asset('/images/partners/CDB-logo.png')}}" alt="Coder Dojo Bulgaria" class="img-fluid"></a></div>
+                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-7"><a href="https://move.bg/" target=" _blank"><img src="{{asset('/images/partners/movebg-logo2.png')}}" alt="movebg-logo" class="img-fluid"></a></div>
+                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-8"><a href="http://nmd.bg/" target=" _blank"><img src="{{asset('/images/partners/NMD-Logo.gif')}}" alt="NMD-Logo" class="img-fluid"></a></div>
 
-                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-5"><img src="{{asset('/images/partners/eSkills-For-Future-logo.png')}}" alt="eSkills-For-Future-logo" class="img-fluid"></div>
-                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-6"><img src="{{asset('/images/partners/Startup-logo-main.png')}}" alt="Startup-logo-main" class="img-fluid"></div>
+                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-5"><a href="http://eskills.tto-bait.bg/" target=" _blank"><img src="{{asset('/images/partners/eSkills-For-Future-logo.png')}}" alt="eSkills-For-Future-logo" class="img-fluid"></a></div>
+                    <div class="p-6 col-md-6 col-xs-6 col-sm-6 sponsors-6"><a href="http://startup.bg/" target=" _blank"><img src="{{asset('/images/partners/Startup-logo-main.png')}}" alt="Startup-logo-main" class="img-fluid"></a></div>
                 </div>
                 <!-- end of mobile sponsors logo's -->
             </div>

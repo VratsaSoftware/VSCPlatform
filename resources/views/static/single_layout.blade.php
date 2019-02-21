@@ -28,7 +28,7 @@
     <meta property="og:image" content="{{asset('/images/vso-logo-bg-original.png')}}" />
 </head>
 
-<body>
+<body style="opacity:0">
     <script src="./js/jquery.morelines.js"></script>
     <div id="content">
         <!-- header section - nav - gallery -->

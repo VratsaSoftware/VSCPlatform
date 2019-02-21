@@ -99,9 +99,9 @@ input {
     position: relative;
     width: 80%;
     display: block;
-    margin: 9px auto;
-    margin-left: 9px;
-    left: 9px;
+    margin: 10px auto;
+    margin-left: 12px;
+    left: 13px;
     font-size: 17px;
     color: #fff;
     padding: 8px;
@@ -302,7 +302,7 @@ label {
     color: green;
     font-size: 13px;
     /* position: absolute; */
-    margin-top: 4vw;
+    margin-top: 3vw;
     cursor: pointer;
 }
 
@@ -316,6 +316,11 @@ label {
     height: auto;
     /* margin-left: -2.4vw;*/
     margin-top: 4vw;
+    margin-left: 25%;
+}
+
+.login-img-circle {
+    margin-top: 3vw;
 }
 
 .login-form-img {
@@ -400,7 +405,7 @@ p {
     }
 
     .register-img {
-        width: 35vw;
+        width: 20vw;
     }
 
     #male, #female {
@@ -443,7 +448,11 @@ p {
 @media only screen and (min-width: 992px) {}
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {}
+@media only screen and (min-width: 1200px) {
+    .register-img {
+        width: 12vw;
+    }
+}
 
 /* biggest */
 @media screen and (min-width: 1900px) {
@@ -452,5 +461,9 @@ p {
     input {
         left: 5%;
         margin-left: 5%;
+    }
+
+    .register-img {
+        width: 10vw;
     }
 }

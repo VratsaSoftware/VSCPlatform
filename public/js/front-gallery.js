@@ -34,7 +34,7 @@ function showSlides( n ) {
 }
 
 function loadImg( element ) {
-	$( element ).find( 'img' ).attr( 'src', $( element ).attr( 'data-loader' ) );
+	// $( element ).find( 'img' ).attr( 'src', $( element ).attr( 'data-loader' ) );
 
 	$( element ).find( 'img' ).attr( 'src', $( element ).attr( 'data-src' ) );
 	// $( element ).find( 'img' ).removeClass( 'big-loader' );

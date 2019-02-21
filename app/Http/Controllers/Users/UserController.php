@@ -38,8 +38,8 @@ class UserController extends Controller
     {
         $data = $request->validate([
             'picture' => 'file|image|mimes:jpeg,png,gif,webp,ico|max:4000',
-            'name' => 'sometimes|string|min:3|max:25|alpha',
-            'location' => 'sometimes|min:3|max:10|string|alpha',
+            'name' => 'sometimes|string|min:3|max:25|',
+            'location' => 'sometimes|min:3|max:10|string|',
             'dob' => 'sometimes|date_format:Y-m-d|before:'.Carbon::now().'|after:1950-01-01',
             'email' => ['sometimes','unique:users','email'],
             'facebook' => 'nullable|url|min:5|max:50',
@@ -52,10 +52,9 @@ class UserController extends Controller
         if (Input::hasFile('picture')) {
             $userPic = Input::file('picture');
             $image = Image::make($userPic->getRealPath());
-            if ($image->width() < 500 || $image->height() < 500|| $image->width() > 1024 || $image->height() > 768) {
-                $message = __('Снимката/Картинката трябва да е с размери до 1024x768px и по-голяма от 500x500px!');
-                return redirect()->back()->with('error', $message);
-            }
+            $image->fit(1024, 768, function ($constraint) {
+                $constraint->upsize();
+            });
             $name = time()."_".$userPic->getClientOriginalName();
             $name = str_replace(' ', '', $name);
             $name = md5($name);
@@ -67,7 +66,7 @@ class UserController extends Controller
             if ($userPic->getClientOriginalExtension() == 'gif') {
                 copy($userPic->getRealPath(), public_path().'/images/user-pics/'.$name);
             } else {
-                $image->save(public_path().'/images/user-pics/'.$name, 50);
+                $image->save(public_path().'/images/user-pics/'.$name, 90);
             }
         }
 

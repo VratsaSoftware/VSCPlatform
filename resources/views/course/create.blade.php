@@ -22,7 +22,6 @@
                     <label for="picture">
                         <img src="{{asset('/images/img-placeholder.jpg')}}" alt="course-pic" id="course-picture">
                         <br>
-                        (800x600px)
                     </label>
                 </div>
 

@@ -48,10 +48,10 @@
 
 
 	<div id="login-button">
-		<img src="{{ asset('/images/vso-logo-bg-original.png') }}" alt="" class="login-img">
+		<img src="{{asset('/images/vso-png-big-2.png')}}" alt="" class="login-img-circle">
 </div>
 <div id="container">
-	<h1><img src="{{ asset('/images/vso-logo-bg-original.png') }}" alt="" class="login-form-img"></h1>
+	<h1><img src="{{asset('/images/vso-png-big-2.png')}}" alt="" class="login-form-img"></h1>
 	@if(!Auth::check())
 	<span class="close-btn">
 		<i class="fas fa-times"></i>
@@ -75,7 +75,7 @@
 
 <!-- Forgotten Password Container -->
 <div id="forgotten-container">
-	<h1><img src="{{ asset('/images/vso-logo-bg-original.png') }}" alt="" class="login-img"></h1>
+	<h1><img src="{{asset('/images/vso-png-big-2.png')}}" alt="" class="login-img"></h1>
 	<span class="close-btn">
 		<i class="fas fa-times"></i>
 	</span>
@@ -90,7 +90,7 @@
 
 <!-- Register Container -->
 <div id="register-container">
-	<h1><img src="{{ asset('/images/vso-logo-bg-original.png') }}" alt="" class="register-img"></h1>
+	<h1><img src="{{asset('/images/vso-png-big-2.png')}}" alt="" class="register-img"></h1>
 	<span class="close-btn">
 		<i class="fas fa-times"></i>
 	</span>
@@ -204,26 +204,13 @@
         $('#login-button').click();
 		changeBg();
 		setTimeout(function(){
-		    if ($(window).width() > 1400) {
+		    if ($(window).width() > 1000) {
                changeBg();
             }
 		}, 10000);
 
 		function changeBg(){
 		    console.log($(window).width()+'/'+$(window).height());
-			if($('#container').is(":visible") || $('#forgotten-container').is(":visible") || $('#register-container').is(":visible")){
-				$('html').css({
-					'background-image':'url(./images/loaders/load-23.gif)',
-					'background-size':'50%',
-				});
-			}else{
-			    if ($(window).width() > 1400) {
-    				$('html').css({
-    					'background-image':'url(./images/loaders/load-22.gif)',
-    					'background-size':'30%',
-    				});
-			    }
-			}
   			// images for background
   			var items = ["1","2","3","4","5","6"];
   			var item = items[Math.floor(Math.random()*items.length)];
@@ -234,7 +221,7 @@
   				});
   			},500);
   			setTimeout(function(){
-  				if ($(window).width() > 1400) {
+  				if ($(window).width() > 1000) {
                     changeBg();
                 }
   			}, 10000);

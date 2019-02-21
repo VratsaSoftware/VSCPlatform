@@ -86,6 +86,12 @@ a {
     color: #128900 !important;
 }
 
+#information-holder, #program-holder, #details-holder, #application-holder {
+    margin-top: -10%;
+    position: absolute;
+    visibility: hidden;
+}
+
 .program-no-tabs {
     margin-top: 2vw;
 }
@@ -907,7 +913,7 @@ a {
 
 .lvl-info:hover {
     font-weight: bolder;
-    cursor: help;
+    /* cursor: help; */
 }
 
 .finished-php {
@@ -1434,7 +1440,7 @@ a {
     }
 
     .info-img {
-        padding-top: 5vw;
+        padding-top: 10vw;
     }
 
     .info-img>img {

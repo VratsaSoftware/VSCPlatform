@@ -1,6 +1,8 @@
 $( function () {
 	$( "#tabs" ).tabs();
 	$( '#ui-id-2' ).on( 'click', function () {
+		$( '#ui-id-1' ).find( '.fas' ).removeClass( 'fa-caret-down' ).addClass( 'fa-caret-right' );
+		$( this ).find( '.fas' ).removeClass( 'fa-caret-right' ).addClass( 'fa-caret-down' );
 		$( '.program-info' ).stop( true, true ).fadeOut( 50 ).fadeIn( 100 );
 		$( '.program-info-img' ).stop( true, true ).fadeOut( 50 ).fadeIn( 100 );
 		$( '.program-info-img' ).removeClass( 'finished-php' );
@@ -10,6 +12,8 @@ $( function () {
 	} );
 
 	$( '#ui-id-1' ).on( 'click', function () {
+		$( '#ui-id-2' ).find( '.fas' ).removeClass( 'fa-caret-down' ).addClass( 'fa-caret-right' );
+		$( this ).find( '.fas' ).removeClass( 'fa-caret-right' ).addClass( 'fa-caret-down' );
 		$( '.program-info' ).stop( true, true ).fadeOut( 50 ).fadeIn( 100 );
 		$( '.program-info-img' ).stop( true, true ).fadeOut( 50 ).fadeIn( 100 );
 		$( '.program-info-img' ).removeClass( 'finished-php' );

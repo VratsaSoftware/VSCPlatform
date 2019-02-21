@@ -65,7 +65,6 @@
                                             <img src="{{asset('/images/img-placeholder.jpg')}}" alt="course-pic" id="course-picture">
                                         @endif
                                         <br>
-                                        (800x600px)
                                     </label>
                                 </div>
 
@@ -203,7 +202,7 @@
                                 </div>
                                 <div class="cf footer">
                                     <div>
-                                        <!--<script src="{{asset('js/profile-picture-preview.js')}}"></script>-->
+                                        <script src="{{asset('js/profile-picture-preview.js')}}"></script>
                                     </div>
                                   <a href="#" class="btn close-modal">Затвори&nbsp;</a>
                                 </div>

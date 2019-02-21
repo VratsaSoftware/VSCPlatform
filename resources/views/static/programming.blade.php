@@ -28,10 +28,10 @@
                         <ul class="d-flex flex-wrap main-nav-list">
                             <li class="p-3"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="" class="img-fluid"></li>
                             <li class="p-3"><a href="{{route('home')}}">Начало</a></li>
-                            <li class="p-3"><a href="#information">Информация</a></li>
-                            <li class="p-3"><a href="#program">Програма</a></li>
-                            <li class="p-3"><a href="#details">Детайли</a></li>
-                            <li class="p-3"><a href="#application">Кандидастване</a></li>
+                            <li class="p-3"><a href="#information-holder">Информация</a></li>
+                            <li class="p-3"><a href="#program-holder">Програма</a></li>
+                            <li class="p-3"><a href="#details-holder">Детайли</a></li>
+                            <li class="p-3"><a href="#application-holder">Кандидастване</a></li>
                             <!-- <li class=""><a href="">Такса</a></li> -->
                         </ul>
                     </nav>
@@ -40,8 +40,11 @@
         </div>
     </div>
 
-    <div class="section">
-        <div id="information" class="d-flex flex-wrap flex-row">
+    <div id="information-holder">
+
+    </div>
+    <div id="information" class="section">
+        <div class="d-flex flex-wrap flex-row">
             <div class="col-md-8 d-flex flex-wrap text-center info-text-container">
                 <div class="col-md-1 space"></div>
                 <div class="col-md-5">
@@ -82,20 +85,22 @@
             </div>
             <div class="col-md-4 info-pic">
                 <div class="info-img">
-                    <img src="{{asset('/images/medal-programing-1.png')}}" alt="info-pic" class="img-fluid">
+                    <img src="{{asset('/images/programming-page-big.jpg')}}" alt="info-pic" class="img-fluid">
                 </div>
             </div>
         </div>
     </div>
+    <div id="program-holder">
 
+    </div>
     <div class="section">
         <div id="program">
             <div class="program-title text-center">ПРОГРАМА</div>
             <div class="program-scheme col-md-12 text-center">
                 <div id="tabs">
                     <ul class="tabs-nav d-flex flex-wrap flex-row program-nav">
-                        <li><a href="#tabs-1">Уеб разработка с PHP</a></li>
-                        <li><a href="#tabs-2">Java технологии</a></li>
+                        <li><a href="#tabs-1"><i class="fas fa-caret-down"></i>Уеб разработка с PHP</a></li>
+                        <li><a href="#tabs-2"><i class="fas fa-caret-right"></i>Java технологии</a></li>
                     </ul>
                     <div class="program-holder d-flex justify-content-center">
                         <!-- php tab -->
@@ -239,7 +244,9 @@
         </div>
     </div>
     </div>
+    <div id="details-holder">
 
+    </div>
     <div class="section">
         <div id="details">
             <div class="details-title text-center">Детайли</div>
@@ -255,7 +262,7 @@
                     <img src="{{asset('/images/detail-2.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Време на провеждане (Интензивност): Два пъти седмично
+                        Честота на провеждане (Интензивност): Два пъти седмично
                     </span>
                 </div>
                 <div class="col-md-4 third-detail text-center">
@@ -313,6 +320,9 @@
         </div>
     </div>
 
+    <div id="application-holder">
+
+    </div>
     <div class="section">
         <div id="application">
             <div class="application-title text-center">Кандидатстване</div>

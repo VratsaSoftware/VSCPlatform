@@ -48,6 +48,7 @@
         $('head').append('<link rel="preload stylesheet" href="{{asset('/css/personal_application_results.css')}}" as="style">');
         $('head').append('<link rel="preload stylesheet" href="{{asset('/css/bootstrap.css')}}" as="style">');
         $('head').append('<link rel="preload stylesheet" href="{{asset('/css/bootstrap-grid.min.css')}}" as="style">');
+        $('head').append('<link rel="preload stylesheet" href="{{asset('/css/font-awesome.min.css')}}" as="style">');
 
         var sectionsnap = document.createElement("script");
         sectionsnap.src = "{{asset('/js/jquery-sectionsnap.js')}}";
