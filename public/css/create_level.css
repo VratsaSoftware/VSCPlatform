@@ -14,7 +14,7 @@ input[type=text], textarea, .options-title, .name-course {
 }
 
 .time-input, .time-minutes {
-    max-width: 50px;
+    max-width: 70px;
 }
 
 .level-title-holder>div>form>input, .level-title-holder>div>form>textarea {

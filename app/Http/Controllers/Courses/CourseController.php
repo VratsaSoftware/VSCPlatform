@@ -55,6 +55,9 @@ class CourseController extends Controller
         ]);
         $coursePic = Input::file('picture');
         $image = Image::make($coursePic->getRealPath());
+        $image->fit(800, 600, function ($constraint) {
+            $constraint->upsize();
+        });
         $name = time()."_".$coursePic->getClientOriginalName();
         $name = str_replace(' ', '', strtolower($name));
         $name = md5($name);
@@ -66,11 +69,14 @@ class CourseController extends Controller
         $insLecturer->user_id = Auth::user()->id;
         $insLecturer->save();
 
-        $folder = mkdir(public_path().'/images/course-'.$createCourse->id, 0777, true);
+        $path = public_path().'/images/course-'.$createCourse->id;
+        if (!File::exists($path)) {
+            $folder = mkdir($path, 0777, true);
+        }
         if ($coursePic->getClientOriginalExtension() == 'gif') {
             copy($coursePic->getRealPath(), public_path().'/images/course-'.$createCourse->id);
         } else {
-            $image->save(public_path().'/images/course-'.$createCourse->id.'/'.$name, 50);
+            $image->save(public_path().'/images/course-'.$createCourse->id.'/'.$name, 90);
         }
 
         $message = __('Успешно създаден курс '.ucfirst($data['name']).'!');
@@ -133,6 +139,9 @@ class CourseController extends Controller
         if (Input::file('picture2')) {
             $coursePic = Input::file('picture2');
             $image = Image::make($coursePic->getRealPath());
+            $image->fit(800, 600, function ($constraint) {
+                $constraint->upsize();
+            });
             $name = time()."_".$coursePic->getClientOriginalName();
             $name = str_replace(' ', '', strtolower($name));
             $name = md5($name);

@@ -52,7 +52,7 @@ img {
     width: 25vw;
     height: 25vw;
     border-radius: 5px;
-    background-color: rgba(255, 255, 255, 1);
+    background-color: rgba(255, 255, 255, 0.9);
     box-shadow: 0px 5px 20px rgba(7, 42, 68, 0.9);
     display: none;
     padding: 2vw;
@@ -99,9 +99,9 @@ input {
     position: relative;
     width: 80%;
     display: block;
-    margin: 9px auto;
-    margin-left: 9px;
-    left: 9px;
+    margin: 10px auto;
+    margin-left: 12px;
+    left: 13px;
     font-size: 17px;
     color: #fff;
     padding: 8px;
@@ -302,7 +302,7 @@ label {
     color: green;
     font-size: 13px;
     /* position: absolute; */
-    margin-top: 4vw;
+    margin-top: 3vw;
     cursor: pointer;
 }
 
@@ -316,6 +316,11 @@ label {
     height: auto;
     /* margin-left: -2.4vw;*/
     margin-top: 4vw;
+    margin-left: 25%;
+}
+
+.login-img-circle {
+    margin-top: 3vw;
 }
 
 .login-form-img {
@@ -342,6 +347,16 @@ p {
     margin-top: 8vw;
 }
 
+#male-label {
+    left: -5%;
+    margin-left: -5%;
+}
+
+#female-label {
+    left: -5%;
+    margin-left: -5%;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     html, body {
@@ -350,7 +365,8 @@ p {
 
     #container, #forgotten-container, #register-container {
         width: 80vw;
-        height: 80vw;
+        height: 50vh;
+        overflow: scroll;
     }
 
     #register {
@@ -389,11 +405,22 @@ p {
     }
 
     .register-img {
-        width: 35vw;
+        width: 20vw;
     }
 
     #male, #female {
         width: 5vw;
+        left: 1px;
+    }
+
+    #male-label {
+        left: -10px;
+        margin-left: -10px;
+    }
+
+    #female-label {
+        left: 10px;
+        margin-left: 10px;
     }
 
     .checkbox {
@@ -402,7 +429,17 @@ p {
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
-@media only screen and (min-width: 600px) {}
+@media only screen and (min-width: 600px) {
+    #male-label {
+        left: -10px;
+        margin-left: -10px;
+    }
+
+    #female-label {
+        left: 10px;
+        margin-left: 10px;
+    }
+}
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {}
@@ -411,4 +448,22 @@ p {
 @media only screen and (min-width: 992px) {}
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
-@media only screen and (min-width: 1200px) {}
+@media only screen and (min-width: 1200px) {
+    .register-img {
+        width: 12vw;
+    }
+}
+
+/* biggest */
+@media screen and (min-width: 1900px) {
+
+    a,
+    input {
+        left: 5%;
+        margin-left: 5%;
+    }
+
+    .register-img {
+        width: 10vw;
+    }
+}

@@ -69,14 +69,10 @@
                         <span>
                             @if($lection->first_date)
                                 &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->first_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->first_date->format('H:i')}}</span>
-                            @else
-                                <i class="fas fa-times"></i>
                             @endif
-                             /
+
                             @if($lection->second_date)
-                                &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->second_date->format('H:i')}}</span>
-                            @else
-                                <i class="fas fa-times"></i>
+                                /&nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->second_date->format('H:i')}}</span>
                             @endif
                          </span><br>
 
@@ -167,14 +163,10 @@
                         <span>
                             @if($lection->first_date)
                                 &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->first_date->format('d-m-Y')}}&nbsp;
-                            @else
-                                <i class="fas fa-times"></i>
                             @endif
-                             /
+
                             @if($lection->second_date)
-                                &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;
-                            @else
-                                <i class="fas fa-times"></i>
+                                /&nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;
                             @endif
                          </span><br>
 
@@ -206,14 +198,10 @@
                         <span>
                             @if($lection->first_date)
                                 &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->first_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->first_date->format('H:i')}}</span>
-                            @else
-                                <i class="fas fa-times"></i>
                             @endif
-                             /
+
                             @if($lection->second_date)
-                                &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->second_date->format('H:i')}}</span>
-                            @else
-                                <i class="fas fa-times"></i>
+                                /&nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->second_date->format('H:i')}}</span>
                             @endif
                          </span><br>
 

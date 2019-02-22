@@ -54,7 +54,7 @@ $( document ).ready( function () {
 		if ( $( this ).parent().find( 'img' ).hasClass( 'profile-pic' ) && !$( this ).parent().find( 'img' ).hasClass( 'edit-img' ) ) {
 			$( this ).parent().find( 'img' ).addClass( 'edit-img' );
 			var oldSrc = $( this ).parent().find( 'img' ).attr( 'src' );
-			$( this ).parent().find( 'img' ).after( '<p class="input-img"><input type="file" id="picture" name="picture" onChange="imagePreview(this);">max:1024x768px</p>' );
+			$( this ).parent().find( 'img' ).after( '<p class="input-img"><input type="file" id="picture" name="picture" onChange="imagePreview(this);"></p>' );
 			$( this ).find( 'i' ).removeClass( 'fa-pencil-alt' ).addClass( 'fa-save' );
 			$( this ).removeClass( 'edit-btn' );
 			e.preventDefault();
@@ -93,7 +93,23 @@ $( document ).ready( function () {
 						$( '#submit-dob' ).click();
 					}
 				} );
+				var datefield = document.createElement( "input" )
 
+				datefield.setAttribute( "type", "date" )
+
+				if ( datefield.type != "date" ) { //if browser doesn't support input type="date", load files for jQuery UI Date Picker
+					var datePicker = document.createElement( "script" );
+					datePicker.src = "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/js/bootstrap-datepicker.js";
+					$( 'head' ).append( datePicker );
+					$( 'head' ).append( '<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.8.0/css/bootstrap-datepicker.standalone.min.css" as="style">' );
+					$( this ).prev( 'span' ).find( '.edit-input' ).remove();
+					$( this ).prev( 'span' ).html( $( this ).prev( 'span' ).html() + '<p class="edit-input"><input type="text" class="edit-user-items" id="dob" name="dob" value=""></p>' );
+					setTimeout( function () {
+						$( '#dob' ).datepicker( {
+							format: 'yyyy-mm-dd'
+						} );
+					}, 200 );
+				}
 			}
 			if ( $( this ).prev( 'span' ).hasClass( 'mail-txt' ) && $( '#email' ).not( ':visible' ) ) {
 				$( this ).prev( 'span' ).html( $( this ).prev( 'span' ).html() + '<p class="edit-input"><input type="text" class="edit-user-items" id="email" name="email" value="' + oldText + '"></p>' );

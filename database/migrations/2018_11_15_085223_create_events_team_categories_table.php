@@ -15,7 +15,7 @@ class CreateEventsTeamCategoriesTable extends Migration
     {
         Schema::create('events_team_categories', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('caregory');
+            $table->string('category');
             $table->timestamps();
             $table->softDeletes();
         });

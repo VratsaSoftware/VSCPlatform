@@ -1,18 +1,20 @@
 $( function () {
 	$( '.time-input' ).on( 'keyup', function () {
-		if ( $( this ).val() > 24 ) {
+		if ( $( this ).val().length < 3 ) {
+			if ( $( this ).val() > 24 ) {
+				$( this ).val( 24 );
+			}
+		} else {
 			$( this ).val( 24 );
-		}
-		if ( $( this ).val() < 10 ) {
-			$( this ).val( 00 + $( this ).val() );
 		}
 	} );
 	$( '.time-minutes' ).on( 'keyup', function () {
-		if ( $( this ).val() > 59 ) {
+		if ( $( this ).val().length < 3 ) {
+			if ( $( this ).val() > 59 ) {
+				$( this ).val( 59 );
+			}
+		} else {
 			$( this ).val( 59 );
-		}
-		if ( $( this ).val() < 10 ) {
-			$( this ).val( 00 + $( this ).val() );
 		}
 	} );
 	var edit = false;
@@ -139,21 +141,24 @@ $( function () {
 		$( '.modal-header > h2' ).text( '' );
 		$( '.modal-header > h2' ).text( 'Добави Лекция' );
 		$( '.copy > p' ).html( '' );
-		$( '.copy > p' ).html( '<form id="create-lection" action="' + action + '" method="POST" enctype="multipart/form-data" files="true"><input type="hidden" name="module" id="module" value="' + module_id + '"><input type="hidden" name="_token" value="' + $( 'meta[name="csrf-token"]' ).attr( 'content' ) + '"><p><label>Заглавие:<i class="fas fa-star-of-life req-star"></i></label><br><input type="text" name="title" id="title" value="' + oldTitle + '"></p><br><p><label>дата 1:<i class="fas fa-star-of-life req-star"></i></label><br><input type="date" id="first_date_create" value="' + oldFirst + '" name="first_date_create"><input type="number" id="first_time_hours" name="first_time_hours" class="time-input" min="1" max="24" title="01 - 24">:<input type="number" id="first_time_minutes" name="first_time_minutes" class="time-minutes" min="1" max="59" title="01-59"></p><br><p><label>дата 2:</label><br><input type="date" id="second_time" value="' + oldSecondTime + '" name="second_date_create"><input type="number" id="second_time_hours" name="second_time_hours" class="time-input" min="1" max="24" title="01 - 24">:<input type="number" id="second_time_minutes" name="second_time_minutes" class="time-minutes" min="1" max="59" title="01-59"></p><br><p><label>Описание:<i class="fas fa-star-of-life req-star"></i></label><br><textarea name="description" id="description">' + oldDesc + '</textarea></p><br><p><label for="order">Поредност:</label><input type="number" name="order" id="order" value="' + order + '"></p><br><p><label>Презентация</label><br><input type="file" name="slides" id="slides"></p><br><p><label>Видео:</label><br><input type="text" name="video" id="video" value="' + oldVideo + '"></p><br><p><label>Критерии за домашно</label><br><input type="file" name="homework" id="homework"></p><br><p><label for="demo">Демо</label><input type="text" name="demo" id="demo" value="' + oldDemo + '"><p><br><p><label for="visibility">Видимост</label><select class="section-el-bold" name="visibility" id="visibility">' + visibility + '</select></p><br><p><label>Тип:</label><select name="type" class="section-el-bold" id="type"><option value="">Лекция</option><option value="other">Тест/Друго</option></select></p></form>' );
+		$( '.copy > p' ).html( '<form id="create-lection" action="' + action + '" method="POST" enctype="multipart/form-data" files="true"><input type="hidden" name="module" id="module" value="' + module_id + '"><input type="hidden" name="_token" value="' + $( 'meta[name="csrf-token"]' ).attr( 'content' ) + '"><p><label>Заглавие:<i class="fas fa-star-of-life req-star"></i></label><br><input type="text" name="title" id="title" value="' + oldTitle + '"></p><br><p><label>дата 1:<i class="fas fa-star-of-life req-star"></i></label><br><input type="date" id="first_date_create" value="' + oldFirst + '" name="first_date_create"><input type="tel" id="first_time_hours" name="first_time_hours" class="time-input" min="1" max="24" title="01 - 24">:<input type="tel" id="first_time_minutes" name="first_time_minutes" class="time-minutes" min="1" max="59" title="01-59"></p><br><p><label>дата 2:</label><br><input type="date" id="second_time" value="' + oldSecondTime + '" name="second_date_create"><input type="tel" id="second_time_hours" name="second_time_hours" class="time-input" min="1" max="24" title="01 - 24">:<input type="tel" id="second_time_minutes" name="second_time_minutes" class="time-minutes" min="1" max="59" title="01-59"></p><br><p><label>Описание:<i class="fas fa-star-of-life req-star"></i></label><br><textarea name="description" id="description">' + oldDesc + '</textarea></p><br><p><label for="order">Поредност:</label><input type="tel" name="order" id="order" value="' + order + '"></p><br><p><label>Презентация</label><br><input type="file" name="slides" id="slides"></p><br><p><label>Видео:</label><br><input type="text" name="video" id="video" value="' + oldVideo + '"></p><br><p><label>Критерии за домашно</label><br><input type="file" name="homework" id="homework"></p><br><p><label for="demo">Демо</label><input type="text" name="demo" id="demo" value="' + oldDemo + '"><p><br><p><label for="visibility">Видимост</label><select class="section-el-bold" name="visibility" id="visibility">' + visibility + '</select></p><br><p><label>Тип:</label><select name="type" class="section-el-bold" id="type"><option value="">Лекция</option><option value="other">Тест/Друго</option></select></p></form>' );
 		$( '.time-input' ).on( 'keyup', function () {
-			if ( $( this ).val() > 24 ) {
+			if ( $( this ).val().length < 3 ) {
+				if ( $( this ).val() > 24 ) {
+					$( this ).val( 24 );
+				}
+			} else {
 				$( this ).val( 24 );
-			}
-			if ( $( this ).val() < 10 ) {
-				$( this ).val( 00 + $( this ).val() );
 			}
 		} );
 		$( '.time-minutes' ).on( 'keyup', function () {
-			if ( $( this ).val() > 59 ) {
+			console.log( $( this ).val().length );
+			if ( $( this ).val().length < 3 ) {
+				if ( $( this ).val() > 59 ) {
+					$( this ).val( 59 );
+				}
+			} else {
 				$( this ).val( 59 );
-			}
-			if ( $( this ).val() < 10 ) {
-				$( this ).val( 00 + $( this ).val() );
 			}
 		} );
 		$( '.modal-content > .cf > div' ).html( '<input class="btn close-modal create-lection-btn" type="submit" name="submit" value="Добави">' );

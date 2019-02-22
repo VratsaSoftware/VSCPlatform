@@ -65,6 +65,9 @@ class ModuleController extends Controller
 
         $modulePic = Input::file('picture');
         $image = Image::make($modulePic->getRealPath());
+        $image->fit(800, 600, function ($constraint) {
+            $constraint->upsize();
+        });
         $name = time()."_".$modulePic->getClientOriginalName();
         $name = str_replace(' ', '', strtolower($name));
         $name = md5($name);
@@ -84,8 +87,11 @@ class ModuleController extends Controller
         if ($modulePic->getClientOriginalExtension() == 'gif') {
             copy($modulePic->getRealPath(), public_path().'/images/course-'.$course->id.'/module-'.$createModule->id.'/'.$name);
         } else {
-            $folder = mkdir(public_path().'/images/course-'.$course->id.'/module-'.$createModule->id, 0777, true);
-            $image->save(public_path().'/images/course-'.$course->id.'/module-'.$createModule->id.'/'.$name, 50);
+            $path = public_path().'/images/course-'.$course->id.'/module-'.$createModule->id;
+            if (!File::exists($path)) {
+                $folder = mkdir($path, 0777, true);
+            }
+            $image->save($path.'/'.$name, 90);
         }
 
         if (isset($data['students'])) {
@@ -152,6 +158,9 @@ class ModuleController extends Controller
         if (Input::hasFile('picture')) {
             $modulePic = Input::file('picture');
             $image = Image::make($modulePic->getRealPath());
+            $image->fit(800, 600, function ($constraint) {
+                $constraint->upsize();
+            });
             $name = time()."_".$modulePic->getClientOriginalName();
             $name = str_replace(' ', '', strtolower($name));
             $name = md5($name);
@@ -204,12 +213,16 @@ class ModuleController extends Controller
         ]);
 
         $user = User::where('email', $request->mail)->first();
-        ModulesStudent::firstOrCreate(
-            ['course_modules_id' => $request->module_id,'user_id' => $user->id]
-        );
+        if (!is_null($user)) {
+            ModulesStudent::firstOrCreate(
+                ['course_modules_id' => $request->module_id,'user_id' => $user->id]
+            );
 
-        $message = __('Успешно добавен курсист!');
-        return redirect()->back()->with('success', $message);
+            $message = __('Успешно добавен курсист!');
+            return redirect()->back()->with('success', $message);
+        }
+        $message = __('Няма такъв потребител!');
+        return redirect()->back()->with('error', $message);
     }
 
     public function removeUser(Request $request)

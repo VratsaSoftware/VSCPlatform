@@ -100,37 +100,16 @@
                                 <a href="#" class="behance"><img src="./images/profile/behance-icon.svg" alt="be"></a>
                                 <p class="edit-social"><input type="text" id="behance" name="behance" value=""></p>
                                 @foreach($social_links as $social)
-                                @if($social->SocialName->name == 'facebook')
-                                <script type="text/javascript">
-                                    loadSocialSrc('facebook', '{!! $social->link !!}');
-                                </script>
-                                @elseif($social->SocialName->name == 'linkedin')
-                                <script type="text/javascript">
-                                    loadSocialSrc('linkedin', '{!! $social->link !!}');
-                                </script>
-                                @elseif($social->SocialName->name == 'github')
-                                <script type="text/javascript">
-                                    loadSocialSrc('github', '{!! $social->link !!}');
-                                </script>
-                                @elseif($social->SocialName->name == 'skype')
-                                <script type="text/javascript">
-                                    loadSocialSrc('skype', '{!! $social->link !!}');
-                                </script>
-                                @elseif($social->SocialName->name == 'dribbble')
-                                <script type="text/javascript">
-                                    loadSocialSrc('dribbble', '{!! $social->link !!}');
-                                </script>
-                                @elseif($social->SocialName->name == 'behance')
-                                <script type="text/javascript">
-                                    loadSocialSrc('behance', '{!! $social->link !!}');
-                                </script>
-                                @endif
-                                @endforeach
 
+                                <script type="text/javascript">
+                                    loadSocialSrc('{{$social->SocialName->name}}', '{!! $social->link !!}');
+                                </script>
+
+                                @endforeach
+                                <button type="submit" value="submit" class="edit-btn btn btn-success social-edit" id="submit-social">
+                                    <i class="fas fa-pencil-alt"></i>
+                                </button>
                             </div>
-                            <button type="submit" value="submit" class="edit-btn btn btn-success social-edit" id="submit-social">
-                                <i class="fas fa-pencil-alt"></i>
-                            </button>
                         </div>
                     </div>
                 </div>

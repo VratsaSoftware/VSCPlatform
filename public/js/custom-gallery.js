@@ -12,7 +12,7 @@ $( document ).ready( function () {
 	} );
 
 	if ( $( ".mySlides" ).hasClass( "active-slide" ) ) {
-		$( ".mySlides > img" ).fadeIn();
+		$( ".mySlides > img" ).fadeIn( 100 );
 	}
 
 	$( '.dot' ).mouseover( function () {

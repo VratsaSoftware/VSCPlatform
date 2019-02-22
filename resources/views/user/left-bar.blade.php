@@ -13,33 +13,18 @@
         <li class="{{ Route::is('myProfile') ? 'sidenav-selected' : '' }}"><a href="{{route('myProfile')}}">
                 <img src="{{asset('/images/profile/nav/my-profile-icon.png')}}" alt="" class="img-fluid">Моят Профил</a>
         </li>
-        <li class="disabled"><a href="#" class="disabled">
-                <img src="{{asset('/images/profile/nav/results-icon.png')}}" alt="" class="img-fluid">Резултати от кандидатстване</a>
-        </li>
         <li class="nested-nav {{ Route::is('user.course') ? 'sidenav-selected' : '' }}">
             <a href="#" id="my-courses"><i class="fas fa-chevron-down"></i>Моите курсове</a>
             <ul>
                 @forelse(Auth::user()->studentGetCourse() as $course)
-                    <li><a href="{{ route('user.course',['user' => Auth::user()->id,'course' => $course->id])}}"><img src="{{asset('/images/course-'.$course->id.'/'.$course->picture)}}" alt="">{{$course->name}}</a></li>
+                    <li><a href="{{ route('user.course',['user' => Auth::user()->id,'course' => $course->id])}}"><img src="{{asset('/images/course-'.$course->id.'/'.$course->picture)}}" alt="">{{strlen($course->name) < 10 ? $course->name : mb_substr($course->name, 0, 10)."..."}}</a></li>
                     @empty
                     <li><a href="#" class="disabled"><img src="{{asset('/images/profile/remove-icon.png')}}" alt="">Нямате записани Курсове</a></li>
                     @endforelse
             </ul>
         </li>
-        <li class="disabled"><a href="#" class="disabled">
-                <img src="{{asset('/images/profile/nav/grades-icon.png')}}" alt="" class="img-fluid">Бележник</a>
-        </li>
-        <li class="disabled"><a href="#" class="disabled">
-                <img src="{{asset('/images/profile/nav/events-icon.png')}}" alt="" class="img-fluid">Участие в събития</a>
-        </li>
-        <li class="disabled"><a href="#" class="disabled">
-                <img src="{{asset('/images/profile/nav/mentor-icon.png')}}" alt="" class="img-fluid">Менторска програма</a>
-        </li>
-        <li class="disabled"><a href="#" class="disabled">
-                <img src="{{asset('/images/profile/nav/payment-icon.png')}}" alt="" class="img-fluid">Плащания</a>
-        </li>
         <li>
-            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+            <a id="logout-btn" class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fas fa-sign-out-alt fa-1x"></i>
                 {{ __('Излизане') }}
             </a>

@@ -48,10 +48,10 @@
 
 
 	<div id="login-button">
-		<img src="{{ asset('/images/vso-logo-bg-original.png') }}" alt="" class="login-img">
+		<img src="{{asset('/images/vso-png-big-2.png')}}" alt="" class="login-img-circle">
 </div>
 <div id="container">
-	<h1><img src="{{ asset('/images/vso-logo-bg-original.png') }}" alt="" class="login-form-img"></h1>
+	<h1><img src="{{asset('/images/vso-png-big-2.png')}}" alt="" class="login-form-img"></h1>
 	@if(!Auth::check())
 	<span class="close-btn">
 		<i class="fas fa-times"></i>
@@ -75,7 +75,7 @@
 
 <!-- Forgotten Password Container -->
 <div id="forgotten-container">
-	<h1><img src="{{ asset('/images/vso-logo-bg-original.png') }}" alt="" class="login-img"></h1>
+	<h1><img src="{{asset('/images/vso-png-big-2.png')}}" alt="" class="login-img"></h1>
 	<span class="close-btn">
 		<i class="fas fa-times"></i>
 	</span>
@@ -90,7 +90,7 @@
 
 <!-- Register Container -->
 <div id="register-container">
-	<h1><img src="{{ asset('/images/vso-logo-bg-original.png') }}" alt="" class="register-img"></h1>
+	<h1><img src="{{asset('/images/vso-png-big-2.png')}}" alt="" class="register-img"></h1>
 	<span class="close-btn">
 		<i class="fas fa-times"></i>
 	</span>
@@ -104,28 +104,38 @@
 			<input type="text" name="last_name" placeholder="Фамилия..." value="{{ old('last_name') }}" required autofocus>
 		</p>
 		<p>
-			<input type="email" name="email" placeholder="Поща..." value="{{ old('email') }}" required>
+			<input type="email" id="register_email" name="email" placeholder="Електронна поща..." value="{{ old('email') }}" required>
 		</p>
 
 		<p>
-			<input type="password" name="password" placeholder="Парола..." autocomplete="password" required>
+			<input type="password" id="register_password" name="password" placeholder="Парола..." autocomplete="password" required>
 		</p>
 
 		<p>
-			<input id="password-confirm" type="password" class="form-control" name="password_confirmation"  placeholder="Повтори парола..." autocomplete="password"  required>
+			<input id="register_password_confirm" type="password" class="form-control" name="password_confirmation"  placeholder="Повтори парола..." autocomplete="password"  required>
 		</p>
 
 		<p>
-			<label for="location">Град</label>
+			<label for="location">Населено място</label>
 			<select id="location" name="location">
 
 			</select>
 		</p>
 
 		<p class="sex-options">
-			<label for="male">Мъж</label><input type="radio" name="sex" id="male" value="male">
-			<label for="female">Жена</label><input type="radio" name="sex" id="female" value="female">
-		</p>
+            @if(!empty(old('sex')) && old('sex') != 'male')
+                <label id="male-label" for="male">Мъж</label><input type="radio" name="sex" id="male" value="male">
+                <label id="female-label" for="female">Жена</label><input type="radio" name="sex" id="female" value="female" checked="checked">
+            @elseif(!empty(old('sex')) && old('sex') != 'female')
+                <label id="male-label" for="male">Мъж</label><input type="radio" name="sex" id="male" value="male" checked="checked">
+                <label id="female-label" for="female">Жена</label><input type="radio" name="sex" id="female" value="female">
+            @endif
+
+            @if(empty(old('sex')))
+                <label id="male-label" for="male">Мъж</label><input type="radio" name="sex" id="male" value="male">
+			    <label id="female-label" for="female">Жена</label><input type="radio" name="sex" id="female" value="female">
+            @endif
+        </p>
 
 		<a href="#" class="orange-btn" id="register-btn-send">Регистрация</a>
 	</form>
@@ -191,39 +201,32 @@
 <!-- //changing background -->
 <script>
 	$(function(){
+        $('#login-button').click();
 		changeBg();
 		setTimeout(function(){
-		    if ($(window).width() > 1400) {
+		    if ($(window).width() > 1000) {
                changeBg();
             }
 		}, 10000);
 
 		function changeBg(){
 		    console.log($(window).width()+'/'+$(window).height());
-			if($('#container').is(":visible") || $('#forgotten-container').is(":visible") || $('#register-container').is(":visible")){
-				$('html').css({
-					'background-image':'url(./images/loaders/load-23.gif)',
-					'background-size':'50%',
-				});
-			}else{
-			    if ($(window).width() > 1400) {
-    				$('html').css({
-    					'background-image':'url(./images/loaders/load-22.gif)',
-    					'background-size':'30%',
-    				});
-			    }
-			}
   			// images for background
   			var items = ["1","2","3","4","5","6"];
   			var item = items[Math.floor(Math.random()*items.length)];
   			setTimeout(function(){
-  				$('html').css({
-  					'background-image':'url(./images/bg/login/'+item+'.jpg)',
-  					'background-size':'cover',
-  				});
+                $('<img/>').attr('src', './images/bg/login/'+item+'.jpg').on('load', function() {
+                   $(this).remove();
+                   $('html').css({
+     					'background-image':'url(./images/bg/login/'+item+'.jpg)',
+     					'background-size':'cover',
+     				});
+                    $('html').fadeIn();
+                });
+
   			},500);
   			setTimeout(function(){
-  				if ($(window).width() > 1400) {
+  				if ($(window).width() > 1000) {
                     changeBg();
                 }
   			}, 10000);
@@ -235,36 +238,16 @@
   	$(function(){
   		var cities = {
         "0":"Враца",
-        "1": "София",
-        "2": "Пловдив",
-        "3": "Варна",
-        "4": "Бургас",
-        "5": "Русе",
-        "6": "Стара Загора",
-        "7": "Плевен",
-        "8": "Сливен",
-        "9": "Добрич",
-        "10": "Шумен",
-        "11": "Перник",
-        "12": "Хасково",
-        "13": "Монтана",
-        "14": "Мездра",
-        "15": "Ловеч",
-        "16": "Разград",
-        "17": "Борино",
-        "18": "Мадан",
-        "19": "Златоград",
-        "20": "Пазарджик",
-        "21": "Смолян",
-        "22": "Благоевград",
-        "23": "Неделино",
-        "24": "Девин",
-        "25": "Велико Търново",
-        "26": "Видин",
-        "27": "Силистра",
-        "28": "Габрово",
-        "29": "Търговище",
-        "30": "Друго"
+        "1":"Борован",
+        "2":"Бяла Слатина",
+        "3":"Козлодуй",
+        "4":"Криводол",
+        "5":"Мездра",
+        "6":"Мизия",
+        "7":"Оряхово",
+        "8":"Роман",
+        "9":"Хайредин",
+        "10": "Друго"
 		};
   		 var options = [];
 		  $.each( cities, function( key, val ) {

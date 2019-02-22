@@ -64,11 +64,16 @@
 			if ( $target ) {
 				animating = true;
 				$( 'html, body' ).animate( {
-					scrollTop: ( $target.offset().top )
+					scrollTop: ( ( $target.offset().top - 20 ) )
 				}, settings.animationTime, function () {
 					window.clearTimeout( scrollTimer );
 					animating = false;
 				} );
+				if ( $target.find( '#events' ).length ) {
+					$( '.main-events > div' ).each( function ( k, v ) {
+						$( this ).find( 'img' ).attr( 'src', $( this ).find( 'img' ).attr( 'data-img' ) );
+					} );
+				}
 			}
 		}
 		// on window scroll

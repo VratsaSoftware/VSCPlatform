@@ -38,14 +38,23 @@ class UserController extends Controller
     {
         $data = $request->validate([
             'picture' => 'file|image|mimes:jpeg,png,gif,webp,ico|max:4000',
-            'name' => 'sometimes',
-            'location' => 'sometimes',
-            'dob' => 'sometimes|date_format:Y-m-d|before:'.Carbon::now(),
-            'email' => ['sometimes','unique:users','email']
+            'name' => 'sometimes|string|min:3|max:25|',
+            'location' => 'sometimes|min:3|max:10|string|',
+            'dob' => 'sometimes|date_format:Y-m-d|before:'.Carbon::now().'|after:1950-01-01',
+            'email' => ['sometimes','unique:users','email'],
+            'facebook' => 'nullable|url|min:5|max:50',
+            'linkedin' => 'nullable|url|min:5|max:50',
+            'github' => 'nullable|url|min:5|max:50',
+            'skype' => 'nullable|url|min:5|max:50',
+            'dribbble' => 'nullable|url|min:5|max:50',
+            'behance' => 'nullable|url|min:5|max:50',
         ]);
         if (Input::hasFile('picture')) {
             $userPic = Input::file('picture');
             $image = Image::make($userPic->getRealPath());
+            $image->fit(1024, 768, function ($constraint) {
+                $constraint->upsize();
+            });
             $name = time()."_".$userPic->getClientOriginalName();
             $name = str_replace(' ', '', $name);
             $name = md5($name);
@@ -57,14 +66,22 @@ class UserController extends Controller
             if ($userPic->getClientOriginalExtension() == 'gif') {
                 copy($userPic->getRealPath(), public_path().'/images/user-pics/'.$name);
             } else {
-                $image->save(public_path().'/images/user-pics/'.$name, 50);
+                $image->save(public_path().'/images/user-pics/'.$name, 90);
             }
         }
-        if ($request->has('name')) {
+
+        if (isset($data['name']) && !is_null($data['name'])) {
             $name = explode(" ", $data['name']);
-            $user->name = $name[0];
-            $user->last_name = $name[1];
+            $user->name = $data['name'];
+            $user->last_name = "";
+            if (isset($name[0]) && isset($name[1])) {
+                $user->name = $name[0];
+                // array_shift($name);
+                // $user->last_name = implode(" ", $name);
+                $user->last_name = $name[1];
+            }
         }
+
         if ($request->has('location')) {
             $user->location = $data['location'];
         }
@@ -84,8 +101,8 @@ class UserController extends Controller
     {
         $request['valid_instTypes'] = \Config::get('institutionTypes');
         $data = $request->validate([
-            'y_from' => 'required|date|date_format:Y-m-d',
-            'y_to' => 'required|date|date_format:Y-m-d|after:y_from',
+            'y_from' => 'required|numeric|min:1900|max:2099',
+            'y_to' => 'required|numeric|min:'.((int)$request->y_from-1).'|max:2099',
             'edu_type' => 'required|numeric',
             'edu_institution_type' => "required|in_array:valid_instTypes.*",
             'institution_name' => 'required|string',
@@ -238,6 +255,10 @@ class UserController extends Controller
         if (!empty($request->int_other)) {
             $interestCheck = Interest::firstOrCreate(
                 ['cl_users_interest_type_id' => $request->int_type,'name' => $request->int_other]
+            );
+
+            $insertHobbie = Hobbie::firstOrCreate(
+                ['cl_interest_id' => $interestCheck->id,'user_id' => Auth::user()->id]
             );
         }
 
