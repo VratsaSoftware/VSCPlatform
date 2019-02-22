@@ -215,10 +215,15 @@
   			var items = ["1","2","3","4","5","6"];
   			var item = items[Math.floor(Math.random()*items.length)];
   			setTimeout(function(){
-  				$('html').css({
-  					'background-image':'url(./images/bg/login/'+item+'.jpg)',
-  					'background-size':'cover',
-  				});
+                $('<img/>').attr('src', './images/bg/login/'+item+'.jpg').on('load', function() {
+                   $(this).remove();
+                   $('html').css({
+     					'background-image':'url(./images/bg/login/'+item+'.jpg)',
+     					'background-size':'cover',
+     				});
+                    $('html').fadeIn();
+                });
+
   			},500);
   			setTimeout(function(){
   				if ($(window).width() > 1000) {
