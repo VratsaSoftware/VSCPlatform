@@ -15,6 +15,7 @@ use App\Models\Users\InterestsType;
 use App\Models\Users\Interest;
 use App\Models\Users\Hobbie;
 use App\User;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -60,8 +61,9 @@ class HomeController extends Controller
         }
 
         if ($isAdmin) {
-            $courses = Course::all();
-            return view('user.my_profile', ['social_links' => $socialLinks,'certificates' => $certificates]);
+            $courses = Course::where('ends', '>', Carbon::now()->format('Y-m-d H:m:s'))->get();
+            $lecturer = User::find(Auth::user()->id);
+            return view('admin.my_profile', ['social_links' => $socialLinks,'certificates' => $certificates,'courses' => $courses,'lecturer' => $lecturer]);
         }
         if ($isLecturer) {
             $courses = Course::with('Lecturers')->whereHas('Lecturers', function ($query) use ($userId) {

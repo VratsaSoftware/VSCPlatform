@@ -91,6 +91,11 @@ class User extends Authenticatable
         return false;
     }
 
+    public function adminGetCourses()
+    {
+        return Course::all();
+    }
+
     public function studentGetCourse()
     {
         $userId = Auth::user()->id;

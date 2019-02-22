@@ -240,6 +240,10 @@ input[type=text], input[type=date] {
     border-radius: 10px;
 }
 
+.view_all_courses_icon {
+    width: 1.5vw !important;
+}
+
 textarea {
     height: 100%;
     width: 100%;

@@ -6,7 +6,7 @@ use Closure;
 
 use Illuminate\Support\Facades\Auth;
 
-class isLecturer
+class isAdmin
 {
     /**
      * Handle an incoming request.
@@ -17,7 +17,7 @@ class isLecturer
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->isLecturer() || Auth::user()->isAdmin()) {
+        if (Auth::user()->isAdmin()) {
             return $next($request);
         }
         $message = __('Нямате достъп до този ресурс!');

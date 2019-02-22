@@ -876,7 +876,7 @@ a {
 
 .code-logos-program:hover {
     transform: scale(1.5);
-    cursor: help;
+    /* cursor: help; */
 }
 
 .lvl-info, .program-info-img {

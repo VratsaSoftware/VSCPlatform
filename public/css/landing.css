@@ -959,7 +959,7 @@ a, .title-btns-content>a {
     }
 
     .mySlides>img {
-        height: 75vh;
+        height: 55vh;
     }
 
     .slider-title {
@@ -1105,7 +1105,11 @@ a, .title-btns-content>a {
     }
 
     .slider-title {
-        margin-top: -23vw;
+        margin-top: -30vw;
+    }
+
+    .title-btns-content>a {
+        padding: 1px;
     }
 
     .btn-content-wrap {
@@ -1113,7 +1117,7 @@ a, .title-btns-content>a {
         /* margin-top: 5vw; */
         display: table;
         position: absolute;
-        margin-left: 33%;
+        margin-left: 37%;
     }
 }
 
@@ -1124,7 +1128,7 @@ a, .title-btns-content>a {
     }
 
     .mySlides>img {
-        height: 90vh;
+        height: 80vh;
     }
 
     .hamburger-wrap {
@@ -1319,7 +1323,7 @@ a, .title-btns-content>a {
     }
 
     .mySlides>img {
-        height: 85vh;
+        height: 65vh;
     }
 
     #right-menu {
@@ -1601,7 +1605,7 @@ a, .title-btns-content>a {
     }
 
     .student-comment {
-        height: 20vh;
+        height: 20vw;
     }
 
     .mobile-sponsors {
@@ -1639,17 +1643,17 @@ a, .title-btns-content>a {
     }
 
     .slider-title {
-        font-size: 4vh;
+        font-size: 3vh;
         margin-top: 0;
     }
 
     .slider-subtitle-content {
         margin-top: 0;
-        font-size: 3vh;
+        font-size: 2vh;
     }
 
     .btn-content-wrap {
-        margin-top: 0;
+        margin-top: -20%;
     }
 
     .title-btns-content>a {
