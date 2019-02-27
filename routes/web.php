@@ -67,6 +67,10 @@ Route::group(['middleware' => 'auth'], function () {
     //institution name autocomplete
     Route::get('/user/education/autocomplete', 'Users\UserController@eduAutocomplete')->name('edu.institution');
 
+    //list all events
+    Route::get('/user/events/all', 'Events\EventController@index')->name('users.events');
+
+    Route::get('/user/event/{event}/register/team', 'Events\EventController@registerTeam')->name('events.register.team');
     Route::group(['middleware' => 'isLecturer'], function () {
         // lecturer routes
         Route::post('/lecturer/update/bio', 'Users\UserController@updateBio')->name('lecturer.update.bio');
@@ -88,7 +92,10 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group(['middleware' => 'isAdmin'], function () {
         Route::get('courses/all', 'Admin\AdminController@allCourses')->name('all.courses');
-        Route::get('events/all', 'Admin\AdminController@showAllEvents')->name('all.events');
+        Route::get('events/all', 'Admin\AdminController@showAllEvents')->name('admin.events');
+
+        //events routes
+        Route::resource('events', 'Events\EventController')->names('events');
     });
 });
 Route::post('/lection/video/shown', 'Courses\LectionController@videoShown')->name('lection.video.show');

@@ -199,6 +199,8 @@ class ModuleController extends Controller
     public function destroy($id)
     {
         $module = Module::find($id);
+        $course = Course::find($module->course_id);
+        File::delete(public_path().'/images/course-'.$course->id.'/module-'.$module->id.'/'.$module->picture);
         $module->delete();
 
         $message = __('Успешно изтрит модул!');

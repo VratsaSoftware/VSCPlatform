@@ -1,5 +1,5 @@
 @extends('layouts.template')
-@section('title', 'Admin Събития')
+@section('title', 'Събития')
 @section('content')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
 
@@ -33,9 +33,6 @@
               </div>
           </p>
           @endif
-      <div class="col-md-12 text-center events-add-holder">
-          <a href="#modal" id="add-event"><img src="{{asset('/images/profile/add-icon.png')}}" alt="add-icon" class="img-fluid">Добави</a>
-      </div>
     <div class="col-md-12 events-now-text text-center">Актуални</div>
   </div>
   <div class="events col-md-12 d-flex flex-row flex-wrap">
@@ -48,29 +45,15 @@
                         @else
                             <i class="fas fa-chart-pie"></i>
                         @endif
-                        @if(strtolower($event->visibility) == 'public')
-                            <i class="fas fa-eye"></i>
-                        @endif
-                        @if(strtolower($event->visibility) == 'private')
-                            <i class="fas fa-eye-slash"></i>
-                        @endif
-                        @if(strtolower($event->visibility) == 'draft')
-                            <i class="fas fa-file"></i>
-                        @endif
                     </div>
                     <div class="event-body col-md-12">
+                        <a href="http://hack.vratsa.net/" target="_blank">
+                            <div class="event-body-text show-more-event info-btn-in">
+                              информация
+                            </div>
+                        </a>
                       <a href="#modal-view">
                         <span class="desc-no-show">
-                            <p>
-                            Локация:<br/>
-                            {{$event->location}}<br/>
-                            Описание:<br/>
-                            {{$event->description}}<br/>
-                            Започва:<br/>
-                            {{$event->from}}<br/>
-                            Свърва:<br/>
-                            {{$event->to}}<br/>
-                            </p>
                             @if($event->is_team > 0)
                                 <p>
                                     Отбори<br/>
@@ -84,9 +67,9 @@
                                           <th>Технология</th>
                                           <th>Вдъхновение</th>
                                           <th>Git Hub</th>
-                                          <th>Активен</th>
+
                                           <th>Участници</th>
-                                          <th>Създаден на</th>
+
                                         </tr>
                                       </thead>
                                       <tbody>
@@ -102,29 +85,14 @@
                                                   <td>{{$team->inspiration}}</td>
                                                   <td style="color:#1B8500"><a href="{{$team->github}}" target="_blank">{{$team->github}}</a></td>
                                                   <td>
-                                                      @if($team->is_active > 0)
-                                                          <span style="visibility:hidden">1</span>
-                                                          <i class="fas fa-check-circle" style="color:#1B8500"></i>
-                                                      @else
-                                                          <span style="visibility:hidden">0</span>
-                                                          <i class="fas fa-times-circle" style="color:#F00"></i>
-                                                      @endif
-                                                  </td>
-                                                  <td>
-                                                      общо - <span style="color:#F00">{{count($team->Members)}}</span><br/>
                                                       @foreach($team->Members as $member)
                                                         <p>
-                                                            <span>{{$member->Role->role}} - <br/>
+                                                            <span>
                                                                   {{$member->User->name}} {{$member->User->last_name}}  <br/>
-                                                                  {{$member->User->email}}<br />
-                                                                  @if(!is_null($member->User->Occupation->occupation))
-                                                                      {{$member->User->Occupation->occupation}}
-                                                                  @endif
                                                             </span>
                                                         </p>
                                                       @endforeach
                                                   </td>
-                                                  <td>{{$team->created_at}}</td>
                                                 </tr>
                                             @endforeach
                                       </tbody>
@@ -135,31 +103,31 @@
                             @endif
                         </span>
                         <div class="event-body-text show-more-event">
-                          виж
+                          отбори
                         </div>
                       </a>
+                        @if(Auth::user()->isOnEvent($event->id))
+                              <a href="#">
+                                  <div class="event-body-text show-more-event candidate-btn-in">
+                                    виж отбора
+                                  </div>
+                              </a>
+                        @else
+                            <a href="{{route('events.register.team',['event' => $event->id])}}">
+                                <div class="event-body-text show-more-event candidate-btn-in">
+                                  запиши се
+                                </div>
+                            </a>
+                        @endif
                       @if(!is_null($event->picture) || !empty($event->picture))
                           <img src="{{asset('/images/events/'.$event->picture)}}" alt="">
                       @else
                           <img src="{{asset('/images/img-placeholder.jpg')}}" alt="no photo">
                       @endif
-                      <div class="col-md-12 d-flex flex-row flex-wrap">
-                          <div class="col-md-6 delete-module text-center">
-                                <span class="hidden-event-data" data-event-id="{{$event->id}}" data-picture="{{$event->picture}}" data-name="{{$event->name}}" data-description="{{$event->description}}" data-from="{{$event->from->format('Y-m-d')}}" data-to="{{$event->to->format('Y-m-d')}}" data-team="{{$event->is_team}}" data-module="{{$event->is_module}}" data-location="{{$event->location}}" data-visibility="{{$event->visibility}}" data-min-team="{{$event->min_team}}" data-max-team="{{$event->max_team}}"></span>
-                                <a href="#modal"><button type="submit" class="btn btn-info edit-event"><i class="fas fa-edit"></i></button></a>
-                          </div>
-                          <div class="col-md-6 delete-module text-center">
-                                  <form action="{{ route('events.destroy',$event->id) }}" method="POST" onsubmit="return ConfirmDelete()" id="delete-edu">
-                                      {{ method_field('DELETE') }}
-                                      {{ csrf_field() }}
-                                      <button type="submit" class="btn btn-danger delete-module-btn" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                                  </form>
-                          </div>
-                      </div>
                     </div>
                     <div class="event-footer col-md-12 d-flex flex-row flex-wrap">
                         @if($event->is_team > 0)
-                            <div class="col-md-6">капацитет на отборите:{{$event->min_team}} - {{$event->max_team}}</div>
+                            <div class="col-md-6">от {{$event->min_team}} до {{$event->max_team}} участници в отбор</div>
                         @else
                             <div class="col-md-6">{{$event->visibility}}</div>
                         @endif
@@ -171,9 +139,11 @@
             няма актуални събития
           </p>
         @endforelse
+        @if(count($pastEvents) > 0)
         <div class="col-md-12 text-center past-text">
             Отминали
         </div>
+        @endif
         @forelse($pastEvents as $event)
             <div class="col-md-6">
                 <div class="event-title col-md-12 title-signed">
@@ -182,15 +152,6 @@
                         <i class="fas fa-users"></i>
                     @else
                         <i class="fas fa-chart-pie"></i>
-                    @endif
-                    @if(strtolower($event->visibility) == 'public')
-                        <i class="fas fa-eye"></i>
-                    @endif
-                    @if(strtolower($event->visibility) == 'private')
-                        <i class="fas fa-eye-slash"></i>
-                    @endif
-                    @if(strtolower($event->visibility) == 'draft')
-                        <i class="fas fa-file"></i>
                     @endif
                 </div>
                 <div class="event-body col-md-12">
@@ -235,7 +196,7 @@
                                               <td>{{$team->Category->category}}</td>
                                               <td>{{$team->technology_stack}}</td>
                                               <td>{{$team->inspiration}}</td>
-                                              <td style="color:#1B8500"><a href="{{$team->github}}" target="_blank">{{$team->github}}</a></td>
+                                              <td>{{$team->github}}</td>
                                               <td>
                                                   @if($team->is_active > 0)
                                                       <span style="visibility:hidden">1</span>
@@ -246,7 +207,6 @@
                                                   @endif
                                               </td>
                                               <td>
-                                                  общо - <span style="color:#F00">{{count($team->Members)}}</span><br/>
                                                   @foreach($team->Members as $member)
                                                     <p>
                                                         <span>{{$member->Role->role}} - <br/>
@@ -278,19 +238,6 @@
                   @else
                       <img src="{{asset('/images/img-placeholder.jpg')}}" alt="no photo">
                   @endif
-                  <div class="col-md-12 d-flex flex-row flex-wrap">
-                      <div class="col-md-6 delete-module text-center">
-                            <span class="hidden-event-data" data-event-id="{{$event->id}}" data-picture="{{$event->picture}}" data-name="{{$event->name}}" data-description="{{$event->description}}" data-from="{{$event->from->format('Y-m-d')}}" data-to="{{$event->to->format('Y-m-d')}}" data-team="{{$event->is_team}}" data-module="{{$event->is_module}}" data-location="{{$event->location}}" data-visibility="{{$event->visibility}}" data-min-team="{{$event->min_team}}" data-max-team="{{$event->max_team}}"></span>
-                            <a href="#modal"><button type="submit" class="btn btn-info edit-event"><i class="fas fa-edit"></i></button></a>
-                      </div>
-                      <div class="col-md-6 delete-module text-center">
-                              <form action="{{ route('events.destroy',$event->id) }}" method="POST" onsubmit="return ConfirmDelete()" id="delete-edu">
-                                  {{ method_field('DELETE') }}
-                                  {{ csrf_field() }}
-                                  <button type="submit" class="btn btn-danger delete-module-btn" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
-                              </form>
-                      </div>
-                  </div>
                 </div>
                 <div class="event-footer col-md-12 d-flex flex-row flex-wrap footer-signed">
                     @if($event->is_team > 0)
@@ -303,7 +250,7 @@
             </div>
         @empty
             <p class="col-md-12 text-center no-events-title">
-                няма отминали събития
+                {{-- няма отминали събития --}}
             </p>
         @endforelse
     </div>

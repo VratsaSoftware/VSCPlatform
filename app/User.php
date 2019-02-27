@@ -20,7 +20,9 @@ use App\Models\Users\WorkCompany;
 use App\Models\Users\WorkExperience;
 use App\Models\Users\WorkPosition;
 use App\Models\Users\Hobbie;
+use App\Models\Users\Occupation;
 use App\Notifications\PasswordReset;
+use App\Models\Events\TeamMember;
 
 class User extends Authenticatable
 {
@@ -32,6 +34,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $guarded = [];
+    protected $dates = ['dob'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -55,6 +58,11 @@ class User extends Authenticatable
     public function Certifications()
     {
         return $this->hasMany(Certification::class);
+    }
+
+    public function Occupation()
+    {
+        return $this->hasOne(Occupation::class, 'id', 'cl_occupation_id');
     }
 
     public function isAdmin()
@@ -235,5 +243,20 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new PasswordReset($token));
+    }
+
+    public function isOnEvent($eventId)
+    {
+        $isMember = TeamMember::with('Teams')->where('user_id', Auth::user()->id)->get();
+        if (!is_null($isMember)) {
+            foreach ($isMember as $member) {
+                foreach ($member->Teams as $team) {
+                    if ($team->events_id == $eventId) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }

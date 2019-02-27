@@ -107,7 +107,7 @@
 }
 
 .events-now-text {
-    margin-top: 10vw;
+    margin-top: 5vw;
     font-family: Ubuntu;
     letter-spacing: 1px;
     font-size: 2vw;
@@ -126,7 +126,7 @@
     display: none;
 }
 
-#modal {
+#modal, #modal-view {
     left: 50%;
     margin: 250px 0 0 -40% !important;
     opacity: 0;
@@ -144,7 +144,7 @@
 }
 
 /* Make the modal appear when targeted */
-#modal:target {
+#modal:target, #modal-view:target {
     opacity: 1;
     /*top:50%;*/
     visibility: visible;
@@ -154,30 +154,30 @@
     /* overflow: auto; */
 }
 
-#modal {
+#modal, #modal-view {
     overflow: auto;
 }
 
-.modal-header, #modal .footer {
+.modal-header, #modal .footer, #modal-view .footer {
     border-bottom: 1px solid #e7e7e7;
     border-radius: 5px 5px 0 0;
 }
 
-#modal .footer {
+#modal .footer, #modal-view .footer {
     border: none;
     border-top: 1px solid #e7e7e7;
     border-radius: 0 0 5px 5px;
 }
 
-#modal h2 {
+#modal h2, #modal-view h2 {
     margin: 0;
 }
 
-#modal .btn {
+#modal .btn, #modal-view .btn {
     float: right;
 }
 
-#modal .copy, #modal .modal-header, #modal .footer {
+#modal .copy, #modal-view .copy, #modal .modal-header, #modal-view .modal-header, #modal .footer, #modal-view .footer {
     padding: 15px;
 }
 
@@ -236,6 +236,10 @@
     display: inline-block;
 }
 
+.desc-no-show {
+    display: none;
+}
+
 .modal-gallery-header {
     font-weight: bold;
     font-family: Comfortaa;
@@ -256,6 +260,46 @@
 
 .empty-data {
     color: #D3D3D3 !important;
+}
+
+.no-events-title {
+    margin-bottom: 5vw;
+}
+
+.events-add-holder {
+    /* margin-top: 10vw; */
+}
+
+.events-add-holder>a:hover {
+    color: #1B8500;
+}
+
+#teams-table_wrapper, #new-table_wrapper {
+    overflow: scroll;
+}
+
+.team-table-pic {
+    width: 10vw;
+    height: 10vw;
+}
+
+.team-capacity {
+    display: none;
+}
+
+.candidate-btn-in {
+    left: 70%;
+    background: #f00;
+}
+
+.info-btn-in {
+    left: 28%;
+}
+
+.small-field-register {
+    /* width: auto !important;
+    max-width: auto !important;
+    margin-left: 1%; */
 }
 
 /*QUERY's

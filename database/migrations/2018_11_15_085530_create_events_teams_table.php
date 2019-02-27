@@ -23,6 +23,7 @@ class CreateEventsTeamsTable extends Migration
             $table->enum('technology_stack', ['php','java','android','front_end','.net','hardware','c#','c++','other']);
             $table->string('inspiration');
             $table->string('github');
+            $table->integer('isActive');
             $table->timestamps();
             $table->softDeletes();
 

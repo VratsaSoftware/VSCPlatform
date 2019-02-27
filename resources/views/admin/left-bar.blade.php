@@ -19,7 +19,7 @@
     </ul>
   </li>
   <li class="nested-nav">
-      <a href="{{route('all.events')}}">
+      <a href="{{route('admin.events')}}">
           <img src="{{asset('/images/profile/nav/events-icon.png')}}" alt="" class="img-fluid">Събития
       </a>
   </li>
