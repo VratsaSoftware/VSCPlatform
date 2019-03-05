@@ -21,6 +21,17 @@ $( '.show-more-event' ).on( 'click', function () {
 	newModal.show();
 } );
 
+$( '.invites-modal-btn' ).on( 'click', function () {
+	$( '.close-modal' ).attr( 'data-scroll', ( $( this ).offset().top - 700 ) );
+	var newModal = $( '#modal' ).clone( true ).attr( 'id', 'invites-modal' );
+	var desc = $( this ).find( '.invites-no-show' ).html();
+	$( '#modal' ).after( newModal );
+	$( '#invites-modal > .modal-content > .copy' ).html( '' );
+	$( '#invites-modal > .modal-content > .copy' ).html( '<p>' + desc + '</p>' );
+	$( '#invites-modal > .modal-content > .copy > #teams-table' ).attr( 'id', 'invites-table' )
+	newModal.show();
+} );
+
 $( 'input:radio[name="type"]' ).change(
 	function () {
 		console.log( $( this ).val() );

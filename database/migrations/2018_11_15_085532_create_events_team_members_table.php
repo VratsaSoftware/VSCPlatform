@@ -16,6 +16,7 @@ class CreateEventsTeamMembersTable extends Migration
         Schema::create('events_team_members', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();
+            $table->string('email')->nullable();
             $table->integer('cl_users_team_role_id')->unsigned()->nullable();
             $table->integer('cl_users_shirts_size_id')->unsigned()->nullable();
             $table->integer('event_team_id')->unsigned()->nullable();

@@ -9,6 +9,7 @@ use App\Models\Events\TeamMember;
 class Team extends Model
 {
     protected $table = 'events_teams';
+    protected $guarded = [];
 
     public function Events()
     {

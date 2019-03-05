@@ -124,7 +124,7 @@ body {
     letter-spacing: 1px;
 }
 
-.alert {
+.alert, .invited {
     position: absolute;
     z-index: -10;
     margin-top: -5vw;
@@ -436,6 +436,19 @@ input:checked+.slider:before {
 
 /*end of switch*/
 /*end of header*/
+.stay {
+    z-index: 100 !important;
+    margin-top: -2vw !important;
+}
+
+.event-alert {
+    font-style: italic;
+}
+
+.invite-alert:hover {
+    color: #000;
+}
+
 /*QUERY'S
 ------------------------------------------------------------------------------------------ */
 /* Extra small devices (phones, 600px and down) */

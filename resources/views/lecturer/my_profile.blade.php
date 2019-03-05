@@ -66,7 +66,7 @@
                         </div>
                         <div class="col-md-2 birthday-wrap text-left">
                             <img src="./images/profile/birthday-cake-icon.png" alt="birthday-icon">
-                            <span class="birthday">{{Auth::user()->dob}}</span>
+                            <span class="birthday">{{Auth::user()->dob->format('d-m-Y')}}</span>
                             <button type="submit" value="submit" class="edit-btn btn btn-success" id="submit-dob">
                                 <i class="fas fa-pencil-alt"></i>
                             </button>

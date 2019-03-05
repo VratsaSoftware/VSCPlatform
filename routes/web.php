@@ -71,6 +71,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/events/all', 'Events\EventController@index')->name('users.events');
 
     Route::get('/user/event/{event}/register/team', 'Events\EventController@registerTeam')->name('events.register.team');
+    Route::post('/user/event/{event}/store/team', 'Events\EventController@storeTeam')->name('events.store.team');
+    Route::get('/user/team/{team}/deny', 'Events\EventController@inviteDeny')->name('team.invite.deny');
+    Route::get('/user/event/{event}/team/{team}/accept', 'Events\EventController@inviteAccept')->name('team.invite.accept');
+    Route::post('/user/event/{event}/team/{team}/member/{teamMember}', 'Events\EventController@confirmInvite')->name('team.confirm.invite');
     Route::group(['middleware' => 'isLecturer'], function () {
         // lecturer routes
         Route::post('/lecturer/update/bio', 'Users\UserController@updateBio')->name('lecturer.update.bio');

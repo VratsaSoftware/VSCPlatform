@@ -67,33 +67,35 @@
                                           <th>Технология</th>
                                           <th>Вдъхновение</th>
                                           <th>Git Hub</th>
-
                                           <th>Участници</th>
-
                                         </tr>
                                       </thead>
                                       <tbody>
                                             @foreach($event->Teams as $team)
-                                                <tr>
-                                                  <td>
-                                                      <img src="{{asset('/images/events/teams/'.$team->picture)}}" alt="logo" class="team-table-pic">
-                                                  </td>
-                                                  <td>{{$team->title}}</td>
-                                                  <td>{{$team->slogan}}</td>
-                                                  <td>{{$team->Category->category}}</td>
-                                                  <td>{{$team->technology_stack}}</td>
-                                                  <td>{{$team->inspiration}}</td>
-                                                  <td style="color:#1B8500"><a href="{{$team->github}}" target="_blank">{{$team->github}}</a></td>
-                                                  <td>
-                                                      @foreach($team->Members as $member)
-                                                        <p>
-                                                            <span>
-                                                                  {{$member->User->name}} {{$member->User->last_name}}  <br/>
-                                                            </span>
-                                                        </p>
-                                                      @endforeach
-                                                  </td>
-                                                </tr>
+                                                @if($team->is_active > 0)
+                                                    <tr>
+                                                      <td>
+                                                          <img src="{{asset('/images/events/teams/'.$team->picture)}}" alt="logo" class="team-table-pic">
+                                                      </td>
+                                                      <td>{{$team->title}}</td>
+                                                      <td>{{$team->slogan}}</td>
+                                                      <td>{{$team->Category->category}}</td>
+                                                      <td>{{$team->technology_stack}}</td>
+                                                      <td>{{$team->inspiration}}</td>
+                                                      <td style="color:#1B8500"><a href="{{$team->github}}" target="_blank">{{$team->github}}</a></td>
+                                                      <td>
+                                                          @foreach($team->Members as $member)
+                                                            <p>
+                                                                <span>
+                                                                    @if(!is_null($member->User))
+                                                                      {{$member->User->name}} {{$member->User->last_name}}  <br/>
+                                                                  @endif
+                                                                </span>
+                                                            </p>
+                                                          @endforeach
+                                                      </td>
+                                                    </tr>
+                                                @endif
                                             @endforeach
                                       </tbody>
                                     </table>
@@ -106,18 +108,88 @@
                           отбори
                         </div>
                       </a>
-                        @if(Auth::user()->isOnEvent($event->id))
-                              <a href="#">
-                                  <div class="event-body-text show-more-event candidate-btn-in">
-                                    виж отбора
-                                  </div>
-                              </a>
-                        @else
-                            <a href="{{route('events.register.team',['event' => $event->id])}}">
+                        @if(Auth::user()->isOnEvent($event->id) && Auth::user()->isConfirmedMember($event->id))
                                 <div class="event-body-text show-more-event candidate-btn-in">
-                                  запиши се
+                                  <i class="fas fa-check-circle"></i> записан
                                 </div>
-                            </a>
+    
+                                @if(Auth::user()->isCapitan(Auth::user()->getTeam()->id))
+                                    <div class="event-body-text show-more-event team-name">
+                                      {{Auth::user()->getTeam()->title}}capitan
+                                    </div>
+                                @else
+                                    <div class="event-body-text show-more-event team-name">
+                                      {{Auth::user()->getTeam()->title}}
+                                    </div>
+                                @endif
+                        @else
+                            @if(!Auth::user()->isOnEvent($event->id))
+                                <a href="{{route('events.register.team',['event' => $event->id])}}">
+                                    <div class="event-body-text show-more-event candidate-btn-in">
+                                      запиши се
+                                    </div>
+                                </a>
+                            @else
+                                <div class="event-body-text show-more-event candidate-btn-in">
+                                  поканени сте
+                                </div>
+                            @endif
+                            <a href="#invites-modal" class="invites-modal-btn">
+                                <span class="invites-no-show">
+                                    <table class="table table-striped">
+                                      <thead>
+                                          <tr>
+                                            <th>Лого</th>
+                                            <th>Име на отбора</th>
+                                            <th>Мото</th>
+                                            <th>Категория</th>
+                                            <th>Технология</th>
+                                            <th>Вдъхновение</th>
+                                            <th>Git Hub</th>
+                                            <th>Участници</th>
+                                            <th>Операции</th>
+                                          </tr>
+                                      </thead>
+                                      <tbody>
+                            <?php $memberTeams = Auth::user()->getMemberInvitedTeam($event->id) ?>
+                            @foreach($memberTeams as $teams)
+                                @foreach($teams->Teams as $team)
+                                    <tr>
+                                      <td>
+                                          <img src="{{asset('/images/events/teams/'.$team->picture)}}" alt="logo" class="team-table-pic">
+                                      </td>
+                                      <td>{{$team->title}}</td>
+                                      <td>{{$team->slogan}}</td>
+                                      <td>{{$team->Category->category}}</td>
+                                      <td>{{$team->technology_stack}}</td>
+                                      <td>{{$team->inspiration}}</td>
+                                      <td style="color:#1B8500"><a href="{{$team->github}}" target="_blank">{{$team->github}}</a></td>
+                                      <td>
+                                          @foreach($team->Members as $member)
+                                            <p>
+                                                <span>
+                                                    @if(!is_null($member->User))
+                                                      {{$member->User->name}} {{$member->User->last_name}}  <br/>
+                                                  @endif
+                                                </span>
+                                            </p>
+                                          @endforeach
+                                      </td>
+                                      <td>
+                                          <a href="{{route('team.invite.accept',['event' => $event->id, 'team' => $team->id])}}">Потвърди</a>
+                                          <a href="{{route('team.invite.deny',['team'=>$team->id])}}">Откажи</a>
+                                      </td>
+                                    </tr>
+
+                                @endforeach
+                            @endforeach
+                                </tbody>
+                            </table>
+                        </span>
+                            <div class="event-body-text show-more-event candidate-btn-pending">
+                              имате {{count(Auth::user()->getMemberInvitedTeam($event->id))}} покани
+                            </div>
+                        </a>
                         @endif
                       @if(!is_null($event->picture) || !empty($event->picture))
                           <img src="{{asset('/images/events/'.$event->picture)}}" alt="">
@@ -155,6 +227,11 @@
                     @endif
                 </div>
                 <div class="event-body col-md-12">
+                    <a href="http://hack.vratsa.net/" target="_blank">
+                        <div class="event-body-text show-more-event info-btn-in">
+                          информация
+                        </div>
+                    </a>
                   <a href="#modal-view">
                     <span class="desc-no-show">
                         <p>
@@ -180,9 +257,7 @@
                                       <th>Технология</th>
                                       <th>Вдъхновение</th>
                                       <th>Git Hub</th>
-                                      <th>Активен</th>
                                       <th>Участници</th>
-                                      <th>Създаден на</th>
                                     </tr>
                                   </thead>
                                   <tbody>
@@ -198,28 +273,18 @@
                                               <td>{{$team->inspiration}}</td>
                                               <td>{{$team->github}}</td>
                                               <td>
-                                                  @if($team->is_active > 0)
-                                                      <span style="visibility:hidden">1</span>
-                                                      <i class="fas fa-check-circle" style="color:#1B8500"></i>
-                                                  @else
-                                                      <span style="visibility:hidden">0</span>
-                                                      <i class="fas fa-times-circle" style="color:#F00"></i>
-                                                  @endif
-                                              </td>
-                                              <td>
                                                   @foreach($team->Members as $member)
                                                     <p>
                                                         <span>{{$member->Role->role}} - <br/>
                                                               {{$member->User->name}} {{$member->User->last_name}}  <br/>
                                                               {{$member->User->email}}<br />
-                                                              @if(!is_null($member->User->Occupation->occupation))
+                                                              @if(!is_null($member->User) && !is_null($member->User->Occupation))
                                                                   {{$member->User->Occupation->occupation}}
                                                               @endif
                                                         </span>
                                                     </p>
                                                   @endforeach
                                               </td>
-                                              <td>{{$team->created_at}}</td>
                                             </tr>
                                         @endforeach
                                   </tbody>
@@ -229,10 +294,28 @@
 
                         @endif
                     </span>
-                    <div class="event-body-text button-signed show-more-event">
-                      виж
+                    <div class="event-body-text show-more-event">
+                      отбори
                     </div>
-                  </a>
+                </a>
+                    @if(Auth::user()->isOnEvent($event->id))
+                        @if(Auth::user()->isConfirmedMember($event->id))
+
+                        @else
+
+                        @endif
+                          {{-- <a href="#">
+                              <div class="event-body-text show-more-event candidate-btn-in">
+                                виж отбора
+                              </div>
+                          </a> --}}
+                    @else
+                        <a href="{{route('events.register.team',['event' => $event->id])}}">
+                            <div class="event-body-text show-more-event candidate-btn-in">
+                              запиши се
+                            </div>
+                        </a>
+                    @endif
                   @if(!is_null($event->picture) || !empty($event->picture))
                       <img src="{{asset('/images/events/'.$event->picture)}}" alt="">
                   @else

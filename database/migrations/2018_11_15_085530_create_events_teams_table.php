@@ -24,6 +24,7 @@ class CreateEventsTeamsTable extends Migration
             $table->string('inspiration');
             $table->string('github');
             $table->integer('isActive');
+            $table->integer('members_count');
             $table->timestamps();
             $table->softDeletes();
 

@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Events;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Events\Event;
+use App\Models\Events\Team;
+use App\Models\Events\TeamMember;
 use App\Models\Events\TeamCategory;
 use Illuminate\Support\Facades\Input;
 use Image;
@@ -15,6 +17,9 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Users\Occupation;
 use App\Models\Users\ShirtSize;
+use App\Models\Users\UsersTeamRole;
+use App\Mail\InviteMember;
+use Illuminate\Support\Facades\Mail;
 
 class EventController extends Controller
 {
@@ -33,6 +38,7 @@ class EventController extends Controller
             ['to', '<', Carbon::now()->format('Y-m-d H:m:s')],
             ['visibility','!=','draft'],
         ])->get();
+
         return view('layouts.events', ['events' => $events,'pastEvents' => $pastEvents]);
     }
 
@@ -219,11 +225,184 @@ class EventController extends Controller
 
     public function registerTeam(Event $event)
     {
-        $teamCategories = TeamCategory::all();
-        $stacks = \Config::get('tehnologyStack');
+        if (!Auth::user()->isOnEvent($event->id)) {
+            $teamCategories = TeamCategory::all();
+            $stacks = \Config::get('tehnologyStack');
+            $user = User::find(Auth::user()->id);
+            $occupations = Occupation::all();
+            $sizes = ShirtSize::all();
+            return view('events.teams-register', ['event' => $event,'categories' => $teamCategories,'stacks' => $stacks, 'user' => $user,'occupations' => $occupations,'sizes' => $sizes]);
+        }
+        $message = __('Вече сте записан за това събитие!');
+        return redirect()->back()->with('error', $message);
+    }
+
+    public function storeTeam(Event $event, Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+        $data = $request->validate([
+            'team_picture' => 'required|file|image|mimes:jpeg,png,gif,webp,ico,jpg|max:4000',
+            'name' => 'required|max:20',
+            'team_category' => 'required|numeric',
+            'technologyStack' => 'required',
+            'git' => 'required',
+            'slogan' => 'required',
+            'inspiration' => 'sometimes|max:200',
+            'occupation' => 'required|numeric',
+            'shirt_size' => 'required|numeric|',
+            'invite_member_email.*' => 'sometimes|email',
+        ]);
+        $user->cl_occupation_id = $request->occupation;
+        $user->save();
+
+        $teamPic = Input::file('team_picture');
+        $image = Image::make($teamPic->getRealPath());
+        $image->fit(800, 600, function ($constraint) {
+            $constraint->upsize();
+        });
+        $picName = time()."_".$teamPic->getClientOriginalName();
+        $picName = str_replace(' ', '', strtolower($picName));
+        $picName = md5($picName);
+
+        if ($teamPic->getClientOriginalExtension() == 'gif') {
+            copy($coursePic->getRealPath(), public_path().'/images/events/'.$picName);
+        } else {
+            $image->save(public_path().'/images/events/'.$picName, 90);
+        }
+        $member = 0;
+
+        if (!is_null($request->invite_member_email) && isset($request->invite_member_email)) {
+            foreach ($request->invite_member_email as $invites) {
+                if (!empty($invites)) {
+                    $member++;
+                }
+            }
+        }
+
+        $newTeam = new Team;
+        $newTeam->events_id = $event->id;
+        $newTeam->title = $request->name;
+        $newTeam->picture = $picName;
+        $newTeam->slogan = $request->slogan;
+        $newTeam->event_team_category_id = $request->team_category;
+        $newTeam->technology_stack = $request->technologyStack;
+        $newTeam->inspiration = $request->inspiration;
+        $newTeam->github = $request->git;
+        $newTeam->is_active = 0;
+        $newTeam->members_count = $member +1;
+        $newTeam->save();
+
+        $role = UsersTeamRole::where('role', 'капитан')->select('id')->first();
+        $newMemberCapitan = new TeamMember;
+        $newMemberCapitan->user_id = $user->id;
+        $newMemberCapitan->cl_users_team_role_id = $role->id;
+        $newMemberCapitan->cl_users_shirts_size_id = $request->shirt_size;
+        $newMemberCapitan->event_team_id = $newTeam->id;
+        $newMemberCapitan->confirmed = 1;
+        $newMemberCapitan->save();
+
+        if (!is_null($request->invite_member_email) && isset($request->invite_member_email)) {
+            $isMemberExisting = User::whereIn('email', $request->invite_member_email)->get();
+            $role = UsersTeamRole::where('role', 'участник')->select('id')->first();
+            if (count($isMemberExisting) > 0) {
+                foreach ($isMemberExisting as $key => $userExist) {
+                    $newMember = new TeamMember;
+                    $newMember->user_id = $userExist->id;
+                    $newMember->cl_users_team_role_id = $role->id;
+                    $newMember->event_team_id = $newTeam->id;
+                    $newMember->confirmed = 0;
+                    $newMember->save();
+                }
+            } else {
+                $members = TeamMember::where('event_team_id', $newTeam->id)->get();
+                $allTeamMembers = [];
+                if (count($members) > 0) {
+                    $allTeamMembers = $members;
+                }
+                foreach ($request->invite_member_email as $email) {
+                    $newMember = new TeamMember;
+                    $newMember->email = $email;
+                    $newMember->cl_users_team_role_id = $role->id;
+                    $newMember->event_team_id = $newTeam->id;
+                    $newMember->confirmed = 0;
+                    $newMember->save();
+                    Mail::to($email)->send(new InviteMember($user, $newTeam, $allTeamMembers, $event));
+                }
+            }
+        }
+
+        $message = __('Успешно създаден Отбор - '.$request->name.'!');
+        return redirect()->route('users.events')->with('success', $message);
+    }
+
+    public function inviteDeny($team)
+    {
+        $teamMember = TeamMember::where([
+            ['event_team_id',$team],
+            ['user_id', Auth::user()->id],
+        ])
+        ->orWhere([
+            ['event_team_id',$team],
+            ['user_id', Auth::user()->email],
+        ])
+        ->first();
+        $teamMember->confirmed = -1;
+        $teamMember->save();
+
+        $message = __('Успешно отхвърлихте поканата за влизане в отбор!');
+        return redirect()->route('users.events')->with('success', $message);
+    }
+
+    public function inviteAccept(Event $event, $team)
+    {
+        $team = Team::with('Members')->find($team);
+        $teamMember = TeamMember::where([
+            ['event_team_id',$team->id],
+            ['user_id', Auth::user()->id],
+        ])
+        ->orWhere([
+            ['event_team_id',$team->id],
+            ['email', Auth::user()->email],
+        ])
+        ->first();
+        $teamMember->user_id = Auth::user()->id;
+        $teamMember->save();
         $user = User::find(Auth::user()->id);
         $occupations = Occupation::all();
         $sizes = ShirtSize::all();
-        return view('events.teams-register', ['event' => $event,'categories' => $teamCategories,'stacks' => $stacks, 'user' => $user,'occupations' => $occupations,'sizes' => $sizes]);
+
+        return view('events.team_join', ['teamMember'=>$teamMember->id,'event' => $event, 'team' => $team,'user' => $user,'sizes' => $sizes,'occupations' => $occupations]);
+    }
+
+    public function confirmInvite(Request $request, Event $event, Team $team, TeamMember $teamMember)
+    {
+        $data = $request->validate([
+            'occupation' => 'required|numeric',
+            'shirt_size' => 'required|numeric',
+        ]);
+        $user = User::find(Auth::user()->id);
+        $user->cl_occupation_id = $request->occupation;
+        $user->save();
+
+        if ($team->members_count < $event->max_team) {
+            $teamMember->confirmed = 1;
+            $teamMember->cl_users_shirts_size_id = $request->shirt_size;
+            $teamMember->save();
+
+            $newMemberCount = ($team->members_count+1);
+            $team->members_count = $newMemberCount;
+
+
+            if ($newMemberCount > $event->min_team) {
+                $team->is_active = 1;
+            }
+            $team->save();
+
+            $message = __('Успешно потвърдихте поканата за влизане в отбор!');
+            return redirect()->route('users.events')->with('success', $message);
+        } else {
+            $message = __('Отбора вече е пълен');
+            return redirect()->route('users.events')->with('error', $message);
+        }
     }
 }

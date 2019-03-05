@@ -10,6 +10,7 @@ use App\User;
 class TeamMember extends Model
 {
     protected $table = 'events_team_members';
+    protected $guarded = [];
 
     public function Teams()
     {
