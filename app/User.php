@@ -25,6 +25,7 @@ use App\Notifications\PasswordReset;
 use App\Models\Events\TeamMember;
 use App\Models\Events\Event;
 use App\Models\Events\Team;
+use App\Models\Users\UsersTeamRole;
 
 class User extends Authenticatable
 {
@@ -347,13 +348,25 @@ class User extends Authenticatable
         ->get();
     }
 
-    public function getTeam()
+    public function getTeam($capitan)
     {
         $userId = Auth::user()->id;
-        return Team::with('Members')->whereHas('Members', function ($query) use ($userId) {
-            $query->where('user_id', $userId);
-        })
-        ->first();
+        $role = UsersTeamRole::where('role', 'капитан')->select('id')->first();
+        if($capitan){
+            return Team::with('Members','Members.User')->whereHas('Members', function ($query) use ($userId,$role) {
+                $query->where([
+                    ['user_id', $userId],
+                    ['cl_users_team_role_id', $role->id]
+                ]);
+            })
+            ->first();
+        }
+        return Team::with('Members','Members.User')->whereHas('Members', function ($query) use ($userId,$role) {
+                $query->where([
+                    ['user_id', $userId],
+                ]);
+            })
+            ->first();
     }
 
     public function isCapitan($team)

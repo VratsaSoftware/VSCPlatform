@@ -21,7 +21,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
     </head>
 
-    <body>
+    <body style="opacity:0">
         <!-- JQuery -->
         <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
 

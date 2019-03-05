@@ -225,7 +225,7 @@ class EventController extends Controller
 
     public function registerTeam(Event $event)
     {
-        if (!Auth::user()->isOnEvent($event->id)) {
+        if (!Auth::user()->isConfirmedMember($event->id)) {
             $teamCategories = TeamCategory::all();
             $stacks = \Config::get('tehnologyStack');
             $user = User::find(Auth::user()->id);
@@ -265,19 +265,14 @@ class EventController extends Controller
         $picName = md5($picName);
 
         if ($teamPic->getClientOriginalExtension() == 'gif') {
-            copy($coursePic->getRealPath(), public_path().'/images/events/'.$picName);
+            copy($coursePic->getRealPath(), public_path().'/images/events/teams/'.$picName);
         } else {
-            $image->save(public_path().'/images/events/'.$picName, 90);
+            $image->save(public_path().'/images/events/teams/'.$picName, 90);
         }
-        $member = 0;
 
-        if (!is_null($request->invite_member_email) && isset($request->invite_member_email)) {
-            foreach ($request->invite_member_email as $invites) {
-                if (!empty($invites)) {
-                    $member++;
-                }
-            }
-        }
+        $denyInvites = TeamMember::where('user_id',Auth::user()->id)->orWhere('email',Auth::user()->email)->first();
+        $denyInvites->confirmed = -1;
+        $denyInvites->save();
 
         $newTeam = new Team;
         $newTeam->events_id = $event->id;
@@ -289,7 +284,7 @@ class EventController extends Controller
         $newTeam->inspiration = $request->inspiration;
         $newTeam->github = $request->git;
         $newTeam->is_active = 0;
-        $newTeam->members_count = $member +1;
+        $newTeam->members_count = 1;
         $newTeam->save();
 
         $role = UsersTeamRole::where('role', 'капитан')->select('id')->first();
@@ -326,7 +321,7 @@ class EventController extends Controller
                     $newMember->event_team_id = $newTeam->id;
                     $newMember->confirmed = 0;
                     $newMember->save();
-                    Mail::to($email)->send(new InviteMember($user, $newTeam, $allTeamMembers, $event));
+                    Mail::to($email)->send(new InviteMember($user, $newTeam, $event));
                 }
             }
         }
@@ -343,11 +338,17 @@ class EventController extends Controller
         ])
         ->orWhere([
             ['event_team_id',$team],
-            ['user_id', Auth::user()->email],
+            ['email', Auth::user()->email],
         ])
         ->first();
+        $teamMember->user_id = Auth::user()->id;
+        $teamMember->email = Auth::user()->email;
         $teamMember->confirmed = -1;
         $teamMember->save();
+
+        // $team = Team::find($team);
+        // $team->members_count = ($team->members_count - 1);
+        // $team->save();
 
         $message = __('Успешно отхвърлихте поканата за влизане в отбор!');
         return redirect()->route('users.events')->with('success', $message);
@@ -384,7 +385,7 @@ class EventController extends Controller
         $user->cl_occupation_id = $request->occupation;
         $user->save();
 
-        if ($team->members_count < $event->max_team) {
+        if ($team->members_count <= $event->max_team) {
             $teamMember->confirmed = 1;
             $teamMember->cl_users_shirts_size_id = $request->shirt_size;
             $teamMember->save();
@@ -393,7 +394,7 @@ class EventController extends Controller
             $team->members_count = $newMemberCount;
 
 
-            if ($newMemberCount > $event->min_team) {
+            if ($newMemberCount >= $event->min_team) {
                 $team->is_active = 1;
             }
             $team->save();
@@ -404,5 +405,40 @@ class EventController extends Controller
             $message = __('Отбора вече е пълен');
             return redirect()->route('users.events')->with('error', $message);
         }
+    }
+
+    public function inviteToTeam(Request $request, Team $team,Event $event)
+    {
+        $data = $request->validate([
+            'email' => 'required|email',
+        ]);
+        $memberPlus = ($team->members_count + 1);
+
+        if($memberPlus <= $event->max_team){
+            $capitan = User::find(Auth::user()->id);
+
+            $role = UsersTeamRole::where('role', 'участник')->select('id')->first();
+
+            $isExisting = TeamMember::where('email', $request->email)->first();
+            if(is_null($isExisting)){
+                $newMember = new TeamMember;
+                $newMember->email = $request->email;
+                $newMember->cl_users_team_role_id = $role->id;
+                $newMember->event_team_id = $team->id;
+                $newMember->confirmed = 0;
+                $newMember->save();
+
+                // $team->members_count = $memberPlus;
+                // $team->save();
+                Mail::to($request->email)->send(new InviteMember($capitan, $team, $event));
+
+                $message = __('Успешно изпратихте покана за влизане в отбор!');
+                return redirect()->route('users.events')->with('success', $message);
+            }
+            $message = __('Вече сте изпратили покана на този Е-mail!');
+            return redirect()->route('users.events')->with('error', $message);
+        }
+        $message = __('Капацитета на отбора ви е пълен!');
+        return redirect()->route('users.events')->with('error', $message);
     }
 }

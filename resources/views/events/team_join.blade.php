@@ -13,7 +13,7 @@
                         </ul>
                     </div>
                 @endif
-                <div class="col-md-12 level-title-holder d-flex flex-row flex-wrap">
+                <div class="col-md-12 join-team-wrapper d-flex flex-row flex-wrap">
 
                     <table class="table table-striped">
                       <thead>

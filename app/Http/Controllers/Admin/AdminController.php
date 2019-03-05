@@ -19,7 +19,7 @@ class AdminController extends Controller
 
     public function showAllEvents()
     {
-        $events = Event::with('Teams', 'Teams.Members', 'Teams.Members.User', 'Teams.Members.User.Occupation', 'Teams.Members.Role', 'Teams.Category')->where('to', '>', Carbon::now()->format('Y-m-d H:m:s'))->get();
+        $events = Event::with('Teams', 'Teams.Members', 'Teams.Members.User', 'Teams.Members.User.Occupation', 'Teams.Members.Role','Teams.Members.Shirt', 'Teams.Category')->where('to', '>', Carbon::now()->format('Y-m-d H:m:s'))->get();
         $pastEvents = Event::with('Teams', 'Teams.Members', 'Teams.Category')->where('to', '<', Carbon::now()->format('Y-m-d H:m:s'))->get();
         return view('admin.events', ['events' => $events,'pastEvents' => $pastEvents]);
     }

@@ -109,30 +109,61 @@
                         </div>
                       </a>
                         @if(Auth::user()->isOnEvent($event->id) && Auth::user()->isConfirmedMember($event->id))
-                                <div class="event-body-text show-more-event candidate-btn-in">
+                                <div class="event-body-text show-more-event candidate-btn-in" style="pointer-events: none;">
                                   <i class="fas fa-check-circle"></i> записан
                                 </div>
-    
-                                @if(Auth::user()->isCapitan(Auth::user()->getTeam()->id))
+                                
+                                @if(!is_null(Auth::user()->getTeam(true)) &&Auth::user()->isCapitan(Auth::user()->getTeam(true)->id))
                                     <div class="event-body-text show-more-event team-name">
-                                      {{Auth::user()->getTeam()->title}}capitan
+                                      Отбор: {{Auth::user()->getTeam(true)->title}}
+                                      <p>
+                                        @if(Auth::user()->getTeam(true)->is_active > 0)
+                                          <i class="fas fa-check-circle"></i> Активен
+                                          |участници:{{Auth::user()->getTeam(true)->members_count}}
+                                        @else
+                                          <i class="fas fa-times-circle"></i> НЕ Активен
+                                          |участници:{{Auth::user()->getTeam(true)->members_count}}
+                                        @endif
+                                      </p>
+                                      <div class="col-md-12 d-flex flex-row flex-wrap team-member-wrap">
+                                        <?php $members = Auth::user()->getTeam(true)->Members ?>
+                                        
+                                        @foreach($members as $member)
+                                            <div class="col-md-6 text-left">
+                                              {{isset($member->email)?$member->email:$member->User->name}}
+                                            </div>
+                                            <div class="col-md-6 text-right">
+                                              @if($member->confirmed > 0)
+                                                <i class="fas fa-check-circle"></i>
+                                              @endif
+                                              @if($member->confirmed < 0)
+                                                <i class="fas fa-times-circle"></i> 
+                                              @endif
+                                              @if($member->confirmed == 0)
+                                                <i class="fas fa-eye-slash"></i>
+                                              @endif
+                                            </div>
+                                          <br />
+                                        @endforeach
+                                        @if(Auth::user()->getTeam(true)->members_count < $event->max_team)
+                                          <a href="#" class="invite-member-btn" data-real="{{Auth::user()->getTeam(true)->members_count}}" data-max="{{$event->max_team}}" data-action="{{route('invite.to.team',[Auth::user()->getTeam(true)->id,$event->id])}}">
+                                            <img src="{{asset('/images/profile/add-icon.png')}}" alt="add-icon" class="img-fluid">покани
+                                          </a>
+                                        @endif
+                                      </div>
                                     </div>
                                 @else
                                     <div class="event-body-text show-more-event team-name">
-                                      {{Auth::user()->getTeam()->title}}
+                                      {{Auth::user()->getTeam(false)->title}}
                                     </div>
                                 @endif
                         @else
-                            @if(!Auth::user()->isOnEvent($event->id))
+                            @if(!Auth::user()->isOnEvent($event->id) || !Auth::user()->isConfirmedMember($event->id))
                                 <a href="{{route('events.register.team',['event' => $event->id])}}">
                                     <div class="event-body-text show-more-event candidate-btn-in">
                                       запиши се
                                     </div>
                                 </a>
-                            @else
-                                <div class="event-body-text show-more-event candidate-btn-in">
-                                  поканени сте
-                                </div>
                             @endif
                             <a href="#invites-modal" class="invites-modal-btn">
                                 <span class="invites-no-show">
@@ -152,43 +183,51 @@
                                       </thead>
                                       <tbody>
                             <?php $memberTeams = Auth::user()->getMemberInvitedTeam($event->id) ?>
-                            @foreach($memberTeams as $teams)
-                                @foreach($teams->Teams as $team)
-                                    <tr>
-                                      <td>
-                                          <img src="{{asset('/images/events/teams/'.$team->picture)}}" alt="logo" class="team-table-pic">
-                                      </td>
-                                      <td>{{$team->title}}</td>
-                                      <td>{{$team->slogan}}</td>
-                                      <td>{{$team->Category->category}}</td>
-                                      <td>{{$team->technology_stack}}</td>
-                                      <td>{{$team->inspiration}}</td>
-                                      <td style="color:#1B8500"><a href="{{$team->github}}" target="_blank">{{$team->github}}</a></td>
-                                      <td>
-                                          @foreach($team->Members as $member)
+                              @foreach($memberTeams as $teams)
+                                  @foreach($teams->Teams as $team)
+                                      <tr>
+                                        <td>
+                                            <img src="{{asset('/images/events/teams/'.$team->picture)}}" alt="logo" class="team-table-pic">
+                                        </td>
+                                        <td>{{$team->title}}</td>
+                                        <td>{{$team->slogan}}</td>
+                                        <td>{{$team->Category->category}}</td>
+                                        <td>{{$team->technology_stack}}</td>
+                                        <td>{{$team->inspiration}}</td>
+                                        <td style="color:#1B8500"><a href="{{$team->github}}" target="_blank">{{$team->github}}</a></td>
+                                        <td>
+                                            @foreach($team->Members as $member)
+                                              <p>
+                                                @if($member->confirmed > 0)
+                                                  <span>
+                                                      @if(!is_null($member->User))
+                                                        {{$member->User->name}} {{$member->User->last_name}}  <br/>
+                                                    @endif
+                                                  </span>
+                                                @endif
+                                              </p>
+                                            @endforeach
+                                        </td>
+                                        <td class="text-center">
                                             <p>
-                                                <span>
-                                                    @if(!is_null($member->User))
-                                                      {{$member->User->name}} {{$member->User->last_name}}  <br/>
-                                                  @endif
-                                                </span>
+                                              <a href="{{route('team.invite.accept',['event' => $event->id, 'team' => $team->id])}}">
+                                                <button class="btn btn-success">Потвърди</button>
+                                              </a>
                                             </p>
-                                          @endforeach
-                                      </td>
-                                      <td>
-                                          <a href="{{route('team.invite.accept',['event' => $event->id, 'team' => $team->id])}}">Потвърди</a>
-                                          <a href="{{route('team.invite.deny',['team'=>$team->id])}}">Откажи</a>
-                                      </td>
-                                    </tr>
+                                            <a href="{{route('team.invite.deny',['team'=>$team->id])}}"><button class="btn btn-danger">Откажи</button></a>
+                                        </td>
+                                      </tr>
 
-                                @endforeach
-                            @endforeach
-                                </tbody>
-                            </table>
-                        </span>
-                            <div class="event-body-text show-more-event candidate-btn-pending">
-                              имате {{count(Auth::user()->getMemberInvitedTeam($event->id))}} покани
-                            </div>
+                                  @endforeach
+                              @endforeach
+                                  </tbody>
+                              </table>
+                          </span>
+                            @if(count($memberTeams) > 0)
+                              <div class="event-body-text show-more-event candidate-btn-pending">
+                                имате {{count(Auth::user()->getMemberInvitedTeam($event->id))}} покани
+                              </div>
+                            @endif
                         </a>
                         @endif
                       @if(!is_null($event->picture) || !empty($event->picture))
@@ -516,4 +555,28 @@ $( '.close-modal' ).on( 'click', function () {
 	$( '#modal-view' ).remove();
 } );
 </script>
+
+<script>
+  $('.invite-member-btn').on('click', function(e){
+    e.preventDefault();
+    var real = parseInt($(this).attr('data-real'));
+    var max = parseInt($(this).attr('data-max'));
+    $(this).attr('data-real',(real+1));
+    var sum = parseInt(real) + 1;
+    var isExisting = $(this).parent().find('#invite_email');
+    var action = $(this).attr('data-action');
+    var token = $( 'meta[name="csrf-token"]' ).attr( 'content' ); 
+
+    if(sum < max && isExisting.length < 1){
+      $(this).before('<div class="col-md-12 text-center"><form action="'+action+'" id="send-invite-form" method="POST"><input name="_token" value="'+token+'" type="hidden"><input type="email" name="email" id="email" class="section-el-bold" placeholder="въведи електрона поща / Е-mail"></form></div>');
+      $(this).html('<span id="send-invite"><i class="fas fa-external-link-alt"></i>Изпрати</span>');
+      $('#send-invite').on('click', function(e){
+        e.preventDefault();
+        $('#send-invite-form').submit();
+      });
+    }else{
+      $(this).html('<span id="send-invite"><i class="fas fa-external-link-alt"></i>Пълен отбор</span>');
+    }
+  });
+  </script>
 @endsection

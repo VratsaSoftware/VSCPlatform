@@ -21,11 +21,10 @@ class InviteMember extends Mailable
     public $members;
     public $event;
 
-    public function __construct($capitan, $team, $members, $event)
+    public function __construct($capitan, $team,  $event)
     {
         $this->capitan = $capitan;
         $this->team = $team;
-        $this->members = $members;
         $this->event = $event;
     }
 

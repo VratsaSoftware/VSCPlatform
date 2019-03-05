@@ -67,9 +67,9 @@
                             Описание:<br/>
                             {{$event->description}}<br/>
                             Започва:<br/>
-                            {{$event->from}}<br/>
+                            {{$event->from->format('Y-m-d')}}<br/>
                             Свърва:<br/>
-                            {{$event->to}}<br/>
+                            {{$event->to->format('Y-m-d')}}<br/>
                             </p>
                             @if($event->is_team > 0)
                                 <p>
@@ -111,16 +111,27 @@
                                                       @endif
                                                   </td>
                                                   <td>
-                                                      общо - <span style="color:#F00">{{count($team->Members)}}</span><br/>
+                                                      общо - <span style="color:#F00">{{$team->members_count}}</span><br/>
                                                       @foreach($team->Members as $member)
                                                         <p>
+                                                          @if($member->confirmed > 0)
                                                             <span>{{$member->Role->role}} - <br/>
-                                                                  {{$member->User->name}} {{$member->User->last_name}}  <br/>
-                                                                  {{$member->User->email}}<br />
-                                                                  @if(!is_null($member->User->Occupation->occupation))
+                                                                  @if(!is_null($member->User))
+                                                                    {{$member->User->name}} {{$member->User->last_name}}  <br/>
+                                                                    {{$member->User->email}}<br />
+                                                                  @else
+                                                                    {{$member->email}}
+                                                                  @endif
+                                                                  @if(!is_null($member->User))
                                                                       {{$member->User->Occupation->occupation}}
                                                                   @endif
+                                                                  <br/>
+                                                                  @if(!is_null($member->Shirt))
+                                                                     тениска: {{$member->Shirt->size}}
+                                                                  @endif
+                                                                  <br/>
                                                             </span>
+                                                             @endif
                                                         </p>
                                                       @endforeach
                                                   </td>

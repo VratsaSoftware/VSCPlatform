@@ -5,6 +5,7 @@ namespace App\Models\Events;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Events\Team;
 use App\Models\Users\UsersTeamRole;
+use App\Models\Users\ShirtSize;
 use App\User;
 
 class TeamMember extends Model
@@ -25,5 +26,10 @@ class TeamMember extends Model
     public function User()
     {
         return $this->hasOne(User::class, 'id', 'user_id');
+    }
+
+    public function Shirt()
+    {
+        return $this->hasOne(ShirtSize::class, 'id', 'cl_users_shirts_size_id');
     }
 }
