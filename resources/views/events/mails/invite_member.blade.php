@@ -48,6 +48,42 @@
         text-align: center;
     }
 
+    .logo{
+        margin-top: 2vw;
+    }
+
+    .announcement{
+        margin-top:5vw;
+    }
+
+    .sended_by_wrapper, .view_more{
+        margin-top: 5vw;
+    }
+
+    .accept > a, .deny > a{
+      border: none;
+      color: white;
+      padding: 15px 32px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      text-decoration: none;
+      border-radius: 5px;
+    }
+
+    .accept > a{
+        background-color: #4CAF50; /* Green */
+    }
+
+    .deny > a{
+        background-color: #f00; /* Green */
+    }
+
+    .greeting{
+        margin-bottom:1vw;
+    }
+
     </style>
 </head>
 <body>
@@ -58,13 +94,15 @@
             <br/>
             <div class="logo">
                 ще се проведе - {{$event->name}}
+                <h3>{{$event->description}}</h3>
             </div>
             <br/>
         </header>
             <div class="announcement">
                 <h3 class="greeting">Здравейте, имате покана за влизане в отбор</h3>
                 <h1>{{$team->title}}</h1>
-                <p class="accept"><a href="{{route('users.events')}}">Потвърди</a></p><p class="deny"><a href="{{route('users.events')}}">Откажи</a></p>
+                <p class="accept"><a href="{{route('users.events')}}">Потвърди</a></p>
+                <p class="deny"><a href="{{route('users.events')}}">Откажи</a></p>
                 <h2><img src="{{asset('/images/events/teams/'.$team->picture)}}" alt="team-logo" class="team-picture"/></h2>
                 
                 <p class="sended_by_wrapper">

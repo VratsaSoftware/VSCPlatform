@@ -4,30 +4,30 @@
 <div class="content-wrap">
     <div class="col-md-12 d-flex flex-row flex-wrap options-wrap">
         @if (!empty(Session::get('success')))
-                <p>
-                    <div class="alert alert-success" style="margin-top:-5vw;">
-                        <p>{{ session('success') }}</p>
-                    </div>
-                </p>
-                @endif
-                @if ($errors->any())
-                <div class="alert alert-danger" style="margin-top:-5vw;">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+            <p>
+                <div class="alert alert-success slide-on">
+                    <p>{{ session('success') }}</p>
                 </div>
-                @endif
-                @if ($message = Session::get('error'))
-                <p>
-                    <div class="alert alert-danger" style="margin-top:-5vw;">
-                        <button type="button" class="close" data-dismiss="alert">
-                        </button>
-                        <p>{{ $message }}</p>
-                    </div>
-                </p>
-                @endif
+            </p>
+            @endif
+            @if ($errors->any())
+            <div class="alert alert-danger slide-on">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            @if ($message = Session::get('error'))
+            <p>
+                <div class="alert alert-danger slide-on">
+                    <button type="button" class="close" data-dismiss="alert">
+                    </button>
+                    <p>{{ $message }}</p>
+                </div>
+            </p>
+            @endif
         @foreach ($modules as $module)
         <div class="col-md-6 right-option">
             @if($module->starts->lt(\Carbon\Carbon::now()) && $module->ends->gt(\Carbon\Carbon::now()))

@@ -15,4 +15,9 @@ class Event extends Model
     {
         return $this->hasMany(Team::class, 'events_id', 'id');
     }
+
+    public function getNameAttribute($value)
+    {
+        return ucfirst($value);
+    }
 }

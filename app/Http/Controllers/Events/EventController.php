@@ -257,7 +257,7 @@ class EventController extends Controller
 
         $teamPic = Input::file('team_picture');
         $image = Image::make($teamPic->getRealPath());
-        $image->fit(800, 600, function ($constraint) {
+        $image->fit(1024, 768, function ($constraint) {
             $constraint->upsize();
         });
         $picName = time()."_".$teamPic->getClientOriginalName();
@@ -271,8 +271,10 @@ class EventController extends Controller
         }
 
         $denyInvites = TeamMember::where('user_id',Auth::user()->id)->orWhere('email',Auth::user()->email)->first();
-        $denyInvites->confirmed = -1;
-        $denyInvites->save();
+        if(!is_null($denyInvites)){
+            $denyInvites->confirmed = -1;
+            $denyInvites->save();
+        }
 
         $newTeam = new Team;
         $newTeam->events_id = $event->id;
@@ -380,10 +382,18 @@ class EventController extends Controller
         $data = $request->validate([
             'occupation' => 'required|numeric',
             'shirt_size' => 'required|numeric',
+            'userage' => 'required|numeric|min:7|max:100'
         ]);
+
+        $year = Carbon::now()->subYears($request->userage)->format('Y');
+        $year .= '-01-01';
+        $dob = Carbon::parse($year)->format('Y-m-d');
+
         $user = User::find(Auth::user()->id);
         $user->cl_occupation_id = $request->occupation;
+        $user->dob = $dob;
         $user->save();
+        
 
         if ($team->members_count <= $event->max_team) {
             $teamMember->confirmed = 1;
@@ -412,33 +422,45 @@ class EventController extends Controller
         $data = $request->validate([
             'email' => 'required|email',
         ]);
-        $memberPlus = ($team->members_count + 1);
 
-        if($memberPlus <= $event->max_team){
-            $capitan = User::find(Auth::user()->id);
+        $invites = TeamMember::where([
+            ['event_team_id',$team->id],
+        ])
+        ->whereBetween('created_at',[Carbon::now()->subDays(1)->format('Y-m-d H:m:s'),Carbon::now()->addDay(1)->format('Y-m-d H:m:s')])
+        ->count();
+        
+        if($invites < 10){
+            $memberPlus = ($team->members_count + 1);
 
-            $role = UsersTeamRole::where('role', 'участник')->select('id')->first();
+            if($memberPlus <= $event->max_team){
+                $capitan = User::find(Auth::user()->id);
 
-            $isExisting = TeamMember::where('email', $request->email)->first();
-            if(is_null($isExisting)){
-                $newMember = new TeamMember;
-                $newMember->email = $request->email;
-                $newMember->cl_users_team_role_id = $role->id;
-                $newMember->event_team_id = $team->id;
-                $newMember->confirmed = 0;
-                $newMember->save();
+                $role = UsersTeamRole::where('role', 'участник')->select('id')->first();
 
-                // $team->members_count = $memberPlus;
-                // $team->save();
-                Mail::to($request->email)->send(new InviteMember($capitan, $team, $event));
+                $isExisting = TeamMember::where([
+                    ['email', $request->email],
+                    ['event_team_id', $team->id]
+                ])->first();
+                if(is_null($isExisting)){
+                    $newMember = new TeamMember;
+                    $newMember->email = $request->email;
+                    $newMember->cl_users_team_role_id = $role->id;
+                    $newMember->event_team_id = $team->id;
+                    $newMember->confirmed = 0;
+                    $newMember->save();
 
-                $message = __('Успешно изпратихте покана за влизане в отбор!');
-                return redirect()->route('users.events')->with('success', $message);
+                    Mail::to($request->email)->send(new InviteMember($capitan, $team, $event));
+                    
+                    $message = __('Успешно изпратихте покана за влизане в отбор!');
+                    return redirect()->route('users.events')->with('success', $message);
+                }
+                $message = __('Вече сте изпратили покана на този Е-mail!');
+                return redirect()->route('users.events')->with('error', $message);
             }
-            $message = __('Вече сте изпратили покана на този Е-mail!');
+            $message = __('Капацитета на отбора ви е пълен!');
             return redirect()->route('users.events')->with('error', $message);
         }
-        $message = __('Капацитета на отбора ви е пълен!');
+        $message = __('Надвишихте дневния лимит за изпращане на покани!');
         return redirect()->route('users.events')->with('error', $message);
     }
 }

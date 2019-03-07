@@ -26,6 +26,9 @@
         <li class="nested-nav">
             <a href="{{route('users.events')}}">
                 <img src="{{asset('/images/profile/nav/events-icon.png')}}" alt="" class="img-fluid">Събития
+                @if(isset($isInvited) && $isInvited)
+                    <i class="fas fa-bell"></i>
+                @endif
             </a>
         </li>
         <li>

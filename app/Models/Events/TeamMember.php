@@ -12,6 +12,7 @@ class TeamMember extends Model
 {
     protected $table = 'events_team_members';
     protected $guarded = [];
+    protected $dates = ['created_at','updated_at'];
 
     public function Teams()
     {

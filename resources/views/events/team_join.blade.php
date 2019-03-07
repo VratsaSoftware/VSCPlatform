@@ -80,7 +80,7 @@
                             @if(!is_null($user->dob))
                                 <input type="text" name="userage" value="{{(\Carbon\Carbon::now()->format('Y') - $user->dob->format('Y'))}}" disabled class="small-field-register">
                             @else
-                                <input type="text" name="userage" value="" placeholder="въведете години..." class="small-field-register">
+                                <input type="text" name="userage" value="{{old('userage')}}" placeholder="въведете години..." class="small-field-register">
                             @endif
                             <label for="occupation">Занимание</label><br>
                             <select class="occupation section-el-bold" name="occupation" id="occupation">

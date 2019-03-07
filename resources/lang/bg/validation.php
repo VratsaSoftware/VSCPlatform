@@ -206,5 +206,6 @@ return [
         'inspiration'              => 'Вдъхновение',
         'team_picture'             => 'Лого на отбора',
         'invite_member_email'      => 'Покани по email',
+        'userage'                  => 'Години',
     ],
 ];

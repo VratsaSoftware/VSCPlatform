@@ -8,31 +8,31 @@
 <div class="content-wrap">
   <div class="section">
       <div class="col-md-12 d-flex flex-row flex-wrap options-wrap">
-          @if (!empty(Session::get('success')))
-          <p>
-              <div class="alert alert-success" style="margin-top:-5vw;">
-                  <p>{{ session('success') }}</p>
-              </div>
-          </p>
-          @endif
-          @if ($errors->any())
-          <div class="alert alert-danger" style="margin-top:-5vw;">
-              <ul>
-                  @foreach ($errors->all() as $error)
-                  <li>{{ $error }}</li>
-                  @endforeach
-              </ul>
-          </div>
-          @endif
-          @if ($message = Session::get('error'))
-          <p>
-              <div class="alert alert-danger" style="margin-top:-5vw;">
-                  <button type="button" class="close" data-dismiss="alert">
-                  </button>
-                  <p>{{ $message }}</p>
-              </div>
-          </p>
-          @endif
+         @if (!empty(Session::get('success')))
+            <p>
+                <div class="alert alert-success slide-on">
+                    <p>{{ session('success') }}</p>
+                </div>
+            </p>
+            @endif
+            @if ($errors->any())
+            <div class="alert alert-danger slide-on">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+            @endif
+            @if ($message = Session::get('error'))
+            <p>
+                <div class="alert alert-danger slide-on">
+                    <button type="button" class="close" data-dismiss="alert">
+                    </button>
+                    <p>{{ $message }}</p>
+                </div>
+            </p>
+            @endif
       <div class="col-md-12 text-center events-add-holder">
           <a href="#modal" id="add-event"><img src="{{asset('/images/profile/add-icon.png')}}" alt="add-icon" class="img-fluid">Добави</a>
       </div>
@@ -236,43 +236,54 @@
                                     </tr>
                                   </thead>
                                   <tbody>
-                                        @foreach($event->Teams as $team)
-                                            <tr>
-                                              <td>
-                                                  <img src="{{asset('/images/events/teams/'.$team->picture)}}" alt="logo" class="team-table-pic">
-                                              </td>
-                                              <td>{{$team->title}}</td>
-                                              <td>{{$team->slogan}}</td>
-                                              <td>{{$team->Category->category}}</td>
-                                              <td>{{$team->technology_stack}}</td>
-                                              <td>{{$team->inspiration}}</td>
-                                              <td style="color:#1B8500"><a href="{{$team->github}}" target="_blank">{{$team->github}}</a></td>
-                                              <td>
-                                                  @if($team->is_active > 0)
-                                                      <span style="visibility:hidden">1</span>
-                                                      <i class="fas fa-check-circle" style="color:#1B8500"></i>
-                                                  @else
-                                                      <span style="visibility:hidden">0</span>
-                                                      <i class="fas fa-times-circle" style="color:#F00"></i>
-                                                  @endif
-                                              </td>
-                                              <td>
-                                                  общо - <span style="color:#F00">{{count($team->Members)}}</span><br/>
-                                                  @foreach($team->Members as $member)
-                                                    <p>
-                                                        <span>{{$member->Role->role}} - <br/>
-                                                              {{$member->User->name}} {{$member->User->last_name}}  <br/>
-                                                              {{$member->User->email}}<br />
-                                                              @if(!is_null($member->User->Occupation->occupation))
-                                                                  {{$member->User->Occupation->occupation}}
-                                                              @endif
-                                                        </span>
-                                                    </p>
-                                                  @endforeach
-                                              </td>
-                                              <td>{{$team->created_at}}</td>
-                                            </tr>
-                                        @endforeach
+                                         @foreach($event->Teams as $team)
+                                                <tr>
+                                                  <td>
+                                                      <img src="{{asset('/images/events/teams/'.$team->picture)}}" alt="logo" class="team-table-pic">
+                                                  </td>
+                                                  <td>{{$team->title}}</td>
+                                                  <td>{{$team->slogan}}</td>
+                                                  <td>{{$team->Category->category}}</td>
+                                                  <td>{{$team->technology_stack}}</td>
+                                                  <td>{{$team->inspiration}}</td>
+                                                  <td style="color:#1B8500"><a href="{{$team->github}}" target="_blank">{{$team->github}}</a></td>
+                                                  <td>
+                                                      @if($team->is_active > 0)
+                                                          <span style="visibility:hidden">1</span>
+                                                          <i class="fas fa-check-circle" style="color:#1B8500"></i>
+                                                      @else
+                                                          <span style="visibility:hidden">0</span>
+                                                          <i class="fas fa-times-circle" style="color:#F00"></i>
+                                                      @endif
+                                                  </td>
+                                                  <td>
+                                                      общо - <span style="color:#F00">{{$team->members_count}}</span><br/>
+                                                      @foreach($team->Members as $member)
+                                                        <p>
+                                                          @if($member->confirmed > 0)
+                                                            <span>{{$member->Role->role}} - <br/>
+                                                                  @if(!is_null($member->User))
+                                                                    {{$member->User->name}} {{$member->User->last_name}}  <br/>
+                                                                    {{$member->User->email}}<br />
+                                                                  @else
+                                                                    {{$member->email}}
+                                                                  @endif
+                                                                  @if(!is_null($member->User))
+                                                                      {{$member->User->Occupation->occupation}}
+                                                                  @endif
+                                                                  <br/>
+                                                                  @if(!is_null($member->Shirt))
+                                                                     тениска: {{$member->Shirt->size}}
+                                                                  @endif
+                                                                  <br/>
+                                                            </span>
+                                                             @endif
+                                                        </p>
+                                                      @endforeach
+                                                  </td>
+                                                  <td>{{$team->created_at}}</td>
+                                                </tr>
+                                            @endforeach
                                   </tbody>
                                 </table>
                             </p>

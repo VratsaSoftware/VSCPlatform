@@ -324,11 +324,26 @@ body{
 
 .candidate-btn-pending {
     background-color: #1B8500;
-    animation-name: color;
+    animation-name: pendingColor;
     animation-duration: 2s;
     animation-iteration-count: infinite;
     top: 80%;
     left: 50%;
+}
+
+@keyframes pendingColor {
+    0% {
+        background-color: #1B8500;
+    }
+
+    50% {
+        background-color: #FFFF00;
+        color: #000;
+    }
+
+    100% {
+        background-color: #FF0000;
+    }
 }
 
 .team-name {
@@ -366,21 +381,6 @@ body{
     color: #fff;
 }
 
-@keyframes color {
-    0% {
-        background-color: #1B8500;
-    }
-
-    50% {
-        background-color: #FFFF00;
-        color: #000;
-    }
-
-    100% {
-        background-color: #FF0000;
-    }
-}
-
 .invites-no-show {
     display: none;
 }
@@ -393,6 +393,43 @@ body{
 .join-team-wrapper{
     margin-top: 6vw;
 }
+
+.member-name-status{
+    color:#141823 !important;
+}
+
+.member-status-icon > .fa-times-circle{
+    color:#f00 !important;
+}
+
+.member-status-icon > .fa-eye-slash{
+    color:#d3d3d3 !important;
+}
+
+.member-status-icon > .fa-check-circle{
+    color:#1B8500 !important;
+}
+
+.active-team-wrapper{
+    color:#1B8500 !important;
+}
+
+.not-active-team-wrapper{
+    color:#f00 !important;
+}
+
+#send-invite:hover{
+    cursor: pointer;
+}
+
+.close-modal{
+    float:right;
+}
+
+.copy{
+    overflow-y:scroll;
+}
+
 
 /*QUERY's
 -------------------------------------------------------------------------------------------*/

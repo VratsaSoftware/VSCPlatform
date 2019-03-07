@@ -34,12 +34,13 @@
             @if($isInvited)
                 <p>
                     <div class="alert alert-success stay">
-                    @foreach(Auth::user()->getInvitedEvents() as $event)
+                        <?php $events = Auth::user()->getInvitedEvents() ?>
+                    @foreach($events as $event)
                         <a href="{{route('users.events')}}" class="invite-alert">
                       <p>
                           <h4>Нова покана</h4>
                           За влизане в отбор!&nbsp;
-                          <span class="event-alert">събитие:{{$event->name}}</span>
+                          <span class="event-alert">събитие:&nbsp;{{$event->name}}</span>
                       </p>
                         </a>
                     @endforeach
