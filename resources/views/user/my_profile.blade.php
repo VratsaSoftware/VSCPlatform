@@ -8,13 +8,13 @@
             {{ csrf_field() }}
             @if (!empty(Session::get('success')))
             <p>
-                <div class="alert alert-success">
+                <div class="alert alert-success slide-on">
                     <p>{{ session('success') }}</p>
                 </div>
             </p>
             @endif
             @if ($errors->any())
-            <div class="alert alert-danger">
+            <div class="alert alert-danger slide-on">
                 <ul>
                     @foreach ($errors->all() as $error)
                     <li>{{ $error }}</li>
@@ -24,12 +24,28 @@
             @endif
             @if ($message = Session::get('error'))
             <p>
-                <div class="alert alert-danger">
+                <div class="alert alert-danger slide-on">
                     <button type="button" class="close" data-dismiss="alert">
                     </button>
                     <p>{{ $message }}</p>
                 </div>
             </p>
+            @endif
+            @if($isInvited)
+                <p>
+                    <div class="alert alert-success stay">
+                        <?php $events = Auth::user()->getInvitedEvents() ?>
+                    @foreach($events as $event)
+                        <a href="{{route('users.events')}}" class="invite-alert">
+                      <p>
+                          <h4>Нова покана</h4>
+                          За влизане в отбор!&nbsp;
+                          <span class="event-alert">събитие:&nbsp;{{$event->name}}</span>
+                      </p>
+                        </a>
+                    @endforeach
+                    </div>
+                </p>
             @endif
             <div class="header d-flex flex-row flex-wrap col-md-12 text-center">
                 <div class="col-md-12 text-center loader-wrapper">
@@ -66,7 +82,7 @@
                     </div>
                     <div class="col-md-2 birthday-wrap text-left">
                         <img src="./images/profile/birthday-cake-icon.png" alt="birthday-icon">
-                        <span class="birthday">{{Auth::user()->dob}}</span>
+                        <span class="birthday">{{Auth::user()->dob? Auth::user()->dob->format('d-m-Y'):''}}</span>
                         <button type="submit" value="submit" class="edit-btn btn btn-success" id="submit-dob">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
@@ -104,7 +120,7 @@
                             <script type="text/javascript">
                                 loadSocialSrc('{{$social->SocialName->name}}', '{!! $social->link !!}');
                             </script>
-                    
+
                             @endforeach
                             <button type="submit" value="submit" class="edit-btn btn btn-success social-edit" id="submit-social">
                                 <i class="fas fa-pencil-alt"></i>

@@ -381,6 +381,7 @@ a {
 
 .event-title>i {
     float: right;
+    margin-left: 1vw;
 }
 
 .for-delete {

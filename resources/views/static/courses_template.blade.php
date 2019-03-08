@@ -21,7 +21,7 @@
     <meta property="og:image" content="{{asset('//images/vso-logo-bg-original.png')}}" />
 </head>
 
-<body>
+<body style="opacity:0">
     <!-- JQuery -->
     <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
     <!-- JQuery UI-->

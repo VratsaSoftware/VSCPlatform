@@ -5,14 +5,23 @@
     <div class="section">
         @if (!empty(Session::get('success')))
         <p>
-            <div class="alert alert-success">
+            <div class="alert alert-success slide-on">
                 <p>{{ session('success') }}</p>
             </div>
         </p>
         @endif
+        @if ($errors->any())
+        <div class="alert alert-danger slide-on">
+            <ul>
+                @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+        @endif
         @if ($message = Session::get('error'))
         <p>
-            <div class="alert alert-danger">
+            <div class="alert alert-danger slide-on">
                 <button type="button" class="close" data-dismiss="alert">
                 </button>
                 <p>{{ $message }}</p>

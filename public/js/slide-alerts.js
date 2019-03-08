@@ -1,5 +1,5 @@
-$(function() {
-    setTimeout(function() {
-        $('.alert').toggle("slide");
-    }, 4000);
-});
+$( function () {
+	setTimeout( function () {
+		$( '.slide-on' ).toggle( "slide" );
+	}, 4000 );
+} );

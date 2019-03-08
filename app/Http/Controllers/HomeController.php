@@ -15,6 +15,7 @@ use App\Models\Users\InterestsType;
 use App\Models\Users\Interest;
 use App\Models\Users\Hobbie;
 use App\User;
+use Carbon\Carbon;
 
 class HomeController extends Controller
 {
@@ -34,6 +35,7 @@ class HomeController extends Controller
         $socialLinks = Auth::user()->getSocialLinks();
         $hasWorkExp = Auth::user()->hasWorkExp();
         $hasHobbies = Auth::user()->hasHobbies();
+        $isInvited = Auth::user()->isEventInvited('not_confirmed');
 
         $educationTypes = EducationType::all();
         $education = [];
@@ -60,8 +62,9 @@ class HomeController extends Controller
         }
 
         if ($isAdmin) {
-            $courses = Course::all();
-            return view('user.my_profile', ['social_links' => $socialLinks,'certificates' => $certificates]);
+            $courses = Course::where('ends', '>', Carbon::now()->format('Y-m-d H:m:s'))->get();
+            $lecturer = User::find(Auth::user()->id);
+            return view('admin.my_profile', ['social_links' => $socialLinks,'certificates' => $certificates,'courses' => $courses,'lecturer' => $lecturer]);
         }
         if ($isLecturer) {
             $courses = Course::with('Lecturers')->whereHas('Lecturers', function ($query) use ($userId) {
@@ -70,6 +73,6 @@ class HomeController extends Controller
             $lecturer = User::find(Auth::user()->id);
             return view('lecturer.my_profile', ['social_links' => $socialLinks,'courses' => $courses, 'lecturer' => $lecturer]);
         }
-        return view('user.my_profile', ['social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes,'workExp' => $workExp,'hobbies' => $hobbies,'interestTypes' => $interestTypes]);
+        return view('user.my_profile', ['social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes,'workExp' => $workExp,'hobbies' => $hobbies,'interestTypes' => $interestTypes,'isInvited' => $isInvited]);
     }
 }

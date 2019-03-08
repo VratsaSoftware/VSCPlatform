@@ -2,6 +2,7 @@ body {
     margin: 0;
     padding: 0;
     background: #F2F2F2;
+    opacity: 1 !important;
 }
 
 a {
@@ -30,7 +31,7 @@ a {
     /* Set the navbar to fixed position */
     top: 0 !important;
     /* Position the navbar at the top of the page */
-    width: 100% !important;
+    width: 90% !important;
     /* Full width */
     z-index: 99999 !important;
     background: rgba(28, 136, 0, 0.7) !important;
@@ -44,7 +45,7 @@ a {
     /* Set the navbar to fixed position */
     top: 0 !important;
     /* Position the navbar at the top of the page */
-    width: 100% !important;
+    width: 90% !important;
     /* Full width */
     z-index: 99999 !important;
     background: rgba(255, 143, 41, 0.7) !important;
@@ -876,7 +877,7 @@ a {
 
 .code-logos-program:hover {
     transform: scale(1.5);
-    cursor: help;
+    /* cursor: help; */
 }
 
 .lvl-info, .program-info-img {
@@ -1502,6 +1503,11 @@ a {
 
     .timer-programming, .timer-digital {
         font-size: 5vw;
+    }
+
+    body{
+        padding-left: 5%;
+        padding-right:5%;
     }
 }
 

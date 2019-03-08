@@ -23,6 +23,14 @@
                     @endforelse
             </ul>
         </li>
+        <li class="nested-nav">
+            <a href="{{route('users.events')}}">
+                <img src="{{asset('/images/profile/nav/events-icon.png')}}" alt="" class="img-fluid">Събития
+                @if(isset($isInvited) && $isInvited)
+                    <i class="fas fa-bell"></i>
+                @endif
+            </a>
+        </li>
         <li>
             <a id="logout-btn" class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                 <i class="fas fa-sign-out-alt fa-1x"></i>

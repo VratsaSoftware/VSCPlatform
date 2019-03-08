@@ -17,7 +17,7 @@ class isLecturer
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->isLecturer()) {
+        if (Auth::user()->isLecturer() || Auth::user()->isAdmin()) {
             return $next($request);
         }
         $message = __('Нямате достъп до този ресурс!');

@@ -16,12 +16,16 @@ class CreateEventsTable extends Migration
         Schema::create('events', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
+            $table->string('picture');
             $table->string('description');
             $table->dateTime('from');
             $table->dateTime('to');
             $table->string('location');
             $table->enum('is_team', [1,0])->default(0);
+            $table->integer('min_team')->nullable();
+            $table->integer('max_team')->nullable();
             $table->enum('is_module', [1,0])->default(0);
+            $table->string('visibility');
             $table->timestamps();
             $table->softDeletes();
         });

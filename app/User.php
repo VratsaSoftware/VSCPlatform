@@ -20,7 +20,12 @@ use App\Models\Users\WorkCompany;
 use App\Models\Users\WorkExperience;
 use App\Models\Users\WorkPosition;
 use App\Models\Users\Hobbie;
+use App\Models\Users\Occupation;
 use App\Notifications\PasswordReset;
+use App\Models\Events\TeamMember;
+use App\Models\Events\Event;
+use App\Models\Events\Team;
+use App\Models\Users\UsersTeamRole;
 
 class User extends Authenticatable
 {
@@ -32,6 +37,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $guarded = [];
+    protected $dates = ['dob'];
 
     /**
      * The attributes that should be hidden for arrays.
@@ -55,6 +61,11 @@ class User extends Authenticatable
     public function Certifications()
     {
         return $this->hasMany(Certification::class);
+    }
+
+    public function Occupation()
+    {
+        return $this->hasOne(Occupation::class, 'id', 'cl_occupation_id');
     }
 
     public function isAdmin()
@@ -89,6 +100,11 @@ class User extends Authenticatable
             return true;
         }
         return false;
+    }
+
+    public function adminGetCourses()
+    {
+        return Course::all();
     }
 
     public function studentGetCourse()
@@ -230,5 +246,141 @@ class User extends Authenticatable
     public function sendPasswordResetNotification($token)
     {
         $this->notify(new PasswordReset($token));
+    }
+
+    public function isOnEvent($eventId)
+    {
+        $isMember = TeamMember::with('Teams')->where('user_id', Auth::user()->id)->orWhere('email', Auth::user()->email)->get();
+        if (!is_null($isMember)) {
+            foreach ($isMember as $member) {
+                foreach ($member->Teams as $team) {
+                    if ($team->events_id == $eventId) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+    }
+
+    public function isEventInvited($status)
+    {
+        if ($status != 'confirmed') {
+            $isInvited = TeamMember::with('Teams')
+            ->where([
+                ['confirmed', 0],
+                ['user_id', Auth::user()->id]
+            ])
+            ->orWhere([
+                ['confirmed', 0],
+                ['email', Auth::user()->email]
+            ])
+            ->get();
+        } else {
+            $isInvited = TeamMember::with('Teams')
+            ->where([
+                ['confirmed', 1],
+                ['user_id', Auth::user()->id]
+            ])
+            ->orWhere([
+                ['confirmed', 1],
+                ['email', Auth::user()->email]
+            ])
+            ->get();
+        }
+
+        if ($isInvited->isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    public function getInvitedEvents()
+    {
+        $userId = Auth::user()->id;
+        $userEmail = Auth::user()->email;
+        return Event::with('Teams', 'Teams.Members')->whereHas('Teams.Members', function ($query) use ($userId,$userEmail) {
+            $query->where('user_id', $userId)
+            ->orWhere('email', $userEmail);
+        })
+        ->where('visibility', '!=', 'draft')
+        ->select('name')
+        ->get();
+    }
+
+    public function isConfirmedMember($event)
+    {
+        $isConfirmed = TeamMember::with('Teams')
+        ->where([
+            ['confirmed', 1],
+            ['user_id', Auth::user()->id]
+        ])
+        ->orWhere([
+            ['confirmed', 1],
+            ['email', Auth::user()->email]
+        ])
+        ->get();
+        if ($isConfirmed->isEmpty()) {
+            return false;
+        }
+        return true;
+    }
+
+    public function getMemberInvitedTeam($event)
+    {
+        $userId = Auth::user()->id;
+        $userEmail = Auth::user()->email;
+
+        return TeamMember::with('Teams', 'Teams.Members')
+        ->where([
+            ['user_id', $userId],
+            ['confirmed', '>' ,-1],
+            ])
+        ->orWhere([
+            ['email', $userEmail],
+            ['confirmed', '>' ,-1],
+        ])
+        ->whereHas('Teams', function ($query) use ($event) {
+            $query->where([
+                ['events_id', $event],
+            ]);
+        })
+        ->get();
+    }
+
+    public function getTeam($capitan)
+    {
+        $userId = Auth::user()->id;
+        $role = UsersTeamRole::where('role', 'капитан')->select('id')->first();
+        if($capitan){
+            return Team::with('Members','Members.User')->whereHas('Members', function ($query) use ($userId,$role) {
+                $query->where([
+                    ['user_id', $userId],
+                    ['cl_users_team_role_id', $role->id]
+                ]);
+            })
+            ->first();
+        }
+        return Team::with('Members','Members.User')->whereHas('Members', function ($query) use ($userId,$role) {
+                $query->where([
+                    ['user_id', $userId],
+                ]);
+            })
+            ->first();
+    }
+
+    public function isCapitan($team)
+    {
+        $userId = Auth::user()->id;
+        $member = TeamMember::where([
+            ['event_team_id',$team],
+            ['user_id',$userId],
+            ['cl_users_team_role_id',1],//to do role from table for capitan
+            ])
+            ->first();
+        if (!is_null($member)) {
+            return true;
+        }
+        return false;
     }
 }

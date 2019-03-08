@@ -67,6 +67,15 @@ Route::group(['middleware' => 'auth'], function () {
     //institution name autocomplete
     Route::get('/user/education/autocomplete', 'Users\UserController@eduAutocomplete')->name('edu.institution');
 
+    //list all events
+    Route::get('/user/events/all', 'Events\EventController@index')->name('users.events');
+
+    Route::get('/user/event/{event}/register/team', 'Events\EventController@registerTeam')->name('events.register.team');
+    Route::post('/user/event/{event}/store/team', 'Events\EventController@storeTeam')->name('events.store.team');
+    Route::get('/user/team/{team}/deny', 'Events\EventController@inviteDeny')->name('team.invite.deny');
+    Route::get('/user/event/{event}/team/{team}/accept', 'Events\EventController@inviteAccept')->name('team.invite.accept');
+    Route::post('/user/event/{event}/team/{team}/member/{teamMember}', 'Events\EventController@confirmInvite')->name('team.confirm.invite');
+    Route::post('/user/invite/to/team/{team}/event/{event}', 'Events\EventController@inviteToTeam')->name('invite.to.team');
     Route::group(['middleware' => 'isLecturer'], function () {
         // lecturer routes
         Route::post('/lecturer/update/bio', 'Users\UserController@updateBio')->name('lecturer.update.bio');
@@ -84,6 +93,14 @@ Route::group(['middleware' => 'auth'], function () {
         //lection routes
         Route::resource('lection', 'Courses\LectionController')->names('lection');
         Route::post('change/lection/{lection}/visibility', 'Courses\LectionController@changeVisibility')->name('lection.visibility');
+    });
+
+    Route::group(['middleware' => 'isAdmin'], function () {
+        Route::get('courses/all', 'Admin\AdminController@allCourses')->name('all.courses');
+        Route::get('events/all', 'Admin\AdminController@showAllEvents')->name('admin.events');
+
+        //events routes
+        Route::resource('events', 'Events\EventController')->names('events');
     });
 });
 Route::post('/lection/video/shown', 'Courses\LectionController@videoShown')->name('lection.video.show');

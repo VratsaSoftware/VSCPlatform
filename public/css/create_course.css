@@ -35,8 +35,8 @@
     margin-bottom: 5vw;
 }
 
-.create-course {
-    background: red;
+.create-course, .edit-event-btn {
+    /* background: red; */
     padding-left: 5vw;
     padding-right: 5vw;
     padding-top: 1vw;
@@ -49,7 +49,7 @@
     color: #fff;
 }
 
-.create-course:hover {
+.create-course:hover, .edit-event-btn:hover {
     color: #1C8800;
     background: #fff;
 }

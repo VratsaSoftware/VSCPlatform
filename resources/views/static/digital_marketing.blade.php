@@ -26,7 +26,7 @@
                 <div class="header-menu col-md-12 header-marketing" id="header-sticky">
                     <nav class="text-center">
                         <ul class="d-flex flex-wrap main-nav-list">
-                            <li class="p-3"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="" class="img-fluid"></li>
+                           <li class="p-3"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="vso-logo" class="img-fluid"></li>
                             <li class="p-3"><a href="{{route('home')}}">Начало</a></li>
                             <li class="p-3"><a href="#information-holder">Информация</a></li>
                             <li class="p-3"><a href="#program-holder">Програма</a></li>
