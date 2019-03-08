@@ -25,7 +25,7 @@
     <div id="content">
         <!-- header section - nav - gallery -->
         <div class="section">
-            <div id="header" class="col-md-12 col-sm-12 row">
+            <div id="header" class="col-md-11 col-sm-12 row">
                 <div id="logo" class="col-md-1 col-sm-1">
                     <h1><a href="{{route('home')}}"><img src="{{asset('/images/vso-png-big-2.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
                 </div>
@@ -373,6 +373,7 @@
                     </span>
                 </div>
                 <div class="col-md-12 text-right">Враца Софтуер Общество &copy; {{\Carbon\Carbon::now()->format('Y')}}</div>
+                <div class="col-md-12 text-right"><img src="{{asset('images/location-front.png')}}" alt="location" width="20px">град Враца, ул. Кокиче 14</div>
             </div>
         </div>
         <!-- end of cookies section -->

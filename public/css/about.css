@@ -35,6 +35,7 @@ body {
 }
 
 .overlay-top-img>img {
+    margin-left: -1%;
     width: 100%;
     height: 100%;
     opacity: 0.7;
@@ -60,7 +61,7 @@ body {
 /*end-head-section*/
 /*team section*/
 #team {
-    position: absolute;
+   /* position: absolute;*/
 }
 
 /*end of team section*/
@@ -345,7 +346,7 @@ body {
 @media only screen and (min-width: 1200px) {
     .header-about-text {
         margin-top: 25vw;
-        font-size: 3.5vw;
+        font-size: 3vw;
     }
 
     .header {
@@ -385,5 +386,10 @@ body {
     .team-holder>img {
         width: 10vw;
         height: 10vw;
+    }
+
+    body{
+        padding-left: 5%;
+        padding-right: 5%;
     }
 }

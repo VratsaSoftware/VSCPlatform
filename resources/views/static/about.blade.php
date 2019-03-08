@@ -39,7 +39,7 @@
 <body>
     <!-- header section - nav - gallery -->
     <div class="section" id="header-section">
-        <div class="overlay-top-img">
+        <div class="overlay-top-img col-md-11">
             <img src="{{asset('/images/team.png')}}" alt="bg-img" class="img-fluid">
         </div>
     </div>

@@ -75,10 +75,11 @@
 
 .google-maps {
     position: relative;
-    padding-bottom: 75%; // This is the aspect ratio
+    padding-bottom: 75%; 
     height: 0;
     overflow: hidden;
-    display: inline-block
+    display: inline-block;
+    margin-top:3vw;
 }
 
 .google-maps iframe {
