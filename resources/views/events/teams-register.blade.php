@@ -4,6 +4,9 @@
     <div class="content-wrap">
         <div class="section">
             <div class="col-md-12 d-flex flex-row flex-wrap">
+                <div class="col-md-12 create-team-rules">
+                    {!!$event->description!!}
+                </div>
                 @if ($errors->any())
                     <div class="alert alert-danger alert-on-course">
                         <ul>

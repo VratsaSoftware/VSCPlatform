@@ -67,13 +67,13 @@ class EventController extends Controller
         $data = $request->validate([
             'picture' => 'required|file|image|mimes:jpeg,png,gif,webp,ico,jpg|max:4000',
             'name' => 'required',
-            'description' => 'required|max:200',
-            'starts' => 'required|date_format:Y-m-d',
-            'ends' => 'required|date_format:Y-m-d|after:starts',
+            'description' => 'required',
+            'starts' => 'required|date_format:"Y-m-d\TH:i"',
+            'ends' => 'required|date_format:"Y-m-d\TH:i"|after:starts',
             'type' => 'required|in_array:valid_type.*',
             'visibility' => 'required|in_array:valid_visibility.*',
-            'min_team' => 'numeric|min:1|max:99',
-            'max_team' => 'numeric|min:'.$request->min_team.'|max:99',
+            'min_team' => 'sometimes|required|numeric|min:1|max:99',
+            'max_team' => 'sometimes|required|numeric|min:'.$request->min_team.'|max:99',
         ]);
 
         $eventPic = Input::file('picture');
@@ -96,8 +96,8 @@ class EventController extends Controller
         $newEvent->name = $request->name;
         $newEvent->picture = $name;
         $newEvent->description = $request->description;
-        $newEvent->from = $request->starts;
-        $newEvent->to = $request->ends;
+        $newEvent->from = Carbon::parse($data['starts']);
+        $newEvent->to = Carbon::parse($data['ends']);
         $newEvent->min_team = $request->min_team;
         $newEvent->max_team = $request->max_team;
         $newEvent->location = $request->location;
@@ -154,14 +154,15 @@ class EventController extends Controller
         $data = $request->validate([
             'picture' => 'file|image|mimes:jpeg,png,gif,webp,ico,jpg|max:4000',
             'name' => 'required',
-            'description' => 'required|max:200',
-            'starts' => 'required|date_format:Y-m-d',
-            'ends' => 'required|date_format:Y-m-d|after:starts',
+            'description' => 'required',
+            'starts' => 'required|date_format:"Y-m-d\TH:i"',
+            'ends' => 'required|date_format:"Y-m-d\TH:i"|after:starts',
             'type' => 'required|in_array:valid_type.*',
             'visibility' => 'required|in_array:valid_visibility.*',
             'min_team' => 'numeric|min:1|max:99',
             'max_team' => 'numeric|min:'.$request->min_team.'|max:99',
         ]);
+
         if (Input::file('picture')) {
             $eventPicRemove = public_path().'/images/events/'.$event->picture;
             File::delete($eventPicRemove);
@@ -185,8 +186,8 @@ class EventController extends Controller
 
         $event->name = $request->name;
         $event->description = $request->description;
-        $event->from = $request->starts;
-        $event->to = $request->ends;
+        $event->from = Carbon::parse($data['starts']);
+        $event->to = Carbon::parse($data['ends']);
         $event->location = $request->location;
         $event->min_team = $request->min_team;
         $event->max_team = $request->max_team;
@@ -270,8 +271,8 @@ class EventController extends Controller
             $image->save(public_path().'/images/events/teams/'.$picName, 90);
         }
 
-        $denyInvites = TeamMember::where('user_id',Auth::user()->id)->orWhere('email',Auth::user()->email)->first();
-        if(!is_null($denyInvites)){
+        $denyInvites = TeamMember::where('user_id', Auth::user()->id)->orWhere('email', Auth::user()->email)->first();
+        if (!is_null($denyInvites)) {
             $denyInvites->confirmed = -1;
             $denyInvites->save();
         }
@@ -393,7 +394,7 @@ class EventController extends Controller
         $user->cl_occupation_id = $request->occupation;
         $user->dob = $dob;
         $user->save();
-        
+
 
         if ($team->members_count <= $event->max_team) {
             $teamMember->confirmed = 1;
@@ -417,7 +418,7 @@ class EventController extends Controller
         }
     }
 
-    public function inviteToTeam(Request $request, Team $team,Event $event)
+    public function inviteToTeam(Request $request, Team $team, Event $event)
     {
         $data = $request->validate([
             'email' => 'required|email',
@@ -426,13 +427,13 @@ class EventController extends Controller
         $invites = TeamMember::where([
             ['event_team_id',$team->id],
         ])
-        ->whereBetween('created_at',[Carbon::now()->subDays(1)->format('Y-m-d H:m:s'),Carbon::now()->addDay(1)->format('Y-m-d H:m:s')])
+        ->whereBetween('created_at', [Carbon::now()->subDays(1)->format('Y-m-d H:m:s'),Carbon::now()->addDay(1)->format('Y-m-d H:m:s')])
         ->count();
-        
-        if($invites < 10){
+
+        if ($invites < 10) {
             $memberPlus = ($team->members_count + 1);
 
-            if($memberPlus <= $event->max_team){
+            if ($memberPlus <= $event->max_team) {
                 $capitan = User::find(Auth::user()->id);
 
                 $role = UsersTeamRole::where('role', 'участник')->select('id')->first();
@@ -441,7 +442,7 @@ class EventController extends Controller
                     ['email', $request->email],
                     ['event_team_id', $team->id]
                 ])->first();
-                if(is_null($isExisting)){
+                if (is_null($isExisting)) {
                     $newMember = new TeamMember;
                     $newMember->email = $request->email;
                     $newMember->cl_users_team_role_id = $role->id;
@@ -450,7 +451,7 @@ class EventController extends Controller
                     $newMember->save();
 
                     Mail::to($request->email)->send(new InviteMember($capitan, $team, $event));
-                    
+
                     $message = __('Успешно изпратихте покана за влизане в отбор!');
                     return redirect()->route('users.events')->with('success', $message);
                 }

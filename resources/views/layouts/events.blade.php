@@ -48,6 +48,12 @@
                         <br/>
                     </div>
                     <div class="event-body col-md-12">
+                        <div class="event-body-text show-more-event rules-wrapper col-md-10">
+                          Правила
+                          <div class="col-md-12 rules-text">
+                            {!!$event->description!!}
+                        </div>
+                        </div>
                         <a href="http://hack.vratsa.net/" target="_blank">
                             <div class="event-body-text show-more-event info-btn-in">
                               информация
@@ -113,13 +119,13 @@
                                 <div class="event-body-text show-more-event candidate-btn-in" style="pointer-events: none;">
                                   <i class="fas fa-check-circle"></i> записан
                                 </div>
-                                
+
                                 @if(!is_null(Auth::user()->getTeam(true)) &&Auth::user()->isCapitan(Auth::user()->getTeam(true)->id))
-                                    <div class="event-body-text show-more-event team-name">
+                                    <div class="event-body-text show-more-event team-name col-md-10">
                                       Отбор: {{Auth::user()->getTeam(true)->title}}
-                                      
+
                                         @if(Auth::user()->getTeam(true)->is_active > 0)
-                                        <p class="active-team-wrapper"> 
+                                        <p class="active-team-wrapper">
                                           <i class="fas fa-check-circle"></i> Активен
                                           |участници:{{Auth::user()->getTeam(true)->members_count}}
                                         @else
@@ -130,7 +136,7 @@
                                       </p>
                                       <div class="col-md-12 d-flex flex-row flex-wrap team-member-wrap">
                                         <?php $members = Auth::user()->getTeam(true)->Members ?>
-                                        
+
                                         @foreach($members as $member)
                                             <div class="col-md-6 text-left member-name-status">
                                               {{isset($member->email)?$member->email:$member->User->name}}
@@ -140,7 +146,7 @@
                                                 <i class="fas fa-check-circle"></i>
                                               @endif
                                               @if($member->confirmed < 0)
-                                                <i class="fas fa-times-circle"></i> 
+                                                <i class="fas fa-times-circle"></i>
                                               @endif
                                               @if($member->confirmed == 0)
                                                 <i class="fas fa-eye-slash"></i>
@@ -156,7 +162,7 @@
                                       </div>
                                     </div>
                                 @else
-                                    <div class="event-body-text show-more-event team-name">
+                                    <div class="event-body-text show-more-event team-name col-md-10">
                                       участник в отбор: <br />
                                       {{Auth::user()->getTeam(false)->title}}
                                     </div>
@@ -246,7 +252,7 @@
                         @else
                             <div class="col-md-6">{{$event->visibility}}</div>
                         @endif
-                      <div class="col-md-6">{{$event->from->format('Y-m-d')}} / {{$event->to->format('Y-m-d')}}</div>
+                      <div class="col-md-6">{{$event->from->format('m-d-y H:i')}} / {{$event->to->format('m-d-y H:i')}}</div>
                     </div>
                 </div>
         @empty
@@ -334,7 +340,7 @@
                                 </table>
                             </p>
                         @else
-                              
+
                         @endif
                     </span>
                     <div class="event-body-text show-more-event">
@@ -355,7 +361,7 @@
                                   <i class="fas fa-check-circle"></i> изтекъл
                         </div>
                     @endif
-                  
+
                   @if(!is_null($event->picture) || !empty($event->picture))
                       <img src="{{asset('/images/events/'.$event->picture)}}" alt="">
                   @else
@@ -368,7 +374,7 @@
                     @else
                         <div class="col-md-6">{{$event->visibility}}</div>
                     @endif
-                  <div class="col-md-6">{{$event->from->format('Y-m-d')}} / {{$event->to->format('Y-m-d')}}</div>
+                  <div class="col-md-6">{{$event->from->format('m-d-y H:m')}} / {{$event->to->format('m-d-y H:m')}}</div>
                 </div>
             </div>
         @empty
@@ -566,13 +572,13 @@ $( '.close-modal' ).on( 'click', function () {
     var sum = parseInt(real) + 1;
     var isExisting = $(this).parent().find('#invite_email');
     var action = $(this).attr('data-action');
-    var token = $( 'meta[name="csrf-token"]' ).attr( 'content' ); 
+    var token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
 
     if(sum < max && isExisting.length < 1){
       $(this).before('<div class="col-md-12 text-center"><form action="'+action+'" id="send-invite-form" method="POST"><input name="_token" value="'+token+'" type="hidden"><input type="email" name="email" id="email" class="section-el-bold" placeholder="въведи електрона поща / Е-mail"></form></div>');
       $(this).after('<span id="send-invite" class="col-md-12 text-center"><i class="fas fa-external-link-alt"></i>Изпрати</span>');
       $(this).remove();
-      
+
       $('#send-invite').on('click', function(e){
         e.preventDefault();
         $('#send-invite-form').submit();

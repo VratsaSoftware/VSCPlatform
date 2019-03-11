@@ -65,7 +65,8 @@
                             Локация:<br/>
                             {{$event->location}}<br/>
                             Описание:<br/>
-                            {{$event->description}}<br/>
+                            <div class="admin-desc">
+                            {!!$event->description!!}</div><br/>
                             Започва:<br/>
                             {{$event->from->format('Y-m-d')}}<br/>
                             Свърва:<br/>
@@ -122,7 +123,7 @@
                                                                   @else
                                                                     {{$member->email}}
                                                                   @endif
-                                                                  @if(!is_null($member->User))
+                                                                  @if(!is_null($member->User) && !is_null($member->User->Occupation))
                                                                       {{$member->User->Occupation->occupation}}
                                                                   @endif
                                                                   <br/>
@@ -156,7 +157,7 @@
                       @endif
                       <div class="col-md-12 d-flex flex-row flex-wrap">
                           <div class="col-md-6 delete-module text-center">
-                                <span class="hidden-event-data" data-event-id="{{$event->id}}" data-picture="{{$event->picture}}" data-name="{{$event->name}}" data-description="{{$event->description}}" data-from="{{$event->from->format('Y-m-d')}}" data-to="{{$event->to->format('Y-m-d')}}" data-team="{{$event->is_team}}" data-module="{{$event->is_module}}" data-location="{{$event->location}}" data-visibility="{{$event->visibility}}" data-min-team="{{$event->min_team}}" data-max-team="{{$event->max_team}}"></span>
+                                <span class="hidden-event-data" data-event-id="{{$event->id}}" data-picture="{{$event->picture}}" data-name="{{$event->name}}" data-description="{{$event->description}}" data-from="{{$event->from->format('Y-m-d\TH:i')}}" data-to="{{$event->to->format('Y-m-d\TH:i')}}" data-team="{{$event->is_team}}" data-module="{{$event->is_module}}" data-location="{{$event->location}}" data-visibility="{{$event->visibility}}" data-min-team="{{$event->min_team}}" data-max-team="{{$event->max_team}}"></span>
                                 <a href="#modal"><button type="submit" class="btn btn-info edit-event"><i class="fas fa-edit"></i></button></a>
                           </div>
                           <div class="col-md-6 delete-module text-center">
@@ -174,7 +175,7 @@
                         @else
                             <div class="col-md-6">{{$event->visibility}}</div>
                         @endif
-                      <div class="col-md-6">{{$event->from->format('Y-m-d')}} / {{$event->to->format('Y-m-d')}}</div>
+                      <div class="col-md-6">{{$event->from->format('m-d-y H:m')}} / {{$event->to->format('m-d-y H:m')}}</div>
                     </div>
                 </div>
         @empty
@@ -268,7 +269,7 @@
                                                                   @else
                                                                     {{$member->email}}
                                                                   @endif
-                                                                  @if(!is_null($member->User))
+                                                                  @if(!is_null($member->User) && !is_null($member->User->Occupation))
                                                                       {{$member->User->Occupation->occupation}}
                                                                   @endif
                                                                   <br/>
@@ -302,7 +303,7 @@
                   @endif
                   <div class="col-md-12 d-flex flex-row flex-wrap">
                       <div class="col-md-6 delete-module text-center">
-                            <span class="hidden-event-data" data-event-id="{{$event->id}}" data-picture="{{$event->picture}}" data-name="{{$event->name}}" data-description="{{$event->description}}" data-from="{{$event->from->format('Y-m-d')}}" data-to="{{$event->to->format('Y-m-d')}}" data-team="{{$event->is_team}}" data-module="{{$event->is_module}}" data-location="{{$event->location}}" data-visibility="{{$event->visibility}}" data-min-team="{{$event->min_team}}" data-max-team="{{$event->max_team}}"></span>
+                            <span class="hidden-event-data" data-event-id="{{$event->id}}" data-picture="{{$event->picture}}" data-name="{{$event->name}}" data-description="{{$event->description}}" data-from="{{$event->from->format('Y-m-d\TH:i')}}" data-to="{{$event->to->format('Y-m-d\TH:i')}}" data-team="{{$event->is_team}}" data-module="{{$event->is_module}}" data-location="{{$event->location}}" data-visibility="{{$event->visibility}}" data-min-team="{{$event->min_team}}" data-max-team="{{$event->max_team}}"></span>
                             <a href="#modal"><button type="submit" class="btn btn-info edit-event"><i class="fas fa-edit"></i></button></a>
                       </div>
                       <div class="col-md-6 delete-module text-center">
@@ -320,7 +321,7 @@
                     @else
                         <div class="col-md-6">{{$event->visibility}}</div>
                     @endif
-                  <div class="col-md-6">{{$event->from->format('Y-m-d')}} / {{$event->to->format('Y-m-d')}}</div>
+                  <div class="col-md-6">{{$event->from->format('m-d-y H:i')}} / {{$event->to->format('m-d-y H:i')}}</div>
                 </div>
             </div>
         @empty
@@ -366,11 +367,11 @@
                     </p>
                     <p>
                         <label for="starts">Започва</label>
-                        <input type="date" name="starts" id="starts" value="{{old('starts')}}">
+                        <input type="datetime-local" name="starts" id="starts" value="{{old('starts')}}">
                     </p>
                     <p>
                         <label for="ends">Свършва</label>
-                        <input type="date" name="ends" id="ends" value="{{old('ends')}}">
+                        <input type="datetime-local" name="ends" id="ends" value="{{old('ends')}}">
                     </p>
                     <p>
                         <label for="location">Локация</label>
@@ -456,7 +457,7 @@ $( '.edit-event' ).on( 'click', function () {
 	var visibility = $( this ).parent().prev( '.hidden-event-data' ).attr( 'data-visibility' );
 	var min_team = $( this ).parent().prev( '.hidden-event-data' ).attr( 'data-min-team' );
 	var max_team = $( this ).parent().prev( '.hidden-event-data' ).attr( 'data-max-team' );
-
+    console.log(from);
 	var route = "{{url('/events/')}}";
 	var editRoute = route + '/' + eventId;
 	$( '.copy > #create_event' ).attr( 'id', 'edit_event' );

@@ -21,7 +21,7 @@ class InviteMember extends Mailable
     public $members;
     public $event;
 
-    public function __construct($capitan, $team,  $event)
+    public function __construct($capitan, $team, $event)
     {
         $this->capitan = $capitan;
         $this->team = $team;
@@ -35,7 +35,8 @@ class InviteMember extends Mailable
      */
     public function build()
     {
+        $test = ['capitan' => $this->capitan,'team' => $this->team,'members'=>$this->members,'event' => $this->event];
         return $this->from($this->capitan->email)
-                ->view('events.mails.invite_member', ['capitan' => $this->capitan,'team' => $this->team,'members'=>$this->members,'event' => $this->event]);
+                ->markdown('events.mails.invite_member', compact('test'));
     }
 }
