@@ -67,6 +67,7 @@ class EventController extends Controller
         $data = $request->validate([
             'picture' => 'required|file|image|mimes:jpeg,png,gif,webp,ico,jpg|max:4000',
             'name' => 'required',
+            'rules'=> 'sometimes',
             'description' => 'required',
             'starts' => 'required|date_format:"Y-m-d\TH:i"',
             'ends' => 'required|date_format:"Y-m-d\TH:i"|after:starts',
@@ -95,6 +96,7 @@ class EventController extends Controller
         $newEvent = new Event;
         $newEvent->name = $request->name;
         $newEvent->picture = $name;
+        $newEvent->rules = $request->rules;
         $newEvent->description = $request->description;
         $newEvent->from = Carbon::parse($data['starts']);
         $newEvent->to = Carbon::parse($data['ends']);
@@ -451,12 +453,20 @@ class EventController extends Controller
                     $newMember->save();
 
                     Mail::to($request->email)->send(new InviteMember($capitan, $team, $event));
-
                     $message = __('Успешно изпратихте покана за влизане в отбор!');
                     return redirect()->route('users.events')->with('success', $message);
                 }
-                $message = __('Вече сте изпратили покана на този Е-mail!');
-                return redirect()->route('users.events')->with('error', $message);
+                if ($isExisting->confirmed  < 0) {
+                    $isExisting->confirmed = 0;
+                    $isExisting->save();
+
+                    Mail::to($request->email)->send(new InviteMember($capitan, $team, $event));
+                    $message = __('Успешно изпратихте покана за влизане в отбор!');
+                    return redirect()->route('users.events')->with('success', $message);
+                } else {
+                    $message = __('Вече сте изпратили покана на този Е-mail!');
+                    return redirect()->route('users.events')->with('error', $message);
+                }
             }
             $message = __('Капацитета на отбора ви е пълен!');
             return redirect()->route('users.events')->with('error', $message);

@@ -362,6 +362,10 @@
                         <input type="text" id="name" name="name" placeholder="" class="name-course" value="{{old('name')}}">
                     </p>
                     <p>
+                        <label for="rules">Правила</label><br>
+                        <textarea id="rules" cols="30" rows="5" name="rules" placeholder="" style="resize: none;">{{old('rules')}}</textarea>
+                    </p>
+                    <p>
                         <label for="description">Описание</label><br>
                         <textarea id="description" cols="30" rows="5" name="description" placeholder="" style="resize: none;">{{old('description')}}</textarea>
                     </p>
@@ -404,7 +408,7 @@
                                 <label for="min_team">Минимум:</label><br />
                                 <input type="number" id="min_team" name="min_team" value="1" min="1" max="99"><br />
                                 <label for="min_team">Максимум:</label><br />
-                                <input type="number" id="max_team" name="max_team" value="0" min="0" max="99">
+                                <input type="number" id="max_team" name="max_team" value="2" min="1" max="99">
                             </p>
                         @endif
                     </p>
@@ -457,7 +461,7 @@ $( '.edit-event' ).on( 'click', function () {
 	var visibility = $( this ).parent().prev( '.hidden-event-data' ).attr( 'data-visibility' );
 	var min_team = $( this ).parent().prev( '.hidden-event-data' ).attr( 'data-min-team' );
 	var max_team = $( this ).parent().prev( '.hidden-event-data' ).attr( 'data-max-team' );
-    console.log(from);
+    
 	var route = "{{url('/events/')}}";
 	var editRoute = route + '/' + eventId;
 	$( '.copy > #create_event' ).attr( 'id', 'edit_event' );

@@ -474,6 +474,14 @@ body {
     overflow-y: scroll;
 }
 
+.in-team-title {
+    font-weight: bolder;
+}
+
+.in-team-pic>img {
+    width: 8vw;
+}
+
 /*QUERY's
 -------------------------------------------------------------------------------------------*/
 /* Extra small devices (phones, 600px and down) */

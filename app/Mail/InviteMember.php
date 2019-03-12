@@ -35,8 +35,19 @@ class InviteMember extends Mailable
      */
     public function build()
     {
-        $test = ['capitan' => $this->capitan,'team' => $this->team,'members'=>$this->members,'event' => $this->event];
+        $url = url('/user/events/all');
+        $text = 'От '.$this->event->from.' до '.$this->event->to.' ще се проведе<br/>
+        <b>'.$this->event->name.'</b><br/>
+        <p>
+        Здравейте, имате покана за влизане в отбор : '.$this->team->title.'
+        <img src="'.asset('/images/events/teams/'.$this->team->picture).'" alt="team-logo"><br/>
+        <center><i>поканата е изпратена от капитана : '.$this->capitan->name.' '.$this->capitan->last_name.'</i></center>
+        </p>
+        '.$this->event->description.'
+        <p>'.
+        $this->event->rules
+        .'</p>';
         return $this->from($this->capitan->email)
-                ->markdown('events.mails.invite_member', compact('test'));
+                ->markdown('events.mails.invite_member', compact('url', 'text'));
     }
 }

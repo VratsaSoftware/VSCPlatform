@@ -13,6 +13,11 @@
                         </ul>
                     </div>
                 @endif
+                <div class="col-md-12 create-team-rules">
+                    {!!$event->description!!}
+                    <br/>
+                    {!!$event->rules!!}
+                </div>
                 <div class="col-md-12 join-team-wrapper d-flex flex-row flex-wrap">
 
                     <table class="table table-striped">
@@ -76,9 +81,10 @@
                             @endif
                             <label for="useremail">Е-Mail</label>
                             <input type="text" name="useremail" value="{{$user->email}}" disabled class="small-field-register">
-                            <label for="useremail">Възраст</label>
+                            <label for="userage">Възраст</label>
                             @if(!is_null($user->dob))
                                 <input type="text" name="userage" value="{{(\Carbon\Carbon::now()->format('Y') - $user->dob->format('Y'))}}" disabled class="small-field-register">
+                                <input type="hidden" name="userage" value="{{(\Carbon\Carbon::now()->format('Y') - $user->dob->format('Y'))}}">
                             @else
                                 <input type="text" name="userage" value="{{old('userage')}}" placeholder="въведете години..." class="small-field-register">
                             @endif

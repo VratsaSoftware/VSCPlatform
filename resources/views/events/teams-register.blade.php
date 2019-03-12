@@ -6,6 +6,8 @@
             <div class="col-md-12 d-flex flex-row flex-wrap">
                 <div class="col-md-12 create-team-rules">
                     {!!$event->description!!}
+                    <br/>
+                    {!!$event->rules!!}
                 </div>
                 @if ($errors->any())
                     <div class="alert alert-danger alert-on-course">

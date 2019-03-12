@@ -10,11 +10,12 @@ $( '.create-course-btn' ).on( 'click', function () {
 $( '.show-more-event' ).on( 'click', function () {
 	$( '.close-modal' ).attr( 'data-scroll', ( $( this ).offset().top - 700 ) );
 	var newModal = $( '#modal' ).clone( true ).attr( 'id', 'modal-view' );
+	var newId = Math.random().toString( 36 ).substr( 2, 9 );
 	var desc = $( this ).prev( '.desc-no-show' ).html();
 	$( '#modal' ).after( newModal );
 	$( '#modal-view > .modal-content > .copy' ).html( '' );
 	$( '#modal-view > .modal-content > .copy' ).html( '<p>' + desc + '</p>' );
-	$( '#modal-view > .modal-content > .copy > #teams-table' ).attr( 'id', 'new-table' ).DataTable( {
+	$( '#modal-view > .modal-content > .copy > #teams-table' ).attr( 'id', 'new-table-' + newId ).DataTable( {
 		"pageLength": 1,
 		"lengthMenu": [ 1, 5, 10, 15, 50, 100 ]
 	} );
