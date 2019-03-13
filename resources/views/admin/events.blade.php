@@ -66,7 +66,10 @@
                             {{$event->location}}<br/>
                             Описание:<br/>
                             <div class="admin-desc">
-                            {!!$event->description!!}</div><br/>
+                                {!!$event->description!!}<br/>
+                                Правила:<br/>
+                                {!! $event->rules!!}
+                            </div><br/>
                             Започва:<br/>
                             {{$event->from->format('Y-m-d')}}<br/>
                             Свърва:<br/>
@@ -157,7 +160,7 @@
                       @endif
                       <div class="col-md-12 d-flex flex-row flex-wrap">
                           <div class="col-md-6 delete-module text-center">
-                                <span class="hidden-event-data" data-event-id="{{$event->id}}" data-picture="{{$event->picture}}" data-name="{{$event->name}}" data-description="{{$event->description}}" data-from="{{$event->from->format('Y-m-d\TH:i')}}" data-to="{{$event->to->format('Y-m-d\TH:i')}}" data-team="{{$event->is_team}}" data-module="{{$event->is_module}}" data-location="{{$event->location}}" data-visibility="{{$event->visibility}}" data-min-team="{{$event->min_team}}" data-max-team="{{$event->max_team}}"></span>
+                                <span class="hidden-event-data" data-event-id="{{$event->id}}" data-picture="{{$event->picture}}" data-name="{{$event->name}}" data-rules="{{$event->rules}}" data-description="{{$event->description}}" data-from="{{$event->from->format('Y-m-d\TH:i')}}" data-to="{{$event->to->format('Y-m-d\TH:i')}}" data-team="{{$event->is_team}}" data-module="{{$event->is_module}}" data-location="{{$event->location}}" data-visibility="{{$event->visibility}}" data-min-team="{{$event->min_team}}" data-max-team="{{$event->max_team}}"></span>
                                 <a href="#modal"><button type="submit" class="btn btn-info edit-event"><i class="fas fa-edit"></i></button></a>
                           </div>
                           <div class="col-md-6 delete-module text-center">
@@ -212,7 +215,9 @@
                         Локация:<br/>
                         {{$event->location}}<br/>
                         Описание:<br/>
-                        {{$event->description}}<br/>
+                        {!!$event->description!!}<br/>
+                        Правила:<br/>
+                        {!! $event->rules!!}
                         Започва:<br/>
                         {{$event->from}}<br/>
                         Свърва:<br/>
@@ -452,6 +457,7 @@ $( '.edit-event' ).on( 'click', function () {
 	var eventId = $( this ).parent().prev( '.hidden-event-data' ).attr( 'data-event-id' );
 	var picture = $( this ).parent().prev( '.hidden-event-data' ).attr( 'data-picture' );
 	var name = $( this ).parent().prev( '.hidden-event-data' ).attr( 'data-name' );
+    var rules = $( this ).parent().prev( '.hidden-event-data' ).attr( 'data-rules' );
 	var description = $( this ).parent().prev( '.hidden-event-data' ).attr( 'data-description' );
 	var from = $( this ).parent().prev( '.hidden-event-data' ).attr( 'data-from' );
 	var to = $( this ).parent().prev( '.hidden-event-data' ).attr( 'data-to' );
@@ -461,7 +467,7 @@ $( '.edit-event' ).on( 'click', function () {
 	var visibility = $( this ).parent().prev( '.hidden-event-data' ).attr( 'data-visibility' );
 	var min_team = $( this ).parent().prev( '.hidden-event-data' ).attr( 'data-min-team' );
 	var max_team = $( this ).parent().prev( '.hidden-event-data' ).attr( 'data-max-team' );
-    
+
 	var route = "{{url('/events/')}}";
 	var editRoute = route + '/' + eventId;
 	$( '.copy > #create_event' ).attr( 'id', 'edit_event' );
@@ -469,6 +475,7 @@ $( '.edit-event' ).on( 'click', function () {
 	$( '.copy > #edit_event' ).attr( 'action', editRoute );
 	$( '#course-picture' ).attr( 'src', '{{url("images/events")}}' + '/' + picture );
 	$( '#name' ).val( name );
+    $( '#rules' ).val( rules );
 	$( '#description' ).val( description );
 	$( '#starts' ).val( from );
 	$( '#ends' ).val( to );

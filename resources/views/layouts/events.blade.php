@@ -584,7 +584,7 @@ $( '.close-modal' ).on( 'click', function () {
     var action = $(this).attr('data-action');
     var token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
 
-    if(sum < max && isExisting.length < 1){
+    if(sum <= max && isExisting.length < 1){
       $(this).before('<div class="col-md-12 text-center"><form action="'+action+'" id="send-invite-form" method="POST"><input name="_token" value="'+token+'" type="hidden"><input type="email" name="email" id="email" class="section-el-bold" placeholder="въведи електрона поща / Е-mail"></form></div>');
       $(this).after('<span id="send-invite" class="col-md-12 text-center"><i class="fas fa-external-link-alt"></i>Изпрати</span>');
       $(this).remove();

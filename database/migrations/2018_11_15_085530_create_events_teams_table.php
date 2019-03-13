@@ -20,11 +20,12 @@ class CreateEventsTeamsTable extends Migration
             $table->string('picture');
             $table->string('slogan');
             $table->integer('event_team_category_id')->unsigned()->nullable();
-            $table->enum('technology_stack', ['php','java','android','front_end','.net','hardware','c#','c++','other']);
+            $table->enum('technology_stack', ['PHP','WordPress','Java','Android','Front-end','.NET','Хардуерни системи','Друго']);
             $table->string('inspiration');
             $table->string('github');
             $table->integer('is_active');
             $table->integer('members_count');
+            $table->bigInteger('hack_team_id');
             $table->timestamps();
             $table->softDeletes();
 
