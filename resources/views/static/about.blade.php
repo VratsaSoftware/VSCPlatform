@@ -25,7 +25,7 @@
     <script type="text/javascript" src="{{asset('/js/jquery-sectionsnap.js')}}"></script>
 
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png-big-2.png')}}" />
+    <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png-white.png')}}" />
 
     <!-- facebook -->
     <meta property="og:url" content="" />
@@ -96,9 +96,9 @@
                         Теодор Костадинов
                     </div>
                     <div class="team-txt">
-                        За мен:
-                        Христо Ботев е една от именитите фигури в българската революционна дейност, литература и публицистика. Поет и бунтовник, ревностен пазител на националните идеи, той оставя трайна следа в предосвобожденската история на
-                        България. Роден е на 6 януари 1848 година в Калофер.
+                        Теодор е един от основателите на <b>Враца софтуер</b> и един от първите лектори в сдружението.  Занимава се както с програмиране и преподаване, така и с организиране на събития и състезания. Любима негова е игра е ежегодният Лов на съкровище във Враца, за която черпи вдъхновение от множеството ескейп стаи на които ходи.
+
+                       Теодор е старши програмист в голяма американска компания, като се занимава соновно с Джава и Андроид. Обича да експериментира с различни технологии и похвати, и често подхваща собствени проекти. Любовта към програмирането е нещото, което иска да предаде на своите курсисти.
                     </div>
                     {{-- <div class="team-contact">
                         <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid">
@@ -139,7 +139,7 @@
 
             <div class="col-md-4 leaders">
                 <div class="team-holder">
-                    <img src="{{asset('/images/botev-img.png')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/images/men-no-avatar.png')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Тонко Влахов
                     </div>

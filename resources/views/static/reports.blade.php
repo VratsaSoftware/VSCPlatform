@@ -12,16 +12,10 @@
             <i class="far fa-file-alt"></i> Отчет
         </div>
         <div class="col-md-4 reports-year">
-            2015
+            2018
         </div>
         <div class="col-md-8 reports-holder">
-            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2015.pdf')}}" target=" _blank" class="reports-links">Враца софтуер общество отчет</a>
-        </div>
-        <div class="col-md-4 reports-year">
-            2016
-        </div>
-        <div class="col-md-8 reports-holder">
-            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2016.pdf')}}" target=" _blank" class="reports-links">Враца софтуер общество отчет</a>
+            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2018.pdf')}}" target=" _blank" class="reports-links">Враца софтуер общество отчет</a>
         </div>
         <div class="col-md-4 reports-year">
             2017
@@ -30,10 +24,16 @@
             <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2017.pdf')}}" target=" _blank" class="reports-links">Враца софтуер общество отчет</a>
         </div>
         <div class="col-md-4 reports-year">
-            2018
+            2016
         </div>
         <div class="col-md-8 reports-holder">
-            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2018.pdf')}}" target=" _blank" class="reports-links">Враца софтуер общество отчет</a>
+            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2016.pdf')}}" target=" _blank" class="reports-links">Враца софтуер общество отчет</a>
+        </div>
+        <div class="col-md-4 reports-year">
+            2015
+        </div>
+        <div class="col-md-8 reports-holder">
+            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2015.pdf')}}" target=" _blank" class="reports-links">Враца софтуер общество отчет</a>
         </div>
     </div>
 @endsection

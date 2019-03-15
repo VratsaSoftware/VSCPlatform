@@ -871,7 +871,7 @@ a {
 .code-logos-program {
     width: 20%;
     transition: transform .2s;
-    margin-left: 1vw;
+    margin-left: 5px;
     /* Animation */
 }
 
@@ -1505,9 +1505,9 @@ a {
         font-size: 5vw;
     }
 
-    body{
+    body {
         padding-left: 5%;
-        padding-right:5%;
+        padding-right: 5%;
     }
 }
 

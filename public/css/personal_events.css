@@ -58,7 +58,7 @@ body {
     border-radius: 8px;
     padding: 1vw;
     position: absolute;
-    top: 50%;
+    top: 58.5%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-family: Ubuntu;
@@ -348,7 +348,7 @@ body {
 }
 
 .team-name {
-    top: 80%;
+    top: 83%;
     left: 50%;
     background-color: rgba(255, 255, 255, 0.7);
     color: #000;
@@ -432,14 +432,14 @@ body {
 }
 
 .rules-wrapper {
-    top: 21%;
+    top: 25.5%;
     /* z-index: 999; */
     background-color: rgba(255, 255, 255, 0.7);
     color: #000;
 }
 
 .rules-text {
-    height: 8vw;
+    height: 14vw;
     overflow-y: scroll;
     text-align: justify;
 }
@@ -486,8 +486,12 @@ body {
 -------------------------------------------------------------------------------------------*/
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+    .options-wrap {
+        margin-top: 5vw;
+    }
+
     .events {
-        margin-top: 10vw;
+        margin-top: 0vw;
     }
 
     .event-title {
@@ -543,7 +547,7 @@ body {
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     .events {
-        margin-top: 10vw;
+        margin-top: 0vw;
     }
 
     .event-title {
@@ -594,7 +598,7 @@ body {
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     .events {
-        margin-top: 5vw;
+        margin-top: 0vw;
     }
 
     .event-title {
@@ -649,7 +653,7 @@ body {
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     .events {
-        margin-top: 5vw;
+        margin-top: 0vw;
     }
 
     .event-title {
