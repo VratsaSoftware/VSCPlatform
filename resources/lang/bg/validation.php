@@ -207,5 +207,13 @@ return [
         'team_picture'             => 'Лого на отбора',
         'invite_member_email'      => 'Покани по email',
         'userage'                  => 'Години',
+        'suitable_candidate'       => 'Подходящ кандидат',
+        'suitable_training'        => 'Подходящ кандидат за обучението',
+        'accompliments'            => 'Постижения',
+        'expecatitions'            => 'Очаквания',
+        'use'                      => 'Употреба',
+        'source'                   => 'Източник',
+        'cv'                       => 'Автобиография',
+        'course'                   => 'Курс',
     ],
 ];

@@ -20,7 +20,7 @@ class CreateEntriesTable extends Migration
             $table->string('test_score')->nullable();
             $table->string('task')->nullable();
             $table->longText('interview')->nullable();
-            $table->enum('approved',[1,0])->default(0);
+            $table->enum('approved', [1,0])->nullable();
             $table->string('field')->nullable();
             $table->timestamps();
             $table->softDeletes();
