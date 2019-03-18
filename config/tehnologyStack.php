@@ -1,12 +1,11 @@
 <?php
 return [
-     'php',
-     'java',
-     'android',
-     'front_end',
-     '.net',
-     'hardware',
-     'c#',
-     'c++',
-     'other'
+     'PHP',
+     'WordPress',
+     'Java',
+     'Android',
+     'Front-end',
+     '.NET',
+     'Хардуерни системи',
+     'Друго',
 ];

@@ -48,6 +48,12 @@
                         <br/>
                     </div>
                     <div class="event-body col-md-12">
+                        <div class="event-body-text show-more-event rules-wrapper col-md-10">
+                          Правила
+                          <div class="col-md-12 rules-text">
+                            {!!$event->rules!!}
+                        </div>
+                        </div>
                         <a href="http://hack.vratsa.net/" target="_blank">
                             <div class="event-body-text show-more-event info-btn-in">
                               информация
@@ -86,13 +92,15 @@
                                                       <td style="color:#1B8500"><a href="{{$team->github}}" target="_blank">{{$team->github}}</a></td>
                                                       <td>
                                                           @foreach($team->Members as $member)
-                                                            <p>
-                                                                <span>
-                                                                    @if(!is_null($member->User))
-                                                                      {{$member->User->name}} {{$member->User->last_name}}  <br/>
-                                                                  @endif
-                                                                </span>
-                                                            </p>
+                                                              @if($member->confirmed > 0)
+                                                                <p>
+                                                                    <span>
+                                                                        @if(!is_null($member->User))
+                                                                          {{$member->User->name}} {{$member->User->last_name}}  <br/>
+                                                                      @endif
+                                                                    </span>
+                                                                </p>
+                                                            @endif
                                                           @endforeach
                                                       </td>
                                                     </tr>
@@ -110,27 +118,26 @@
                         </div>
                       </a>
                         @if(Auth::user()->isOnEvent($event->id) && Auth::user()->isConfirmedMember($event->id))
-                                <div class="event-body-text show-more-event candidate-btn-in" style="pointer-events: none;">
+                                <div class="event-body-text show-more-event candidate-btn-in" style="pointer-events: none;" id="entered-{{$event->id}}">
                                   <i class="fas fa-check-circle"></i> записан
                                 </div>
-                                
-                                @if(!is_null(Auth::user()->getTeam(true)) &&Auth::user()->isCapitan(Auth::user()->getTeam(true)->id))
-                                    <div class="event-body-text show-more-event team-name">
-                                      Отбор: {{Auth::user()->getTeam(true)->title}}
-                                      
-                                        @if(Auth::user()->getTeam(true)->is_active > 0)
-                                        <p class="active-team-wrapper"> 
+
+                                @if(!is_null(Auth::user()->getTeam(true,$event->id)) && Auth::user()->isCapitan(Auth::user()->getTeam(true,$event->id)->id))
+                                    <div class="event-body-text show-more-event team-name col-md-10">
+                                      Отбор: {{Auth::user()->getTeam(true,$event->id)->title}}
+                                        @if(Auth::user()->getTeam(true,$event->id)->is_active > 0)
+                                        <p class="active-team-wrapper">
                                           <i class="fas fa-check-circle"></i> Активен
-                                          |участници:{{Auth::user()->getTeam(true)->members_count}}
+                                          |участници:{{Auth::user()->getTeam(true,$event->id)->members_count}}
                                         @else
                                         <p class="not-active-team-wrapper">
                                           <i class="fas fa-times-circle"></i> НЕ Активен
-                                          |участници:{{Auth::user()->getTeam(true)->members_count}}
+                                          |участници:{{Auth::user()->getTeam(true,$event->id)->members_count}}
                                         @endif
                                       </p>
                                       <div class="col-md-12 d-flex flex-row flex-wrap team-member-wrap">
-                                        <?php $members = Auth::user()->getTeam(true)->Members ?>
-                                        
+                                        <?php $members = Auth::user()->getTeam(true,$event->id)->Members ?>
+
                                         @foreach($members as $member)
                                             <div class="col-md-6 text-left member-name-status">
                                               {{isset($member->email)?$member->email:$member->User->name}}
@@ -140,7 +147,7 @@
                                                 <i class="fas fa-check-circle"></i>
                                               @endif
                                               @if($member->confirmed < 0)
-                                                <i class="fas fa-times-circle"></i> 
+                                                <i class="fas fa-times-circle"></i>
                                               @endif
                                               @if($member->confirmed == 0)
                                                 <i class="fas fa-eye-slash"></i>
@@ -148,17 +155,18 @@
                                             </div>
                                           <br />
                                         @endforeach
-                                        @if(Auth::user()->getTeam(true)->members_count < $event->max_team)
-                                          <a href="#" class="invite-member-btn" data-real="{{Auth::user()->getTeam(true)->members_count}}" data-max="{{$event->max_team}}" data-action="{{route('invite.to.team',[Auth::user()->getTeam(true)->id,$event->id])}}">
+                                        @if(Auth::user()->getTeam(true,$event->id)->members_count < $event->max_team)
+                                          <a href="#" class="invite-member-btn" data-real="{{Auth::user()->getTeam(true,$event->id)->members_count}}" data-max="{{$event->max_team}}" data-action="{{route('invite.to.team',[Auth::user()->getTeam(true,$event->id)->id,$event->id])}}">
                                             <img src="{{asset('/images/profile/add-icon.png')}}" alt="add-icon" class="img-fluid">покани
                                           </a>
                                         @endif
                                       </div>
                                     </div>
                                 @else
-                                    <div class="event-body-text show-more-event team-name">
+                                    <div class="event-body-text show-more-event team-name col-md-10">
                                       участник в отбор: <br />
-                                      {{Auth::user()->getTeam(false)->title}}
+                                      <span class="in-team-title">{{Auth::user()->getTeam(false,$event->id)->title}}</span><br/>
+                                      <span class="in-team-pic"><img src="{{asset('/images/events/teams/'.Auth::user()->getTeam(false,$event->id)->picture)}}" alt="team-pic"></span>
                                     </div>
                                 @endif
                         @else
@@ -229,7 +237,12 @@
                           </span>
                             @if(count($memberTeams) > 0)
                               <div class="event-body-text show-more-event candidate-btn-pending">
-                                <i class="fas fa-bell"></i> имате {{count(Auth::user()->getMemberInvitedTeam($event->id))}} покани
+                                <i class="fas fa-bell"></i>
+                                    @if(count(Auth::user()->getMemberInvitedTeam($event->id)) > 1)
+                                        имате {{count(Auth::user()->getMemberInvitedTeam($event->id))}} покани
+                                    @else
+                                        имате {{count(Auth::user()->getMemberInvitedTeam($event->id))}} поканa
+                                    @endif
                               </div>
                             @endif
                         </a>
@@ -246,7 +259,7 @@
                         @else
                             <div class="col-md-6">{{$event->visibility}}</div>
                         @endif
-                      <div class="col-md-6">{{$event->from->format('Y-m-d')}} / {{$event->to->format('Y-m-d')}}</div>
+                      <div class="col-md-6">{{$event->from->format('m-d-y H:i')}} / {{$event->to->format('m-d-y H:i')}}</div>
                     </div>
                 </div>
         @empty
@@ -280,6 +293,8 @@
                         <p>
                         Локация:<br/>
                         {{$event->location}}<br/>
+                        Правила:<br/>
+                        {!!$event->rules!!}<br/>
                         Описание:<br/>
                         {{$event->description}}<br/>
                         Започва:<br/>
@@ -318,13 +333,15 @@
                                                       <td style="color:#1B8500"><a href="{{$team->github}}" target="_blank">{{$team->github}}</a></td>
                                                       <td>
                                                           @foreach($team->Members as $member)
-                                                            <p>
-                                                                <span>
-                                                                    @if(!is_null($member->User))
-                                                                      {{$member->User->name}} {{$member->User->last_name}}  <br/>
-                                                                  @endif
-                                                                </span>
-                                                            </p>
+                                                              @if($member->confirmed > 0)
+                                                                <p>
+                                                                    <span>
+                                                                        @if(!is_null($member->User))
+                                                                          {{$member->User->name}} {{$member->User->last_name}}  <br/>
+                                                                      @endif
+                                                                    </span>
+                                                                </p>
+                                                               @endif
                                                           @endforeach
                                                       </td>
                                                     </tr>
@@ -334,28 +351,27 @@
                                 </table>
                             </p>
                         @else
-                              
+
                         @endif
                     </span>
                     <div class="event-body-text show-more-event">
                       отбори
                     </div>
                 </a>
-
                     @if(Auth::user()->isOnEvent($event->id) && Auth::user()->isConfirmedMember($event->id))
                           <div class="event-body-text show-more-event candidate-btn-in" style="pointer-events: none;">
                                     <i class="fas fa-check-circle"></i> записан
                           </div>
                             <div class="event-body-text show-more-event team-name">
                                       участник в отбор: <br />
-                                      {{Auth::user()->getTeam(false)->title}}
+                                      {{Auth::user()->getTeam(false,$event->id)->title}}
                             </div>
                     @else
                         <div class="event-body-text show-more-event candidate-btn-in" style="pointer-events: none;">
                                   <i class="fas fa-check-circle"></i> изтекъл
                         </div>
                     @endif
-                  
+
                   @if(!is_null($event->picture) || !empty($event->picture))
                       <img src="{{asset('/images/events/'.$event->picture)}}" alt="">
                   @else
@@ -368,7 +384,7 @@
                     @else
                         <div class="col-md-6">{{$event->visibility}}</div>
                     @endif
-                  <div class="col-md-6">{{$event->from->format('Y-m-d')}} / {{$event->to->format('Y-m-d')}}</div>
+                  <div class="col-md-6">{{$event->from->format('m-d-y H:m')}} / {{$event->to->format('m-d-y H:m')}}</div>
                 </div>
             </div>
         @empty
@@ -566,13 +582,13 @@ $( '.close-modal' ).on( 'click', function () {
     var sum = parseInt(real) + 1;
     var isExisting = $(this).parent().find('#invite_email');
     var action = $(this).attr('data-action');
-    var token = $( 'meta[name="csrf-token"]' ).attr( 'content' ); 
+    var token = $( 'meta[name="csrf-token"]' ).attr( 'content' );
 
-    if(sum < max && isExisting.length < 1){
+    if(sum <= max && isExisting.length < 1){
       $(this).before('<div class="col-md-12 text-center"><form action="'+action+'" id="send-invite-form" method="POST"><input name="_token" value="'+token+'" type="hidden"><input type="email" name="email" id="email" class="section-el-bold" placeholder="въведи електрона поща / Е-mail"></form></div>');
       $(this).after('<span id="send-invite" class="col-md-12 text-center"><i class="fas fa-external-link-alt"></i>Изпрати</span>');
       $(this).remove();
-      
+
       $('#send-invite').on('click', function(e){
         e.preventDefault();
         $('#send-invite-form').submit();

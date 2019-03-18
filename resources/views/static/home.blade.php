@@ -71,9 +71,9 @@
                                 </span>
                             </p>
                         </div>
-                        <p class="btn-content-wrap">
+                        {{-- <p class="btn-content-wrap">
                             <span class="title-btns-content"><a href="{{route('programmingCourses')}}">Кандидатствай</a></span>
-                        </p>
+                        </p> --}}
                     </div>
 
                     <div class="mySlides" data-src="{{asset('/images/home-top-slider/digital-big.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
@@ -88,9 +88,9 @@
                                 </span>
                             </p>
                         </div>
-                        <p class="btn-content-wrap">
+                        {{-- <p class="btn-content-wrap">
                             <span class="title-btns-content"><a href="{{route('digitalMarketing')}}">Кандидатствай</a></span>
-                        </p>
+                        </p> --}}
                     </div>
 
                     <div class="mySlides" data-src="{{asset('/images/home-top-slider/cw-1.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
@@ -106,9 +106,9 @@
                                 </span>
                             </p>
                         </div>
-                        <p class="btn-content-wrap">
+                        {{-- <p class="btn-content-wrap">
                             <span class="title-btns-content"><a href="http://codeweek.vratsa.net" target=" _blank">Кандидатствай</a></span>
-                        </p>
+                        </p> --}}
                     </div>
 
                     <div class="mySlides" data-src="{{asset('/images/home-top-slider/kids-1.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
@@ -123,9 +123,9 @@
                                     </span>
                                 </p>
                         </div>
-                        <p class="btn-content-wrap">
+                        {{-- <p class="btn-content-wrap">
                             <span class="title-btns-content"><a href="https://mindhub.bg/" target="_blank">Кандидатствай</a></span>
-                        </p>
+                        </p> --}}
                     </div>
 
                     <div class="mySlides" data-src="{{asset('/images/home-top-slider/telerik_academy_school.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
@@ -140,9 +140,9 @@
                                     </span>
                                 </p>
                         </div>
-                        <p class="btn-content-wrap">
+                        {{-- <p class="btn-content-wrap">
                             <span class="title-btns-content"><a href="https://www.telerikacademy.com/school" target="_blank">Кандидатствай</a></span>
-                        </p>
+                        </p> --}}
                     </div>
 
                     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -187,7 +187,7 @@
 
 
                     <div class="num-num col-md-2 bd-highlight">
-                        <div class="num-big-num count">250</div>
+                        <div class="num-big-num count">310</div>
                         <div class="num-content">души започнали курс</div>
                     </div>
                     <div class="right-line col-md-1">

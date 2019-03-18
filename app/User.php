@@ -310,7 +310,11 @@ class User extends Authenticatable
 
     public function isConfirmedMember($event)
     {
-        $isConfirmed = TeamMember::with('Teams')
+        $isConfirmed = TeamMember::with('Teams')->whereHas('Teams', function ($query) use ($event) {
+            $query->where([
+                ['events_id', $event],
+            ]);
+        })
         ->where([
             ['confirmed', 1],
             ['user_id', Auth::user()->id]
@@ -320,10 +324,15 @@ class User extends Authenticatable
             ['email', Auth::user()->email]
         ])
         ->get();
-        if ($isConfirmed->isEmpty()) {
-            return false;
+
+        foreach ($isConfirmed as $key => $check) {
+            foreach ($check->Teams as $team) {
+                if ($check->Teams()->exists() && $team->events_id == $event) {
+                    return true;
+                }
+            }
         }
-        return true;
+        return false;
     }
 
     public function getMemberInvitedTeam($event)
@@ -331,14 +340,14 @@ class User extends Authenticatable
         $userId = Auth::user()->id;
         $userEmail = Auth::user()->email;
 
-        return TeamMember::with('Teams', 'Teams.Members')
+        $invites = TeamMember::with('Teams')
         ->where([
             ['user_id', $userId],
-            ['confirmed', '>' ,-1],
+            ['confirmed', 0],
             ])
         ->orWhere([
             ['email', $userEmail],
-            ['confirmed', '>' ,-1],
+            ['confirmed',0],
         ])
         ->whereHas('Teams', function ($query) use ($event) {
             $query->where([
@@ -346,14 +355,23 @@ class User extends Authenticatable
             ]);
         })
         ->get();
+
+        foreach ($invites as $invite) {
+            foreach ($invite->Teams as $team) {
+                if ($team->events_id == $event) {
+                    return $invites;
+                }
+            }
+        }
+        return [];
     }
 
-    public function getTeam($capitan)
+    public function getTeam($capitan, $event = null)
     {
         $userId = Auth::user()->id;
         $role = UsersTeamRole::where('role', 'капитан')->select('id')->first();
-        if($capitan){
-            return Team::with('Members','Members.User')->whereHas('Members', function ($query) use ($userId,$role) {
+        if ($capitan) {
+            return Team::where('events_id', $event)->with('Members', 'Members.User')->whereHas('Members', function ($query) use ($userId,$role) {
                 $query->where([
                     ['user_id', $userId],
                     ['cl_users_team_role_id', $role->id]
@@ -361,11 +379,11 @@ class User extends Authenticatable
             })
             ->first();
         }
-        return Team::with('Members','Members.User')->whereHas('Members', function ($query) use ($userId,$role) {
-                $query->where([
+        return Team::with('Members', 'Members.User')->whereHas('Members', function ($query) use ($userId,$role) {
+            $query->where([
                     ['user_id', $userId],
                 ]);
-            })
+        })
             ->first();
     }
 

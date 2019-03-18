@@ -1,6 +1,7 @@
-body{
+body {
     opacity: 1 !important;
 }
+
 /*events section*/
 .events {
     /*margin-top: 5vw;*/
@@ -57,7 +58,7 @@ body{
     border-radius: 8px;
     padding: 1vw;
     position: absolute;
-    top: 50%;
+    top: 58.5%;
     left: 50%;
     transform: translate(-50%, -50%);
     font-family: Ubuntu;
@@ -347,10 +348,10 @@ body{
 }
 
 .team-name {
-    top: 80%;
+    top: 83%;
     left: 50%;
     background-color: rgba(255, 255, 255, 0.7);
-    color:#000;
+    color: #000;
 }
 
 .team-name:hover {
@@ -385,58 +386,112 @@ body{
     display: none;
 }
 
-.team-member-wrap{
+.team-member-wrap {
     height: 5vw;
     overflow-y: scroll;
 }
 
-.join-team-wrapper{
+.join-team-wrapper {
     margin-top: 6vw;
 }
 
-.member-name-status{
-    color:#141823 !important;
+.member-name-status {
+    color: #141823 !important;
 }
 
-.member-status-icon > .fa-times-circle{
-    color:#f00 !important;
+.member-status-icon>.fa-times-circle {
+    color: #f00 !important;
 }
 
-.member-status-icon > .fa-eye-slash{
-    color:#d3d3d3 !important;
+.member-status-icon>.fa-eye-slash {
+    color: #d3d3d3 !important;
 }
 
-.member-status-icon > .fa-check-circle{
-    color:#1B8500 !important;
+.member-status-icon>.fa-check-circle {
+    color: #1B8500 !important;
 }
 
-.active-team-wrapper{
-    color:#1B8500 !important;
+.active-team-wrapper {
+    color: #1B8500 !important;
 }
 
-.not-active-team-wrapper{
-    color:#f00 !important;
+.not-active-team-wrapper {
+    color: #f00 !important;
 }
 
-#send-invite:hover{
+#send-invite:hover {
     cursor: pointer;
 }
 
-.close-modal{
-    float:right;
+.close-modal {
+    float: right;
 }
 
-.copy{
-    overflow-y:scroll;
+.copy {
+    overflow-y: scroll;
 }
 
+.rules-wrapper {
+    top: 25.5%;
+    /* z-index: 999; */
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #000;
+}
+
+.rules-text {
+    height: 14vw;
+    overflow-y: scroll;
+    text-align: justify;
+}
+
+.team-member-wrap::-webkit-scrollbar, .rules-text::-webkit-scrollbar {
+    width: 5px;
+}
+
+.team-member-wrap::-webkit-scrollbar-track, .rules-text::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.team-member-wrap::-webkit-scrollbar-thumb, .rules-text::-webkit-scrollbar-thumb {
+    background-color: #1B8500;
+    outline: 1px solid slategrey;
+}
+
+.rules-text>ol {
+    color: #f00;
+}
+
+.create-team-rules {
+    margin-top: 10vw;
+}
+
+.create-team-rules>ol {
+    font-weight: bolder;
+}
+
+.admin-desc {
+    height: 10vw;
+    overflow-y: scroll;
+}
+
+.in-team-title {
+    font-weight: bolder;
+}
+
+.in-team-pic>img {
+    width: 8vw;
+}
 
 /*QUERY's
 -------------------------------------------------------------------------------------------*/
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+    .options-wrap {
+        margin-top: 5vw;
+    }
+
     .events {
-        margin-top: 10vw;
+        margin-top: 0vw;
     }
 
     .event-title {
@@ -492,7 +547,7 @@ body{
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
     .events {
-        margin-top: 10vw;
+        margin-top: 0vw;
     }
 
     .event-title {
@@ -543,7 +598,7 @@ body{
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
     .events {
-        margin-top: 5vw;
+        margin-top: 0vw;
     }
 
     .event-title {
@@ -598,7 +653,7 @@ body{
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
     .events {
-        margin-top: 5vw;
+        margin-top: 0vw;
     }
 
     .event-title {

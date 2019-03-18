@@ -20,6 +20,12 @@ use App\Models\Users\ShirtSize;
 use App\Models\Users\UsersTeamRole;
 use App\Mail\InviteMember;
 use Illuminate\Support\Facades\Mail;
+use App\Models\Hackaton\Team as HackTeam;
+use App\Models\Hackaton\Category as HackCategory;
+use App\Models\Hackaton\Occupation as HackOccupation;
+use App\Models\Hackaton\Technology as HackTechnology;
+use App\Models\Hackaton\Tshirt as HackTshirt;
+use App\Models\Hackaton\Member as HackMember;
 
 class EventController extends Controller
 {
@@ -67,13 +73,14 @@ class EventController extends Controller
         $data = $request->validate([
             'picture' => 'required|file|image|mimes:jpeg,png,gif,webp,ico,jpg|max:4000',
             'name' => 'required',
-            'description' => 'required|max:200',
-            'starts' => 'required|date_format:Y-m-d',
-            'ends' => 'required|date_format:Y-m-d|after:starts',
+            'rules'=> 'sometimes',
+            'description' => 'required',
+            'starts' => 'required|date_format:"Y-m-d\TH:i"',
+            'ends' => 'required|date_format:"Y-m-d\TH:i"|after:starts',
             'type' => 'required|in_array:valid_type.*',
             'visibility' => 'required|in_array:valid_visibility.*',
-            'min_team' => 'numeric|min:1|max:99',
-            'max_team' => 'numeric|min:'.$request->min_team.'|max:99',
+            'min_team' => 'sometimes|required|numeric|min:1|max:99',
+            'max_team' => 'sometimes|required|numeric|min:'.$request->min_team.'|max:99',
         ]);
 
         $eventPic = Input::file('picture');
@@ -95,9 +102,10 @@ class EventController extends Controller
         $newEvent = new Event;
         $newEvent->name = $request->name;
         $newEvent->picture = $name;
+        $newEvent->rules = $request->rules;
         $newEvent->description = $request->description;
-        $newEvent->from = $request->starts;
-        $newEvent->to = $request->ends;
+        $newEvent->from = Carbon::parse($data['starts']);
+        $newEvent->to = Carbon::parse($data['ends']);
         $newEvent->min_team = $request->min_team;
         $newEvent->max_team = $request->max_team;
         $newEvent->location = $request->location;
@@ -154,14 +162,16 @@ class EventController extends Controller
         $data = $request->validate([
             'picture' => 'file|image|mimes:jpeg,png,gif,webp,ico,jpg|max:4000',
             'name' => 'required',
-            'description' => 'required|max:200',
-            'starts' => 'required|date_format:Y-m-d',
-            'ends' => 'required|date_format:Y-m-d|after:starts',
+            'rules'=> 'sometimes',
+            'description' => 'required',
+            'starts' => 'required|date_format:"Y-m-d\TH:i"',
+            'ends' => 'required|date_format:"Y-m-d\TH:i"|after:starts',
             'type' => 'required|in_array:valid_type.*',
             'visibility' => 'required|in_array:valid_visibility.*',
             'min_team' => 'numeric|min:1|max:99',
             'max_team' => 'numeric|min:'.$request->min_team.'|max:99',
         ]);
+
         if (Input::file('picture')) {
             $eventPicRemove = public_path().'/images/events/'.$event->picture;
             File::delete($eventPicRemove);
@@ -184,9 +194,10 @@ class EventController extends Controller
         }
 
         $event->name = $request->name;
+        $event->rules = $request->rules;
         $event->description = $request->description;
-        $event->from = $request->starts;
-        $event->to = $request->ends;
+        $event->from = Carbon::parse($data['starts']);
+        $event->to = Carbon::parse($data['ends']);
         $event->location = $request->location;
         $event->min_team = $request->min_team;
         $event->max_team = $request->max_team;
@@ -270,12 +281,59 @@ class EventController extends Controller
             $image->save(public_path().'/images/events/teams/'.$picName, 90);
         }
 
-        $denyInvites = TeamMember::where('user_id',Auth::user()->id)->orWhere('email',Auth::user()->email)->first();
-        if(!is_null($denyInvites)){
+        $denyInvites = TeamMember::where('user_id', Auth::user()->id)->orWhere('email', Auth::user()->email)->first();
+        if (!is_null($denyInvites)) {
             $denyInvites->confirmed = -1;
             $denyInvites->save();
         }
 
+        //db hackaton
+        $category = TeamCategory::select('category')->find($request->team_category);
+        $hackCategoryFind = HackCategory::where('category', $category->category)->first();
+        $hackCategory = $hackCategoryFind->category;
+        $hackStackFind = HackTechnology::where('technology', $request->technologyStack)->first();
+        $hackStack = $hackStackFind->technology;
+
+        $hackTeam = new HackTeam;
+        $hackTeam->team_name = $request->name;
+        $hackTeam->category = $hackCategory;
+        $hackTeam->technologies = $hackStack;
+        $hackTeam->team_moto = $request->slogan;
+        $hackTeam->inspiration = isset($request->inspiration)?$request->inspiration:' ';
+        $hackTeam->is_confirmed = 0;
+        $hackTeam->date_created = Carbon::now();
+        $hackTeam->github_account = $request->git;
+        $hackTeam->team_logo = $picName;
+        $hackTeam->team_thumbnail = $picName;
+        $hackTeam->project = '';
+        $hackTeam->project_description = '';
+        $hackTeam->save();
+
+        if (isset($user->dob)) {
+            $ageSum = (Carbon::now()->format('Y') - $user->dob->format('Y'));
+        }
+        $age = isset($ageSum)?$ageSum:$request->userage;
+        $occupation = Occupation::find($request->occupation);
+        $hackOccupation = HackOccupation::firstOrCreate(
+            ['occupation' => $occupation->occupation]
+        );
+        $shirtSize = ShirtSize::find($request->shirt_size);
+        $hackShirtSize = HackTshirt::firstOrCreate(
+            ['tshirt_size' => $shirtSize->size]
+        );
+
+        $hackMember = new HackMember;
+        $hackMember->first_name = $user->name;
+        $hackMember->last_name = $user->last_name;
+        $hackMember->email = $user->email;
+        $hackMember->age = isset($request->userage)?$request->userage:$age;
+        $hackMember->occupation = $hackOccupation->occupation;
+        $hackMember->tshirt = $hackShirtSize->tshirt_size;
+        $hackMember->team = $hackTeam->team_id;
+        $hackMember->is_captain = 1;
+        $hackMember->save();
+
+        //db local
         $newTeam = new Team;
         $newTeam->events_id = $event->id;
         $newTeam->title = $request->name;
@@ -283,10 +341,11 @@ class EventController extends Controller
         $newTeam->slogan = $request->slogan;
         $newTeam->event_team_category_id = $request->team_category;
         $newTeam->technology_stack = $request->technologyStack;
-        $newTeam->inspiration = $request->inspiration;
+        $newTeam->inspiration = isset($request->inspiration)?$request->inspiration:' ';
         $newTeam->github = $request->git;
         $newTeam->is_active = 0;
         $newTeam->members_count = 1;
+        $newTeam->hack_team_id = $hackTeam->team_id;
         $newTeam->save();
 
         $role = UsersTeamRole::where('role', 'капитан')->select('id')->first();
@@ -309,13 +368,9 @@ class EventController extends Controller
                     $newMember->event_team_id = $newTeam->id;
                     $newMember->confirmed = 0;
                     $newMember->save();
+                    Mail::to($userExist->email)->send(new InviteMember($user, $newTeam, $event));
                 }
             } else {
-                $members = TeamMember::where('event_team_id', $newTeam->id)->get();
-                $allTeamMembers = [];
-                if (count($members) > 0) {
-                    $allTeamMembers = $members;
-                }
                 foreach ($request->invite_member_email as $email) {
                     $newMember = new TeamMember;
                     $newMember->email = $email;
@@ -393,20 +448,46 @@ class EventController extends Controller
         $user->cl_occupation_id = $request->occupation;
         $user->dob = $dob;
         $user->save();
-        
+
 
         if ($team->members_count <= $event->max_team) {
             $teamMember->confirmed = 1;
             $teamMember->cl_users_shirts_size_id = $request->shirt_size;
             $teamMember->save();
 
+            //hack db
+            $age = (Carbon::now()->format('Y') - $user->dob->format('Y'));
+            $occupation = Occupation::find($request->occupation);
+            $hackOccupation = HackOccupation::firstOrCreate(
+                ['occupation' => $occupation->occupation]
+            );
+            $shirtSize = ShirtSize::find($request->shirt_size);
+            $hackShirtSize = HackTshirt::firstOrCreate(
+                ['tshirt_size' => $shirtSize->size]
+            );
+
+            $hackTeam = HackTeam::where('team_id', $team->hack_team_id)->first();
+
+            $newHackMember = new HackMember;
+            $newHackMember->first_name = $user->name;
+            $newHackMember->last_name = $user->last_name;
+            $newHackMember->email = $user->email;
+            $newHackMember->age = isset($request->userage)?$request->userage:$age;
+            $newHackMember->occupation = $hackOccupation->occupation;
+            $newHackMember->tshirt = $hackShirtSize->tshirt_size;
+            $newHackMember->team = $hackTeam->team_id;
+            $newHackMember->is_captain = null;
+            $newHackMember->save();
+
             $newMemberCount = ($team->members_count+1);
             $team->members_count = $newMemberCount;
 
 
             if ($newMemberCount >= $event->min_team) {
+                $hackTeam->is_confirmed = 1;
                 $team->is_active = 1;
             }
+            $hackTeam->save();
             $team->save();
 
             $message = __('Успешно потвърдихте поканата за влизане в отбор!');
@@ -417,7 +498,7 @@ class EventController extends Controller
         }
     }
 
-    public function inviteToTeam(Request $request, Team $team,Event $event)
+    public function inviteToTeam(Request $request, Team $team, Event $event)
     {
         $data = $request->validate([
             'email' => 'required|email',
@@ -426,13 +507,13 @@ class EventController extends Controller
         $invites = TeamMember::where([
             ['event_team_id',$team->id],
         ])
-        ->whereBetween('created_at',[Carbon::now()->subDays(1)->format('Y-m-d H:m:s'),Carbon::now()->addDay(1)->format('Y-m-d H:m:s')])
+        ->whereBetween('created_at', [Carbon::now()->subDays(1)->format('Y-m-d H:m:s'),Carbon::now()->addDay(1)->format('Y-m-d H:m:s')])
         ->count();
-        
-        if($invites < 10){
+
+        if ($invites < 10) {
             $memberPlus = ($team->members_count + 1);
 
-            if($memberPlus <= $event->max_team){
+            if ($memberPlus <= $event->max_team) {
                 $capitan = User::find(Auth::user()->id);
 
                 $role = UsersTeamRole::where('role', 'участник')->select('id')->first();
@@ -441,7 +522,7 @@ class EventController extends Controller
                     ['email', $request->email],
                     ['event_team_id', $team->id]
                 ])->first();
-                if(is_null($isExisting)){
+                if (is_null($isExisting)) {
                     $newMember = new TeamMember;
                     $newMember->email = $request->email;
                     $newMember->cl_users_team_role_id = $role->id;
@@ -450,12 +531,20 @@ class EventController extends Controller
                     $newMember->save();
 
                     Mail::to($request->email)->send(new InviteMember($capitan, $team, $event));
-                    
                     $message = __('Успешно изпратихте покана за влизане в отбор!');
                     return redirect()->route('users.events')->with('success', $message);
                 }
-                $message = __('Вече сте изпратили покана на този Е-mail!');
-                return redirect()->route('users.events')->with('error', $message);
+                if ($isExisting->confirmed  < 0) {
+                    $isExisting->confirmed = 0;
+                    $isExisting->save();
+
+                    Mail::to($request->email)->send(new InviteMember($capitan, $team, $event));
+                    $message = __('Успешно изпратихте покана за влизане в отбор!');
+                    return redirect()->route('users.events')->with('success', $message);
+                } else {
+                    $message = __('Вече сте изпратили покана на този Е-mail!');
+                    return redirect()->route('users.events')->with('error', $message);
+                }
             }
             $message = __('Капацитета на отбора ви е пълен!');
             return redirect()->route('users.events')->with('error', $message);
