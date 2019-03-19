@@ -9,7 +9,7 @@
   			<!-- <span class="badge-notify">3</span> -->
             @else
                 <div class="cf footer">
-                <a href="{{route('home')}}" class="btn close-modal">ВХОД</a>
+                <a href="{{route('login')}}" class="btn close-modal">ВХОД</a>
                 </div>
             @endif
         </div>

@@ -15,17 +15,20 @@
           @endif
         <!-- course candidation statistic -->
         <div class="col-md-12 candidation-title">Програмиране</div>
+            <div class="col-md-12 candidation-text" style="margin-bottom:0">
+                @if(isset($entry->approved) && is_null($entry->approved))
+                    все още нямате оценка
+                @else
+                    обща информация
+                @endif
+            </div>
           <div class="col-md-12 candidation-text">
-            @if(isset($entry->approved) && is_null($entry->approved))
-                все още нямате оценка
-            @else
-                стъпките на кандидатстване
-            @endif
+
           </div>
 
           <!-- circle steps icons -->
           <ul class="steps col-md-12">
-              @if(is_null($entry) || isset($entry->entry_form_id))
+              @if(is_null($entry) || is_null($entry->test_score))
                   <li class="active-step">1
               @else
                   <li>1
@@ -39,7 +42,7 @@
                 @endif
             </div>
           </li>
-          @if(isset($entry->test_score) && is_null($entry->test_score))
+          @if(isset($entry->test_score) && is_null($entry->task))
               <li class="active-step">2
           @else
               <li>2
@@ -51,7 +54,7 @@
                 @endif
             </div>
           </li>
-          @if(isset($entry->task) && is_null($entry->task))
+          @if(isset($entry->task) && is_null($entry->interview))
               <li class="active-step">3
           @else
               <li>3
@@ -63,7 +66,7 @@
                 @endif
             </div>
           </li>
-          @if(isset($entry->interview) && is_null($entry->interview))
+          @if(isset($entry->interview) && is_null($entry->approved))
               <li class="active-step">4
           @else
               <li>4
@@ -75,7 +78,7 @@
                 @endif
             </div>
           </li>
-          @if(isset($entry->approved) && is_null($entry->approved))
+          @if(isset($entry->approved) && !is_null($entry->approved))
               <li class="active-step">5
           @else
               <li>5
@@ -116,7 +119,7 @@
     <!-- end of course candidation statistic -->
 
     <!-- opened courses -->
-    <div class="col-md-12 events-now-text text-center">Отворени Курсове</div>
+    {{-- <div class="col-md-12 events-now-text text-center">Отворени Курсове</div>
     <div class="available-events d-flex flex-row flex-wrap">
       <div class="col-md-6">
         <div class="event-title col-md-12">Програмиране с JAVA</div>
@@ -148,7 +151,7 @@
           <div class="col-md-6">Лектор:Лилия Михайлова</div>
           <div class="col-md-6">Начало: 1 Февруари</div>
         </div>
-      </div>
+      </div> --}}
       <!-- end of opened courses -->
     </div>
   </div>
