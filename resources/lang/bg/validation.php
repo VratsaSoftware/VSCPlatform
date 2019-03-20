@@ -215,5 +215,8 @@ return [
         'source'                   => 'Източник',
         'cv'                       => 'Автобиография',
         'course'                   => 'Курс',
+        'username'                 => 'Име',
+        'lastname'                 => 'Фамилия',
+        'useremail'                => 'E-mail',
     ],
 ];

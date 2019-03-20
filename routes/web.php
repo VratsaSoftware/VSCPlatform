@@ -104,6 +104,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['middleware' => 'isAdmin'], function () {
+        Route::get('applications/all', 'Courses\ApplicationController@applicationsAll')->name('admin.applications');
         Route::get('courses/all', 'Admin\AdminController@allCourses')->name('all.courses');
         Route::get('events/all', 'Admin\AdminController@showAllEvents')->name('admin.events');
 

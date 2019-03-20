@@ -58,9 +58,9 @@ class ApplicationController extends Controller
 
         if (Auth::user()) {
             $data = $request->validate([
-                "username" => 'sometimes', 'string', 'max:255',
-                "lastname" => 'sometimes', 'string', 'max:255',
-                "useremail" => 'sometimes', 'string', 'email', 'max:255', 'unique:users',
+                "username" => 'sometimes|string|max:255',
+                "lastname" => 'sometimes|string|max:255',
+                "email" => 'sometimes|string|email|max:255|unique:users',
                 "phone" => 'required|numeric',
                 "occupation" => 'required',
                 "course" => 'required|in_array:valid_course.*',
@@ -81,7 +81,7 @@ class ApplicationController extends Controller
                 $user->dob = $dob;
             }
             $user->save();
-            $cv = time().'.'.$request->cv->getClientOriginalExtension();
+            $cv = $user->name.time().'.'.$request->cv->getClientOriginalExtension();
             $cvName = str_replace(' ', '', strtolower($cv));
             // $cvName = md5($cvName);
 
@@ -99,9 +99,10 @@ class ApplicationController extends Controller
         }
         // not registered
         $data = $request->validate([
-            "username" => 'required', 'string', 'max:255',
-            "lastname" => 'required', 'string', 'max:255',
-            "useremail" => 'required', 'string', 'email', 'max:255', 'unique:users',
+            "username" => 'required|string|max:255',
+            "lastname" => 'required|string|max:255',
+            "email" => 'required|string|email|max:255|unique:users',
+            "userage" => 'required|numeric|max:120',
             "phone" => 'required|numeric',
             "occupation" => 'required',
             "course" => 'required|in_array:valid_course.*',
@@ -115,23 +116,22 @@ class ApplicationController extends Controller
         ]);
         $role = Role::where('role', 'user')->select('id')->first();
         $dob = null;
-        if (isset($request->userage)) {
-            $year = Carbon::now()->subYears($request->userage)->format('Y');
-            $year .= '-01-01';
-            $dob = Carbon::parse($year)->format('Y-m-d');
-            unset($data['userage']);
-        }
+        $year = Carbon::now()->subYears($request->userage)->format('Y');
+        $year .= '-01-01';
+        $dob = Carbon::parse($year)->format('Y-m-d');
+        unset($data['userage']);
         $newUser = User::create([
             'name' => $data['username'],
             'last_name' => $data['lastname'],
-            'email' => $data['useremail'],
+            'email' => $data['email'],
             'cl_role_id' => $role->id,
             'dob' => $dob,
+            'cl_occupation_id' => $data['occupation'],
             'password' => Hash::make(str_random(12)),
         ]);
 
 
-        $cv = time().'.'.$request->cv->getClientOriginalExtension();
+        $cv = $newUser->name.time().'.'.$request->cv->getClientOriginalExtension();
         $cvName = str_replace(' ', '', strtolower($cv));
         // $cvName = md5($cvName);
 
@@ -140,7 +140,7 @@ class ApplicationController extends Controller
         unset($data['occupation']);
         unset($data['username']);
         unset($data['lastname']);
-        unset($data['useremail']);
+        unset($data['email']);
 
         $newForm = EntryForm::create($data);
         $newEntry = new Entry;
@@ -150,6 +150,8 @@ class ApplicationController extends Controller
 
         $token = Password::getRepository()->create($newUser);
         $newUser->sendPasswordResetNotification($token);
+
+        return redirect('password/reset/'.$token);
     }
 
     /**
@@ -195,5 +197,12 @@ class ApplicationController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function applicationsAll()
+    {
+        $entries = Entry::with('User.Occupation', 'Form')->get();
+
+        return view('admin.applications', ['entries' => $entries]);
     }
 }
