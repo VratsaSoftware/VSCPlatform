@@ -39,13 +39,12 @@
                     <li><a href="#partners"><img src="{{asset('/images/oval.png')}}" alt="nav-img"></a>
                     <li><a href="#testimonials"><img src="{{asset('/images/oval.png')}}" alt="nav-img"></a>
                 </ul>
-
                 <div class="row buttons-right col-md-2">
                     <div id="login-btn" class="col-md-2">
                         <span id="log-in"><a href="{{route('login')}}">ВХОД</a></span>
                     </div>
                     <div id="candidate-btn" class="col-md-2">
-                        <span id="candidate"><a href="{{route('programmingCourses')}}">Кандидатствай</a></span>
+                        <span id="candidate"><a href="{{route('application.create')}}">Кандидатствай</a></span>
                     </div>
                 </div>
             </div>
@@ -235,15 +234,27 @@
                 <div class="main-events d-flex mb-12 flex-row col-md-12 flex-wrap">
                     <div class="p-6 col-md-6 text-center main-event-first">
                         <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/cw18.png')}}" alt="events">
+                        <div class="event-title-top">
+                            <a href="http://codeweek.vratsa.net/" target=" _blank" class="event-top-link">CodeWeek</a>
+                        </div>
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-second">
                         <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/google-garage.jpg')}}" alt="events">
+                        <div class="event-title-top">
+                            <a href="https://learndigital.withgoogle.com/digitalengarazh" target=" _blank" class="event-top-link">Google Digital Garage</a>
+                        </div>
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-first">
                         <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/digital-event.jpg')}}" alt="events">
+                        <div class="event-title-top">
+                            <a href="{{route('digitalMarketing')}}" target=" _blank" class="event-top-link">Digital Marketing</a>
+                        </div>
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-second">
                         <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/HackVratsa.jpg')}}" alt="events">
+                        <div class="event-title-top">
+                            <a href="http://hack.vratsa.net/" target=" _blank" class="event-top-link">HackVratsa</a>
+                        </div>
                     </div>
                 </div>
 
@@ -251,25 +262,46 @@
                     <section class="center slider col-md-11 filmstrip-events">
                         <div>
                             <img src="{{asset('/images/home-events/cw18.png')}}" alt="events">
+                            <div class="event-title-top-small">
+                                <a href="http://hack.vratsa.net/" target=" _blank" class="event-top-link">CodeWeek</a>
+                            </div>
                         </div>
                         <div>
                             <img src="{{asset('/images/home-events/google-garage.jpg')}}" alt="events">
+                            <div class="event-title-top-small">
+                                <a href="https://learndigital.withgoogle.com/digitalengarazh" target=" _blank" class="event-top-link">Google Digital Garage</a>
+                            </div>
                         </div>
 
                         <div>
                             <img src="{{asset('/images/home-events/HackVratsa.jpg')}}" alt="events">
+                            <div class="event-title-top-small">
+                                <a href="http://hack.vratsa.net/" target=" _blank" class="event-top-link">HackVratsa</a>
+                            </div>
                         </div>
                         <div>
                             <img src="{{asset('/images/home-events/railsgirls.png')}}" alt="events">
+                            <div class="event-title-top-small">
+                                <a href="http://railsgirls.com/" target=" _blank" class="event-top-link">RailsGirls</a>
+                            </div>
                         </div>
                         <div>
                             <img src="{{asset('/images/home-events/th.jpg')}}" alt="events">
+                            <div class="event-title-top-small">
+                                <a href="http://hunt.vratsa.net/" target=" _blank" class="event-top-link">TreasureHunt</a>
+                            </div>
                         </div>
                         <div>
                             <img src="{{asset('/images/home-events/edit-vr.jpg')}}" alt="events">
+                            <div class="event-title-top-small">
+                                <a href="http://eotr.edit.bg/" target=" _blank" class="event-top-link">EditOnTheRoad</a>
+                            </div>
                         </div>
                         <div>
                             <img src="{{asset('/images/home-events/digital-event.jpg')}}" alt="events">
+                            <div class="event-title-top-small">
+                                <a href="{{route('digitalMarketing')}}" target=" _blank" class="event-top-link">DigitalMarketing</a>
+                            </div>
                         </div>
                     </section>
                 </div>
@@ -340,20 +372,20 @@
                     <span>Какво казват за нас нашите курсисти?</span>
                 </div>
                 <div class="col-md-12 flex-row justify-content-between d-flex flex-wrap testimonials-students text-center">
-                    <div class="p-3 col-md-3 first-student student-1">
+                    <div class="p-2 col-md-3 first-student student-1">
                         <img src="{{asset('/images/home-testimonials/adi-todorova.jpg')}}" alt="Adi Todorova" class="student-img img-fluid">
                         <div class="student-comment">Супер готина организация, която помага на всеки който желае да се развие в ИТ сферата. Курсовете им дават добри основи в програмирането, а най-яката част е запознанството нови хора.</div>
                         <div class="student-name">Аделина Тодорова, студент</div>
                     </div>
 
-                    <div class="p-3 col-md-3 second-student student-2">
+                    <div class="p-2 col-md-3 second-student student-2">
                         <img src="{{asset('/images/home-testimonials/svetli_170x170.png')}}" alt="Svetoslav Vasilev" class="student-img img-fluid">
                         <div class="student-comment">Невероятен тръмплин, с който можеш да
                             започнеш работа в ИТ Сферата. Лично преминах 9 - месечния PHP курс, след което започнах работа веднага.</div>
                         <div class="student-name">Светослав Василев, програмист</div>
                     </div>
 
-                    <div class="p-3 col-md-3 third-student student-3">
+                    <div class="p-2 col-md-3 third-student student-3">
                         <img src="{{asset('/images/home-testimonials/ivan-spasov.png')}}" alt="Ivan Spasov" class="student-img img-fluid">
                         <div class="student-comment">Враца Софтуер не е просто общност те са едно вдъхновяващо семейство което те кара да се чувстваш като незаменима и важна част от нещо специално.</div>
                         <div class="student-name">Иван Спасов, студент</div>

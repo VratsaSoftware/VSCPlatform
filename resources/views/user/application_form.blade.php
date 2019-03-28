@@ -99,40 +99,40 @@
                                 </select>
                             </p>
                             <p>
-                                <label for="suitable_candidate">Защо смятате, че тези обучения са подходящ за Вас? <span class="req-star-form">*</span></label>
+                                <label for="suitable_candidate">Защо смятате, че тези обучения са подходящ за Вас? <span id="candidate-label"></span> <span class="req-star-form">*</span></label>
                                 @if ($errors->has('suitable_candidate'))
                                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                                         <strong>{{ $errors->first('suitable_candidate') }}</strong>
                                     </span>
                                 @endif
-                                <textarea name="suitable_candidate" rows="8" cols="80" placeholder="между 100 и 500 символа" class="section-el-bold">{{old('suitable_candidate')}}</textarea>
+                                <textarea maxlength="500" name="suitable_candidate" rows="8" cols="80" placeholder="между 100 и 500 символа" class="section-el-bold">{{old('suitable_candidate')}}</textarea>
                             </p>
                             <p>
-                                <label for="suitable_training">Защо смятате, че именно Вие сте подходящ за ИТ обучение? <span class="req-star-form">*</span></label>
+                                <label for="suitable_training">Защо смятате, че именно Вие сте подходящ за ИТ обучение? <span id="training-label"></span> <span class="req-star-form">*</span></label>
                                 @if ($errors->has('suitable_training'))
                                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                                         <strong>{{ $errors->first('suitable_training') }}</strong>
                                     </span>
                                 @endif
-                                <textarea name="suitable_training" rows="8" cols="80" placeholder="между 100 и 500 символа" class="section-el-bold">{{old('suitable_training')}}</textarea>
+                                <textarea maxlength="500" name="suitable_training" rows="8" cols="80" placeholder="между 100 и 500 символа" class="section-el-bold">{{old('suitable_training')}}</textarea>
                             </p>
                             <p>
-                                <label for="accompliments">Опишете 3 постижения, с които се гордеете (може да са в личен, професионален план или свързани с учене). <span class="req-star-form">*</span></label>
+                                <label for="accompliments">Опишете 3 постижения, с които се гордеете (може да са в личен, професионален план или свързани с учене).<span id="accompliments-label"></span> <span class="req-star-form">*</span></label>
                                 @if ($errors->has('accompliments'))
                                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                                         <strong>{{ $errors->first('accompliments') }}</strong>
                                     </span>
                                 @endif
-                                <textarea name="accompliments" rows="8" cols="80" placeholder="между 100 и 500 символа" class="section-el-bold">{{old('accompliments')}}</textarea>
+                                <textarea maxlength="500" name="accompliments" rows="8" cols="80" placeholder="между 100 и 500 символа" class="section-el-bold">{{old('accompliments')}}</textarea>
                             </p>
                             <p>
-                                <label for="expecatitions">Какви са очакванията Ви за това обучение? <span class="req-star-form">*</span></label>
+                                <label for="expecatitions">Какви са очакванията Ви за това обучение? <span id="expecatitions-label"></span><span class="req-star-form">*</span></label>
                                 @if ($errors->has('expecatitions'))
                                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                                         <strong>{{ $errors->first('expecatitions') }}</strong>
                                     </span>
                                 @endif
-                                <textarea name="expecatitions" rows="8" cols="80" placeholder="между 100 и 500 символа" class="section-el-bold">{{old('expecatitions')}}</textarea>
+                                <textarea maxlength="500" name="expecatitions" rows="8" cols="80" placeholder="между 100 и 500 символа" class="section-el-bold">{{old('expecatitions')}}</textarea>
                             </p>
                             <p>
                                 <label for="use">Как смятате да използвате наученото от това обучение? <span class="req-star-form">*</span></label><br/>
@@ -184,4 +184,5 @@
             </div>
         </div>
     </div>
+    <script src="{{asset('js/application-form-text-counter.js')}}" charset="utf-8"></script>
 @endsection

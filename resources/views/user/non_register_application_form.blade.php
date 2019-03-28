@@ -171,28 +171,5 @@
             </div>
         </div>
     </div>
-    <script type="text/javascript">
-    $('textarea[name="suitable_candidate"]').on('keyup', function() {
-            symbolCount(this,$('#candidate-label'));
-    });
-
-    $('textarea[name="suitable_training"]').on('keyup', function() {
-            symbolCount(this,$('#training-label'));
-    });
-
-    $('textarea[name="accompliments"]').on('keyup', function() {
-            symbolCount(this,$('#accompliments-label'));
-    });
-
-    $('textarea[name="expecatitions"]').on('keyup', function() {
-            symbolCount(this,$('#expecatitions-label'));
-    });
-
-    function symbolCount(element,label){
-        len = element.value.length,
-        lbl = label;
-        lbl.text('символа :'+len);
-    }
-
-    </script>
+    <script src="{{asset('js/application-form-text-counter.js')}}" charset="utf-8"></script>
 @endsection

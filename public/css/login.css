@@ -6,6 +6,7 @@ html {
     background-size: cover;
     overflow: hidden;
     background-blend-mode: lighten;
+    transition: background 0.5s linear;
 }
 
 body {
@@ -157,11 +158,11 @@ a:hover {
 
 #remember-container {
     position: relative;
-    /*margin: -5px 20px;*/
-    margin-top: 2vw;
+    /* margin: -5px 20px; */
+    /* margin-top: 2vw; */
     cursor: pointer;
     text-align: center;
-    padding-left: 1vw;
+    /* padding-left: 1vw; */
 }
 
 #register-container {
@@ -193,6 +194,7 @@ label {
     padding: 0 !important;
     margin: 0 !important;
     width: 2vw;
+    left: -1%;
 }
 
 #female {
@@ -215,7 +217,7 @@ label {
     width: 16px;
     height: 15px;
     margin-top: 0;
-    left: -1vw;
+    left: -1.5vw;
 }
 
 .checkbox:checked:active {
@@ -296,14 +298,16 @@ label {
 }
 
 #register {
-    display: inline-block;
+    /* display: inline-block; */
     /* margin-left: 6vw; */
-    font-family: Comfortaa;
-    color: green;
+    font-family: 'Comfortaa', sans-serif;
+    color: #6ab14f;
     font-size: 13px;
     /* position: absolute; */
-    margin-top: 3vw;
+    /* margin-top: 3vw; */
     cursor: pointer;
+    text-align: left;
+    padding-left: 1%;
 }
 
 #register:hover {
