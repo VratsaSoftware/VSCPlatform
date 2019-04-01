@@ -75,8 +75,6 @@
 }
 
 .slick-slide img {
-    max-width: 95vw;
-    width: 14vw;
     display: block;
     border-radius: 20px;
 }
@@ -105,4 +103,22 @@
 
 .slick-arrow.slick-hidden {
     display: none;
+}
+
+.event-title-top-small {
+    display: none;
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+    .slick-slide img {
+        max-width: 95vw;
+        width: 14vw;
+        display: block;
+        border-radius: 20px;
+    }
+
+    .event-title-top-small {
+        display: block;
+    }
 }
