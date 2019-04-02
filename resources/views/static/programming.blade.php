@@ -255,21 +255,21 @@
                     <img src="{{asset('/images/detail-1.png')}}" alt="info-php-second" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Продължителност: 9 месеца
+                        Продължителност 9 месеца
                     </span>
                 </div>
                 <div class="col-md-4 second-detail text-center">
                     <img src="{{asset('/images/detail-2.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Честота на провеждане (Интензивност): Два пъти седмично
+                        Два пъти седмично
                     </span>
                 </div>
                 <div class="col-md-4 third-detail text-center">
                     <img src="{{asset('/images/rocket-extra-small.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Предварителни изисквания: Не е необходима. Курсът е предназначен за начинаещи.
+                        Предназначен за начинаещи
                     </span>
                 </div>
 
@@ -279,7 +279,7 @@
                     <img src="{{asset('/images/detail-4.png')}}" alt="info-php-second" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Подготовка вкъщи: ~10 часа / седмично
+                        ~ 10ч. седмично за подготовка вкъщи
                     </span>
                 </div>
 
@@ -289,7 +289,7 @@
                     <img src="{{asset('/images/detail-5.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Изпити и проекти: Всяко ниво завършва с изпит и проект.
+                        Всяко ниво завършва с изпит и проект
                     </span>
                 </div>
 
@@ -301,7 +301,9 @@
                     <img src="{{asset('/images/detail-6.png')}}" alt="info-php-second" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Сертификати: Професионален (над 80%) , обикновен (над 50%)
+                        Сертификати:<br />
+                        Професионален<br /> (над 80%)<br />
+                        Обикновен<br /> (над 50%)<br />
                     </span>
                 </div>
 
@@ -311,7 +313,7 @@
                     <img src="{{asset('/images/detail-7.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Менторска програма: Да
+                        Менторска програма
                     </span>
                 </div>
 

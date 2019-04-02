@@ -8,6 +8,7 @@
             <li class="nav-item"><a href="{{route('about')}}">Екип</a></li>
             <li class="nav-item"><a href="{{route('year_reports')}}">Годишни Отчети</a></li>
             <li class="nav-item"><a href="{{route('contacts')}}">Контакти</a></li>
+            <li class="nav-item"><a href="http://gnezdoto.vratsasoftware.com/" target=" _blank">Гнездото</a></li>
             <li class="nav-item"><a href="{{route('programmingCourses')}}">Програмиране</a></li>
             <li class="nav-item"><a href="{{route('digitalMarketing')}}">Дигитален Маркетинг</a></li>
             <li class="nav-item"><a href="{{route('login')}}" class="right-mobile">Вход</a></li>

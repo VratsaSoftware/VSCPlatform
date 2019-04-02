@@ -56,7 +56,7 @@
         <div class="section">
             <div id="carousel">
                 <div class="slideshow-container">
-
+                    {{-- title = 33 characters, text min = 125 / max = 250 --}}
                     <div class="mySlides" data-src="{{asset('/images/home-top-slider/programming-pic.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                         <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
@@ -70,16 +70,16 @@
                                 </span>
                             </p>
                         </div>
-                        {{-- <p class="btn-content-wrap">
+                        <p class="btn-content-wrap">
                             <span class="title-btns-content"><a href="{{route('programmingCourses')}}">Кандидатствай</a></span>
-                        </p> --}}
+                        </p>
                     </div>
 
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/digital-big.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/gnezdoto.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                         <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
-                                <span class="slider-title">Безплатен 4-месечен курс по дигитален маркетинг</span>
+                                <span class="slider-title">Гнездото</span>
                             <p />
                             <p>
                                 <span class="slider-subtitle-content">
@@ -87,16 +87,16 @@
                                 </span>
                             </p>
                         </div>
-                        {{-- <p class="btn-content-wrap">
-                            <span class="title-btns-content"><a href="{{route('digitalMarketing')}}">Кандидатствай</a></span>
-                        </p> --}}
+                        <p class="btn-content-wrap">
+                            <span class="title-btns-content"><a href="http://gnezdoto.vratsasoftware.com/">Виж още</a></span>
+                        </p>
                     </div>
 
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/cw-1.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/arduino.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                         <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
-                                <span class="slider-title">CodeWeek Враца - най-голямото ИТ събитие на северозапада</span>
+                                <span class="slider-title">Arduino</span>
                             <p />
                             <p>
                                 <span class="slider-subtitle-content">
@@ -105,12 +105,12 @@
                                 </span>
                             </p>
                         </div>
-                        {{-- <p class="btn-content-wrap">
+                        <p class="btn-content-wrap">
                             <span class="title-btns-content"><a href="http://codeweek.vratsa.net" target=" _blank">Кандидатствай</a></span>
-                        </p> --}}
+                        </p>
                     </div>
 
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/kids-1.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/mindhub.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                         <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
@@ -122,16 +122,16 @@
                                     </span>
                                 </p>
                         </div>
-                        {{-- <p class="btn-content-wrap">
+                        <p class="btn-content-wrap">
                             <span class="title-btns-content"><a href="https://mindhub.bg/" target="_blank">Кандидатствай</a></span>
-                        </p> --}}
+                        </p>
                     </div>
 
                     <div class="mySlides" data-src="{{asset('/images/home-top-slider/telerik_academy_school.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                         <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
-                                <span class="slider-title">9 групи на Телерик академия във Враца</span>
+                                <span class="slider-title">hack vratsa</span>
                                 <p />
                                 <p>
                                     <span class="slider-subtitle-content">През новата учебна година ще има 9 групи на Академия Телерик за ученици, които се интересуват от ИТ. Запиши се за Разработка на игри, Дигитални науки или Алгоритмично
@@ -139,9 +139,9 @@
                                     </span>
                                 </p>
                         </div>
-                        {{-- <p class="btn-content-wrap">
+                        <p class="btn-content-wrap">
                             <span class="title-btns-content"><a href="https://www.telerikacademy.com/school" target="_blank">Кандидатствай</a></span>
-                        </p> --}}
+                        </p>
                     </div>
 
                     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -151,11 +151,11 @@
                 <br>
 
                 <div id="thumbnails" class="col-md-12">
-                    <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/vsc-thumb-big.png')}}" width="100%" alt="gallery-nav"></span>
-                    <span class="dot" onclick="currentSlide(2)"><img src="{{asset('/images/home-top-slider/digital_thumb_big.png')}}" width="100%" alt="gallery-nav"></span>
-                    <span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/cropped-cweekLogo.png')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/vsc-thumb-big-2.png')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(2)"><img src="{{asset('/images/home-top-slider/gnezdoto_logo.jpg')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/arduino_logo.png')}}" width="100%" alt="gallery-nav"></span>
                     <span class="dot" onclick="currentSlide(4)"><img src="{{asset('/images/home-top-slider/mind-hub-crop.png')}}" width="100%" alt="gallery-nav"></span>
-                    <span class="dot" onclick="currentSlide(5)"><img src="{{asset('/images/home-top-slider/telerik-tumb2.png')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(5)"><img src="{{asset('/images/home-top-slider/hack_thumb.png')}}" width="100%" alt="gallery-nav"></span>
                 </div>
 
             </div>
@@ -233,27 +233,27 @@
                 </div>
                 <div class="main-events d-flex mb-12 flex-row col-md-12 flex-wrap">
                     <div class="p-6 col-md-6 text-center main-event-first">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/cw18.png')}}" alt="events">
-                        <div class="event-title-top">
-                            <a href="http://codeweek.vratsa.net/" target=" _blank" class="event-top-link">CodeWeek</a>
-                        </div>
-                    </div>
-                    <div class="p-6 col-md-6 text-center main-event-second">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/google-garage.jpg')}}" alt="events">
-                        <div class="event-title-top">
-                            <a href="https://learndigital.withgoogle.com/digitalengarazh" target=" _blank" class="event-top-link">Google Digital Garage</a>
-                        </div>
-                    </div>
-                    <div class="p-6 col-md-6 text-center main-event-first">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/digital-event.jpg')}}" alt="events">
-                        <div class="event-title-top">
-                            <a href="{{route('digitalMarketing')}}" target=" _blank" class="event-top-link">Digital Marketing</a>
-                        </div>
-                    </div>
-                    <div class="p-6 col-md-6 text-center main-event-second">
                         <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/HackVratsa.jpg')}}" alt="events">
                         <div class="event-title-top">
                             <a href="http://hack.vratsa.net/" target=" _blank" class="event-top-link">HackVratsa</a>
+                        </div>
+                    </div>
+                    <div class="p-6 col-md-6 text-center main-event-second">
+                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/th.jpg')}}" alt="events">
+                        <div class="event-title-top">
+                            <a href="https://learndigital.withgoogle.com/digitalengarazh" target=" _blank" class="event-top-link">TreasureHunt</a>
+                        </div>
+                    </div>
+                    <div class="p-6 col-md-6 text-center main-event-first">
+                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/railsgirls.png')}}" alt="events">
+                        <div class="event-title-top">
+                            <a href="{{route('digitalMarketing')}}" target=" _blank" class="event-top-link">RailsGirls</a>
+                        </div>
+                    </div>
+                    <div class="p-6 col-md-6 text-center main-event-second">
+                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/cw18.png')}}" alt="events">
+                        <div class="event-title-top">
+                            <a href="http://codeweek.vratsa.net/" target=" _blank" class="event-top-link">CodeWeek</a>
                         </div>
                     </div>
                 </div>

@@ -19,5 +19,8 @@
                 <a href="{{route('digitalMarketing')}}">Дигитален Маркетинг</a>
             </div>
         </li>
+        <li>
+            <a href="http://gnezdoto.vratsasoftware.com/" target=" _blank">Гнездото</a>
+        </li>
     </ul>
 </nav>
