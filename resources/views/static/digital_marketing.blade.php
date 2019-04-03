@@ -205,7 +205,8 @@
                     <img src="{{asset('/images/detail-5-marketing.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Всяко ниво завършва с изпит и проект
+                        всяко ниво завършва с<br/>
+                        изпит и проект
                     </span>
                 </div>
 

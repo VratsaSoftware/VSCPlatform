@@ -164,7 +164,7 @@ a, .title-btns-content>a {
 
 .btn-content-wrap {
     /* margin-top: 3vw; */
-    margin-left: 20%;
+    /* margin-left: 20%; */
 }
 
 .mySlides>img {
@@ -273,20 +273,34 @@ a, .title-btns-content>a {
     color: #fff;
     text-decoration: none;
     padding: 15px;
+    /*
     background: #1C8800;
     border-radius: 8px;
-    width: 200px;
-    position: absolute;
+    width: 200px; */
+    /* position: absolute; */
     /* left: 50%; */
     /* margin-left: -25px; */
 }
 
-.title-btns>a:hover, .title-btns-content>a:hover {
+.title-btns>a:hover {
     text-decoration: none;
     color: #1C8800;
     background-color: #fff;
 }
 
+.title-btns-content:hover {
+    background-color: #fff;
+}
+
+.title-btns-content:hover .sub-btn {
+    color: #1C8800;
+    text-decoration: none;
+}
+
+/* .title-btns-content>a:hover {
+    text-decoration: none;
+    color: #1C8800;
+} */
 /* Number text (1/3 etc) */
 .numbertext {
     color: #f2f2f2;
@@ -298,24 +312,30 @@ a, .title-btns-content>a {
 
 /* The dots/bullets/indicators */
 .dot {
+    /*border-radius:5px;*/
     margin-right: 100px;
     cursor: pointer;
     height: 10%;
     width: 10%;
     margin: 0 2px;
-    background-color: #bbb;
+    background-color: #fff;
     display: inline-block;
     transition: background-color 0.6s ease;
     opacity: 0.2;
 }
 
+.dot>img {
+    /*border-radius:50px;*/
+}
+
 #thumbnails>.active {
-    border: 5px solid #fff;
+    border: 3px solid #fff;
+    /*border-radius:50%;*/
     opacity: 1;
 }
 
 .active, .dot:hover {
-    background-color: #717171;
+    /*background-color: #717171;*/
 }
 
 /* Fading animation */
@@ -691,7 +711,7 @@ a, .title-btns-content>a {
     background: #FFFFFF;
     border-radius: 10px;
     font-family: Ubuntu;
-    margin-bottom: 1%;
+    margin-bottom: 2%;
 }
 
 .first-student:hover, .second-student:hover, .third-student:hover {
@@ -859,7 +879,7 @@ a, .title-btns-content>a {
 }
 
 .menu li {
-    display: block;
+    /* display: block; */
     padding: 15px 0 15px 0;
     border-bottom: #dddddd 1px solid;
 }
@@ -868,8 +888,19 @@ a, .title-btns-content>a {
     text-decoration: none;
     margin: 0px;
     color: #666;
+    padding-top: 2%;
+    padding-bottom: 2%;
+    padding-left: 27%;
+    padding-right: 27%;
 }
 
+.about-go, .edu-go {
+    display: none;
+}
+
+/* .go-right {
+    padding-left: 25% !important;
+} */
 .hamburger-nav>.nav-item:hover {
     background-color: rgba(255, 255, 255, 2);
 }
@@ -972,6 +1003,32 @@ a, .title-btns-content>a {
     background: rgba(255, 255, 255, 0.6);
 }
 
+.btn-to-go {
+    font-family: Ubuntu;
+    font-style: normal;
+    font-weight: bold;
+    line-height: normal;
+    font-size: 1.2vw;
+    text-align: center;
+    letter-spacing: 1.25px;
+    color: #fff;
+    text-decoration: none;
+    padding: 15px;
+    background: #1C8800;
+    border-radius: 8px;
+    width: 200px;
+    /* position: absolute; */
+}
+
+.title-btns-content {
+    display: inline-block;
+    /* margin-top: 2vw; */
+    height: 3.5vw;
+    width: 15vw;
+    background: #1C8800;
+    border-radius: 8px;
+}
+
 /*.buttons-right{
     margin-left: -10vw !important;
 }*/
@@ -979,6 +1036,10 @@ a, .title-btns-content>a {
 /*query's */
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+    .secondary-events {
+        display: none;
+    }
+
     .main-nav-list, .buttons-right {
         display: none !important;
     }
@@ -1030,7 +1091,7 @@ a, .title-btns-content>a {
     }
 
     #logo {
-        padding-left: 0;
+        /* padding-left: 0; */
     }
 
     .main-logo {
@@ -1145,19 +1206,29 @@ a, .title-btns-content>a {
 
     .btn-content-wrap {
         margin-top: -18vw;
+        margin-left: auto;
         /* margin-top: 5vw; */
         /* display: table;
         position: absolute; */
         /* margin-left: 37%; */
+        /* margin-left: 25%; */
     }
 
     body {
         padding: 0;
     }
+
+    .title-btns-content {
+        width: 35vw;
+    }
 }
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
+    .secondary-events {
+        display: none;
+    }
+
     .main-nav-list, .buttons-right {
         display: none !important;
     }
@@ -1198,7 +1269,7 @@ a, .title-btns-content>a {
         /* margin-top: 5vw; */
         display: table;
         position: absolute;
-        /* margin-left: 37%; */
+        margin-left: 1%;
         width: 500px;
         position: absolute;
         /* left: 50%;
@@ -1206,9 +1277,9 @@ a, .title-btns-content>a {
     }
 
     .title-btns-content {
-        display: table-cell;
+        /* display: table-cell; */
         text-align: center;
-        vertical-align: bottom;
+        /* vertical-align: bottom; */
     }
 
     .hamburger {
@@ -1315,10 +1386,18 @@ a, .title-btns-content>a {
     body {
         padding: 0;
     }
+
+    .title-btns-content {
+        width: 30vw;
+    }
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+    .secondary-events {
+        display: block;
+    }
+
     .main-nav-list, .buttons-right {
         display: none !important;
     }
@@ -1459,20 +1538,27 @@ a, .title-btns-content>a {
         margin-top: 0vh;
     }
 
-    body {
-        padding-left: 5%;
-        padding-right: 5%;
+    /* body {
+        padding-left: 3%;
+        padding-right: 3%;
+    } */
+    .title-btns-content {
+        width: 28vw;
     }
 }
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+    .secondary-events {
+        display: block;
+    }
+
     .main-nav-list {
         display: inline-block !important;
     }
 
     .mySlides>img {
-        height: 95vh;
+        height: 90vh;
     }
 
     .buttons-right {
@@ -1555,17 +1641,24 @@ a, .title-btns-content>a {
         display: block;
     }
 
-    .btn-content-wrap {
-        /* margin-left: 43%; */
-    }
-
+    /* .btn-content-wrap {
+        margin-left: 23%;
+    } */
     body {
         padding: 0;
+    }
+
+    .title-btns-content {
+        width: 20vw;
     }
 }
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+    .secondary-events {
+        display: block;
+    }
+
     .main-event-first>img, .main-event-second>img {
         height: 20vw;
     }
@@ -1605,7 +1698,7 @@ a, .title-btns-content>a {
     }
 
     .mySlides>img {
-        height: 85vh;
+        height: 95vh;
     }
 
     #thumbnails {
@@ -1705,6 +1798,33 @@ a, .title-btns-content>a {
 
     #log-in {
         margin-left: -20px;
+    }
+
+    /* .btn-content-wrap {
+        margin-left: 25%;
+    } */
+    .title-btns-content {
+        width: 15vw;
+    }
+}
+
+@media screen and (min-width: 1600px) {
+
+    /* .btn-content-wrap {
+        margin-left: 23%;
+    } */
+    .title-btns-content>a {
+        width: 400px;
+    }
+}
+
+@media screen and (min-width: 1900px) {
+
+    /* .btn-content-wrap {
+        margin-left: 25%;
+    } */
+    .title-btns-content>a {
+        width: 400px;
     }
 }
 

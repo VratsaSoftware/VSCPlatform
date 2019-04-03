@@ -34,6 +34,8 @@
     <meta property="og:description" content="Безплатни курсове по програмиране" />
     <meta property="og:image" content="{{asset('/images/vso-png-big-2.png')}}" />
 
+    <link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}" />
+
 </head>
 
 <body>

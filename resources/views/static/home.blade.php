@@ -27,7 +27,7 @@
         <div class="section">
             <div id="header" class="col-md-11 col-sm-12 row">
                 <div id="logo" class="col-md-1 col-sm-1">
-                    <h1><a href="{{route('home')}}"><img src="{{asset('/images/vso-png-big-2.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
+                    <h1><a href="{{route('home')}}"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
                 </div>
 
                 @include('static.menu')
@@ -56,7 +56,7 @@
         <div class="section">
             <div id="carousel">
                 <div class="slideshow-container">
-                    {{-- title = 33 characters, text min = 125 / max = 250 --}}
+                    {{-- title = 33 characters, text min = 125 / max = 290 --}}
                     <div class="mySlides" data-src="{{asset('/images/home-top-slider/programming-pic.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                         <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
@@ -64,32 +64,33 @@
                                 <span class="slider-title">9-месечни курсове по програмиране</span>
                             <p />
                             <p>
-                                <span class="slider-subtitle-content">
-                                    Целта на обучението е да придобиете основни познания по програмиране и да имате възможност да започнете стаж в софтуерна компания във Враца! Към момента 20 човека завършили курсовете работят в ИТ сферата във
-                                    Враца и 3 компании отвориха офиси в града.
-                                </span>
+                                    <p class="slider-subtitle-content">
+                                        Обучението ще ви помогне да придобиете основни познания по програмиране и да имате възможност да започнете стаж в софтуерна компания във Враца!
+                                        Към момента 24 човека завършили курсовете работят в ИТ сферата във Враца и 3 компании отвориха офиси в града.
+                                    </p>
+                                    <br/>
+
+                                    <span class="title-btns-content"><a class="sub-btn" href="{{route('programmingCourses')}}">Кандидатствай</a></span>
                             </p>
                         </div>
-                        <p class="btn-content-wrap">
-                            <span class="title-btns-content"><a href="{{route('programmingCourses')}}">Кандидатствай</a></span>
-                        </p>
                     </div>
 
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/gnezdoto.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/cws_fb_cover2 (1).png')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                         <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">Гнездото</span>
                             <p />
                             <p>
-                                <span class="slider-subtitle-content">
-                                    Започваме курс по дигитален маркетинг - за първи път във Враца!
-                                </span>
+                                <p class="slider-subtitle-content">
+                                    "Гнездото" е първото споделено работно пространство в Северозападна България и е проект на <b>"Враца софтуер общество".</b>
+                                    <br />В момента работим по неговото създаване!
+                                </p>
+                                <br/>
+
+                                <span class="title-btns-content"><a class="sub-btn" href="http://gnezdoto.vratsasoftware.com/" target=" _blank">виж още</a></span>
                             </p>
                         </div>
-                        <p class="btn-content-wrap">
-                            <span class="title-btns-content"><a href="http://gnezdoto.vratsasoftware.com/">Виж още</a></span>
-                        </p>
                     </div>
 
                     <div class="mySlides" data-src="{{asset('/images/home-top-slider/arduino.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
@@ -99,49 +100,51 @@
                                 <span class="slider-title">Arduino</span>
                             <p />
                             <p>
-                                <span class="slider-subtitle-content">
-                                    CodeWeek Враца има една основна цел: да те запознае отблизо с най-популярните възможности за
-                                    професионално развитие в 21 век.
-                                </span>
+                                <p class="slider-subtitle-content">
+                                    Скоро стартираме курс по Arduino!
+                                    Arduino е една от най-разпространените платформи за хоби роботика. Това е микроконтролер с огромно общество от потребители, като през годините е използван за хиляди разнообразни проекти.
+                                </p>
+                                <br/>
+
+                                <span class="title-btns-content"><a class="sub-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSf5-bKSKqJcMDONIrp93ggmYvaW84x3DR9e2em-uQf5LhH6aA/viewform" target=" _blank">кандидатствай</a></span>
                             </p>
                         </div>
-                        <p class="btn-content-wrap">
-                            <span class="title-btns-content"><a href="http://codeweek.vratsa.net" target=" _blank">Кандидатствай</a></span>
-                        </p>
                     </div>
 
                     <div class="mySlides" data-src="{{asset('/images/home-top-slider/mindhub.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                         <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
-                                <span class="slider-title">Ново: ИТ курсове за деца 6-11год. във Враца </span>
+                                <span class="slider-title">ИТ курсове за деца 6-11год. във Враца </span>
                                 <p />
                                 <p>
-                                    <span class="slider-subtitle-content">MindHub e първият иновативен клуб по програмиране за деца на възраст между 6 и 11 години. През учебната 2018/2019г за първи път и във Враца ще се провеждат курсове на Майнд
-                                        хъб (mindhub).
-                                    </span>
+                                    <p class="slider-subtitle-content">
+                                        MindHub e първият иновативен клуб по програмиране за деца на възраст между 6 и 11 години.
+                                        През учебната 2018/2019г за първи път и във Враца ще се провеждат курсове на Майнд хъб (mindhub).
+                                    </p>
+                                    <br/>
+
+                                    <span class="title-btns-content"><a class="sub-btn" href="https://mindhub.bg/" target=" _blank">виж още</a></span>
                                 </p>
                         </div>
-                        <p class="btn-content-wrap">
-                            <span class="title-btns-content"><a href="https://mindhub.bg/" target="_blank">Кандидатствай</a></span>
-                        </p>
                     </div>
 
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/telerik_academy_school.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/hack.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                         <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
-                                <span class="slider-title">hack vratsa</span>
+                                <span class="slider-title">Hack Vratsa</span>
                                 <p />
                                 <p>
-                                    <span class="slider-subtitle-content">През новата учебна година ще има 9 групи на Академия Телерик за ученици, които се интересуват от ИТ. Запиши се за Разработка на игри, Дигитални науки или Алгоритмично
-                                        програмиране. За ученици 4-12 клас.
-                                    </span>
+                                    <p class="slider-subtitle-content">
+                                        Човешкия вид е безспорен господар на Земята. Отдавна сме усвоили огъня, обработваме голям процент от сушата, създаваме собствени езера и острови, добиваме ресурси от недрата на планетата и много други.
+                                        Оставяме своя все по-голям отпечатък и това се усеща.
+                                    </p>
+                                    <br/>
+
+                                    <span class="title-btns-content"><a class="sub-btn" href="http://hack.vratsa.net/" target=" _blank">виж още</a></span>
                                 </p>
                         </div>
-                        <p class="btn-content-wrap">
-                            <span class="title-btns-content"><a href="https://www.telerikacademy.com/school" target="_blank">Кандидатствай</a></span>
-                        </p>
                     </div>
 
                     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -177,7 +180,7 @@
 
 
                     <div class="num-num col-md-2 bd-highlight">
-                        <div class="num-big-num count">1570</div>
+                        <div class="num-big-num count">1740</div>
                         <div class="num-content">души посетили наши събития</div>
                     </div>
                     <div class="right-line col-md-1">
@@ -186,7 +189,7 @@
 
 
                     <div class="num-num col-md-2 bd-highlight">
-                        <div class="num-big-num count">310</div>
+                        <div class="num-big-num count">405</div>
                         <div class="num-content">души започнали курс</div>
                     </div>
                     <div class="right-line col-md-1">
@@ -195,7 +198,7 @@
 
 
                     <div class="num-num col-md-2 bd-highlight">
-                        <div class="num-big-num count">4</div>
+                        <div class="num-big-num count">5</div>
                         <div class="num-content">години</div>
                     </div>
 
@@ -427,7 +430,7 @@
                 $('head').append('<link rel="preload stylesheet" href="{{asset('/css/bootstrap-grid.min.css')}}" as="style">');
                 $('head').append('<link rel="preload stylesheet" href="{{asset('/css/slick.css')}}" as="style">');
                 $('head').append('<link rel="preload stylesheet" href="{{asset('/css/slick-theme.css')}}" as="style">');
-
+                $('head').append('<link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}" />');
                 var frontGallery = document.createElement("script");
                 frontGallery.src = "{{asset('/js/front-gallery.js')}}";
                 var customGallery = document.createElement("script");

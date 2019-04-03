@@ -110,7 +110,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 1: Ще мога да създавам реални уеб сайтове с WordPress.Ще направя уеб сайт за реален клиент (фирма, организация или човек).
+                                            Какво ще знам и мога след Ниво 1: Основи на програмирането с PHP - Създаване на уеб страници с HTML&CSS. Основи на програмирането с PHP.Работа с git
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
@@ -118,6 +118,7 @@
                                         <img src="{{asset('/images/code-logos/html-transperent.png')}}" alt="html-logo" class="code-logos-program" title="HTML5">
                                         <img src="{{asset('/images/code-logos/css-original.png')}}" alt="html-logo" class="code-logos-program" title="CSS3">
                                         <img src="{{asset('/images/code-logos/php-original.png')}}" alt="html-logo" class="code-logos-program" title="PHP7">
+                                        <img src="{{asset('/images/code-logos/git-original.png')}}" alt="html-logo" class="code-logos-program" title="GIT">
                                     </div>
                                 </div>
                                 <!-- end of first-lvl -->
@@ -126,7 +127,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 2: Ще мога да създавам реални уеб сайтове с WordPress.Ще направя уеб сайт за реален клиент (фирма, организация или човек).
+                                            Какво ще знам и мога след Ниво 2: Бази данни - Работа с MySQL база данни и създаване на PHP уеб приложения с база данни
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
@@ -141,7 +142,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 3: Ще мога да създавам реални уеб сайтове с WordPress.Ще направя уеб сайт за реален клиент (фирма, организация или човек).
+                                            Какво ще знам и мога след Ниво 3: Основи на front-end програмирането - Създаване на приложения с client side логика чрез JavaScript & jQuery
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
@@ -158,11 +159,12 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 4: Ще мога да създавам реални уеб сайтове с WordPress.Ще направя уеб сайт за реален клиент (фирма, организация или човек).
+                                            Какво ще знам и мога след Ниво 4: ООП и MVC - Базови познания по обектно ориентирано програмиране. Създаване на уеб приложения с Laravel framework
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
                                     <div class="col-md-4 program-info-img">
+                                        <img src="{{asset('/images/code-logos/oop-original.png')}}" alt="PHP-logo" class="code-logos-program" title="PHP OOP">
                                         <img src="{{asset('/images/code-logos/laravel-original.png')}}" alt="html-logo" class="code-logos-program" title="LARAVEL">
                                     </div>
                                 </div>
@@ -178,7 +180,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 1: Ще мога да създавам реални уеб сайтове с WordPress.Ще направя уеб сайт за реален клиент (фирма, организация или човек).
+                                            Какво ще знам и мога след Ниво 1 Java: Основи на програмирането с Java: Създаване на уеб страници с HTML&CSS. Основи на програмирането с PHP
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
@@ -194,7 +196,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 2: Ще мога да създавам реални уеб сайтове с WordPress.Ще направя уеб сайт за реален клиент (фирма, организация или човек).
+                                            Какво ще знам и мога след Ниво 2 Java: Бази данни: Работа с MySQL база данни и създаване на PHP уеб приложения с база данни
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
@@ -209,7 +211,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 3: Ще мога да създавам реални уеб сайтове с WordPress.Ще направя уеб сайт за реален клиент (фирма, организация или човек).
+                                            Какво ще знам и мога след Ниво 3 Java: Основи на front-end програмирането: Създаване на приложения с client side логика чрез JavaScript & jQuery
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
@@ -224,7 +226,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 4: Ще мога да създавам реални уеб сайтове с WordPress.Ще направя уеб сайт за реален клиент (фирма, организация или човек).
+                                            Какво ще знам и мога след Ниво 4 Java: ООП и MVC: Базови познания по обектно ориентирано програмиране. Създаване на уеб приложения с Laravel framework
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
@@ -289,7 +291,8 @@
                     <img src="{{asset('/images/detail-5.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Всяко ниво завършва с изпит и проект
+                        всяко ниво завършва с<br/>
+                        изпит и проект
                     </span>
                 </div>
 
