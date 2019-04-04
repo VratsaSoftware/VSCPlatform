@@ -70,9 +70,9 @@
 					animating = false;
 				} );
 				if ( $target.find( '#events' ).length ) {
-					$( '.main-events > div' ).each( function ( k, v ) {
-						$( this ).find( 'img' ).attr( 'src', $( this ).find( 'img' ).attr( 'data-img' ) );
-					} );
+					// $( '.main-events > div' ).each( function ( k, v ) {
+					// 	$( this ).find( 'img' ).attr( 'src', $( this ).find( 'img' ).attr( 'data-img' ) );
+					// } );
 				}
 			}
 		}

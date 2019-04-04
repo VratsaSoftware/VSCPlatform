@@ -8,13 +8,22 @@
     <meta name="author" content="ВСО 2019">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png-white.png')}}" />
+    <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png.png')}}" />
     <!-- facebook -->
     <meta property="og:url" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Враца Софтуер Общество" />
     <meta property="og:description" content="Развиваме дигитална индустрия във Враца" />
     <meta property="og:image" content="{{asset('/images/vso-logo-bg-original.png')}}" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-51734359-3"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+
+ gtag('config', 'UA-51734359-3');
+</script>
 </head>
 
 <body style="opacity:0">
@@ -57,21 +66,21 @@
             <div id="carousel">
                 <div class="slideshow-container">
                     {{-- title = 33 characters, text min = 125 / max = 290 --}}
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/programming-pic.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/hack.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                         <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
-                                <span class="slider-title">9-месечни курсове по програмиране</span>
-                            <p />
-                            <p>
+                                <span class="slider-title">Hack Vratsa</span>
+                                <p />
+                                <p>
                                     <p class="slider-subtitle-content">
-                                        Обучението ще ви помогне да придобиете основни познания по програмиране и да имате възможност да започнете стаж в софтуерна компания във Враца!
-                                        Към момента 24 човека завършили курсовете работят в ИТ сферата във Враца и 3 компании отвориха офиси в града.
+                                        Човешкия вид е безспорен господар на Земята. Отдавна сме усвоили огъня, обработваме голям процент от сушата, създаваме собствени езера и острови, добиваме ресурси от недрата на планетата и много други.
+                                        Оставяме своя все по-голям отпечатък и това се усеща.
                                     </p>
                                     <br/>
 
-                                    <span class="title-btns-content"><a class="sub-btn" href="{{route('programmingCourses')}}">Кандидатствай</a></span>
-                            </p>
+                                    <span class="title-btns-content"><a class="sub-btn" href="http://hack.vratsa.net/" target=" _blank">виж още</a></span>
+                                </p>
                         </div>
                     </div>
 
@@ -129,21 +138,21 @@
                         </div>
                     </div>
 
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/hack.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/programming-pic.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                         <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
-                                <span class="slider-title">Hack Vratsa</span>
-                                <p />
-                                <p>
+                                <span class="slider-title">9-месечни курсове по програмиране</span>
+                            <p />
+                            <p>
                                     <p class="slider-subtitle-content">
-                                        Човешкия вид е безспорен господар на Земята. Отдавна сме усвоили огъня, обработваме голям процент от сушата, създаваме собствени езера и острови, добиваме ресурси от недрата на планетата и много други.
-                                        Оставяме своя все по-голям отпечатък и това се усеща.
+                                        Обучението ще ви помогне да придобиете основни познания по програмиране и да имате възможност да започнете стаж в софтуерна компания във Враца!
+                                        Към момента 24 човека завършили курсовете работят в ИТ сферата във Враца и 3 компании отвориха офиси в града.
                                     </p>
                                     <br/>
 
-                                    <span class="title-btns-content"><a class="sub-btn" href="http://hack.vratsa.net/" target=" _blank">виж още</a></span>
-                                </p>
+                                    <span class="title-btns-content"><a class="sub-btn" href="{{route('programmingCourses')}}">Кандидатствай</a></span>
+                            </p>
                         </div>
                     </div>
 
@@ -154,11 +163,11 @@
                 <br>
 
                 <div id="thumbnails" class="col-md-12">
-                    <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/vsc-thumb-big-2.png')}}" width="100%" alt="gallery-nav"></span>
-                    <span class="dot" onclick="currentSlide(2)"><img src="{{asset('/images/home-top-slider/gnezdoto_logo.jpg')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/hack_thumb.png')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(2)"><img src="{{asset('/images/home-top-slider/gnezdoto_logo_cropped.jpg')}}" width="100%" alt="gallery-nav"></span>
                     <span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/arduino_logo.png')}}" width="100%" alt="gallery-nav"></span>
                     <span class="dot" onclick="currentSlide(4)"><img src="{{asset('/images/home-top-slider/mind-hub-crop.png')}}" width="100%" alt="gallery-nav"></span>
-                    <span class="dot" onclick="currentSlide(5)"><img src="{{asset('/images/home-top-slider/hack_thumb.png')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(5)"><img src="{{asset('/images/home-top-slider/vsc-thumb-big-2.png')}}" width="100%" alt="gallery-nav"></span>
                 </div>
 
             </div>
@@ -236,25 +245,33 @@
                 </div>
                 <div class="main-events d-flex mb-12 flex-row col-md-12 flex-wrap">
                     <div class="p-6 col-md-6 text-center main-event-first">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/HackVratsa.jpg')}}" alt="events">
+                        <a href="http://hack.vratsa.net/" target=" _blank">
+                            <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/HackVratsa.jpg')}}" alt="events">
+                        </a>
                         <div class="event-title-top">
                             <a href="http://hack.vratsa.net/" target=" _blank" class="event-top-link">HackVratsa</a>
                         </div>
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-second">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/th.jpg')}}" alt="events">
+                        <a href="http://hunt.vratsa.net/" target=" _blank">
+                            <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/th.jpg')}}" alt="events">
+                        </a>
                         <div class="event-title-top">
-                            <a href="https://learndigital.withgoogle.com/digitalengarazh" target=" _blank" class="event-top-link">TreasureHunt</a>
+                            <a href="http://hunt.vratsa.net/" target=" _blank" class="event-top-link">TreasureHunt</a>
                         </div>
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-first">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/railsgirls.png')}}" alt="events">
+                        <a href="https://www.facebook.com/railsgirlsvratsa/" target=" _blank">
+                            <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/railsgirls.png')}}" alt="events">
+                        </a>
                         <div class="event-title-top">
-                            <a href="{{route('digitalMarketing')}}" target=" _blank" class="event-top-link">RailsGirls</a>
+                            <a href="https://www.facebook.com/railsgirlsvratsa/" target=" _blank" class="event-top-link">RailsGirls</a>
                         </div>
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-second">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/cw18.png')}}" alt="events">
+                        <a href="http://codeweek.vratsa.net/" target=" _blank">
+                            <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/cw18.png')}}" alt="events">
+                        </a>
                         <div class="event-title-top">
                             <a href="http://codeweek.vratsa.net/" target=" _blank" class="event-top-link">CodeWeek</a>
                         </div>
@@ -407,6 +424,7 @@
                         Генерален партньор за периода 2017-2019г е Фондация Америка за България.<br />
                     </span>
                 </div>
+
                 <div class="col-md-12 text-right">Враца Софтуер Общество &copy; {{\Carbon\Carbon::now()->format('Y')}}</div>
                 <div class="col-md-12 text-right"><img src="{{asset('images/location-front.png')}}" alt="location" width="20px">град Враца, ул. Кокиче 14</div>
             </div>
@@ -455,6 +473,10 @@
                 $('body').append(sponsors);
                 $('body').append(students);
                 $('body').append(rightDot);
+
+                $( '.main-events > div' ).each( function ( k, v ) {
+						$( this ).find( 'img' ).attr( 'src', $( this ).find( 'img' ).attr( 'data-img' ) );
+					} );
             });
         </script>
 </body>

@@ -58,7 +58,7 @@
                 <div class="col-md-1 space"></div>
                 <div class="col-md-5">
                     <div class="info-title">
-                        <span>Фрийленсъри</span>
+                        <span>Фрийлансъри</span>
                     </div>
                     <div class="info-text">
                         Искаш да работиш за себе си, да си свободен и независим. Обичаш предизвикателството да създаваш решения за различни компании. Мечтаеш сам да избираш работата, с която да се захванеш. Придобий уменията, които могат да ти дадат всичко това.
@@ -180,7 +180,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 1 Java: Основи на програмирането с Java: Създаване на уеб страници с HTML&CSS. Основи на програмирането с PHP
+                                            Какво ще знам и мога след Ниво 1 Java: Основи на езика Java, работа със среда за разработка IntelliJ, основни разбирания за системата git
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
@@ -196,7 +196,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 2 Java: Бази данни: Работа с MySQL база данни и създаване на PHP уеб приложения с база данни
+                                            Какво ще знам и мога след Ниво 2 Java: Работа с обекти и класове в Java, разбиране за абстрактност и полиморфизъм, работа с файлове
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
@@ -211,7 +211,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 3 Java: Основи на front-end програмирането: Създаване на приложения с client side логика чрез JavaScript & jQuery
+                                            Какво ще знам и мога след Ниво 3 Java: Създаване на Андроид приложения на езика Котлин, работа с Андроид студио, бази данни и дизайн
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
@@ -226,7 +226,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 4 Java: ООП и MVC: Базови познания по обектно ориентирано програмиране. Създаване на уеб приложения с Laravel framework
+                                            Какво ще знам и мога след Ниво 4 Java: Създаване на уеб системи и REST APIs на Java, познания за мрежова свързаност, основи на Angular
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
