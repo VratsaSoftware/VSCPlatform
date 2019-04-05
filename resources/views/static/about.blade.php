@@ -41,13 +41,13 @@
 <body>
     <!-- header section - nav - gallery -->
     <div class="section" id="header-section">
-        <div class="overlay-top-img col-md-11">
+        <div class="overlay-top-img">
             <img src="{{asset('/images/team.png')}}" alt="bg-img" class="img-fluid">
         </div>
     </div>
     <div id="header" class="col-md-12 col-sm-12 d-flex flex-row flex-wrap header">
         <div id="logo" class="col-md-1 col-sm-1">
-            <h1><a href="{{route('home')}}"><img src="{{asset('/images/vso-png-big-2.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
+            <h1><a href="{{route('home')}}"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
         </div>
         <div class="col-md-12 text-center d-flex flex-row flex-wrap top-text-wrap content-wrapper">
             <div class="col-md-12 header-about-text">
