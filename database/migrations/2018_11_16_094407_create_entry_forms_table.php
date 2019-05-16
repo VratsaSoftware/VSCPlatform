@@ -15,17 +15,17 @@ class CreateEntryFormsTable extends Migration
     {
         Schema::create('entry_forms', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
-            $table->enum('course', ['php','java','other'])->default('other');
-            $table->string('suitable_candidate')->nullabe();
-            $table->string('suitable_training')->nullabe();
-            $table->string('accompliments')->nullabe();
-            $table->string('expecatitions')->nullabe();
-            $table->string('use')->nullabe();
-            $table->string('source')->nullabe();
-            $table->string('cv')->nullabe();
+
+            $table->longText('course')->nullable();
+            $table->longText('suitable_candidate')->nullabe();
+            $table->longText('suitable_training')->nullabe();
+            $table->longText('accompliments')->nullabe();
+            $table->longText('expecatitions')->nullabe();
+            $table->longText('use')->nullabe();
+            $table->longText('source')->nullabe();
+            $table->longText('cv')->nullabe();
             $table->enum('is_remote', [1,0])->default(0);
-            $table->dateTime('submited_before')->nullabe();
+            $table->bigInteger('phone')->nullabe();
             $table->timestamps();
             $table->softDeletes();
 

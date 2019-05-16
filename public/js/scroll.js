@@ -17,10 +17,10 @@ $( document ).ready( function () {
 		'animationTime': 900,
 
 		// offset top (no snap before scroll reaches this position)
-		'offsetTop': 700,
+		'offsetTop': 800,
 
 		// offset bottom (no snap after bottom - offsetBottom)
-		'offsetBottom': 700,
+		'offsetBottom': 800,
 	} );
 	// }
 } );

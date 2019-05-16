@@ -84,11 +84,25 @@ input[type=text], input[type=date] {
     height: 600px;
 }
 
+.req-star-form {
+    color: #f00;
+}
+
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     #picture {
         font-size: 3vw;
     }
+}
+
+#course, #suitable_candidate, #suitable_training, #accompliments, #expecatitions, #use, #source, #cv-wrapper, #created_at {
+    min-width: 20vw;
+    max-width: 40vw;
+    overflow: auto;
+}
+
+#cv {
+    color: #1C8800;
 }
 
 /*end of picture section*/

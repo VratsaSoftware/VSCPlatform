@@ -64,12 +64,11 @@
                             <p>
                             Локация:<br/>
                             {{$event->location}}<br/>
-                            Описание:<br/>
-                            <div class="admin-desc">
+                            {{-- <div class="admin-desc">
                                 {!!$event->description!!}<br/>
                                 Правила:<br/>
                                 {!! $event->rules!!}
-                            </div><br/>
+                            </div><br/> --}}
                             Започва:<br/>
                             {{$event->from->format('Y-m-d')}}<br/>
                             Свърва:<br/>

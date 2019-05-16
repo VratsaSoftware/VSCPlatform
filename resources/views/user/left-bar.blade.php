@@ -13,6 +13,9 @@
         <li class="{{ Route::is('myProfile') ? 'sidenav-selected' : '' }}"><a href="{{route('myProfile')}}">
                 <img src="{{asset('/images/profile/nav/my-profile-icon.png')}}" alt="" class="img-fluid">Моят Профил</a>
         </li>
+        <li><a href="{{route('application.index')}}">
+                <img src="{{asset('/images/profile/nav/results-icon.png')}}" alt="" class="img-fluid">Кандидастване</a>
+        </li>
         <li class="nested-nav {{ Route::is('user.course') ? 'sidenav-selected' : '' }}">
             <a href="#" id="my-courses"><i class="fas fa-chevron-down"></i>Моите курсове</a>
             <ul>

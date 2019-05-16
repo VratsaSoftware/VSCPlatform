@@ -10,7 +10,7 @@
                     {!!$event->rules!!}
                 </div>
                 @if ($errors->any())
-                    <div class="alert alert-danger alert-on-course">
+                    <div class="alert alert-danger alert-on-course slide-on">
                         <ul>
                             @foreach ($errors->all() as $error)
                             <li>{{ $error }}</li>

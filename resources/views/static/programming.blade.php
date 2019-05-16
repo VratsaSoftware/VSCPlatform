@@ -58,7 +58,7 @@
                 <div class="col-md-1 space"></div>
                 <div class="col-md-5">
                     <div class="info-title">
-                        <span>Фрийленсъри</span>
+                        <span>Фрийлансъри</span>
                     </div>
                     <div class="info-text">
                         Искаш да работиш за себе си, да си свободен и независим. Обичаш предизвикателството да създаваш решения за различни компании. Мечтаеш сам да избираш работата, с която да се захванеш. Придобий уменията, които могат да ти дадат всичко това.
@@ -79,7 +79,7 @@
                         <span>Професионално развитие</span>
                     </div>
                     <div class="info-text">
-                        Светът около теб се променя с напредването на технологиите. Живеем в 21 век и не е нужно да прекараш 4 години в университет, за да имаш добра кариера. Нашата академия предлага практическо обучение водено от опитни лектори.
+                       Светът около теб се променя с напредването на технологиите. Живеем в 21 век и има много възможности за добра кариера, дори във Враца. Нашата академия предлага практическо обучение водено от опитни лектори.
                     </div>
                 </div>
             </div>
@@ -110,7 +110,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 1: Ще мога да създавам реални уеб сайтове с WordPress.Ще направя уеб сайт за реален клиент (фирма, организация или човек).
+                                            Какво ще знам и мога след Ниво 1: Основи на програмирането с PHP - Създаване на уеб страници с HTML&CSS. Основи на програмирането с PHP.Работа с git
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
@@ -118,6 +118,7 @@
                                         <img src="{{asset('/images/code-logos/html-transperent.png')}}" alt="html-logo" class="code-logos-program" title="HTML5">
                                         <img src="{{asset('/images/code-logos/css-original.png')}}" alt="html-logo" class="code-logos-program" title="CSS3">
                                         <img src="{{asset('/images/code-logos/php-original.png')}}" alt="html-logo" class="code-logos-program" title="PHP7">
+                                        <img src="{{asset('/images/code-logos/git-original.png')}}" alt="html-logo" class="code-logos-program" title="GIT">
                                     </div>
                                 </div>
                                 <!-- end of first-lvl -->
@@ -126,7 +127,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 2: Ще мога да създавам реални уеб сайтове с WordPress.Ще направя уеб сайт за реален клиент (фирма, организация или човек).
+                                            Какво ще знам и мога след Ниво 2: Бази данни - Работа с MySQL база данни и създаване на PHP уеб приложения с база данни
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
@@ -141,7 +142,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 3: Ще мога да създавам реални уеб сайтове с WordPress.Ще направя уеб сайт за реален клиент (фирма, организация или човек).
+                                            Какво ще знам и мога след Ниво 3: Основи на front-end програмирането - Създаване на приложения с client side логика чрез JavaScript & jQuery
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
@@ -158,11 +159,12 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 4: Ще мога да създавам реални уеб сайтове с WordPress.Ще направя уеб сайт за реален клиент (фирма, организация или човек).
+                                            Какво ще знам и мога след Ниво 4: ООП и MVC - Базови познания по обектно ориентирано програмиране. Създаване на уеб приложения с Laravel framework
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
                                     <div class="col-md-4 program-info-img">
+                                        <img src="{{asset('/images/code-logos/oop-original.png')}}" alt="PHP-logo" class="code-logos-program" title="PHP OOP">
                                         <img src="{{asset('/images/code-logos/laravel-original.png')}}" alt="html-logo" class="code-logos-program" title="LARAVEL">
                                     </div>
                                 </div>
@@ -178,7 +180,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 1: Ще мога да създавам реални уеб сайтове с WordPress.Ще направя уеб сайт за реален клиент (фирма, организация или човек).
+                                            Какво ще знам и мога след Ниво 1: Основи на езика Java - работа със среда за разработка IntelliJ, основни разбирания за системата git
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
@@ -194,7 +196,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 2: Ще мога да създавам реални уеб сайтове с WordPress.Ще направя уеб сайт за реален клиент (фирма, организация или човек).
+                                            Какво ще знам и мога след Ниво 2: Java ООП -  разбиране за абстрактност и полиморфизъм, работа с файлове
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
@@ -209,7 +211,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 3: Ще мога да създавам реални уеб сайтове с WordPress.Ще направя уеб сайт за реален клиент (фирма, организация или човек).
+                                            Какво ще знам и мога след Ниво 3: Android - работа с Андроид студио, бази данни и дизайн
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
@@ -224,7 +226,7 @@
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
                                         <p class="program-info">
-                                            Какво ще знам и мога след Ниво 4: Ще мога да създавам реални уеб сайтове с WordPress.Ще направя уеб сайт за реален клиент (фирма, организация или човек).
+                                            Какво ще знам и мога след Ниво 4: Създаване на web приложения - Работа с Java Servlets и JSP (Java Server Pages). Боравене с релационни бази данни. Работа с Tomcat сървър.
                                         </p>
                                     </div>
                                     <div class="col-md-1 clear-tick"><img src="{{asset('/images/tick-y-big.png')}}" alt="tick"></div>
@@ -255,21 +257,21 @@
                     <img src="{{asset('/images/detail-1.png')}}" alt="info-php-second" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Продължителност: 9 месеца
+                        Продължителност 9 месеца
                     </span>
                 </div>
                 <div class="col-md-4 second-detail text-center">
                     <img src="{{asset('/images/detail-2.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Честота на провеждане (Интензивност): Два пъти седмично
+                        Два пъти седмично
                     </span>
                 </div>
                 <div class="col-md-4 third-detail text-center">
                     <img src="{{asset('/images/rocket-extra-small.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Предварителни изисквания: Не е необходима. Курсът е предназначен за начинаещи.
+                        Предназначен за начинаещи
                     </span>
                 </div>
 
@@ -279,7 +281,7 @@
                     <img src="{{asset('/images/detail-4.png')}}" alt="info-php-second" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Подготовка вкъщи: ~10 часа / седмично
+                        ~ 10ч. седмично за подготовка вкъщи
                     </span>
                 </div>
 
@@ -289,7 +291,8 @@
                     <img src="{{asset('/images/detail-5.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Изпити и проекти: Всяко ниво завършва с изпит и проект.
+                        всяко ниво завършва с<br/>
+                        изпит и проект
                     </span>
                 </div>
 
@@ -301,7 +304,9 @@
                     <img src="{{asset('/images/detail-6.png')}}" alt="info-php-second" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Сертификати: Професионален (над 80%) , обикновен (над 50%)
+                        Сертификати:<br />
+                        Професионален<br /> (над 80%)<br />
+                        Обикновен<br /> (над 50%)<br />
                     </span>
                 </div>
 
@@ -311,7 +316,7 @@
                     <img src="{{asset('/images/detail-7.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Менторска програма: Да
+                        Менторска програма
                     </span>
                 </div>
 
@@ -389,11 +394,13 @@
     </script>
     <script>
         var headeroffset = $("#header-sticky").offset();
-        var sticky = headeroffset.top;
+        var sticky = (headeroffset.top - 50);
+       
         $(window).scroll(function() {
-            if (window.pageYOffset > sticky) {
+            if (window.pageYOffset >= sticky && !$("#header-sticky").hasClass('sticky')) {
                 $("#header-sticky").addClass('sticky');
-            } else {
+            } 
+            if(window.pageYOffset < sticky && $("#header-sticky").hasClass('sticky')) {
                 $("#header-sticky").removeClass('sticky');
             }
         });

@@ -43,9 +43,17 @@ Route::get('/contacts', function () {
 
 Auth::routes();
 
+Route::get('/application/create', 'Courses\ApplicationController@create')->name('application.create');
+Route::post('/application/store', 'Courses\ApplicationController@store')->name('application.store');
+
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/myProfile', 'HomeController@index')->name('myProfile');
     Route::resource('user', 'Users\UserController')->names('user');
+
+    //applications
+    Route::resource('application', 'Courses\ApplicationController', ['except' => [
+            'create','store'
+        ]])->names('application');
 
     // users education section
     Route::post('/user/create/education/', 'Users\UserController@createEducation')->name('create.education');
@@ -96,6 +104,7 @@ Route::group(['middleware' => 'auth'], function () {
     });
 
     Route::group(['middleware' => 'isAdmin'], function () {
+        Route::get('applications/all', 'Courses\ApplicationController@applicationsAll')->name('admin.applications');
         Route::get('courses/all', 'Admin\AdminController@allCourses')->name('all.courses');
         Route::get('events/all', 'Admin\AdminController@showAllEvents')->name('admin.events');
 
