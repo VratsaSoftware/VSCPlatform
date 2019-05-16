@@ -1,8 +1,8 @@
 <!DOCTYPE html>
-<html lang="bg">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Враца Софтуер Общество</title>
+    <title>Vratsa Software</title>
     <meta name="description" content="Развиваме дигитална индустрия във Враца">
     <meta name="keywords" content="Враца Софтуер,Програмиране,Курсове,Програмисти,Обучения,Враца">
     <meta name="author" content="ВСО 2019">
@@ -36,10 +36,10 @@
         <div class="section">
             <div id="header" class="col-md-11 col-sm-12 row">
                 <div id="logo" class="col-md-1 col-sm-1">
-                    <h1><a href="{{route('home')}}"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
+                    <h1><a href="{{route('home')}}"><img src="{{asset('/images/logoVS_en.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
                 </div>
 
-                @include('static.menu')
+                @include('static.en.menu')
 
                 <ul id='right-menu'>
                     <li><a href="#header"><img src="{{asset('/images/oval.png')}}" alt="nav-img"></a>
@@ -50,14 +50,14 @@
                 </ul>
                 <div class="row buttons-right col-md-2">
                     <div id="login-btn" class="col-md-2">
-                        <span id="log-in"><a href="{{route('login')}}">ВХОД</a></span>
+                        <span id="log-in"><a href="{{route('login')}}">LOGIN</a></span>
                     </div>
                     <!--<div id="candidate-btn" class="col-md-2">-->
                     <!--    <span id="candidate"><a href="{{route('application.create')}}">Кандидатствай</a></span>-->
                     <!--</div>-->
                 </div>
             </div>
-            @include('static.hamburger_menu')
+            @include('static.en.hamburger_menu')
         </div>
         <!-- end of header section -->
 
@@ -180,7 +180,7 @@
 
                     <div class="num-num col-md-2 bd-highlight">
                         <div class="num-big-num count">3</div>
-                        <div class="num-content">нови софтуерни компании с офис във Враца</div>
+                        <div class="num-content">new software companies opened offices in Vratsa</div>
                     </div>
                     <div class="right-line col-md-1">
                         <img src="{{asset('/images/right-num-line.png')}}" alt="line-img">
@@ -189,7 +189,7 @@
 
                     <div class="num-num col-md-2 bd-highlight">
                         <div class="num-big-num count">1570</div>
-                        <div class="num-content">души посетили наши събития</div>
+                        <div class="num-content">participants in our events</div>
                     </div>
                     <div class="right-line col-md-1">
                         <img src="{{asset('/images/right-num-line.png')}}" alt="line-img">
@@ -198,7 +198,7 @@
 
                     <div class="num-num col-md-2 bd-highlight">
                         <div class="num-big-num count">250</div>
-                        <div class="num-content">души започнали курс</div>
+                        <div class="num-content">people started our courses</div>
                     </div>
                     <div class="right-line col-md-1">
                         <img src="{{asset('/images/right-num-line.png')}}" alt="line-img">
@@ -207,29 +207,28 @@
 
                     <div class="num-num col-md-2 bd-highlight">
                         <div class="num-big-num count">4</div>
-                        <div class="num-content">години</div>
+                        <div class="num-content">years</div>
                     </div>
 
                 </div>
             </div>
             <div class="why">
                 <div class="why-title col-md-12 text-center">
-                    <span>Защо ВСО?</span>
+                    <span>Why Vratsa Software Community?</span>
                 </div>
                 <div class="why-sections d-flex mb-12 flex-row flex-wrap">
                     <div class="why-first-section p-4 col-md-4 text-center">
                         <img src="{{asset('/images/why-first-icon.png')}}" class="img-fluid" alt="icon-img">
                         <span class="why-first-content">
-                            Развиваме дигитална индустрия във Враца, като организираме интересни ИТ събития и курсове по програмиране, дигитален маркетинг и други.
-                        </span>
+                            We are developing software industry in Vratsa by organising interesting IT events and courses in programming, digital marketing and others.</span>
                     </div>
                     <div class="why-second-section p-4 col-md-4 text-center">
                         <img src="{{asset('/images/why-second-icon.png')}}" class="img-fluid" alt="icon-img">
-                        <span class="why-second-content">Преподавателите ни са професионалисти-практици с амбиция да предадат своите знания и опит. </span>
+                        <span class="why-second-content">Our trainers are highly professional and practitioners with ambition to pass on their knowledge and experience.</span>
                     </div>
                     <div class="why-third-section p-4 col-md-4 text-center">
                         <img src="{{asset('/images/why-third-icon.png')}}" class="img-fluid" alt="icon-img">
-                        <span class="why-third-content">Получили сме редица национални и международни признания сред, които: Достойни българи 2017г, включване в списъкът на Форбс Европа 30 под 30, Google RISE Awards.</span>
+                        <span class="why-third-content">We have received numerous national and international awards and recognition. Some of them are: Worthy Bulgarians 2017, inclusion in the list of Forbes Europe 30 under 30, Google RISE Awards.</span>
                     </div>
                 </div>
             </div>
@@ -240,7 +239,7 @@
         <div class="section">
             <div id="events">
                 <div class="events-title col-md-12 text-center">
-                    <span>Събития</span>
+                    <span>Events</span>
                 </div>
                 <div class="main-events d-flex mb-12 flex-row col-md-12 flex-wrap">
                     <div class="p-6 col-md-6 text-center main-event-first">
@@ -332,7 +331,7 @@
         <div class="section">
             <div id="partners" class="col-md-12">
                 <div class="partners-title col-md-12 text-center">
-                    <span>Партньори</span>
+                    <span>Partners</span>
                 </div>
                 <!-- only 4 visible -->
                 <div class="col-md-12 flex-wrap sponsors-logos b-description_readmore js-description_readmore text-center more-sponsors">
@@ -356,8 +355,8 @@
                 <div class="col-md-5">
 
                 </div>
-                <div class="col-md-2 b-description_readmore_button">
-                    Покажи още
+                <div class="col-md-2 b-description_readmore_button" data-lang="{{Session::get('locale')}}">
+                    show more
                 </div>
                 <div class="col-md-5">
 
@@ -388,26 +387,25 @@
         <div class="section">
             <div id="testimonials">
                 <div class="testimonials-title col-md-12 text-center">
-                    <span>Какво казват за нас нашите курсисти?</span>
+                    <span>What our coursists are saying about us</span>
                 </div>
                 <div class="col-md-12 flex-row justify-content-between d-flex flex-wrap testimonials-students text-center">
                     <div class="p-2 col-md-3 first-student student-1">
                         <img src="{{asset('/images/home-testimonials/adi-todorova.jpg')}}" alt="Adi Todorova" class="student-img img-fluid">
-                        <div class="student-comment">Супер готина организация, която помага на всеки който желае да се развие в ИТ сферата. Курсовете им дават добри основи в програмирането, а най-яката част е запознанството нови хора.</div>
-                        <div class="student-name">Аделина Тодорова, студент</div>
+                        <div class="student-comment">A super cool organization that helps everyone who wants to develop in the IT sphere. Their courses give a good foundation in programming, and the most exciting part is getting to meet new people.</div>
+                        <div class="student-name">Adelina Todorova, student</div>
                     </div>
 
                     <div class="p-2 col-md-3 second-student student-2">
                         <img src="{{asset('/images/home-testimonials/svetli_170x170.png')}}" alt="Svetoslav Vasilev" class="student-img img-fluid">
-                        <div class="student-comment">Невероятен тръмплин, с който можеш да
-                            започнеш работа в ИТ Сферата. Лично преминах 9 - месечния PHP курс, след което започнах работа веднага.</div>
-                        <div class="student-name">Светослав Василев, програмист</div>
+                        <div class="student-comment">Great way to kickstart with which you can start work in the IT. I personally passed the 9 - month PHP course, then started work immediately.</div>
+                        <div class="student-name">Svetoslav Vasilev, programmer</div>
                     </div>
 
                     <div class="p-2 col-md-3 third-student student-3">
                         <img src="{{asset('/images/home-testimonials/ivan-spasov.png')}}" alt="Ivan Spasov" class="student-img img-fluid">
-                        <div class="student-comment">Враца Софтуер не е просто общност те са едно вдъхновяващо семейство което те кара да се чувстваш като незаменима и важна част от нещо специално.</div>
-                        <div class="student-name">Иван Спасов, студент</div>
+                        <div class="student-comment">Vratsa Software is not just a community they are an inspiring family that makes you feel like an irreplaceable and important part of something special.</div>
+                        <div class="student-name">Ivan Spasov, student</div>
                     </div>
                 </div>
             </div>
@@ -420,12 +418,12 @@
                 <div class="cookie-text col-md-8">
                     <span class="p-6 col-md-3 col-xs-3 col-sm-3"><img src="{{asset('/images/partners/us4bg-logo-small.png')}}" alt="sponsor" class="img-fluid cookie-sponsor-img"></span>
                     <span class="cookie-sponsor-text">
-                        Генерален партньор за периода 2017-2019г е Фондация Америка за България.<br />
+                        General partner for the period 2017-2019 is foundation America for Bulgaria.<br />
                     </span>
                 </div>
 
-                <div class="col-md-12 text-right">Враца Софтуер Общество &copy; {{\Carbon\Carbon::now()->format('Y')}}</div>
-                <div class="col-md-12 text-right"><img src="{{asset('images/location-front.png')}}" alt="location" width="20px">град Враца, ул. Кокиче 14</div>
+                <div class="col-md-12 text-right">Vratsa Software &copy; {{\Carbon\Carbon::now()->format('Y')}}</div>
+                <div class="col-md-12 text-right"><img src="{{asset('images/location-front.png')}}" alt="location" width="20px">Vratsa, 3000, str. Kokiche 14</div>
             </div>
         </div>
         <!-- end of cookies section -->

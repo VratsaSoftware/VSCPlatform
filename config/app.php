@@ -69,6 +69,19 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Application available Languages
+    |--------------------------------------------------------------------------
+    |
+    | A list of available languages defined from their ISO Language Codes codes,
+    | see more: http://www.w3schools.com/tags/ref_language_codes.asp.
+    | If the code isn't in the list, fallback_locale (see above) will be used.
+    | To set new language, please create a folder in /resources/lang/{ISO-CODE}
+    |
+    */
+    'languages' => ['bg', 'en'],
+
+    /*
+    |--------------------------------------------------------------------------
     | Application Locale Configuration
     |--------------------------------------------------------------------------
     |

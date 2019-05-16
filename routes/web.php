@@ -11,34 +11,59 @@
 |
 */
 
+Route::get('language/{lang}', function ($lang) {
+    Session::put('locale', $lang);
+    return back();
+})->name('langroute');
 
 Route::get('/', function () {
-    return view('static.home');
+    if(Session::get('locale') == 'bg'){
+        return view('static.home');
+    }
+    return view('static.en.home');
 })->name('home');
 
 // static pages
 Route::get('/about', function () {
-    return view('static.about');
+    if(Session::get('locale') == 'bg'){
+        return view('static.about');
+    }
+    return view('static.en.about');
 })->name('about');
 
 Route::get('/programming-courses', function () {
-    return view('static.programming');
+    if(Session::get('locale') == 'bg'){
+        return view('static.programming');
+    }
+    return view('static.en.programming');
 })->name('programmingCourses');
 
 Route::get('/digital-marketing', function () {
-    return view('static.digital_marketing');
+    if(Session::get('locale') == 'bg'){
+        return view('static.digital_marketing');
+    }
+    return view('static.en.digital_marketing');
 })->name('digitalMarketing');
 
 Route::get('/mission', function () {
-    return view('static.mission');
+    if(Session::get('locale') == 'bg'){
+        return view('static.mission');
+    }
+    return view('static.en.mission');
 })->name('mission');
 
 Route::get('/reports', function () {
-    return view('static.reports');
+    if(Session::get('locale') == 'bg'){
+        return view('static.reports');
+    }
+    return view('static.en.reports');
 })->name('year_reports');
 
 Route::get('/contacts', function () {
-    return view('static.contacts');
+    if(Session::get('locale') == 'bg'){
+        return view('static.contacts');
+    }
+    return view('static.en.contacts');
 })->name('contacts');
 
 Auth::routes();

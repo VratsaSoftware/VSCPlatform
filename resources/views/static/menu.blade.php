@@ -22,5 +22,12 @@
         <li>
             <a href="http://gnezdoto.vratsasoftware.com/" target=" _blank">Гнездото</a>
         </li>
+        @foreach (Config::get('app.languages') as $language)
+        @if ($language != App::getLocale())
+        <li>
+            <a href="{{ route('langroute', $language) }}">{{ strtoupper($language) }}</a>
+        </li>
+        @endif
+        @endforeach
     </ul>
 </nav>
