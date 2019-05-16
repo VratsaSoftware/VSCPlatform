@@ -58,7 +58,7 @@
                 <div class="col-md-1 space"></div>
                 <div class="col-md-5">
                     <div class="info-title">
-                        <span>Фрийленсъри</span>
+                        <span>Фрийлансъри</span>
                     </div>
                     <div class="info-text">
                         Работи за себе си и променяй света. Имаш възможност да създадеш свой собствен стил и имидж, които да те направят търсен. Може да избираш проектите, с които да се захванеш и да ги изпълняваш от всяко място, на което ти харесва да бъдеш.
@@ -205,7 +205,8 @@
                     <img src="{{asset('/images/detail-5-marketing.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Всяко ниво завършва с изпит и проект
+                        всяко ниво завършва с<br/>
+                        изпит и проект
                     </span>
                 </div>
 
@@ -306,13 +307,22 @@
     </script>
     <script>
         var headeroffset = $("#header-sticky").offset();
-        var sticky = headeroffset.top;
+        var sticky = (headeroffset.top - 100);
         $(window).scroll(function() {
-            if (window.pageYOffset > sticky) {
+            // if (window.pageYOffset > sticky) {
+            //     $("#header-sticky").addClass('sticky-marketing');
+            // } else {
+            //     $("#header-sticky").removeClass('sticky-marketing');
+            // }
+            
+            $(window).scroll(function() {
+            if (window.pageYOffset >= sticky && !$("#header-sticky").hasClass('sticky-marketing')) {
                 $("#header-sticky").addClass('sticky-marketing');
-            } else {
+            } 
+            if(window.pageYOffset < sticky && $("#header-sticky").hasClass('sticky-marketing')) {
                 $("#header-sticky").removeClass('sticky-marketing');
             }
+        });
         });
     </script>
     <script type="text/javascript">
