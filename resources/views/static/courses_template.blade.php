@@ -26,6 +26,7 @@
     <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
     <!-- JQuery UI-->
     <script type="text/javascript" src="{{asset('/js/jquery-ui.js')}}"></script>
+    @include('static.lang_btn')
     @yield('content')
 <script>
     $(function() {

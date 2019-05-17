@@ -1012,6 +1012,17 @@ a {
     display: none;
 }
 
+.lang-menu{
+    position: fixed;
+    right: -4.5%;
+    top: 5%;
+    width: 8em;
+    margin-top: -2.5em;
+    text-decoration: none;
+    list-style: none;
+    z-index: 9999;
+}
+
 /*end of application section*/
 /*----------------------------------------------------------------------------------------------------*/
 /*QUERY's */

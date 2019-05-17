@@ -15,6 +15,9 @@
             <li class="edu-go bg-secondary"><a class="text-light" href="{{route('digitalMarketing')}}">Дигитален Маркетинг</a></li>
             <li class="nav-item"><a href="{{route('login')}}" class="right-mobile">Вход</a></li>
             {{-- <li class="nav-item"><a href="#" class="right-mobile">Кандидатствай</a></li> --}}
+            <li>
+                <a href="{{ route('langroute', 'en') }}"><img src="{{asset('/images/en.png')}}" width="25px"></a>
+            </li>
         </ul>
     </div>
 </div>

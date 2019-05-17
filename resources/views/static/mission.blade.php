@@ -1,6 +1,7 @@
 @extends('static.single_layout')
 @section('title', 'Мисия')
 @section('content')
+@include('static.lang_btn')
             <div class="col-md-12 header-about-text text-center">
                 Мисия на „Враца софтуер общество”
             </div>

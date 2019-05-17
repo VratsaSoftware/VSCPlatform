@@ -942,12 +942,12 @@ a, .title-btns-content>a {
     /* position: relative;
     width: 80%; */
     margin-left: 18%;
-     margin-top: -3px; 
+     margin-top: -3px;
 }
 
 .dropdown-content-about {
     margin-left: 7%;
-    margin-top: -3px; 
+    margin-top: -3px;
 }
 
 /* Links inside the dropdown */
@@ -1031,6 +1031,17 @@ a, .title-btns-content>a {
     width: 15vw;
     background: #1C8800;
     border-radius: 8px;
+}
+
+.lang-menu{
+    position: fixed;
+    right: -4.5%;
+    top: 5%;
+    width: 8em;
+    margin-top: -2.5em;
+    text-decoration: none;
+    list-style: none;
+    z-index: 9999;
 }
 
 /*.buttons-right{

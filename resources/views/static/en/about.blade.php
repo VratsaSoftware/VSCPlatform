@@ -39,6 +39,7 @@
 </head>
 
 <body>
+    @include('static.en.lang_btn')
     <!-- header section - nav - gallery -->
     <div class="section" id="header-section">
         <div class="overlay-top-img">

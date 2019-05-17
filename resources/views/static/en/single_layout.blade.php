@@ -47,7 +47,7 @@
                 @include('static.en.hamburger_menu')
                 <!-- end of hamburger -->
 			</div>
-
+            @include('static.en.lang_btn')
 		<!-- end of header section -->
         @yield('content')
     </div>

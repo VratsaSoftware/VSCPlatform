@@ -49,6 +49,7 @@
 			</div>
 
 		<!-- end of header section -->
+        @include('static.lang_btn')
         @yield('content')
     </div>
         <script src="{{asset('/js/hamburger-menu.js')}}"></script>

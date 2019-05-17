@@ -27,6 +27,7 @@
 </head>
 
 <body style="opacity:0">
+    @include('static.lang_btn')
     <!-- JQuery -->
     <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
     <!-- scroll -->
@@ -48,6 +49,7 @@
                     <li><a href="#partners"><img src="{{asset('/images/oval.png')}}" alt="nav-img"></a>
                     <li><a href="#testimonials"><img src="{{asset('/images/oval.png')}}" alt="nav-img"></a>
                 </ul>
+
                 <div class="row buttons-right col-md-2">
                     <div id="login-btn" class="col-md-2">
                         <span id="log-in"><a href="{{route('login')}}">ВХОД</a></span>
@@ -416,7 +418,7 @@
 
         <!-- cookies section -->
         <div class="section">
-            <div id="cookies" class="col-md-12 d-flex flex-wrap">
+            <!-- <div id="cookies" class="col-md-12 d-flex flex-wrap">
                 <div class="cookie-text col-md-8">
                     <span class="p-6 col-md-3 col-xs-3 col-sm-3"><img src="{{asset('/images/partners/us4bg-logo-small.png')}}" alt="sponsor" class="img-fluid cookie-sponsor-img"></span>
                     <span class="cookie-sponsor-text">
@@ -426,7 +428,8 @@
 
                 <div class="col-md-12 text-right">Враца Софтуер Общество &copy; {{\Carbon\Carbon::now()->format('Y')}}</div>
                 <div class="col-md-12 text-right"><img src="{{asset('images/location-front.png')}}" alt="location" width="20px">град Враца, ул. Кокиче 14</div>
-            </div>
+            </div> -->
+            @include('static.footer')
         </div>
         <!-- end of cookies section -->
         <script src="{{asset('/js/slick.js')}}"></script>

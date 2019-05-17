@@ -16,6 +16,8 @@ use App\Models\Users\Interest;
 use App\Models\Users\Hobbie;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Validator;
+use App\Models\Users\Subscribe;
 
 class HomeController extends Controller
 {
@@ -74,5 +76,21 @@ class HomeController extends Controller
             return view('lecturer.my_profile', ['social_links' => $socialLinks,'courses' => $courses, 'lecturer' => $lecturer]);
         }
         return view('user.my_profile', ['social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes,'workExp' => $workExp,'hobbies' => $hobbies,'interestTypes' => $interestTypes,'isInvited' => $isInvited]);
+    }
+
+    public function subscribe($email)
+    {
+        $inputemail = ['email' => $email];
+        $validatorEmail = Validator::make($inputemail, [
+                'email' => 'email|unique:subscribers',
+        ]);
+        if(!$validatorEmail->fails()){
+            $insertSubscribe = new Subscribe;
+            $insertSubscribe->email = $email;
+            $insertSubscribe->save();
+
+            return response()->json('ok',200);
+        }
+        return response()->json('error',400);
     }
 }

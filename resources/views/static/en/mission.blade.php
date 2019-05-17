@@ -1,6 +1,7 @@
 @extends('static.en.single_layout')
 @section('title', 'Mission')
 @section('content')
+@include('static.en.lang_btn')
             <div class="col-md-12 header-about-text text-center">
                 Vratsa Software Mission
             </div>

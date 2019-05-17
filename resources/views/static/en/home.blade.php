@@ -27,6 +27,7 @@
 </head>
 
 <body style="opacity:0">
+    @include('static.en.lang_btn')
     <!-- JQuery -->
     <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
     <!-- scroll -->
@@ -48,6 +49,7 @@
                     <li><a href="#partners"><img src="{{asset('/images/oval.png')}}" alt="nav-img"></a>
                     <li><a href="#testimonials"><img src="{{asset('/images/oval.png')}}" alt="nav-img"></a>
                 </ul>
+
                 <div class="row buttons-right col-md-2">
                     <div id="login-btn" class="col-md-2">
                         <span id="log-in"><a href="{{route('login')}}">LOGIN</a></span>

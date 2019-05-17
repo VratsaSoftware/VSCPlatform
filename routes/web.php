@@ -66,6 +66,8 @@ Route::get('/contacts', function () {
     return view('static.en.contacts');
 })->name('contacts');
 
+Route::get('/subscribe/{email}','HomeController@subscribe');
+
 Auth::routes();
 
 Route::get('/application/create', 'Courses\ApplicationController@create')->name('application.create');

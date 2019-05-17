@@ -95,7 +95,7 @@
     </div>
     <div class="section">
         <div id="program">
-            <div class="program-title text-center">PROGRAMM</div>
+            <div class="program-title text-center">PROGRAM</div>
             <div class="program-scheme col-md-12 text-center">
                 <div id="tabs">
                     <ul class="tabs-nav d-flex flex-wrap flex-row program-nav">
@@ -336,19 +336,19 @@
             <!-- circle steps icons -->
             <ul class="steps col-md-12">
                 <li>1
-                    <span>electronic form</span>
+                    <span style="margin-left:-4vw;">electronic form</span>
                 </li>
                 <li>2
-                    <span>individual test</span>
+                    <span style="margin-left:-4vw;">individual test</span>
                 </li>
                 <li>3
-                    <span>individual task</span>
+                    <span style="margin-left:-3.5vw;">individual task</span>
                 </li>
                 <li>4
-                    <span>interview</span>
+                    <span style="margin-left:-3.5vw;">interview</span>
                 </li>
                 <li class="active-step">5
-                    <span>reception</span>
+                    <span style="margin-left:-3.5vw;">reception</span>
                 </li>
             </ul>
 

@@ -1,6 +1,7 @@
 @extends('static.single_layout')
 @section('title', 'Контакти')
 @section('content')
+@include('static.lang_btn')
     <div class="col-md-12 header-about-text text-center">
         Контакти
     </div>
