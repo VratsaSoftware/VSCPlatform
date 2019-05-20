@@ -2,29 +2,29 @@
 <div class="footer col-md-12 d-flex flex-row flex-wrap">
     <div class="col-md-4">
         <div class="col-md-12 f-heading">
-            За нас
+            About
         </div>
         <div class="col-md-12">
-            <p><a href="{{route('mission')}}">Мисия</a></p>
-            <p><a href="{{route('about')}}">Екип</a></p>
-            <p><a href="{{route('year_reports')}}">Годишни Отчети</a></p>
-            <p><a href="{{route('contacts')}}">Контакти</a></p>
+            <p><a href="{{route('mission')}}">Mission</a></p>
+            <p><a href="{{route('about')}}">Team</a></p>
+            <p><a href="{{route('year_reports')}}">Annual reports</a></p>
+            <p><a href="{{route('contacts')}}">Contacts</a></p>
         </div>
     </div>
 
     <div class="col-md-4">
         <div class="col-md-12 f-heading">
-            Обучения
+            Courses
         </div>
         <div class="col-md-12">
-            <p><a href="{{route('programmingCourses')}}">Програмиране</a></p>
-            <p><a href="{{route('digitalMarketing')}}">Дигитален Маркетинг</a></p>
+            <p><a href="{{route('programmingCourses')}}">Programming</a></p>
+            <p><a href="{{route('digitalMarketing')}}">Digital Marketing</a></p>
         </div>
     </div>
 
     <div class="col-md-4">
         <div class="col-md-12 f-heading">
-            Контакти
+            Contacts
         </div>
         <div class="col-md-12 f-contacts">
             <p><i class="far fa-envelope"></i>&nbsp;<a href="mailto:school@vratsasoftware.com">school@vratsasoftware.com</a></p>
@@ -35,14 +35,14 @@
 </div>
 <div class="footer-end col-md-12 d-flex flex-row flex-wrap">
     <div class="col-md-6">
-        <p>Въведи своя имейл адрес, за да получаваш нашия бюлетин:</p>
+        <p>Subscribe for our newsletter, by e-mail:</p>
         <p>Vratsa Software &copy; {{\Carbon\Carbon::now()->format('Y')}}</p>
     </div>
     <div class="col-md-6 text-center">
         <input type="text" name="subscribe" value="" placeholder="example@gmail.com" id="subscribe" name="subscribe"> <button type="button" name="button" class="send-subscribe" id="subscribe-btn" data-url="{!! url('/') !!}">Изпрати</button>
     </div>
     <div class="col-md-12 text-center">
-        Генерален партньор за периода 2017-{{\Carbon\Carbon::now()->format('Y')}} е Фондация Америка за България.
+        General partner for the period 2017-{{\Carbon\Carbon::now()->format('Y')}} is foundation America for Bulgaria.
     </div>
 </div>
 
@@ -64,7 +64,7 @@
                         $('#subscribe').val('');
                         $('#subscribe').attr("disabled", 'disabled');
                         $('#subscribe-btn').hide('fast');
-                        $('#subscribe').parent().append('<span class="alert alert-success" id="subscribed">успешно се абонирахте</span>');
+                        $('#subscribe').parent().append('<span class="alert alert-success" id="subscribed">subscribed</span>');
                         setTimeout(function () {
                             $('#subscribed').hide();
                             $('#subscribe-btn').show();

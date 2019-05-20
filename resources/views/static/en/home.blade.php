@@ -416,17 +416,18 @@
 
         <!-- cookies section -->
         <div class="section">
-            <div id="cookies" class="col-md-12 d-flex flex-wrap">
-                <div class="cookie-text col-md-8">
+            <!-- <div id="cookies" class="col-md-12 d-flex flex-wrap"> -->
+                <!-- <div class="cookie-text col-md-8">
                     <span class="p-6 col-md-3 col-xs-3 col-sm-3"><img src="{{asset('/images/partners/us4bg-logo-small.png')}}" alt="sponsor" class="img-fluid cookie-sponsor-img"></span>
                     <span class="cookie-sponsor-text">
                         General partner for the period 2017-2019 is foundation America for Bulgaria.<br />
                     </span>
-                </div>
+                </div> -->
 
-                <div class="col-md-12 text-right">Vratsa Software &copy; {{\Carbon\Carbon::now()->format('Y')}}</div>
-                <div class="col-md-12 text-right"><img src="{{asset('images/location-front.png')}}" alt="location" width="20px">Vratsa, 3000, str. Kokiche 14</div>
-            </div>
+                <!-- <div class="col-md-12 text-right">Vratsa Software &copy; {{\Carbon\Carbon::now()->format('Y')}}</div>
+                <div class="col-md-12 text-right"><img src="{{asset('images/location-front.png')}}" alt="location" width="20px">Vratsa, 3000, str. Kokiche 14</div> -->
+            <!-- </div> -->
+            @include('static.en.footer')
         </div>
         <!-- end of cookies section -->
         <script src="{{asset('/js/slick.js')}}"></script>
