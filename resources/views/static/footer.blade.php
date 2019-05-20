@@ -8,7 +8,6 @@
             <p><a href="{{route('mission')}}">Мисия</a></p>
             <p><a href="{{route('about')}}">Екип</a></p>
             <p><a href="{{route('year_reports')}}">Годишни Отчети</a></p>
-            <p><a href="{{route('contacts')}}">Контакти</a></p>
         </div>
     </div>
 

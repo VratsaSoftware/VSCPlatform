@@ -76,11 +76,11 @@
                                 <p />
                                 <p>
                                     <p class="slider-subtitle-content">
-                                        В HackVratsa могат да участват всички ученици, студенти и работещи, с интереси към програмирането, дизайна и предприемачеството. Целта на инициативата е заедно в екип да формулират концепция за софтуерен продукт и да стартират работа по неговото разработване.
+                                        All students, students and workers with interest in programming, design and entrepreneurship can participate in HackVratsa. The goal of the initiative is to team together to formulate a concept for a software product and to start work on its development.
                                     </p>
                                     <br/>
 
-                                    <span class="title-btns-content"><a class="sub-btn" href="http://hack.vratsa.net/" target=" _blank">виж още</a></span>
+                                    <span class="title-btns-content"><a class="sub-btn" href="http://hack.vratsa.net/" target=" _blank">read more</a></span>
                                 </p>
                         </div>
                     </div>
@@ -89,16 +89,16 @@
                         <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
-                                <span class="slider-title">Гнездото</span>
+                                <span class="slider-title">The Nest</span>
                             <p />
                             <p>
-                                <p class="slider-subtitle-content">
-                                    "Гнездото" е първото споделено работно пространство в Северозападна България и е проект на <b>"Враца софтуер общество".</b>
-                                    <br />В момента работим по неговото създаване!
+                                <p class="slider-subtitle-content text-center">
+                                    "The Nest" is the first shared workspace in Northwestern Bulgaria and is a project of <br/> "Vratsa Software Society."<br/>
+                                    <br/>We are currently working on its creation!
                                 </p>
                                 <br/>
 
-                                <span class="title-btns-content"><a class="sub-btn" href="http://gnezdoto.vratsasoftware.com/" target=" _blank">виж още</a></span>
+                                <span class="title-btns-content"><a class="sub-btn" href="http://gnezdoto.vratsasoftware.com/" target=" _blank">read more</a></span>
                             </p>
                         </div>
                     </div>
@@ -111,12 +111,12 @@
                             <p />
                             <p>
                                 <p class="slider-subtitle-content">
-                                    Скоро стартираме курс по Arduino!
-                                    Arduino е една от най-разпространените платформи за хоби роботика. Това е микроконтролер с огромно общество от потребители, като през годините е използван за хиляди разнообразни проекти.
+                                    Soon we start an Arduino course!<br />
+                                     Arduino is one of the most popular platforms for robotics hobby. It is a microcontroller with a huge user community, and over the years has been used for thousands of diverse projects.
                                 </p>
                                 <br/>
 
-                                <span class="title-btns-content"><a class="sub-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSf5-bKSKqJcMDONIrp93ggmYvaW84x3DR9e2em-uQf5LhH6aA/viewform" target=" _blank">кандидатствай</a></span>
+                                <span class="title-btns-content"><a class="sub-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSf5-bKSKqJcMDONIrp93ggmYvaW84x3DR9e2em-uQf5LhH6aA/viewform" target=" _blank">apply</a></span>
                             </p>
                         </div>
                     </div>
@@ -125,16 +125,16 @@
                         <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
-                                <span class="slider-title">ИТ курсове за деца 6-11год. във Враца </span>
+                                <span class="slider-title">IT courses for children 6-11years. in Vratsa</span>
                                 <p />
                                 <p>
                                     <p class="slider-subtitle-content">
-                                        MindHub e първият иновативен клуб по програмиране за деца на възраст между 6 и 11 години.
-                                        През учебната 2018/2019г за първи път и във Враца ще се провеждат курсове на Майнд хъб (mindhub).
+                                        MindHub is the first innovative programming club for children between the ages of 6 and 11.<br/>
+                                         During the school year 2018/2019 for the first time and in Vratsa there will be courses of mindhub.
                                     </p>
                                     <br/>
 
-                                    <span class="title-btns-content"><a class="sub-btn" href="https://mindhub.bg/" target=" _blank">виж още</a></span>
+                                    <span class="title-btns-content"><a class="sub-btn" href="https://mindhub.bg/" target=" _blank">read more</a></span>
                                 </p>
                         </div>
                     </div>
@@ -143,16 +143,16 @@
                         <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
-                                <span class="slider-title">9-месечни курсове по програмиране</span>
+                                <span class="slider-title">9-month programming courses</span>
                             <p />
                             <p>
                                     <p class="slider-subtitle-content">
-                                        Обучението ще ви помогне да придобиете основни познания по програмиране и да имате възможност да започнете стаж в софтуерна компания във Враца!
-                                        Към момента 24 човека завършили курсовете работят в ИТ сферата във Враца и 3 компании отвориха офиси в града.
+                                        The training will help you acquire basic programming skills and be able to start an internship at a software company in Vratsa!
+At the moment, 24 people have completed the courses working in the IT field in Vratsa and 3 companies have opened offices in the city.
                                     </p>
                                     <br/>
 
-                                    <span class="title-btns-content"><a class="sub-btn" href="{{route('programmingCourses')}}">виж още</a></span>
+                                    <span class="title-btns-content"><a class="sub-btn" href="{{route('programmingCourses')}}">read more</a></span>
                             </p>
                         </div>
                     </div>

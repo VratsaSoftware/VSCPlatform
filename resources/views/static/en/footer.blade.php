@@ -8,7 +8,6 @@
             <p><a href="{{route('mission')}}">Mission</a></p>
             <p><a href="{{route('about')}}">Team</a></p>
             <p><a href="{{route('year_reports')}}">Annual reports</a></p>
-            <p><a href="{{route('contacts')}}">Contacts</a></p>
         </div>
     </div>
 
@@ -39,7 +38,7 @@
         <p>Vratsa Software &copy; {{\Carbon\Carbon::now()->format('Y')}}</p>
     </div>
     <div class="col-md-6 text-center">
-        <input type="text" name="subscribe" value="" placeholder="example@gmail.com" id="subscribe" name="subscribe"> <button type="button" name="button" class="send-subscribe" id="subscribe-btn" data-url="{!! url('/') !!}">Изпрати</button>
+        <input type="text" name="subscribe" value="" placeholder="example@gmail.com" id="subscribe" name="subscribe"> <button type="button" name="button" class="send-subscribe" id="subscribe-btn" data-url="{!! url('/') !!}">Subscribe</button>
     </div>
     <div class="col-md-12 text-center">
         General partner for the period 2017-{{\Carbon\Carbon::now()->format('Y')}} is foundation America for Bulgaria.
