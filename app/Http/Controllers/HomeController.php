@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use App\Models\CourseModules\ModulesStudent;
 use App\Models\Courses\Course;
@@ -16,6 +17,7 @@ use App\Models\Users\Interest;
 use App\Models\Users\Hobbie;
 use App\User;
 use Carbon\Carbon;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Users\Subscribe;
 
@@ -42,11 +44,13 @@ class HomeController extends Controller
         $educationTypes = EducationType::all();
         $education = [];
         $certificates = [];
-        $course = [];
+
         $workExp = [];
         $interestTypes = InterestsType::all();
         $hobbies = [];
-        $interests = [];
+
+        App::setLocale(Session::get('bg'));
+
         if ($hasEducation) {
             $education = Auth::user()->getEducation();
         }

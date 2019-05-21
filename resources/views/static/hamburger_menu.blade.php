@@ -23,6 +23,13 @@
 </div>
 
 <script type="text/javascript">
+    $(function () {
+        $('.about-hamburger').click();
+        $('.about-hamburger').click();
+        $('.edu-hamburger').click();
+        $('.edu-hamburger').click();
+    });
+    
     $('.about-hamburger').on('click',function(){
         if(!$(this).hasClass('opened')){
             $(this).addClass('opened');

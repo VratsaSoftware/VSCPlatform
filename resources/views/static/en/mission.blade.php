@@ -16,4 +16,7 @@
                     </p>
 				</div>
 			</div>
+<div class="section" style="margin-top: 10%">
+    @include('static.en.footer')
+</div>
 @endsection

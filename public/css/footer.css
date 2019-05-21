@@ -1,59 +1,60 @@
-.footer{
+.footer {
+    margin-top: 1%;
     background: #8DE219;
 }
 
-.footer > div > div > p > a{
-    color:#000000;
+.footer > div > div > p > a {
+    color: #000000;
     font-family: Comfortaa;
 }
 
-.f-heading{
+.f-heading {
     margin-top: 2vw;
     margin-bottom: 2vw;
     font-family: ubuntu;
 }
 
-.f-contacts > p > i{
+.f-contacts > p > i {
     border-radius: 50%;
 }
 
-.footer > div > div > p > a:hover{
-    color:#383838;
+.footer > div > div > p > a:hover {
+    color: #383838;
 }
 
-.footer-end{
+.footer-end {
     padding-top: 2%;
     padding-bottom: 2%;
     background: #232323;
-    border-bottom-left-radius:50px;
-    border-bottom-right-radius:50px;
+    border-bottom-left-radius: 50px;
+    border-bottom-right-radius: 50px;
 }
 
-.footer-end > div{
+.footer-end > div {
     margin-top: 1vw;
     font-family: Ubuntu;
     color: #fff;
 }
 
-#subscribe{
+#subscribe {
     border-radius: 5px;
-    border:1px solid #232323;
+    border: 1px solid #232323;
     height: 50%;
-    padding:0.5%;
+    padding: 0.5%;
 }
 
-.send-subscribe{
+.send-subscribe {
     margin-top: -0.9%;
     background: #1C8800 !important;
     color: #fff;
     font-family: Ubuntu;
-    border:1px solid #1C8800;
+    border: 1px solid #1C8800;
     border-radius: 5px;
     height: 50%;
     margin-left: 1vw;
 }
 
-.send-subscribe:hover{
+.send-subscribe:hover {
     cursor: pointer;
     background: #fff !important;
     color: #1C8800;

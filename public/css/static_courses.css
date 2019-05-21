@@ -1053,6 +1053,10 @@ a {
         margin-top: 6%;
     }
 
+    .lang-menu{
+        display: none;
+    }
+
     .info-img {
         text-align: center;
     }
@@ -1152,6 +1156,10 @@ a {
         display: block;
     }
 
+    .lang-menu{
+        display: none;
+    }
+
     .header-menu {
         display: none;
     }
@@ -1246,6 +1254,10 @@ a {
 
     .hamburger-wrap {
         display: block;
+    }
+
+    .lang-menu{
+        display: none;
     }
 
     .hamburger {
@@ -1344,6 +1356,10 @@ a {
         display: none;
     }
 
+    .lang-menu{
+        display: block;
+    }
+
     .header-menu {
         display: inline-block;
         font-size: 2vw;
@@ -1432,6 +1448,10 @@ a {
 
     .hamburger-wrap {
         display: none;
+    }
+
+    .lang-menu{
+        display: block;
     }
 
     .header-menu {

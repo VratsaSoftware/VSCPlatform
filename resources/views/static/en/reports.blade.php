@@ -36,4 +36,7 @@
             <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2015.pdf')}}" target=" _blank" class="reports-links">Vratsa Software report</a>
         </div>
     </div>
+    <div class="section" style="margin-top: 5%;">
+        @include('static.en.footer')
+    </div>
 @endsection

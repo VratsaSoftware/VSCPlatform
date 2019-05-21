@@ -28,6 +28,9 @@
     <script type="text/javascript" src="{{asset('/js/jquery-ui.js')}}"></script>
     @include('static.en.lang_btn')
     @yield('content')
+    <div class="section">
+        @include('static.en.footer')
+    </div>
 <script>
     $(function() {
         $('.main-nav-list > li > a').on('click', function() {

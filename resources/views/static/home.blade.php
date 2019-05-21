@@ -431,6 +431,7 @@
             </div> -->
             @include('static.footer')
         </div>
+    </div>
         <!-- end of cookies section -->
         <script src="{{asset('/js/slick.js')}}"></script>
         <script src="{{asset('/js/hamburger-menu.js')}}" async></script>

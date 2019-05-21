@@ -4,11 +4,11 @@
     <div class="section">
         <div id="header" style="background: url(./images/cover-img-smallest.png)">
             <!-- hamburger -->
-            @include('static.hamburger_menu')
+            @include('static.en.hamburger_menu')
             <!-- end of hamburger -->
             <div class="overlay-marketing">
                 <div id="logo" class="col-md-12 text-center">
-                    <a href="{{route('home')}}"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="vso-logo" class="img-fluid"></a>
+                    <a href="{{route('home')}}"><img src="{{asset('/images/logoVS_en.png')}}" alt="vso-logo" class="img-fluid" width="40%"></a>
                 </div>
 
                 <div class="header-title col-md-12 text-center">

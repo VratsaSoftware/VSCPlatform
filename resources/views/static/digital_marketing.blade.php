@@ -158,7 +158,6 @@
             </div>
         </div>
     </div>
-    </div>
 
     <div id="details-holder">
 
@@ -289,7 +288,6 @@
                 <div class="col-md-1"></div>
             </div>
         </div>
-    </div>
     </div>
     {{-- <div class="col-md-12 text-center">
         <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="#">КАНДИДАТСТВАЙ</a></span>

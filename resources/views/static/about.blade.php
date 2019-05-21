@@ -66,7 +66,6 @@
         @include('static.hamburger_menu')
         <!-- end of hamburger -->
     </div>
-    </div>
     <!-- end of header section -->
     <div class="col-md-12 founders-title text-center">
         Основатели
@@ -76,7 +75,7 @@
         <div id="team" class="col-md-12 d-flex flex-row flex-wrap text-center">
             <div class="col-md-4 founders">
                 <div class="team-holder">
-                    <img src="{{asset('/team/ek_pic.jpeg')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team_pictures/ek_pic.jpeg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Емилиян Кадийски
                     </div>
@@ -93,7 +92,7 @@
 
             <div class="col-md-4 founders">
                 <div class="team-holder">
-                    <img src="{{asset('/team/teo_pic5.jpg')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team_pictures/teo_pic5.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Теодор Костадинов
                     </div>
@@ -111,7 +110,7 @@
 
             <div class="col-md-4 founders">
                 <div class="team-holder">
-                    <img src="{{asset('/team/Iliyan-Dimov-pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team_pictures/Iliyan-Dimov-pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Илиян Димов
                     </div>
@@ -157,7 +156,7 @@
 
             <div class="col-md-4 leaders">
                 <div class="team-holder">
-                    <img src="{{asset('/team/ivan_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team_pictures/ivan_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Иван Стрижлев
                     </div>
@@ -181,7 +180,7 @@
 
             <div class="col-md-4 teachers">
                 <div class="team-holder">
-                    <img src="{{asset('/team/lili_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team_pictures/lili_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Лилия Михайлова
                     </div>
@@ -198,7 +197,7 @@
 
             <div class="col-md-4 teachers">
                 <div class="team-holder">
-                    <img src="{{asset('/team/tito_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team_pictures/tito_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Тихомир Кръстев
                     </div>
@@ -216,7 +215,7 @@
 
             <div class="col-md-4 teachers">
                 <div class="team-holder">
-                    <img src="{{asset('/team/milena_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team_pictures/milena_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Милена Томова
                     </div>
@@ -236,6 +235,10 @@
         </div>
     </div>
     <!-- end of team section -->
+
+    <div class="section">
+        @include('static.footer')
+    </div>
 
     <script src="{{asset('/js/hamburger-menu.js')}}"></script>
 </body>
