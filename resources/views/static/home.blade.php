@@ -73,7 +73,7 @@
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">Hack Vratsa</span>
-                                <p />
+                            </p>
                                 <p>
                                     <p class="slider-subtitle-content">
                                         В HackVratsa могат да участват всички ученици, студенти и работещи, с интереси към програмирането, дизайна и предприемачеството. Целта на инициативата е заедно в екип да формулират концепция за софтуерен продукт и да стартират работа по неговото разработване.
@@ -90,7 +90,7 @@
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">Гнездото</span>
-                            <p />
+                            </p>
                             <p>
                                 <p class="slider-subtitle-content">
                                     "Гнездото" е първото споделено работно пространство в Северозападна България и е проект на <b>"Враца софтуер общество".</b>
@@ -108,7 +108,7 @@
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">Arduino</span>
-                            <p />
+                            </p>
                             <p>
                                 <p class="slider-subtitle-content">
                                     Скоро стартираме курс по Arduino!
@@ -126,7 +126,7 @@
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">ИТ курсове за деца 6-11год. във Враца </span>
-                                <p />
+                            </p>
                                 <p>
                                     <p class="slider-subtitle-content">
                                         MindHub e първият иновативен клуб по програмиране за деца на възраст между 6 и 11 години.
@@ -144,7 +144,7 @@
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">9-месечни курсове по програмиране</span>
-                            <p />
+                            </p>
                             <p>
                                     <p class="slider-subtitle-content">
                                         Обучението ще ви помогне да придобиете основни познания по програмиране и да имате възможност да започнете стаж в софтуерна компания във Враца!
