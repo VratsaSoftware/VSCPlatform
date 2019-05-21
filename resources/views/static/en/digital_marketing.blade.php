@@ -249,19 +249,19 @@
         <div class="col-md-12 d-flex flex-row flex-wrap steps-wrapper text-center">
             <!-- circle steps icons -->
             <ul class="steps col-md-12">
-                <li>1
+                <li class="marketing-steps">1
                     <span style="margin-left:-4vw;">electronic form</span>
                 </li>
-                <li>2
+                <li class="marketing-steps">2
                     <span style="margin-left:-4vw;">individual test</span>
                 </li>
-                <li>3
+                <li class="marketing-steps">3
                     <span style="margin-left:-3.5vw;">individual task</span>
                 </li>
-                <li>4
+                <li class="marketing-steps">4
                     <span style="margin-left:-3.5vw;">interview</span>
                 </li>
-                <li class="active-step">5
+                <li class="marketing-steps">5
                     <span style="margin-left:-3.5vw;">reception</span>
                 </li>
             </ul>
