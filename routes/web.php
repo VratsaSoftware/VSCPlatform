@@ -31,7 +31,7 @@ Route::get('/team', function () {
     return view('static.en.about');
 })->name('about');
 
-Route::get('/programming-courses', function () {
+Route::get('/train-devs', function () {
     if (Session::get('locale') == 'bg') {
         return view('static.programming');
     }
