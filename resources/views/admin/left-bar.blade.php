@@ -26,6 +26,11 @@
           <img src="{{asset('/images/profile/nav/events-icon.png')}}" alt="" class="img-fluid">Събития
       </a>
   </li>
+    <li class="nested-nav">
+      <a href="{{route('polls.index')}}">
+          <img src="{{asset('/images/profile/nav/grades-icon.png')}}" alt="" class="img-fluid">Анекти
+      </a>
+    </li>
  <li>
     <a id="logout-btn" class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
       <i class="fas fa-sign-out-alt fa-1x"></i>

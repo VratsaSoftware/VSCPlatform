@@ -102,11 +102,12 @@ class UserController extends Controller
         $request['valid_instTypes'] = \Config::get('institutionTypes');
         $data = $request->validate([
             'y_from' => 'required|numeric|min:1900|max:2099',
-            'y_to' => 'required|numeric|min:'.((int)$request->y_from-1).'|max:2099',
+            'y_to' => 'sometimes|nullable|numeric|min:'.((int)$request->y_from-1).'|max:2099',
             'edu_type' => 'required|numeric',
             'edu_institution_type' => "required|in_array:valid_instTypes.*",
             'institution_name' => 'required|string',
             'specialty' => 'string',
+            'edu_course' => 'sometimes'
         ]);
 
         $eduInstitution = EducationInstitution::firstOrCreate(
@@ -178,7 +179,7 @@ class UserController extends Controller
     {
         $data = $request->validate([
             'y_from' => 'required|date|date_format:Y-m-d',
-            'y_to' => 'required|date|date_format:Y-m-d',
+            'y_to' => 'sometimes|nullable|date|date_format:Y-m-d',
             'work_company' => 'required|string',
             'work_position' => "required|string",
         ]);
@@ -186,7 +187,9 @@ class UserController extends Controller
         $createWorkExp = new WorkExperience;
         $createWorkExp->user_id = Auth::user()->id;
         $createWorkExp->y_from = $request->y_from;
-        $createWorkExp->y_to = $request->y_to;
+        if(!is_null($request->y_to)) {
+            $createWorkExp->y_to = $request->y_to;
+        }
         $workCompany = WorkCompany::firstOrCreate(
             ['name' => $request->work_company]
         );

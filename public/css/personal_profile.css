@@ -534,6 +534,18 @@ input:checked+.slider:before {
     }
 }
 
+#course-certificate{
+    display: none;
+}
+
+#interests{
+    max-width: 100%;
+}
+
+.interests{
+    max-width: 100%;
+}
+
 /*QUERY'S
 ------------------------------------------------------------------------------------------ */
 /* Extra small devices (phones, 600px and down) */

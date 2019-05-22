@@ -152,6 +152,9 @@ Route::group(['middleware' => 'auth'], function () {
 
         //events routes
         Route::resource('events', 'Events\EventController')->names('events');
+
+        //polls routes
+        Route::resource('polls', 'Admin\PollController')->names('polls');
     });
 });
 Route::post('/lection/video/shown', 'Courses\LectionController@videoShown')->name('lection.video.show');
