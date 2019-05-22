@@ -19,7 +19,7 @@
     <!-- scroll -->
     <script type="text/javascript" src="{{asset('/js/jquery-sectionsnap.js')}}"></script>
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png-white.png')}}" />
+    <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png.png')}}" />
     <!-- facebook -->
     <meta property="og:url" content="" />
     <meta property="og:type" content="website" />
@@ -49,8 +49,10 @@
 			</div>
 
 		<!-- end of header section -->
+        @include('static.lang_btn')
         @yield('content')
     </div>
+
         <script src="{{asset('/js/hamburger-menu.js')}}"></script>
 </body>
 </html>

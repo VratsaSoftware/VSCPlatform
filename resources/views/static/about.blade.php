@@ -25,7 +25,7 @@
     <script type="text/javascript" src="{{asset('/js/jquery-sectionsnap.js')}}"></script>
 
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png-white.png')}}" />
+    <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png.png')}}" />
 
     <!-- facebook -->
     <meta property="og:url" content="" />
@@ -34,18 +34,21 @@
     <meta property="og:description" content="Безплатни курсове по програмиране" />
     <meta property="og:image" content="{{asset('/images/vso-png-big-2.png')}}" />
 
+    <link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}" />
+
 </head>
 
 <body>
+    @include('static.lang_btn')
     <!-- header section - nav - gallery -->
     <div class="section" id="header-section">
-        <div class="overlay-top-img col-md-11">
+        <div class="overlay-top-img">
             <img src="{{asset('/images/team.png')}}" alt="bg-img" class="img-fluid">
         </div>
     </div>
     <div id="header" class="col-md-12 col-sm-12 d-flex flex-row flex-wrap header">
         <div id="logo" class="col-md-1 col-sm-1">
-            <h1><a href="{{route('home')}}"><img src="{{asset('/images/vso-png-big-2.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
+            <h1><a href="{{route('home')}}"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
         </div>
         <div class="col-md-12 text-center d-flex flex-row flex-wrap top-text-wrap content-wrapper">
             <div class="col-md-12 header-about-text">
@@ -63,7 +66,6 @@
         @include('static.hamburger_menu')
         <!-- end of hamburger -->
     </div>
-    </div>
     <!-- end of header section -->
     <div class="col-md-12 founders-title text-center">
         Основатели
@@ -73,13 +75,12 @@
         <div id="team" class="col-md-12 d-flex flex-row flex-wrap text-center">
             <div class="col-md-4 founders">
                 <div class="team-holder">
-                    <img src="{{asset('/team/ek_pic.jpeg')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team_pictures/ek_pic.jpeg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Емилиян Кадийски
                     </div>
                     <div class="team-txt">
-                        Роден във Враца, Емо завършва математическата гимназия в града, след това магистратура по Информатика в СУ “Св. Климент Охридски”. Работи като уеб програмист и през 2011г е част от първата кохорта учители на Заедно в час. През 2013г заедно с двама приятели стартират<br/> <b>Враца софтуер общество</b>, организацията развива дигитална индустрия в родния им град, предлагайки курсове по програмиране и интересни ИТ събития.
-                        В момента Емо работи като програмист и като учител в професионалната техническа гимназия “Н. Й. Вапцаров” във Враца, където от 2015г има специалност за програмиране.
+                        Роден във Враца, Емо завършва математическата гимназия в града, след това магистратура по Информатика в СУ “Св. Климент Охридски”. Работи като уеб програмист и през 2011г е част от първата кохорта учители на Заедно в час.
                         Хобитата му са да спортува: футбол, ски, тичане, да пътува и да обикаля сред природата.
                     </div>
                     {{-- <div class="team-contact">
@@ -91,7 +92,7 @@
 
             <div class="col-md-4 founders">
                 <div class="team-holder">
-                    <img src="{{asset('/team/teo_pic5.jpg')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team_pictures/teo_pic5.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Теодор Костадинов
                     </div>
@@ -109,7 +110,7 @@
 
             <div class="col-md-4 founders">
                 <div class="team-holder">
-                    <img src="{{asset('/team/Iliyan-Dimov-pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team_pictures/Iliyan-Dimov-pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Илиян Димов
                     </div>
@@ -144,7 +145,7 @@
                         Тонко Влахов
                     </div>
                     <div class="team-txt">
-                        Тонко е завършил политология в УНСС. Присъединява се към екипа на Враца софтуер преди три години и от тогава се занимава с организационно развитие, маркетинг и организиране на събития. Един от капитаните CoderDojo Bulgaria. Запален меломан и любител на кино изкуството и комиксите.
+                        Тонко е завършил политология в УНСС. Присъединява се към екипа на Враца софтуер през 2016 и от тогава се занимава с организационно развитие, маркетинг и организиране на събития. Един от капитаните на CoderDojo Bulgaria. Запален меломан и любител на кино изкуството и комиксите.
                     </div>
                     <div class="team-contact">
                         <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid">
@@ -155,7 +156,7 @@
 
             <div class="col-md-4 leaders">
                 <div class="team-holder">
-                    <img src="{{asset('/team/ivan_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team_pictures/ivan_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Иван Стрижлев
                     </div>
@@ -179,7 +180,7 @@
 
             <div class="col-md-4 teachers">
                 <div class="team-holder">
-                    <img src="{{asset('/team/lili_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team_pictures/lili_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Лилия Михайлова
                     </div>
@@ -196,7 +197,7 @@
 
             <div class="col-md-4 teachers">
                 <div class="team-holder">
-                    <img src="{{asset('/team/tito_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team_pictures/tito_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Тихомир Кръстев
                     </div>
@@ -214,7 +215,7 @@
 
             <div class="col-md-4 teachers">
                 <div class="team-holder">
-                    <img src="{{asset('/team/milena_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team_pictures/milena_pic.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
                         Милена Томова
                     </div>
@@ -234,6 +235,10 @@
         </div>
     </div>
     <!-- end of team section -->
+
+    <div class="section">
+        @include('static.footer')
+    </div>
 
     <script src="{{asset('/js/hamburger-menu.js')}}"></script>
 </body>

@@ -51,9 +51,10 @@
         $(function() {
                     $('head').append('<link rel="stylesheet" href="{{asset('/css/bootstrap-grid.min.css')}}" />');
                     $('head').append('<link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}" />');
-                    $('head').append('<link rel="stylesheet" href="{{asset('/css/bootstrap.min.css')}}" />');
+                    $('head').append('<link rel="stylesheet" href="{{asset('/css/bootstrap.css')}}" />');
                     $('head').append('<link rel="stylesheet" href="{{asset('/css/public_profile.css')}}" />');
                     $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_profile.css')}}" />');
+                    $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_application_results.css')}}" />');
                     $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_events.css')}}" />');
                     $('head').append('<link rel="stylesheet" href="{{asset('/css/lecturer_profile.css')}}" />');
                     $('head').append('<link rel="stylesheet" href="{{asset('/css/create_course.css')}}" />');

@@ -8,16 +8,26 @@
     <meta name="author" content="ВСО 2019">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png-white.png')}}" />
+    <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png.png')}}" />
     <!-- facebook -->
     <meta property="og:url" content="" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Враца Софтуер Общество" />
     <meta property="og:description" content="Развиваме дигитална индустрия във Враца" />
     <meta property="og:image" content="{{asset('/images/vso-logo-bg-original.png')}}" />
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-51734359-3"></script>
+<script>
+ window.dataLayer = window.dataLayer || [];
+ function gtag(){dataLayer.push(arguments);}
+ gtag('js', new Date());
+
+ gtag('config', 'UA-51734359-3');
+</script>
 </head>
 
 <body style="opacity:0">
+    @include('static.lang_btn')
     <!-- JQuery -->
     <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
     <!-- scroll -->
@@ -27,7 +37,7 @@
         <div class="section">
             <div id="header" class="col-md-11 col-sm-12 row">
                 <div id="logo" class="col-md-1 col-sm-1">
-                    <h1><a href="{{route('home')}}"><img src="{{asset('/images/vso-png-big-2.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
+                    <h1><a href="{{route('home')}}"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
                 </div>
 
                 @include('static.menu')
@@ -44,9 +54,9 @@
                     <div id="login-btn" class="col-md-2">
                         <span id="log-in"><a href="{{route('login')}}">ВХОД</a></span>
                     </div>
-                    <div id="candidate-btn" class="col-md-2">
-                        <span id="candidate"><a href="{{route('programmingCourses')}}">Кандидатствай</a></span>
-                    </div>
+                    <!--<div id="candidate-btn" class="col-md-2">-->
+                    <!--    <span id="candidate"><a href="{{route('application.create')}}">Кандидатствай</a></span>-->
+                    <!--</div>-->
                 </div>
             </div>
             @include('static.hamburger_menu')
@@ -57,92 +67,94 @@
         <div class="section">
             <div id="carousel">
                 <div class="slideshow-container">
+                    {{-- title = 33 characters, text min = 125 / max = 290 --}}
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/hack.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                        <img src="" width="100%" alt="events">
+                        <div class="text text-wrap-gallery col-md-12 text-center">
+                            <p>
+                                <span class="slider-title">Hack Vratsa</span>
+                            </p>
+                                <p>
+                                    <p class="slider-subtitle-content">
+                                        В HackVratsa могат да участват всички ученици, студенти и работещи, с интереси към програмирането, дизайна и предприемачеството. Целта на инициативата е заедно в екип да формулират концепция за софтуерен продукт и да стартират работа по неговото разработване.
+                                    </p>
+                                    <br/>
+
+                                    <span class="title-btns-content"><a class="sub-btn" href="http://hack.vratsa.net/" target=" _blank">виж още</a></span>
+                                </p>
+                        </div>
+                    </div>
+
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/cws_fb_cover2 (1).png')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                        <img src="" width="100%" alt="events">
+                        <div class="text text-wrap-gallery col-md-12 text-center">
+                            <p>
+                                <span class="slider-title">Гнездото</span>
+                            </p>
+                            <p>
+                                <p class="slider-subtitle-content">
+                                    "Гнездото" е първото споделено работно пространство в Северозападна България и е проект на <b>"Враца софтуер общество".</b>
+                                    <br />В момента работим по неговото създаване!
+                                </p>
+                                <br/>
+
+                                <span class="title-btns-content"><a class="sub-btn" href="http://gnezdoto.vratsasoftware.com/" target=" _blank">виж още</a></span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/arduino.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                        <img src="" width="100%" alt="events">
+                        <div class="text text-wrap-gallery col-md-12 text-center">
+                            <p>
+                                <span class="slider-title">Arduino</span>
+                            </p>
+                            <p>
+                                <p class="slider-subtitle-content">
+                                    Скоро стартираме курс по Arduino!
+                                    Arduino е една от най-разпространените платформи за хоби роботика. Това е микроконтролер с огромно общество от потребители, като през годините е използван за хиляди разнообразни проекти.
+                                </p>
+                                <br/>
+
+                                <span class="title-btns-content"><a class="sub-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSf5-bKSKqJcMDONIrp93ggmYvaW84x3DR9e2em-uQf5LhH6aA/viewform" target=" _blank">кандидатствай</a></span>
+                            </p>
+                        </div>
+                    </div>
+
+                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/mindhub.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                        <img src="" width="100%" alt="events">
+                        <div class="text text-wrap-gallery col-md-12 text-center">
+                            <p>
+                                <span class="slider-title">ИТ курсове за деца 6-11год. във Враца </span>
+                            </p>
+                                <p>
+                                    <p class="slider-subtitle-content">
+                                        MindHub e първият иновативен клуб по програмиране за деца на възраст между 6 и 11 години.
+                                        През учебната 2018/2019г за първи път и във Враца ще се провеждат курсове на Майнд хъб (mindhub).
+                                    </p>
+                                    <br/>
+
+                                    <span class="title-btns-content"><a class="sub-btn" href="https://mindhub.bg/" target=" _blank">виж още</a></span>
+                                </p>
+                        </div>
+                    </div>
 
                     <div class="mySlides" data-src="{{asset('/images/home-top-slider/programming-pic.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                         <img src="" width="100%" alt="events">
                         <div class="text text-wrap-gallery col-md-12 text-center">
                             <p>
                                 <span class="slider-title">9-месечни курсове по програмиране</span>
-                            <p />
+                            </p>
                             <p>
-                                <span class="slider-subtitle-content">
-                                    Целта на обучението е да придобиете основни познания по програмиране и да имате възможност да започнете стаж в софтуерна компания във Враца! Към момента 20 човека завършили курсовете работят в ИТ сферата във
-                                    Враца и 3 компании отвориха офиси в града.
-                                </span>
+                                    <p class="slider-subtitle-content">
+                                        Обучението ще ви помогне да придобиете основни познания по програмиране и да имате възможност да започнете стаж в софтуерна компания във Враца!
+                                        Към момента 24 човека завършили курсовете работят в ИТ сферата във Враца и 3 компании отвориха офиси в града.
+                                    </p>
+                                    <br/>
+
+                                    <span class="title-btns-content"><a class="sub-btn" href="{{route('programmingCourses')}}">виж още</a></span>
                             </p>
                         </div>
-                        {{-- <p class="btn-content-wrap">
-                            <span class="title-btns-content"><a href="{{route('programmingCourses')}}">Кандидатствай</a></span>
-                        </p> --}}
-                    </div>
-
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/digital-big.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
-                        <img src="" width="100%" alt="events">
-                        <div class="text text-wrap-gallery col-md-12 text-center">
-                            <p>
-                                <span class="slider-title">Безплатен 4-месечен курс по дигитален маркетинг</span>
-                            <p />
-                            <p>
-                                <span class="slider-subtitle-content">
-                                    Започваме курс по дигитален маркетинг - за първи път във Враца!
-                                </span>
-                            </p>
-                        </div>
-                        {{-- <p class="btn-content-wrap">
-                            <span class="title-btns-content"><a href="{{route('digitalMarketing')}}">Кандидатствай</a></span>
-                        </p> --}}
-                    </div>
-
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/cw-1.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
-                        <img src="" width="100%" alt="events">
-                        <div class="text text-wrap-gallery col-md-12 text-center">
-                            <p>
-                                <span class="slider-title">CodeWeek Враца - най-голямото ИТ събитие на северозапада</span>
-                            <p />
-                            <p>
-                                <span class="slider-subtitle-content">
-                                    CodeWeek Враца има една основна цел: да те запознае отблизо с най-популярните възможности за
-                                    професионално развитие в 21 век.
-                                </span>
-                            </p>
-                        </div>
-                        {{-- <p class="btn-content-wrap">
-                            <span class="title-btns-content"><a href="http://codeweek.vratsa.net" target=" _blank">Кандидатствай</a></span>
-                        </p> --}}
-                    </div>
-
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/kids-1.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
-                        <img src="" width="100%" alt="events">
-                        <div class="text text-wrap-gallery col-md-12 text-center">
-                            <p>
-                                <span class="slider-title">Ново: ИТ курсове за деца 6-11год. във Враца </span>
-                                <p />
-                                <p>
-                                    <span class="slider-subtitle-content">MindHub e първият иновативен клуб по програмиране за деца на възраст между 6 и 11 години. През учебната 2018/2019г за първи път и във Враца ще се провеждат курсове на Майнд
-                                        хъб (mindhub).
-                                    </span>
-                                </p>
-                        </div>
-                        {{-- <p class="btn-content-wrap">
-                            <span class="title-btns-content"><a href="https://mindhub.bg/" target="_blank">Кандидатствай</a></span>
-                        </p> --}}
-                    </div>
-
-                    <div class="mySlides" data-src="{{asset('/images/home-top-slider/telerik_academy_school.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
-                        <img src="" width="100%" alt="events">
-                        <div class="text text-wrap-gallery col-md-12 text-center">
-                            <p>
-                                <span class="slider-title">9 групи на Телерик академия във Враца</span>
-                                <p />
-                                <p>
-                                    <span class="slider-subtitle-content">През новата учебна година ще има 9 групи на Академия Телерик за ученици, които се интересуват от ИТ. Запиши се за Разработка на игри, Дигитални науки или Алгоритмично
-                                        програмиране. За ученици 4-12 клас.
-                                    </span>
-                                </p>
-                        </div>
-                        {{-- <p class="btn-content-wrap">
-                            <span class="title-btns-content"><a href="https://www.telerikacademy.com/school" target="_blank">Кандидатствай</a></span>
-                        </p> --}}
                     </div>
 
                     <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
@@ -152,11 +164,11 @@
                 <br>
 
                 <div id="thumbnails" class="col-md-12">
-                    <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/vsc-thumb-big.png')}}" width="100%" alt="gallery-nav"></span>
-                    <span class="dot" onclick="currentSlide(2)"><img src="{{asset('/images/home-top-slider/digital_thumb_big.png')}}" width="100%" alt="gallery-nav"></span>
-                    <span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/cropped-cweekLogo.png')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/hack_thumb.png')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(2)"><img src="{{asset('/images/home-top-slider/gnezdoto_logo_cropped.jpg')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/arduino_logo.png')}}" width="100%" alt="gallery-nav"></span>
                     <span class="dot" onclick="currentSlide(4)"><img src="{{asset('/images/home-top-slider/mind-hub-crop.png')}}" width="100%" alt="gallery-nav"></span>
-                    <span class="dot" onclick="currentSlide(5)"><img src="{{asset('/images/home-top-slider/telerik-tumb2.png')}}" width="100%" alt="gallery-nav"></span>
+                    <span class="dot" onclick="currentSlide(5)"><img src="{{asset('/images/home-top-slider/vsc-thumb-big-2.png')}}" width="100%" alt="gallery-nav"></span>
                 </div>
 
             </div>
@@ -187,7 +199,7 @@
 
 
                     <div class="num-num col-md-2 bd-highlight">
-                        <div class="num-big-num count">310</div>
+                        <div class="num-big-num count">250</div>
                         <div class="num-content">души започнали курс</div>
                     </div>
                     <div class="right-line col-md-1">
@@ -234,16 +246,36 @@
                 </div>
                 <div class="main-events d-flex mb-12 flex-row col-md-12 flex-wrap">
                     <div class="p-6 col-md-6 text-center main-event-first">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/cw18.png')}}" alt="events">
+                        <a href="https://hack.vratsa.net/" target=" _blank">
+                            <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/HackVratsa.jpg')}}" alt="events">
+                        </a>
+                        <div class="event-title-top">
+                            <a href="https://hack.vratsa.net/" target=" _blank" class="event-top-link">HackVratsa</a>
+                        </div>
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-second">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/google-garage.jpg')}}" alt="events">
+                        <a href="https://hunt.vratsa.net/" target=" _blank">
+                            <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/th.jpg')}}" alt="events">
+                        </a>
+                        <div class="event-title-top">
+                            <a href="https://hunt.vratsa.net/" target=" _blank" class="event-top-link">TreasureHunt</a>
+                        </div>
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-first">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/digital-event.jpg')}}" alt="events">
+                        <a href="https://www.facebook.com/railsgirlsvratsa/" target=" _blank">
+                            <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/railsgirls.png')}}" alt="events">
+                        </a>
+                        <div class="event-title-top">
+                            <a href="https://www.facebook.com/railsgirlsvratsa/" target=" _blank" class="event-top-link">RailsGirls</a>
+                        </div>
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-second">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/HackVratsa.jpg')}}" alt="events">
+                        <a href="https://codeweek.vratsa.net/" target=" _blank">
+                            <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/cw18.png')}}" alt="events">
+                        </a>
+                        <div class="event-title-top">
+                            <a href="https://codeweek.vratsa.net/" target=" _blank" class="event-top-link">CodeWeek</a>
+                        </div>
                     </div>
                 </div>
 
@@ -251,25 +283,46 @@
                     <section class="center slider col-md-11 filmstrip-events">
                         <div>
                             <img src="{{asset('/images/home-events/cw18.png')}}" alt="events">
+                            <div class="event-title-top-small">
+                                <a href="http://hack.vratsa.net/" target=" _blank" class="event-top-link">CodeWeek</a>
+                            </div>
                         </div>
                         <div>
                             <img src="{{asset('/images/home-events/google-garage.jpg')}}" alt="events">
+                            <div class="event-title-top-small">
+                                <a href="https://learndigital.withgoogle.com/digitalengarazh" target=" _blank" class="event-top-link">Google Digital Garage</a>
+                            </div>
                         </div>
 
                         <div>
                             <img src="{{asset('/images/home-events/HackVratsa.jpg')}}" alt="events">
+                            <div class="event-title-top-small">
+                                <a href="http://hack.vratsa.net/" target=" _blank" class="event-top-link">HackVratsa</a>
+                            </div>
                         </div>
                         <div>
                             <img src="{{asset('/images/home-events/railsgirls.png')}}" alt="events">
+                            <div class="event-title-top-small">
+                                <a href="http://railsgirls.com/" target=" _blank" class="event-top-link">RailsGirls</a>
+                            </div>
                         </div>
                         <div>
                             <img src="{{asset('/images/home-events/th.jpg')}}" alt="events">
+                            <div class="event-title-top-small">
+                                <a href="http://hunt.vratsa.net/" target=" _blank" class="event-top-link">TreasureHunt</a>
+                            </div>
                         </div>
                         <div>
                             <img src="{{asset('/images/home-events/edit-vr.jpg')}}" alt="events">
+                            <div class="event-title-top-small">
+                                <a href="http://eotr.edit.bg/" target=" _blank" class="event-top-link">EditOnTheRoad</a>
+                            </div>
                         </div>
                         <div>
                             <img src="{{asset('/images/home-events/digital-event.jpg')}}" alt="events">
+                            <div class="event-title-top-small">
+                                <a href="{{route('digitalMarketing')}}" target=" _blank" class="event-top-link">DigitalMarketing</a>
+                            </div>
                         </div>
                     </section>
                 </div>
@@ -340,20 +393,20 @@
                     <span>Какво казват за нас нашите курсисти?</span>
                 </div>
                 <div class="col-md-12 flex-row justify-content-between d-flex flex-wrap testimonials-students text-center">
-                    <div class="p-3 col-md-3 first-student student-1">
+                    <div class="p-2 col-md-3 first-student student-1">
                         <img src="{{asset('/images/home-testimonials/adi-todorova.jpg')}}" alt="Adi Todorova" class="student-img img-fluid">
                         <div class="student-comment">Супер готина организация, която помага на всеки който желае да се развие в ИТ сферата. Курсовете им дават добри основи в програмирането, а най-яката част е запознанството нови хора.</div>
                         <div class="student-name">Аделина Тодорова, студент</div>
                     </div>
 
-                    <div class="p-3 col-md-3 second-student student-2">
+                    <div class="p-2 col-md-3 second-student student-2">
                         <img src="{{asset('/images/home-testimonials/svetli_170x170.png')}}" alt="Svetoslav Vasilev" class="student-img img-fluid">
                         <div class="student-comment">Невероятен тръмплин, с който можеш да
                             започнеш работа в ИТ Сферата. Лично преминах 9 - месечния PHP курс, след което започнах работа веднага.</div>
                         <div class="student-name">Светослав Василев, програмист</div>
                     </div>
 
-                    <div class="p-3 col-md-3 third-student student-3">
+                    <div class="p-2 col-md-3 third-student student-3">
                         <img src="{{asset('/images/home-testimonials/ivan-spasov.png')}}" alt="Ivan Spasov" class="student-img img-fluid">
                         <div class="student-comment">Враца Софтуер не е просто общност те са едно вдъхновяващо семейство което те кара да се чувстваш като незаменима и важна част от нещо специално.</div>
                         <div class="student-name">Иван Спасов, студент</div>
@@ -365,17 +418,20 @@
 
         <!-- cookies section -->
         <div class="section">
-            <div id="cookies" class="col-md-12 d-flex flex-wrap">
+            <!-- <div id="cookies" class="col-md-12 d-flex flex-wrap">
                 <div class="cookie-text col-md-8">
                     <span class="p-6 col-md-3 col-xs-3 col-sm-3"><img src="{{asset('/images/partners/us4bg-logo-small.png')}}" alt="sponsor" class="img-fluid cookie-sponsor-img"></span>
                     <span class="cookie-sponsor-text">
                         Генерален партньор за периода 2017-2019г е Фондация Америка за България.<br />
                     </span>
                 </div>
+
                 <div class="col-md-12 text-right">Враца Софтуер Общество &copy; {{\Carbon\Carbon::now()->format('Y')}}</div>
                 <div class="col-md-12 text-right"><img src="{{asset('images/location-front.png')}}" alt="location" width="20px">град Враца, ул. Кокиче 14</div>
-            </div>
+            </div> -->
+            @include('static.footer')
         </div>
+    </div>
         <!-- end of cookies section -->
         <script src="{{asset('/js/slick.js')}}"></script>
         <script src="{{asset('/js/hamburger-menu.js')}}" async></script>
@@ -395,7 +451,7 @@
                 $('head').append('<link rel="preload stylesheet" href="{{asset('/css/bootstrap-grid.min.css')}}" as="style">');
                 $('head').append('<link rel="preload stylesheet" href="{{asset('/css/slick.css')}}" as="style">');
                 $('head').append('<link rel="preload stylesheet" href="{{asset('/css/slick-theme.css')}}" as="style">');
-
+                $('head').append('<link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}" />');
                 var frontGallery = document.createElement("script");
                 frontGallery.src = "{{asset('/js/front-gallery.js')}}";
                 var customGallery = document.createElement("script");
@@ -420,6 +476,10 @@
                 $('body').append(sponsors);
                 $('body').append(students);
                 $('body').append(rightDot);
+
+                $( '.main-events > div' ).each( function ( k, v ) {
+						$( this ).find( 'img' ).attr( 'src', $( this ).find( 'img' ).attr( 'data-img' ) );
+					} );
             });
         </script>
 </body>

@@ -1012,6 +1012,17 @@ a {
     display: none;
 }
 
+.lang-menu{
+    position: fixed;
+    right: -4.5%;
+    top: 5%;
+    width: 8em;
+    margin-top: -2.5em;
+    text-decoration: none;
+    list-style: none;
+    z-index: 9999;
+}
+
 /*end of application section*/
 /*----------------------------------------------------------------------------------------------------*/
 /*QUERY's */
@@ -1040,6 +1051,10 @@ a {
     .hamburger {
         right: 0;
         margin-top: 6%;
+    }
+
+    .lang-menu{
+        display: none;
     }
 
     .info-img {
@@ -1141,6 +1156,10 @@ a {
         display: block;
     }
 
+    .lang-menu{
+        display: none;
+    }
+
     .header-menu {
         display: none;
     }
@@ -1235,6 +1254,10 @@ a {
 
     .hamburger-wrap {
         display: block;
+    }
+
+    .lang-menu{
+        display: none;
     }
 
     .hamburger {
@@ -1333,6 +1356,10 @@ a {
         display: none;
     }
 
+    .lang-menu{
+        display: block;
+    }
+
     .header-menu {
         display: inline-block;
         font-size: 2vw;
@@ -1421,6 +1448,10 @@ a {
 
     .hamburger-wrap {
         display: none;
+    }
+
+    .lang-menu{
+        display: block;
     }
 
     .header-menu {

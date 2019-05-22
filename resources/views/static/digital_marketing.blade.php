@@ -58,7 +58,7 @@
                 <div class="col-md-1 space"></div>
                 <div class="col-md-5">
                     <div class="info-title">
-                        <span>Фрийленсъри</span>
+                        <span>Фрийлансъри</span>
                     </div>
                     <div class="info-text">
                         Работи за себе си и променяй света. Имаш възможност да създадеш свой собствен стил и имидж, които да те направят търсен. Може да избираш проектите, с които да се захванеш и да ги изпълняваш от всяко място, на което ти харесва да бъдеш.
@@ -158,7 +158,6 @@
             </div>
         </div>
     </div>
-    </div>
 
     <div id="details-holder">
 
@@ -178,14 +177,14 @@
                     <img src="{{asset('/images/detail-2-marketing.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Честота на провеждане (Интензивност): веднъж през уикенда
+                        Два пъти седмично
                     </span>
                 </div>
                 <div class="col-md-4 third-detail text-center">
                     <img src="{{asset('/images/rocket-extra-small-marketing.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Предварителни изисквания: Не е необходима. Курсът е предназначен за начинаещи.
+                        Предназначен за начинаещи
                     </span>
                 </div>
 
@@ -195,7 +194,7 @@
                     <img src="{{asset('/images/detail-4-marketing.png')}}" alt="info-php-second" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Подготовка вкъщи: ~6 часа / седмично
+                        ~ 10ч. седмично за подготовка вкъщи
                     </span>
                 </div>
 
@@ -205,7 +204,8 @@
                     <img src="{{asset('/images/detail-5-marketing.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Изпити и проекти: Всяко ниво завършва с изпит и проект.
+                        всяко ниво завършва с<br/>
+                        изпит и проект
                     </span>
                 </div>
 
@@ -217,7 +217,9 @@
                     <img src="{{asset('/images/detail-6-marketing.png')}}" alt="info-php-second" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Сертификати: Професионален (над 80%) , обикновен (над 50%)
+                        Сертификати:<br />
+                        Професионален<br /> (над 80%)<br />
+                        Обикновен<br /> (над 50%)<br />
                     </span>
                 </div>
 
@@ -227,7 +229,7 @@
                     <img src="{{asset('/images/detail-7-marketing.png')}}" alt="icon" class="img-fluid">
                     <br />
                     <span class="detail-text">
-                        Менторска програма: Да
+                        Менторска програма
                     </span>
                 </div>
 
@@ -287,7 +289,6 @@
             </div>
         </div>
     </div>
-    </div>
     {{-- <div class="col-md-12 text-center">
         <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="#">КАНДИДАТСТВАЙ</a></span>
     </div> --}}
@@ -304,13 +305,22 @@
     </script>
     <script>
         var headeroffset = $("#header-sticky").offset();
-        var sticky = headeroffset.top;
+        var sticky = (headeroffset.top - 100);
         $(window).scroll(function() {
-            if (window.pageYOffset > sticky) {
+            // if (window.pageYOffset > sticky) {
+            //     $("#header-sticky").addClass('sticky-marketing');
+            // } else {
+            //     $("#header-sticky").removeClass('sticky-marketing');
+            // }
+            
+            $(window).scroll(function() {
+            if (window.pageYOffset >= sticky && !$("#header-sticky").hasClass('sticky-marketing')) {
                 $("#header-sticky").addClass('sticky-marketing');
-            } else {
+            } 
+            if(window.pageYOffset < sticky && $("#header-sticky").hasClass('sticky-marketing')) {
                 $("#header-sticky").removeClass('sticky-marketing');
             }
+        });
         });
     </script>
     <script type="text/javascript">

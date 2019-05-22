@@ -11,7 +11,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- favicon -->
-    <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png-white.png')}}" />
+    <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png.png')}}" />
 
     <!-- facebook -->
     <meta property="og:url" content="" />
@@ -26,7 +26,11 @@
     <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
     <!-- JQuery UI-->
     <script type="text/javascript" src="{{asset('/js/jquery-ui.js')}}"></script>
+    @include('static.lang_btn')
     @yield('content')
+    <div class="section">
+        @include('static.footer')
+    </div>
 <script>
     $(function() {
         $('.main-nav-list > li > a').on('click', function() {

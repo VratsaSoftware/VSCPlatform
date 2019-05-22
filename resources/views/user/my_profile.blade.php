@@ -103,18 +103,18 @@
                     </script>
                     <div class="col-md-4 header-contacts text-right">
                         <div class="col-md-12">
-                            <a href="#" class="facebook" target=" _blank"><img src="./images/profile/facebook-icon.svg" alt="fb"></a>
-                            <p class="edit-social"><input type="text" id="facebook" name="facebook" value=""></p>
-                            <a href="#" class="linkedin" target=" _blank"><img src="./images/profile/linkdin-icon.svg" alt="li"></a>
-                            <p class="edit-social"><input type="text" id="linkedin" name="linkedin" value=""></p>
-                            <a href="#" class="github" target=" _blank"><img src="./images/profile/github-icon.svg" alt="gh"></a>
-                            <p class="edit-social"><input type="text" id="github" name="github" value=""></p>
-                            <a href="#" class="skype" target=" _blank"><img src="./images/profile/skype-icon.svg" alt="sk"></a>
-                            <p class="edit-social"><input type="text" id="skype" name="skype" value=""></p>
-                            <a href="#" class="dribbble" target=" _blank"><img src="./images/profile/dribble-icon.svg" alt="dr"></a>
-                            <p class="edit-social"><input type="text" id="dribbble" name="dribbble" value=""></p>
-                            <a href="#" class="behance" target=" _blank"><img src="./images/profile/behance-icon.svg" alt="be"></a>
-                            <p class="edit-social"><input type="text" id="behance" name="behance" value=""></p>
+                            <a href="#" class="facebook" target=" _blank"><img src="{{asset('/images/profile/facebook-icon.svg')}}" alt="fb"></a>
+                            <p class="edit-social"><input type="text" id="facebook" name="facebook" value="{{old('facebook')}}"></p>
+                            <a href="#" class="linkedin" target=" _blank"><img src="{{asset('/images/profile/linkdin-icon.svg')}}" alt="li"></a>
+                            <p class="edit-social"><input type="text" id="linkedin" name="linkedin" value="{{old('linkedin')}}"></p>
+                            <a href="#" class="github" target=" _blank"><img src="{{asset('/images/profile/github-icon.svg')}}" alt="gh"></a>
+                            <p class="edit-social"><input type="text" id="github" name="github" value="{{old('github')}}"></p>
+                            <a href="#" class="skype" target=" _blank"><img src="{{asset('/images/profile/skype-icon.svg')}}" alt="sk"></a>
+                            <p class="edit-social"><input type="text" id="skype" name="skype" value="{{old('skype')}}"></p>
+                            <a href="#" class="dribbble" target=" _blank"><img src="{{asset('/images/profile/dribble-icon.svg')}}" alt="dr"></a>
+                            <p class="edit-social"><input type="text" id="dribbble" name="dribbble" value="{{old('dribbble')}}"></p>
+                            <a href="#" class="behance" target=" _blank"><img src="{{asset('/images/profile/behance-icon.svg')}}" alt="be"></a>
+                            <p class="edit-social"><input type="text" id="behance" name="behance" value="{{old('behance')}}"></p>
                             @foreach($social_links as $social)
 
                             <script type="text/javascript">

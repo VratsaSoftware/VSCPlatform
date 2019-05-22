@@ -36,6 +36,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\VerifyCsrfToken::class,
             // \App\Http\Middleware\IsOnCourse::class,
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
+            \App\Http\Middleware\SetLocale::class,
         ],
 
         'api' => [
@@ -64,6 +65,7 @@ class Kernel extends HttpKernel
         'isOnCourse' => \App\Http\Middleware\IsOnCourse::class,
         'isLecturer' => \App\Http\Middleware\isLecturer::class,
         'isAdmin' => \App\Http\Middleware\isAdmin::class,
+        'setLocale' => \App\Http\Middleware\SetLocale::class,
     ];
 
     /**
