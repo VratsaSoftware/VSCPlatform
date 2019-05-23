@@ -155,6 +155,7 @@ Route::group(['middleware' => 'auth'], function () {
 
         //polls routes
         Route::resource('polls', 'Admin\PollController')->names('polls');
+        Route::get('poll/{poll}/votes','Admin\PollController@getVotes')->name('poll.votes');
     });
 });
 Route::post('/lection/video/shown', 'Courses\LectionController@videoShown')->name('lection.video.show');

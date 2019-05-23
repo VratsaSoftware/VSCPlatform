@@ -482,6 +482,23 @@ body {
     width: 8vw;
 }
 
+.in-modal-poll-vote-names{
+    list-style-type: none;
+    height: 100px;
+    overflow-y: scroll;
+}
+
+.in-modal-poll-vote-names > li{
+    margin-bottom: 1%;
+}
+
+.poll-option-title{
+    border-top: 1px solid #000000;
+    margin-top: 5%;
+    font-weight: bolder;
+    padding-top: 2.5%;
+}
+
 /*QUERY's
 -------------------------------------------------------------------------------------------*/
 /* Extra small devices (phones, 600px and down) */

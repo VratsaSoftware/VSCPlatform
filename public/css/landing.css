@@ -1037,9 +1037,9 @@ a, .title-btns-content > a {
 
 .lang-menu {
     position: fixed;
-    right: -4.5%;
+    right: 0;
     top: 5%;
-    width: 8em;
+    /*width: 8em;*/
     margin-top: -2.5em;
     text-decoration: none;
     list-style: none;
@@ -1939,7 +1939,7 @@ a, .title-btns-content > a {
 
 @media (min-width: 1920px) and (max-width: 2560px)  {
     .lang-menu {
-        right: -2.5%;
+        /*right: -2.5%;*/
         /*display: block;*/
     }
 }

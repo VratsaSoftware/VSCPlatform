@@ -8,7 +8,7 @@
             <!-- end of hamburger -->
             <div class="overlay">
                 <div id="logo" class="col-md-12 text-center">
-                    <a href="{{route('home')}}"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="vso-logo" class="img-fluid"></a>
+                    <a href="{{route('home')}}"><img src="{{asset('/images/logoVS_bg.png')}}" alt="vso-logo" class="img-fluid" width="20%"></a>
                 </div>
 
                 <div class="header-title col-md-12 text-center">
@@ -26,7 +26,7 @@
                 <div class="header-menu col-md-12" id="header-sticky">
                     <nav class="text-center">
                         <ul class="d-flex flex-wrap main-nav-list">
-                            <li class="p-3"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="" class="img-fluid"></li>
+                            <li class="p-3"><img src="{{asset('/images/logoVs_bg.png')}}" alt="" class="img-fluid"></li>
                             <li class="p-3"><a href="{{route('home')}}">Начало</a></li>
                             <li class="p-3"><a href="#information-holder">Информация</a></li>
                             <li class="p-3"><a href="#program-holder">Програма</a></li>

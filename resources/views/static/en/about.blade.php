@@ -41,11 +41,11 @@
 <body>
     @include('static.en.lang_btn')
     <!-- header section - nav - gallery -->
-    <div class="section" id="header-section">
-        <div class="overlay-top-img">
-            <img src="{{asset('/images/team.png')}}" alt="bg-img" class="img-fluid">
-        </div>
-    </div>
+{{--    <div class="section" id="header-section">--}}
+{{--        <div class="overlay-top-img">--}}
+{{--            <img src="{{asset('/images/team.png')}}" alt="bg-img" class="img-fluid">--}}
+{{--        </div>--}}
+{{--    </div>--}}
     <div id="header" class="col-md-12 col-sm-12 d-flex flex-row flex-wrap header">
         <div id="logo" class="col-md-1 col-sm-1">
             <h1><a href="{{route('home')}}"><img src="{{asset('/images/logoVS_en.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>

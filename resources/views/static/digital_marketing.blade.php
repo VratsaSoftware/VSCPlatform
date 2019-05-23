@@ -8,7 +8,7 @@
             <!-- end of hamburger -->
             <div class="overlay-marketing">
                 <div id="logo" class="col-md-12 text-center">
-                    <a href="{{route('home')}}"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="vso-logo" class="img-fluid"></a>
+                    <a href="{{route('home')}}"><img src="{{asset('/images/logoVS_bg.png')}}" alt="vso-logo" class="img-fluid" width="20%"></a>
                 </div>
 
                 <div class="header-title col-md-12 text-center">

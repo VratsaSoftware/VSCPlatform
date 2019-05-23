@@ -42,7 +42,6 @@
               </tbody>
             </table>
         </div>
-    </div>
     <!-- modal for adding elements -->
     <div id="modal" style="position:absolute">
         <div class="modal-content print-body">

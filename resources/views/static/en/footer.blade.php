@@ -1,6 +1,6 @@
 <link rel="stylesheet" href="{{asset('/css/footer.css')}}">
-<div class="footer col-md-12 d-flex flex-row flex-wrap">
-    <div class="col-md-4">
+<div class="footer col-md-12 flex-row justify-content-between d-flex flex-wrap text-center">
+    <div class="p-2 col-md-3">
         <div class="col-md-12 f-heading">
             About
         </div>
@@ -11,7 +11,7 @@
         </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="p-2 col-md-3">
         <div class="col-md-12 f-heading">
             Courses
         </div>
@@ -21,15 +21,19 @@
         </div>
     </div>
 
-    <div class="col-md-4">
+    <div class="p-2 col-md-3">
         <div class="col-md-12 f-heading">
             Contacts
         </div>
         <div class="col-md-12 f-contacts">
-            <p><i class="far fa-envelope"></i>&nbsp;<a href="mailto:school@vratsasoftware.com">school@vratsasoftware.com</a></p>
-            <p><i class="fab fa-facebook-square"></i>&nbsp;<a href="https://www.facebook.com/vratsasoftware/">vratsasoftware</a></p>
-            <p><i class="fas fa-phone"></i>&nbsp;<a href="tel:+359 88 207 6174">+359 88 207 6174</a></p>
+            <p><i class="far fa-envelope"></i><br/><a href="mailto:school@vratsasoftware.com">school@vratsasoftware.com</a></p>
+            <p><i class="fab fa-facebook-square"></i><br/><a href="https://www.facebook.com/vratsasoftware/">vratsasoftware</a></p>
+            <p><i class="fas fa-phone"></i><br/><a href="tel:+359 88 207 6174">+359 88 207 6174</a></p>
         </div>
+    </div>
+
+    <div class="col-md-12 text-center">
+        General partner for the period 2017-{{\Carbon\Carbon::now()->format('Y')}} is foundation America for Bulgaria.
     </div>
 </div>
 <div class="footer-end col-md-12 d-flex flex-row flex-wrap">
@@ -39,9 +43,6 @@
     </div>
     <div class="col-md-6 text-center">
         <input type="text" name="subscribe" value="" placeholder="example@gmail.com" id="subscribe" name="subscribe"> <button type="button" name="button" class="send-subscribe" id="subscribe-btn" data-url="{!! url('/') !!}">Subscribe</button>
-    </div>
-    <div class="col-md-12 text-center">
-        General partner for the period 2017-{{\Carbon\Carbon::now()->format('Y')}} is foundation America for Bulgaria.
     </div>
 </div>
 
@@ -58,17 +59,17 @@
                 async:true,
                 url: url+'/subscribe/'+email,
                 success: function(data){
-                        $('#subscribe').css('background','#fff');
-                        $('#subscribe').css('border','');
-                        $('#subscribe').val('');
-                        $('#subscribe').attr("disabled", 'disabled');
-                        $('#subscribe-btn').hide('fast');
-                        $('#subscribe').parent().append('<span class="alert alert-success" id="subscribed">subscribed</span>');
-                        setTimeout(function () {
-                            $('#subscribed').hide();
-                            $('#subscribe-btn').show();
-                            $('#subscribe').prop("disabled", false);
-                        }, 5000);
+                    $('#subscribe').css('background','#fff');
+                    $('#subscribe').css('border','');
+                    $('#subscribe').val('');
+                    $('#subscribe').attr("disabled", 'disabled');
+                    $('#subscribe-btn').hide('fast');
+                    $('#subscribe').parent().append('<span class="alert alert-success" id="subscribed">subscribed</span>');
+                    setTimeout(function () {
+                        $('#subscribed').hide();
+                        $('#subscribe-btn').show();
+                        $('#subscribe').prop("disabled", false);
+                    }, 5000);
                 },
                 error: function(jqXHR, textStatus, errorThrown) {
                     $('#subscribe').css('border','1px solid #f00');

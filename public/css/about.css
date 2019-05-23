@@ -13,9 +13,17 @@ body {
     src: url(fonts/comfortaa/Comfortaa-Regular.ttf);
 }
 
+#team{
+    z-index: 999;
+}
+
+#main-nav>ul>li>a, #log-in>a, .header-about-text{
+    color: #000;
+}
+
 /*head-section*/
 .header {
-    background-color: rgba(0, 0, 0, 0.5) !important;
+    /*background-color: rgba(0, 0, 0, 0.5) !important;*/
     height: 65vw;
     top: 0;
     margin-top: -1vw !important;
@@ -52,7 +60,7 @@ body {
 .header-about-text {
     /* z-index: 99; */
     font-family: Comfortaa;
-    color: #FFFFFF !important;
+    color: #000000 !important;
     text-shadow: 0px 0px 10px rgba(94, 94, 94, 0.148862);
     margin-top: 0vw;
     position: absolute;
@@ -61,7 +69,7 @@ body {
 /*end-head-section*/
 /*team section*/
 #team {
-   /* position: absolute;*/
+    /* position: absolute;*/
 }
 
 /*end of team section*/
@@ -148,7 +156,7 @@ body {
 
 .founders-title {
     font-family: Ubuntu;
-    margin-top: 5vw;
+    margin-top: -30vw;
 }
 
 /*end of team sections*/
@@ -227,7 +235,7 @@ body {
     }
 
     .team-txt {
-         font-size: 4vw;
+        font-size: 4vw;
     }
 
     .team-txt {
@@ -348,7 +356,7 @@ body {
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
     .header-about-text {
-        margin-top: 25vw;
+        margin-top: 13vw;
         font-size: 3vw;
     }
 
