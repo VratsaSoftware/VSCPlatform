@@ -17,53 +17,53 @@ Route::get('language/{lang}', function ($lang) {
 })->name('langroute');
 
 Route::get('/', function () {
-    if (Session::get('locale') == 'bg') {
-        return view('static.home');
+    if (Session::get('locale') == 'en') {
+        return view('static.en.home');
     }
-    return view('static.en.home');
+    return view('static.home');
 })->name('home');
 
 // static pages
 Route::get('/team', function () {
-    if (Session::get('locale') == 'bg') {
-        return view('static.about');
+    if (Session::get('locale') == 'en') {
+        return view('static.en.about');
     }
-    return view('static.en.about');
+    return view('static.about');
 })->name('about');
 
 Route::get('/train-devs', function () {
-    if (Session::get('locale') == 'bg') {
-        return view('static.programming');
+    if (Session::get('locale') == 'en') {
+        return view('static.en.programming');
     }
-    return view('static.en.programming');
+    return view('static.programming');
 })->name('programmingCourses');
 
 Route::get('/digital-marketing', function () {
-    if (Session::get('locale') == 'bg') {
-        return view('static.digital_marketing');
+    if (Session::get('locale') == 'en') {
+        return view('static.en.digital_marketing');
     }
-    return view('static.en.digital_marketing');
+    return view('static.digital_marketing');
 })->name('digitalMarketing');
 
 Route::get('/mission-2', function () {
-    if (Session::get('locale') == 'bg') {
-        return view('static.mission');
+    if (Session::get('locale') == 'en') {
+        return view('static.en.mission');
     }
-    return view('static.en.mission');
+    return view('static.mission');
 })->name('mission');
 
 Route::get('/reports', function () {
-    if (Session::get('locale') == 'bg') {
-        return view('static.reports');
+    if (Session::get('locale') == 'en') {
+        return view('static.en.reports');
     }
-    return view('static.en.reports');
+    return view('static.reports');
 })->name('year_reports');
 
 Route::get('/contacts', function () {
-    if (Session::get('locale') == 'bg') {
-        return view('static.contacts');
+    if (Session::get('locale') == 'en') {
+        return view('static.en.contacts');
     }
-    return view('static.en.contacts');
+    return view('static.contacts');
 })->name('contacts');
 
 Route::get('/subscribe/{email}', 'HomeController@subscribe');
@@ -166,3 +166,43 @@ Route::get('/user/{user?}/course/{course}/module/{module}/lections',
     'Courses\LectionController@show')->name('user.module.lections');
 Route::post('/user/{user?}/course/{course}/module/{module}/lection/{lection}/comment',
     'Courses\LectionController@addComment')->name('user.module.lection.comment');
+
+
+//old routes redirects
+Route::fallback(function ()
+{
+    if (Session::get('locale') == 'en') {
+        return view('static.en.home');
+    }
+    return view('static.home');
+});
+
+Route::get('/{lang}/team', function($lang){
+    Session::put('locale', $lang);
+    return redirect()->route('about');
+})->where('lang','(bg|en)');
+
+Route::get('/{lang}/train-devs', function($lang){
+    Session::put('locale', $lang);
+    return redirect()->route('programmingCourses');
+})->where('lang','(bg|en)');
+
+Route::get('/{lang}/digital-marketing', function($lang){
+    Session::put('locale', $lang);
+    return redirect()->route('digitalMarketing');
+})->where('lang','(bg|en)');
+
+Route::get('/{lang}/mission-2', function($lang){
+    Session::put('locale', $lang);
+    return redirect()->route('mission');
+})->where('lang','(bg|en)');
+
+Route::get('/{lang}/reports', function($lang){
+    Session::put('locale', $lang);
+    return redirect()->route('year_reports');
+})->where('lang','(bg|en)');
+
+Route::get('/{lang}/contacts', function($lang){
+    Session::put('locale', $lang);
+    return redirect()->route('contacts');
+})->where('lang','(bg|en)');

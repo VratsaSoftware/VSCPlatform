@@ -1,14 +1,14 @@
 @extends('static.en.courses_template')
 @section('title', 'Programming courses')
 @section('content')
-<div class="section">
+    <div class="section">
         <div id="header" style="background: url(./images/cover-img.png)">
             <!-- hamburger -->
-            @include('static.en.hamburger_menu')
-            <!-- end of hamburger -->
+        @include('static.en.hamburger_menu')
+        <!-- end of hamburger -->
             <div class="overlay">
                 <div id="logo" class="col-md-12 text-center">
-                    <a href="{{route('home')}}"><img src="{{asset('/images/logoVS_en.png')}}" alt="vso-logo" class="img-fluid" width="20%"></a>
+                    <a href="{{route('home')}}"><img src="{{asset('/images/logoVS_en_white.png')}}" alt="vso-logo" class="img-fluid" width="20%"></a>
                 </div>
 
                 <div class="header-title col-md-12 text-center">
@@ -26,7 +26,7 @@
                 <div class="header-menu col-md-12" id="header-sticky">
                     <nav class="text-center">
                         <ul class="d-flex flex-wrap main-nav-list">
-                            <li class="p-3"><img src="{{asset('/images/logoVS_en.png')}}" alt="" class="img-fluid"></li>
+                            <li class="p-3"><img src="{{asset('/images/logoVS_en_white.png')}}" alt="" class="img-fluid"></li>
                             <li class="p-3"><a href="{{route('home')}}">Home</a></li>
                             <li class="p-3"><a href="#information-holder">Information</a></li>
                             <li class="p-3"><a href="#program-holder">Program</a></li>
@@ -79,7 +79,7 @@
                         <span>Professional Development</span>
                     </div>
                     <div class="info-text">
-                       Choose a path that gives you the opportunity to grow and become better. Keep up to date with new technologies and trends. Start your journey led by experienced lecturers and make sure you create your own mark.
+                        Choose a path that gives you the opportunity to grow and become better. Keep up to date with new technologies and trends. Start your journey led by experienced lecturers and make sure you create your own mark.
                     </div>
                 </div>
             </div>
@@ -383,14 +383,14 @@
     </div>
 
     <script>
-    // Set the date we're counting down to
-    var programmingDate = new Date("Feb 10, 2019 00:00:00").getTime();
-    var timerClass = '.timer-programming';
+        // Set the date we're counting down to
+        var programmingDate = new Date("Feb 10, 2019 00:00:00").getTime();
+        var timerClass = '.timer-programming';
 
-    // Update the count down every 1 second
-    var start = setInterval(function() {
-        timer(programmingDate,timerClass)
-    }, 1000);
+        // Update the count down every 1 second
+        var start = setInterval(function() {
+            timer(programmingDate,timerClass)
+        }, 1000);
     </script>
     <script>
         var headeroffset = $("#header-sticky").offset();

@@ -14,7 +14,7 @@ body {
 }
 
 #team{
-    z-index: 999;
+    z-index: 10;
 }
 
 #main-nav>ul>li>a, #log-in>a, .header-about-text{
@@ -165,7 +165,7 @@ body {
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
     .header-about-text {
-        margin-top: 45vw;
+        margin-top: 35vw;
         font-size: 6.2vw;
     }
 

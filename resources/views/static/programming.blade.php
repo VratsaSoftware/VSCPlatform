@@ -1,14 +1,14 @@
 @extends('static.courses_template')
 @section('title', 'Курсове по Програмиране')
 @section('content')
-<div class="section">
+    <div class="section">
         <div id="header" style="background: url(./images/cover-img.png)">
             <!-- hamburger -->
-            @include('static.hamburger_menu')
-            <!-- end of hamburger -->
+        @include('static.hamburger_menu')
+        <!-- end of hamburger -->
             <div class="overlay">
                 <div id="logo" class="col-md-12 text-center">
-                    <a href="{{route('home')}}"><img src="{{asset('/images/logoVS_bg.png')}}" alt="vso-logo" class="img-fluid" width="20%"></a>
+                    <a href="{{route('home')}}"><img src="{{asset('/images/logoVStext.png')}}" alt="vso-logo" class="img-fluid" width="20%"></a>
                 </div>
 
                 <div class="header-title col-md-12 text-center">
@@ -26,7 +26,7 @@
                 <div class="header-menu col-md-12" id="header-sticky">
                     <nav class="text-center">
                         <ul class="d-flex flex-wrap main-nav-list">
-                            <li class="p-3"><img src="{{asset('/images/logoVs_bg.png')}}" alt="" class="img-fluid"></li>
+                            <li class="p-3"><img src="{{asset('/images/logoVStext.png')}}" alt="" class="img-fluid"></li>
                             <li class="p-3"><a href="{{route('home')}}">Начало</a></li>
                             <li class="p-3"><a href="#information-holder">Информация</a></li>
                             <li class="p-3"><a href="#program-holder">Програма</a></li>
@@ -79,7 +79,7 @@
                         <span>Професионално развитие</span>
                     </div>
                     <div class="info-text">
-                       Светът около теб се променя с напредването на технологиите. Живеем в 21 век и има много възможности за добра кариера, дори във Враца. Нашата академия предлага практическо обучение водено от опитни лектори.
+                        Светът около теб се променя с напредването на технологиите. Живеем в 21 век и има много възможности за добра кариера, дори във Враца. Нашата академия предлага практическо обучение водено от опитни лектори.
                     </div>
                 </div>
             </div>
@@ -383,23 +383,23 @@
     </div>
 
     <script>
-    // Set the date we're counting down to
-    var programmingDate = new Date("Feb 10, 2019 00:00:00").getTime();
-    var timerClass = '.timer-programming';
+        // Set the date we're counting down to
+        var programmingDate = new Date("Feb 10, 2019 00:00:00").getTime();
+        var timerClass = '.timer-programming';
 
-    // Update the count down every 1 second
-    var start = setInterval(function() {
-        timer(programmingDate,timerClass)
-    }, 1000);
+        // Update the count down every 1 second
+        var start = setInterval(function() {
+            timer(programmingDate,timerClass)
+        }, 1000);
     </script>
     <script>
         var headeroffset = $("#header-sticky").offset();
         var sticky = (headeroffset.top - 50);
-       
+
         $(window).scroll(function() {
             if (window.pageYOffset >= sticky && !$("#header-sticky").hasClass('sticky')) {
                 $("#header-sticky").addClass('sticky');
-            } 
+            }
             if(window.pageYOffset < sticky && $("#header-sticky").hasClass('sticky')) {
                 $("#header-sticky").removeClass('sticky');
             }

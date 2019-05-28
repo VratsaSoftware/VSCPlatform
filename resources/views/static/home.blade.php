@@ -216,7 +216,7 @@
         </div>
         <div class="why">
             <div class="why-title col-md-12 text-center">
-                <span>Защо ВСО?</span>
+                <span>Защо Враца Софтуер?</span>
             </div>
             <div class="why-sections d-flex mb-12 flex-row flex-wrap">
                 <div class="why-first-section p-4 col-md-4 text-center">

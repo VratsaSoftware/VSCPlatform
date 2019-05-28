@@ -307,6 +307,22 @@
                                     <input type="text" name="specialty" id="specialty_live" value="няма"
                                            class="section-el-bold edit-edu">
                                 @endif
+                                <i class="fas fa-book-open"></i>
+                                @if(!is_null($edu->type))
+                                    <span class="section-el-bold live-edu">{{$edu->type}}</span>
+                                @endif
+                                <select name="edu_type_second" id="edu_type_second" class="section-el-bold edit-edu" style="max-width: 100%;">
+                                    <option value="null" selected>-</option>
+                                    @foreach(Config::get('eduTypes') as $type)
+                                        @if($type !== 'null')
+                                            @if($edu->type == $type)
+                                                <option value="{{$type}}" selected>{{$type}}</option>
+                                            @else
+                                                <option value="{{$type}}">{{$type}}</option>
+                                            @endif
+                                        @endif
+                                    @endforeach
+                                </select><br/>
                                 <i class="fas fa-comment"></i>
                                 <span class="live-edu">Коментар :</span>
                                 @if(!empty($edu->description))
@@ -359,20 +375,30 @@
                                 <select name="edu_institution_type" id="edu_institution_type_live"
                                         class="section-el-bold">
                                     @foreach(Config::get('institutionTypes') as $type)
+                                        <option value="{{$type}}">{{$type}}</option>
+                                    @endforeach
+                                </select><br/>
+                                <i class="fas fa-book-open"></i>
+                                <select name="edu_type_second" id="edu_type_second" class="section-el-bold"
+                                        style="max-width: 100%;">
+                                        <option value="null" selected>-</option>
+                                    @foreach(Config::get('eduTypes') as $type)
+                                        @if($type != 'null')
                                             <option value="{{$type}}">{{$type}}</option>
+                                        @endif
                                     @endforeach
                                 </select><br/>
 
-                                <div id="course-certificate">
-                                    Направление
-                                    <select name="edu_course" id="edu_course" class="section-el-bold">
-                                       @foreach(Config::get('applicationForm.courses') as $course)
-                                            @if(!$loop->last)
-                                                <option value="{{$course}}" {{ (old("edu_course") == $course ? "selected":"") }}>{{ucfirst($course)}}</option>
-                                            @endif
-                                        @endforeach
-                                    </select>
-                                </div>
+{{--                                <div id="course-certificate">--}}
+                                {{--                                    Направление--}}
+                                {{--                                    <select name="edu_course" id="edu_course" class="section-el-bold">--}}
+                                {{--                                       @foreach(Config::get('applicationForm.courses') as $course)--}}
+                                {{--                                            @if(!$loop->last)--}}
+                                {{--                                                <option value="{{$course}}" {{ (old("edu_course") == $course ? "selected":"") }}>{{ucfirst($course)}}</option>--}}
+                                {{--                                            @endif--}}
+                                {{--                                        @endforeach--}}
+                                {{--                                    </select>--}}
+                                {{--                                </div>--}}
 
                                 <input type="text" name="institution_name" id="institution_name"
                                        value="{{old('institution_name')}}" class="section-el-bold institution_name"
@@ -389,7 +415,6 @@
                                 <textarea name="edu_description" id="edu_description" placeholder="коментар..."
                                           style="overflow:auto;resize:none" rows="5" class="section-el-bold"
                                           form="edu-form-create-1" value="{{old('edu_description')}}"></textarea>
-
                                 <p><button value="запази" class="btn btn-success"><i class="fas fa-save"></i></button> <button
                                             class="btn btn-info edit-edu edu-add-new"><i
                                                 class="fas fa-plus"></i></button></p>

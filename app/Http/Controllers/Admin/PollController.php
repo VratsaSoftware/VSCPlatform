@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Admin\PollOption;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Poll;
@@ -17,7 +19,7 @@ class PollController extends Controller
     {
         $polls = Poll::with('Options', 'Options.Votes', 'Options.Votes.User')->get();
 
-        return view('admin.polls', ['polls' => $polls]);
+        return view('admin.polls.polls', ['polls' => $polls]);
     }
 
     /**
@@ -27,7 +29,7 @@ class PollController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.polls.create');
     }
 
     /**
@@ -38,7 +40,42 @@ class PollController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request['valid_visibility'] = \Config::get('courseVisibility');
+        $data = $request->validate([
+            'question' => 'required|string',
+            'start_date' => 'required|date_format:Y-m-d',
+            'start_time' => 'required|date_format:H:i',
+            'end_date' => 'required|date_format:Y-m-d|after:start_date',
+            'end_time' => 'required|date_format:H:i',
+            'visibility' => 'required|in_array:valid_visibility.*',
+            'type' => 'required|numeric|min:0|max:1',
+            'options' => 'required|array|min:2',
+            'for_delete' => 'sometimes|array',
+        ]);
+
+        $start_date = Carbon::parse($request->start_date.$request->start_time)->format('Y-m-d H:i:s');
+        $end_date = Carbon::parse($request->end_date.$request->end_time)->format('Y-m-d H:i:s');
+
+        $newPoll = new Poll;
+        $newPoll->question = $request->question;
+        $newPoll->start = $start_date;
+        $newPoll->ends = $end_date;
+        $newPoll->visibility = $request->visibility;
+        $newPoll->type = $request->type;
+        $newPoll->save();
+
+        foreach($request->options as $kId => $option){
+            if(!is_null($option) && !empty($option)) {
+                $insNewOption = new PollOption;
+                $insNewOption->poll_id = $newPoll->id;
+                $insNewOption->option = $option;
+                $insNewOption->save();
+            }
+        }
+
+        $message = __('Успешно създадена анкета!');
+        return redirect()->route('polls.index')->with('success', $message);
+
     }
 
     /**
@@ -49,7 +86,7 @@ class PollController extends Controller
      */
     public function show($id)
     {
-        //
+
     }
 
     /**
@@ -60,7 +97,8 @@ class PollController extends Controller
      */
     public function edit($id)
     {
-        //
+        $poll = Poll::with('Options')->find($id);
+        return view('admin.polls.edit',['poll' => $poll]);
     }
 
     /**
@@ -70,9 +108,57 @@ class PollController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Poll $poll)
     {
-        //
+        $request['valid_visibility'] = \Config::get('courseVisibility');
+        $data = $request->validate([
+            'question' => 'required|string',
+            'start_date' => 'required|date_format:Y-m-d',
+            'start_time' => 'required|date_format:H:i',
+            'end_date' => 'required|date_format:Y-m-d|after:start_date',
+            'end_time' => 'required|date_format:H:i',
+            'visibility' => 'required|in_array:valid_visibility.*',
+            'type' => 'required|numeric|min:0|max:1',
+            'options' => 'required|array|min:2',
+            'for_delete' => 'sometimes|array',
+        ]);
+        $start_date = Carbon::parse($request->start_date.$request->start_time)->format('Y-m-d H:i:s');
+        $end_date = Carbon::parse($request->end_date.$request->end_time)->format('Y-m-d H:i:s');
+
+        $poll->question = $request->question;
+        $poll->start = $start_date;
+        $poll->ends = $end_date;
+        $poll->visibility = $request->visibility;
+        $poll->type = $request->type;
+        $poll->save();
+
+        if(isset($request->for_delete)){
+            foreach ($request->for_delete as $delOption){
+                $forDelete = PollOption::find($delOption);
+                $forDelete->delete();
+            }
+        }
+
+        foreach($request->options as $kId => $option){
+            if(!is_null($option) && !empty($option)) {
+                $insOption = PollOption::where([
+                    ['id',$kId],
+                    ['poll_id',$poll->id]
+                ])->first();
+                if($insOption){
+                    $insOption->option = $option;
+                    $insOption->save();
+                }else{
+                    $insNewOption = new PollOption;
+                    $insNewOption->poll_id = $poll->id;
+                    $insNewOption->option = $option;
+                    $insNewOption->save();
+                }
+            }
+        }
+
+        $message = __('Успешно редактирана анкета!');
+        return redirect()->route('polls.index')->with('success', $message);
     }
 
     /**
@@ -83,11 +169,15 @@ class PollController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deletePoll = Poll::find($id);
+        $deletePoll->delete();
+
+        $message = __('Успешно изтрита анкета!');
+        return redirect()->route('polls.index')->with('success', $message);
     }
 
     public function getVotes(Poll $poll)
     {
-        return view('admin.poll_votes',['poll' => $poll])->render();
+        return view('admin.polls.poll_votes',['poll' => $poll])->render();
     }
 }

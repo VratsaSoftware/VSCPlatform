@@ -100,6 +100,7 @@ class UserController extends Controller
     public function createEducation(Request $request)
     {
         $request['valid_instTypes'] = \Config::get('institutionTypes');
+        $request['valid_types'] = \Config::get('eduTypes');
         $data = $request->validate([
             'y_from' => 'required|numeric|min:1900|max:2099',
             'y_to' => 'sometimes|nullable|numeric|min:'.((int)$request->y_from-1).'|max:2099',
@@ -107,7 +108,8 @@ class UserController extends Controller
             'edu_institution_type' => "required|in_array:valid_instTypes.*",
             'institution_name' => 'required|string',
             'specialty' => 'string',
-            'edu_course' => 'sometimes'
+            'edu_course' => 'sometimes',
+            'edu_type_second' => 'sometimes|in_array:valid_types.*'
         ]);
 
         $eduInstitution = EducationInstitution::firstOrCreate(
@@ -129,6 +131,9 @@ class UserController extends Controller
             $insEdu->institution_id = $eduInstitution->id;
             $insEdu->specialty_id = $eduSpeciality->id;
             $insEdu->description = $request->edu_description;
+            if($request->edu_type_second !== 'null') {
+                $insEdu->type = $request->edu_type_second;
+            }
             $insEdu->save();
 
             $message = __('Успешно добавено Образование!');
@@ -141,13 +146,15 @@ class UserController extends Controller
     public function updateEducation(Request $request)
     {
         $request['valid_instTypes'] = \Config::get('institutionTypes');
+        $request['valid_types'] = \Config::get('eduTypes');
         $data = $request->validate([
-            'y_from' => 'required|date|date_format:Y-m-d',
-            'y_to' => 'required|date|date_format:Y-m-d|after:y_from',
+            'y_from' => 'required|numeric|min:1900|max:2099',
+            'y_to' => 'sometimes|nullable|numeric|min:'.((int)$request->y_from-1).'|max:2099',
             'edu_type' => 'required|numeric',
             'edu_institution_type' => "required|in_array:valid_instTypes.*",
             'institution_name' => 'required|string',
             'specialty' => 'string',
+            'edu_type_second' => 'sometimes|in_array:valid_types.*'
         ]);
         $updEdu = Education::find($request->edu_id);
         $updEdu->y_from = $request->y_from;
@@ -162,6 +169,9 @@ class UserController extends Controller
         );
         $updEdu->specialty_id = $eduSpeciality->id;
         $updEdu->description = $request->edu_description;
+        if($request->edu_type_second !== 'null') {
+            $updEdu->type = $request->edu_type_second;
+        }
         $updEdu->save();
 
         $message = __('Успешно направени промени в секция Образование!');

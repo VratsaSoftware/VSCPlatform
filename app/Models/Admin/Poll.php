@@ -10,6 +10,7 @@ class Poll extends Model
 {
     protected $table = 'polls';
     protected $dates = ['start','ends'];
+    protected $guarded = [];
 
     public function Options()
     {
