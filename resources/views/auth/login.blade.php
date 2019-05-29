@@ -10,7 +10,7 @@
 
 	<link rel="stylesheet" href="{{ asset('/css/login.css') }}">
 	<!-- favicon -->
-	<link rel="shortcut icon" type="image/png" href="{{ asset('/images/vso-png-white.png') }}" />
+	<link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png.png')}}" />
 	<!-- JQuery -->
 	<script type="text/javascript" src="{{ asset('/js/jquery-3.3.1.js') }}"></script>
 

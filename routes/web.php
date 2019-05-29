@@ -169,13 +169,13 @@ Route::post('/user/{user?}/course/{course}/module/{module}/lection/{lection}/com
 
 
 //old routes redirects
-Route::fallback(function ()
-{
-    if (Session::get('locale') == 'en') {
-        return view('static.en.home');
-    }
-    return view('static.home');
-});
+//Route::fallback(function ()
+//{
+//    if (Session::get('locale') == 'en') {
+//        return view('static.en.home');
+//    }
+//    return view('static.home');
+//});
 
 Route::get('/{lang}/team', function($lang){
     Session::put('locale', $lang);

@@ -9,7 +9,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
         <!-- favicon -->
-        <link rel="shortcut icon" type="image/png" href="{{ asset('/images/vso-png-white.png') }}" />
+        <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png.png')}}" />
 
         <!-- facebook -->
         <meta property="og:url" content="" />

@@ -3,6 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Free 9 months programming courses in Vratsa">
+    <meta name="keywords" content="Vraca Software,Programming,Courses,Programmers,Education,Vratsa,Vraca">
+    <meta name="author" content="Vratsa Software">
 
     <title>Team</title>
 

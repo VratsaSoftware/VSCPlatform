@@ -3,6 +3,9 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Развиваме дигитална индустрия във Враца">
+    <meta name="keywords" content="Враца Софтуер,Програмиране,Курсове,Програмисти,Обучения,Враца">
+    <meta name="author" content="Враца Софутер Общество">
 
     <title>Екип</title>
 
