@@ -29,9 +29,8 @@
 <body style="opacity:0">
 @include('static.lang_btn')
 <!-- JQuery -->
-<script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}" async></script>
 <!-- scroll -->
-{{--<script type="text/javascript" src="{{asset('/js/jquery-sectionsnap.js')}}" async></script>--}}
 <div id="content">
     <!-- header section - nav - gallery -->
     <div class="section">
@@ -470,8 +469,6 @@
         frontGallery.src = "{{asset('/js/front-gallery.js')}}";
         var customGallery = document.createElement("script");
         customGallery.src = "{{asset('/js/custom-gallery.js')}}";
-        var scroll = document.createElement("script");
-        scroll.src = "{{asset('/js/scroll.js')}}";
         var numbers = document.createElement("script");
         numbers.src = "{{asset('/js/numbers-section-trigger.js')}}";
         var filmstrip = document.createElement("script");
@@ -484,7 +481,6 @@
         rightDot.src = "{{asset('/js/right-dot-menu.js')}}";
         $('body').append(frontGallery);
         $('body').append(customGallery);
-        $('body').append(scroll);
         $('body').append(numbers);
         $('body').append(filmstrip);
         $('body').append(sponsors);
