@@ -476,13 +476,16 @@
             students.src = "{{asset('/js/students.js')}}";
             var rightDot = document.createElement("script");
             rightDot.src = "{{asset('/js/right-dot-menu.js')}}";
+            setTimeout(loadJs,2000);
             $('body').append(frontGallery);
-            $('body').append(customGallery);
-            $('body').append(numbers);
-            $('body').append(filmstrip);
-            $('body').append(sponsors);
-            $('body').append(students);
-            $('body').append(rightDot);
+            function loadJs(){
+                $('body').append(customGallery);
+                $('body').append(numbers);
+                $('body').append(filmstrip);
+                $('body').append(sponsors);
+                $('body').append(students);
+                $('body').append(rightDot);
+            }
 
             $( '.main-events > div' ).each( function ( k, v ) {
                 $( this ).find( 'img' ).attr( 'src', $( this ).find( 'img' ).attr( 'data-img' ) );
