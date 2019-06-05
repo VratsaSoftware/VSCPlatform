@@ -13,6 +13,8 @@
 
 Route::get('language/{lang}', function ($lang) {
     Session::put('locale', $lang);
+    \Cookie::forget('locale');
+    Cookie::queue('locale', $lang, (60 * 60 * 24 * 365));
     return back();
 })->name('langroute');
 

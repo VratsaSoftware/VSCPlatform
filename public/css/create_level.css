@@ -438,6 +438,10 @@ input[type=range]:focus {
     height: 25vw;
 }
 
+.lection-description{
+    overflow-wrap: break-word;
+}
+
 /*end of students section*/
 /*Query's
 --------------------------------------------------------------------------------------------------*/

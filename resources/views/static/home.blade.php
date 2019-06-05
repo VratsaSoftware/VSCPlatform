@@ -1,6 +1,16 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-51734359-3"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-51734359-3');
+    </script>
+
     <meta charset="UTF-8">
     <title>Враца Софтуер Общество</title>
     <meta name="description" content="Развиваме дигитална индустрия във Враца">
@@ -15,28 +25,19 @@
     <meta property="og:title" content="Враца Софтуер Общество" />
     <meta property="og:description" content="Развиваме дигитална индустрия във Враца" />
     <meta property="og:image" content="{{asset('/images/vso-logo-bg-original.png')}}" />
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-51734359-3"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-
-        gtag('config', 'UA-51734359-3');
-    </script>
 </head>
 
 <body style="opacity:0">
 @include('static.lang_btn')
 <!-- JQuery -->
-<script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}" async></script>
+<script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
 <!-- scroll -->
 <div id="content">
     <!-- header section - nav - gallery -->
     <div class="section">
         <div id="header" class="col-md-11 col-sm-12 row">
             <div id="logo" class="col-md-1 col-sm-1">
-                <h1><a href="{{route('home')}}"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
+                <h1><a href="{{route('home')}}"><img src="{{asset('/images/logoVStext.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
             </div>
 
             @include('static.menu')
@@ -246,7 +247,7 @@
             <div class="main-events d-flex mb-12 flex-row col-md-12 flex-wrap">
                 <div class="p-6 col-md-6 text-center main-event-first">
                     <a href="https://hack.vratsa.net/" target=" _blank">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/HackVratsa.jpg')}}" alt="events">
+                        <img src="" data-img="{{asset('/images/home-events/HackVratsa.jpg')}}" alt="events">
                     </a>
                     <div class="event-title-top">
                         <a href="https://hack.vratsa.net/" target=" _blank" class="event-top-link">HackVratsa</a>
@@ -254,7 +255,7 @@
                 </div>
                 <div class="p-6 col-md-6 text-center main-event-second">
                     <a href="https://hunt.vratsa.net/" target=" _blank">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/th.jpg')}}" alt="events">
+                        <img src="" data-img="{{asset('/images/home-events/th.jpg')}}" alt="events">
                     </a>
                     <div class="event-title-top">
                         <a href="https://hunt.vratsa.net/" target=" _blank" class="event-top-link">TreasureHunt</a>
@@ -262,7 +263,7 @@
                 </div>
                 <div class="p-6 col-md-6 text-center main-event-first">
                     <a href="https://www.facebook.com/railsgirlsvratsa/" target=" _blank">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/railsgirls.png')}}" alt="events">
+                        <img src="" data-img="{{asset('/images/home-events/railsgirls.png')}}" alt="events">
                     </a>
                     <div class="event-title-top">
                         <a href="https://www.facebook.com/railsgirlsvratsa/" target=" _blank" class="event-top-link">RailsGirls</a>
@@ -270,7 +271,7 @@
                 </div>
                 <div class="p-6 col-md-6 text-center main-event-second">
                     <a href="https://codeweek.vratsa.net/" target=" _blank">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/cw18.png')}}" alt="events">
+                        <img src="" data-img="{{asset('/images/home-events/cw18.png')}}" alt="events">
                     </a>
                     <div class="event-title-top">
                         <a href="https://codeweek.vratsa.net/" target=" _blank" class="event-top-link">CodeWeek</a>
@@ -464,7 +465,7 @@
         $('head').append('<link rel="preload stylesheet" href="{{asset('/css/bootstrap-grid.min.css')}}" as="style">');
         $('head').append('<link rel="preload stylesheet" href="{{asset('/css/slick.css')}}" as="style">');
         $('head').append('<link rel="preload stylesheet" href="{{asset('/css/slick-theme.css')}}" as="style">');
-        $('head').append('<link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}" />');
+
         var frontGallery = document.createElement("script");
         frontGallery.src = "{{asset('/js/front-gallery.js')}}";
         var customGallery = document.createElement("script");
@@ -482,6 +483,7 @@
         setTimeout(loadJs,2000);
         $('body').append(frontGallery);
         function loadJs(){
+            $('head').append('<link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}" />');
             $('body').append(customGallery);
             $('body').append(numbers);
             $('body').append(filmstrip);
@@ -493,6 +495,7 @@
         $( '.main-events > div' ).each( function ( k, v ) {
             $( this ).find( 'img' ).attr( 'src', $( this ).find( 'img' ).attr( 'data-img' ) );
         } );
+
     });
 </script>
 </body>

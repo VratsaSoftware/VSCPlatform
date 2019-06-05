@@ -29,7 +29,7 @@
         @if(Auth::user() && Auth::user()->isAdmin())
             @include('admin.left-bar')
         @endif
-        @if(Auth::user() && Auth::user()->isLecturer())
+        @if(Auth::user() && Auth::user()->isLecturer() && !Auth::user()->isAdmin())
             @include('lecturer.left-bar')
         @endif
         @if(Auth::user() && !Auth::user()->isLecturer() && !Auth::user()->isAdmin())

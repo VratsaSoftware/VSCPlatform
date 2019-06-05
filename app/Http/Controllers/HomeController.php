@@ -20,6 +20,7 @@ use Carbon\Carbon;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Users\Subscribe;
+use Cookie;
 
 class HomeController extends Controller
 {
@@ -49,7 +50,8 @@ class HomeController extends Controller
         $interestTypes = InterestsType::all();
         $hobbies = [];
 
-        App::setLocale(Session::get('bg'));
+        Session::put('locale', 'bg');
+        app()->setLocale('bg');
 
         if ($hasEducation) {
             $education = Auth::user()->getEducation();

@@ -29,14 +29,14 @@
 <body style="opacity:0">
 @include('static.en.lang_btn')
 <!-- JQuery -->
-<script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}" async></script>
-<!-- scroll -->
+<script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
+
 <div id="content">
     <!-- header section - nav - gallery -->
     <div class="section">
         <div id="header" class="col-md-11 col-sm-12 row">
             <div id="logo" class="col-md-1 col-sm-1">
-                <h1><a href="{{route('home')}}"><img src="{{asset('/images/logoVS_en.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
+                <h1><a href="{{route('home')}}"><img src="{{asset('/images/logoVS_en_white.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
             </div>
 
             @include('static.en.menu')
@@ -245,7 +245,7 @@
             <div class="main-events d-flex mb-12 flex-row col-md-12 flex-wrap">
                 <div class="p-6 col-md-6 text-center main-event-first">
                     <a href="https://hack.vratsa.net/" target=" _blank">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/HackVratsa.jpg')}}" alt="events">
+                        <img src="" data-img="{{asset('/images/home-events/HackVratsa.jpg')}}" alt="events">
                     </a>
                     <div class="event-title-top">
                         <a href="https://hack.vratsa.net/" target=" _blank" class="event-top-link">HackVratsa</a>
@@ -253,7 +253,7 @@
                 </div>
                 <div class="p-6 col-md-6 text-center main-event-second">
                     <a href="https://hunt.vratsa.net/" target=" _blank">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/th.jpg')}}" alt="events">
+                        <img src="" data-img="{{asset('/images/home-events/th.jpg')}}" alt="events">
                     </a>
                     <div class="event-title-top">
                         <a href="https://hunt.vratsa.net/" target=" _blank" class="event-top-link">TreasureHunt</a>
@@ -261,7 +261,7 @@
                 </div>
                 <div class="p-6 col-md-6 text-center main-event-first">
                     <a href="https://www.facebook.com/railsgirlsvratsa/" target=" _blank">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/railsgirls.png')}}" alt="events">
+                        <img src="" data-img="{{asset('/images/home-events/railsgirls.png')}}" alt="events">
                     </a>
                     <div class="event-title-top">
                         <a href="https://www.facebook.com/railsgirlsvratsa/" target=" _blank" class="event-top-link">RailsGirls</a>
@@ -269,7 +269,7 @@
                 </div>
                 <div class="p-6 col-md-6 text-center main-event-second">
                     <a href="https://codeweek.vratsa.net/" target=" _blank">
-                        <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/cw18.png')}}" alt="events">
+                        <img src="" data-img="{{asset('/images/home-events/cw18.png')}}" alt="events">
                     </a>
                     <div class="event-title-top">
                         <a href="https://codeweek.vratsa.net/" target=" _blank" class="event-top-link">CodeWeek</a>

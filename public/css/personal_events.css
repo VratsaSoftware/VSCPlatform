@@ -111,7 +111,8 @@ body {
 }
 
 .events-now-text {
-    margin-top: 5vw;
+    margin-top: 7vw;
+    margin-bottom: 2vw;
     font-family: Ubuntu;
     letter-spacing: 1px;
     font-size: 2vw;

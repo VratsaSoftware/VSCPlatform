@@ -148,7 +148,7 @@
     </div>
 
     <div id="main-content">
-        @if(Session::get('locale') !== 'bg' || is_null(Session::get('locale')))
+        @if(Cookie::get('locale') !== 'bg' || is_null(Cookie::get('locale')))
             <h1>We couldn't find what you were looking for.</h1>
 
             <p>Unfortunately the page you were looking for could not be found. It may be
