@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Admin\Poll;
+use App\Models\Admin\PollVote;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\App;
@@ -81,6 +83,23 @@ class HomeController extends Controller
             $lecturer = User::find(Auth::user()->id);
             return view('lecturer.my_profile', ['social_links' => $socialLinks,'courses' => $courses, 'lecturer' => $lecturer]);
         }
+
+        $poll = Auth::user()->getPolls();
+
+        if($poll || !is_null($poll)) {
+            return view('user.my_profile', [
+                'social_links' => $socialLinks,
+                'certificates' => $certificates,
+                'education' => $education,
+                'eduTypes' => $educationTypes,
+                'workExp' => $workExp,
+                'hobbies' => $hobbies,
+                'interestTypes' => $interestTypes,
+                'isInvited' => $isInvited,
+                'poll' => $poll
+            ]);
+        }
+
         return view('user.my_profile', ['social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes,'workExp' => $workExp,'hobbies' => $hobbies,'interestTypes' => $interestTypes,'isInvited' => $isInvited]);
     }
 

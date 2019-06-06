@@ -9,6 +9,7 @@ use App\Models\Admin\PollOption;
 class PollVote extends Model
 {
     protected $table = 'poll_votes';
+    protected $guarded = [];
 
     public function User()
     {

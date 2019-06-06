@@ -28,7 +28,7 @@
                         <td>{{$vote->User->last_name}}</td>
                         <td>{{$vote->User->email}}</td>
                         <td>{{$vote->created_at->format('d-m')}}</td>
-                        <td>{{$vote->created_at->format('H:m')}}</td>
+                        <td>{{$vote->created_at->format('H:i')}}</td>
                     </tr>
                 @endforeach
                 </tbody>

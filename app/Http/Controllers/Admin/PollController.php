@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Admin\PollOption;
+use App\Models\Admin\PollVote;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Admin\Poll;
+use Illuminate\Support\Facades\Auth;
 
 class PollController extends Controller
 {
@@ -53,8 +55,8 @@ class PollController extends Controller
             'for_delete' => 'sometimes|array',
         ]);
 
-        $start_date = Carbon::parse($request->start_date.$request->start_time)->format('Y-m-d H:i:s');
-        $end_date = Carbon::parse($request->end_date.$request->end_time)->format('Y-m-d H:i:s');
+        $start_date = Carbon::parse($request->start_date . $request->start_time)->format('Y-m-d H:i:s');
+        $end_date = Carbon::parse($request->end_date . $request->end_time)->format('Y-m-d H:i:s');
 
         $newPoll = new Poll;
         $newPoll->question = $request->question;
@@ -64,8 +66,8 @@ class PollController extends Controller
         $newPoll->type = $request->type;
         $newPoll->save();
 
-        foreach($request->options as $kId => $option){
-            if(!is_null($option) && !empty($option)) {
+        foreach ($request->options as $kId => $option) {
+            if (!is_null($option) && !empty($option)) {
                 $insNewOption = new PollOption;
                 $insNewOption->poll_id = $newPoll->id;
                 $insNewOption->option = $option;
@@ -98,7 +100,7 @@ class PollController extends Controller
     public function edit($id)
     {
         $poll = Poll::with('Options')->find($id);
-        return view('admin.polls.edit',['poll' => $poll]);
+        return view('admin.polls.edit', ['poll' => $poll]);
     }
 
     /**
@@ -122,8 +124,8 @@ class PollController extends Controller
             'options' => 'required|array|min:2',
             'for_delete' => 'sometimes|array',
         ]);
-        $start_date = Carbon::parse($request->start_date.$request->start_time)->format('Y-m-d H:i:s');
-        $end_date = Carbon::parse($request->end_date.$request->end_time)->format('Y-m-d H:i:s');
+        $start_date = Carbon::parse($request->start_date . $request->start_time)->format('Y-m-d H:i:s');
+        $end_date = Carbon::parse($request->end_date . $request->end_time)->format('Y-m-d H:i:s');
 
         $poll->question = $request->question;
         $poll->start = $start_date;
@@ -132,23 +134,23 @@ class PollController extends Controller
         $poll->type = $request->type;
         $poll->save();
 
-        if(isset($request->for_delete)){
-            foreach ($request->for_delete as $delOption){
+        if (isset($request->for_delete)) {
+            foreach ($request->for_delete as $delOption) {
                 $forDelete = PollOption::find($delOption);
                 $forDelete->delete();
             }
         }
 
-        foreach($request->options as $kId => $option){
-            if(!is_null($option) && !empty($option)) {
+        foreach ($request->options as $kId => $option) {
+            if (!is_null($option) && !empty($option)) {
                 $insOption = PollOption::where([
-                    ['id',$kId],
-                    ['poll_id',$poll->id]
+                    ['id', $kId],
+                    ['poll_id', $poll->id]
                 ])->first();
-                if($insOption){
+                if ($insOption) {
                     $insOption->option = $option;
                     $insOption->save();
-                }else{
+                } else {
                     $insNewOption = new PollOption;
                     $insNewOption->poll_id = $poll->id;
                     $insNewOption->option = $option;
@@ -178,6 +180,25 @@ class PollController extends Controller
 
     public function getVotes(Poll $poll)
     {
-        return view('admin.polls.poll_votes',['poll' => $poll])->render();
+        return view('admin.polls.poll_votes', ['poll' => $poll])->render();
+    }
+
+    public function userVote(Request $request)
+    {
+        $isVoted = Poll::with('Options','Options.Votes')->whereHas('Options.Votes',function($q){
+            $q->where('user_id', Auth::user()->id);
+        })->find($request->poll_id);
+
+        if(is_null($isVoted)){
+            foreach ($request->data as $optionId) {
+                $newVote = new PollVote;
+                $newVote->poll_option_id = $optionId;
+                $newVote->user_id = Auth::user()->id;
+                $newVote->save();
+            }
+            $poll = Poll::with('Options','Options.Votes')->find($request->poll_id);
+            return view('admin.polls.user_after_vote',['poll'=>$poll]);
+        }
+        return response()->json('dublicate',204);
     }
 }

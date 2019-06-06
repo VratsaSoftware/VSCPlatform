@@ -79,6 +79,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/myProfile', 'HomeController@index')->name('myProfile');
     Route::resource('user', 'Users\UserController')->names('user');
 
+    //polls vote
+    Route::post('poll/user/vote','Admin\PollController@userVote')->name('user.vote.poll');
+
     //applications
     Route::resource('application', 'Courses\ApplicationController', [
         'except' => [

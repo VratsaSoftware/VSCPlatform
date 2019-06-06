@@ -74,6 +74,37 @@
                     </button>
                 </div>
             </div>
+            @if(isset($poll))
+                    <div class="col-md-4 text-left poll-container name-wrap poll-opened">
+                        <p class="name col-md-12">Анкета <span class="close-poll open-btn-poll">x</span></p>
+                        <p class="col-md-12">
+                            <span class="poll-question col-md-12">{{ucfirst($poll->question)}}</span> <br/>
+                            @if($poll->type > 0 )
+                                <span class="poll-type col-md-12">много избори</span>
+                            @else
+                                <span class="poll-type col-md-12">един избор</span>
+                        @endif
+                        @foreach($poll->Options as $option)
+                            <p class="col-md-12 poll-options-wrapper">
+                                @if($poll->type > 0)
+                                    <label class="container">{{$option->option}}
+                                        <input type="checkbox" name="options" id="option-{{$option->id}}"
+                                               class="poll-options" value="{{$option->id}}">
+                                        @else
+                                            <label class="container" for="option-{{$option->id}}">{{$option->option}}
+                                                <input type="radio" name="options" id="option-{{$option->id}}"
+                                                       class="poll-options" value="{{$option->id}}">
+                                                @endif
+                                                <span class="checkmark"></span>
+                                            </label>
+                            </p>
+                            @endforeach
+                            </p>
+                            <p class="col-md-12 text-center">
+                                <button class="btn btn-outline-success" id="vote-poll" data-url="{{route('user.vote.poll')}}" data-poll-id="{{$poll->id}}">Гласувай</button>
+                            </p>
+                    </div>
+            @endif
         </div>
         <div class="information-wrap col-md-12 d-flex flex-row flex-wrap">
             <div class="col-md-2 location-wrap text-left">
@@ -311,7 +342,8 @@
                                 @if(!is_null($edu->type))
                                     <span class="section-el-bold live-edu">{{$edu->type}}</span>
                                 @endif
-                                <select name="edu_type_second" id="edu_type_second" class="section-el-bold edit-edu" style="max-width: 100%;">
+                                <select name="edu_type_second" id="edu_type_second" class="section-el-bold edit-edu"
+                                        style="max-width: 100%;">
                                     <option value="null" selected>-</option>
                                     @foreach(Config::get('eduTypes') as $type)
                                         @if($type !== 'null')
@@ -745,5 +777,8 @@
 
     <!-- ajax load interest by type -->
     <script src="{{asset('/js/profile-interests-ajax-load.js')}}" charset="utf-8" async></script>
+
+    <!-- ajax load interest by type -->
+    <script src="{{asset('/js/polls.js')}}" charset="utf-8" async></script>
 
 @endsection

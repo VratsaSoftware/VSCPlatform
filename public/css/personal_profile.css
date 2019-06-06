@@ -167,6 +167,7 @@ body {
 .loading-edit {
     position: absolute;
     margin-top: 25vw;
+    /*margin-left: -12%;*/
 }
 
 .loader-wrapper {
@@ -544,6 +545,168 @@ input:checked+.slider:before {
 
 .interests{
     max-width: 100%;
+}
+
+/*POLLS*/
+/* Customize the label (the container) */
+.container {
+    display: block;
+    position: relative;
+    padding-left: 35px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    font-size: initial;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    word-wrap: break-word;
+    font-weight: bold;
+}
+
+/* Hide the browser's default checkbox */
+.container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+/* Create a custom checkbox */
+.checkmark {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 20px;
+    width: 20px;
+    background-color: #eee;
+}
+
+/* On mouse-over, add a grey background color */
+.container:hover input ~ .checkmark {
+    background-color: #ccc;
+}
+
+/* When the checkbox is checked, add a blue background */
+.container input:checked ~ .checkmark {
+    background-color: #28a745;
+}
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+    content: "";
+    position: absolute;
+    display: none;
+}
+
+/* Show the checkmark when checked */
+.container input:checked ~ .checkmark:after {
+    display: block;
+}
+
+/* Style the checkmark/indicator */
+.container .checkmark:after {
+    left: 9px;
+    top: 5px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 3px 3px 0;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+
+.poll-options{
+    list-style-type: none;
+}
+
+.poll-container{
+    padding-top: 1%!important;
+    font-family: Comfortaa;
+    border: 1px solid #fff;
+    border-radius: 10px;
+    overflow: auto;
+    -webkit-box-shadow: 10px 10px 17px -14px rgba(0,0,0,0.68);
+    -moz-box-shadow: 10px 10px 17px -14px rgba(0,0,0,0.68);
+    box-shadow: 0px 10px 50px rgba(7, 42, 68, 0.12);
+    /*height: 90%;*/
+    margin-top: -4vw;
+    /*position: fixed;*/
+    right: 0;
+    z-index: 1;
+    background-color: rgba(255, 255, 255, 0.9);
+}
+
+.poll-type{
+    font-style: italic;
+    font-size: small;
+    color: #9E9E9E;
+    padding-left: 0;
+}
+
+.poll-question{
+    font-size: initial;
+    word-wrap: break-word;
+    padding-left: 0!important;
+    font-weight: bold;
+}
+
+.name-wrap{
+    margin-bottom: 0!important;
+    /*max-height: 60%;*/
+}
+
+.header-name{
+    height: 20%;
+}
+
+.close-poll{
+    color: #27A745;
+    cursor: pointer;
+}
+
+.poll-opened{
+    position: fixed;
+    max-height: 90%;
+}
+
+.poll-closed{
+    position: relative;
+    height: 500px;
+    z-index: 0;
+}
+
+.open-btn-poll{
+    right: 2%;
+    top: 6vw;
+    position: fixed;
+}
+
+.close-btn-poll{
+    float: right;
+    position: relative;
+}
+
+.poll-container::-webkit-scrollbar {
+    width: 5px;
+    border-radius:20px;
+}
+
+.poll-container::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+    border-radius:20px;
+}
+
+.poll-container::-webkit-scrollbar-thumb {
+    background-color: #1B8500;
+    outline: 1px solid slategrey;
+    border-radius:20px;
+}
+
+.success-poll-text{
+    margin-top: 100%;
 }
 
 /*QUERY'S
