@@ -34,28 +34,36 @@ $('#vote-poll').on('click', function (e) {
             selectedOptions.push(v.value);
         }
     });
+    var data = false;
     if(oneOption){
         var data = oneOption;
     }
 
-    if(manyOptions){
+    if(manyOptions && selectedOptions.length > 0){
         var data = selectedOptions;
     }
 
-    $.ajax( {
-        headers: {
-            'X-CSRF-TOKEN': $( 'meta[name="csrf-token"]' ).attr( 'content' )
-        },
-        type: "POST",
-        url: url,
-        data: {'data': data,'poll_id':poll_id},
-        success: function ( response, textStatus, xhr ) {
-            if ( xhr.status == 200 ) {
-                $('.poll-container').stop(true,true).fadeOut();
-                $('.poll-container').html('');
-                $('.poll-container').html(response);
-                $('.poll-container').stop(true,true).fadeIn();
+    if(data) {
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            type: "POST",
+            url: url,
+            data: {'data': data, 'poll_id': poll_id},
+            success: function (response, textStatus, xhr) {
+                if (xhr.status == 200) {
+                    $('.poll-container').stop(true, true).fadeOut();
+                    $('.poll-container').html('');
+                    $('.poll-container').html(response);
+                    $('.poll-container').stop(true, true).fadeIn();
+                }
             }
-        }
-    } );
+        });
+    }else{
+        $('.poll-container').addClass('blink');
+        setTimeout(function () {
+            $('.poll-container').removeClass('blink');
+        },800)
+    }
 });

@@ -185,20 +185,23 @@ class PollController extends Controller
 
     public function userVote(Request $request)
     {
-        $isVoted = Poll::with('Options','Options.Votes')->whereHas('Options.Votes',function($q){
-            $q->where('user_id', Auth::user()->id);
-        })->find($request->poll_id);
+        if(isset($request->data)) {
+            $isVoted = Poll::with('Options', 'Options.Votes')->whereHas('Options.Votes', function ($q) {
+                $q->where('user_id', Auth::user()->id);
+            })->find($request->poll_id);
 
-        if(is_null($isVoted)){
-            foreach ($request->data as $optionId) {
-                $newVote = new PollVote;
-                $newVote->poll_option_id = $optionId;
-                $newVote->user_id = Auth::user()->id;
-                $newVote->save();
+            if (is_null($isVoted)) {
+                foreach ($request->data as $optionId) {
+                    $newVote = new PollVote;
+                    $newVote->poll_option_id = $optionId;
+                    $newVote->user_id = Auth::user()->id;
+                    $newVote->save();
+                }
+                $poll = Poll::with('Options', 'Options.Votes')->find($request->poll_id);
+                return view('admin.polls.user_after_vote', ['poll' => $poll]);
             }
-            $poll = Poll::with('Options','Options.Votes')->find($request->poll_id);
-            return view('admin.polls.user_after_vote',['poll'=>$poll]);
+            return response()->json('dublicate', 204);
         }
-        return response()->json('dublicate',204);
+        return response()->json('error',400);
     }
 }

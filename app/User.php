@@ -422,11 +422,10 @@ class User extends Authenticatable
             ['ends', '>', Carbon::now()]
         ])->get();
 
-        foreach ($polls as $testPoll) {
+        foreach ($polls as $key => $testPoll) {
             foreach ($testPoll->Options as $option) {
                 $optionIds[] = $option->id;
             }
-
 
             $isVoted = PollVote::whereIn('poll_option_id', $optionIds)->where('user_id', Auth::user()->id)->first();
             //if there is a poll started or close to start with datetime now under 1 minute we send the poll
@@ -436,6 +435,7 @@ class User extends Authenticatable
                     $valid[] = $testPoll;
                 }
             }
+            $optionIds = [];
         }
         return $valid[0];
     }
