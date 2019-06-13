@@ -14,7 +14,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Враца Софтуер Общество" />
     <meta property="og:description" content="Развиваме дигитална индустрия във Враца" />
-    <meta property="og:image" content="{{asset('/images/vso-logo-bg-original.png')}}" />
+    <meta property="og:image" content="{{asset('/images/logoVS_bg.png')}}" />
+    <meta property="og:image:alt" content="{{asset('/images/logoVS_bg.png')}}" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-51734359-3"></script>
     <script>

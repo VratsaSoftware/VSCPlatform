@@ -313,7 +313,7 @@
                                                 {{ method_field('DELETE') }}
                                                 {{ csrf_field() }}
                                             </form>
-                                            <button type="submit" class="btn btn-danger delete-lection-btn" value="DELETE" data="{{$lection->id}}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                            <button type="submit" class="btn btn-danger delete-lection-btn" value="DELETE" data="{{$lection->id}}" data-url="{{route('lection.destroy',$lection->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                         </div>
                                     </div>
                                 </div>
@@ -385,7 +385,7 @@
                                                                 {{ method_field('DELETE') }}
                                                                 {{ csrf_field() }}
                                                             </form>
-                                                            <button type="submit" class="btn btn-danger delete-lection-btn" value="DELETE" data="{{$lection->id}}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                                            <button type="submit" class="btn btn-danger delete-lection-btn" value="DELETE" data="{{$lection->id}}" data-url="{{route('lection.destroy',$lection->id)}}"><i class="fa fa-trash" aria-hidden="true"></i></button>
                                                         </div>
                                                     </div>
                                                 </div>

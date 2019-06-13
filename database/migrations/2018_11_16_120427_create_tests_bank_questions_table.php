@@ -19,6 +19,7 @@ class CreateTestsBankQuestionsTable extends Migration
             $table->longText('question');
             $table->enum('type',['open','one','many'])->default('one');
             $table->string('difficulty');
+            $table->integer('bonus')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

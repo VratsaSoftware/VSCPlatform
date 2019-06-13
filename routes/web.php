@@ -148,6 +148,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('lection', 'Courses\LectionController')->names('lection');
         Route::post('change/lection/{lection}/visibility',
             'Courses\LectionController@changeVisibility')->name('lection.visibility');
+
+        //tests routes
+        Route::resource('test','Admin\TestController')->names('test');
     });
 
     Route::group(['middleware' => 'isAdmin'], function () {

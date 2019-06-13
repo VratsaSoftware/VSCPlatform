@@ -52,7 +52,7 @@ class UserController extends Controller
         if (Input::hasFile('picture')) {
             $userPic = Input::file('picture');
             $image = Image::make($userPic->getRealPath());
-            $image->fit(1024, 768, function ($constraint) {
+            $image->fit(1280,1280, function ($constraint) {
                 $constraint->upsize();
             });
             $name = time()."_".$userPic->getClientOriginalName();

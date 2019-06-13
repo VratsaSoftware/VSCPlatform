@@ -225,9 +225,9 @@ a {
 }
 
 .icon-click-many, .icon-edit, .remove-q {
-    position: absolute;
-    margin-left: -3vw;
-    margin-top: 1vw;
+    /*position: absolute;*/
+    /*margin-left: -3vw;*/
+    /*margin-top: 1vw;*/
 }
 
 .input-answers>a>i {
@@ -239,7 +239,7 @@ a {
 }
 
 .remove-q {
-    margin-left: 1vw;
+    /*margin-left: 1vw;*/
     color: #FF0000 !important;
 }
 
@@ -301,6 +301,10 @@ code {
 
 .q-open-wrap, .q-one-wrap, .q-many-wrap {
     display: none;
+}
+
+#modal:target{
+    top: -10%!important;
 }
 
 /*end of test section*/

@@ -1,7 +1,7 @@
 function imagePreview( input ) {
 	var ext = input.files[ 0 ][ 'name' ].substring( input.files[ 0 ][ 'name' ].lastIndexOf( '.' ) + 1 ).toLowerCase();
 	if ( input.files && input.files[ 0 ] && ( ext == "gif" || ext == "png" || ext == "jpeg" || ext == "jpg" ) ) {
-		img = new Image( 1024, 768 );
+		img = new Image( 1280,1280 );
 		var imgwidth = 0;
 		var imgheight = 0;
 		var maxwidth = 1024;

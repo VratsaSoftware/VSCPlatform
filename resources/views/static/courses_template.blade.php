@@ -18,7 +18,8 @@
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Враца Софтуер Общество" />
     <meta property="og:description" content="Безплатни курсове по програмиране" />
-    <meta property="og:image" content="{{asset('//images/vso-logo-bg-original.png')}}" />
+    <meta property="og:image" content="{{asset('/images/logoVS_bg.png')}}" />
+    <meta property="og:image:alt" content="{{asset('/images/logoVS_bg.png')}}" />
 </head>
 
 <body style="opacity:0">
