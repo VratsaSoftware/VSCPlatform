@@ -37,6 +37,6 @@
         </div>
     </div>
     <div class="section" style="margin-top: 5%;">
-        @include('static.footer')
+        @include('static.includes.bg.footer')
     </div>
 @endsection

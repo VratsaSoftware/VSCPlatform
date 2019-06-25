@@ -1,35 +1,10 @@
 <!DOCTYPE html>
 <html lang="bg">
-<head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-51734359-3"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
 
-        gtag('config', 'UA-51734359-3');
-    </script>
-
-    <meta charset="UTF-8">
-    <title>Враца Софтуер Общество</title>
-    <meta name="description" content="Развиваме дигитална индустрия във Враца">
-    <meta name="keywords" content="Враца Софтуер,Програмиране,Курсове,Програмисти,Обучения,Враца">
-    <meta name="author" content="ВСО 2019">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- favicon -->
-    <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png.png')}}" />
-    <!-- facebook -->
-    <meta property="og:url" content="" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Враца Софтуер Общество" />
-    <meta property="og:description" content="Развиваме дигитална индустрия във Враца" />
-    <meta property="og:image" content="{{asset('/images/logoVS_bg.png')}}" />
-    <meta property="og:image:alt" content="{{asset('/images/logoVS_bg.png')}}" />
-</head>
+@include('static.includes.bg.home_head')
 
 <body style="opacity:0">
-@include('static.lang_btn')
+@include('static.includes.bg.lang_btn')
 <!-- JQuery -->
 <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
 <!-- scroll -->
@@ -41,7 +16,7 @@
                 <h1><a href="{{route('home')}}"><img src="{{asset('/images/logoVStext.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
             </div>
 
-            @include('static.menu')
+            @include('static.includes.bg.menu')
 
             <ul id='right-menu'>
                 <li><a href="#header"><img src="{{asset('/images/oval.png')}}" alt="nav-img"></a>
@@ -60,7 +35,7 @@
                 <!--</div>-->
             </div>
         </div>
-        @include('static.hamburger_menu')
+        @include('static.includes.bg.hamburger_menu')
     </div>
     <!-- end of header section -->
 
@@ -444,7 +419,7 @@
                 <div class="col-md-12 text-right">Враца Софтуер Общество &copy; {{\Carbon\Carbon::now()->format('Y')}}</div>
                 <div class="col-md-12 text-right"><img src="{{asset('images/location-front.png')}}" alt="location" width="20px">град Враца, ул. Кокиче 14</div>
             </div> -->
-        @include('static.footer')
+        @include('static.includes.bg.footer')
     </div>
 </div>
 <!-- end of cookies section -->

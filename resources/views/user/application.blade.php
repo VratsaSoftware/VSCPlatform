@@ -14,7 +14,53 @@
                 </p>
             @endif
             <!-- course candidation statistic -->
-                <div class="col-md-12 candidation-title">Програмиране</div>
+                <div class="col-md-12 candidation-title">
+                    <div class="form-group">
+                        <label for="sel1">Избери направление/модул:</label>
+                        <select class="form-control" id="sel1" name="course">
+                            <option value="0" disabled selected="selected">-----</option>
+                            @foreach(Config::get('applicationForm.courses') as $key => $modules)
+                                @if(is_array($modules))
+                                    @foreach($modules as $sub)
+                                        <option class="no-show course-{{str_replace(' ', '', $key)}}"
+                                                value="{{$key}}">{{$sub}}</option>
+                                    @endforeach
+                                @endif
+                                <option value="{{$key}}"
+                                        {{ (old("course") == $key ? "selected":"") }} data-count="{{count($modules)}}">{{ucfirst($key)}}</option>
+                            @endforeach
+                        </select>
+                        <br/>
+                        <select class="form-control no-show" name="sub" id="sub">
+
+                        </select>
+                        <script>
+                            $('#sel1').on('change', function () {
+                                $('#sub').html(' ');
+                                var selectedCourse = this.value.replace(/ /g, '');
+
+                                if ($(this).find(':selected').attr('data-count') > 0) {
+                                    var clonedOptions = $('.course-' + selectedCourse).clone();
+                                    $.each(clonedOptions, function (k, option) {
+                                        $('#sub').append(option);
+                                        $('#sub').find('option').removeClass('no-show');
+                                    });
+                                    $('#sub').removeClass('no-show');
+                                } else {
+                                    $('#sub').addClass('no-show');
+                                }
+                            });
+
+                            $('#sub').on('change', function(){
+                                var selectedSub = $("#sub").find(':selected').text();
+                                var rawValue = $('#sel1').find(':selected').text();
+                                var applicationUrl = $('#candidate').attr('data-url');
+                                $('#candidate').attr('href','');
+                                $('#candidate').attr('href', applicationUrl + '/' + rawValue + '/' + selectedSub);
+                            });
+                        </script>
+                    </div>
+                </div>
                 <div class="col-md-12 candidation-text" style="margin-bottom:0">
                     @if(isset($entry->approved) && is_null($entry->approved))
                         все още нямате оценка
@@ -41,7 +87,9 @@
                                 <span>електронна форма</span>
                                 <div class="personal-steps">
                                     @if(is_null($entry))
-                                        <a href="{{route('application.create')}}"><button type="button" class="btn btn-success">Кандидаствай</button></a>
+                                        <a href="{{route('application.create')}}" id="candidate" data-url="{{route('application.create')}}">
+                                            <button type="button" class="btn btn-success">Кандидаствай</button>
+                                        </a>
                                     @else
                                         вече сте изпратили своята форма
                                     @endif
@@ -102,20 +150,25 @@
                     <div class="candidate-imgs col-md-12 flex-row flex-wrap text-center">
                         <div class="col-md-1"></div>
                         <div class="steps col-md-2 first-candidate-img">
-                            <img src="{{asset('/images/candidate-img-step-1.png')}}" alt="step" class="img-fluid candidate-img">
+                            <img src="{{asset('/images/candidate-img-step-1.png')}}" alt="step"
+                                 class="img-fluid candidate-img">
                         </div>
 
                         <div class="steps col-md-2">
-                            <img src="{{asset('/images/candidate-img-step-2.png')}}" alt="step" class="img-fluid candidate-img">
+                            <img src="{{asset('/images/candidate-img-step-2.png')}}" alt="step"
+                                 class="img-fluid candidate-img">
                         </div>
                         <div class="steps col-md-2">
-                            <img src="{{asset('/images/candidate-img-step-3.png')}}" alt="step" class="img-fluid candidate-img">
+                            <img src="{{asset('/images/candidate-img-step-3.png')}}" alt="step"
+                                 class="img-fluid candidate-img">
                         </div>
                         <div class="steps col-md-2">
-                            <img src="{{asset('/images/candidate-img-step-4.png')}}" alt="step" class="img-fluid candidate-img">
+                            <img src="{{asset('/images/candidate-img-step-4.png')}}" alt="step"
+                                 class="img-fluid candidate-img">
                         </div>
                         <div class="steps col-md-2">
-                            <img src="{{asset('/images/candidate-img-step-5.png')}}" alt="step" class="img-fluid candidate-img">
+                            <img src="{{asset('/images/candidate-img-step-5.png')}}" alt="step"
+                                 class="img-fluid candidate-img">
                         </div>
                         <div class="col-md-1"></div>
                     </div>
@@ -164,27 +217,27 @@
     </div>
     <script src="./js/fixed-left-top-menu.js"></script>
     <script>
-        $(function(){
+        $(function () {
             // $('.candidation-text').text($('.active-step > div').text());
 
-            $('li.active-step').prevAll().mouseenter(function(){
+            $('li.active-step').prevAll().mouseenter(function () {
                 $(this).parent().prev('.candidation-text').html($(this).find('.personal-steps').html());
             });
 
-            $('li.active-step').prevAll().mouseleave(function(){
+            $('li.active-step').prevAll().mouseleave(function () {
                 // $('.candidation-text').text($('.active-step').find('.personal-steps').text());
             });
 
-            $('.steps > li').mouseenter(function(){
+            $('.steps > li').mouseenter(function () {
                 $(this).parent().prev('.candidation-text').html($(this).find('.personal-steps').html());
             });
 
-            $('li.active-step').nextAll().mouseenter(function(){
-                $(this).css('background','#ffcccc').attr('title','Този етап предстои!');
+            $('li.active-step').nextAll().mouseenter(function () {
+                $(this).css('background', '#ffcccc').attr('title', 'Този етап предстои!');
             });
 
-            $('li.active-step').nextAll().mouseleave(function(){
-                $(this).css('background','#D3D3D3').attr('title','');
+            $('li.active-step').nextAll().mouseleave(function () {
+                $(this).css('background', '#D3D3D3').attr('title', '');
             });
 
         });

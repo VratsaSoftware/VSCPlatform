@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Models\Courses\PersonalCertificate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -347,5 +348,31 @@ class UserController extends Controller
 
         $message = __('Успешно направени промени!');
         return redirect()->route('myProfile')->with('success', $message);
+    }
+
+    public function showCertificate($user,$course)
+    {
+        $personalCertificate = PersonalCertificate::where([
+            ['user_id',$user],
+            ['course_id',$course]
+        ])->first();
+
+        $personalCertificate->modules = explode(",", $personalCertificate->modules);
+
+        $mainTemplate = View('certifications.templates.main', [
+            'number' => $personalCertificate->number,
+            'color' => $personalCertificate->color,
+            'title' => $personalCertificate->title,
+            'subTitle' => $personalCertificate->sub_title,
+            'modules' => $personalCertificate->modules,
+            'username' => $personalCertificate->username,
+            'lecturer' => $personalCertificate->lecturer,
+            'date' => $personalCertificate->date->format('d/m/Y'),
+            'images' => 0,
+            'imageLeft' => '',
+            'imageRight' => '',
+            'centerLogo' => $personalCertificate->center_logo,
+        ]);
+        return $mainTemplate;
     }
 }

@@ -4,7 +4,7 @@
     <div class="section">
         <div id="header" style="background: url(./images/cover-img-smallest.png)">
             <!-- hamburger -->
-        @include('static.hamburger_menu')
+        @include('static.includes.bg.hamburger_menu')
         <!-- end of hamburger -->
             <div class="overlay-marketing">
                 <div id="logo" class="col-md-12 text-center">

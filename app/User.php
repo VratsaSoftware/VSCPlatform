@@ -4,6 +4,7 @@ namespace App;
 
 use App\Models\Admin\Poll;
 use App\Models\Admin\PollVote;
+use App\Models\CourseModules\ModulesStudent;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -71,6 +72,7 @@ class User extends Authenticatable
     {
         return $this->hasOne(Occupation::class, 'id', 'cl_occupation_id');
     }
+
 
     public function isAdmin()
     {

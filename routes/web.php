@@ -72,7 +72,8 @@ Route::get('/subscribe/{email}', 'HomeController@subscribe');
 
 Auth::routes();
 
-Route::get('/application/create', 'Courses\ApplicationController@create')->name('application.create');
+Route::get('/application/create/{course?}/{module?}',
+    'Courses\ApplicationController@create')->name('application.create');
 Route::post('/application/store', 'Courses\ApplicationController@store')->name('application.store');
 
 Route::group(['middleware' => 'auth'], function () {
@@ -80,7 +81,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::resource('user', 'Users\UserController')->names('user');
 
     //polls vote
-    Route::post('poll/user/vote','Admin\PollController@userVote')->name('user.vote.poll');
+    Route::post('poll/user/vote', 'Admin\PollController@userVote')->name('user.vote.poll');
 
     //applications
     Route::resource('application', 'Courses\ApplicationController', [
@@ -128,6 +129,8 @@ Route::group(['middleware' => 'auth'], function () {
         'Events\EventController@confirmInvite')->name('team.confirm.invite');
     Route::post('/user/invite/to/team/{team}/event/{event}',
         'Events\EventController@inviteToTeam')->name('invite.to.team');
+    Route::get('user/{user}/course/{course}/certificate/show',
+        'Users\UserController@showCertificate')->name('user.cert.show');
     Route::group(['middleware' => 'isLecturer'], function () {
         // lecturer routes
         Route::post('/lecturer/update/bio', 'Users\UserController@updateBio')->name('lecturer.update.bio');
@@ -150,7 +153,7 @@ Route::group(['middleware' => 'auth'], function () {
             'Courses\LectionController@changeVisibility')->name('lection.visibility');
 
         //tests routes
-        Route::resource('test','Admin\TestController')->names('test');
+        Route::resource('test', 'Admin\TestController')->names('test');
     });
 
     Route::group(['middleware' => 'isAdmin'], function () {
@@ -163,7 +166,14 @@ Route::group(['middleware' => 'auth'], function () {
 
         //polls routes
         Route::resource('polls', 'Admin\PollController')->names('polls');
-        Route::get('poll/{poll}/votes','Admin\PollController@getVotes')->name('poll.votes');
+        Route::get('poll/{poll}/votes', 'Admin\PollController@getVotes')->name('poll.votes');
+
+        Route::get('course/certificate/create/{course?}', 'Admin\AdminController@createCertificate')->name('course.cert.create');
+        Route::get('course/certificate/user/{users?}',
+            'Admin\AdminController@getUserDataForCertificate')->name('users.modules');
+        Route::post('certificate/store/', 'Admin\AdminController@storeCertificate')->name('certification.store');
+        Route::get('user/{user}/certificate/preview',
+            'Admin\AdminController@certificatePreview')->name('certificate.preview');
     });
 });
 Route::post('/lection/video/shown', 'Courses\LectionController@videoShown')->name('lection.video.show');
@@ -185,32 +195,32 @@ Route::post('/user/{user?}/course/{course}/module/{module}/lection/{lection}/com
 //    return view('static.home');
 //});
 
-Route::get('/{lang}/team', function($lang){
+Route::get('/{lang}/team', function ($lang) {
     Session::put('locale', $lang);
     return redirect()->route('about');
-})->where('lang','(bg|en)');
+})->where('lang', '(bg|en)');
 
-Route::get('/{lang}/train-devs', function($lang){
+Route::get('/{lang}/train-devs', function ($lang) {
     Session::put('locale', $lang);
     return redirect()->route('programmingCourses');
-})->where('lang','(bg|en)');
+})->where('lang', '(bg|en)');
 
-Route::get('/{lang}/digital-marketing', function($lang){
+Route::get('/{lang}/digital-marketing', function ($lang) {
     Session::put('locale', $lang);
     return redirect()->route('digitalMarketing');
-})->where('lang','(bg|en)');
+})->where('lang', '(bg|en)');
 
-Route::get('/{lang}/mission-2', function($lang){
+Route::get('/{lang}/mission-2', function ($lang) {
     Session::put('locale', $lang);
     return redirect()->route('mission');
-})->where('lang','(bg|en)');
+})->where('lang', '(bg|en)');
 
-Route::get('/{lang}/reports', function($lang){
+Route::get('/{lang}/reports', function ($lang) {
     Session::put('locale', $lang);
     return redirect()->route('year_reports');
-})->where('lang','(bg|en)');
+})->where('lang', '(bg|en)');
 
-Route::get('/{lang}/contacts', function($lang){
+Route::get('/{lang}/contacts', function ($lang) {
     Session::put('locale', $lang);
     return redirect()->route('contacts');
-})->where('lang','(bg|en)');
+})->where('lang', '(bg|en)');

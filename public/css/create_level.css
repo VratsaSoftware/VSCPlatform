@@ -3,7 +3,7 @@
     margin-top: 10vw;
 }
 
-input[type=text], textarea, .options-title, .name-course, .phone-input {
+input[type=text], textarea, .options-title, .name-course, .phone-input, #color {
     background: #FFFFFF;
     border: 2px solid #243847;
     box-sizing: border-box;
@@ -440,6 +440,22 @@ input[type=range]:focus {
 
 .lection-description{
     overflow-wrap: break-word;
+}
+
+.course-wrap-filter{
+    border:1px solid #000;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    padding:1%;
+    border-radius:10px;
+}
+
+.course-wrap-filter:hover{
+    background: #4CAF50;
+}
+
+.selected-filter{
+    background: #4CAF50 !important;
 }
 
 /*end of students section*/

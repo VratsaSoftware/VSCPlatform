@@ -1,10 +1,10 @@
 @extends('static.en.courses_template')
-@section('title', 'Курс по Дигитален Маркетинг')
+@section('title', 'Digital Marketing Course')
 @section('content')
     <div class="section">
         <div id="header" style="background: url(./images/cover-img-smallest.png)">
             <!-- hamburger -->
-        @include('static.en.hamburger_menu')
+        @include('static.includes.en.hamburger_menu')
         <!-- end of hamburger -->
             <div class="overlay-marketing">
                 <div id="logo" class="col-md-12 text-center">

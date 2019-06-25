@@ -4,7 +4,7 @@
     <div class="section">
         <div id="header" style="background: url(./images/cover-img.png)">
             <!-- hamburger -->
-        @include('static.en.hamburger_menu')
+        @include('static.includes.en.hamburger_menu')
         <!-- end of hamburger -->
             <div class="overlay">
                 <div id="logo" class="col-md-12 text-center">
@@ -377,9 +377,9 @@
         </div>
     </div>
     </div>
-    {{-- <div class="col-md-12 text-center">
-        <span id="prepare" class="end-candidate programming-candidate-btn"><a href="#">APPLY NOW</a></span>
-    </div> --}}
+    <div class="col-md-12 text-center">
+        <span id="prepare" class="end-candidate programming-candidate-btn"><a href="{{route('application.create')}}">APPLY</a></span>
+    </div>
     </div>
 
     <script>

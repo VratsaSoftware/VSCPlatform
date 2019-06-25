@@ -1,48 +1,10 @@
 <!DOCTYPE html>
 <html lang="bg">
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Развиваме дигитална индустрия във Враца">
-    <meta name="keywords" content="Враца Софтуер,Програмиране,Курсове,Програмисти,Обучения,Враца">
-    <meta name="author" content="Враца Софутер Общество">
-
-    <title>Екип</title>
-
-    <link rel="stylesheet" href="{{asset('/css/landing.css')}}">
-
-    <link rel="stylesheet" href="{{asset('/css/about.css')}}">
-
-    <link rel="stylesheet" href="{{asset('/css/bootstrap.css')}}">
-
-    <link rel="stylesheet" href="{{asset('/css/bootstrap-grid.css')}}">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- JQuery -->
-    <script type="text/javascript" src="{{asset('/js/jquery-3.3.1.js')}}"></script>
-
-    <script type="text/javascript" src="{{asset('/js/jquery-ui.js')}}"></script>
-
-    <!-- scroll -->
-    <script type="text/javascript" src="{{asset('/js/jquery-sectionsnap.js')}}"></script>
-
-    <!-- favicon -->
-    <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png.png')}}" />
-
-    <!-- facebook -->
-    <meta property="og:url" content="" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Враца Софтуер Общество" />
-    <meta property="og:description" content="Безплатни курсове по програмиране" />
-    <meta property="og:image" content="{{asset('/images/vso-png-big-2.png')}}" />
-
-    <link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}" />
-
-</head>
+@include('static.includes.bg.about_head')
 
 <body>
-    @include('static.lang_btn')
+    @include('static.includes.bg.lang_btn')
     <!-- header section - nav - gallery -->
 {{--    <div class="section" id="header-section">--}}
     {{--        <div class="overlay-top-img">--}}
@@ -58,7 +20,7 @@
                 Екипът на Враца Софтуер Общество
             </div>
         </div>
-        @include('static.menu')
+        @include('static.includes.bg.menu')
 
         <div class="row buttons-right col-md-2">
             <div id="candidate-btn" class="col-md-2">
@@ -66,7 +28,7 @@
             </div>
         </div>
         <!-- hamburger -->
-        @include('static.hamburger_menu')
+        @include('static.includes.bg.hamburger_menu')
         <!-- end of hamburger -->
     </div>
     <!-- end of header section -->
@@ -240,7 +202,7 @@
     <!-- end of team section -->
 
     <div class="section">
-        @include('static.footer')
+        @include('static.includes.bg.footer')
     </div>
 
     <script src="{{asset('/js/hamburger-menu.js')}}"></script>

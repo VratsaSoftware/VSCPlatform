@@ -28,6 +28,9 @@
                 </div>
             </p>
             @endif
+        <div class="col-md-12 text-center cert-link">
+            <a href="{{route('user.cert.show',[Auth::user()->id,$course->id])}}"><img src="{{asset('/images/awards/medal-1.png')}}" alt="medal" width="50px">Сертификат</a>
+        </div>
         @foreach ($modules as $module)
         <div class="col-md-6 right-option">
             @if($module->starts->lt(\Carbon\Carbon::now()) && $module->ends->gt(\Carbon\Carbon::now()))

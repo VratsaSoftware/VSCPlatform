@@ -79,11 +79,57 @@
                                         <strong>{{ $errors->first('course') }}</strong>
                                     </span>
                                 @endif
-                                <select class="section-el-bold" name="course">
-                                    @foreach(Config::get('applicationForm.courses') as $course)
-                                            <option value="{{$course}}" {{ (old("course") == $course ? "selected":"") }}>{{ucfirst($course)}}</option>
+                                <select class="section-el-bold" name="course" id="course-select">
+                                    <option value="0" disabled selected="selected">-----</option>
+                                    @foreach(Config::get('applicationForm.courses') as $key => $modules)
+                                        @if(is_array($modules))
+                                            @foreach($modules as $sub)
+                                                <option class="no-show course-{{str_replace(' ', '', $key)}}"
+                                                        value="{{$sub}}">{{$sub}}</option>
+                                            @endforeach
+                                        @endif
+                                        @if(isset($course) && $course == $key)
+                                            <option value="{{$key}}"
+                                                    {{ (old("course") == $key ? "selected":"") }} selected="selected"
+                                                    data-count="{{count($modules)}}">{{ucfirst($key)}}</option>
+                                        @else
+                                            <option value="{{$key}}"
+                                                    {{ (old("course") == $key ? "selected":"") }} data-count="{{count($modules)}}">{{ucfirst($key)}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
+                                <br>
+                                <br/>
+                                <span class="no-show">Модул <span class="req-star-form">*</span></span>
+                                <select class="section-el-bold no-show" name="module" id="module">
+
+                                </select>
+                                <script>
+                                    $(function () {
+                                        addSub();
+                                    });
+                                    $('#course-select').on('change', function () {
+                                        addSub();
+                                    });
+
+                                    function addSub(){
+                                        $('#module').html(' ');
+                                        var selectedCourse = $('#course-select').find(':selected').text().replace(/ /g, '');
+
+                                        if ($('#course-select').find(':selected').attr('data-count') > 0) {
+                                            var clonedOptions = $('.course-' + selectedCourse).clone();
+                                            $.each(clonedOptions, function (k, option) {
+                                                $('#module').append(option);
+                                                $('#module').find('option').removeClass('no-show');
+                                            });
+                                            $('#module').removeClass('no-show');
+                                            $('#module').prev('span').removeClass('no-show');
+                                        } else {
+                                            $('#module').addClass('no-show');
+                                            $('#module').prev('span').addClass('no-show');
+                                        }
+                                    }
+                                </script>
                             </p>
                             <p>
                                 <label for="suitable_candidate">Защо смятате, че тези обучения са подходящ за Вас? <span id="candidate-label"></span> <span class="req-star-form">*</span></label>

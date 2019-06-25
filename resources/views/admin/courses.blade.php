@@ -8,7 +8,12 @@
   <div class="events col-md-12 d-flex flex-row flex-wrap">
         @forelse($courses as $course)
                 <div class="col-md-6">
-                    <div class="event-title col-md-12">{{$course->name}}</div>
+                    <div class="event-title col-md-12">
+                        {{$course->name}}
+                        <div class="col-md-12 text-right">
+                            <a href="{{route('course.cert.create')}}">Сертификат</a>
+                        </div>
+                    </div>
                     <div class="event-body col-md-12">
                       <a href="{{route('lecturer.show.course',['course' => $course->id])}}">
                         <div class="event-body-text">

@@ -1,7 +1,7 @@
 @extends('static.en.single_layout')
 @section('title', 'Контакти')
 @section('content')
-@include('static.en.lang_btn')
+@include('static.includes.en.lang_btn')
     <div class="col-md-12 header-about-text text-center">
         Contacts
     </div>
@@ -20,6 +20,6 @@
         </p>
     </div>
 <div class="section" style="margin-top: -20%">
-    @include('static.en.footer')
+    @include('static.includes.en.footer')
 </div>
 @endsection

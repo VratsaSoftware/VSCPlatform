@@ -500,6 +500,14 @@ body {
     padding-top: 2.5%;
 }
 
+.cert-link{
+    font-family: Ubuntu;
+}
+
+.cert-link:hover{
+    color: #1B8500;
+}
+
 /*QUERY's
 -------------------------------------------------------------------------------------------*/
 /* Extra small devices (phones, 600px and down) */

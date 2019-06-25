@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Courses;
 
+use App\Models\Courses\PersonalCertificate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Courses\Course;
@@ -94,9 +95,13 @@ class CourseController extends Controller
         $modules = Course::getModules($course->id, $isLecturer = false);
         $courses = [];
         if (Auth::user()) {
+            $certificate = PersonalCertificate::where('user_id',Auth::user()->id)->first();
+            if($certificate) {
+                $certificate = true;
+            }
             $courses = Auth::user()->studentGetCourse();
         }
-        return view('user.course', ['courses' => $courses,'course' => $course,'modules' => $modules]);
+        return view('user.course', ['courses' => $courses,'course' => $course,'modules' => $modules,'certificate' => isset($certificate)?$certificate:false]);
     }
 
     public function showLecturerCourse(Course $course)

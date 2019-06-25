@@ -34,12 +34,29 @@ class ApplicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create(Request $request)
     {
+        $course = null;
+        $module = null;
+        if($request->course && $request->module) {
+            $courses = \Config::get('applicationForm.courses');
+            foreach ($courses as $course => $module){
+                $coursesOnly[] = $course;
+                $modulesOnly[] = $module;
+            }
+            $request['valid_course'] = $coursesOnly;
+            $request['valid_modules'] = $modulesOnly;
+            $data = $request->validate([
+                "course" => 'in_array:valid_course.*',
+                "module" => 'in_array:valid_modules.*',
+            ]);
+            $course = $request->course;
+            $module = $request->module;
+        }
         $occupations = Occupation::all();
         if (Auth::user()) {
             $user = User::find(Auth::user()->id);
-            return view('user.application_form', ['user'=>$user,'occupations'=>$occupations]);
+            return view('user.application_form', ['user'=>$user,'occupations'=>$occupations,'course' => $course,'module' => $module]);
         }
         return view('user.non_register_application_form', ['occupations'=>$occupations]);
     }
@@ -52,7 +69,13 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-        $request['valid_course'] = \Config::get('applicationForm.courses');
+        $courses = \Config::get('applicationForm.courses');
+        foreach ($courses as $course => $module){
+            $coursesOnly[] = $course;
+            $modulesOnly[] = $module;
+        }
+        $request['valid_course'] = $coursesOnly;
+        $request['valid_modules'] = $modulesOnly;
         $request['valid_use'] = \Config::get('applicationForm.use');
         $request['valid_source'] = \Config::get('applicationForm.source');
 
@@ -70,8 +93,10 @@ class ApplicationController extends Controller
                 "expecatitions" => 'required|min:100|max:500',
                 "use" => 'required|in_array:valid_use.*',
                 "source" => 'required|in_array:valid_source.*',
-                "cv" => 'required|file'
+                "cv" => 'required|file',
+                "module" => 'sometimes|string|in_array:valid_modules.*',
             ]);
+
             $user = User::find(Auth::user()->id);
             $user->cl_occupation_id = $data['occupation'];
             if (isset($request->userage)) {
@@ -112,8 +137,10 @@ class ApplicationController extends Controller
             "expecatitions" => 'required|min:100|max:500',
             "use" => 'required|in_array:valid_use.*',
             "source" => 'required|in_array:valid_source.*',
-            "cv" => 'required|file'
+            "cv" => 'required|file',
+            "module" => 'sometimes|string|in_array:valid_modules.*',
         ]);
+
         $role = Role::where('role', 'user')->select('id')->first();
         $dob = null;
         $year = Carbon::now()->subYears($request->userage)->format('Y');
