@@ -26,6 +26,9 @@ $('.add-bank').on('click', function(){
     $('.copy > p').html($('.create-bank').html());
     $('.modal-content > .cf > div').html('<input class="btn send-bank" type="submit" value="Добави">');
     $('#modal').show();
+    $('.send-bank').on('click', function(){
+        $('.modal-content').find('.copy > p').find('form').submit();
+    });
 });
 
 <!-- create questions modal -->

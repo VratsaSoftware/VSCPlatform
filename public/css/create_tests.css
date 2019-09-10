@@ -6,6 +6,8 @@ a {
 .test-statistic-wrapper {
     margin-top: 10vw;
     justify-content: space-between;
+    max-height: 20vh;
+    overflow-y: scroll;
 }
 
 .all-questions {
@@ -88,9 +90,12 @@ a {
 }
 
 .test-nav {
+    overflow-y: scroll;
     padding: 1vw;
     background: #fff;
     font-family: Comfortaa;
+    height: 500px !important;
+    min-height: 400px !important;
 }
 
 .test-nav>div {
@@ -144,8 +149,9 @@ a {
 .add-bank {
     color: #1C8800;
     padding: 1vw;
-    padding-left: 5vw;
-    padding-right: 5vw;
+    /*padding-left: 5vw;*/
+    /*padding-right: 5vw;*/
+    font-size:1vw !important;
 }
 
 .create-bank {
