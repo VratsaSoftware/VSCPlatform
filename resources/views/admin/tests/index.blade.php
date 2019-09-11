@@ -5,8 +5,8 @@
     @if (!empty(Session::get('success')))
         <p>
             <div class="alert alert-success slide-on" style="margin-top:-40px">
-                <p>{{ session('success') }}</p>
-            </div>
+        <p>{{ session('success') }}</p>
+        </div>
         </p>
     @endif
     @if ($errors->any())
@@ -120,7 +120,8 @@
                             <label for="title">Заглавие/Име</label>
                         </p>
                         <p>
-                            <input type="text" name="title" placeholder="въведи име на банката/теста" value="{{old('title')}}">
+                            <input type="text" name="title" placeholder="въведи име на банката/теста"
+                                   value="{{old('title')}}">
                         <hr>
                         </p>
                         <p>
@@ -162,7 +163,7 @@
             </div>
             <div class="col-md-4 test-nav d-flex flex-row flex-wrap">
                 @foreach($banks as $bank)
-                    <div class="col-md-12 d-flex flex-row flex-wrap bank-holder">
+                    <div class="col-md-12 d-flex flex-row flex-wrap bank-holder" data-bank-id="{{$bank->id}}">
                         <span class="col-md-5 text-left">{{$bank->name}}</span>
                         <span class="col-md-2 text-center"></span>
                         <span class="col-md-5 text-center"><i class="fas fa-book"></i>&nbsp;{{$bank->questions_count}}&nbsp;<i
@@ -185,79 +186,106 @@
                                     <a href="#modal"><img src="./images/profile/add-icon.png" alt="add">&nbsp;Добави</a>
                                 </li>
                                 <div class="create-question">
-                                    <div class="col-md-12">
-                                        Тип:&nbsp;<select name="types" class="q-types" id="q-types">
-                                            <option disabled selected value>Избери Тип</option>
-                                            <option value="0">Отворен</option>
-                                            <option value="1">Един Верен</option>
-                                            <option value="2">Много Верни</option>
-                                        </select>
-                                    </div>
-                                    <!-- //adding question fields -->
-                                    <script>
-                                        $('#q-types').on('change', function () {
-                                            var selected = $(this).val();
-                                            // $('.modal-content > .cf > div').html('<input class="btn send-bank" type="submit" value="Добави">');
-                                            switch (selected) {
-                                                case '0':
-                                                    $('.copy > p ').find('.q-one').remove();
-                                                    $('.copy > p > div:nth-child(1)').find('i').remove()
-                                                    $('.copy > p ').find('.q-many').remove();
-                                                    $(this).parent().parent().append($('.q-open-wrap').html());
-                                                    break;
-                                                case '1':
-                                                    $('.copy > p ').find('.q-open').remove();
-                                                    $('.copy > p > div:nth-child(1)').find('i').remove()
-                                                    $('.copy > p ').find('.q-many').remove();
-                                                    $(this).parent().parent().append($('.q-one-wrap').html());
-                                                    break;
-                                                case '2':
-                                                    $('.copy > p ').find('.q-open').remove();
-                                                    $('.copy > p > div:nth-child(1)').find('i').remove()
-                                                    $('.copy > p ').find('.q-one').remove();
-                                                    $(this).parent().parent().append($('.q-many-wrap').html());
-                                                    break;
-                                                default:
-                                            }
-                                        });
-                                    </script>
+                                    <form class="form-horizontal" action="{{route('store.question')}}" method="POST"
+                                          enctype='multipart/form-data'
+                                          id="create-question">
+                                        {{ csrf_field() }}
+                                        <div class="col-md-12">
+                                            Тип:&nbsp;<select name="type" class="q-types" id="q-types">
+                                                <option disabled selected value>Избери Тип</option>
+                                                <option value="open">Отворен</option>
+                                                <option value="one">Един Верен</option>
+                                                <option value="many">Много Верни</option>
+                                            </select>
+                                        </div>
+                                        <!-- //adding question fields -->
+                                        <script>
+                                            $('#q-types').on('change', function () {
+                                                var selected = $(this).val();
+                                                // $('.modal-content > .cf > div').html('<input class="btn send-bank" type="submit" value="Добави">');
+                                                switch (selected) {
+                                                    case 'open':
+                                                        $('.copy > p > form').find('.q-one').remove();
+                                                        $('.copy > p > form > div:nth-child(1)').find('i').remove();
+                                                        $('.copy > p > form').find('.q-many').remove();
+                                                        $(this).parent().parent().append($('.q-open-wrap').html());
+                                                        break;
+                                                    case 'one':
+                                                        $('.copy > p > form').find('.q-open').remove();
+                                                        $('.copy > p > form > div:nth-child(1)').find('i').remove()
+                                                        $('.copy > p > form').find('.q-many').remove();
+                                                        $(this).parent().parent().append($('.q-one-wrap').html());
+                                                        break;
+                                                    case 'many':
+                                                        $('.copy > p > form').find('.q-open').remove();
+                                                        $('.copy > p > form > div:nth-child(1)').find('i').remove()
+                                                        $('.copy > p > form').find('.q-one').remove();
+                                                        $(this).parent().parent().append($('.q-many-wrap').html());
+                                                        break;
+                                                    default:
+                                                }
+                                            });
+                                        </script>
+                                        <script>
+                                            $("#create-question").submit(function(e){
+                                                var validated = frontEndValidation('create-question');
+                                                if(validated){
+                                                    $(this).submit();
+                                                }else{
+                                                    e.preventDefault();
+                                                }
+                                            });
+                                        </script>
                                 </div>
                                 <!-- open question box holder -->
                                 <div class="col-md-12 q-open-wrap">
                                     <div class="col-md-12 questions-box q-open">
-                                        въпрос: <br>
-                                        <textarea name="q-open" id="q-open" cols="30" rows="5"></textarea>
+                                        снимка:
+                                        <input type="file" name="image"><br/>
+                                        въпрос: <i class="fa fa-asterisk" style="font-size: 0.75em; color: #f00;"></i><br>
+                                        <textarea name="question" id="q-open" cols="30" rows="5" class="required"></textarea>
                                         <br>
-                                        <select name="diff" id="diff">
+                                        <i class="fa fa-asterisk" style="font-size: 0.75em; color: #f00;"></i>
+                                        <select name="difficulty" id="diff" class="required">
                                             <option disabled selected value="0">Трудност</option>
                                             <option value="1">лесен</option>
                                             <option value="2">нормален</option>
                                             <option value="3">труден</option>
                                         </select>&nbsp;&nbsp;
-                                        <input type="radio" name="bonus" value="0" id="no-bonus" checked> <label
+                                        <input type="radio" name="bonus_radio" value="0" id="no-bonus" checked> <label
                                                 for="no-bonus">Без Бонус</label>&nbsp;&nbsp;
-                                        <input type="radio" name="bonus" value="1" id="yess-bonus"> <label
+                                        <input type="radio" name="bonus_radio" value="1" id="yess-bonus"> <label
                                                 for="yess-bonus">Бонус</label>
+                                        <br>
+                                        отговор: (опционално) <br>
+                                        снимка:
+                                        <input type="file" name="open_a_image">
+                                        <br>
+                                        <textarea name="answer" id="open-answer" cols="30" rows="5"></textarea>
                                         <script type="text/javascript">
                                             var addedThropyOpen = false;
 
                                             $('#yess-bonus').on('click', function () {
                                                 if (!addedThropyOpen) {
-                                                    $('.copy > p > div:nth-child(1)').append('<i class="fas fa-trophy"></i>');
-                                                    $(this).next('label').after('&nbsp;&nbsp;<input type="number" class="bonus-points">');
+                                                    $('.copy > p > form > div:nth-child(1)').append('<i class="fas fa-trophy"></i>');
+                                                    $(this).next('label').after('&nbsp;&nbsp;<input type="number" name="bonus" class="bonus-points">');
                                                     addedThropyOpen = true;
                                                 }
                                             });
 
                                             $('#no-bonus').on('click', function () {
                                                 if (addedThropyOpen) {
-                                                    $('.copy > p > div:nth-child(1)').find('i').remove();
+                                                    $('.copy > p > form > div:nth-child(1)').find('i').remove();
                                                     $('.bonus-points').remove();
                                                     addedThropyOpen = false;
                                                 }
                                             });
                                         </script>
+                                        <div class="col-md-12 text-center create-q-btn">
+                                            <button type="submit" class="btn btn-success" style="float:none">Създай</button>
+                                        </div>
                                     </div>
+                                    </form>
                                 </div>
                                 <!-- end of open qustion box holder -->
 
@@ -265,29 +293,31 @@
                                 <div class="col-md-12 q-one-wrap">
                                     <div class="col-md-12 questions-box q-one">
                                         <p>въпрос: <br>
-                                            <textarea name="q-one" id="q-one" cols="30" rows="5"></textarea>
+                                            <textarea name="question" id="q-one" cols="30" rows="5" class="required"></textarea>
                                             <br>
-                                            <select name="diff">
+                                            <select name="difficulty" class="required">
                                                 <option disabled selected value="0">Трудност</option>
                                                 <option value="1">лесен</option>
                                                 <option value="2">нормален</option>
                                                 <option value="3">труден</option>
                                             </select>&nbsp;&nbsp;
-                                            <input type="radio" name="bonus" value="0" id="no-bonus" checked> <label
+                                            <input type="radio" name="bonus_radio" value="0" id="no-bonus" checked>
+                                            <label
                                                     for="no-bonus">Без Бонус</label>&nbsp;&nbsp;
-                                            <input type="radio" name="bonus" value="1" id="yess-bonus"> <label
+                                            <input type="radio" name="bonus_radio" value="1" id="yess-bonus"> <label
                                                     for="yess-bonus">Бонус</label>
                                         </p>
                                         <p>отговори:</p>
                                         <p class="input-answers">
                                             <a href="" class="icon-click"><i
                                                         class="fas fa-check-circle"></i></a>&nbsp;<input type="text"
-                                                                                                         class="q-one-answer"><a
+                                                                                                         class="q-one-answer required"
+                                                                                                         name="answers[]"><a
                                                     href="" class="remove-q modal-remove-q"><i class="fas fa-times"></i></a>
                                         </p>
                                         <div class="col-md-12 add-answers">
                                             <a href="">
-                                                <img src="./images/profile/add-icon.png" alt="add">
+                                                <img src="{{asset('/images/profile/add-icon.png')}}" alt="add">
                                             </a>
                                             <span></span>
                                         </div>
@@ -296,15 +326,15 @@
 
                                             $('#yess-bonus').on('click', function () {
                                                 if (!addedThropy) {
-                                                    $('.copy > p > div:nth-child(1)').append('<i class="fas fa-trophy"></i>');
-                                                    $(this).next('label').after('&nbsp;&nbsp;<input type="number" class="bonus-points">');
+                                                    $('.copy > p > form > div:nth-child(1)').append('<i class="fas fa-trophy"></i>');
+                                                    $(this).next('label').after('&nbsp;&nbsp;<input type="number" name="bonus" class="bonus-points">');
                                                     addedThropy = true;
                                                 }
                                             });
 
                                             $('#no-bonus').on('click', function () {
                                                 if (addedThropy) {
-                                                    $('.copy > p > div:nth-child(1)').find('i').remove();
+                                                    $('.copy > p > form > div:nth-child(1)').find('i').remove();
                                                     $('.bonus-points').remove();
                                                     addedThropy = false;
                                                 }
@@ -313,7 +343,7 @@
                                             $('.add-answers > a').on('click', function (e) {
                                                 e.preventDefault();
 
-                                                var addAnswer = $('.copy > p > .q-one >  .input-answers').last().clone(true);
+                                                var addAnswer = $('.copy > p > form > .q-one >  .input-answers').last().clone(true);
                                                 // if cloning correct answer box remove the class
                                                 if (addAnswer.find('a').hasClass('corect-answer-one')) {
                                                     addAnswer.find('a').removeClass('corect-answer-one');
@@ -322,7 +352,7 @@
                                                 }
 
                                                 $('.q-one > .add-answers').prev('.input-answers').after(addAnswer);
-                                                var numAnswers = ($('.copy > p > .q-one').find('.input-answers').length);
+                                                var numAnswers = ($('.copy > p > form > .q-one').find('.input-answers').length);
                                                 $('.q-one > .add-answers > span').html(numAnswers);
                                             });
 
@@ -346,44 +376,49 @@
 
                                             $('.remove-q').on('click', function (e) {
                                                 e.preventDefault();
-                                                if ($('.copy > p > .q-one').find('.input-answers').length > 1) {
+                                                if ($('.copy > p > form > .q-one').find('.input-answers').length > 1) {
                                                     $(this).parent().remove();
-                                                    var numAnswers = ($('.copy > p > .q-one').find('.input-answers').length);
+                                                    var numAnswers = ($('.copy > p > form > .q-one').find('.input-answers').length);
                                                     $('.q-one > .add-answers > span').html(numAnswers);
                                                 }
                                             });
                                         </script>
-
+                                        <div class="col-md-12 text-center create-q-btn">
+                                            <button type="submit" class="btn btn-success" style="float:none">Създай</button>
+                                        </div>
                                     </div>
+                                    </form>
                                 </div>
-                                <!-- end of one qustion box holder -->
+                                <!-- end of one question box holder -->
 
                                 <!-- many question box holder -->
                                 <div class="col-md-12 q-many-wrap">
                                     <div class="col-md-12 questions-box q-many">
                                         <p>въпрос: <br>
-                                            <textarea name="q-many" id="" cols="30" rows="5"></textarea>
+                                            <textarea name="question" id="question" cols="30" rows="5"></textarea>
                                             <br>
-                                            <select name="diff">
+                                            <select name="difficulty">
                                                 <option disabled selected value="0">Трудност</option>
                                                 <option value="1">лесен</option>
                                                 <option value="2">нормален</option>
                                                 <option value="3">труден</option>
                                             </select>&nbsp;&nbsp;
-                                            <input type="radio" name="bonus" value="0" id="no-bonus" checked> <label
+                                            <input type="radio" name="bonus_radio" value="0" id="no-bonus" checked>
+                                            <label
                                                     for="no-bonus">Без Бонус</label>&nbsp;&nbsp;
-                                            <input type="radio" name="bonus" value="1" id="yess-bonus"> <label
+                                            <input type="radio" name="bonus_radio" value="1" id="yess-bonus"> <label
                                                     for="yess-bonus">Бонус</label>
                                         </p>
                                         <p class="input-answers">
                                             <a href="" class="icon-click-many"><i class="fas fa-check-circle"></i></a>&nbsp;<textarea
-                                                    class="q-many-answer" cols="30"></textarea><a href=""
-                                                                                                  class="remove-q"><i
+                                                    class="q-many-answer" name="answers[]" cols="30"></textarea><a
+                                                    href=""
+                                                    class="remove-q"><i
                                                         class="fas fa-times"></i></a>
                                         </p>
                                         <div class="col-md-12 add-answers-many">
                                             <a href="">
-                                                <img src="./images/profile/add-icon.png" alt="add">
+                                                <img src="{{asset('/images/profile/add-icon.png')}}" alt="add">
                                             </a>
                                             <span></span>
                                         </div>
@@ -392,15 +427,15 @@
 
                                             $('#yess-bonus').on('click', function () {
                                                 if (!addedThropyMany) {
-                                                    $('.copy > p > div:nth-child(1)').append('<i class="fas fa-trophy"></i>');
-                                                    $(this).next('label').after('&nbsp;&nbsp;<input type="number" class="bonus-points">');
+                                                    $('.copy > p > form > div:nth-child(1)').append('<i class="fas fa-trophy"></i>');
+                                                    $(this).next('label').after('&nbsp;&nbsp;<input type="number" name="bonus" class="bonus-points">');
                                                     addedThropyMany = true;
                                                 }
                                             });
 
                                             $('#no-bonus').on('click', function () {
                                                 if (addedThropyMany) {
-                                                    $('.copy > p > div:nth-child(1)').find('i').remove();
+                                                    $('.copy > p > form > div:nth-child(1)').find('i').remove();
                                                     $('.bonus-points').remove();
                                                     addedThropyMany = false;
                                                 }
@@ -409,7 +444,7 @@
                                             $('.add-answers-many > a').on('click', function (e) {
                                                 e.preventDefault();
 
-                                                var addAnswer = $('.copy > p > .q-many >  .input-answers').last().clone(true);
+                                                var addAnswer = $('.copy > p > form > .q-many > .input-answers').last().clone(true);
                                                 // if cloning correct answer box remove the class
                                                 if (addAnswer.find('a').hasClass('corect-answer-one')) {
                                                     addAnswer.find('a').removeClass('corect-answer-one');
@@ -418,8 +453,8 @@
                                                 }
 
                                                 $('.q-many > .add-answers-many').prev('.input-answers').after(addAnswer);
-                                                var numAnswers = ($('.copy > p > .q-many > .input-answers').find('.corect-answer-one').length / 2);
-                                                var maxAnswers = ($('.copy > p > .q-many > .input-answers').length);
+                                                var numAnswers = ($('.copy > p > form > .q-many > .input-answers').find('.corect-answer-one').length / 2);
+                                                var maxAnswers = ($('.copy > p > form > .q-many > .input-answers').length);
 
 
                                                 $('.q-many > .add-answers-many > span').html(numAnswers + '/' + maxAnswers);
@@ -428,9 +463,9 @@
 
                                             $('.remove-q').on('click', function (e) {
                                                 e.preventDefault();
-                                                if ($('.copy > p > .q-many').find('.input-answers').length > 1) {
+                                                if ($('.copy > p > form > .q-many').find('.input-answers').length > 1) {
 
-                                                    var maxAnswers = ($('.copy > p > .q-many >.input-answers').length);
+                                                    var maxAnswers = ($('.copy > p > form > .q-many >.input-answers').length);
                                                     if (maxAnswers > 0) {
                                                         maxAnswers -= 1;
                                                     }
@@ -441,7 +476,7 @@
                                                     }
 
                                                     $(this).parent().remove();
-                                                    var numAnswers = ($('.copy > p > .q-many > .input-answers').find('.corect-answer-one').length / 2);
+                                                    var numAnswers = ($('.copy > p > form > .q-many > .input-answers').find('.corect-answer-one').length / 2);
 
                                                     $('.q-many > .add-answers-many > span').html(numAnswers + '/' + maxAnswers);
                                                 }
@@ -453,23 +488,27 @@
                                                     $(this).addClass('corect-answer-one');
                                                     $(this).next('.q-many-answer').addClass('corect-answer-one');
 
-                                                    var numAnswers = (($('.copy > p > .q-many > .input-answers').find('.corect-answer-one').length / 2) - 1);
-                                                    var maxAnswers = ($('.copy > p > .q-many > .input-answers').length);
+                                                    var numAnswers = (($('.copy > p > form > .q-many > .input-answers').find('.corect-answer-one').length / 2) - 1);
+                                                    var maxAnswers = ($('.copy > p > form > .q-many > .input-answers').length);
                                                     numAnswers += 1;
                                                     $('.q-many > .add-answers-many > span').html(numAnswers + '/' + maxAnswers);
                                                 } else {
                                                     $(this).removeClass('corect-answer-one');
                                                     $(this).next('.q-many-answer').removeClass('corect-answer-one');
-                                                    var numAnswers = (($('.copy > p > .q-many > .input-answers').find('.corect-answer-one').length / 2));
-                                                    var maxAnswers = ($('.copy > p > .q-many > .input-answers').length);
+                                                    var numAnswers = (($('.copy > p > form > .q-many > .input-answers').find('.corect-answer-one').length / 2));
+                                                    var maxAnswers = ($('.copy > p > form > .q-many > .input-answers').length);
 
                                                     $('.q-many > .add-answers-many > span').html(numAnswers + '/' + maxAnswers);
                                                 }
                                             });
                                         </script>
+                                        <div class="col-md-12 text-center create-q-btn">
+                                            <button type="submit" class="btn btn-success" style="float:none">Създай</button>
+                                        </div>
                                     </div>
+                                    </form>
                                 </div>
-                                <!-- end of many qustion box holder -->
+                                <!-- end of many question box holder -->
 
                             @foreach($bank->Questions as $question)
                                 @if($question->type == 'open')
@@ -487,6 +526,12 @@
                                                 @endswitch
                                                 <p>
                                                 <div class="col-md-7 question">
+                                                    @if(!is_null($question->image))
+                                                        <span><img src="{{asset('images/questions/'.$question->image)}}"
+                                                                   alt="q_image"
+                                                                   class="q_image img-responsive"></span>
+                                                        <br/>
+                                                    @endif
                                                     {{$question->question}}
                                                 </div>
                                                 <div class="col-md-5 text-right">
@@ -494,16 +539,35 @@
                                                     <span class="col-md-4 num-correct">X</span>
                                                     <span class="col-md-2"><a href="" class="edit-question"><i
                                                                     class="fas fa-pencil-alt"></i></a></span>
-                                                    <span class="col-md-2"><a href=""><i
-                                                                    class="fas fa-times"></i></a></span>
+                                                    <span class="col-md-2">
+                                                         <form action="{{ route('delete.question',$question->id) }}"
+                                                               method="POST" id="delete-lection"
+                                                               onsubmit="return ConfirmDelete()">
+                                                                    {{ method_field('DELETE') }}
+                                                             {{ csrf_field() }}
+                                                                <button class="btn btn-light delete-q"><i
+                                                                            class="fas fa-times"></i></button>
+                                                                </form>
+                                                    </span>
                                                 </div>
                                                 </p>
                                                 <p>
                                                 <div class="col-md-12">
-                                                    <span class="correct-open corect-answer">{{$question->Answers[0]->answer}}</span>
+                                                    <span class="correct-open corect-answer">
+                                                        @if(isset($question->Answers[0]) && !is_null($question->Answers[0]->image))
+                                                            <span><img src="{{asset('images/questions/'.$question->Answers[0]->image)}}"
+                                                                       alt="q_image" class="q_image_inside img-responsive"></span>
+                                                            <br>
+                                                        @endif
+                                                        {{isset($question->Answers[0]->answer)?$question->Answers[0]->answer:null}}
+                                                    </span>
                                                     <ul class="answers-list">
                                                     </ul>
-                                                    <div class="col-md-12 text-right trophy-bonus"></div>
+                                                    @if(!is_null($question->bonus))
+                                                        <div class="col-md-12 text-right trophy-bonus">
+                                                            +{{$question->bonus}}&nbsp;<i class="fas fa-trophy"></i>
+                                                        </div>
+                                                    @endif
                                                 </div>
                                                 </p>
                                             </li>
@@ -525,6 +589,12 @@
                                                         @endswitch
                                                         <p>
                                                         <div class="col-md-7 question">
+                                                            @if(!is_null($question->image))
+                                                                <span><img src="{{asset('images/questions/'.$question->image)}}"
+                                                                           alt="q_image"
+                                                                           class="q_image img-responsive"></span>
+                                                                <br/>
+                                                            @endif
                                                             {{$question->question}}
                                                         </div>
                                                         <div class="col-md-5 text-right">
@@ -533,8 +603,16 @@
                                                             <span class="col-md-4 num-correct">{{$question->correctCount}}</span>
                                                             <span class="col-md-2"><a href="" class="edit-question"><i
                                                                             class="fas fa-pencil-alt"></i></a></span>
-                                                            <span class="col-md-2"><a href=""><i
-                                                                            class="fas fa-times"></i></a></span>
+                                                            <span class="col-md-2">
+                                                                <form action="{{ route('delete.question',$question->id) }}"
+                                                                      method="POST" id="delete-lection"
+                                                                      onsubmit="return ConfirmDelete()">
+                                                                    {{ method_field('DELETE') }}
+                                                                    {{ csrf_field() }}
+                                                                <button class="btn btn-light delete-q"><i
+                                                                            class="fas fa-times"></i></button>
+                                                                </form>
+                                                            </span>
                                                         </div>
                                                         </p>
                                                         <p>
@@ -543,13 +621,22 @@
                                     <ul class="answers-list">
                                         @foreach($question->Answers as $answer)
                                             @if($answer->correct > 0)
-                                                <li class="corect-answer">{{$answer->answer}}</li>
+                                                <li class="corect-answer">
                                             @else
-                                                <li>{{$answer->answer}}</li>
+                                                <li>
                                             @endif
+                                                    @if(!is_null($answer->image))
+                                                        <span><img src="{{asset('images/questions/'.$answer->image)}}"
+                                                                   alt="q_image" class="q_image_inside img-responsive"></span>
+                                                        <br>
+                                                    @endif
+                                                    {{$answer->answer}}</li>
                                         @endforeach
                                     </ul>
-                                    <div class="col-md-12 text-right trophy-bonus"></div>
+                                    @if(!is_null($question->bonus))
+                                          <div class="col-md-12 text-right trophy-bonus">+{{$question->bonus}}&nbsp;<i
+                                                      class="fas fa-trophy"></i></div>
+                                      @endif
                                   </span>
                                                         </div>
                                                         </p>
@@ -572,8 +659,13 @@
                                                                 @endswitch
                                                                 <p>
                                                                 <div class="col-md-7 question">
-                                                                    Коя функция може да се използва за извличане на
-                                                                    масив от наличните опции в stream контекста?
+                                                                    @if(!is_null($question->image))
+                                                                        <span><img src="{{asset('images/questions/'.$question->image)}}"
+                                                                                   alt="q_image"
+                                                                                   class="q_image img-responsive"></span>
+                                                                        <br/>
+                                                                    @endif
+                                                                    {{$question->question}}
                                                                 </div>
                                                                 <div class="col-md-5 text-right">
                                                                     <span class="col-md-4"><i
@@ -582,20 +674,40 @@
                                                                     <span class="col-md-2"><a href=""
                                                                                               class="edit-question"><i
                                                                                     class="fas fa-pencil-alt"></i></a></span>
-                                                                    <span class="col-md-2"><a href=""><i
-                                                                                    class="fas fa-times"></i></a></span>
+                                                                    <span class="col-md-2">
+                                                                         <form action="{{ route('delete.question',$question->id) }}"
+                                                                               method="POST" id="delete-lection"
+                                                                               onsubmit="return ConfirmDelete()">
+                                                                    {{ method_field('DELETE') }}
+                                                                             {{ csrf_field() }}
+                                                                <button class="btn btn-light delete-q"><i
+                                                                            class="fas fa-times"></i></button>
+                                                                </form>
+                                                                    </span>
                                                                 </div>
                                                                 </p>
                                                                 <p>
                                                                 <div class="col-md-12">
                                   <span class="correct-one">
                                     <ul class="answers-list">
-                                      <li>stream_context_get_params</li>
-                                      <li>stream_context_get_default</li>
-                                      <li class="corect-answer">stream_context_get_options</li>
-                                      <li>'options' елемента от stream_get_meta_data</li>
-                                    </ul class="answers-list">
-                                    <div class="col-md-12 text-right trophy-bonus">+1&nbsp;<i class="fas fa-trophy"></i></div>
+                                       @foreach($question->Answers as $answer)
+                                            @if($answer->correct > 0)
+                                                <li class="corect-answer">
+                                            @else
+                                                <li>
+                                            @endif
+                                                    @if(!is_null($answer->image))
+                                                        <span><img src="{{asset('images/questions/'.$answer->image)}}"
+                                                                   alt="q_image" class="q_image_inside img-responsive"></span>
+                                                        <br>
+                                                    @endif
+                                                    {{$answer->answer}}</li>
+                                        @endforeach
+                                    </ul>
+                                      @if(!is_null($question->bonus))
+                                          <div class="col-md-12 text-right trophy-bonus">+{{$question->bonus}}&nbsp;<i
+                                                      class="fas fa-trophy"></i></div>
+                                      @endif
                                   </span>
                                                                 </div>
                                                                 </p>
@@ -623,4 +735,30 @@
         </div>
     </div>
     <script src="{{asset('js/create_tests.js')}}"></script>
+    <script>
+        function ConfirmDelete() {
+            var x = confirm("Сигурни ли сте че искате да изтриете ?");
+            if (x)
+                return true;
+            else
+                return false;
+        }
+    </script>
+    <script>
+        $('.q_image').on('click', function () {
+            if ($(this).hasClass('img_big')) {
+                $(this).removeClass('img_big');
+            } else {
+                $(this).addClass('img_big')
+            }
+        });
+
+        $('.q_image_inside').on('click', function () {
+            if ($(this).hasClass('img_big')) {
+                $(this).removeClass('img_big');
+            } else {
+                $(this).addClass('img_big')
+            }
+        });
+    </script>
 @endsection

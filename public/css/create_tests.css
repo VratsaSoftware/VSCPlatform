@@ -313,6 +313,39 @@ code {
     top: -10%!important;
 }
 
+.delete-q{
+    margin-top: -40px;
+    margin-right: -20px;
+}
+
+.q_image{
+    transition: all 150ms linear;
+    width:200px;
+    max-height: 200px;
+    border-radius:5%;
+}
+
+.q_image_inside{
+    transition: all 150ms linear;
+    width: 100px;
+    max-height: 100px;
+    border-radius: 5%;
+}
+
+.img_big{
+    transition: all 150ms linear;
+    width:500px;
+    max-height: 500px;
+}
+
+.create-q-btn{
+    margin-top: 1%;
+}
+
+.missed-field{
+    border: 2px solid #dd3300 !important;
+}
+
 /*end of test section*/
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {

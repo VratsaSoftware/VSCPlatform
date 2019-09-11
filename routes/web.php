@@ -155,6 +155,9 @@ Route::group(['middleware' => 'auth'], function () {
         //tests routes
         Route::resource('test', 'Admin\TestController')->names('test');
         Route::post('test/bank/create','Admin\TestController@createBank')->name('create.bank');
+        Route::post('test/question/create','Admin\TestController@storeQuestion')->name('store.question');
+        Route::delete('/test/delete/question/{question}',
+            'Admin\TestController@deleteQuestion')->name('delete.question');
     });
 
     Route::group(['middleware' => 'isAdmin'], function () {

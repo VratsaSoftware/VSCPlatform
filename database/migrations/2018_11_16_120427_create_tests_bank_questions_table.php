@@ -17,6 +17,7 @@ class CreateTestsBankQuestionsTable extends Migration
             $table->increments('id');
             $table->integer('test_bank_id')->unsigned()->nullable();
             $table->longText('question');
+            $table->longText('image')->nullable();
             $table->enum('type',['open','one','many'])->default('one');
             $table->string('difficulty');
             $table->integer('bonus')->nullable();

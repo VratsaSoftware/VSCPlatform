@@ -61,5 +61,6 @@
             няма курсове
         @endforelse
     </div>
+    </div>
 </div>
 @endsection

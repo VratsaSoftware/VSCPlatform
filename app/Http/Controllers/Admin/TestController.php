@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Traits\ImageUploadTrait;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Tests\Test;
@@ -17,6 +18,8 @@ use File;
 
 class TestController extends Controller
 {
+    use ImageUploadTrait;
+
     /**
      * Display a listing of the resource.
      *
@@ -43,7 +46,6 @@ class TestController extends Controller
             }
         }
 
-
         foreach ($banks as $bank) {
             $bankDifficultyCount = ['easy' => 0, 'medium' => 0, 'hard' => 0];
             $correctAnswersCount = 0;
@@ -59,14 +61,16 @@ class TestController extends Controller
                         $bankDifficultyCount['hard'] += 1;
                         break;
                 }
+                foreach ($question->Answers as $answer) {
+                    if ($answer->correct > 0 || $answer->correct != '0') {
+                        $correctAnswersCount += 1;
+                    }
+                }
+                $question->correctCount = $correctAnswersCount;
+                $correctAnswersCount = 0;
             }
             $bank->difficultyCount = $bankDifficultyCount;
-            foreach ($question->Answers as $answer) {
-                if ($answer->correct > 0) {
-                    $correctAnswersCount += 1;
-                }
-            }
-            $question->correctCount = $correctAnswersCount;
+
         }
 
         return view('admin.tests.index',
@@ -159,34 +163,81 @@ class TestController extends Controller
             $name = time() . "_" . $bankPic->getClientOriginalName();
             $name = str_replace(' ', '', strtolower($name));
             $name = md5($name);
-            $path = public_path().'/images/questions';
+            $path = public_path() . '/images/questions';
             if (!File::exists($path)) {
                 $folder = mkdir($path, 0777, true);
             }
-            $image->save($path.'/'.$name, 90);
+            $image->save($path . '/' . $name, 90);
             $newBank->logo = $name;
         }
 
         $newBank->name = $data['title'];
         $newBank->save();
+        $this->loadQuestionsToBank($data, $newBank->id);
 
-        if(!is_null($data['from_bank'])){
-            foreach ($data['from_bank'] as $num => $bank){
-                if(!is_null($data['from_bank_easy'][$num])){
+        $message = __('Успешно добавена Банка ' . $newBank->name . ' !');
+        return redirect()->back()->with('success', $message);
+    }
+
+    public function loadQuestionsToBank($data, $newBank)
+    {
+        if (!is_null($data['from_bank'])) {
+            foreach ($data['from_bank'] as $num => $bank) {
+                if (!is_null($data['from_bank_easy'][$num])) {
                     $questions = BankQuestion::where([
-                        ['difficulty','1'],
-                        ['test_bank_id',$bank]
+                        ['difficulty', '1'],
+                        ['test_bank_id', $bank]
                     ])->get();
-
-                    if (!$questions->isEmpty() && count($questions) > (int)$data['from_bank_easy'][$num])
-                    {
+                    if (!$questions->isEmpty() && count($questions) >= (int)$data['from_bank_easy'][$num]) {
                         $questions = $questions->random($data['from_bank_easy'][$num]);
-                        foreach($questions as $question){
+                        foreach ($questions as $question) {
                             $newQ = $question->replicate();
-                            $newQ->test_bank_id = $newBank->id;
+                            $newQ->test_bank_id = $newBank;
                             $newQ->save();
-                            $answers = BankAnswer::where('tests_bank_question_id',$question->id)->get();
-                            foreach($answers as $answer){
+                            $answers = BankAnswer::where('tests_bank_question_id', $question->id)->get();
+                            foreach ($answers as $answer) {
+                                $newAnswer = $answer->replicate();
+                                $newAnswer->tests_bank_question_id = $newQ->id;
+                                $newAnswer->save();
+                            }
+                        }
+                    }
+                }
+
+                if (!is_null($data['from_bank_medium'][$num])) {
+                    $questions = BankQuestion::where([
+                        ['difficulty', '2'],
+                        ['test_bank_id', $bank]
+                    ])->get();
+                    if (!$questions->isEmpty() && count($questions) >= (int)$data['from_bank_medium'][$num]) {
+                        $questions = $questions->random($data['from_bank_medium'][$num]);
+                        foreach ($questions as $question) {
+                            $newQ = $question->replicate();
+                            $newQ->test_bank_id = $newBank;
+                            $newQ->save();
+                            $answers = BankAnswer::where('tests_bank_question_id', $question->id)->get();
+                            foreach ($answers as $answer) {
+                                $newAnswer = $answer->replicate();
+                                $newAnswer->tests_bank_question_id = $newQ->id;
+                                $newAnswer->save();
+                            }
+                        }
+                    }
+                }
+
+                if (!is_null($data['from_bank_hard'][$num])) {
+                    $questions = BankQuestion::where([
+                        ['difficulty', '3'],
+                        ['test_bank_id', $bank]
+                    ])->get();
+                    if (!$questions->isEmpty() && count($questions) >= (int)$data['from_bank_hard'][$num]) {
+                        $questions = $questions->random($data['from_bank_hard'][$num]);
+                        foreach ($questions as $question) {
+                            $newQ = $question->replicate();
+                            $newQ->test_bank_id = $newBank;
+                            $newQ->save();
+                            $answers = BankAnswer::where('tests_bank_question_id', $question->id)->get();
+                            foreach ($answers as $answer) {
                                 $newAnswer = $answer->replicate();
                                 $newAnswer->tests_bank_question_id = $newQ->id;
                                 $newAnswer->save();
@@ -196,8 +247,72 @@ class TestController extends Controller
                 }
             }
         }
+    }
 
-        $message = __('Успешно добавена Банка '.$newBank->name.' !');
+    public function storeQuestion(Request $request)
+    {
+        $data = $request->validate([
+            'type' => 'required|',
+            'bank' => 'required|numeric',
+            'question' => 'required|',
+            'difficulty' => 'required|numeric|min:1|max:3',
+            'bonus_radio' => 'sometimes|nullable|',
+            'answer' => 'sometimes|nullable',
+            'bonus' => 'sometimes',
+        ]);
+
+        switch ($data['type']) {
+            case 'open':
+                $data = $request->except([
+                    '_token',
+                    '_method',
+                    'answer',
+                    'bonus_radio',
+                    'open_a_image'
+                ]);
+                $data['test_bank_id'] = $data['bank'];
+                unset($data['bank']);
+                if (Input::hasFile('image')) {
+                    $qImg = Input::file('image');
+                    $data['image'] = $this->storeImage($qImg, '/images/questions/');
+                }
+                $newQ = BankQuestion::create($data);
+                if ($request->answer) {
+                    $data = [];
+                    $data['tests_bank_question_id'] = $newQ->id;
+                    $data['answer'] = $request->answer;
+                    $data['correct'] = 1;
+                    if (Input::hasFile('open_a_image')) {
+                        $aImg = Input::file('open_a_image');
+                        $data['image'] = $this->storeImage($aImg, '/images/questions/');
+                    }
+                    $newA = BankAnswer::create($data);
+                }
+                break;
+            case 'one':
+
+                break;
+            case 'many':
+
+                break;
+        }
+
+        $message = __('Успешно добавен въпрос !');
+        return redirect()->back()->with('success', $message);
+    }
+
+    public function deleteQuestion(BankQuestion $question)
+    {
+
+        if (!is_null($question->image)) {
+            $oldImage = public_path() . '/images/questions/' . $question->image;
+            if (File::exists($oldImage)) {
+                File::delete($oldImage);
+            }
+        }
+
+        $question->delete();
+        $message = __('Успешно изтрит въпрос !');
         return redirect()->back()->with('success', $message);
     }
 }
