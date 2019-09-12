@@ -292,9 +292,14 @@
                                 <!-- one question box holder -->
                                 <div class="col-md-12 q-one-wrap">
                                     <div class="col-md-12 questions-box q-one">
-                                        <p>въпрос: <br>
+                                        <p>
+                                            снимка:
+                                            <input type="file" name="image"><br/>
+                                            въпрос:
+                                            <i class="fa fa-asterisk" style="font-size: 0.75em; color: #f00;"></i><br/>
                                             <textarea name="question" id="q-one" cols="30" rows="5" class="required"></textarea>
                                             <br>
+                                            <i class="fa fa-asterisk" style="font-size: 0.75em; color: #f00;"></i>
                                             <select name="difficulty" class="required">
                                                 <option disabled selected value="0">Трудност</option>
                                                 <option value="1">лесен</option>
@@ -308,12 +313,16 @@
                                                     for="yess-bonus">Бонус</label>
                                         </p>
                                         <p>отговори:</p>
+                                        <input type="hidden" name="correct_one_answer" id="correct_one_answer">
                                         <p class="input-answers">
-                                            <a href="" class="icon-click"><i
-                                                        class="fas fa-check-circle"></i></a>&nbsp;<input type="text"
+                                            снимка:
+                                            <input type="file" name="open_a_image[]" id="open_a_image"><br/>
+                                            <input type="hidden" name="image_for_" class="open_a_image_a" value="0">
+                                            <a href="" class="icon-click">
+                                                <i class="fas fa-check-circle"></i></a>&nbsp;<input type="text"
                                                                                                          class="q-one-answer required"
-                                                                                                         name="answers[]"><a
-                                                    href="" class="remove-q modal-remove-q"><i class="fas fa-times"></i></a>
+                                                                                                         name="answers[]" data-q-count=0>
+                                            <a href="" class="remove-q modal-remove-q"><i class="fas fa-times"></i></a>
                                         </p>
                                         <div class="col-md-12 add-answers">
                                             <a href="">
@@ -340,10 +349,22 @@
                                                 }
                                             });
 
+                                            $('#open_a_image').change(function (){
+                                                var fileName = $(this).val().replace(/C:\\fakepath\\/i, '');
+                                                fileName = fileName.replace(/\s/g, '');
+                                                $(this).parent().find('.open_a_image_a').val(fileName);
+                                                var inputNum = $(this).parent().find('.q-one-answer').attr('data-q-count');
+                                                $(this).parent().find('.open_a_image_a').attr('name','image_for_'+inputNum);
+                                            });
+
                                             $('.add-answers > a').on('click', function (e) {
                                                 e.preventDefault();
 
                                                 var addAnswer = $('.copy > p > form > .q-one >  .input-answers').last().clone(true);
+                                                //numbering inputs so after that will append input with correct answer number of input
+                                                var currentNum = parseInt(addAnswer.find('.q-one-answer').attr('data-q-count'));
+                                                addAnswer.find('#open_a_image').val(null);
+                                                addAnswer.find('input').attr('data-q-count',currentNum + 1);
                                                 // if cloning correct answer box remove the class
                                                 if (addAnswer.find('a').hasClass('corect-answer-one')) {
                                                     addAnswer.find('a').removeClass('corect-answer-one');
@@ -360,6 +381,7 @@
                                                 e.preventDefault();
                                                 if (!$(this).hasClass('corect-answer-one')) {
                                                     $(this).addClass('corect-answer-one');
+                                                    $('#correct_one_answer').val($(this).next('.q-one-answer').attr('data-q-count'));
                                                     // $(this).find('.fas').removeClass('fa-check-circle').addClass('fa-times');
                                                     $(this).next('.q-one-answer').addClass('corect-answer-one');
                                                     $(this).parent().prevAll().find('a').removeClass('corect-answer-one');
@@ -371,6 +393,7 @@
                                                 } else {
                                                     $(this).removeClass('corect-answer-one');
                                                     $(this).next('.q-one-answer').removeClass('corect-answer-one');
+                                                    $('#correct-one-answer').val(null);
                                                 }
                                             });
 
@@ -394,10 +417,13 @@
                                 <!-- many question box holder -->
                                 <div class="col-md-12 q-many-wrap">
                                     <div class="col-md-12 questions-box q-many">
-                                        <p>въпрос: <br>
-                                            <textarea name="question" id="question" cols="30" rows="5"></textarea>
+                                        <p>снимка:
+                                            <input type="file" name="image"><br/>
+                                            въпрос: <i class="fa fa-asterisk" style="font-size: 0.75em; color: #f00;"></i><br>
+                                            <textarea name="question" id="question" cols="30" rows="5" class="required"></textarea>
                                             <br>
-                                            <select name="difficulty">
+                                            <i class="fa fa-asterisk" style="font-size: 0.75em; color: #f00;"></i>
+                                            <select name="difficulty" class="required">
                                                 <option disabled selected value="0">Трудност</option>
                                                 <option value="1">лесен</option>
                                                 <option value="2">нормален</option>
@@ -409,12 +435,19 @@
                                             <input type="radio" name="bonus_radio" value="1" id="yess-bonus"> <label
                                                     for="yess-bonus">Бонус</label>
                                         </p>
+                                        <p>отговори:</p>
+                                        <input type="hidden" name="correct_many_answer" id="correct_many_answer">
                                         <p class="input-answers">
-                                            <a href="" class="icon-click-many"><i class="fas fa-check-circle"></i></a>&nbsp;<textarea
-                                                    class="q-many-answer" name="answers[]" cols="30"></textarea><a
-                                                    href=""
-                                                    class="remove-q"><i
-                                                        class="fas fa-times"></i></a>
+                                            снимка:
+                                            <input type="file" name="many_a_image[]" id="many_a_image"><br/>
+                                            <input type="hidden" name="image_for_" class="many_a_image_a" value="0">
+                                            <a href="" class="icon-click-many">
+                                                <i class="fas fa-check-circle"></i>
+                                            </a>&nbsp;
+                                            <input type="text" class="q-many-answer" name="answers[]" data-q-count=0 style="width:90%">
+                                            <a href="" class="remove-q">
+                                                <i class="fas fa-times"></i>
+                                            </a>
                                         </p>
                                         <div class="col-md-12 add-answers-many">
                                             <a href="">
@@ -441,10 +474,22 @@
                                                 }
                                             });
 
+                                            $('#many_a_image').change(function (){
+                                                var fileName = $(this).val().replace(/C:\\fakepath\\/i, '');
+                                                fileName = fileName.replace(/\s/g, '');
+                                                $(this).parent().find('.many_a_image_a').val(fileName);
+                                                var inputNum = $(this).parent().find('.q-many-answer').attr('data-q-count');
+                                                $(this).parent().find('.many_a_image_a').attr('name','image_for_'+inputNum);
+                                            });
+
                                             $('.add-answers-many > a').on('click', function (e) {
                                                 e.preventDefault();
 
                                                 var addAnswer = $('.copy > p > form > .q-many > .input-answers').last().clone(true);
+                                                //numbering inputs so after that will append input with correct answer number of input
+                                                var currentNum = parseInt(addAnswer.find('.q-many-answer').attr('data-q-count'));
+                                                addAnswer.find('#many_a_image').val(null);
+                                                addAnswer.find('input').attr('data-q-count',currentNum + 1);
                                                 // if cloning correct answer box remove the class
                                                 if (addAnswer.find('a').hasClass('corect-answer-one')) {
                                                     addAnswer.find('a').removeClass('corect-answer-one');
@@ -487,7 +532,8 @@
                                                 if (!$(this).hasClass('corect-answer-one')) {
                                                     $(this).addClass('corect-answer-one');
                                                     $(this).next('.q-many-answer').addClass('corect-answer-one');
-
+                                                    $('#correct_many_answer').val($('#correct_many_answer').val()+','+$(this).next('.q-many-answer').attr('data-q-count'));
+                                                    console.log($('#correct_many_answer').val());
                                                     var numAnswers = (($('.copy > p > form > .q-many > .input-answers').find('.corect-answer-one').length / 2) - 1);
                                                     var maxAnswers = ($('.copy > p > form > .q-many > .input-answers').length);
                                                     numAnswers += 1;
@@ -497,7 +543,15 @@
                                                     $(this).next('.q-many-answer').removeClass('corect-answer-one');
                                                     var numAnswers = (($('.copy > p > form > .q-many > .input-answers').find('.corect-answer-one').length / 2));
                                                     var maxAnswers = ($('.copy > p > form > .q-many > .input-answers').length);
-
+                                                    var removedCorrect = $('#correct_many_answer').val().split(",");
+                                                    var nextNum = parseInt($(this).next('.q-many-answer').attr('data-q-count'));
+                                                    $.each(removedCorrect,function(i){
+                                                        var checkNum = parseInt(removedCorrect[i]);
+                                                        if(checkNum !== nextNum){
+                                                            $('#correct_many_answer').val(removedCorrect[i]);
+                                                        }
+                                                    });
+                                                    console.log($('#correct_many_answer').val());
                                                     $('.q-many > .add-answers-many > span').html(numAnswers + '/' + maxAnswers);
                                                 }
                                             });

@@ -259,6 +259,7 @@ class TestController extends Controller
             'bonus_radio' => 'sometimes|nullable|',
             'answer' => 'sometimes|nullable',
             'bonus' => 'sometimes',
+            'correct_one_answer' => 'sometimes'
         ]);
 
         switch ($data['type']) {
@@ -270,6 +271,7 @@ class TestController extends Controller
                     'bonus_radio',
                     'open_a_image'
                 ]);
+
                 $data['test_bank_id'] = $data['bank'];
                 unset($data['bank']);
                 if (Input::hasFile('image')) {
@@ -290,9 +292,109 @@ class TestController extends Controller
                 }
                 break;
             case 'one':
+                $valdiate = $request->validate([
+                    'correct_one_answer' => 'required'
+                ]);
+                $correct = (int)$request->correct_one_answer;
+                $data = $request->except([
+                    '_token',
+                    '_method',
+                    'answer',
+                    'bonus_radio',
+                    'open_a_image',
+                    'correct_one_answer',
+                    'answers'
+                ]);
+                for($r = 0; $r < count($request->answers); $r++){
+                    unset($data['image_for_'.$r]);
+                    unset($data['image_for_']);
+                }
 
+                $data['test_bank_id'] = $data['bank'];
+                unset($data['bank']);
+                if (Input::hasFile('image')) {
+                    $qImg = Input::file('image');
+                    $data['image'] = $this->storeImage($qImg, '/images/questions/');
+                }
+                $newQ = BankQuestion::create($data);
+                foreach ($request->answers as $num => $answer) {
+                    $data = [];
+                    $data['tests_bank_question_id'] = $newQ->id;
+                    $data['answer'] = $answer;
+                    $data['correct'] = 0;
+                    if ($num == $correct) {
+                        $data['correct'] = 1;
+                    }
+
+                    if (isset($request->open_a_image)) {
+                        if (array_key_exists('image_for_' . $num, $request->all())) {
+                            foreach (Input::file('open_a_image') as $numImg => $file) {
+                                $fileName = str_replace(' ', '', $file->getClientOriginalName());
+                                $checkNames = $request->all();
+                                $checkNames['image_for_'.$num];
+                                if ($checkNames['image_for_'.$num] == $fileName) {
+                                    $data['image'] = $this->storeImage($file, '/images/questions/');
+                                }
+                            }
+                        }
+                    }
+                    $newA = BankAnswer::create($data);
+                }
                 break;
             case 'many':
+                $valdiate = $request->validate([
+                    'correct_many_answer' => 'required'
+                ]);
+                $correctArr = explode(',', $request->correct_many_answer);
+                $correctArrNoEmpty = array_filter($correctArr,'strlen');
+                $correct = array_map('intval', $correctArrNoEmpty);
+
+                $data = $request->except([
+                    '_token',
+                    '_method',
+                    'answer',
+                    'bonus_radio',
+                    'many_a_image',
+                    'correct_many_answer',
+                    'answers'
+                ]);
+                for($r = 0; $r < count($request->answers); $r++){
+                    unset($data['image_for_'.$r]);
+                    unset($data['image_for_']);
+                }
+
+                $data['test_bank_id'] = $data['bank'];
+                unset($data['bank']);
+                if (Input::hasFile('image')) {
+                    $qImg = Input::file('image');
+                    $data['image'] = $this->storeImage($qImg, '/images/questions/');
+                }
+                $newQ = BankQuestion::create($data);
+
+                foreach ($request->answers as $num => $answer) {
+                    $data = [];
+                    $data['tests_bank_question_id'] = $newQ->id;
+                    $data['answer'] = $answer;
+                    $data['correct'] = 0;
+
+                    if (in_array((int)$num,$correct)) {
+                        $data['correct'] = 1;
+                    }
+
+                    if (isset($request->many_a_image)) {
+                        if (array_key_exists('image_for_' . $num, $request->all())) {
+                            foreach (Input::file('many_a_image') as $numImg => $file) {
+                                $fileName = str_replace(' ', '', $file->getClientOriginalName());
+                                $checkNames = $request->all();
+                                $checkNames['image_for_'.$num];
+                                if ($checkNames['image_for_'.$num] == $fileName) {
+                                    $data['image'] = $this->storeImage($file, '/images/questions/');
+                                }
+                            }
+                        }
+                    }
+                    $newA = BankAnswer::create($data);
+                }
 
                 break;
         }

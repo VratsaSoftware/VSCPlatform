@@ -160,6 +160,8 @@ a {
 
 .tests-content {
     padding: 2vw;
+    max-height: 46vw;
+    overflow-y: scroll;
 }
 
 .tests-list>li:nth-child(1) {
