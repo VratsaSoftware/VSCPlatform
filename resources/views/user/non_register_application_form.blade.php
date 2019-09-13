@@ -14,6 +14,9 @@
                             </p>
                             <form action="{{route('application.store')}}" method="POST" class="col-md-12" id="application" name="application" enctype="multipart/form-data">
                                 {{ csrf_field() }}
+                                @if(collect(request()->segments())->last() !== 'create')
+                                    <input type="hidden" name="source_url" value="{{collect(request()->segments())->last()}}">
+                                @endif
                             <p>
                                 <label for="username">Име <span class="req-star-form">*</span></label>
                                 @if ($errors->has('username'))

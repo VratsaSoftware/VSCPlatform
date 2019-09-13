@@ -18,6 +18,7 @@
                   <th scope="col">Пол</th>
                   <th scope="col">Занимание</th>
                   <th scope="col">Телефон</th>
+                  <th scope="col">Източник на формата</th>
                   <th scope="col">Форма</th>
                 </tr>
               </thead>
@@ -33,6 +34,7 @@
                       <td>{{$entry->User->sex}}</td>
                       <td>{{$entry->User->Occupation->occupation}}</td>
                       <td>{{$entry->Form->phone}}</td>
+                      <td>{{$entry->Form->source_url}}</td>
                       <td data-course="{{$entry->Form->course}}" data-module="{{$entry->Form->module}}" data-suitable_candidate="{{$entry->Form->suitable_candidate}}" data-suitable_training="{{$entry->Form->suitable_training}}" data-accompliments="{{$entry->Form->accompliments}}" data-expecatitions="{{$entry->Form->expecatitions}}" data-use="{{$entry->Form->use}}" data-source="{{$entry->Form->source}}" data-cv="{{$entry->Form->cv}}" data-created_at="{{$entry->Form->created_at}}">
                           <a href="#modal" class="show-form"><button class="btn btn-success">Виж</button>
                           </a>

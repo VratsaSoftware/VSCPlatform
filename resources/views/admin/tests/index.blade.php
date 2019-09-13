@@ -203,23 +203,18 @@
                                             $('#q-types').on('change', function () {
                                                 var selected = $(this).val();
                                                 // $('.modal-content > .cf > div').html('<input class="btn send-bank" type="submit" value="Добави">');
+                                                $('.copy > p > form').find('.q-open').remove();
+                                                $('.copy > p > form').find('.q-one').remove();
+                                                $('.copy > p > form').find('.q-many').remove();
+                                                $('.copy > p > form > div:nth-child(1)').find('i').remove();
                                                 switch (selected) {
                                                     case 'open':
-                                                        $('.copy > p > form').find('.q-one').remove();
-                                                        $('.copy > p > form > div:nth-child(1)').find('i').remove();
-                                                        $('.copy > p > form').find('.q-many').remove();
                                                         $(this).parent().parent().append($('.q-open-wrap').html());
                                                         break;
                                                     case 'one':
-                                                        $('.copy > p > form').find('.q-open').remove();
-                                                        $('.copy > p > form > div:nth-child(1)').find('i').remove()
-                                                        $('.copy > p > form').find('.q-many').remove();
                                                         $(this).parent().parent().append($('.q-one-wrap').html());
                                                         break;
                                                     case 'many':
-                                                        $('.copy > p > form').find('.q-open').remove();
-                                                        $('.copy > p > form > div:nth-child(1)').find('i').remove()
-                                                        $('.copy > p > form').find('.q-one').remove();
                                                         $(this).parent().parent().append($('.q-many-wrap').html());
                                                         break;
                                                     default:
@@ -393,14 +388,24 @@
                                                 } else {
                                                     $(this).removeClass('corect-answer-one');
                                                     $(this).next('.q-one-answer').removeClass('corect-answer-one');
-                                                    $('#correct-one-answer').val(null);
+                                                    $('#correct_one_answer').val(null);
                                                 }
                                             });
 
                                             $('.remove-q').on('click', function (e) {
                                                 e.preventDefault();
                                                 if ($('.copy > p > form > .q-one').find('.input-answers').length > 1) {
+                                                    var correctOne = $(this).parent().parent().find('.input-answers').find("input:text").hasClass("corect-answer-one");
+                                                    if(correctOne) {
+                                                        $('#correct_one_answer').val($(this).parent().parent().find('.input-answers').find("input:text").attr('data-q-count'));
+                                                    }
                                                     $(this).parent().remove();
+                                                    $('.copy > p > form > .q-one').find('.input-answers').each(function(i, obj) {
+                                                            $(this).find(".open_a_image_a").attr('data-q-count', i);
+                                                            $(this).find("#open_a_image").attr('data-q-count', i);
+                                                            $(this).find(".q-one-answer").attr('data-q-count', i );
+                                                    });
+
                                                     var numAnswers = ($('.copy > p > form > .q-one').find('.input-answers').length);
                                                     $('.q-one > .add-answers > span').html(numAnswers);
                                                 }
@@ -519,8 +524,29 @@
                                                     if ($(this).parent().find('.icon-click-many').hasClass('corect-answer-one')) {
                                                         numAnswers -= 1;
                                                     }
+                                                    $('.copy > p > form > .q-many').find('.input-answers').each(function(i, obj) {
+                                                        if($(this).find("input:text").hasClass("corect-answer-one")){
+
+                                                        }
+                                                        $(this).find(".many_a_image_a").attr('data-q-count', i);
+                                                        $(this).find("#many_a_image").attr('data-q-count', i);
+                                                        $(this).find(".q-many-answer").attr('data-q-count', i );
+                                                    });
+                                                    var correctOnes = $(this).parent().parent().find('.input-answers').find("input:text").hasClass("corect-answer-one");
+                                                    if(correctOnes) {
+                                                        $('#correct_many_answer').val();
+                                                    }
 
                                                     $(this).parent().remove();
+                                                    $('.copy > p > form > .q-many').find('.input-answers').each(function(i, obj) {
+                                                        $(this).find(".many_a_image_a").attr('data-q-count', i);
+                                                        $(this).find("#many_a_image").attr('data-q-count', i);
+                                                        $(this).find(".q-many-answer").attr('data-q-count', i );
+                                                        if($(this).find(".q-many-answer").hasClass("corect-answer-one")){
+                                                            $('#correct_many_answer').val(','+$(this).find(".q-many-answer").attr('data-q-count')+',');
+                                                        }
+                                                        console.log($('#correct_many_answer').val());
+                                                    });
                                                     var numAnswers = ($('.copy > p > form > .q-many > .input-answers').find('.corect-answer-one').length / 2);
 
                                                     $('.q-many > .add-answers-many > span').html(numAnswers + '/' + maxAnswers);
@@ -533,7 +559,7 @@
                                                     $(this).addClass('corect-answer-one');
                                                     $(this).next('.q-many-answer').addClass('corect-answer-one');
                                                     $('#correct_many_answer').val($('#correct_many_answer').val()+','+$(this).next('.q-many-answer').attr('data-q-count'));
-                                                    console.log($('#correct_many_answer').val());
+
                                                     var numAnswers = (($('.copy > p > form > .q-many > .input-answers').find('.corect-answer-one').length / 2) - 1);
                                                     var maxAnswers = ($('.copy > p > form > .q-many > .input-answers').length);
                                                     numAnswers += 1;

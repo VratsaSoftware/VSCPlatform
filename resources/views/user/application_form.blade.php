@@ -13,6 +13,9 @@
                         <form action="{{route('application.store')}}" method="POST" class="col-md-12" id="application"
                               name="application" enctype="multipart/form-data">
                             {{ csrf_field() }}
+                            @if(collect(request()->segments())->last() !== 'create')
+                                <input type="hidden" name="source_url" value="{{collect(request()->segments())->last()}}">
+                            @endif
                             <p>
                                 <label for="username">Име <span class="req-star-form">*</span></label>
                                 @if ($errors->has('username'))
@@ -234,7 +237,7 @@
                                 @endif
                                 <select class="section-el-bold" name="source">
                                     @foreach(Config::get('applicationForm.source') as $source)
-                                        <option value="{{$source}}" {{ (old("source") == $source ? "selected":"") }}>{{ucfirst($source)}}</option>
+                                        <option value="{{$source}}" {{ (old("source") == $source ? "selected":"") }}>{{$source}}</option>
                                     @endforeach
                                 </select>
                             </p>

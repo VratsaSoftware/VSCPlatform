@@ -74,7 +74,7 @@ Auth::routes();
 
 Route::get('/application/create/{course?}/{module?}',
     'Courses\ApplicationController@create')->name('application.create');
-Route::post('/application/store', 'Courses\ApplicationController@store')->name('application.store');
+Route::post('/application/store/', 'Courses\ApplicationController@store')->name('application.store');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/myProfile', 'HomeController@index')->name('myProfile');

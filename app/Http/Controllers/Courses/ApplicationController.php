@@ -95,6 +95,7 @@ class ApplicationController extends Controller
                 "source" => 'required|in_array:valid_source.*',
                 "cv" => 'required|file',
                 "module" => 'sometimes|string|in_array:valid_modules.*',
+                "source_url" => 'sometimes'
             ]);
 
             $user = User::find(Auth::user()->id);
@@ -113,6 +114,9 @@ class ApplicationController extends Controller
             $data['cv'] = $cvName;
             $request->cv->move(public_path().'/entry/cv/', $cvName);
             unset($data['occupation']);
+            if(isset($request->source_url)){
+                $data['source_url'] = $request->source_url;
+            }
             $newForm = EntryForm::create($data);
             $newEntry = new Entry;
             $newEntry->user_id = $user->id;
@@ -168,7 +172,9 @@ class ApplicationController extends Controller
         unset($data['username']);
         unset($data['lastname']);
         unset($data['email']);
-
+        if(isset($request->source_url)){
+            $data['source_url'] = $request->source_url;
+        }
         $newForm = EntryForm::create($data);
         $newEntry = new Entry;
         $newEntry->user_id = $newUser->id;

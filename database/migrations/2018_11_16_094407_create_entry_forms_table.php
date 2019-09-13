@@ -26,6 +26,7 @@ class CreateEntryFormsTable extends Migration
             $table->longText('cv')->nullabe();
             $table->enum('is_remote', [1,0])->default(0);
             $table->bigInteger('phone')->nullabe();
+            $table->longText('source_url')->nullabe();
             $table->timestamps();
             $table->softDeletes();
 

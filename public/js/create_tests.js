@@ -22,6 +22,10 @@ $('.cf > a').mouseenter(function () {
     $(this).attr('href', '#dif-wrapper');
 });
 
+$('.cf > a').on('click', function(){
+    location.reload();
+});
+
 
 $('.add-bank').on('click', function () {
     $('.copy > p').html($('.create-bank').html());
