@@ -1,4 +1,7 @@
 /*statistic section*/
+html {
+    scroll-behavior: smooth;
+}
 a {
     color: #1C8800;
 }
@@ -207,6 +210,7 @@ a {
 .corect-answer {
     color: #1C8800;
     font-weight: bold;
+    border-color: #1C8800 !important;
 }
 
 @keyframes border-pulsate {

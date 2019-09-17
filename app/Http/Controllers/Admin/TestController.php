@@ -305,8 +305,8 @@ class TestController extends Controller
                     'correct_one_answer',
                     'answers'
                 ]);
-                for($r = 0; $r < count($request->answers); $r++){
-                    unset($data['image_for_'.$r]);
+                for ($r = 0; $r < count($request->answers); $r++) {
+                    unset($data['image_for_' . $r]);
                     unset($data['image_for_']);
                 }
 
@@ -331,8 +331,8 @@ class TestController extends Controller
                             foreach (Input::file('open_a_image') as $numImg => $file) {
                                 $fileName = str_replace(' ', '', $file->getClientOriginalName());
                                 $checkNames = $request->all();
-                                $checkNames['image_for_'.$num];
-                                if ($checkNames['image_for_'.$num] == $fileName) {
+                                $checkNames['image_for_' . $num];
+                                if ($checkNames['image_for_' . $num] == $fileName) {
                                     $data['image'] = $this->storeImage($file, '/images/questions/');
                                 }
                             }
@@ -346,7 +346,7 @@ class TestController extends Controller
                     'correct_many_answer' => 'required'
                 ]);
                 $correctArr = explode(',', $request->correct_many_answer);
-                $correctArrNoEmpty = array_filter($correctArr,'strlen');
+                $correctArrNoEmpty = array_filter($correctArr, 'strlen');
                 $correct = array_map('intval', $correctArrNoEmpty);
 
                 $data = $request->except([
@@ -358,8 +358,8 @@ class TestController extends Controller
                     'correct_many_answer',
                     'answers'
                 ]);
-                for($r = 0; $r < count($request->answers); $r++){
-                    unset($data['image_for_'.$r]);
+                for ($r = 0; $r < count($request->answers); $r++) {
+                    unset($data['image_for_' . $r]);
                     unset($data['image_for_']);
                 }
 
@@ -377,7 +377,7 @@ class TestController extends Controller
                     $data['answer'] = $answer;
                     $data['correct'] = 0;
 
-                    if (in_array((int)$num,$correct)) {
+                    if (in_array((int)$num, $correct)) {
                         $data['correct'] = 1;
                     }
 
@@ -386,8 +386,8 @@ class TestController extends Controller
                             foreach (Input::file('many_a_image') as $numImg => $file) {
                                 $fileName = str_replace(' ', '', $file->getClientOriginalName());
                                 $checkNames = $request->all();
-                                $checkNames['image_for_'.$num];
-                                if ($checkNames['image_for_'.$num] == $fileName) {
+                                $checkNames['image_for_' . $num];
+                                if ($checkNames['image_for_' . $num] == $fileName) {
                                     $data['image'] = $this->storeImage($file, '/images/questions/');
                                 }
                             }
@@ -401,6 +401,83 @@ class TestController extends Controller
 
         $message = __('Успешно добавен въпрос !');
         return redirect()->back()->with('success', $message);
+    }
+
+    public function editQuestion($question)
+    {
+        $question = BankQuestion::with('Answers')->find($question);
+
+        return view('admin.tests.edit',['question' => $question]);
+    }
+
+    public function updateQuestion(Request $request,BankQuestion $question)
+    {
+        $data = $request->validate([
+            'type' => 'required|',
+            'question' => 'required|',
+            'difficulty' => 'required|numeric|min:1|max:3',
+            'bonus_radio' => 'sometimes|nullable|',
+            'answer' => 'sometimes|nullable',
+            'bonus' => 'sometimes',
+            'correct_one_answer' => 'sometimes'
+        ]);
+
+        switch ($data['type']) {
+            case 'open':
+                $data = $request->except([
+                    '_token',
+                    '_method',
+                    'answer',
+                    'bonus_radio',
+                    'open_a_image'
+                ]);
+
+                if (Input::hasFile('image')) {
+                    $oldImage = public_path() . '/images/questions/' . $question->image;
+                    if (File::exists($oldImage)) {
+                        File::delete($oldImage);
+                    }
+                    $qImg = Input::file('image');
+                    $data['image'] = $this->storeImage($qImg, '/images/questions/');
+                    $question->image = $data['image'];
+                    $question->save();
+                }
+                unset($data['image']);
+                $question->bonus = $request->bonus;
+                $question->save();
+                $updQ = $question->fill($data);
+
+                if ($request->answer) {
+                    $data = [];
+                    $data['answer'] = $request->answer;
+                    $data['tests_bank_question_id'] = $updQ->id;
+                    $data['correct'] = 1;
+                    $updA = BankAnswer::find($request->open_answer_id);
+                    if (Input::hasFile('open_a_image')) {
+                        if($updA) {
+                            $oldImage = public_path() . '/images/questions/' . $updA->image;
+                            if (File::exists($oldImage)) {
+                                File::delete($oldImage);
+                            }
+                        }
+                        $aImg = Input::file('open_a_image');
+                        $data['image'] = $this->storeImage($aImg, '/images/questions/');
+                    }
+                    $updA = BankAnswer::updateOrCreate(
+                        ['id' => $request->open_answer_id],
+                        $data
+                    );
+                }else{
+                    $delA = BankAnswer::find($request->open_answer_id);
+                    if($delA) {
+                        $delA->delete();
+                    }
+                }
+                break;
+        }
+
+        $message = __('Успешно редактиран въпрос !');
+        return redirect('test')->with('success', $message);
     }
 
     public function deleteQuestion(BankQuestion $question)

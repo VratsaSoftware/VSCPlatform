@@ -182,7 +182,7 @@
 
                         <div class="col-md-12">
                             <ul class="list-group tests-list">
-                                <li class="list-group-item list-group-item-success add-question">
+                                <li class="list-group-item list-group-item-success add-question" id="add-question-li">
                                     <a href="#modal"><img src="./images/profile/add-icon.png" alt="add">&nbsp;Добави</a>
                                 </li>
                                 <div class="create-question">
@@ -617,7 +617,7 @@
                                                 <div class="col-md-5 text-right">
                                                     <span class="col-md-4"><i class="fas fa-keyboard"></i></span>
                                                     <span class="col-md-4 num-correct">X</span>
-                                                    <span class="col-md-2"><a href="" class="edit-question"><i
+                                                    <span class="col-md-2"><a href="{{route('question.edit',['question' => $question->id])}}" data-route="{{route('update.question',['question' => $question->id])}}" class="edit-question"><i
                                                                     class="fas fa-pencil-alt"></i></a></span>
                                                     <span class="col-md-2">
                                                          <form action="{{ route('delete.question',$question->id) }}"
@@ -681,7 +681,7 @@
                                                             <span class="col-md-4"><i
                                                                         class="far fa-check-square"></i></span>
                                                             <span class="col-md-4 num-correct">{{$question->correctCount}}</span>
-                                                            <span class="col-md-2"><a href="" class="edit-question"><i
+                                                            <span class="col-md-2"><a href="{{route('question.edit',['question' => $question->id])}}" data-route="{{route('update.question',['question' => $question->id])}}" class="edit-question"><i
                                                                             class="fas fa-pencil-alt"></i></a></span>
                                                             <span class="col-md-2">
                                                                 <form action="{{ route('delete.question',$question->id) }}"
@@ -751,8 +751,8 @@
                                                                     <span class="col-md-4"><i
                                                                                 class="far fa-dot-circle"></i></span>
                                                                     <span class="col-md-4 num-correct">1</span>
-                                                                    <span class="col-md-2"><a href=""
-                                                                                              class="edit-question"><i
+                                                                    <span class="col-md-2"><a href="{{route('question.edit',['question' => $question->id])}}"
+                                                                                              data-route="{{route('update.question',['question' => $question->id])}}" class="edit-question"><i
                                                                                     class="fas fa-pencil-alt"></i></a></span>
                                                                     <span class="col-md-2">
                                                                          <form action="{{ route('delete.question',$question->id) }}"
@@ -798,12 +798,25 @@
                             </ul>
                         </div>
                         <div class="col-md-12 text-center back-to-top">
-                            <a href="#dif-wrapper">
+                            <a href="#" id="scroll-to-top">
                                 <button class="btn btn-success top-btn">Начало <i class="fas fa-arrow-up"></i></button>
                             </a>
+                            <script>
+                                $('#scroll-to-top').click(function (e) {
+                                    e.preventDefault();
+                                    $('#banks > #tests-content').scrollTop(0);
+                                });
+                            </script>
                         </div>
                     </div>
                 @endforeach
+                    <div class="no-show editing-form-wrapper">
+                        <form action="" id="editing_form" name="editing_form" action="" method="POST">
+                            {{ method_field('PUT') }}
+                            {{ csrf_field() }}
+
+                        </form>
+                    </div>
             </div>
             <!-- end of test nav -->
 
