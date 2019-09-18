@@ -96,6 +96,7 @@
     @endif
 
     @if($question->type == 'one')
+        <input type="hidden" name="type" value="one">
         <!-- one question box holder -->
         <div class="col-md-12">
             <div class="col-md-12 questions-box q-one">
@@ -124,24 +125,27 @@
                             for="yess-bonus">Бонус</label>
                 </p>
                 <p>отговори:</p>
-                @foreach($question->Answers as $answer)
+                <input type="hidden" name="correct_one_answer" id="correct_one_answer" value="">
+
+            @foreach($question->Answers as $answer)
                     @if($answer->correct > 0)
                         <?php $correct = true; ?>
                     @else
                         <?php $correct = false; ?>
                     @endif
-                <input type="hidden" name="correct_one_answer" id="correct_one_answer" value="{{$correct?$answer->id:null}}">
-                <p class="input-answers {{$correct?'corect-answer':''}}">
+                <p class="input-answers">
+                    <input type="hidden" name="answers_before[]" value="{{ $answer->id }}">
                     снимка:
                     <input type="file" name="open_a_image[]" id="open_a_image"><br/>
                     <input type="hidden" name="image_for_" class="open_a_image_a" value="0">
-                    <a href="" class="icon-click">
+                    <a href="" class="icon-click {{$correct?'click_me corect-answer-one':''}}">
                         <i class="fas fa-check-circle"></i></a>&nbsp;<input type="text"
-                                                                            class="q-one-answer required {{$correct?'corect-answer':''}}"
+                                                                            class="q-one-answer required {{$correct?'corect-answer-one':''}}"
                                                                             name="answers[]" data-q-count="{{$answer->id}}" value="{{$answer->answer}}">
-                    <a href="" class="remove-q modal-remove-q" style="margin-left:51.5%"><i class="fas fa-times"></i></a>
+                    <a href="" class="remove-q" style="margin-left:51.5%"><i class="fas fa-times"></i></a>
                 </p>
                 @endforeach
+
                 <div class="col-md-12 add-answers">
                     <a href="">
                         <img src="{{asset('/images/profile/add-icon.png')}}" alt="add">
@@ -217,13 +221,13 @@
 
                     $('.remove-q').on('click', function (e) {
                         e.preventDefault();
-                        if ($('.copy > p > form > .q-one').find('.input-answers').length > 1) {
+                        if ($('.q-one').find('.input-answers').length > 1) {
                             var correctOne = $(this).parent().parent().find('.input-answers').find("input:text").hasClass("corect-answer-one");
                             if (correctOne) {
                                 $('#correct_one_answer').val($(this).parent().parent().find('.input-answers').find("input:text").attr('data-q-count'));
                             }
                             $(this).parent().remove();
-                            $('.copy > p > form > .q-one').find('.input-answers').each(function (i, obj) {
+                            $('.q-one').find('.input-answers').each(function (i, obj) {
                                 $(this).find(".open_a_image_a").attr('data-q-count', i);
                                 $(this).find("#open_a_image").attr('data-q-count', i);
                                 $(this).find(".q-one-answer").attr('data-q-count', i);
@@ -442,6 +446,9 @@
                 if (isBonus) {
                     $('#yess-bonus').click();
                 }
+
+                $('.click_me').click();
+                $('.click_me').trigger("click");
             });
         </script>
 @endsection

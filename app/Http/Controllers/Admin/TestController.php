@@ -407,10 +407,10 @@ class TestController extends Controller
     {
         $question = BankQuestion::with('Answers')->find($question);
 
-        return view('admin.tests.edit',['question' => $question]);
+        return view('admin.tests.edit', ['question' => $question]);
     }
 
-    public function updateQuestion(Request $request,BankQuestion $question)
+    public function updateQuestion(Request $request, BankQuestion $question)
     {
         $data = $request->validate([
             'type' => 'required|',
@@ -454,7 +454,7 @@ class TestController extends Controller
                     $data['correct'] = 1;
                     $updA = BankAnswer::find($request->open_answer_id);
                     if (Input::hasFile('open_a_image')) {
-                        if($updA) {
+                        if ($updA) {
                             $oldImage = public_path() . '/images/questions/' . $updA->image;
                             if (File::exists($oldImage)) {
                                 File::delete($oldImage);
@@ -467,12 +467,61 @@ class TestController extends Controller
                         ['id' => $request->open_answer_id],
                         $data
                     );
-                }else{
+                } else {
                     $delA = BankAnswer::find($request->open_answer_id);
-                    if($delA) {
+                    if ($delA) {
                         $delA->delete();
                     }
                 }
+                break;
+            case 'one':
+                $valdiate = $request->validate([
+                    'correct_one_answer' => 'required'
+                ]);
+                $correct = (int)$request->correct_one_answer;
+                $data = $request->except([
+                    '_token',
+                    '_method',
+                    'answer',
+                    'bonus_radio',
+                    'open_a_image',
+                    'correct_one_answer',
+                    'answers',
+                    'answers_before'
+                ]);
+                for ($r = 0; $r < count($request->answers); $r++) {
+                    unset($data['image_for_' . $r]);
+                    unset($data['image_for_']);
+                }
+                if (Input::hasFile('image')) {
+                    $oldImage = public_path() . '/images/questions/' . $question->image;
+                    if (File::exists($oldImage)) {
+                        File::delete($oldImage);
+                    }
+                    $qImg = Input::file('image');
+                    $data['image'] = $this->storeImage($qImg, '/images/questions/');
+                }
+                $question->fill($data);
+                $extra = BankAnswer::whereNotIn('id',$request->answers_before)->where('tests_bank_question_id', $question->id)->get();
+                foreach($extra as $forDel){
+                    $forDel->delete();
+                }
+                foreach ($request->answers as $answer) {
+                        $updA = BankAnswer::updateOrCreate(
+                            ['answer' => $answer,'tests_bank_question_id' => $question->id]
+                        );
+                }
+                $unCorrect = BankAnswer::where([
+                        ['tests_bank_question_id', $question->id],
+                        ['correct', '>', 0]
+                    ]
+                )->first();
+                $unCorrect->correct = 0;
+                $unCorrect->save();
+                $correctA = BankAnswer::find($correct);
+                $correctA->correct = 1;
+                $correctA->save();
+
                 break;
         }
 
