@@ -395,12 +395,16 @@
                                             $('.remove-q').on('click', function (e) {
                                                 e.preventDefault();
                                                 if ($('.copy > p > form > .q-one').find('.input-answers').length > 1) {
-                                                    var correctOne = $(this).parent().parent().find('.input-answers').find("input:text").hasClass("corect-answer-one");
-                                                    if(correctOne) {
-                                                        $('#correct_one_answer').val($(this).parent().parent().find('.input-answers').find("input:text").attr('data-q-count'));
-                                                    }
+                                                    // var correctOne = $(this).parent().parent().find('.input-answers').find("input:text").hasClass("corect-answer-one");
+                                                    // if(correctOne) {
+                                                    //     $('#correct_one_answer').val($(this).parent().parent().find('.input-answers').find("input:text").attr('data-q-count'));
+                                                    // }
                                                     $(this).parent().remove();
                                                     $('.copy > p > form > .q-one').find('.input-answers').each(function(i, obj) {
+                                                            var correctOne = $(this).find(".corect-answer-one");
+                                                            if (correctOne) {
+                                                                $('#correct_one_answer').val(i);
+                                                            }
                                                             $(this).find(".open_a_image_a").attr('data-q-count', i);
                                                             $(this).find("#open_a_image").attr('data-q-count', i);
                                                             $(this).find(".q-one-answer").attr('data-q-count', i );
@@ -532,21 +536,23 @@
                                                         $(this).find("#many_a_image").attr('data-q-count', i);
                                                         $(this).find(".q-many-answer").attr('data-q-count', i );
                                                     });
-                                                    var correctOnes = $(this).parent().parent().find('.input-answers').find("input:text").hasClass("corect-answer-one");
-                                                    if(correctOnes) {
-                                                        $('#correct_many_answer').val();
-                                                    }
 
                                                     $(this).parent().remove();
                                                     $('.copy > p > form > .q-many').find('.input-answers').each(function(i, obj) {
                                                         $(this).find(".many_a_image_a").attr('data-q-count', i);
                                                         $(this).find("#many_a_image").attr('data-q-count', i);
                                                         $(this).find(".q-many-answer").attr('data-q-count', i );
-                                                        if($(this).find(".q-many-answer").hasClass("corect-answer-one")){
-                                                            $('#correct_many_answer').val(','+$(this).find(".q-many-answer").attr('data-q-count')+',');
-                                                        }
-                                                        console.log($('#correct_many_answer').val());
                                                     });
+                                                    var removedCorrect = $('#correct_many_answer').val().split(",");
+                                                    var nextNum = parseInt($(this).prev('.q-many-answer').attr('data-q-count'));
+                                                    var added = ',';
+                                                    $.each(removedCorrect,function(i){
+                                                        var checkNum = parseInt(removedCorrect[i]);
+                                                        if(checkNum !== nextNum && removedCorrect[i] !== ''){
+                                                            added += removedCorrect[i]+',';
+                                                        }
+                                                    });
+                                                    $('#correct_many_answer').val(added);
                                                     var numAnswers = ($('.copy > p > form > .q-many > .input-answers').find('.corect-answer-one').length / 2);
 
                                                     $('.q-many > .add-answers-many > span').html(numAnswers + '/' + maxAnswers);
@@ -571,13 +577,15 @@
                                                     var maxAnswers = ($('.copy > p > form > .q-many > .input-answers').length);
                                                     var removedCorrect = $('#correct_many_answer').val().split(",");
                                                     var nextNum = parseInt($(this).next('.q-many-answer').attr('data-q-count'));
+                                                    var added = ',';
                                                     $.each(removedCorrect,function(i){
                                                         var checkNum = parseInt(removedCorrect[i]);
-                                                        if(checkNum !== nextNum){
-                                                            $('#correct_many_answer').val(removedCorrect[i]);
+                                                        if(checkNum !== nextNum && removedCorrect[i] !== ''){
+                                                            added += removedCorrect[i]+',';
                                                         }
                                                     });
-                                                    console.log($('#correct_many_answer').val());
+                                                    $('#correct_many_answer').val(added);
+
                                                     $('.q-many > .add-answers-many > span').html(numAnswers + '/' + maxAnswers);
                                                 }
                                             });

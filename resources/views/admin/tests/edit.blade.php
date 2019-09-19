@@ -109,7 +109,8 @@
                     <input type="file" name="image"><br/>
                     въпрос:
                     <i class="fa fa-asterisk" style="font-size: 0.75em; color: #f00;"></i><br/>
-                    <textarea name="question" id="q-one" cols="30" rows="5" class="required">{{$question->question}}</textarea>
+                    <textarea name="question" id="q-one" cols="30" rows="5"
+                              class="required">{{$question->question}}</textarea>
                     <br>
                     <i class="fa fa-asterisk" style="font-size: 0.75em; color: #f00;"></i>
                     <select name="difficulty" class="required">
@@ -118,39 +119,45 @@
                         <option value="2" {{$question->difficulty == '2'?'selected':''}}>нормален</option>
                         <option value="3" {{$question->difficulty == '3'?'selected':''}}>труден</option>
                     </select>&nbsp;&nbsp;
-                    <input type="radio" name="bonus_radio" value="0" id="no-bonus" {{is_null($question->bonus)?'checked':''}}>
+                    <input type="radio" name="bonus_radio" value="0"
+                           id="no-bonus" {{is_null($question->bonus)?'checked':''}}>
                     <label
                             for="no-bonus">Без Бонус</label>&nbsp;&nbsp;
-                    <input type="radio" name="bonus_radio" value="1" id="yess-bonus" {{$question->bonus}}" {{is_null($question->bonus)?'':'checked'}}> <label
+                    <input type="radio" name="bonus_radio" value="1" id="yess-bonus"
+                           data-bonus="{{$question->bonus}}" {{is_null($question->bonus)?'':'checked'}}> <label
                             for="yess-bonus">Бонус</label>
                 </p>
                 <p>отговори:</p>
                 <input type="hidden" name="correct_one_answer" id="correct_one_answer" value="">
 
-            @foreach($question->Answers as $answer)
+                @foreach($question->Answers as $num => $answer)
                     @if($answer->correct > 0)
                         <?php $correct = true; ?>
                     @else
                         <?php $correct = false; ?>
                     @endif
-                <p class="input-answers">
-                    <input type="hidden" name="answers_before[]" value="{{ $answer->id }}">
-                    снимка:
-                    <input type="file" name="open_a_image[]" id="open_a_image"><br/>
-                    <input type="hidden" name="image_for_" class="open_a_image_a" value="0">
-                    <a href="" class="icon-click {{$correct?'click_me corect-answer-one':''}}">
-                        <i class="fas fa-check-circle"></i></a>&nbsp;<input type="text"
-                                                                            class="q-one-answer required {{$correct?'corect-answer-one':''}}"
-                                                                            name="answers[]" data-q-count="{{$answer->id}}" value="{{$answer->answer}}">
-                    <a href="" class="remove-q" style="margin-left:51.5%"><i class="fas fa-times"></i></a>
-                </p>
+                    <p class="input-answers">
+                        снимка:
+                        @if(!is_null($answer->image))
+                            <img src="{{asset('images/questions/'.$answer->image)}}" alt="edit-img-q" class="q_image"
+                                 width="20%">
+                            <input type="hidden" name="old_image_{{$num}}" class="old_image" value="{{$answer->image}}">
+                        @endif
+                        <input type="file" name="open_a_image[]" class="open_a_image"><br/>
+                        <input type="hidden" name="image_for_" class="open_a_image_a" value="0">
+                        <a href="" class="icon-click {{$correct?'click_me corect-answer-one':''}}">
+                            <i class="fas fa-check-circle"></i></a>&nbsp;<input type="text"
+                                                                                class="q-one-answer required {{$correct?'corect-answer-one':''}}"
+                                                                                name="answers[]" data-q-count="{{$num}}"
+                                                                                value="{{$answer->answer}}">
+                        <a href="" class="remove-q" style="margin-left:51.5%"><i class="fas fa-times"></i></a>
+                    </p>
                 @endforeach
 
                 <div class="col-md-12 add-answers">
                     <a href="">
                         <img src="{{asset('/images/profile/add-icon.png')}}" alt="add">
                     </a>
-                    <span></span>
                 </div>
                 <script>
                     var addedThropy = false;
@@ -158,7 +165,7 @@
                     $('#yess-bonus').on('click', function () {
                         if (!addedThropy) {
                             $('.copy > p > form > div:nth-child(1)').append('<i class="fas fa-trophy"></i>');
-                            $(this).next('label').after('&nbsp;&nbsp;<input type="number" name="bonus" class="bonus-points">');
+                            $(this).next('label').after('&nbsp;&nbsp;<input type="number" name="bonus" class="bonus-points" value="'+$(this).attr('data-bonus')+'">');
                             addedThropy = true;
                         }
                     });
@@ -171,7 +178,7 @@
                         }
                     });
 
-                    $('#open_a_image').change(function () {
+                    $('.open_a_image').change(function () {
                         var fileName = $(this).val().replace(/C:\\fakepath\\/i, '');
                         fileName = fileName.replace(/\s/g, '');
                         $(this).parent().find('.open_a_image_a').val(fileName);
@@ -182,10 +189,11 @@
                     $('.add-answers > a').on('click', function (e) {
                         e.preventDefault();
 
-                        var addAnswer = $('.copy > p > form > .q-one >  .input-answers').last().clone(true);
+                        var addAnswer = $('.input-answers').last().clone(true);
                         //numbering inputs so after that will append input with correct answer number of input
                         var currentNum = parseInt(addAnswer.find('.q-one-answer').attr('data-q-count'));
-                        addAnswer.find('#open_a_image').val(null);
+                        addAnswer.find('.q_image').remove();
+                        addAnswer.find('.open_a_image').val(null);
                         addAnswer.find('input').attr('data-q-count', currentNum + 1);
                         // if cloning correct answer box remove the class
                         if (addAnswer.find('a').hasClass('corect-answer-one')) {
@@ -222,15 +230,16 @@
                     $('.remove-q').on('click', function (e) {
                         e.preventDefault();
                         if ($('.q-one').find('.input-answers').length > 1) {
-                            var correctOne = $(this).parent().parent().find('.input-answers').find("input:text").hasClass("corect-answer-one");
-                            if (correctOne) {
-                                $('#correct_one_answer').val($(this).parent().parent().find('.input-answers').find("input:text").attr('data-q-count'));
-                            }
                             $(this).parent().remove();
                             $('.q-one').find('.input-answers').each(function (i, obj) {
+                                var correctOne = $(this).find(".corect-answer-one");
+                                if (correctOne) {
+                                    $('#correct_one_answer').val(i);
+                                }
                                 $(this).find(".open_a_image_a").attr('data-q-count', i);
                                 $(this).find("#open_a_image").attr('data-q-count', i);
                                 $(this).find(".q-one-answer").attr('data-q-count', i);
+                                $(this).find('.old_image').attr('name', 'old_image_' + i);
                             });
 
                             var numAnswers = ($('.copy > p > form > .q-one').find('.input-answers').length);
@@ -248,41 +257,61 @@
     @endif
 
     @if($question->type == 'many')
+        <input type="hidden" name="type" value="many">
         <!-- many question box holder -->
-        <div class="col-md-12 q-many-wrap">
+        <div class="col-md-12">
             <div class="col-md-12 questions-box q-many">
                 <p>снимка:
+                    @if(!is_null($question->image))
+                        <img src="{{asset('images/questions/'.$question->image)}}" alt="edit-img-q" class="q_image"
+                             width="20%">
+                    @endif
                     <input type="file" name="image"><br/>
                     въпрос: <i class="fa fa-asterisk" style="font-size: 0.75em; color: #f00;"></i><br>
-                    <textarea name="question" id="question" cols="30" rows="5" class="required"></textarea>
+                    <textarea name="question" id="question" cols="30" rows="5" class="required">{{$question->question}}</textarea>
                     <br>
                     <i class="fa fa-asterisk" style="font-size: 0.75em; color: #f00;"></i>
                     <select name="difficulty" class="required">
                         <option disabled selected value="0">Трудност</option>
-                        <option value="1">лесен</option>
-                        <option value="2">нормален</option>
-                        <option value="3">труден</option>
+                        <option value="1" {{$question->difficulty == '1'?'selected':''}}>лесен</option>
+                        <option value="2" {{$question->difficulty == '2'?'selected':''}}>нормален</option>
+                        <option value="3" {{$question->difficulty == '3'?'selected':''}}>труден</option>
                     </select>&nbsp;&nbsp;
-                    <input type="radio" name="bonus_radio" value="0" id="no-bonus" checked>
+                    <input type="radio" name="bonus_radio" value="0"
+                           id="no-bonus" {{is_null($question->bonus)?'checked':''}}>
                     <label
                             for="no-bonus">Без Бонус</label>&nbsp;&nbsp;
-                    <input type="radio" name="bonus_radio" value="1" id="yess-bonus"> <label
+                    <input type="radio" name="bonus_radio" value="1" id="yess-bonus"
+                           data-bonus="{{$question->bonus}}" {{is_null($question->bonus)?'':'checked'}}> <label
                             for="yess-bonus">Бонус</label>
                 </p>
                 <p>отговори:</p>
                 <input type="hidden" name="correct_many_answer" id="correct_many_answer">
-                <p class="input-answers">
-                    снимка:
-                    <input type="file" name="many_a_image[]" id="many_a_image"><br/>
-                    <input type="hidden" name="image_for_" class="many_a_image_a" value="0">
-                    <a href="" class="icon-click-many">
-                        <i class="fas fa-check-circle"></i>
-                    </a>&nbsp;
-                    <input type="text" class="q-many-answer" name="answers[]" data-q-count=0 style="width:90%">
-                    <a href="" class="remove-q">
-                        <i class="fas fa-times"></i>
-                    </a>
-                </p>
+                @foreach($question->Answers as $num => $answer)
+                    @if($answer->correct > 0)
+                        <?php $correct = true; ?>
+                    @else
+                        <?php $correct = false; ?>
+                    @endif
+                    <p class="input-answers">
+                        снимка:
+                        @if(!is_null($answer->image))
+                            <img src="{{asset('images/questions/'.$answer->image)}}" alt="edit-img-q" class="q_image"
+                                 width="20%">
+                            <input type="hidden" name="old_image_{{$num}}" class="old_image" value="{{$answer->image}}">
+                        @endif
+                        <input type="file" name="many_a_image[]" class="many_a_image"><br/>
+                        <input type="hidden" name="image_for_" class="many_a_image_a" value="0">
+                        <a href="" class="icon-click-many {{$correct?'click_me corect-answer-one':''}}">
+                            <i class="fas fa-check-circle"></i>
+                        </a>&nbsp;
+                        <input type="text" class="q-many-answer {{$correct?'corect-answer-one':''}}" name="answers[]" data-q-count="{{$num}}"
+                               value="{{$answer->answer}}" style="width:90%">
+                        <a href="" class="remove-q">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </p>
+                @endforeach
                 <div class="col-md-12 add-answers-many">
                     <a href="">
                         <img src="{{asset('/images/profile/add-icon.png')}}" alt="add">
@@ -295,7 +324,7 @@
                     $('#yess-bonus').on('click', function () {
                         if (!addedThropyMany) {
                             $('.copy > p > form > div:nth-child(1)').append('<i class="fas fa-trophy"></i>');
-                            $(this).next('label').after('&nbsp;&nbsp;<input type="number" name="bonus" class="bonus-points">');
+                            $(this).next('label').after('&nbsp;&nbsp;<input type="number" name="bonus" class="bonus-points" value="'+$(this).attr('data-bonus')+'">');
                             addedThropyMany = true;
                         }
                     });
@@ -308,7 +337,7 @@
                         }
                     });
 
-                    $('#many_a_image').change(function () {
+                    $('.many_a_image').change(function () {
                         var fileName = $(this).val().replace(/C:\\fakepath\\/i, '');
                         fileName = fileName.replace(/\s/g, '');
                         $(this).parent().find('.many_a_image_a').val(fileName);
@@ -319,7 +348,7 @@
                     $('.add-answers-many > a').on('click', function (e) {
                         e.preventDefault();
 
-                        var addAnswer = $('.copy > p > form > .q-many > .input-answers').last().clone(true);
+                        var addAnswer = $('.q-many > .input-answers').last().clone(true);
                         //numbering inputs so after that will append input with correct answer number of input
                         var currentNum = parseInt(addAnswer.find('.q-many-answer').attr('data-q-count'));
                         addAnswer.find('#many_a_image').val(null);
@@ -332,8 +361,8 @@
                         }
 
                         $('.q-many > .add-answers-many').prev('.input-answers').after(addAnswer);
-                        var numAnswers = ($('.copy > p > form > .q-many > .input-answers').find('.corect-answer-one').length / 2);
-                        var maxAnswers = ($('.copy > p > form > .q-many > .input-answers').length);
+                        var numAnswers = ($('.q-many > .input-answers').find('.corect-answer-one').length / 2);
+                        var maxAnswers = ($('.q-many > .input-answers').length);
 
 
                         $('.q-many > .add-answers-many > span').html(numAnswers + '/' + maxAnswers);
@@ -342,9 +371,9 @@
 
                     $('.remove-q').on('click', function (e) {
                         e.preventDefault();
-                        if ($('.copy > p > form > .q-many').find('.input-answers').length > 1) {
+                        if ($('.q-many').find('.input-answers').length > 1) {
 
-                            var maxAnswers = ($('.copy > p > form > .q-many >.input-answers').length);
+                            var maxAnswers = ($('.q-many >.input-answers').length);
                             if (maxAnswers > 0) {
                                 maxAnswers -= 1;
                             }
@@ -360,23 +389,26 @@
                                 $(this).find(".many_a_image_a").attr('data-q-count', i);
                                 $(this).find("#many_a_image").attr('data-q-count', i);
                                 $(this).find(".q-many-answer").attr('data-q-count', i);
+                                $(this).find('.old_image').attr('name', 'old_image_' + i);
                             });
-                            var correctOnes = $(this).parent().parent().find('.input-answers').find("input:text").hasClass("corect-answer-one");
-                            if (correctOnes) {
-                                $('#correct_many_answer').val();
-                            }
 
                             $(this).parent().remove();
-                            $('.copy > p > form > .q-many').find('.input-answers').each(function (i, obj) {
+                            $('.q-many').find('.input-answers').each(function (i, obj) {
                                 $(this).find(".many_a_image_a").attr('data-q-count', i);
                                 $(this).find("#many_a_image").attr('data-q-count', i);
                                 $(this).find(".q-many-answer").attr('data-q-count', i);
-                                if ($(this).find(".q-many-answer").hasClass("corect-answer-one")) {
-                                    $('#correct_many_answer').val(',' + $(this).find(".q-many-answer").attr('data-q-count') + ',');
-                                }
-                                console.log($('#correct_many_answer').val());
                             });
-                            var numAnswers = ($('.copy > p > form > .q-many > .input-answers').find('.corect-answer-one').length / 2);
+                            var removedCorrect = $('#correct_many_answer').val().split(",");
+                            var nextNum = parseInt($(this).prev('.q-many-answer').attr('data-q-count'));
+                            var added = ',';
+                            $.each(removedCorrect,function(i){
+                                var checkNum = parseInt(removedCorrect[i]);
+                                if(checkNum !== nextNum && removedCorrect[i] !== ''){
+                                    added += removedCorrect[i]+',';
+                                }
+                            });
+                            $('#correct_many_answer').val(added);
+                            var numAnswers = ($('.q-many > .input-answers').find('.corect-answer-one').length / 2);
 
                             $('.q-many > .add-answers-many > span').html(numAnswers + '/' + maxAnswers);
                         }
@@ -389,30 +421,31 @@
                             $(this).next('.q-many-answer').addClass('corect-answer-one');
                             $('#correct_many_answer').val($('#correct_many_answer').val() + ',' + $(this).next('.q-many-answer').attr('data-q-count'));
 
-                            var numAnswers = (($('.copy > p > form > .q-many > .input-answers').find('.corect-answer-one').length / 2) - 1);
-                            var maxAnswers = ($('.copy > p > form > .q-many > .input-answers').length);
+                            var numAnswers = (($('.q-many > .input-answers').find('.corect-answer-one').length / 2) - 1);
+                            var maxAnswers = ($('.q-many > .input-answers').length);
                             numAnswers += 1;
                             $('.q-many > .add-answers-many > span').html(numAnswers + '/' + maxAnswers);
                         } else {
                             $(this).removeClass('corect-answer-one');
                             $(this).next('.q-many-answer').removeClass('corect-answer-one');
-                            var numAnswers = (($('.copy > p > form > .q-many > .input-answers').find('.corect-answer-one').length / 2));
-                            var maxAnswers = ($('.copy > p > form > .q-many > .input-answers').length);
+                            var numAnswers = (($('.q-many > .input-answers').find('.corect-answer-one').length / 2));
+                            var maxAnswers = ($('.q-many > .input-answers').length);
                             var removedCorrect = $('#correct_many_answer').val().split(",");
                             var nextNum = parseInt($(this).next('.q-many-answer').attr('data-q-count'));
-                            $.each(removedCorrect, function (i) {
+                            var added = ',';
+                            $.each(removedCorrect,function(i){
                                 var checkNum = parseInt(removedCorrect[i]);
-                                if (checkNum !== nextNum) {
-                                    $('#correct_many_answer').val(removedCorrect[i]);
+                                if(checkNum !== nextNum && removedCorrect[i] !== ''){
+                                    added += removedCorrect[i]+',';
                                 }
                             });
-                            console.log($('#correct_many_answer').val());
+                            $('#correct_many_answer').val(added);
                             $('.q-many > .add-answers-many > span').html(numAnswers + '/' + maxAnswers);
                         }
                     });
                 </script>
                 <div class="col-md-12 text-center create-q-btn">
-                    <button type="submit" class="btn btn-success" style="float:none">Създай</button>
+                    <button type="submit" class="btn btn-success" style="float:none">Редактирай</button>
                 </div>
             </div>
             </form>
@@ -449,6 +482,11 @@
 
                 $('.click_me').click();
                 $('.click_me').trigger("click");
+                var numAnswers = ($('.q-many > .input-answers').find('.corect-answer-one').length / 2);
+                var maxAnswers = ($('.q-many > .input-answers').length);
+
+
+                $('.q-many > .add-answers-many > span').html(numAnswers + '/' + maxAnswers);
             });
         </script>
 @endsection

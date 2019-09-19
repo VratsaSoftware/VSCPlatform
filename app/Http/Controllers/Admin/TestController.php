@@ -397,6 +397,7 @@ class TestController extends Controller
                 }
 
                 break;
+
         }
 
         $message = __('Успешно добавен въпрос !');
@@ -500,29 +501,102 @@ class TestController extends Controller
                     }
                     $qImg = Input::file('image');
                     $data['image'] = $this->storeImage($qImg, '/images/questions/');
+                    $question->image = $data['image'];
+                    $question->save();
+                    unset($data['image']);
                 }
+                $question->bonus = $request->bonus;
+                $question->save();
                 $question->fill($data);
-                $extra = BankAnswer::whereNotIn('id',$request->answers_before)->where('tests_bank_question_id', $question->id)->get();
-                foreach($extra as $forDel){
-                    $forDel->delete();
-                }
-                foreach ($request->answers as $answer) {
-                        $updA = BankAnswer::updateOrCreate(
-                            ['answer' => $answer,'tests_bank_question_id' => $question->id]
-                        );
-                }
-                $unCorrect = BankAnswer::where([
-                        ['tests_bank_question_id', $question->id],
-                        ['correct', '>', 0]
-                    ]
-                )->first();
-                $unCorrect->correct = 0;
-                $unCorrect->save();
-                $correctA = BankAnswer::find($correct);
-                $correctA->correct = 1;
-                $correctA->save();
+                $clearA = BankAnswer::where('tests_bank_question_id',$question->id)->delete();
+                foreach ($request->answers as $num => $answer) {
+                    $data = [];
+                    $data['tests_bank_question_id'] = $question->id;
+                    $data['answer'] = $answer;
+                    $data['correct'] = 0;
+                    if ($num == $correct) {
+                        $data['correct'] = 1;
+                    }
 
+                    if (isset($request->open_a_image) && array_key_exists('image_for_' . $num, $request->all())) {
+                        if (array_key_exists('image_for_' . $num, $request->all())) {
+                            foreach (Input::file('open_a_image') as $numImg => $file) {
+                                $fileName = str_replace(' ', '', $file->getClientOriginalName());
+                                $checkNames = $request->all();
+                                $checkNames['image_for_' . $num];
+                                if ($checkNames['image_for_' . $num] == $fileName && !is_null($checkNames['image_for_' . $num])) {
+                                    $data['image'] = $this->storeImage($file, '/images/questions/');
+                                }
+                            }
+                        }
+                    }else {
+                        if (array_key_exists('old_image_' . $num, $request->all())) {
+                            $oldImages = $request->all();
+                            $data['image'] = $oldImages['old_image_' . $num];
+                        }
+                    }
+                    $newA = BankAnswer::create($data);
+                }
                 break;
+            case 'many':
+                $valdiate = $request->validate([
+                    'correct_many_answer' => 'required'
+                ]);
+                $correctArr = explode(',', $request->correct_many_answer);
+                $correctArrNoEmpty = array_filter($correctArr, 'strlen');
+                $correct = array_map('intval', $correctArrNoEmpty);
+
+                $data = $request->except([
+                    '_token',
+                    '_method',
+                    'answer',
+                    'bonus_radio',
+                    'many_a_image',
+                    'correct_many_answer',
+                    'answers'
+                ]);
+                for ($r = 0; $r < count($request->answers); $r++) {
+                    unset($data['image_for_' . $r]);
+                    unset($data['image_for_']);
+                }
+                if (Input::hasFile('image')) {
+                    $qImg = Input::file('image');
+                    $data['image'] = $this->storeImage($qImg, '/images/questions/');
+                    $question->image = $data['image'];
+                    unset($data['image']);
+                }
+                $question->bonus = $request->bonus;
+                $question->save();
+                $newQ = $question->fill($data);
+                $deleteOld = BankAnswer::where('tests_bank_question_id',$question->id)->delete();
+                foreach ($request->answers as $num => $answer) {
+                    $data = [];
+                    $data['tests_bank_question_id'] = $newQ->id;
+                    $data['answer'] = $answer;
+                    $data['correct'] = 0;
+
+                    if (in_array((int)$num, $correct)) {
+                        $data['correct'] = 1;
+                    }
+
+                    if (array_key_exists('image_for_' . $num, $request->all())) {
+                            foreach (Input::file('many_a_image') as $numImg => $file) {
+                                $fileName = str_replace(' ', '', $file->getClientOriginalName());
+                                $checkNames = $request->all();
+                                $checkNames['image_for_' . $num];
+                                if ($checkNames['image_for_' . $num] == $fileName) {
+                                    $data['image'] = $this->storeImage($file, '/images/questions/');
+                                }
+                            }
+                    }else {
+                        if (array_key_exists('old_image_' . $num, $request->all())) {
+                            $oldImages = $request->all();
+                            $data['image'] = $oldImages['old_image_' . $num];
+                        }
+                    }
+
+                    $newA[] = BankAnswer::create($data);
+                }
         }
 
         $message = __('Успешно редактиран въпрос !');
