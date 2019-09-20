@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Events;
 
+use App\Models\Events\ExtraForm;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Events\Event;
@@ -36,16 +37,17 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::with('Teams', 'Teams.Members', 'Teams.Members.User', 'Teams.Members.User.Occupation', 'Teams.Members.Role', 'Teams.Category')->where([
+        $events = Event::with('Teams', 'Teams.Members', 'Teams.Members.User', 'Teams.Members.User.Occupation',
+            'Teams.Members.Role', 'Teams.Category')->where([
             ['to', '>', Carbon::now()->format('Y-m-d H:m:s')],
-            ['visibility','!=','draft'],
-            ])->get();
+            ['visibility', '!=', 'draft'],
+        ])->get();
         $pastEvents = Event::with('Teams', 'Teams.Members', 'Teams.Category')->where([
             ['to', '<', Carbon::now()->format('Y-m-d H:m:s')],
-            ['visibility','!=','draft'],
+            ['visibility', '!=', 'draft'],
         ])->get();
 
-        return view('layouts.events', ['events' => $events,'pastEvents' => $pastEvents]);
+        return view('layouts.events', ['events' => $events, 'pastEvents' => $pastEvents]);
     }
 
     /**
@@ -61,7 +63,7 @@ class EventController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -69,18 +71,18 @@ class EventController extends Controller
         $request->min_team = (int)$request->min_team;
         $request->max_team = (int)$request->max_team;
         $request['valid_visibility'] = \Config::get('courseVisibility');
-        $request['valid_type'] = ['is_team','is_module'];
+        $request['valid_type'] = ['is_team', 'is_module'];
         $data = $request->validate([
             'picture' => 'required|file|image|mimes:jpeg,png,gif,webp,ico,jpg|max:4000',
             'name' => 'required',
-            'rules'=> 'sometimes',
+            'rules' => 'sometimes',
             'description' => 'required',
             'starts' => 'required|date_format:"Y-m-d\TH:i"',
             'ends' => 'required|date_format:"Y-m-d\TH:i"|after:starts',
             'type' => 'required|in_array:valid_type.*',
             'visibility' => 'required|in_array:valid_visibility.*',
             'min_team' => 'sometimes|required|numeric|min:1|max:99',
-            'max_team' => 'sometimes|required|numeric|min:'.$request->min_team.'|max:99',
+            'max_team' => 'sometimes|required|numeric|min:' . $request->min_team . '|max:99',
         ]);
 
         $eventPic = Input::file('picture');
@@ -88,15 +90,15 @@ class EventController extends Controller
         $image->fit(800, 600, function ($constraint) {
             $constraint->upsize();
         });
-        $name = time()."_".$eventPic->getClientOriginalName();
+        $name = time() . "_" . $eventPic->getClientOriginalName();
         $name = str_replace(' ', '', strtolower($name));
         $name = md5($name);
-        $path = public_path().'/images/events';
+        $path = public_path() . '/images/events';
 
         if ($eventPic->getClientOriginalExtension() == 'gif') {
-            copy($eventPic->getRealPath(), public_path().'/images/events');
+            copy($eventPic->getRealPath(), public_path() . '/images/events');
         } else {
-            $image->save(public_path().'/images/events/'.$name, 90);
+            $image->save(public_path() . '/images/events/' . $name, 90);
         }
 
         $newEvent = new Event;
@@ -117,16 +119,19 @@ class EventController extends Controller
             $newEvent->is_module = '1';
         }
         $newEvent->visibility = $request->visibility;
+        if ($request->event_type) {
+            $newEvent->type = $request->event_type;
+        }
         $newEvent->save();
 
-        $message = __('Успешно създадено събитие '.ucfirst($data['name']).'!');
+        $message = __('Успешно създадено събитие ' . ucfirst($data['name']) . '!');
         return redirect()->route('admin.events')->with('success', $message);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -137,7 +142,7 @@ class EventController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -148,8 +153,8 @@ class EventController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -158,37 +163,37 @@ class EventController extends Controller
         $request->max_team = (int)$request->max_team;
         $event = Event::find($id);
         $request['valid_visibility'] = \Config::get('courseVisibility');
-        $request['valid_type'] = ['is_team','is_module'];
+        $request['valid_type'] = ['is_team', 'is_module'];
         $data = $request->validate([
             'picture' => 'file|image|mimes:jpeg,png,gif,webp,ico,jpg|max:4000',
             'name' => 'required',
-            'rules'=> 'sometimes',
+            'rules' => 'sometimes',
             'description' => 'required',
             'starts' => 'required|date_format:"Y-m-d\TH:i"',
             'ends' => 'required|date_format:"Y-m-d\TH:i"|after:starts',
             'type' => 'required|in_array:valid_type.*',
             'visibility' => 'required|in_array:valid_visibility.*',
             'min_team' => 'numeric|min:1|max:99',
-            'max_team' => 'numeric|min:'.$request->min_team.'|max:99',
+            'max_team' => 'numeric|min:' . $request->min_team . '|max:99',
         ]);
 
         if (Input::file('picture')) {
-            $eventPicRemove = public_path().'/images/events/'.$event->picture;
+            $eventPicRemove = public_path() . '/images/events/' . $event->picture;
             File::delete($eventPicRemove);
             $eventPic = Input::file('picture');
             $image = Image::make($eventPic->getRealPath());
             $image->fit(800, 600, function ($constraint) {
                 $constraint->upsize();
             });
-            $name = time()."_".$eventPic->getClientOriginalName();
+            $name = time() . "_" . $eventPic->getClientOriginalName();
             $name = str_replace(' ', '', strtolower($name));
             $name = md5($name);
-            $path = public_path().'/images/events';
+            $path = public_path() . '/images/events';
 
             if ($eventPic->getClientOriginalExtension() == 'gif') {
-                copy($eventPic->getRealPath(), public_path().'/images/events');
+                copy($eventPic->getRealPath(), public_path() . '/images/events');
             } else {
-                $image->save(public_path().'/images/events/'.$name, 90);
+                $image->save(public_path() . '/images/events/' . $name, 90);
             }
             $event->picture = $name;
         }
@@ -209,23 +214,26 @@ class EventController extends Controller
             $event->is_module = '1';
         }
         $event->visibility = $request->visibility;
+        if ($request->event_type) {
+            $event->type = $request->event_type;
+        }
         $event->save();
 
-        $message = __('Успешно направени промени по събитие '.ucfirst($data['name']).'!');
+        $message = __('Успешно направени промени по събитие ' . ucfirst($data['name']) . '!');
         return redirect()->route('admin.events')->with('success', $message);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $deleteEvent = Event::find($id);
         if (!is_null($deleteEvent->picture)) {
-            $eventPic = public_path().'/images/events/'.$deleteEvent->picture;
+            $eventPic = public_path() . '/images/events/' . $deleteEvent->picture;
             File::delete($eventPic);
         }
         $deleteEvent->delete();
@@ -242,7 +250,14 @@ class EventController extends Controller
             $user = User::find(Auth::user()->id);
             $occupations = Occupation::all();
             $sizes = ShirtSize::all();
-            return view('events.teams-register', ['event' => $event,'categories' => $teamCategories,'stacks' => $stacks, 'user' => $user,'occupations' => $occupations,'sizes' => $sizes]);
+            return view('events.teams-register', [
+                'event' => $event,
+                'categories' => $teamCategories,
+                'stacks' => $stacks,
+                'user' => $user,
+                'occupations' => $occupations,
+                'sizes' => $sizes
+            ]);
         }
         $message = __('Вече сте записан за това събитие!');
         return redirect()->back()->with('error', $message);
@@ -271,14 +286,14 @@ class EventController extends Controller
         $image->fit(1024, 768, function ($constraint) {
             $constraint->upsize();
         });
-        $picName = time()."_".$teamPic->getClientOriginalName();
+        $picName = time() . "_" . $teamPic->getClientOriginalName();
         $picName = str_replace(' ', '', strtolower($picName));
         $picName = md5($picName);
 
         if ($teamPic->getClientOriginalExtension() == 'gif') {
-            copy($coursePic->getRealPath(), public_path().'/images/events/teams/'.$picName);
+            copy($coursePic->getRealPath(), public_path() . '/images/events/teams/' . $picName);
         } else {
-            $image->save(public_path().'/images/events/teams/'.$picName, 90);
+            $image->save(public_path() . '/images/events/teams/' . $picName, 90);
         }
 
         $denyInvites = TeamMember::where('user_id', Auth::user()->id)->orWhere('email', Auth::user()->email)->first();
@@ -299,7 +314,7 @@ class EventController extends Controller
         $hackTeam->category = $hackCategory;
         $hackTeam->technologies = $hackStack;
         $hackTeam->team_moto = $request->slogan;
-        $hackTeam->inspiration = isset($request->inspiration)?$request->inspiration:' ';
+        $hackTeam->inspiration = isset($request->inspiration) ? $request->inspiration : ' ';
         $hackTeam->is_confirmed = 0;
         $hackTeam->date_created = Carbon::now();
         $hackTeam->github_account = $request->git;
@@ -312,7 +327,7 @@ class EventController extends Controller
         if (isset($user->dob)) {
             $ageSum = (Carbon::now()->format('Y') - $user->dob->format('Y'));
         }
-        $age = isset($ageSum)?$ageSum:$request->userage;
+        $age = isset($ageSum) ? $ageSum : $request->userage;
         $occupation = Occupation::find($request->occupation);
         $hackOccupation = HackOccupation::firstOrCreate(
             ['occupation' => $occupation->occupation]
@@ -326,7 +341,7 @@ class EventController extends Controller
         $hackMember->first_name = $user->name;
         $hackMember->last_name = $user->last_name;
         $hackMember->email = $user->email;
-        $hackMember->age = isset($request->userage)?$request->userage:$age;
+        $hackMember->age = isset($request->userage) ? $request->userage : $age;
         $hackMember->occupation = $hackOccupation->occupation;
         $hackMember->tshirt = $hackShirtSize->tshirt_size;
         $hackMember->team = $hackTeam->team_id;
@@ -341,7 +356,7 @@ class EventController extends Controller
         $newTeam->slogan = $request->slogan;
         $newTeam->event_team_category_id = $request->team_category;
         $newTeam->technology_stack = $request->technologyStack;
-        $newTeam->inspiration = isset($request->inspiration)?$request->inspiration:' ';
+        $newTeam->inspiration = isset($request->inspiration) ? $request->inspiration : ' ';
         $newTeam->github = $request->git;
         $newTeam->is_active = 0;
         $newTeam->members_count = 1;
@@ -383,21 +398,21 @@ class EventController extends Controller
             }
         }
 
-        $message = __('Успешно създаден Отбор - '.$request->name.'!');
+        $message = __('Успешно създаден Отбор - ' . $request->name . '!');
         return redirect()->route('users.events')->with('success', $message);
     }
 
     public function inviteDeny($team)
     {
         $teamMember = TeamMember::where([
-            ['event_team_id',$team],
+            ['event_team_id', $team],
             ['user_id', Auth::user()->id],
         ])
-        ->orWhere([
-            ['event_team_id',$team],
-            ['email', Auth::user()->email],
-        ])
-        ->first();
+            ->orWhere([
+                ['event_team_id', $team],
+                ['email', Auth::user()->email],
+            ])
+            ->first();
         $teamMember->user_id = Auth::user()->id;
         $teamMember->email = Auth::user()->email;
         $teamMember->confirmed = -1;
@@ -415,21 +430,28 @@ class EventController extends Controller
     {
         $team = Team::with('Members')->find($team);
         $teamMember = TeamMember::where([
-            ['event_team_id',$team->id],
+            ['event_team_id', $team->id],
             ['user_id', Auth::user()->id],
         ])
-        ->orWhere([
-            ['event_team_id',$team->id],
-            ['email', Auth::user()->email],
-        ])
-        ->first();
+            ->orWhere([
+                ['event_team_id', $team->id],
+                ['email', Auth::user()->email],
+            ])
+            ->first();
         $teamMember->user_id = Auth::user()->id;
         $teamMember->save();
         $user = User::find(Auth::user()->id);
         $occupations = Occupation::all();
         $sizes = ShirtSize::all();
 
-        return view('events.team_join', ['teamMember'=>$teamMember->id,'event' => $event, 'team' => $team,'user' => $user,'sizes' => $sizes,'occupations' => $occupations]);
+        return view('events.team_join', [
+            'teamMember' => $teamMember->id,
+            'event' => $event,
+            'team' => $team,
+            'user' => $user,
+            'sizes' => $sizes,
+            'occupations' => $occupations
+        ]);
     }
 
     public function confirmInvite(Request $request, Event $event, Team $team, TeamMember $teamMember)
@@ -472,14 +494,14 @@ class EventController extends Controller
             $newHackMember->first_name = $user->name;
             $newHackMember->last_name = $user->last_name;
             $newHackMember->email = $user->email;
-            $newHackMember->age = isset($request->userage)?$request->userage:$age;
+            $newHackMember->age = isset($request->userage) ? $request->userage : $age;
             $newHackMember->occupation = $hackOccupation->occupation;
             $newHackMember->tshirt = $hackShirtSize->tshirt_size;
             $newHackMember->team = $hackTeam->team_id;
             $newHackMember->is_captain = null;
             $newHackMember->save();
 
-            $newMemberCount = ($team->members_count+1);
+            $newMemberCount = ($team->members_count + 1);
             $team->members_count = $newMemberCount;
 
 
@@ -505,10 +527,11 @@ class EventController extends Controller
         ]);
 
         $invites = TeamMember::where([
-            ['event_team_id',$team->id],
+            ['event_team_id', $team->id],
         ])
-        ->whereBetween('created_at', [Carbon::now()->subDays(1)->format('Y-m-d H:m:s'),Carbon::now()->addDay(1)->format('Y-m-d H:m:s')])
-        ->count();
+            ->whereBetween('created_at',
+                [Carbon::now()->subDays(1)->format('Y-m-d H:m:s'), Carbon::now()->addDay(1)->format('Y-m-d H:m:s')])
+            ->count();
 
         if ($invites < 10) {
             $memberPlus = ($team->members_count + 1);
@@ -534,7 +557,7 @@ class EventController extends Controller
                     $message = __('Успешно изпратихте покана за влизане в отбор!');
                     return redirect()->route('users.events')->with('success', $message);
                 }
-                if ($isExisting->confirmed  < 0) {
+                if ($isExisting->confirmed < 0) {
                     $isExisting->confirmed = 0;
                     $isExisting->save();
 
@@ -551,5 +574,51 @@ class EventController extends Controller
         }
         $message = __('Надвишихте дневния лимит за изпращане на покани!');
         return redirect()->route('users.events')->with('error', $message);
+    }
+
+    public function cwRegister(Event $event)
+    {
+        $user = User::find(Auth::user()->id);
+        $occupations = Occupation::all();
+        if (!Auth::user()->isOnCWEvent($event->id)) {
+            return view('events.cw.registration', [
+                'user' => $user,
+                'event' => $event,
+                'occupations' => Occupation::all(),
+            ]);
+        }
+
+        $message = __('Вече сте записани за събитието');
+        return redirect()->route('users.events')->with('error', $message);
+    }
+
+    public function cwStoreForm(Request $request, $event)
+    {
+        $request['valid_categories'] = \Config::get('cwCategories');
+        $data = $request->validate([
+            'occupation' => 'required|numeric',
+            'days' => 'required|numeric|',
+            'categories.*' => 'sometimes|in_array:valid_categories.*',
+            'visited' => 'required',
+        ]);
+
+        $user = User::find(Auth::user()->id);
+        $user->cl_occupation_id = $data['occupation'];
+        $user->save();
+        $data = $request->except([
+            '_token',
+            '_method',
+            'valid_categories',
+            'occupation'
+        ]);
+
+        $newCWRegistration = new ExtraForm;
+        $newCWRegistration->event_id = $event;
+        $newCWRegistration->user_id = $user->id;
+        $newCWRegistration->fields = $data;
+        $newCWRegistration->save();
+
+        $message = __('Успешно се регистрирахте за CodeWeek!');
+        return redirect()->route('users.events')->with('success', $message);
     }
 }

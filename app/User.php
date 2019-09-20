@@ -5,6 +5,7 @@ namespace App;
 use App\Models\Admin\Poll;
 use App\Models\Admin\PollVote;
 use App\Models\CourseModules\ModulesStudent;
+use App\Models\Events\ExtraForm;
 use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
@@ -259,7 +260,7 @@ class User extends Authenticatable
         $this->notify(new PasswordReset($token));
     }
 
-    public function isOnEvent($eventId)
+    public function isOnTeamEvent($eventId)
     {
         $isMember = TeamMember::with('Teams')->where('user_id', Auth::user()->id)->orWhere('email',
             Auth::user()->email)->get();
@@ -273,6 +274,18 @@ class User extends Authenticatable
             }
             return false;
         }
+    }
+
+    public function isOnCWEvent($eventId)
+    {
+        $isOnCw = ExtraForm::where([
+            ['event_id',$eventId],
+            ['user_id',Auth::user()->id]
+        ])->first();
+        if($isOnCw){
+            return true;
+        }
+        return false;
     }
 
     public function isEventInvited($status)
@@ -418,8 +431,8 @@ class User extends Authenticatable
 
     public function getPolls()
     {
-        $valid = [0 => NULL];
-        $polls = Poll::with('Options','Options.Votes')->where([
+        $valid = [0 => null];
+        $polls = Poll::with('Options', 'Options.Votes')->where([
             ['start', '<', Carbon::now()],
             ['ends', '>', Carbon::now()]
         ])->get();

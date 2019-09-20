@@ -131,6 +131,10 @@ Route::group(['middleware' => 'auth'], function () {
         'Events\EventController@inviteToTeam')->name('invite.to.team');
     Route::get('user/{user}/course/{course}/certificate/show',
         'Users\UserController@showCertificate')->name('user.cert.show');
+
+    //cw
+    Route::get('/user/event/{event}/register','Events\EventController@cwRegister')->name('events.cw.register');
+    Route::post('/user/event/{event}/cw', 'Events\EventController@cwStoreForm')->name('events.cw.form');
     Route::group(['middleware' => 'isLecturer'], function () {
         // lecturer routes
         Route::post('/lecturer/update/bio', 'Users\UserController@updateBio')->name('lecturer.update.bio');
