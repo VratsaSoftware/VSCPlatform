@@ -119,46 +119,46 @@
                                                   <td>
                                                       общо - <span
                                                               style="color:#F00">{{$team->members_count}}</span><br/>
-                                                @foreach($team->Members as $member)
-                                                    <p>
+                                @foreach($team->Members as $member)
+                                    <p>
                                                         @if($member->confirmed > 0)
-                                                            <span>
+                                            <span>
                                                                 {{$member->Role->role}} - <br/>
                                                             @if(!is_null($member->User))
-                                                                    {{$member->User->name}} {{$member->User->last_name}}  <br/>
-                                                                    {{$member->User->email}}<br/>
-                                                            @else
-                                                                {{$member->email}}
-                                                            @endif
-                                                            @if(!is_null($member->User) && !is_null($member->User->Occupation))
-                                                                {{$member->User->Occupation->occupation}}
-                                                            @endif
+                                                    {{$member->User->name}} {{$member->User->last_name}}  <br/>
+                                                    {{$member->User->email}}<br/>
+                                                @else
+                                                    {{$member->email}}
+                                                @endif
+                                                @if(!is_null($member->User) && !is_null($member->User->Occupation))
+                                                    {{$member->User->Occupation->occupation}}
+                                                @endif
                                                             <br/>
                                                            @if(!is_null($member->Shirt))
-                                                                тениска: {{$member->Shirt->size}}
-                                                           @endif
+                                                    тениска: {{$member->Shirt->size}}
+                                                @endif
                                                                 <br/>
                                                             </span>
-                                                        @endif
+                                        @endif
                                                     </p>
-                                                @endforeach
-                                                </td>
-                                                <td>{{$team->created_at}}</td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
+                                    @endforeach
+                                    </td>
+                                    <td>{{$team->created_at}}</td>
+                                    </tr>
+                                    @endforeach
+                                    </tbody>
                                     </table>
                                     </span>
-                                        <div class="event-body-text show-more-event">
-                                            виж още
-                                        </div>
+                        <div class="event-body-text show-more-event">
+                            виж регистрирани
+                        </div>
                     </a>
-                                    @else
-                                    </span>
-                                        <div class="event-body-text">
-                                            <a href="{{route('event.show',$event->id)}}" style="padding:10% 0 10% 0">виж още</a>
-                                        </div>
-                                    @endif
+                    @else
+                    </span>
+                    <div class="event-body-text">
+                        <a href="{{route('event.show',$event->id)}}" style="padding:10% 0 10% 0">виж регистрирани</a>
+                    </div>
+                    @endif
 
                     @if(!is_null($event->picture) || !empty($event->picture))
                         <img src="{{asset('/images/events/'.$event->picture)}}" alt="">
@@ -309,9 +309,9 @@
                                                 @endif
                                                                   <br/>
                                             </span>
-                                      @endif
+                                        @endif
                                     </p>
-                                @endforeach
+                                    @endforeach
                                     </td>
                                     <td>{{$team->created_at}}</td>
                                     </tr>
@@ -319,16 +319,16 @@
                                     </tbody>
                                     </table>
                                  </span>
-                                    <div class="event-body-text show-more-event">
-                                        виж
-                                    </div>
-                                </a>
-                                    @else
-                                    </span>
-                                        <div class="event-body-text">
-                                            <a href="{{route('event.show',$event->id)}}" style="padding:10% 0 10% 0">виж още</a>
-                                        </div>
-                                    @endif
+                        <div class="event-body-text show-more-event">
+                            виж
+                        </div>
+                    </a>
+                    @else
+                    </span>
+                    <div class="event-body-text">
+                        <a href="{{route('event.show',$event->id)}}" style="padding:10% 0 10% 0">виж регистрирани</a>
+                    </div>
+                    @endif
 
                     @if(!is_null($event->picture) || !empty($event->picture))
                         <img src="{{asset('/images/events/'.$event->picture)}}" alt="">

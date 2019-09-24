@@ -16,7 +16,9 @@
                     <th scope="col">Възраст</th>
                     <th scope="col">Пол</th>
                     <th scope="col">Занимание</th>
-                    <th scope="col">Форма</th>
+                    <th scope="col">Участие преди</th>
+                    <th scope="col">Дни</th>
+                    <th scope="col">Категория</th>
                     <th scope="col">Създаден</th>
                 </tr>
                 </thead>
@@ -35,45 +37,15 @@
                         @endif
                         <td>{{$entry->User->sex}}</td>
                         <td>{{$entry->User->Occupation->occupation}}</td>
-                        <td class="text-center">
-                            <button class="btn btn-success show-form">Виж</button>
-                            <div class="no-show">
+                            <ul>
                                @foreach($entry->fields as $column => $data)
-                                    @switch($column)
-                                        @case('visited')
-                                            <?php $column = 'Участвали ли сте преди на CodeWeek?' ?>
-                                        @break
-
-                                        @case('days')
-                                            <?php $column = 'Дни' ?>
-                                        @break
-
-                                        @case('categories')
-                                            <?php $column = 'Категории' ?>
-                                        @break
-
-                                        @case('link')
-                                        <?php $column = 'Линк' ?>
-                                        @break
-                                    @endswitch
-                                    @if(is_array($data))
-                                       <p>
-                                           {{$column}} =>
-                                            @foreach($data as $v)
-                                                <b>{{$v}} |</b>
-                                            @endforeach
-                                       </p>
-                                    @else
-                                        <p>
-                                            @if($column == 'Дни')
-                                                {{$column}} => <b>{{$data < 1?'първия':'двата'}}</b>
-                                            @else
-                                                {{$column}} => <b>{{$data}}</b>
-                                            @endif
-                                        </p>
-                                    @endif
+                                   @if($column == 'days')
+                                        <td class="text-center"> {{$data > 0?'2':'1'}}</td>
+                                   @else
+                                        <td class="text-center"> {{$data}}</td>
+                                   @endif
                                @endforeach
-                            </div>
+                            </ul>
                         </td>
                         <td>
                             <p>

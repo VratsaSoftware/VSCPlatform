@@ -34,30 +34,20 @@
                                 <label for="">част от информацията е взета от профила ви</label>
                             </p>
                             <p>
-                                <label for="username">Име <span class="req-star-form">*</span></label>
-                                @if(!is_null($user->name) && !empty($user->name))
-                                    <input type="text" name="username" value="{{$user->name}}" disabled
-                                           class="small-field-register"><br/>
-                                @else
+                                @if(is_null($user->name) && empty($user->name))
+                                    <label for="username">Име <span class="req-star-form">*</span></label>
                                     <input type="text" name="username" value="" class="small-field-register"><br/>
                                 @endif
 
-                                <label for="userlastname">Фамилия <span class="req-star-form">*</span></label>
-                                @if(!is_null($user->last_name) && !empty($user->last_name))
-                                    <input type="text" name="userlastname" value="{{$user->last_name}}" disabled
-                                           class="small-field-register"><br/>
-                                @else
+                                @if(is_null($user->last_name) && empty($user->last_name))
+                                    <label for="userlastname">Фамилия <span class="req-star-form">*</span></label>
                                     <input type="text" name="username" value="" class="small-field-register"><br/>
                                 @endif
                                 <label for="useremail">Е-Mail <span class="req-star-form">*</span></label>
                                 <input type="text" name="useremail" value="{{$user->email}}" disabled
                                        class="small-field-register">
-                                <label for="useremail">Възраст <span class="req-star-form">*</span></label>
-                                @if(!is_null($user->dob))
-                                    <input type="text" name="userage"
-                                           value="{{(\Carbon\Carbon::now()->format('Y') - $user->dob->format('Y'))}}"
-                                           disabled class="small-field-register">
-                                @else
+                                @if(is_null($user->dob))
+                                    <label for="useremail">Възраст <span class="req-star-form">*</span></label>
                                     <input type="text" name="userage" value="" placeholder="въведете години..."
                                            class="small-field-register">
                                 @endif
@@ -93,9 +83,9 @@
                                 </select>
                             </p>
                             <p id="cat-wrapp">
-                                <label for="categories">Категории <span class="req-star-form">*</span></label>
+                                <label for="categories">Категория <span class="req-star-form">*</span></label>
                                 <br/>
-                                <select class="section-el-bold js-example-basic-multiple" name="categories[]" id="categories" multiple="multiple" style="width:100%">
+                                <select class="section-el-bold js-example-basic-single" name="categories" id="categories" style="width:100%">
                                     @foreach(Config::get('cwCategories') as $category)
                                         @if (old('categories'))
                                             @if (in_array($category, old('categories')))

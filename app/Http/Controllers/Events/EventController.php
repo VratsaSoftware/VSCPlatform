@@ -174,8 +174,8 @@ class EventController extends Controller
             'ends' => 'required|date_format:"Y-m-d\TH:i"|after:starts',
             'type' => 'required|in_array:valid_type.*',
             'visibility' => 'required|in_array:valid_visibility.*',
-            'min_team' => 'numeric|min:1|max:99',
-            'max_team' => 'numeric|min:' . $request->min_team . '|max:99',
+            'min_team' => 'sometimes|numeric|min:1|max:99',
+            'max_team' => 'sometimes|numeric|min:' . $request->min_team . '|max:99',
         ]);
 
         if (Input::file('picture')) {
