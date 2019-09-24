@@ -37,8 +37,7 @@ class EventController extends Controller
      */
     public function index()
     {
-        $events = Event::with('Teams', 'Teams.Members', 'Teams.Members.User', 'Teams.Members.User.Occupation',
-            'Teams.Members.Role', 'Teams.Category')->where([
+        $events = Event::with('Teams', 'Teams.Members', 'Teams.Members.User', 'Teams.Members.User.Occupation', 'Teams.Members.Role', 'Teams.Category')->where([
             ['to', '>', Carbon::now()->format('Y-m-d H:m:s')],
             ['visibility', '!=', 'draft'],
         ])->get();
@@ -134,9 +133,11 @@ class EventController extends Controller
      * @param int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($event)
     {
-        //
+        $applications = ExtraForm::where('event_id',$event)->with('User','User.Occupation','Event')->get();
+
+        return view('events.show',['applications' => $applications]);
     }
 
     /**
@@ -329,13 +330,9 @@ class EventController extends Controller
         }
         $age = isset($ageSum) ? $ageSum : $request->userage;
         $occupation = Occupation::find($request->occupation);
-        $hackOccupation = HackOccupation::firstOrCreate(
-            ['occupation' => $occupation->occupation]
-        );
+        $hackOccupation = HackOccupation::firstOrCreate(['occupation' => $occupation->occupation]);
         $shirtSize = ShirtSize::find($request->shirt_size);
-        $hackShirtSize = HackTshirt::firstOrCreate(
-            ['tshirt_size' => $shirtSize->size]
-        );
+        $hackShirtSize = HackTshirt::firstOrCreate(['tshirt_size' => $shirtSize->size]);
 
         $hackMember = new HackMember;
         $hackMember->first_name = $user->name;
@@ -407,12 +404,10 @@ class EventController extends Controller
         $teamMember = TeamMember::where([
             ['event_team_id', $team],
             ['user_id', Auth::user()->id],
-        ])
-            ->orWhere([
+        ])->orWhere([
                 ['event_team_id', $team],
                 ['email', Auth::user()->email],
-            ])
-            ->first();
+            ])->first();
         $teamMember->user_id = Auth::user()->id;
         $teamMember->email = Auth::user()->email;
         $teamMember->confirmed = -1;
@@ -432,12 +427,10 @@ class EventController extends Controller
         $teamMember = TeamMember::where([
             ['event_team_id', $team->id],
             ['user_id', Auth::user()->id],
-        ])
-            ->orWhere([
+        ])->orWhere([
                 ['event_team_id', $team->id],
                 ['email', Auth::user()->email],
-            ])
-            ->first();
+            ])->first();
         $teamMember->user_id = Auth::user()->id;
         $teamMember->save();
         $user = User::find(Auth::user()->id);
@@ -480,13 +473,9 @@ class EventController extends Controller
             //hack db
             $age = (Carbon::now()->format('Y') - $user->dob->format('Y'));
             $occupation = Occupation::find($request->occupation);
-            $hackOccupation = HackOccupation::firstOrCreate(
-                ['occupation' => $occupation->occupation]
-            );
+            $hackOccupation = HackOccupation::firstOrCreate(['occupation' => $occupation->occupation]);
             $shirtSize = ShirtSize::find($request->shirt_size);
-            $hackShirtSize = HackTshirt::firstOrCreate(
-                ['tshirt_size' => $shirtSize->size]
-            );
+            $hackShirtSize = HackTshirt::firstOrCreate(['tshirt_size' => $shirtSize->size]);
 
             $hackTeam = HackTeam::where('team_id', $team->hack_team_id)->first();
 
@@ -528,10 +517,7 @@ class EventController extends Controller
 
         $invites = TeamMember::where([
             ['event_team_id', $team->id],
-        ])
-            ->whereBetween('created_at',
-                [Carbon::now()->subDays(1)->format('Y-m-d H:m:s'), Carbon::now()->addDay(1)->format('Y-m-d H:m:s')])
-            ->count();
+        ])->whereBetween('created_at', [Carbon::now()->subDays(1)->format('Y-m-d H:m:s'), Carbon::now()->addDay(1)->format('Y-m-d H:m:s')])->count();
 
         if ($invites < 10) {
             $memberPlus = ($team->members_count + 1);
@@ -588,12 +574,45 @@ class EventController extends Controller
             ]);
         }
 
+        if ($event->to < Carbon::now() && Auth::user()->isOnCWEvent($event->id)) {
+            $getLink = ExtraForm::where([
+                ['event_id',$event->id],
+                ['user_id',Auth::user()->id]
+            ])->first();
+
+            return view('events.cw.registration', [
+                'user' => $user,
+                'event' => $event,
+                'occupations' => Occupation::all(),
+                'for_link' => true,
+                'the_link' => isset($getLink->fields['link'])?$getLink->fields['link']:null,
+            ]);
+        }
+
         $message = __('Вече сте записани за събитието');
         return redirect()->route('users.events')->with('error', $message);
     }
 
     public function cwStoreForm(Request $request, $event)
     {
+        if(isset($request->link)){
+            $data = $request->validate([
+                'link' => 'required|string|max:255',
+            ]);
+            $data = $request->except([
+                '_token',
+                '_method',
+            ]);
+            $addLink = ExtraForm::where([
+                ['event_id',$event],
+                ['user_id',Auth::user()->id]
+            ])->first();
+            $addLink->fields += $data;
+            $addLink->save();
+
+            $message = __('Успешно добавихте линк!');
+            return redirect()->route('users.events')->with('success', $message);
+        }
         $request['valid_categories'] = \Config::get('cwCategories');
         $data = $request->validate([
             'occupation' => 'required|numeric',

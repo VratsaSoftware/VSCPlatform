@@ -93,7 +93,7 @@
                                           <th>Създаден на</th>
                                         </tr>
                                       </thead>
-                                      <tbody>
+                                        <tbody>
                                             @foreach($event->Teams as $team)
                                                 <tr>
                                                   <td>
@@ -119,43 +119,47 @@
                                                   <td>
                                                       общо - <span
                                                               style="color:#F00">{{$team->members_count}}</span><br/>
-                                @foreach($team->Members as $member)
-                                    <p>
-                                                          @if($member->confirmed > 0)
-                                            <span>{{$member->Role->role}} - <br/>
-                                                                  @if(!is_null($member->User))
-                                                    {{$member->User->name}} {{$member->User->last_name}}  <br/>
-                                                    {{$member->User->email}}<br/>
-                                                @else
-                                                    {{$member->email}}
-                                                @endif
-                                                @if(!is_null($member->User) && !is_null($member->User->Occupation))
-                                                    {{$member->User->Occupation->occupation}}
-                                                @endif
-                                                                  <br/>
-                                                                  @if(!is_null($member->Shirt))
-                                                    тениска: {{$member->Shirt->size}}
-                                                @endif
-                                                                  <br/>
+                                                @foreach($team->Members as $member)
+                                                    <p>
+                                                        @if($member->confirmed > 0)
+                                                            <span>
+                                                                {{$member->Role->role}} - <br/>
+                                                            @if(!is_null($member->User))
+                                                                    {{$member->User->name}} {{$member->User->last_name}}  <br/>
+                                                                    {{$member->User->email}}<br/>
+                                                            @else
+                                                                {{$member->email}}
+                                                            @endif
+                                                            @if(!is_null($member->User) && !is_null($member->User->Occupation))
+                                                                {{$member->User->Occupation->occupation}}
+                                                            @endif
+                                                            <br/>
+                                                           @if(!is_null($member->Shirt))
+                                                                тениска: {{$member->Shirt->size}}
+                                                           @endif
+                                                                <br/>
                                                             </span>
-                                        @endif
-                                                        </p>
-                                    @endforeach
-                                    </td>
-                                    <td>{{$team->created_at}}</td>
-                                    </tr>
-                                    @endforeach
-                                    </tbody>
+                                                        @endif
+                                                    </p>
+                                                @endforeach
+                                                </td>
+                                                <td>{{$team->created_at}}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
                                     </table>
-                                    </p>
-                                    @else
-                                        
-                                    @endif
-                        </span>
-                        <div class="event-body-text show-more-event">
-                            виж
-                        </div>
+                                    </span>
+                                        <div class="event-body-text show-more-event">
+                                            виж още
+                                        </div>
                     </a>
+                                    @else
+                                    </span>
+                                        <div class="event-body-text">
+                                            <a href="{{route('event.show',$event->id)}}" style="padding:10% 0 10% 0">виж още</a>
+                                        </div>
+                                    @endif
+
                     @if(!is_null($event->picture) || !empty($event->picture))
                         <img src="{{asset('/images/events/'.$event->picture)}}" alt="">
                     @else
@@ -163,7 +167,8 @@
                     @endif
                     <div class="col-md-12 d-flex flex-row flex-wrap">
                         <div class="col-md-6 delete-module text-center">
-                            <span class="hidden-event-data" data-event-id="{{$event->id}}" data-type="{{strtolower($event->type)}}"
+                            <span class="hidden-event-data" data-event-id="{{$event->id}}"
+                                  data-type="{{strtolower($event->type)}}"
                                   data-picture="{{$event->picture}}" data-name="{{$event->name}}"
                                   data-rules="{{$event->rules}}" data-description="{{$event->description}}"
                                   data-from="{{$event->from->format('Y-m-d\TH:i')}}"
@@ -286,9 +291,10 @@
                                                               style="color:#F00">{{$team->members_count}}</span><br/>
                                 @foreach($team->Members as $member)
                                     <p>
-                                                          @if($member->confirmed > 0)
-                                            <span>{{$member->Role->role}} - <br/>
-                                                                  @if(!is_null($member->User))
+                                      @if($member->confirmed > 0)
+                                            <span>
+                                                {{$member->Role->role}} - <br/>
+                                                @if(!is_null($member->User))
                                                     {{$member->User->name}} {{$member->User->last_name}}  <br/>
                                                     {{$member->User->email}}<br/>
                                                 @else
@@ -298,29 +304,32 @@
                                                     {{$member->User->Occupation->occupation}}
                                                 @endif
                                                                   <br/>
-                                                                  @if(!is_null($member->Shirt))
+                                                @if(!is_null($member->Shirt))
                                                     тениска: {{$member->Shirt->size}}
                                                 @endif
                                                                   <br/>
-                                                            </span>
-                                        @endif
-                                                        </p>
-                                    @endforeach
+                                            </span>
+                                      @endif
+                                    </p>
+                                @endforeach
                                     </td>
                                     <td>{{$team->created_at}}</td>
                                     </tr>
                                     @endforeach
                                     </tbody>
                                     </table>
-                                    </p>
+                                 </span>
+                                    <div class="event-body-text show-more-event">
+                                        виж
+                                    </div>
+                                </a>
                                     @else
-
+                                    </span>
+                                        <div class="event-body-text">
+                                            <a href="{{route('event.show',$event->id)}}" style="padding:10% 0 10% 0">виж още</a>
+                                        </div>
                                     @endif
-                        </span>
-                        <div class="event-body-text show-more-event">
-                            виж
-                        </div>
-                    </a>
+
                     @if(!is_null($event->picture) || !empty($event->picture))
                         <img src="{{asset('/images/events/'.$event->picture)}}" alt="">
                     @else
@@ -479,7 +488,7 @@
                                 title="public - видимо от всички,private - трябва да си логнат за да видиш съдържанието, draft - само лекторите виждат съдържанието">
                             <option value="0" selected>---</option>
                             @foreach(Config::get('eventTypes') as $type)
-                                <option value="{{strtolower($type)}}">{{ucfirst($type)}}</option>
+                                <option value="{{strtolower($type)}}" {{old('event_type')==strtolower($type)?'selected':''}}>{{ucfirst($type)}}</option>
                             @endforeach
                         </select>
                     </p>
@@ -550,7 +559,7 @@
             }
             $("#visibility").val(visibility).find("option[value=" + visibility + "]").attr('selected', true);
 
-            if(type.length > 0) {
+            if (type.length > 0) {
                 $("#event_type").val(type).find("option[value=" + type + "]").attr('selected', true);
             }
             $('.create-course').attr('class', 'edit-event-btn').text('Редактирай');

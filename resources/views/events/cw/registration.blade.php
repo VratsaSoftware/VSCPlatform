@@ -7,8 +7,12 @@
         <div class="section">
             <div class="col-md-12 d-flex flex-row flex-wrap">
                 <div class="col-md-12 create-team-rules" style="margin-top:16vw">
-                    <p>Описание: {!!$event->description!!} </p>
-                    <p>Правила: {!!$event->rules!!} </p>
+                    @if(!isset($for_link) || !$for_link)
+                        <p>Описание: {!!$event->description!!} </p>
+                        <p>Правила: {!!$event->rules!!} </p>
+                    @else
+                        <p>Благодарим ви, че участвахте в CodeWeek Враца {{Carbon\Carbon::now()->format('Y')}}</p>
+                    @endif
                 </div>
                 @if ($errors->any())
                     <div class="alert alert-danger alert-on-course slide-on">
@@ -19,7 +23,8 @@
                         </ul>
                     </div>
                 @endif
-                <form action="{{route('events.cw.form',['event' => $event->id])}}" method="POST" class="col-md-12"
+                @if(!isset($for_link) || !$for_link)
+                    <form action="{{route('events.cw.form',['event' => $event->id])}}" method="POST" class="col-md-12"
                       id="cw-reg" name="cw-reg">
                     {{ csrf_field() }}
 
@@ -88,7 +93,7 @@
                                 </select>
                             </p>
                             <p id="cat-wrapp">
-                                <label for="categories">Категории</label>
+                                <label for="categories">Категории <span class="req-star-form">*</span></label>
                                 <br/>
                                 <select class="section-el-bold js-example-basic-multiple" name="categories[]" id="categories" multiple="multiple" style="width:100%">
                                     @foreach(Config::get('cwCategories') as $category)
@@ -111,6 +116,29 @@
                                     class="create-course">Регистрирай</span></a>
                     </div>
                 </form>
+                @else
+                    <form action="{{route('events.cw.form',['event' => $event->id])}}" method="POST" class="col-md-12"
+                          id="cw-link" name="cw-reg-link">
+                    {{ csrf_field() }}
+                        <div class="col-md-12 level-title-holder d-flex flex-row flex-wrap">
+                            <div class="col-md-12 text-center">
+                                <p>
+                                    <label for="link">линк към проекта <span class="req-star-form">*</span></label>
+                                    <br/>
+                                    <input type="text" name="link" id="link" value="{{$the_link?$the_link:''}}">
+                                </p>
+                                <div class="col-md-12 create-course-button text-center">
+                                    <a href="#" onclick="javascript:$('#cw-link').submit()" class="create-course-btn"><span
+                                                class="create-course">Изпрати</span></a>
+                                </div>
+                                <div class="col-md-12 create-course-button text-center">
+                                    <a href="{{route('users.events')}}" class="create-course-btn"><span
+                                                class="create-course">Назад</span></a>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                @endif
             </div>
         </div>
     </div>

@@ -11,12 +11,12 @@ class ExtraForm extends Model
 
     public function User()
     {
-        return $this->hasOne(User::class,'user_id');
+        return $this->hasOne(\App\User::class,'id', 'user_id');
     }
 
     public function Event()
     {
-        return $this->hasOne(Event::class,'event_id');
+        return $this->hasOne(Event::class,'id','event_id');
     }
 
     public function setFieldsAttribute($value)
