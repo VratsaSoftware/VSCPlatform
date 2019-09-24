@@ -17,6 +17,7 @@
                     <th scope="col">Пол</th>
                     <th scope="col">Занимание</th>
                     <th scope="col">Форма</th>
+                    <th scope="col">Създаден</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -27,7 +28,11 @@
                         <td>{{$entry->User->last_name}}</td>
                         <td>{{$entry->User->email}}</td>
                         <td>{{$entry->User->location}}</td>
-                        <td>{{(Carbon\Carbon::now()->format('Y') - $entry->User->dob->format('Y'))}}</td>
+                        @if($entry->User->dob)
+                            <td>{{(Carbon\Carbon::now()->format('Y') - $entry->User->dob->format('Y'))}}</td>
+                        @else
+                            <td>-</td>
+                        @endif
                         <td>{{$entry->User->sex}}</td>
                         <td>{{$entry->User->Occupation->occupation}}</td>
                         <td class="text-center">
@@ -69,6 +74,11 @@
                                     @endif
                                @endforeach
                             </div>
+                        </td>
+                        <td>
+                            <p>
+                               <b>{{$entry->created_at}}</b>
+                            </p>
                         </td>
                     </tr>
                 @endforeach

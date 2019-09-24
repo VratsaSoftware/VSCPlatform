@@ -622,6 +622,13 @@ class EventController extends Controller
         ]);
 
         $user = User::find(Auth::user()->id);
+        if($request->userage) {
+            $dob = null;
+            $year = Carbon::now()->subYears($request->userage)->format('Y');
+            $year .= '-01-01';
+            $dob = Carbon::parse($year)->format('Y-m-d');
+            $user->dob = $dob;
+        }
         $user->cl_occupation_id = $data['occupation'];
         $user->save();
         $data = $request->except([
