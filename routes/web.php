@@ -158,6 +158,8 @@ Route::group(['middleware' => 'auth'], function () {
 
         //tests routes
         Route::resource('test', 'Admin\TestController')->names('test');
+        Route::post('test/add/student','Admin\TestController@addUser')->name('test.add.student');
+        Route::post('test/remove/student','Admin\TestController@removeStudent')->name('test.remove.student');
         Route::post('test/bank/create','Admin\TestController@createBank')->name('create.bank');
         Route::post('test/question/create','Admin\TestController@storeQuestion')->name('store.question');
         Route::get('bank/question/{question}/edit','Admin\TestController@editQuestion')->name('question.edit');

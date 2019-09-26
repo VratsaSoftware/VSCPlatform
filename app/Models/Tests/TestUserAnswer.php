@@ -14,6 +14,6 @@ class TestUserAnswer extends Model
     }
 
     public function Question(){
-        return $this->hasMany(BankQuestion::class);
+        return $this->hasOne(BankQuestion::class);
     }
 }

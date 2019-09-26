@@ -16,6 +16,7 @@ class CreateTestsUsersAnswersTable extends Migration
         Schema::create('tests_users_answers', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('test_id')->unsigned()->nullable();
             $table->integer('tests_bank_question_id')->unsigned()->nullable();
             $table->enum('is_answered',['1','0'])->default('0');
             $table->longText('answer')->nullable();
@@ -25,6 +26,7 @@ class CreateTestsUsersAnswersTable extends Migration
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('tests_bank_question_id')->references('id')->on('tests_bank_questions')->onDelete('cascade');
+            $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
         });
     }
 

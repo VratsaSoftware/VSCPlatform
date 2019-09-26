@@ -17,9 +17,9 @@ class CreateTestsAssignedTable extends Migration
             $table->increments('id');
             $table->integer('test_id')->unsigned()->nullable();
             $table->integer('test_bank_id')->unsigned()->nullable();
-            $table->string('difficulty');
-            $table->string('count');
-            $table->enum('type',['entry','module','null'])->default('null');
+            $table->string('difficulty')->nullable();
+            $table->string('count')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

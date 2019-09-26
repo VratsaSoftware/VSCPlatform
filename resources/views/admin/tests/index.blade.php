@@ -1,7 +1,9 @@
 @extends('layouts.template')
 @section('title', 'Тестове')
 @section('content')
-    <link rel="stylesheet" href="./css/create_tests.css">
+    <link rel="stylesheet" href="{{asset('/css/create_tests.css')}}">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
     @if (!empty(Session::get('success')))
         <p>
             <div class="alert alert-success slide-on" style="margin-top:-40px">
@@ -20,9 +22,9 @@
     @endif
     <div class="section">
         <div class="col-md-12 d-flex flex-row flex-wrap test-statistic-wrapper">
-            <div class="col-md-12 text-center">Количество</div>
+            <div class="col-md-12 text-center">Количество Въпроси</div>
             <div class="col-md-2 all-questions text-center d-flex flex-row flex-wrap">
-                <div class="col-md-12">Общо Въпроси</div>
+                <div class="col-md-12">Общо</div>
                 <div class="col-md-12">
                     <div class="circles">
                         <div class="circle-with-text">
@@ -834,6 +836,61 @@
             </div>
             <!--  end of test content holder -->
         </div>
+        <div class="col-md-12 d-flex flex-row flex-wrap">
+            <div class="col-md-12 text-center">
+                <strong>Тестове</strong>
+            </div>
+            <div class="col-md-12 text-left">
+                <a href="{{route('test.create')}}" class="add-bank" style="position: inherit">
+                    <img src="{{asset('/images/profile/add-icon.png')}}" alt="add">&nbsp;Добави Тест
+                </a>
+            </div>
+            <div class="col-md-12" style="overflow: scroll">
+                <table class="table table-striped" id="tests-table">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Заглавие</th>
+                        <th scope="col">Започва</th>
+                        <th scope="col">Свършва</th>
+                        <th scope="col">Продължителност (Час:мин.)</th>
+                        <th scope="col">Банка</th>
+                        <th scope="col">Записани</th>
+                        <th scope="col">действия</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        @foreach($tests as $test)
+                            <tr>
+                                <td>{{$test->id}}</td>
+                                <td>{{$test->title}}</td>
+                                <td>{{$test->start_at->format('d-m-y')}}</td>
+                                <td>{{$test->expire_at->format('d-m-y')}}</td>
+                                <td>{{$test->duration->format('H:i')}}</td>
+                                <td>{{$test->bank[0]->name}}</td>
+                                <td>
+                                    <ol>
+                                        @foreach($test->Users as $user)
+                                            <li>{{$user->name}} - <strong>{{$user->email}}</strong></li>
+                                        @endforeach
+                                    </ol>
+                                </td>
+                                <td class="text-center">
+                                    <a href="{{route('test.edit',$test->id)}}" style="display:block;margin-bottom:10%">
+                                        <button class="btn btn-outline-info">edit</button>
+                                    </a>
+                                    <form action="{{ route('test.destroy',$test->id) }}" method="POST" onsubmit="return ConfirmDelete()" id="delete-edu">
+                                        {{ method_field('DELETE') }}
+                                        {{ csrf_field() }}
+                                        <button type="submit" class="btn btn-danger delete-module-btn" value="DELETE"><i class="fa fa-trash" aria-hidden="true"></i></button>
+                                    </form>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
     <script src="{{asset('js/create_tests.js')}}"></script>
     <script>
@@ -861,5 +918,11 @@
                 $(this).addClass('img_big')
             }
         });
+        $(document).ready(function() {
+            $('#tests-table').DataTable({
+                responsive: true,
+                order: [[0, "desc"]],
+            });
+        } );
     </script>
 @endsection

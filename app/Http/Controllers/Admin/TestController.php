@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Traits\ImageUploadTrait;
+use App\Models\Courses\Entry;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Tests\Test;
@@ -12,6 +14,7 @@ use App\Models\Tests\BankQuestion;
 use App\Models\Tests\BankAnswer;
 use App\Models\Tests\BankType;
 use App\Models\Tests\TestUserAnswer;
+use App\User;
 use Illuminate\Support\Facades\Input;
 use Image;
 use File;
@@ -72,9 +75,9 @@ class TestController extends Controller
             $bank->difficultyCount = $bankDifficultyCount;
 
         }
+        $tests = Test::with('bank', 'Users')->get();
 
-        return view('admin.tests.index',
-            ['banks' => $banks, 'questions' => $questions, 'difficultyCount' => $difficultyCount]);
+        return view('admin.tests.index', ['banks' => $banks, 'questions' => $questions, 'difficultyCount' => $difficultyCount, 'tests' => $tests]);
     }
 
     /**
@@ -84,7 +87,11 @@ class TestController extends Controller
      */
     public function create()
     {
-        //
+        $banks = Bank::all();
+        $entries = Entry::select('user_id')->get()->toArray();
+        $candidates = User::whereIn('id', $entries)->get();
+
+        return view('admin.tests.create', ['banks' => $banks, 'candidates' => $candidates]);
     }
 
     /**
@@ -95,7 +102,28 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $data = $request->validate([
+            'title' => 'required',
+            'start_at' => 'required',
+            'expire_at' => 'required',
+            'hours' => 'required',
+            'minutes' => 'required',
+            'bank_id' => 'required',
+            'users' => 'required',
+        ]);
+        $duration = '' . $data['hours'] . '';
+        $duration .= ':' . $data['minutes'] . '';
+        $duration = Carbon::parse($duration)->format('H:i');
+        $testData['title'] = $data['title'];
+        $testData['start_at'] = $data['start_at'];
+        $testData['duration'] = $duration;
+        $testData['expire_at'] = $data['expire_at'];
+        $newTest = Test::create($testData);
+        $newTest->bank()->attach($data['bank_id']);
+        $newTest->Users()->attach($data['users']);
+
+        $message = __('Успешно добавен Тест !!!');
+        return redirect()->route('test.index')->with('success', $message);
     }
 
     /**
@@ -117,7 +145,10 @@ class TestController extends Controller
      */
     public function edit($id)
     {
-        //
+        $test = Test::with('bank', 'Users')->find($id);
+        $banks = Bank::all();
+
+        return view('admin.tests.editTest', ['banks' => $banks, 'test' => $test]);
     }
 
     /**
@@ -129,7 +160,31 @@ class TestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->validate([
+            'title' => 'required',
+            'start_at' => 'required',
+            'expire_at' => 'required',
+            'hours' => 'required',
+            'minutes' => 'required',
+            'bank_id' => 'required',
+            'users' => 'sometimes',
+        ]);
+        $duration = '' . $data['hours'] . '';
+        $duration .= ':' . $data['minutes'] . '';
+        $duration = Carbon::parse($duration)->format('H:i');
+        $testData['title'] = $data['title'];
+        $testData['start_at'] = $data['start_at'];
+        $testData['duration'] = $duration;
+        $testData['expire_at'] = $data['expire_at'];
+        $test = Test::find($id);
+        $test->update($testData);
+        $test->bank()->sync($data['bank_id']);
+        if (isset($data['users'])) {
+            $test->Users()->sync($data['users']);
+        }
+
+        $message = __('Успешно редактиран Тест !!!');
+        return redirect()->route('test.index')->with('success', $message);
     }
 
     /**
@@ -140,7 +195,40 @@ class TestController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $deleteTest = Test::find($id);
+        $deleteTest->bank()->detach();
+        $deleteTest->Users()->detach();
+        $deleteTest->delete();
+
+        $message = __('Успешно изтрит Тест !');
+        return redirect()->back()->with('success', $message);
+    }
+
+    public function addUser(Request $request)
+    {
+        $data = $request->validate([
+            'mail' => 'required|email',
+            'test_id' => 'required|numeric',
+        ]);
+
+        $user = User::where('email', $request->mail)->first();
+        if (!is_null($user)) {
+            $test = Test::find($data['test_id']);
+            $test->Users()->attach($user->id);
+
+            $message = __('Успешно добавен курсист!');
+            return redirect()->back()->with('success', $message);
+        }
+        $message = __('Няма такъв потребител!');
+        return redirect()->back()->with('error', $message);
+    }
+
+    public function removeStudent(Request $request)
+    {
+        $test = Test::find($request->test);
+        $test->Users()->detach($request->user);
+
+        return response('success', 200);
     }
 
     public function createBank(Request $request)
@@ -464,10 +552,7 @@ class TestController extends Controller
                         $aImg = Input::file('open_a_image');
                         $data['image'] = $this->storeImage($aImg, '/images/questions/');
                     }
-                    $updA = BankAnswer::updateOrCreate(
-                        ['id' => $request->open_answer_id],
-                        $data
-                    );
+                    $updA = BankAnswer::updateOrCreate(['id' => $request->open_answer_id], $data);
                 } else {
                     $delA = BankAnswer::find($request->open_answer_id);
                     if ($delA) {
@@ -508,7 +593,7 @@ class TestController extends Controller
                 $question->bonus = $request->bonus;
                 $question->save();
                 $question->fill($data);
-                $clearA = BankAnswer::where('tests_bank_question_id',$question->id)->delete();
+                $clearA = BankAnswer::where('tests_bank_question_id', $question->id)->delete();
                 foreach ($request->answers as $num => $answer) {
                     $data = [];
                     $data['tests_bank_question_id'] = $question->id;
@@ -529,7 +614,7 @@ class TestController extends Controller
                                 }
                             }
                         }
-                    }else {
+                    } else {
                         if (array_key_exists('old_image_' . $num, $request->all())) {
                             $oldImages = $request->all();
                             $data['image'] = $oldImages['old_image_' . $num];
@@ -568,7 +653,7 @@ class TestController extends Controller
                 $question->bonus = $request->bonus;
                 $question->save();
                 $newQ = $question->fill($data);
-                $deleteOld = BankAnswer::where('tests_bank_question_id',$question->id)->delete();
+                $deleteOld = BankAnswer::where('tests_bank_question_id', $question->id)->delete();
                 foreach ($request->answers as $num => $answer) {
                     $data = [];
                     $data['tests_bank_question_id'] = $newQ->id;
@@ -580,15 +665,15 @@ class TestController extends Controller
                     }
 
                     if (array_key_exists('image_for_' . $num, $request->all())) {
-                            foreach (Input::file('many_a_image') as $numImg => $file) {
-                                $fileName = str_replace(' ', '', $file->getClientOriginalName());
-                                $checkNames = $request->all();
-                                $checkNames['image_for_' . $num];
-                                if ($checkNames['image_for_' . $num] == $fileName) {
-                                    $data['image'] = $this->storeImage($file, '/images/questions/');
-                                }
+                        foreach (Input::file('many_a_image') as $numImg => $file) {
+                            $fileName = str_replace(' ', '', $file->getClientOriginalName());
+                            $checkNames = $request->all();
+                            $checkNames['image_for_' . $num];
+                            if ($checkNames['image_for_' . $num] == $fileName) {
+                                $data['image'] = $this->storeImage($file, '/images/questions/');
                             }
-                    }else {
+                        }
+                    } else {
                         if (array_key_exists('old_image_' . $num, $request->all())) {
                             $oldImages = $request->all();
                             $data['image'] = $oldImages['old_image_' . $num];
