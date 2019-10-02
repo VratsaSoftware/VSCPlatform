@@ -635,7 +635,8 @@ class EventController extends Controller
             '_token',
             '_method',
             'valid_categories',
-            'occupation'
+            'occupation',
+            'userage'
         ]);
 
         $newCWRegistration = new ExtraForm;

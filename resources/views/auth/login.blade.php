@@ -20,56 +20,61 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-	@if ($errors->has('name'))
-	                <span class="invalid-feedback" role="alert" id="err0">
+@if ($errors->has('name'))
+	<span class="invalid-feedback" role="alert" id="err0">
 	                    <strong>{{ $errors->first('name') }}</strong>
 	                </span>
-	    @endif
-	    @if ($errors->has('last_name'))
-	                <span class="invalid-feedback" role="alert" id="err1">
+@endif
+@if ($errors->has('last_name'))
+	<span class="invalid-feedback" role="alert" id="err1">
 	                    <strong>{{ $errors->first('last_name') }}</strong>
 	                </span>
-	    @endif
-	    @if ($errors->has('email'))
-	                <span class="invalid-feedback" role="alert" id="err2">
+@endif
+@if ($errors->has('email'))
+	<span class="invalid-feedback" role="alert" id="err2">
 	                    <strong>{{ $errors->first('email') }}</strong>
 	                </span>
-	    @endif
-	    @if ($errors->has('password'))
-	        <span class="invalid-feedback" role="alert" id="err3">
+@endif
+@if ($errors->has('password'))
+	<span class="invalid-feedback" role="alert" id="err3">
 	            <strong>{{ $errors->first('password') }}</strong>
 	        </span>
-	    @endif
-	    @if ($errors->has('sex'))
-	                <span class="invalid-feedback" role="alert" id="err4">
+@endif
+@if ($errors->has('sex'))
+	<span class="invalid-feedback" role="alert" id="err4">
 	                    <strong>{{ $errors->first('sex') }}</strong>
 	                </span>
-	    @endif
+@endif
 
 
-	<div id="login-button">
-		<img src="{{asset('/images/vso-png-big-2.png')}}" alt="" class="login-img-circle">
+<div id="login-button">
+	<img src="{{asset('/images/vso-png-big-2.png')}}" alt="" class="login-img-circle">
 </div>
 <div id="container">
 	<h1><img src="{{asset('/images/vso-png-big-2.png')}}" alt="" class="login-form-img"></h1>
 	@if(!Auth::check())
-	<span class="close-btn">
+		<span class="close-btn">
 		<i class="fas fa-times"></i>
 	</span>
 
-	<form method="POST" action="{{ route('login') }}" id="login-form">
-		 @csrf
-        <div>
-    		<input type="email" name="email" placeholder="E-mail" class="email">
-    		<input type="password" name="password" placeholder="Парола" autocomplete="password" class="password">
-    		<a href="#" id="login-btn-send">Вход</a>
-    		<div id="remember-container">
-    			
-    			<div id="forgotten">Забравена парола</div>
-    			<div id="register">Регистрация</div>
-    		</div>
-        </div>
-	</form>
+		<form method="POST" action="{{ route('login') }}" id="login-form">
+			@csrf
+			<div>
+				@if (Request::has('previous'))
+					<input type="hidden" name="previous" value="{{ Request::get('previous') }}">
+				@else
+					<input type="hidden" name="previous" value="{{ URL::previous() }}">
+				@endif
+				<input type="email" name="email" placeholder="E-mail" class="email">
+				<input type="password" name="password" placeholder="Парола" autocomplete="password" class="password">
+				<a href="#" id="login-btn-send">Вход</a>
+				<div id="remember-container">
+
+					<div id="forgotten">Забравена парола</div>
+					<div id="register">Регистрация</div>
+				</div>
+			</div>
+		</form>
 </div>
 
 <!-- Forgotten Password Container -->
@@ -80,7 +85,7 @@
 	</span>
 
 	<form method="POST" action="{{ route('password.email') }}" id="reset-password">
-                        @csrf
+		@csrf
 		<input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" placeholder="e-mail" required>
 		<!-- <input type="text" name="secret" placeholder="Тайна"> -->
 		<a href="#" class="orange-btn" id="reset-password-btn">Нова Парола</a>
@@ -95,7 +100,12 @@
 	</span>
 
 	<form method="POST" action="{{ route('register') }}" id="register-form">
-		 @csrf
+		@csrf
+		@if (Request::has('previous'))
+			<input type="hidden" name="previous" value="{{ Request::get('previous') }}">
+		@else
+			<input type="hidden" name="previous" value="{{ URL::previous() }}">
+		@endif
 		<p>
 			<input type="text" name="name" placeholder="Име..." value="{{ old('name') }}" required autofocus>
 		</p>
@@ -122,34 +132,34 @@
 		</p>
 
 		<p class="sex-options">
-            @if(!empty(old('sex')) && old('sex') != 'male')
-                <label id="male-label" for="male">Мъж</label><input type="radio" name="sex" id="male" value="male">
-                <label id="female-label" for="female">Жена</label><input type="radio" name="sex" id="female" value="female" checked="checked">
-            @elseif(!empty(old('sex')) && old('sex') != 'female')
-                <label id="male-label" for="male">Мъж</label><input type="radio" name="sex" id="male" value="male" checked="checked">
-                <label id="female-label" for="female">Жена</label><input type="radio" name="sex" id="female" value="female">
-            @endif
+			@if(!empty(old('sex')) && old('sex') != 'male')
+				<label id="male-label" for="male">Мъж</label><input type="radio" name="sex" id="male" value="male">
+				<label id="female-label" for="female">Жена</label><input type="radio" name="sex" id="female" value="female" checked="checked">
+			@elseif(!empty(old('sex')) && old('sex') != 'female')
+				<label id="male-label" for="male">Мъж</label><input type="radio" name="sex" id="male" value="male" checked="checked">
+				<label id="female-label" for="female">Жена</label><input type="radio" name="sex" id="female" value="female">
+			@endif
 
-            @if(empty(old('sex')))
-                <label id="male-label" for="male">Мъж</label><input type="radio" name="sex" id="male" value="male">
-			    <label id="female-label" for="female">Жена</label><input type="radio" name="sex" id="female" value="female">
-            @endif
-        </p>
+			@if(empty(old('sex')))
+				<label id="male-label" for="male">Мъж</label><input type="radio" name="sex" id="male" value="male">
+				<label id="female-label" for="female">Жена</label><input type="radio" name="sex" id="female" value="female">
+			@endif
+		</p>
 
 		<a href="#" class="orange-btn" id="register-btn-send">Регистрация</a>
 	</form>
 </div>
 @else
-<div class="continue-to-profile">
-	<a href="{{route('myProfile')}}" id="login-btn-send">Продължи към моя Профил</a>
-    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-        <i class="fas fa-sign-out-alt fa-1x"></i>
-        {{ __('Излизане') }}
-    </a>
-    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-        @csrf
-    </form>
-</div>
+	<div class="continue-to-profile">
+		<a href="{{route('myProfile')}}" id="login-btn-send">Продължи към моя Профил</a>
+		<a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+			<i class="fas fa-sign-out-alt fa-1x"></i>
+			{{ __('Излизане') }}
+		</a>
+		<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+			@csrf
+		</form>
+	</div>
 @endif
 
 <script>
@@ -200,117 +210,117 @@
 <!-- //changing background -->
 <script>
 	$(function(){
-        $('#login-button').click();
+		$('#login-button').click();
 		changeBg();
 		setTimeout(function(){
-		    if ($(window).width() > 1000) {
-               changeBg();
-            }
+			if ($(window).width() > 1000) {
+				changeBg();
+			}
 		}, 10000);
 
 		function changeBg(){
-		    console.log($(window).width()+'/'+$(window).height());
-  			// images for background
-  			var items = ["1","2","3","4","5","6"];
-  			var item = items[Math.floor(Math.random()*items.length)];
-  			setTimeout(function(){
-                $('<img/>').attr('src', './images/bg/login/'+item+'.jpg').on('load', function() {
-                   $(this).remove();
-                   $('html').css({
-     					'background-image':'url(./images/bg/login/'+item+'.jpg)',
-     					'background-size':'cover',
-     				});
-                    $('html').fadeIn();
-                });
+			console.log($(window).width()+'/'+$(window).height());
+			// images for background
+			var items = ["1","2","3","4","5","6"];
+			var item = items[Math.floor(Math.random()*items.length)];
+			setTimeout(function(){
+				$('<img/>').attr('src', './images/bg/login/'+item+'.jpg').on('load', function() {
+					$(this).remove();
+					$('html').css({
+						'background-image':'url(./images/bg/login/'+item+'.jpg)',
+						'background-size':'cover',
+					});
+					$('html').fadeIn();
+				});
 
-  			},500);
-  			setTimeout(function(){
-  				if ($(window).width() > 1000) {
-                    changeBg();
-                }
-  			}, 10000);
-  		};
-  	});
-  </script>
-
-  <script>
-  	$(function(){
-  		var cities = {
-        "0":"Враца",
-        "1":"Борован",
-        "2":"Бяла Слатина",
-        "3":"Козлодуй",
-        "4":"Криводол",
-        "5":"Мездра",
-        "6":"Мизия",
-        "7":"Оряхово",
-        "8":"Роман",
-        "9":"Хайредин",
-        "10": "Друго"
+			},500);
+			setTimeout(function(){
+				if ($(window).width() > 1000) {
+					changeBg();
+				}
+			}, 10000);
 		};
-  		 var options = [];
-		  $.each( cities, function( key, val ) {
-		    options.push( "<option value='"+val+"'>" + val + "</option>" );
-		  });
-		 $('#location').append(options);
-  	})
-  </script>
-  <script>
-    $(document).on('keypress',function(e) {
-        if(e.which == 13) {
-            if($('#container').is(":visible")){
-                $('#login-form').submit();
-            }else if($('#forgotten-container').is(":visible")){
-                $('#reset-password').submit();
-            }else if($('#register-container').is(":visible")){
-                $('#register-form').submit();
-            }else{
-                $('#login-button').fadeOut("slow",function(){
-        			$("#container").fadeIn();
-        			TweenMax.from("#container", .4, { scale: 0, ease:Sine.easeInOut});
-        			TweenMax.to("#container", .4, { scale: 1, ease:Sine.easeInOut});
-        		});
-            }
-        }
-    });
+	});
+</script>
 
-  	$('#login-btn-send').on('click', function(){
-  		$('#login-form').submit();
-  	});
+<script>
+	$(function(){
+		var cities = {
+			"0":"Враца",
+			"1":"Борован",
+			"2":"Бяла Слатина",
+			"3":"Козлодуй",
+			"4":"Криводол",
+			"5":"Мездра",
+			"6":"Мизия",
+			"7":"Оряхово",
+			"8":"Роман",
+			"9":"Хайредин",
+			"10": "Друго"
+		};
+		var options = [];
+		$.each( cities, function( key, val ) {
+			options.push( "<option value='"+val+"'>" + val + "</option>" );
+		});
+		$('#location').append(options);
+	})
+</script>
+<script>
+	$(document).on('keypress',function(e) {
+		if(e.which == 13) {
+			if($('#container').is(":visible")){
+				$('#login-form').submit();
+			}else if($('#forgotten-container').is(":visible")){
+				$('#reset-password').submit();
+			}else if($('#register-container').is(":visible")){
+				$('#register-form').submit();
+			}else{
+				$('#login-button').fadeOut("slow",function(){
+					$("#container").fadeIn();
+					TweenMax.from("#container", .4, { scale: 0, ease:Sine.easeInOut});
+					TweenMax.to("#container", .4, { scale: 1, ease:Sine.easeInOut});
+				});
+			}
+		}
+	});
 
-  	$('#reset-password-btn').on('click', function(){
-  		$('#reset-password').submit();
-  	});
+	$('#login-btn-send').on('click', function(){
+		$('#login-form').submit();
+	});
 
-  	$('#register-btn-send').on('click', function(){
-  		$('#register-form').submit();
-  	});
-  </script>
+	$('#reset-password-btn').on('click', function(){
+		$('#reset-password').submit();
+	});
 
-  <script>
+	$('#register-btn-send').on('click', function(){
+		$('#register-form').submit();
+	});
+</script>
+
+<script>
 	$(function(){
 		var err = 0;
 		setTimeout(function(){
-				$('#err'+err).toggle("slide");
-				err++;
+			$('#err'+err).toggle("slide");
+			err++;
 		},4000);
 		setTimeout(function(){
-				$('#err'+err).toggle("slide");
-				err++;
+			$('#err'+err).toggle("slide");
+			err++;
 		},5000);
 		setTimeout(function(){
-				$('#err'+err).toggle("slide");
-				err++;
+			$('#err'+err).toggle("slide");
+			err++;
 		},6000);
 		setTimeout(function(){
-				$('#err'+err).toggle("slide");
-				err++;
+			$('#err'+err).toggle("slide");
+			err++;
 		},7000);
 		setTimeout(function(){
-				$('#err'+err).toggle("slide");
-				err++;
+			$('#err'+err).toggle("slide");
+			err++;
 		},8000);
 	});
-	</script>
+</script>
 </body>
 </html>
