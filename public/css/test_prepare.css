@@ -1,0 +1,7 @@
+.content-wrap{
+    font-family: Ubuntu;
+}
+
+#begin_test:hover{
+    cursor: pointer !important;
+}

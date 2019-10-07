@@ -79,7 +79,7 @@
             @if(env('IS_APPLICATION_OPEN', false))
                 <!-- circle steps icons -->
                     <ul class="steps col-md-12">
-                        @if(is_null($entry) || is_null($entry->test_score))
+                        @if(!is_null($entry) || $entry && $entry->test_score)
                             <li class="active-step">1
                         @else
                             <li>1
@@ -95,7 +95,7 @@
                                     @endif
                                 </div>
                             </li>
-                            @if(isset($entry->test_score) && is_null($entry->task))
+                            @if(!$entry || $entry && is_null($entry->task))
                                 <li class="active-step">2
                             @else
                                 <li>2
@@ -104,6 +104,10 @@
                                     <div class="personal-steps">
                                         @if(isset($entry))
                                             {{!is_null($entry->test_score)?$entry->test_score:'тази стъпка предстои'}}
+                                        @else
+                                            <a href="{{route('prepare.test')}}" id="candidate" data-url="{{route('application.create')}}">
+                                                <button type="button" class="btn btn-success">ТЕСТ</button>
+                                            </a>
                                         @endif
                                     </div>
                                 </li>

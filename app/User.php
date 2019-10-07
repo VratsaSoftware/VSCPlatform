@@ -76,7 +76,7 @@ class User extends Authenticatable
         return $this->hasOne(Occupation::class, 'id', 'cl_occupation_id');
     }
 
-    public function Tests()
+    public function Test()
     {
         return $this->belongsToMany(Test::class, 'test_users_assign');
     }

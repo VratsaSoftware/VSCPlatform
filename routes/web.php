@@ -91,6 +91,9 @@ Route::group(['middleware' => 'auth'], function () {
         ]
     ])->names('application');
 
+    //tests user routes
+    Route::get('/prepare/test','Users\TestController@prepareUserTest')->name('prepare.test');
+    Route::get('/test/user/start','Users\TestController@start')->name('test.start');
     // users education section
     Route::post('/user/create/education/', 'Users\UserController@createEducation')->name('create.education');
     Route::post('/user/update/education/', 'Users\UserController@updateEducation')->name('update.education');
