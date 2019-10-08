@@ -15,10 +15,10 @@
                   <th scope="col">Е-Поща</th>
                   <th scope="col">Локация</th>
                   <th scope="col">Възраст</th>
-                  <th scope="col">Пол</th>
                   <th scope="col">Занимание</th>
                   <th scope="col">Телефон</th>
                   <th scope="col">Източник на формата</th>
+                  <th>Направление</th>
                   <th scope="col">Форма</th>
                 </tr>
               </thead>
@@ -31,11 +31,11 @@
                       <td>{{$entry->User->email}}</td>
                       <td>{{$entry->User->location}}</td>
                       <td>{{(Carbon\Carbon::now()->format('Y') - $entry->User->dob->format('Y'))}}</td>
-                      <td>{{$entry->User->sex}}</td>
                       <td>{{$entry->User->Occupation->occupation}}</td>
                       <td>{{$entry->Form->phone}}</td>
                       <td>{{$entry->Form->source_url}}</td>
-                      <td data-course="{{$entry->Form->course}}" data-module="{{$entry->Form->module}}" data-suitable_candidate="{{$entry->Form->suitable_candidate}}" data-suitable_training="{{$entry->Form->suitable_training}}" data-accompliments="{{$entry->Form->accompliments}}" data-expecatitions="{{$entry->Form->expecatitions}}" data-use="{{$entry->Form->use}}" data-source="{{$entry->Form->source}}" data-cv="{{$entry->Form->cv}}" data-created_at="{{$entry->Form->created_at}}">
+                      <td>{{$entry->Form->course}}</td>
+                      <td data-course="{{$entry->Form->course}}" data-sex="{{$entry->User->sex}}" data-module="{{$entry->Form->module}}" data-suitable_candidate="{{$entry->Form->suitable_candidate}}" data-suitable_training="{{$entry->Form->suitable_training}}" data-accompliments="{{$entry->Form->accompliments}}" data-expecatitions="{{$entry->Form->expecatitions}}" data-use="{{$entry->Form->use}}" data-source="{{$entry->Form->source}}" data-cv="{{$entry->Form->cv}}" data-created_at="{{$entry->Form->created_at}}">
                           <a href="#modal" class="show-form"><button class="btn btn-success">Виж</button>
                           </a>
                       </td>
@@ -65,6 +65,7 @@
                           <th scope="col">Източник</th>
                           <th scope="col">Автобиография</th>
                           <th scope="col">Изпратена</th>
+                          <th>Пол</th>
                         </tr>
                       </thead>
                       <tbody>
@@ -79,6 +80,7 @@
                           <td id="source">Otto</td>
                           <td id="cv-wrapper"><a id="cv" data-url="{{asset('/entry/cv/')}}" href="" download>свали</a></td>
                           <td id="created_at">Otto</td>
+                          <td id="sex"></td>
                         </tr>
                       </tbody>
                     </table>
@@ -104,6 +106,7 @@
             var source = $(this).parent().attr('data-source');
             var cv = $(this).parent().attr('data-cv');
             var created_at = $(this).parent().attr('data-created_at');
+            var sex = $(this).parent().attr('data-sex');
             $('#course').html(course);
             $('#module').html(module);
             $('#suitable_candidate').html(suitable_candidate);
@@ -112,6 +115,7 @@
             $('#expecatitions').html(expecatitions);
             $('#use').html(use);
             $('#source').html(source);
+            $('#sex').html(sex);
             var downloadUrl = $('#cv').attr('data-url');
             $('#cv').attr('href','');
             $('#cv').attr('href',downloadUrl+'/'+cv);
