@@ -3,13 +3,16 @@
 namespace App\Http\Controllers\Events;
 
 use App\Models\Events\ExtraForm;
+use App\Models\Users\Role;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Events\Event;
 use App\Models\Events\Team;
 use App\Models\Events\TeamMember;
 use App\Models\Events\TeamCategory;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Password;
 use Image;
 use File;
 use Illuminate\Support\Facades\Storage;
@@ -564,8 +567,16 @@ class EventController extends Controller
 
     public function cwRegister(Event $event)
     {
-        $user = User::find(Auth::user()->id);
         $occupations = Occupation::all();
+        if(!Auth::user()){
+            $user = null;
+            return view('events.cw.registration', [
+                'user' => $user,
+                'event' => $event,
+                'occupations' => Occupation::all(),
+            ]);
+        }
+        $user = User::find(Auth::user()->id);
         if (!Auth::user()->isOnCWEvent($event->id)) {
             return view('events.cw.registration', [
                 'user' => $user,
@@ -595,55 +606,108 @@ class EventController extends Controller
 
     public function cwStoreForm(Request $request, $event)
     {
-        if(isset($request->link)){
+        if(Auth::user()) {
+            if (isset($request->link)) {
+                $data = $request->validate([
+                    'link' => 'required|string|max:255',
+                ]);
+                $data = $request->except([
+                    '_token',
+                    '_method',
+                ]);
+                $addLink = ExtraForm::where([
+                    ['event_id', $event],
+                    ['user_id', Auth::user()->id]
+                ])->first();
+                $addLink->fields += $data;
+                $addLink->save();
+
+                $message = __('Успешно добавихте линк!');
+                return redirect()->route('users.events')->with('success', $message);
+            }
+            $request['valid_categories'] = \Config::get('cwCategories');
             $data = $request->validate([
-                'link' => 'required|string|max:255',
+                'occupation' => 'required|numeric',
+                'days' => 'required|numeric|',
+                'categories.*' => 'sometimes|in_array:valid_categories.*',
+                'visited' => 'required',
             ]);
+
+            $user = User::find(Auth::user()->id);
+            if ($request->userage) {
+                $dob = null;
+                $year = Carbon::now()->subYears($request->userage)->format('Y');
+                $year .= '-01-01';
+                $dob = Carbon::parse($year)->format('Y-m-d');
+                $user->dob = $dob;
+            }
+            $user->cl_occupation_id = $data['occupation'];
+            $user->save();
             $data = $request->except([
                 '_token',
                 '_method',
+                'valid_categories',
+                'occupation',
+                'userage',
+                'useremail'
             ]);
-            $addLink = ExtraForm::where([
-                ['event_id',$event],
-                ['user_id',Auth::user()->id]
-            ])->first();
-            $addLink->fields += $data;
-            $addLink->save();
-
-            $message = __('Успешно добавихте линк!');
-            return redirect()->route('users.events')->with('success', $message);
-        }
-        $request['valid_categories'] = \Config::get('cwCategories');
-        $data = $request->validate([
-            'occupation' => 'required|numeric',
-            'days' => 'required|numeric|',
-            'categories.*' => 'sometimes|in_array:valid_categories.*',
-            'visited' => 'required',
-        ]);
-
-        $user = User::find(Auth::user()->id);
-        if($request->userage) {
+        }else{
+            //not logged in/registered
+            $request['valid_categories'] = \Config::get('cwCategories');
+            $data = $request->validate([
+                'username' => 'required',
+                'lastname' => 'required',
+                'useremail' => 'required',
+                'userage' => 'required',
+                'occupation' => 'required|numeric',
+                'days' => 'required|numeric|',
+                'categories.*' => 'sometimes|in_array:valid_categories.*',
+                'visited' => 'required',
+                'location' => ['required'],
+                'sex' => ['required'],
+            ]);
+            $role = Role::where('role', 'user')->select('id')->first();
             $dob = null;
             $year = Carbon::now()->subYears($request->userage)->format('Y');
             $year .= '-01-01';
             $dob = Carbon::parse($year)->format('Y-m-d');
-            $user->dob = $dob;
+            $newUser = User::create([
+                'name' => $data['username'],
+                'last_name' => $data['lastname'],
+                'email' => $data['useremail'],
+                'cl_role_id' => $role->id,
+                'dob' => $dob,
+                'cl_occupation_id' => $data['occupation'],
+                'location' => $data['location'],
+                'sex' => $data['sex'],
+                'password' => Hash::make(str_random(12)),
+            ]);
+            $data = $request->except([
+                '_token',
+                '_method',
+                'valid_categories',
+                'occupation',
+                'userage',
+                'username',
+                'lastname',
+                'useremail',
+                'location',
+                'sex',
+            ]);
         }
-        $user->cl_occupation_id = $data['occupation'];
-        $user->save();
-        $data = $request->except([
-            '_token',
-            '_method',
-            'valid_categories',
-            'occupation',
-            'userage'
-        ]);
 
         $newCWRegistration = new ExtraForm;
         $newCWRegistration->event_id = $event;
-        $newCWRegistration->user_id = $user->id;
+        $newCWRegistration->user_id = isset($newUser)?$newUser->id:$user->id;
         $newCWRegistration->fields = $data;
         $newCWRegistration->save();
+
+        if(!Auth::user()){
+            $token = Password::getRepository()->create($newUser);
+            $newUser->sendPasswordResetNotification($token);
+
+            return redirect('password/reset/'.$token);
+        }
 
         $message = __('Успешно се регистрирахте за CodeWeek!');
         return redirect()->route('users.events')->with('success', $message);

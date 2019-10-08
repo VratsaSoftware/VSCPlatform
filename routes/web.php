@@ -75,6 +75,9 @@ Auth::routes();
 Route::get('/application/create/{course?}/{module?}',
     'Courses\ApplicationController@create')->name('application.create');
 Route::post('/application/store/', 'Courses\ApplicationController@store')->name('application.store');
+//cw
+Route::get('/user/event/{event}/register','Events\EventController@cwRegister')->name('events.cw.register');
+Route::post('/user/event/{event}/cw', 'Events\EventController@cwStoreForm')->name('events.cw.form');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/myProfile', 'HomeController@index')->name('myProfile');
@@ -135,9 +138,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('user/{user}/course/{course}/certificate/show',
         'Users\UserController@showCertificate')->name('user.cert.show');
     Route::get('/user/event/{event}','Events\EventController@show')->name('event.show');
-    //cw
-    Route::get('/user/event/{event}/register','Events\EventController@cwRegister')->name('events.cw.register');
-    Route::post('/user/event/{event}/cw', 'Events\EventController@cwStoreForm')->name('events.cw.form');
     Route::group(['middleware' => 'isLecturer'], function () {
         // lecturer routes
         Route::post('/lecturer/update/bio', 'Users\UserController@updateBio')->name('lecturer.update.bio');

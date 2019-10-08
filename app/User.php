@@ -413,7 +413,7 @@ class User extends Authenticatable
         $polls = Poll::with('Options', 'Options.Votes')->where([
             ['start', '<', Carbon::now()],
             ['ends', '>', Carbon::now()]
-        ])->get();
+        ])->where('visibility', '!=', 'draft')->get();
 
         foreach ($polls as $key => $testPoll) {
             foreach ($testPoll->Options as $option) {

@@ -31,32 +31,49 @@
                     <div class="col-md-12 level-title-holder d-flex flex-row flex-wrap">
                         <div class="col-md-12 text-center">
                             <p>
-                                <label for="">част от информацията е взета от профила ви</label>
+                                @if(!is_null($user))
+                                    <label for="">част от информацията е взета от профила ви</label>
+                                @else
+                                    <label for="">след кандидастването, автоматично ще ви бъде нарпавена регистрация в платформата, и ще бъдете пренасочени към екран за задаване на парола</label>
+                                @endif
                             </p>
                             <p>
-                                @if(is_null($user->name) && empty($user->name))
+                                @if(is_null($user) || is_null($user->name) && empty($user->name))
                                     <label for="username">Име <span class="req-star-form">*</span></label>
-                                    <input type="text" name="username" value="" class="small-field-register"><br/>
+                                    <input type="text" name="username" class="small-field-register" value="{{old('username')}}"><br/>
                                 @endif
 
-                                @if(is_null($user->last_name) && empty($user->last_name))
+                                @if(is_null($user) || is_null($user->last_name) && empty($user->last_name))
                                     <label for="userlastname">Фамилия <span class="req-star-form">*</span></label>
-                                    <input type="text" name="username" value="" class="small-field-register"><br/>
+                                    <input type="text" name="lastname" class="small-field-register" value="{{old('lastname')}}"><br/>
                                 @endif
                                 <label for="useremail">Е-Mail <span class="req-star-form">*</span></label>
-                                <input type="text" name="useremail" value="{{$user->email}}" disabled
+                                <input type="text" name="useremail" value="{{is_null($user)?old('useremail'):$user->email}}" {{!is_null($user)??disabled}}
                                        class="small-field-register">
-                                @if(is_null($user->dob))
-                                    <label for="useremail">Възраст <span class="req-star-form">*</span></label>
-                                    <input type="text" name="userage" value="" placeholder="въведете години..."
+                                @if(is_null($user) || is_null($user->dob))
+                                    <label for="userage">Възраст <span class="req-star-form">*</span></label>
+                                    <input type="text" name="userage" value="{{old('userage')}}" placeholder="въведете години..."
                                            class="small-field-register">
+                                @endif
+                                @if(is_null($user))
+                                    <label for="location">Населено място <span class="req-star-form">*</span></label>
+                                    <select id="location" name="location" class="section-el-bold">
+
+                                    </select>
+                                    <br/>
+                                    <label for="sex">Пол <span class="req-star-form">*</span></label>
+                                    <select name="sex" id="sex" class="section-el-bold">
+                                        <option value="0" {{old('sex')?'':'selected'}} disabled>---</option>
+                                        <option value="male" {{old('days') == 'male'?'selected':''}}>Мъж</option>
+                                        <option value="female" {{old('days') == 'female'?'selected':''}}>Жена</option>
+                                    </select>
                                 @endif
                             </p>
                             <p>
                                 <label for="occupation">Занимание <span class="req-star-form">*</span></label><br>
                                 <select class="occupation section-el-bold" name="occupation" id="occupation">
                                     @foreach ($occupations as $occupation)
-                                        @if(!is_null($user->cl_occupation_id) && $user->cl_occupation_id == $occupation->id)
+                                        @if(!is_null($user) && !is_null($user->cl_occupation_id) && $user->cl_occupation_id == $occupation->id)
                                             <option value="{{$occupation->id}}"
                                                     selected>{{$occupation->occupation}}</option>
                                         @else
@@ -67,7 +84,7 @@
                             </p>
                             <p>
                                 <label for="visited">Участвали ли сте преди на CodeWeek? <span class="req-star-form">*</span></label>
-                                <select name="visited" id="visited">
+                                <select name="visited" id="visited" class="section-el-bold">
                                     <option value="0" {{old('visited')?'':'selected'}} disabled>---</option>
                                     <option value="да" {{old('visited') == 'да'?'selected':''}}>да</option>
                                     <option value="не" {{old('visited') == 'не'?'selected':''}}>не</option>
@@ -88,7 +105,7 @@
                                 <select class="section-el-bold js-example-basic-single" name="categories" id="categories" style="width:100%">
                                     @foreach(Config::get('cwCategories') as $category)
                                         @if (old('categories'))
-                                            @if (in_array($category, old('categories')))
+                                            @if ($category == old('categories')))
                                                 <option value="{{ $category }}" selected>{{ $category }}</option>
                                             @else
                                                 <option value="{{ $category }}">{{ $category }}</option>
@@ -155,5 +172,27 @@
                 $('#cat-wrapp').stop(true, true).fadeOut().hide();
             }
         });
+    </script>
+    <script>
+        $(function(){
+            var cities = {
+                "0":"Враца",
+                "1":"Борован",
+                "2":"Бяла Слатина",
+                "3":"Козлодуй",
+                "4":"Криводол",
+                "5":"Мездра",
+                "6":"Мизия",
+                "7":"Оряхово",
+                "8":"Роман",
+                "9":"Хайредин",
+                "10": "Друго"
+            };
+            var options = [];
+            $.each( cities, function( key, val ) {
+                options.push( "<option value='"+val+"'>" + val + "</option>" );
+            });
+            $('#location').append(options);
+        })
     </script>
 @endsection
