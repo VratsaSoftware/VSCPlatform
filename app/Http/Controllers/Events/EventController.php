@@ -30,6 +30,7 @@ use App\Models\Hackaton\Occupation as HackOccupation;
 use App\Models\Hackaton\Technology as HackTechnology;
 use App\Models\Hackaton\Tshirt as HackTshirt;
 use App\Models\Hackaton\Member as HackMember;
+use App\Mail\cwRegistered;
 
 class EventController extends Controller
 {
@@ -666,6 +667,10 @@ class EventController extends Controller
                 'location' => ['required'],
                 'sex' => ['required'],
             ]);
+            $isExisting = User::where('email',$data['useremail'])->first();
+            if($isExisting){
+                return back()->withErrors(['грешка' => 'Моля, влезте в акаунта си и след това се запишете за CodeWeek']);
+            }
             $role = Role::where('role', 'user')->select('id')->first();
             $dob = null;
             $year = Carbon::now()->subYears($request->userage)->format('Y');
@@ -701,6 +706,10 @@ class EventController extends Controller
         $newCWRegistration->user_id = isset($newUser)?$newUser->id:$user->id;
         $newCWRegistration->fields = $data;
         $newCWRegistration->save();
+        $link = 'https://www.facebook.com/events/354453948600024/';
+        $webSite = 'https://codeweek.vratsasoftware.com/';
+        $email = isset($newUser)?$newUser->email:$user->email;
+        Mail::to($email)->send(new cwRegistered($link,$webSite));
 
         if(!Auth::user()){
             $token = Password::getRepository()->create($newUser);

@@ -24,19 +24,22 @@
                     </div>
                 @endif
                 @if(!isset($for_link) || !$for_link)
-                    <form action="{{route('events.cw.form',['event' => $event->id])}}" method="POST" class="col-md-12"
-                      id="cw-reg" name="cw-reg">
-                    {{ csrf_field() }}
 
                     <div class="col-md-12 level-title-holder d-flex flex-row flex-wrap">
                         <div class="col-md-12 text-center">
                             <p>
                                 @if(!is_null($user))
-                                    <label for="">част от информацията е взета от профила ви</label>
+                                    <label for="">Част от информацията е взета от профила ви</label>
                                 @else
-                                    <label for="">след кандидастването, автоматично ще ви бъде нарпавена регистрация в платформата, и ще бъдете пренасочени към екран за задаване на парола</label>
+                                    <label for="">След кандидастването, автоматично ще ви бъде нарпавена регистрация в платформата, и ще бъдете пренасочени към екран за задаване на парола</label>
+                                    <label for="">Ако имате акаунт в платформата, влезте в него за да се попълни част от информацията <br>
+                                        <a href="{{route('logged.cw.register',$event->id)}}"><button class="btn btn-outline-success">ВХОД</button></a>
+                                    </label>
                                 @endif
                             </p>
+                            <form action="{{route('events.cw.form',['event' => $event->id])}}" method="POST" class="col-md-12"
+                                  id="cw-reg" name="cw-reg">
+                                {{ csrf_field() }}
                             <p>
                                 @if(is_null($user) || is_null($user->name) && empty($user->name))
                                     <label for="username">Име <span class="req-star-form">*</span></label>

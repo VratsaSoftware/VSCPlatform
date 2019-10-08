@@ -94,6 +94,9 @@ Route::group(['middleware' => 'auth'], function () {
         ]
     ])->names('application');
 
+    //cw loggedin redirect
+    Route::get('/user/in/event/{event}/register','Events\EventController@cwRegister')->name('logged.cw.register');
+
     //tests user routes
     Route::get('/prepare/test','Users\TestController@prepareUserTest')->name('prepare.test');
     Route::get('/test/user/start','Users\TestController@start')->name('test.start');
