@@ -39,3 +39,19 @@ function timer( countDownDate, timerClass ) {
         $( timerClass ).html( "<span>Времето изтече!</span>" );
     }
 }
+
+// Set the date we're counting down to
+var finishTime = $('.timer-programming').attr('data-time');
+var programmingDate = new Date(finishTime).getTime();
+var timerClass = '.timer-programming';
+
+// Update the count down every 1 second
+var start = setInterval(function () {
+    timer(programmingDate, timerClass)
+}, 1000);
+
+$('#prev-btn').on('click',function(e){
+   e.preventDefault();
+   $('#prev').val(true);
+   $('#started-q').submit();
+});

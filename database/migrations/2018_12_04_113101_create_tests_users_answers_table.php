@@ -18,9 +18,9 @@ class CreateTestsUsersAnswersTable extends Migration
             $table->integer('user_id')->unsigned()->nullable();
             $table->integer('test_id')->unsigned()->nullable();
             $table->integer('tests_bank_question_id')->unsigned()->nullable();
-            $table->enum('is_answered',['1','0'])->default('0');
+            $table->integer('is_answered')->nullable();
             $table->longText('answer')->nullable();
-            $table->enum('is_valid',['1','0'])->default('0');
+            $table->integer('is_valid')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
