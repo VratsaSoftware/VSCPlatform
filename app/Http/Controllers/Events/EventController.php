@@ -667,6 +667,7 @@ class EventController extends Controller
                 'location' => ['required'],
                 'sex' => ['required'],
             ]);
+
             $isExisting = User::where('email',$data['useremail'])->first();
             if($isExisting){
                 return back()->withErrors(['грешка' => 'Моля, влезте в акаунта си и след това се запишете за CodeWeek']);
@@ -700,7 +701,9 @@ class EventController extends Controller
                 'sex',
             ]);
         }
-
+        if($request->categories == '0' || $request->categories == 0){
+            $data['categories'] = '--';
+        }
         $newCWRegistration = new ExtraForm;
         $newCWRegistration->event_id = $event;
         $newCWRegistration->user_id = isset($newUser)?$newUser->id:$user->id;
