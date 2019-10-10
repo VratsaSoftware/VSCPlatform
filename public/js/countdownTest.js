@@ -37,6 +37,10 @@ function timer( countDownDate, timerClass ) {
         // $( timerClass ).parent().find( 'span' ).hide();
         $( timerClass ).parent().next( '.header-button' ).removeClass( 'no-show' ).show().fadeIn();
         $( timerClass ).html( "<span>Времето изтече!</span>" );
+        $('#submit-test-btn').click();
+        $('#submit-test-btn').fadeOut();
+        $('#next-btn').fadeOut().remove();
+        $('#prev-btn').fadeOute().remove();
     }
 }
 
@@ -53,5 +57,11 @@ var start = setInterval(function () {
 $('#prev-btn').on('click',function(e){
    e.preventDefault();
    $('#prev').val(true);
+   $('#started-q').submit();
+});
+
+$('.single-question').on('click', function(){
+   var requestQuestion = $(this).find('.small-text').attr('data-q-id');
+   $('#started-q').append('<input type="hidden" name="give_q" value="'+requestQuestion+'">');
    $('#started-q').submit();
 });

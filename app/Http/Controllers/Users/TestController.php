@@ -35,6 +35,15 @@ class TestController extends Controller
             if ($userTest->Test()->exists()) {
                 return view('user.tests.prepare', ['test' => $userTest->Test[0], 'qCount' => $questionsCount]);
             }
+        } else {
+            $submited = User::with('Test')->whereHas('Test', function ($q) {
+                $q->whereNotNull('submited_at');
+            })->find(Auth::user()->id);
+            if ($submited) {
+                $submitVals = $this->prepareSubmitStats();
+                $submitVals['score'] = $this->generateScore();
+                return view('user.tests.ending', $submitVals);
+            }
         }
         $message = 'Няма тестове за този потребител';
         return redirect()->route('myProfile')->with('error', $message);
@@ -47,57 +56,83 @@ class TestController extends Controller
             ['user_id', Auth::user()->id],
             ['test_id', $userTest->Test[0]->id]
         ])->first();
+        $submited = TestUserSubmited::where([
+            ['user_id',Auth::user()->id],
+            ['test_id', $userTest->Test[0]->id]
+        ])->whereNotNull('submited_at')->first();
 
-//        if(!$isStarted && empty($isStarted)) {
-        $startedTest = new TestUserSubmited;
-        $startedTest->user_id = Auth::user()->id;
-        $startedTest->test_id = $userTest->Test[0]->id;
-        $startedTest->started_at = Carbon::now();
-        $startedTest->save();
+        if (empty($submited) && is_null($submited)) {
+            if(!$isStarted && empty($isStarted)) {
+                $startedTest = new TestUserSubmited;
+                $startedTest->user_id = Auth::user()->id;
+                $startedTest->test_id = $userTest->Test[0]->id;
+                $startedTest->started_at = Carbon::now();
+                $startedTest->save();
+            }else{
+                $startedTest = $isStarted;
+            }
 
-        $testBankQuestions = Test::with('bank', 'bank.Questions')->find($userTest->Test[0]->id);
-        $questions = $testBankQuestions->bank[0]->Questions;
-        $shuffleQuestions = $questions->shuffle();
-        $finishTime = $startedTest->started_at->addHour($userTest->Test[0]->duration->format('H'));
-        $finishTime = $finishTime->addMinutes($userTest->Test[0]->duration->format('i'));
-        session()->put('questions',$shuffleQuestions);
-        session()->put('submited_id',$startedTest->id);
-        session()->put('answered',0);
-        return view('user.tests.question', ['questions' => $shuffleQuestions, 'order' => null, 'current' => null, 'finishTime' => $finishTime]);
-//        }
+            $testBankQuestions = Test::with('bank', 'bank.Questions')->find($userTest->Test[0]->id);
+            $questions = $testBankQuestions->bank[0]->Questions;
+            $shuffleQuestions = $questions->shuffle();
+            $finishTime = $startedTest->started_at->addHour($userTest->Test[0]->duration->format('H'));
+            $finishTime = $finishTime->addMinutes($userTest->Test[0]->duration->format('i'));
+            //setting questions, started test id to maintain when the test is started
+            session()->put('questions', $shuffleQuestions);
+            session()->put('submited_id', $startedTest->id);
+            return view('user.tests.question', ['questions' => $shuffleQuestions, 'order' => null, 'current' => null, 'finishTime' => $finishTime]);
+        }
+
+        if ($submited || !is_null($submited)) {
+            $submitVals = $this->prepareSubmitStats();
+            $submitVals['score'] = $this->generateScore();
+            return view('user.tests.ending', $submitVals);
+        }
     }
 
     public function answer(Request $request)
     {
+        if (session()->exists('questions')) {
+            $shuffleQuestions = session()->get('questions');
+            $isQuestionExisting = array_column($shuffleQuestions->toArray(), 'id');
+            $isQuestionExisting = array_map(function ($value) {
+                return (int)$value;
+            }, $isQuestionExisting);
+        }
+        //if request question id its not in started test questions
+        if (isset($isQuestionExisting) && !in_array($request->question, $isQuestionExisting)) {
+            $message = 'Невалиден въпрос';
+            return redirect()->route('myProfile')->with('error', $message);
+        }
         $userTest = Auth::user()->load('Test');
-        if($request->open_answer) {
-            $qAnswer = BankAnswer::where('tests_bank_question_id',$request->question)->first();
+        if ($request->open_answer) {
+            $qAnswer = BankAnswer::where('tests_bank_question_id', $request->question)->first();
             $isValid = 0;
-            if($qAnswer && $request->open_answer == $qAnswer->answer){
+            if ($qAnswer && $request->open_answer == $qAnswer->answer) {
                 $isValid = 1;
             }
-            $storeUpdAnswer = TestUserAnswer::updateOrCreate(
-                ['user_id' => Auth::user()->id, 'tests_bank_question_id' => $request->question],
-                ['answer' => $request->open_answer,'test_id' => $userTest->Test[0]->id,'is_answered' => 1,'is_valid' => $isValid]);
+            $storeUpdAnswer = TestUserAnswer::updateOrCreate(['user_id' => Auth::user()->id, 'tests_bank_question_id' => $request->question],
+                ['answer' => $request->open_answer, 'test_id' => $userTest->Test[0]->id, 'is_answered' => 1, 'is_valid' => $isValid]);
         }
-        if($request->one_answer) {
-                $qAnswer = BankAnswer::find($request->one_answer);
-                $isValid = 0;
-                if($qAnswer->correct > 0 || $qAnswer->correct != 0){
-                    $isValid = 1;
-                }
+        if ($request->one_answer) {
+            $qAnswer = BankAnswer::find($request->one_answer);
+            $isValid = 0;
+            if ($qAnswer->correct > 0 || $qAnswer->correct != 0) {
+                $isValid = 1;
+            }
 
-                $storeUpdAnswer = TestUserAnswer::updateOrCreate(
-                    ['user_id' => Auth::user()->id, 'tests_bank_question_id' => $request->question],
-                    ['answer' => $request->one_answer,'test_id' => $userTest->Test[0]->id,'is_answered' => 1,'is_valid' => $isValid]);
+            $storeUpdAnswer = TestUserAnswer::updateOrCreate(['user_id' => Auth::user()->id, 'tests_bank_question_id' => $request->question],
+                ['answer' => $request->one_answer, 'test_id' => $userTest->Test[0]->id, 'is_answered' => 1, 'is_valid' => $isValid]);
         }
-        if($request->many_answers) {
-            $deleteAnswers[] = TestUserAnswer::where(
-                ['user_id' => Auth::user()->id, 'tests_bank_question_id' => $request->question])->delete();
-            foreach($request->many_answers as $answer) {
+        if ($request->many_answers) {
+            $deleteAnswers[] = TestUserAnswer::where([
+                ['user_id', Auth::user()->id],
+                ['tests_bank_question_id', $request->question]
+            ])->delete();
+            foreach ($request->many_answers as $answer) {
                 $qAnswer = BankAnswer::find($answer);
                 $isValid = 0;
-                if($qAnswer->correct > 0 || $qAnswer->correct != 0){
+                if ($qAnswer->correct > 0 || $qAnswer->correct != 0) {
                     $isValid = 1;
                 }
                 $insertNewAnswers = new TestUserAnswer;
@@ -113,46 +148,182 @@ class TestController extends Controller
         $startedTest = TestUserSubmited::find(session()->get('submited_id'));
         $finishTime = $startedTest->started_at->addHour($userTest->Test[0]->duration->format('H'));
         $finishTime = $finishTime->addMinutes($userTest->Test[0]->duration->format('i'));
-        if(session()->exists('questions')) {
-            $shuffleQuestions = session()->get('questions');
-                $max = count($shuffleQuestions);
-                foreach ($shuffleQuestions as $key => $question) {
-                    $isAnswered = TestUserAnswer::where([
-                        ['tests_bank_question_id',$question->id],
-                        ['user_id',Auth::user()->id],
-                        ['test_id',$userTest->Test[0]->id]
-                    ])->get();
-                    if(!$isAnswered->isEmpty()){
-                        $shuffleQuestions[$key]['answered'] = true;
-                        $shuffleQuestions[$key]['answers'] = $isAnswered->toArray();
-                    }
-                    if ($question->id == $request->question) {
-                        if(is_null($request->prev) || !$request->prev || $request->prev != 'true') {
-                            if (($key + 1) != $max) {
-                                $current = $shuffleQuestions[$key + 1];
-                                $order = $key + 1;
-                            } else {
-                                $current = null;
-                                $order = null;
-                            }
-                        }else{
-                            if (($key - 1) >= 0) {
-                                $current = $shuffleQuestions[$key - 1];
-                                $order = $key - 1;
-                            } else {
-                                $current = null;
-                                $order = null;
+
+        $max = count($shuffleQuestions);
+        //if time its not passed for the duration of test based on the time started the test
+        if ($finishTime > Carbon::now()) {
+            //if test is started and questions are inside session
+            if (session()->exists('questions')) {
+                //if is clicked next or prev buttons and empty on right bar question click
+                if (!$request->give_q) {
+                    foreach($shuffleQuestions as $key => $question){
+                        $isAnswered = TestUserAnswer::where([
+                            ['tests_bank_question_id', $question->id],
+                            ['user_id', Auth::user()->id],
+                            ['test_id', $userTest->Test[0]->id]
+                        ])->get();
+                        if (!$isAnswered->isEmpty()) {
+                            $shuffleQuestions[$key]['answered'] = true;
+                            $shuffleQuestions[$key]['answers'] = $isAnswered->toArray();
+                            if ($shuffleQuestions[$key]->type == 'many') {
+                                //parse id's of the answers to integer for later comparison
+                                $shuffleQuestions[$key]['answers_many'] = array_column($shuffleQuestions[$key]['answers'], 'answer');
+                                $shuffleQuestions[$key]['answers_many'] = array_map(function ($value) {
+                                    return (int)$value;
+                                }, $shuffleQuestions[$key]['answers_many']);
                             }
                         }
                     }
+                    foreach ($shuffleQuestions as $key => $question) {
+                        if ($question->id == $request->question) {
+                            //if is clicked next button
+                            if (is_null($request->prev) || !$request->prev || $request->prev != 'true') {
+                                if (($key + 1) != $max) {
+                                    $current = $shuffleQuestions[$key + 1];
+                                    $order = $key + 1;
+                                } else {
+                                    //if is reached last question on next click showing the first question
+                                    $current = $shuffleQuestions[0];
+                                    $order = null;
+                                }
+                            } else {
+                                //is clicked prev button
+                                if (($key - 1) >= 0) {
+                                    $current = $shuffleQuestions[$key - 1];
+                                    $order = $key - 1;
+                                } else {
+                                    //if is reached first question on prev click showing the last question
+                                    $current = $shuffleQuestions[$max - 1];
+                                    $order = null;
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    //if rightbar is clicked on question
+                    foreach ($shuffleQuestions as $key => $question) {
+                        $isAnswered = TestUserAnswer::where([
+                            ['tests_bank_question_id', $question->id],
+                            ['user_id', Auth::user()->id],
+                            ['test_id', $userTest->Test[0]->id]
+                        ])->get();
+                        if (!$isAnswered->isEmpty()) {
+                            $shuffleQuestions[$key]['answered'] = true;
+                            $shuffleQuestions[$key]['answers'] = $isAnswered->toArray();
+                            if ($shuffleQuestions[$key]->type == 'many') {
+                                //parse id's of the answers to integer for later comparison
+                                $shuffleQuestions[$key]['answers_many'] = array_column($shuffleQuestions[$key]['answers'], 'answer');
+                                $shuffleQuestions[$key]['answers_many'] = array_map(function ($value) {
+                                    return (int)$value;
+                                }, $shuffleQuestions[$key]['answers_many']);
+                            }
+                        }
+                        if ($question->id == $request->give_q) {
+                            $current = $shuffleQuestions[$key];
+                            $order = $key;
+                        }
+                    }
                 }
-//                if(is_null($current) || is_null($order)){
-//                    dd('end');
-//                }
-            return view('user.tests.question', ['questions' => $shuffleQuestions, 'order' => $order, 'current' => $current, 'finishTime' => $finishTime]);
-        }else{
-            dd('no questions available');
+            }
+            return view('user.tests.question', [
+                'questions' => $shuffleQuestions,
+                'order' => $order,
+                'current' => $current,
+                'finishTime' => $finishTime,
+                'started' => true,
+            ]);
         }
+        $startedTest->submited_at = Carbon::now();
+        $startedTest->save();
+        $submitVals = $this->prepareSubmitStats();
+        $submitVals['score'] = $this->generateScore();
+        $startedTest->score = $submitVals['score']['percentage'];
+        $startedTest->save();
+//        session()->forget('submited_id');
+//        session()->forget('questions');
+
+        return view('user.tests.ending', $submitVals);
+    }
+
+    public function prepareSubmitStats()
+    {
+        $userTest = Auth::user()->load('Test');
+        $test = $userTest->Test[0];
+        $answered = TestUserAnswer::where([
+            ['user_id', Auth::user()->id],
+            ['test_id', $userTest->Test[0]->id],
+            ['is_answered', 1]
+        ])->select('tests_bank_question_id')->groupBy('tests_bank_question_id')->get();
+        $answeredNum = count($answered);
+        $startedTest = TestUserSubmited::find(session()->get('submited_id'));
+        $started_at = $startedTest->started_at;
+        $time = $started_at->diff($startedTest->submited_at)->format('%H' . 'ч. ' . ':%I' . 'м. ' . ':%S' . 'с. ');
+
+        return ['test' => $test, 'answeredNum' => $answeredNum, 'started_at' => $started_at, 'time' => $time];
+    }
+
+    public function submitTest()
+    {
+        if(session()->get('submited_id')) {
+            $startedTest = TestUserSubmited::find(session()->get('submited_id'));
+            $startedTest->submited_at = Carbon::now();
+            $startedTest->save();
+            $submitVals = $this->prepareSubmitStats();
+            $submitVals['score'] = $this->generateScore();
+            $startedTest->score = $submitVals['score']['percentage'];
+            $startedTest->save();
+
+//            session()->forget('submited_id');
+//            session()->forget('questions');
+
+            return view('user.tests.ending', $submitVals);
+        }
+        $message = 'Теста е направен!';
+        return redirect()->route('myProfile')->with('error', $message);
+    }
+
+    public function generateScore()
+    {
+        $userTest = Auth::user()->load('Test');
+        $answered = TestUserAnswer::with('Question')->where([
+            ['user_id', Auth::user()->id],
+            ['test_id', $userTest->Test[0]->id],
+            ['is_answered', 1]
+        ])->get();
+        $score = 0;
+        foreach ($answered as $answer) {
+            if ($answer->is_valid > 0 || $answer->is_valid != '0') {
+                $points = (int)$answer->Question->difficulty;
+                if (!is_null($answer->bonus)) {
+                    $points += $answer->bonus;
+                }
+                $score += $points;
+            }
+        }
+        $questions = $userTest->load('Test.bank', 'Test.bank.questions');
+        $questionsCount = $questions->Test[0]->bank[0]->questions->count();
+        $maxScore = 0;
+        foreach ($questions->Test[0]->bank[0]->questions as $q) {
+            $maxScore += (int)$q->difficulty;
+            if (!is_null($q->bonus)) {
+                $maxScore += $q->bonus;
+            }
+        }
+
+        $answeredIds = TestUserAnswer::where([
+            ['user_id', Auth::user()->id],
+            ['test_id', $userTest->Test[0]->id],
+            ['is_answered', 1]
+        ])->select('tests_bank_question_id')->groupBy('tests_bank_question_id')->get();
+        $answeredNum = count($answeredIds);
+        $percent = $score / $maxScore;
+        $data['questionsCount'] = $questionsCount;
+        $data['answered'] = $answeredNum;
+        $data['score'] = $score;
+        $data['maxScore'] = $maxScore;
+        $data['percentage'] = (float)number_format($percent * 100, 1);
+
+        return $data;
     }
 
     /**

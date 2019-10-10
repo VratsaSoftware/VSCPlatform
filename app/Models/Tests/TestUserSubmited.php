@@ -9,5 +9,5 @@ class TestUserSubmited extends Model
     protected $guarded = [];
     protected $table = 'test_users_submited';
 
-    protected $dates = ['started_at'];
+    protected $dates = ['started_at','submited_at'];
 }

@@ -20,7 +20,7 @@
 </div>
 <div class="col-md-12 d-flex flex-row flex-wrap main-holder">
     <div class="col-md-9 current-question">
-        @if(is_null($current) || is_null($order))
+        @if(is_null($current) && !isset($started))
             <form action="{{route('test.send.answer')}}" method="POST">
                 @csrf
                 <input type="hidden" name="question" value="{{$questions[0]->id}}">
@@ -120,7 +120,7 @@
                         {{$current->question}}
                     </div>
                     <div class="col-md-12 open-answer-holder">
-                        <textarea name="open_answer" id="open_answer" cols="auto" rows="10" placeholder="отговор">{{isset($current->answers)?$current->answers[0]['answer']:''}}</textarea>
+                        <textarea name="open_answer" id="open_answer" cols="auto" rows="10" placeholder="отговор">{{isset($current->answers[0]['answer'])?$current->answers[0]['answer']:''}}</textarea>
                     </div>
                 @endif
                 @if($current->type == 'one')
@@ -169,15 +169,15 @@
                     <div class="col-md-12 many-question-holder">
                         <ul>
                             @foreach($current->Answers as $answer)
-                                @if($current->answers)
-                                    @foreach($current->answers as $answered)
-                                        @if((int) $answered['answer'] == $answer->id)
-                                            <?php $answer['selected'] = true; ?>
-                                        @endif
-                                    @endforeach
+                                @if($current->answers_many && !is_null($current->answers_many) && isset($current->answers_many))
+                                    @if(in_array($answer->id,$current->answers_many))
+                                        <?php $answer['selected'] = true; ?>
+                                    @else
+                                        <?php $answer['selected'] = false; ?>
+                                    @endif
                                 @endif
                                 <li>
-                                    <input type="checkbox" name="many_answers[]" id="a-{{$answer->id}}" value="{{$answer->id}}" {{isset($answer['selected'])?'checked':''}}>
+                                    <input type="checkbox" name="many_answers[]" id="a-{{$answer->id}}" value="{{$answer->id}}" {{$answer['selected']?'checked':''}}>
                                     &nbsp;<label for="a-{{$answer->id}}">
                                         {{$answer->answer}}
                                     </label>
@@ -191,18 +191,13 @@
                         </ul>
                     </div>
                 @endif
-                    @if($order > 0)
-                        <div class="col-md-6 submit-answer-holder text-center">
-                            <button class="btn btn-outline-success" id="prev-btn">предишен</button>
-                        </div>
-                    @else
-                        <div class="col-md-6 clearfix"></div>
-                    @endif
-                    @if(!is_null($current) || !is_null($order))
-                        <div class="col-md-6 submit-answer-holder text-center">
-                            <button class="btn btn-outline-success">следващ</button>
-                        </div>
-                    @endif
+                    <div class="col-md-6 submit-answer-holder text-center">
+                        <button class="btn btn-outline-success" id="prev-btn">предишен</button>
+                    </div>
+
+                    <div class="col-md-6 submit-answer-holder text-center">
+                        <button class="btn btn-outline-success" id="next-btn">следващ</button>
+                    </div>
             </form>
         @endif
     </div>
@@ -221,7 +216,7 @@
                     @endif
                 @endif
             @endif
-                <div class="col-md-12 small-text">
+                <div class="col-md-12 small-text" data-q-id="{{$question->id}}">
                     {{$question->question}}
                     <br/>
                     <ul>
@@ -248,9 +243,7 @@
         @endforeach
     </div>
     <div class="col-md-11 text-right">
-        <form action="">
-            <button class="btn btn-outline-warning">ПРЕДАЙ</button>
-        </form>
+        <a href="{{route('test.submit')}}"><button class="btn btn-outline-warning" id="submit-test-btn">ПРЕДАЙ</button></a>
     </div>
 </div>
 </div>

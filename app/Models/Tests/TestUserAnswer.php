@@ -14,6 +14,6 @@ class TestUserAnswer extends Model
     }
 
     public function Question(){
-        return $this->hasOne(BankQuestion::class);
+        return $this->hasOne(BankQuestion::class,'id', 'tests_bank_question_id');
     }
 }
