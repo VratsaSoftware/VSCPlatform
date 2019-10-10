@@ -867,7 +867,7 @@
                                 <td>{{$test->start_at->format('d-m-y')}}</td>
                                 <td>{{$test->expire_at->format('d-m-y')}}</td>
                                 <td>{{$test->duration->format('H:i')}}</td>
-                                <td>{{$test->bank[0]->name}}</td>
+                                <td>{{isset($test->bank[0]->name)?$test->bank[0]->name:''}}</td>
                                 <td>
                                     <ol>
                                         @foreach($test->Users as $user)

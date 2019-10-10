@@ -79,7 +79,7 @@
             @if(env('IS_APPLICATION_OPEN', false))
                 <!-- circle steps icons -->
                     <ul class="steps col-md-12">
-                        @if(!is_null($entry) || $entry && $entry->test_score)
+                        @if(!is_null($entry) && is_null($entry->test_score))
                             <li class="active-step">1
                         @else
                             <li>1
@@ -103,11 +103,24 @@
                                     <span>предварителен тест</span>
                                     <div class="personal-steps">
                                         @if(isset($entry))
-                                            {{!is_null($entry->test_score)?$entry->test_score:'тази стъпка предстои'}}
+                                            @if(is_null($entry->test_score))
+                                                <a href="{{route('prepare.test')}}" id="candidate" data-url="{{route('application.create')}}">
+                                                    <button type="button" class="btn btn-success">ТЕСТ</button>
+                                                </a>
+                                            @endif
+                                            @if(isset($entry->test_stats))
+                                                <div class="col-md-12 d-flex flex-row flex-wrap">
+                                                    <div class="col-md-3 text-center">Брой Въпроси:<br/><strong> {{$entry->test_stats['questionsCount']}}</strong></div>
+                                                    <div class="col-md-3 text-center">Брой Отговори:<br/><strong> {{$entry->test_stats['answered']}}</strong></div>
+                                                    <div class="col-md-3 text-center">Точки верни отговори:<br/><strong> {{$entry->test_stats['score']}}</strong></div>
+                                                    <div class="col-md-3 text-center">Максимален брой точки:<br/><strong> {{$entry->test_stats['maxScore']}}</strong></div>
+                                                    <div class="col-md-12 text-center" style="margin-top:1%">
+                                                            <strong>Резултат: {{$entry->test_stats['percentage']}}%</strong>
+                                                    </div>
+                                                </div>
+                                            @endif
                                         @else
-                                            <a href="{{route('prepare.test')}}" id="candidate" data-url="{{route('application.create')}}">
-                                                <button type="button" class="btn btn-success">ТЕСТ</button>
-                                            </a>
+                                            тази стъпка предстои
                                         @endif
                                     </div>
                                 </li>

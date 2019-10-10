@@ -60,8 +60,15 @@ $('#prev-btn').on('click',function(e){
    $('#started-q').submit();
 });
 
-$('.single-question').on('click', function(){
-   var requestQuestion = $(this).find('.small-text').attr('data-q-id');
-   $('#started-q').append('<input type="hidden" name="give_q" value="'+requestQuestion+'">');
-   $('#started-q').submit();
+$(function(){
+    $('.single-question').on('click', function(){
+        var requestQuestion = $(this).find('.small-text').attr('data-q-id');
+        if($('#first_q').length){
+            $('#first_q').append('<input type="hidden" name="give_q" value="'+requestQuestion+'">');
+            $('#first_q').submit();
+        }else {
+            $('#started-q').append('<input type="hidden" name="give_q" value="' + requestQuestion + '">');
+            $('#started-q').submit();
+        }
+    });
 });

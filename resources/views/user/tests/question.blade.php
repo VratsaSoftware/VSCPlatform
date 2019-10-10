@@ -21,7 +21,7 @@
 <div class="col-md-12 d-flex flex-row flex-wrap main-holder">
     <div class="col-md-9 current-question">
         @if(is_null($current) && !isset($started))
-            <form action="{{route('test.send.answer')}}" method="POST">
+            <form action="{{route('test.send.answer')}}" method="POST" id="first_q">
                 @csrf
                 <input type="hidden" name="question" value="{{$questions[0]->id}}">
                 @if($questions[0]->type == 'open')

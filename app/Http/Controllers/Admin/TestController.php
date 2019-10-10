@@ -261,7 +261,7 @@ class TestController extends Controller
 
         $newBank->name = $data['title'];
         $newBank->save();
-        $this->loadQuestionsToBank($data, $newBank->id);
+//        $this->loadQuestionsToBank($data, $newBank->id);
 
         $message = __('Успешно добавена Банка ' . $newBank->name . ' !');
         return redirect()->back()->with('success', $message);

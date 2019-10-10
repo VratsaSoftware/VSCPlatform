@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Courses;
 
+use App\Models\Tests\TestUserSubmited;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Courses\Entry;
@@ -26,6 +27,18 @@ class ApplicationController extends Controller
     public function index()
     {
         $entry = Entry::with('User', 'Form')->where('user_id', Auth::user()->id)->first();
+        $submited = $submited = TestUserSubmited::where([
+            ['user_id',Auth::user()->id],
+            ['test_id', Auth::user()->load('Test')->Test[0]->id]
+        ])->whereNotNull('submited_at')->first();
+        if ($submited) {
+            $score = app('App\Http\Controllers\Users\TestController')->generateScore();
+            if($entry) {
+                $entry->test_score = $score['percentage'];
+                $entry->save();
+            }
+            $entry['test_stats'] = $score;
+        }
         return view('user.application', ['entry'=>$entry]);
     }
 

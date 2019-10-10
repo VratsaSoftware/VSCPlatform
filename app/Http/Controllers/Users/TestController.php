@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Models\Courses\Entry;
 use App\Models\Tests\BankAnswer;
 use App\Models\Tests\Test;
 use App\Models\Tests\TestUserAnswer;
@@ -36,9 +37,10 @@ class TestController extends Controller
                 return view('user.tests.prepare', ['test' => $userTest->Test[0], 'qCount' => $questionsCount]);
             }
         } else {
-            $submited = User::with('Test')->whereHas('Test', function ($q) {
-                $q->whereNotNull('submited_at');
-            })->find(Auth::user()->id);
+            $submited = TestUserSubmited::where([
+                ['user_id',Auth::user()->id],
+                ['test_id', Auth::user()->load('Test')->Test[0]->id]
+            ])->whereNotNull('submited_at')->first();
             if ($submited) {
                 $submitVals = $this->prepareSubmitStats();
                 $submitVals['score'] = $this->generateScore();
@@ -84,9 +86,8 @@ class TestController extends Controller
         }
 
         if ($submited || !is_null($submited)) {
-            $submitVals = $this->prepareSubmitStats();
-            $submitVals['score'] = $this->generateScore();
-            return view('user.tests.ending', $submitVals);
+            $message = 'Теста е направен!';
+            return redirect()->route('myProfile')->with('error', $message);
         }
     }
 
@@ -239,32 +240,37 @@ class TestController extends Controller
         $submitVals['score'] = $this->generateScore();
         $startedTest->score = $submitVals['score']['percentage'];
         $startedTest->save();
-//        session()->forget('submited_id');
-//        session()->forget('questions');
 
         return view('user.tests.ending', $submitVals);
     }
 
     public function prepareSubmitStats()
     {
-        $userTest = Auth::user()->load('Test');
-        $test = $userTest->Test[0];
-        $answered = TestUserAnswer::where([
-            ['user_id', Auth::user()->id],
-            ['test_id', $userTest->Test[0]->id],
-            ['is_answered', 1]
-        ])->select('tests_bank_question_id')->groupBy('tests_bank_question_id')->get();
-        $answeredNum = count($answered);
-        $startedTest = TestUserSubmited::find(session()->get('submited_id'));
-        $started_at = $startedTest->started_at;
-        $time = $started_at->diff($startedTest->submited_at)->format('%H' . 'ч. ' . ':%I' . 'м. ' . ':%S' . 'с. ');
+        if (session()->get('submited_id')) {
+            $userTest = Auth::user()->load('Test');
+            $test = $userTest->Test[0];
+            $answered = TestUserAnswer::where([
+                ['user_id', Auth::user()->id],
+                ['test_id', $userTest->Test[0]->id],
+                ['is_answered', 1]
+            ])->select('tests_bank_question_id')->groupBy('tests_bank_question_id')->get();
+            $answeredNum = count($answered);
+            $startedTest = TestUserSubmited::find(session()->get('submited_id'));
+            $started_at = $startedTest->started_at;
+            if (!session()->exists('time')) {
+                $time = $started_at->diff($startedTest->submited_at)->format('%H' . 'ч. ' . ':%I' . 'м. ' . ':%S' . 'с. ');
+                session()->put('time', $time);
+            }
 
-        return ['test' => $test, 'answeredNum' => $answeredNum, 'started_at' => $started_at, 'time' => $time];
+            return ['test' => $test, 'answeredNum' => $answeredNum, 'started_at' => $started_at, 'time' => isset($time) ? $time : session()->get('time')];
+        }
+        $message = 'Теста е направен!';
+        return redirect()->route('myProfile')->with('error', $message);
     }
 
     public function submitTest()
     {
-        if(session()->get('submited_id')) {
+        if (session()->get('submited_id')) {
             $startedTest = TestUserSubmited::find(session()->get('submited_id'));
             $startedTest->submited_at = Carbon::now();
             $startedTest->save();
@@ -272,10 +278,14 @@ class TestController extends Controller
             $submitVals['score'] = $this->generateScore();
             $startedTest->score = $submitVals['score']['percentage'];
             $startedTest->save();
-
+            $entry = Entry::with('User', 'Form')->where('user_id', Auth::user()->id)->first();
+            if($entry) {
+                $entry->test_score = $submitVals['score']['percentage'];
+                $entry->save();
+            }
 //            session()->forget('submited_id');
 //            session()->forget('questions');
-
+//            session()->forget('time');
             return view('user.tests.ending', $submitVals);
         }
         $message = 'Теста е направен!';
