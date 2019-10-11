@@ -18,12 +18,12 @@
                     <strong>{{$time}}</strong>
                 </div>
                 <div class="col-md-3 text-center">Брой Въпроси:<br/><strong> {{$score['questionsCount']}}</strong></div>
-                <div class="col-md-3 text-center">Брой Отговори:<br/><strong> {{$score['answered']}}</strong></div>
+                <div class="col-md-3 text-center">Брой Отговорени:<br/><strong> {{$score['answered']}}</strong></div>
                 <div class="col-md-3 text-center">Точки верни отговори:<br/><strong> {{$score['score']}}</strong></div>
                 <div class="col-md-3 text-center">Максимален брой точки:<br/><strong> {{$score['maxScore']}}</strong>
                 </div>
                 <div class="col-md-12 text-center">
-                    <strong>Резултат: {{$score['percentage']}}%</strong>
+                    <strong>Резултат: {{$score['score']}} / {{$score['maxScore']}}</strong>
                     <!-- Progress bar 4 -->
                     <div class="progress mx-auto" data-value='{{$score['percentage']}}'>
                           <span class="progress-left">
@@ -33,7 +33,7 @@
                         <span class="progress-bar border-warning"></span>
                         </span>
                         <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                            <div class="h2 font-weight-bold">{{$score['percentage']}}<sup class="small">%</sup></div>
+                            <div class="h2 font-weight-bold">{{$score['percentage']}}<span class="small">%</span></div>
                         </div>
                     </div>
                     <!-- END -->

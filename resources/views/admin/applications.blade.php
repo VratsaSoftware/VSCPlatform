@@ -20,6 +20,7 @@
                   <th scope="col">Източник на формата</th>
                   <th>Направление</th>
                   <th scope="col">Форма</th>
+                  <th>Резултат от Тестове</th>
                 </tr>
               </thead>
               <tbody>
@@ -39,6 +40,7 @@
                           <a href="#modal" class="show-form"><button class="btn btn-success">Виж</button>
                           </a>
                       </td>
+                      <td>{{isset($entry['testScore']['percentage'])?$entry['testScore']['percentage'].'%':'--'}}</td>
                     </tr>
                 @endforeach
               </tbody>

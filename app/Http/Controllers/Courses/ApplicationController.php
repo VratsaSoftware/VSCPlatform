@@ -248,6 +248,9 @@ class ApplicationController extends Controller
     public function applicationsAll()
     {
         $entries = Entry::with('User.Occupation', 'Form')->get();
+        foreach($entries as $entry){
+            $entry['testScore'] = app('App\Http\Controllers\Users\TestController')->generateScore($entry->user_id);
+        }
 
         return view('admin.applications', ['entries' => $entries]);
     }

@@ -79,7 +79,7 @@
             @if(env('IS_APPLICATION_OPEN', false))
                 <!-- circle steps icons -->
                     <ul class="steps col-md-12">
-                        @if(!is_null($entry) && is_null($entry->test_score))
+                        @if(!is_null($entry) && !is_null($entry->test_score))
                             <li class="active-step">1
                         @else
                             <li>1

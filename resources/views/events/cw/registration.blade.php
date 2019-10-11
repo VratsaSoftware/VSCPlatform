@@ -106,7 +106,6 @@
                                 <label for="categories">Категория <span class="req-star-form">*</span></label>
                                 <br/>
                                 <select class="section-el-bold js-example-basic-single" name="categories" id="categories" style="width:100%">
-                                    <option value="0" selected>---</option>
                                     @foreach(Config::get('cwCategories') as $category)
                                         @if (old('categories'))
                                             @if ($category == old('categories')))
