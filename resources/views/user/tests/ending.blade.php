@@ -7,7 +7,7 @@
             <div class="col-md-12 d-flex flex-row flex-wrap stats-holder">
                 <div class="col-md-4 text-center">
                     Заглавие :<br/>
-                    <strong>{{$test->title}}</strong>
+{{--                    <strong>{{$test->title}}</strong>--}}
                 </div>
                 <div class="col-md-4 text-center">
                     Започнат:<br/>
@@ -17,15 +17,16 @@
                     Време:<br/>
                     <strong>{{$time}}</strong>
                 </div>
-                <div class="col-md-3 text-center">Брой Въпроси:<br/><strong> {{$score['questionsCount']}}</strong></div>
-                <div class="col-md-3 text-center">Брой Отговорени:<br/><strong> {{$score['answered']}}</strong></div>
-                <div class="col-md-3 text-center">Точки верни отговори:<br/><strong> {{$score['score']}}</strong></div>
-                <div class="col-md-3 text-center">Максимален брой точки:<br/><strong> {{$score['maxScore']}}</strong>
+                @if($score)
+                <div class="col-md-3 text-center">Брой Въпроси:<br/><strong> {{$score[0]['questionsCount']}}</strong></div>
+                <div class="col-md-3 text-center">Брой Отговорени:<br/><strong> {{$score[1]['answered']}}</strong></div>
+                <div class="col-md-3 text-center">Точки верни отговори:<br/><strong> {{$score[2]['score']}}</strong></div>
+                <div class="col-md-3 text-center">Максимален брой точки:<br/><strong> {{$score[3]['maxScore']}}</strong>
                 </div>
                 <div class="col-md-12 text-center">
-                    <strong>Резултат: {{$score['score']}} / {{$score['maxScore']}}</strong>
+                    <strong>Резултат: {{$score[2]['score']}} / {{$score[3]['maxScore']}}</strong>
                     <!-- Progress bar 4 -->
-                    <div class="progress mx-auto" data-value='{{$score['percentage']}}'>
+                    <div class="progress mx-auto" data-value='{{$score[4]['percentage']}}'>
                           <span class="progress-left">
                                         <span class="progress-bar border-warning"></span>
                           </span>
@@ -33,11 +34,29 @@
                         <span class="progress-bar border-warning"></span>
                         </span>
                         <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
-                            <div class="h2 font-weight-bold">{{$score['percentage']}}<span class="small">%</span></div>
+                            <div class="h2 font-weight-bold">{{$score[4]['percentage']}}<span class="small">%</span></div>
                         </div>
                     </div>
                     <!-- END -->
                 </div>
+                @else
+                    <div class="col-md-12 text-center">
+                        <strong>Резултат: 0</strong>
+                        <!-- Progress bar 4 -->
+                        <div class="progress mx-auto" data-value='0'>
+                          <span class="progress-left">
+                                        <span class="progress-bar border-warning"></span>
+                          </span>
+                            <span class="progress-right">
+                        <span class="progress-bar border-warning"></span>
+                        </span>
+                            <div class="progress-value w-100 h-100 rounded-circle d-flex align-items-center justify-content-center">
+                                <div class="h2 font-weight-bold">0<span class="small">%</span></div>
+                            </div>
+                        </div>
+                        <!-- END -->
+                    </div>
+                @endif
             </div>
             <div class="col-md-12 text-center"><a href="{{route('application.index')}}">
                     <button class="btn btn-outline-success">прогрес</button>

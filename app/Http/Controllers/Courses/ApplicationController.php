@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Courses;
 
+use App\Models\Tests\Test;
+use App\Models\Tests\TestUserAssign;
 use App\Models\Tests\TestUserSubmited;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -27,18 +29,31 @@ class ApplicationController extends Controller
     public function index()
     {
         $entry = Entry::with('User', 'Form')->where('user_id', Auth::user()->id)->first();
-        $submited = $submited = TestUserSubmited::where([
+        $submited = TestUserSubmited::where([
             ['user_id',Auth::user()->id],
-            ['test_id', Auth::user()->load('Test')->Test[0]->id]
-        ])->whereNotNull('submited_at')->first();
+        ])->whereNotNull('submited_at')->select('test_id')->get()->toArray();
+        $entry->test_score = 0;
+        $entry->save();
         if ($submited) {
-            $score = app('App\Http\Controllers\Users\TestController')->generateScore();
-            if($entry) {
-                $entry->test_score = $score['percentage'];
-                $entry->save();
+            $addMe = 0;
+            foreach($submited as $skey => $submitedTest) {
+                $score = app('App\Http\Controllers\Users\TestController')->generateScore(Auth::user()->id,$submitedTest['test_id']);
+                if ($entry && isset($score[4]['percentage'])) {
+                    $addMe += $score[4]['percentage'];
+                    $allScore[] = $score;
+                }
             }
-            $entry['test_stats'] = $score;
+            $entry->test_score = $addMe;
+            $entry->save();
+            $entry['test_stats'] = $allScore;
         }
+        $notSubmited = TestUserAssign::where([
+            ['user_id',Auth::user()->id],
+        ])->whereNotIn('test_id',$submited)->get();
+        if(count($notSubmited) > 0 || !$notSubmited->isEmpty()){
+            $entry['more_test'] = true;
+        }
+
         return view('user.application', ['entry'=>$entry]);
     }
 
@@ -249,8 +264,16 @@ class ApplicationController extends Controller
     {
         $entries = Entry::with('User.Occupation', 'Form')->get();
         foreach($entries as $entry){
-            $entry['testScore'] = app('App\Http\Controllers\Users\TestController')->generateScore($entry->user_id);
+            $submitedTests = TestUserSubmited::where([
+                ['user_id',$entry->user_id]
+            ])->get();
+            foreach($submitedTests as $tkey => $test){
+                $tests[] = Test::find($test->test_id);
+                $scores[] = app('App\Http\Controllers\Users\TestController')->generateScore($entry->user_id,$test->test_id);
+            }
         }
+        $entry['testScoreTest'] = $tests;
+        $entry['testScore'] = $scores;
 
         return view('admin.applications', ['entries' => $entries]);
     }

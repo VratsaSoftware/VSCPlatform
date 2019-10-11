@@ -103,21 +103,24 @@
                                     <span>предварителен тест</span>
                                     <div class="personal-steps">
                                         @if(isset($entry))
-                                            @if(is_null($entry->test_score))
-                                                <a href="{{route('prepare.test')}}" id="candidate" data-url="{{route('application.create')}}">
+                                            @if(is_null($entry->test_score) || isset($entry->more_test))
+                                                <a href="{{route('prepare.test')}}" id="candidate" data-url="{{route('application.create')}}" style="margin-top: -8%;display: inline-block;margin-bottom:3%;">
                                                     <button type="button" class="btn btn-success">ТЕСТ</button>
                                                 </a>
                                             @endif
                                             @if(isset($entry->test_stats))
-                                                <div class="col-md-12 d-flex flex-row flex-wrap">
-                                                    <div class="col-md-3 text-center">Брой Въпроси:<br/><strong> {{$entry->test_stats['questionsCount']}}</strong></div>
-                                                    <div class="col-md-3 text-center">Брой Отговори:<br/><strong> {{$entry->test_stats['answered']}}</strong></div>
-                                                    <div class="col-md-3 text-center">Точки верни отговори:<br/><strong> {{$entry->test_stats['score']}}</strong></div>
-                                                    <div class="col-md-3 text-center">Максимален брой точки:<br/><strong> {{$entry->test_stats['maxScore']}}</strong></div>
-                                                    <div class="col-md-12 text-center" style="margin-top:1%">
-                                                            <strong>Резултат: {{$entry->test_stats['percentage']}}%</strong>
+                                                @foreach($entry->test_stats as $sKey => $stats)
+                                                    <div class="col-md-12 d-flex flex-row flex-wrap" style="margin-bottom: 1%;margin-top:-2%">
+                                                        <div class="col-md-3 text-center">Брой Въпроси:<br/><strong> {{$stats[0]['questionsCount']}}</strong></div>
+                                                        <div class="col-md-3 text-center">Брой Отговори:<br/><strong> {{$stats[1]['answered']}}</strong></div>
+                                                        <div class="col-md-3 text-center">Точки верни отговори:<br/><strong> {{$stats[2]['score']}}</strong></div>
+                                                        <div class="col-md-3 text-center">Максимален брой точки:<br/><strong> {{$stats[3]['maxScore']}}</strong></div>
+                                                        <div class="col-md-12 text-center" style="margin-top:1%">
+                                                                <strong>Резултат: {{$stats[4]['percentage']}}%</strong>
+                                                        </div>
                                                     </div>
-                                                </div>
+                                                    <br/>
+                                                @endforeach
                                             @endif
                                         @else
                                             тази стъпка предстои

@@ -120,7 +120,7 @@
                         {{$current->question}}
                     </div>
                     <div class="col-md-12 open-answer-holder">
-                        <textarea name="open_answer" id="open_answer" cols="auto" rows="10" placeholder="отговор">{{isset($current->answers[0]['answer'])?$current->answers[0]['answer']:''}}</textarea>
+                        <textarea name="open_answer" id="open_answer" cols="auto" rows="10" placeholder="отговор">{{isset($current->answers_open[0]['answer'])?$current->answers_open[0]['answer']:''}}</textarea>
                     </div>
                 @endif
                 @if($current->type == 'one')

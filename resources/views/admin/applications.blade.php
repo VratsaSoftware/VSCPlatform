@@ -40,7 +40,18 @@
                           <a href="#modal" class="show-form"><button class="btn btn-success">Виж</button>
                           </a>
                       </td>
-                      <td>{{isset($entry['testScore']['percentage'])?$entry['testScore']['percentage'].'%':'--'}}</td>
+                      <td>
+                          @if(isset($entry['testScoreTest']))
+                              @foreach($entry['testScoreTest'] as $tkey => $test)
+                                  <p>
+                                  {{$test->title}} =>
+                                  отговорени:{{$entry['testScore'][$tkey][1]['answered'] .'/'. $entry['testScore'][$tkey][0]['questionsCount']}}<br/>
+                                  резултат:{{$entry['testScore'][$tkey][2]['score'] .'/'. $entry['testScore'][$tkey][3]['maxScore']}}<br/>
+                                  процент:{{$entry['testScore'][$tkey][4]['percentage']}}%
+                                  </p>
+                              @endforeach
+                          @endif
+                      </td>
                     </tr>
                 @endforeach
               </tbody>
