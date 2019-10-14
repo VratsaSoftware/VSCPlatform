@@ -156,8 +156,9 @@ class TestController extends Controller
             if ($qAnswer && $request->open_answer == $qAnswer->answer) {
                 $isValid = 1;
             }
+            $request->open_answer = mb_strtolower($request->open_answer,'UTF-8');
             $storeUpdAnswer = TestUserAnswer::updateOrCreate(['user_id' => Auth::user()->id, 'tests_bank_question_id' => $request->question],
-                ['answer' => $request->open_answer, 'test_id' => $userTest->Test[0]->id, 'is_answered' => 1, 'is_valid' => $isValid]);
+                ['answer' => $request->open_answer, 'test_id' => $test->id, 'is_answered' => 1, 'is_valid' => $isValid]);
         }
         if ($request->one_answer) {
             $qAnswer = BankAnswer::find($request->one_answer);
@@ -167,7 +168,7 @@ class TestController extends Controller
             }
 
             $storeUpdAnswer = TestUserAnswer::updateOrCreate(['user_id' => Auth::user()->id, 'tests_bank_question_id' => $request->question],
-                ['answer' => $request->one_answer, 'test_id' => $userTest->Test[0]->id, 'is_answered' => 1, 'is_valid' => $isValid]);
+                ['answer' => $request->one_answer, 'test_id' => $test->id, 'is_answered' => 1, 'is_valid' => $isValid]);
         }
         if ($request->many_answers) {
             $deleteAnswers[] = TestUserAnswer::where([
@@ -214,7 +215,8 @@ class TestController extends Controller
                                 $shuffleQuestions[$key]['answers_open'] = $isAnswered->toArray();
                             }elseif ($shuffleQuestions[$key]->type == 'many') {
                                 //parse id's of the answers to integer for later comparison
-                                $shuffleQuestions[$key]['answers_many'] = array_column($shuffleQuestions[$key]['answers'], 'answer');
+                                $shuffleQuestions[$key]['answers_many'] = $isAnswered->toArray();
+                                $shuffleQuestions[$key]['answers_many'] = array_column($shuffleQuestions[$key]['answers_many'], 'answer');
                                 $shuffleQuestions[$key]['answers_many'] = array_map(function ($value) {
                                     return (int)$value;
                                 }, $shuffleQuestions[$key]['answers_many']);
@@ -450,6 +452,7 @@ class TestController extends Controller
                 $data[]['score'] = $score;
                 $data[]['maxScore'] = $maxScore;
                 $data[]['percentage'] = (float)number_format($percent * 100, 1);
+                $data[]['test_title'] = $questions->title;
         }
         return $data;
     }

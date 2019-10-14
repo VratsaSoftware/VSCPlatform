@@ -51,6 +51,7 @@ class ApplicationController extends Controller
             ['user_id',Auth::user()->id],
         ])->whereNotIn('test_id',$submited)->get();
         if(count($notSubmited) > 0 || !$notSubmited->isEmpty()){
+            $entry['test_count'] = count($notSubmited);
             $entry['more_test'] = true;
         }
 

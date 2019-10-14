@@ -129,7 +129,21 @@
                 </p>
                 <p>отговори:</p>
                 <input type="hidden" name="correct_one_answer" id="correct_one_answer" value="">
+                @if(count($question->Answers) < 1)
+                    <p class="input-answers">
+                        снимка:
+                        <input type="hidden" name="old_image_0" class="old_image" value="">
 
+                        <input type="file" name="open_a_image[]" class="open_a_image"><br/>
+                        <input type="hidden" name="image_for_" class="open_a_image_a" value="0">
+                        <a href="" class="icon-click">
+                            <i class="fas fa-check-circle"></i></a>&nbsp;<input type="text"
+                                                                                class="q-one-answer required"
+                                                                                name="answers[]" data-q-count="0"
+                                                                                value="">
+                        <a href="" class="remove-q" style="margin-left:51.5%"><i class="fas fa-times"></i></a>
+                    </p>
+                @endif
                 @foreach($question->Answers as $num => $answer)
                     @if($answer->correct > 0)
                         <?php $correct = true; ?>
@@ -287,6 +301,24 @@
                 </p>
                 <p>отговори:</p>
                 <input type="hidden" name="correct_many_answer" id="correct_many_answer">
+                @if(count($question->Answers) < 1)
+                <p class="input-answers">
+                    снимка:
+
+                        <input type="hidden" name="old_image_0" class="old_image" value="">
+
+                    <input type="file" name="many_a_image[]" class="many_a_image"><br/>
+                    <input type="hidden" name="image_for_" class="many_a_image_a" value="0">
+                    <a href="" class="icon-click-many">
+                        <i class="fas fa-check-circle"></i>
+                    </a>&nbsp;
+                    <input type="text" class="q-many-answer" name="answers[]" data-q-count="0"
+                           value="" style="width:90%">
+                    <a href="" class="remove-q">
+                        <i class="fas fa-times"></i>
+                    </a>
+                </p>
+                @endif
                 @foreach($question->Answers as $num => $answer)
                     @if($answer->correct > 0)
                         <?php $correct = true; ?>
