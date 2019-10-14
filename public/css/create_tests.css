@@ -316,7 +316,7 @@ code {
 }
 
 #modal:target{
-    top: -10%!important;
+    top: -15%!important;
 }
 
 .delete-q{

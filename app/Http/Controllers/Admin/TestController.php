@@ -518,7 +518,8 @@ class TestController extends Controller
                     '_method',
                     'answer',
                     'bonus_radio',
-                    'open_a_image'
+                    'open_a_image',
+                    'open_answer_id'
                 ]);
 
                 if (Input::hasFile('image')) {
@@ -529,13 +530,11 @@ class TestController extends Controller
                     $qImg = Input::file('image');
                     $data['image'] = $this->storeImage($qImg, '/images/questions/');
                     $question->image = $data['image'];
-                    $question->save();
                 }
                 unset($data['image']);
                 $question->bonus = $request->bonus;
-                $question->save();
                 $updQ = $question->fill($data);
-
+                $question->save();
                 if ($request->answer) {
                     $data = [];
                     $data['answer'] = $request->answer;
@@ -587,12 +586,12 @@ class TestController extends Controller
                     $qImg = Input::file('image');
                     $data['image'] = $this->storeImage($qImg, '/images/questions/');
                     $question->image = $data['image'];
-                    $question->save();
+
                     unset($data['image']);
                 }
                 $question->bonus = $request->bonus;
-                $question->save();
                 $question->fill($data);
+                $question->save();
                 $clearA = BankAnswer::where('tests_bank_question_id', $question->id)->delete();
                 foreach ($request->answers as $num => $answer) {
                     $data = [];
@@ -651,8 +650,8 @@ class TestController extends Controller
                     unset($data['image']);
                 }
                 $question->bonus = $request->bonus;
-                $question->save();
                 $newQ = $question->fill($data);
+                $question->save();
                 $deleteOld = BankAnswer::where('tests_bank_question_id', $question->id)->delete();
                 foreach ($request->answers as $num => $answer) {
                     $data = [];

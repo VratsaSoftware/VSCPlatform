@@ -701,7 +701,7 @@ class EventController extends Controller
                 'sex',
             ]);
         }
-        if($request->categories == '0' || $request->categories == 0){
+        if($request->days == '0' || $request->days == 0){
             $data['categories'] = '--';
         }
         $newCWRegistration = new ExtraForm;

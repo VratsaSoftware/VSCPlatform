@@ -109,7 +109,7 @@
                     <input type="file" name="image"><br/>
                     въпрос:
                     <i class="fa fa-asterisk" style="font-size: 0.75em; color: #f00;"></i><br/>
-                    <textarea name="question" id="q-one" cols="30" rows="5"
+                    <textarea name="question" id="question" cols="30" rows="5"
                               class="required">{{$question->question}}</textarea>
                     <br>
                     <i class="fa fa-asterisk" style="font-size: 0.75em; color: #f00;"></i>
@@ -302,22 +302,22 @@
                 <p>отговори:</p>
                 <input type="hidden" name="correct_many_answer" id="correct_many_answer">
                 @if(count($question->Answers) < 1)
-                <p class="input-answers">
-                    снимка:
+                    <p class="input-answers">
+                        снимка:
 
                         <input type="hidden" name="old_image_0" class="old_image" value="">
 
-                    <input type="file" name="many_a_image[]" class="many_a_image"><br/>
-                    <input type="hidden" name="image_for_" class="many_a_image_a" value="0">
-                    <a href="" class="icon-click-many">
-                        <i class="fas fa-check-circle"></i>
-                    </a>&nbsp;
-                    <input type="text" class="q-many-answer" name="answers[]" data-q-count="0"
-                           value="" style="width:90%">
-                    <a href="" class="remove-q">
-                        <i class="fas fa-times"></i>
-                    </a>
-                </p>
+                        <input type="file" name="many_a_image[]" class="many_a_image"><br/>
+                        <input type="hidden" name="image_for_" class="many_a_image_a" value="0">
+                        <a href="" class="icon-click-many">
+                            <i class="fas fa-check-circle"></i>
+                        </a>&nbsp;
+                        <input type="text" class="q-many-answer" name="answers[]" data-q-count="0"
+                               value="" style="width:90%">
+                        <a href="" class="remove-q">
+                            <i class="fas fa-times"></i>
+                        </a>
+                    </p>
                 @endif
                 @foreach($question->Answers as $num => $answer)
                     @if($answer->correct > 0)

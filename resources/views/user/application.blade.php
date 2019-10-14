@@ -103,7 +103,7 @@
                                     @if(is_null($entry->test_score) || isset($entry->more_test))
                                         <a href="{{route('prepare.test')}}" id="candidate"
                                            data-url="{{route('application.create')}}"
-                                           style="margin-top: -9%;display: inline-block;margin-bottom:3%;">
+                                           style="margin-top: -7%;display: inline-block;margin-bottom:3%;">
                                             <button type="button" class="btn btn-success">ТЕСТ</button>
                                             <br/>
                                             Брой тестове: [ {{ isset($entry['test_count'])?$entry['test_count']:'' }} ]

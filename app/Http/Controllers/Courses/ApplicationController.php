@@ -265,6 +265,8 @@ class ApplicationController extends Controller
     {
         $entries = Entry::with('User.Occupation', 'Form')->get();
         foreach($entries as $entry){
+            $tests = [];
+            $scores = [];
             $submitedTests = TestUserSubmited::where([
                 ['user_id',$entry->user_id]
             ])->get();
@@ -272,9 +274,9 @@ class ApplicationController extends Controller
                 $tests[] = Test::find($test->test_id);
                 $scores[] = app('App\Http\Controllers\Users\TestController')->generateScore($entry->user_id,$test->test_id);
             }
+            $entry['testScoreTest'] = $tests;
+            $entry['testScore'] = $scores;
         }
-        $entry['testScoreTest'] = $tests;
-        $entry['testScore'] = $scores;
 
         return view('admin.applications', ['entries' => $entries]);
     }
