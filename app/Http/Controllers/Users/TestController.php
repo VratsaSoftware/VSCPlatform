@@ -30,25 +30,25 @@ class TestController extends Controller
         $userTest = User::with('Test')->whereHas('Test', function ($q) {
             $q->where('expire_at', '>', Carbon::now());
         })->find(Auth::user()->id);
-        foreach($userTest->Test as $num => $test){
+        if ($userTest) {
+            foreach ($userTest->Test as $num => $test) {
                 $submited = TestUserSubmited::where([
-                    ['user_id',Auth::user()->id],
+                    ['user_id', Auth::user()->id],
                     ['test_id', $test->id]
                 ])->whereNotNull('submited_at')->first();
-                if($submited){
+                if ($submited) {
                     unset($userTest->Test[$num]);
                 }
-            $kcount = 0;
-            foreach($userTest->Test as $test){
-                $test_id = $test->id;
-                $kcount++;
-                if($kcount == 1){
-                    break;
+                $kcount = 0;
+                foreach ($userTest->Test as $test) {
+                    $test_id = $test->id;
+                    $kcount++;
+                    if ($kcount == 1) {
+                        break;
+                    }
                 }
             }
-        }
 
-        if ($userTest) {
             $questions = Test::with('bank', 'bank.Questions')->find($test_id);
             $questionsCount = $questions->bank[0]->questions->count();
             if ($userTest->Test()->exists()) {
@@ -62,21 +62,21 @@ class TestController extends Controller
     public function start()
     {
         $userTest = Auth::user()->load('Test');
-        foreach($userTest->Test as $num => $test){
+        foreach ($userTest->Test as $num => $test) {
             $submited = TestUserSubmited::where([
-                ['user_id',Auth::user()->id],
+                ['user_id', Auth::user()->id],
                 ['test_id', $test->id]
             ])->whereNotNull('submited_at')->first();
-            if($submited) {
-                if($submited){
+            if ($submited) {
+                if ($submited) {
                     unset($userTest->Test[$num]);
                 }
             }
             $kcount = 0;
-            foreach($userTest->Test as $test){
+            foreach ($userTest->Test as $test) {
                 $test_id = $test->id;
                 $kcount++;
-                if($kcount == 1){
+                if ($kcount == 1) {
                     break;
                 }
             }
@@ -86,18 +86,18 @@ class TestController extends Controller
             ['test_id', $test_id]
         ])->first();
         $submited = TestUserSubmited::where([
-            ['user_id',Auth::user()->id],
+            ['user_id', Auth::user()->id],
             ['test_id', $test_id]
         ])->whereNotNull('submited_at')->first();
 
         if (empty($submited) && is_null($submited)) {
-            if(!$isStarted && empty($isStarted)) {
+            if (!$isStarted && empty($isStarted)) {
                 $startedTest = new TestUserSubmited;
                 $startedTest->user_id = Auth::user()->id;
                 $startedTest->test_id = $test_id;
                 $startedTest->started_at = Carbon::now();
                 $startedTest->save();
-            }else{
+            } else {
                 $startedTest = $isStarted;
             }
 
@@ -133,19 +133,19 @@ class TestController extends Controller
             return redirect()->route('myProfile')->with('error', $message);
         }
         $userTest = Auth::user()->load('Test');
-        foreach($userTest->Test as $num => $test){
+        foreach ($userTest->Test as $num => $test) {
             $submited = TestUserSubmited::where([
-                ['user_id',Auth::user()->id],
+                ['user_id', Auth::user()->id],
                 ['test_id', $test->id]
             ])->whereNotNull('submited_at')->first();
-            if($submited){
+            if ($submited) {
                 unset($userTest->Test[$num]);
             }
             $kcount = 0;
-            foreach($userTest->Test as $test){
+            foreach ($userTest->Test as $test) {
                 $test_id = $test->id;
                 $kcount++;
-                if($kcount == 1){
+                if ($kcount == 1) {
                     break;
                 }
             }
@@ -156,7 +156,7 @@ class TestController extends Controller
             if ($qAnswer && $request->open_answer == $qAnswer->answer) {
                 $isValid = 1;
             }
-            $request->open_answer = mb_strtolower($request->open_answer,'UTF-8');
+            $request->open_answer = mb_strtolower($request->open_answer, 'UTF-8');
             $storeUpdAnswer = TestUserAnswer::updateOrCreate(['user_id' => Auth::user()->id, 'tests_bank_question_id' => $request->question],
                 ['answer' => $request->open_answer, 'test_id' => $test->id, 'is_answered' => 1, 'is_valid' => $isValid]);
         }
@@ -203,7 +203,7 @@ class TestController extends Controller
             if (session()->exists('questions')) {
                 //if is clicked next or prev buttons and empty on right bar question click
                 if (!$request->give_q) {
-                    foreach($shuffleQuestions as $key => $question){
+                    foreach ($shuffleQuestions as $key => $question) {
                         $isAnswered = TestUserAnswer::where([
                             ['tests_bank_question_id', $question->id],
                             ['user_id', Auth::user()->id],
@@ -213,14 +213,14 @@ class TestController extends Controller
                             $shuffleQuestions[$key]['answered'] = true;
                             if ($shuffleQuestions[$key]->type == 'open') {
                                 $shuffleQuestions[$key]['answers_open'] = $isAnswered->toArray();
-                            }elseif ($shuffleQuestions[$key]->type == 'many') {
+                            } elseif ($shuffleQuestions[$key]->type == 'many') {
                                 //parse id's of the answers to integer for later comparison
                                 $shuffleQuestions[$key]['answers_many'] = $isAnswered->toArray();
                                 $shuffleQuestions[$key]['answers_many'] = array_column($shuffleQuestions[$key]['answers_many'], 'answer');
                                 $shuffleQuestions[$key]['answers_many'] = array_map(function ($value) {
                                     return (int)$value;
                                 }, $shuffleQuestions[$key]['answers_many']);
-                            }else{
+                            } else {
                                 $shuffleQuestions[$key]['answers'] = $isAnswered->toArray();
                             }
                         }
@@ -287,8 +287,8 @@ class TestController extends Controller
         $startedTest->submited_at = Carbon::now();
         $startedTest->save();
         $submitVals = $this->prepareSubmitStats($test_id);
-        $submitVals['score'] = $this->generateScore(Auth::user()->id,$test_id);
-        $startedTest->score = isset($submitVals['score'][4]['percentage'])?$submitVals['score'][4]['percentage']:0;
+        $submitVals['score'] = $this->generateScore(Auth::user()->id, $test_id);
+        $startedTest->score = isset($submitVals['score'][4]['percentage']) ? $submitVals['score'][4]['percentage'] : 0;
         $startedTest->save();
 
         return view('user.tests.ending', $submitVals);
@@ -298,19 +298,19 @@ class TestController extends Controller
     {
         if (session()->get('submited_id')) {
             $userTest = Auth::user()->load('Test');
-            foreach($userTest->Test as $num => $test){
+            foreach ($userTest->Test as $num => $test) {
                 $submited = TestUserSubmited::where([
-                    ['user_id',Auth::user()->id],
+                    ['user_id', Auth::user()->id],
                     ['test_id', $test->id]
                 ])->whereNotNull('submited_at')->first();
-                if($submited){
+                if ($submited) {
                     unset($userTest->Test[$num]);
                 }
                 $kcount = 0;
-                foreach($userTest->Test as $test){
+                foreach ($userTest->Test as $test) {
                     $test_id = $test->id;
                     $kcount++;
-                    if($kcount == 1){
+                    if ($kcount == 1) {
                         break;
                     }
                 }
@@ -343,10 +343,10 @@ class TestController extends Controller
             $startedTest->submited_at = Carbon::now();
             $startedTest->save();
             $submitVals = $this->prepareSubmitStats($startedTest->test_id);
-            $submitVals['score'] = $this->generateScore(Auth::user()->id,$startedTest->test_id);
-            if(!empty($submitVals['score'] || count($submitVals['score']) > 0)) {
-                foreach($submitVals['score'] as $keys => $vals){
-                    $startedTest->score = isset($vals['percentage'])?$vals['percentage']:0;
+            $submitVals['score'] = $this->generateScore(Auth::user()->id, $startedTest->test_id);
+            if (!empty($submitVals['score'] || count($submitVals['score']) > 0)) {
+                foreach ($submitVals['score'] as $keys => $vals) {
+                    $startedTest->score = isset($vals['percentage']) ? $vals['percentage'] : 0;
                 }
                 $startedTest->save();
             }
@@ -359,100 +359,100 @@ class TestController extends Controller
         return redirect()->route('myProfile')->with('error', $message);
     }
 
-    public function generateScore($userId = null,$testId = null)
+    public function generateScore($userId = null, $testId = null)
     {
 
         $data = [];
         $submited = TestUserSubmited::where([
-            ['user_id',$userId],
-            ['test_id',$testId]
+            ['user_id', $userId],
+            ['test_id', $testId]
         ])->first();
-        if($submited){
-                $answered = TestUserAnswer::with('Question')->where([
-                    ['user_id', is_null($userId) ? Auth::user()->id : $userId],
-                    ['test_id', $testId],
-                    ['is_answered', 1],
-                    ['is_valid', '>', 0]
-                ])->whereHas('Question', function ($q) {
-                    $q->where('type', '!=', 'many');
-                })->get();
-                $score = 0;
-                foreach ($answered as $key => $answer) {
-                    $points = (int)$answer->Question->difficulty;
-                    if (!is_null($answer->Question->bonus)) {
-                        $points += $answer->Question->bonus;
-                    }
-                    $score += $points;
+        if ($submited) {
+            $answered = TestUserAnswer::with('Question')->where([
+                ['user_id', is_null($userId) ? Auth::user()->id : $userId],
+                ['test_id', $testId],
+                ['is_answered', 1],
+                ['is_valid', '>', 0]
+            ])->whereHas('Question', function ($q) {
+                $q->where('type', '!=', 'many');
+            })->get();
+            $score = 0;
+            foreach ($answered as $key => $answer) {
+                $points = (int)$answer->Question->difficulty;
+                if (!is_null($answer->Question->bonus)) {
+                    $points += $answer->Question->bonus;
                 }
-                unset($answered);
-                $answered = TestUserAnswer::with('Question')->where([
-                    ['user_id', is_null($userId) ? Auth::user()->id : $userId],
-                    ['test_id', $testId],
-                    ['is_answered', 1],
-                    ['is_valid', '>', 0]
-                ])->whereHas('Question', function ($q) {
-                    $q->where('type', 'many');
-                })->get();
-                $evaluated = 0;
-                $multipleAnsweredCorrect = 0;
-                foreach ($answered as $key => $answer) {
-                    //if this question its not allready evaluated
-                    if ($answer->Question->id !== $evaluated) {
-                        $numCorrect = BankAnswer::where([
-                            ['tests_bank_question_id', $answer->Question->id],
-                            ['correct', '!=', 0]
-                        ])->orderBy('id')->get();
-                        $multipleAnswer = TestUserAnswer::with('Question')->where([
-                            ['user_id', is_null($userId) ? Auth::user()->id : $userId],
-                            ['test_id', $testId],
-                            ['tests_bank_question_id', $answer->Question->id],
-                        ])->orderBy('answer')->get();
-                        //if correct number of answers is the same as user answered number of answers
-                        if (count($numCorrect) == count($multipleAnswer)) {
-                            foreach ($numCorrect as $cKey => $correct) {
-                                //if correct answer id is the same as the answered
-                                if ($correct->id == (int)$multipleAnswer[$cKey]['answer']) {
-                                    $multipleAnsweredCorrect++;
-                                } else {
-                                    $multipleAnsweredCorrect--;
-                                }
+                $score += $points;
+            }
+            unset($answered);
+            $answered = TestUserAnswer::with('Question')->where([
+                ['user_id', is_null($userId) ? Auth::user()->id : $userId],
+                ['test_id', $testId],
+                ['is_answered', 1],
+                ['is_valid', '>', 0]
+            ])->whereHas('Question', function ($q) {
+                $q->where('type', 'many');
+            })->get();
+            $evaluated = 0;
+            $multipleAnsweredCorrect = 0;
+            foreach ($answered as $key => $answer) {
+                //if this question its not allready evaluated
+                if ($answer->Question->id !== $evaluated) {
+                    $numCorrect = BankAnswer::where([
+                        ['tests_bank_question_id', $answer->Question->id],
+                        ['correct', '!=', 0]
+                    ])->orderBy('id')->get();
+                    $multipleAnswer = TestUserAnswer::with('Question')->where([
+                        ['user_id', is_null($userId) ? Auth::user()->id : $userId],
+                        ['test_id', $testId],
+                        ['tests_bank_question_id', $answer->Question->id],
+                    ])->orderBy('answer')->get();
+                    //if correct number of answers is the same as user answered number of answers
+                    if (count($numCorrect) == count($multipleAnswer)) {
+                        foreach ($numCorrect as $cKey => $correct) {
+                            //if correct answer id is the same as the answered
+                            if ($correct->id == (int)$multipleAnswer[$cKey]['answer']) {
+                                $multipleAnsweredCorrect++;
+                            } else {
+                                $multipleAnsweredCorrect--;
                             }
                         }
-                        $evaluated = $answer->Question->id;
                     }
+                    $evaluated = $answer->Question->id;
                 }
-                if ($multipleAnsweredCorrect > 0) {
-                    $points = (int)$answer->Question->difficulty;
-                    if (!is_null($answer->Question->bonus)) {
-                        $points += $answer->Question->bonus;
-                    }
-                    $score += $points;
+            }
+            if ($multipleAnsweredCorrect > 0) {
+                $points = (int)$answer->Question->difficulty;
+                if (!is_null($answer->Question->bonus)) {
+                    $points += $answer->Question->bonus;
                 }
+                $score += $points;
+            }
 
-                $questions = Test::where('id',$testId)->first();
-                $questions->load('bank', 'bank.questions');
-                $questionsCount = $questions->bank[0]->questions->count();
-                $maxScore = 0;
-                foreach ($questions->bank[0]->questions as $q) {
-                    $maxScore += (int)$q->difficulty;
-                    if (!is_null($q->bonus)) {
-                        $maxScore += $q->bonus;
-                    }
+            $questions = Test::where('id', $testId)->first();
+            $questions->load('bank', 'bank.questions');
+            $questionsCount = $questions->bank[0]->questions->count();
+            $maxScore = 0;
+            foreach ($questions->bank[0]->questions as $q) {
+                $maxScore += (int)$q->difficulty;
+                if (!is_null($q->bonus)) {
+                    $maxScore += $q->bonus;
                 }
+            }
 
-                $answeredIds = TestUserAnswer::where([
-                    ['user_id', is_null($userId) ? Auth::user()->id : $userId],
-                    ['test_id', $testId],
-                    ['is_answered', 1]
-                ])->select('tests_bank_question_id')->groupBy('tests_bank_question_id')->get();
-                $answeredNum = count($answeredIds);
-                $percent = $score / $maxScore;
-                $data[]['questionsCount'] = $questionsCount;
-                $data[]['answered'] = $answeredNum;
-                $data[]['score'] = $score;
-                $data[]['maxScore'] = $maxScore;
-                $data[]['percentage'] = (float)number_format($percent * 100, 1);
-                $data[]['test_title'] = $questions->title;
+            $answeredIds = TestUserAnswer::where([
+                ['user_id', is_null($userId) ? Auth::user()->id : $userId],
+                ['test_id', $testId],
+                ['is_answered', 1]
+            ])->select('tests_bank_question_id')->groupBy('tests_bank_question_id')->get();
+            $answeredNum = count($answeredIds);
+            $percent = $score / $maxScore;
+            $data[]['questionsCount'] = $questionsCount;
+            $data[]['answered'] = $answeredNum;
+            $data[]['score'] = $score;
+            $data[]['maxScore'] = $maxScore;
+            $data[]['percentage'] = (float)number_format($percent * 100, 1);
+            $data[]['test_title'] = $questions->title;
         }
         return $data;
     }

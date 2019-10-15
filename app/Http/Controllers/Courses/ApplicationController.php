@@ -18,6 +18,7 @@ use App\Models\Users\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Mail;
+use App\Mail\CourseApplicationCreated;
 
 class ApplicationController extends Controller
 {
@@ -32,8 +33,10 @@ class ApplicationController extends Controller
         $submited = TestUserSubmited::where([
             ['user_id',Auth::user()->id],
         ])->whereNotNull('submited_at')->select('test_id')->get()->toArray();
-        $entry->test_score = 0;
-        $entry->save();
+        if($entry) {
+            $entry->test_score = 0;
+            $entry->save();
+        }
         if ($submited) {
             $addMe = 0;
             foreach($submited as $skey => $submitedTest) {
@@ -151,7 +154,7 @@ class ApplicationController extends Controller
             $newEntry->user_id = $user->id;
             $newEntry->entry_form_id = $newForm->id;
             $newEntry->save();
-
+            Mail::to($user->email)->send(new CourseApplicationCreated($data['course']));
             $message = __('Успешно изпратихте форма за кандидатстване!');
             return redirect()->route('application.index')->with('success', $message);
         }
@@ -209,7 +212,7 @@ class ApplicationController extends Controller
         $newEntry->user_id = $newUser->id;
         $newEntry->entry_form_id = $newForm->id;
         $newEntry->save();
-
+        Mail::to($newUser->email)->send(new CourseApplicationCreated($request->course));
         $token = Password::getRepository()->create($newUser);
         $newUser->sendPasswordResetNotification($token);
 

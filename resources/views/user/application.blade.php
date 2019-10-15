@@ -15,7 +15,7 @@
             @endif
             <!-- course candidation statistic -->
                 <div class="col-md-12 candidation-title">
-                    @if(is_null($entry->entry_form_id))
+                    @if($entry && is_null($entry->entry_form_id) || is_null($entry))
                     <div class="form-group">
                         <label for="sel1">Избери направление/модул:</label>
                         <select class="form-control" id="sel1" name="course">
@@ -84,7 +84,7 @@
                         <li>1
                             <span>електронна форма</span>
                             <div class="personal-steps">
-                                @if(is_null($entry) || is_null($entry->entry_form_id))
+                                @if(is_null($entry) || !is_null($entry) && is_null($entry->entry_form_id))
                                     <a href="{{route('application.create')}}" id="candidate"
                                        data-url="{{route('application.create')}}">
                                         <button type="button" class="btn btn-success">Кандидаствай</button>
@@ -101,13 +101,15 @@
                             <div class="personal-steps">
                                 @if(isset($entry) && !is_null($entry->entry_form_id))
                                     @if(is_null($entry->test_score) || isset($entry->more_test))
-                                        <a href="{{route('prepare.test')}}" id="candidate"
-                                           data-url="{{route('application.create')}}"
-                                           style="margin-top: -7%;display: inline-block;margin-bottom:3%;">
+                                        <a href="{{route('prepare.test')}}" id="test" style="margin-top: -7%;display: inline-block;margin-bottom:3%;">
                                             <button type="button" class="btn btn-success">ТЕСТ</button>
                                             <br/>
                                             Брой тестове: [ {{ isset($entry['test_count'])?$entry['test_count']:'' }} ]
                                         </a>
+                                    @else
+                                        @if(is_null($entry->test_score))
+                                            Очаквайте скоро да ви се покаже тук бутона за Тест
+                                        @endif
                                     @endif
                                     @if(isset($entry->test_stats))
                                         @foreach($entry->test_stats as $sKey => $stats)

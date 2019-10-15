@@ -7,7 +7,7 @@
             <div class="col-md-12 d-flex flex-row flex-wrap stats-holder">
                 <div class="col-md-4 text-center">
                     Заглавие :<br/>
-{{--                    <strong>{{$test->title}}</strong>--}}
+                    {{$score[5]['test_title']}}
                 </div>
                 <div class="col-md-4 text-center">
                     Започнат:<br/>

@@ -16,7 +16,7 @@ return [
         'реклама в Интернет',
         'транспарант',
         'CodeWeek Враца',
-        ' school.vratsasoftware.com',
+        'school.vratsasoftware.com',
         'друго'
     ],
 ];
