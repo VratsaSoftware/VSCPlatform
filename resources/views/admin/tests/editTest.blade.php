@@ -52,7 +52,7 @@
                                 <div class="col-md-4 options-title">часове</div>
                                 <div class="col-md-8 options-options d-flex flex-row flex-wrap">
                                     <div class="col-md-10 slidecontainer">
-                                        <input type="range" min="0" max="12" value="{{$test->duration->format('g')}}" name="hours" class="option1" id="option1" data-type="ч.">
+                                        <input type="range" min="0" max="12" value="{{$test->duration->format('H')}}" name="hours" class="option1" id="option1" data-type="ч.">
                                         <!-- <div class="option1-color"></div> -->
                                     </div>
                                     <div class="col-md-2 text-center val-holder">

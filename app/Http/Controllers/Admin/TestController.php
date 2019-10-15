@@ -642,6 +642,8 @@ class TestController extends Controller
                 for ($r = 0; $r < count($request->answers); $r++) {
                     unset($data['image_for_' . $r]);
                     unset($data['image_for_']);
+                    unset($data['old_image_' . $r]);
+                    unset($data['old_image_' . ($r+1)]);
                 }
                 if (Input::hasFile('image')) {
                     $qImg = Input::file('image');

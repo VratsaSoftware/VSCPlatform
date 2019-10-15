@@ -92,3 +92,19 @@
     top: 0;
     left: 0;
 }
+
+.green-border{
+    padding:1px;
+    border:1px solid #218022;
+}
+
+.red-border{
+    padding:1px;
+    border:1px solid #ff481b;
+}
+
+.y-bg{
+    padding:1px;
+    border:1px solid #fff530;
+    background: #fffaa2 !important;
+}

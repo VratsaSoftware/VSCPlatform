@@ -246,14 +246,14 @@
                         if ($('.q-one').find('.input-answers').length > 1) {
                             $(this).parent().remove();
                             $('.q-one').find('.input-answers').each(function (i, obj) {
-                                var correctOne = $(this).find(".corect-answer-one");
-                                if (correctOne) {
-                                    $('#correct_one_answer').val(i);
-                                }
                                 $(this).find(".open_a_image_a").attr('data-q-count', i);
                                 $(this).find("#open_a_image").attr('data-q-count', i);
                                 $(this).find(".q-one-answer").attr('data-q-count', i);
                                 $(this).find('.old_image').attr('name', 'old_image_' + i);
+                                var correctOne = $(this).find("input.corect-answer-one[type=text]");
+                                if (correctOne.attr('data-q-count')) {
+                                    $('#correct_one_answer').val(i);
+                                }
                             });
 
                             var numAnswers = ($('.copy > p > form > .q-one').find('.input-answers').length);
@@ -403,42 +403,34 @@
 
                     $('.remove-q').on('click', function (e) {
                         e.preventDefault();
+                        $(this).parent().remove();
                         if ($('.q-many').find('.input-answers').length > 1) {
 
                             var maxAnswers = ($('.q-many >.input-answers').length);
-                            if (maxAnswers > 0) {
-                                maxAnswers -= 1;
-                            }
 
                             //if clicked to remove element have correct class remove answers count - 1
                             if ($(this).parent().find('.icon-click-many').hasClass('corect-answer-one')) {
                                 numAnswers -= 1;
                             }
-                            $('.copy > p > form > .q-many').find('.input-answers').each(function (i, obj) {
-                                if ($(this).find("input:text").hasClass("corect-answer-one")) {
-
-                                }
+                            var added = ',';
+                            $('.q-many').find('.input-answers').each(function (i, obj) {
                                 $(this).find(".many_a_image_a").attr('data-q-count', i);
                                 $(this).find("#many_a_image").attr('data-q-count', i);
                                 $(this).find(".q-many-answer").attr('data-q-count', i);
                                 $(this).find('.old_image').attr('name', 'old_image_' + i);
+
+                                if ($(this).find("input:text").hasClass("corect-answer-one")) {
+                                    added += i+',';
+                                }
                             });
 
-                            $(this).parent().remove();
+
                             $('.q-many').find('.input-answers').each(function (i, obj) {
                                 $(this).find(".many_a_image_a").attr('data-q-count', i);
                                 $(this).find("#many_a_image").attr('data-q-count', i);
                                 $(this).find(".q-many-answer").attr('data-q-count', i);
                             });
-                            var removedCorrect = $('#correct_many_answer').val().split(",");
-                            var nextNum = parseInt($(this).prev('.q-many-answer').attr('data-q-count'));
-                            var added = ',';
-                            $.each(removedCorrect,function(i){
-                                var checkNum = parseInt(removedCorrect[i]);
-                                if(checkNum !== nextNum && removedCorrect[i] !== ''){
-                                    added += removedCorrect[i]+',';
-                                }
-                            });
+
                             $('#correct_many_answer').val(added);
                             var numAnswers = ($('.q-many > .input-answers').find('.corect-answer-one').length / 2);
 

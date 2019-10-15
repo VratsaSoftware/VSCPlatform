@@ -285,7 +285,6 @@ class TestController extends Controller
             ]);
         }
         $startedTest->submited_at = Carbon::now();
-        $startedTest->save();
         $submitVals = $this->prepareSubmitStats($test_id);
         $submitVals['score'] = $this->generateScore(Auth::user()->id, $test_id);
         $startedTest->score = isset($submitVals['score'][4]['percentage']) ? $submitVals['score'][4]['percentage'] : 0;
@@ -315,7 +314,6 @@ class TestController extends Controller
                     }
                 }
             }
-//            $test = $userTest->Test[0];
             $test = [];
             $answered = TestUserAnswer::where([
                 ['user_id', Auth::user()->id],
@@ -341,18 +339,12 @@ class TestController extends Controller
         if (session()->get('submited_id')) {
             $startedTest = TestUserSubmited::find(session()->get('submited_id'));
             $startedTest->submited_at = Carbon::now();
-            $startedTest->save();
             $submitVals = $this->prepareSubmitStats($startedTest->test_id);
             $submitVals['score'] = $this->generateScore(Auth::user()->id, $startedTest->test_id);
             if (!empty($submitVals['score'] || count($submitVals['score']) > 0)) {
-                foreach ($submitVals['score'] as $keys => $vals) {
-                    $startedTest->score = isset($vals['percentage']) ? $vals['percentage'] : 0;
-                }
-                $startedTest->save();
+                $startedTest->score = isset($submitVals['score'][4]['percentage']) ? $submitVals['score'][4]['percentage'] : 0;
             }
-//            session()->forget('submited_id');
-//            session()->forget('questions');
-//            session()->forget('time');
+            $startedTest->save();
             return view('user.tests.ending', $submitVals);
         }
         $message = 'Теста е направен!';
