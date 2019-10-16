@@ -20,7 +20,7 @@ class CreateTestUsersSubmitedTable extends Migration
             $table->dateTime('started_at')->nullable();
             $table->dateTime('submited_at')->nullable();
             $table->bigInteger('questions')->nullable();
-            $table->bigInteger('score')->nullable();
+            $table->float('score',10,2)->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');

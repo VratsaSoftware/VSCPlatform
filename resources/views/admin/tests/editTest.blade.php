@@ -113,6 +113,60 @@
         <div class="overlay"></div>
     </div>
     <!-- end of modal -->
+    <div class="col-md-12 lvl-title text-center">
+        <div class="col-md-12">Кандидадствали</div>
+        <br/>
+    </div>
+
+    <div class="col-md-12 d-flex flex-row flex-wrap text-center all-students-pool">
+    @forelse ($candidates as $user)
+        <!--  one student -->
+            <div class="col-md-3 d-flex flex-row flex-wrap one-student-holder">
+                <div class="col-md-12">
+                    @if($user->picture)
+                        <img src="{{asset('images/user-pics/'.$user->picture)}}" alt="student-pic"
+                             class="img-fluid one-student-pic">
+                    @else
+                        @if($user->sex != 'female')
+                            <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
+                        @else
+                            <img src="{{asset('images/women-no-avatar.png')}}" alt="profile-pic" class="profile-pic">
+                        @endif
+                    @endif
+                </div>
+                <span class="edit-lection-students-pool col-md-12">
+                {{$user->name}}
+
+                    {{$user->last_name}}
+            </span>
+                <div class="col-md-6 edit-lection-students-pool">
+                    {{$user->email}}
+                </div>
+                <div class="col-md-6 edit-lection-students-pool">
+                    <img src="{{asset('/images/profile/location-icon.png')}}" alt="map-icon">
+                    <span class="location">
+                    {{$user->location}}
+                </span>
+                </div>
+                <div class="col-md-11 flex-row flex-wrap student-options">
+                    <div class="col-md-6 add-student text-right">
+                        <img src="{{asset('/images/profile/add-icon.png')}}" width="26px" class="add-student"
+                             data="{{$user->id}}">
+                    </div>
+                    <div class="col-md-6 remove-student text-left">
+                        <img src="{{asset('/images/profile/remove-icon.png')}}" width="26px" class="remove-student"
+                             data="{{$user->id}}">
+                    </div>
+                </div>
+            </div>
+            <!-- end of one student -->
+        @empty
+            <p>
+                Няма потребители!
+            </p>
+        @endforelse
+
+    </div>
     {{-- students add section --}}
     <div class="col-md-12 lvl-title text-center">
         <div class="col-md-12">Записани</div>
@@ -129,8 +183,11 @@
             </form>
         </div>
     </div>
-    <div class="col-md-12 d-flex flex-row flex-wrap text-center all-students-pool">
+    <div class="col-md-12 d-flex flex-row flex-wrap text-center all-students-pool" id="assigned">
     @forelse ($test->Users as $user)
+        <div class="no-show hidden-users-ids">
+            <input type="hidden" name="users[]" id="user-{{$user->id}}" value="{{$user->id}}">
+        </div>
         <!--  one student -->
             <div class="col-md-3 d-flex flex-row flex-wrap one-student-holder">
                 <div class="col-md-12">
@@ -187,4 +244,10 @@
     <script src="{{asset('/js/level-add-students.js')}}"></script>
     <script src="{{asset('/js/level-options.js')}}"></script>
     <script src="{{asset('/js/criteria-edit-lvl.js')}}"></script>
+    <script>
+        $(function(){
+            var addedStudents = $('.hidden-users-ids').html();
+            $('#create_test').append(addedStudents);
+        });
+    </script>
 @endsection

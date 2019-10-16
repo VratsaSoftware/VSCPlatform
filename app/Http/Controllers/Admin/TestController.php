@@ -1,28 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Users;
 
-use App\Http\Controllers\Traits\ImageUploadTrait;
 use App\Models\Courses\Entry;
+use App\Models\Tests\BankAnswer;
+use App\Models\Tests\Test;
+use App\Models\Tests\TestUserAnswer;
+use App\Models\Tests\TestUserSubmited;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Tests\Test;
-use App\Models\Tests\AssignedTest;
-use App\Models\Tests\Bank;
-use App\Models\Tests\BankQuestion;
-use App\Models\Tests\BankAnswer;
-use App\Models\Tests\BankType;
-use App\Models\Tests\TestUserAnswer;
+use Illuminate\Support\Facades\Auth;
 use App\User;
-use Illuminate\Support\Facades\Input;
-use Image;
-use File;
 
 class TestController extends Controller
 {
-    use ImageUploadTrait;
-
     /**
      * Display a listing of the resource.
      *
@@ -30,54 +22,442 @@ class TestController extends Controller
      */
     public function index()
     {
-        $banks = Bank::withCount('Questions')->get();
-        $banks->load('Questions.Answers');
-        $questions = BankQuestion::with('Answers')->get();
-        $difficultyCount = ['easy' => 0, 'medium' => 0, 'hard' => 0];
+        //
+    }
 
-        foreach ($questions as $question) {
-            switch (intval($question->difficulty)) {
-                case 1:
-                    $difficultyCount['easy'] += 1;
-                    break;
-                case 2:
-                    $difficultyCount['medium'] += 1;
-                    break;
-                case 3:
-                    $difficultyCount['hard'] += 1;
-                    break;
-            }
-        }
-
-        foreach ($banks as $bank) {
-            $bankDifficultyCount = ['easy' => 0, 'medium' => 0, 'hard' => 0];
-            $correctAnswersCount = 0;
-            foreach ($bank->Questions as $question) {
-                switch (intval($question->difficulty)) {
-                    case 1:
-                        $bankDifficultyCount['easy'] += 1;
-                        break;
-                    case 2:
-                        $bankDifficultyCount['medium'] += 1;
-                        break;
-                    case 3:
-                        $bankDifficultyCount['hard'] += 1;
-                        break;
+    public function prepareUserTest()
+    {
+        $userTest = User::with('Test')->whereHas('Test', function ($q) {
+            $q->where('expire_at', '>', Carbon::now());
+        })->find(Auth::user()->id);
+        if ($userTest) {
+            foreach ($userTest->Test as $num => $test) {
+                $submited = TestUserSubmited::where([
+                    ['user_id', Auth::user()->id],
+                    ['test_id', $test->id]
+                ])->whereNotNull('submited_at')->first();
+                if ($submited) {
+                    unset($userTest->Test[$num]);
                 }
-                foreach ($question->Answers as $answer) {
-                    if ($answer->correct > 0 || $answer->correct != '0') {
-                        $correctAnswersCount += 1;
+                $kcount = 0;
+                foreach ($userTest->Test as $test) {
+                    $test_id = $test->id;
+                    $kcount++;
+                    if ($kcount == 1) {
+                        break;
                     }
                 }
-                $question->correctCount = $correctAnswersCount;
-                $correctAnswersCount = 0;
             }
-            $bank->difficultyCount = $bankDifficultyCount;
 
+            $questions = Test::with('bank', 'bank.Questions')->find($test_id);
+            $questionsCount = $questions->bank[0]->questions->count();
+            if ($userTest->Test()->exists()) {
+                return view('user.tests.prepare', ['test' => $questions, 'qCount' => $questionsCount]);
+            }
         }
-        $tests = Test::with('bank', 'Users')->get();
+        $message = 'Няма активни тестове за този потребител';
+        return redirect()->route('myProfile')->with('error', $message);
+    }
 
-        return view('admin.tests.index', ['banks' => $banks, 'questions' => $questions, 'difficultyCount' => $difficultyCount, 'tests' => $tests]);
+    public function start()
+    {
+        $userTest = Auth::user()->load('Test');
+        foreach ($userTest->Test as $num => $test) {
+            $submited = TestUserSubmited::where([
+                ['user_id', Auth::user()->id],
+                ['test_id', $test->id]
+            ])->whereNotNull('submited_at')->first();
+            if ($submited) {
+                if ($submited) {
+                    unset($userTest->Test[$num]);
+                }
+            }
+            $kcount = 0;
+            foreach ($userTest->Test as $test) {
+                $test_id = $test->id;
+                $kcount++;
+                if ($kcount == 1) {
+                    break;
+                }
+            }
+        }
+        $isStarted = TestUserSubmited::where([
+            ['user_id', Auth::user()->id],
+            ['test_id', $test_id]
+        ])->first();
+        $submited = TestUserSubmited::where([
+            ['user_id', Auth::user()->id],
+            ['test_id', $test_id]
+        ])->whereNotNull('submited_at')->first();
+
+        if (empty($submited) && is_null($submited)) {
+            if (!$isStarted && empty($isStarted)) {
+                $startedTest = new TestUserSubmited;
+                $startedTest->user_id = Auth::user()->id;
+                $startedTest->test_id = $test_id;
+                $startedTest->started_at = Carbon::now();
+                $startedTest->save();
+            } else {
+                $startedTest = $isStarted;
+            }
+
+            $testBankQuestions = Test::with('bank', 'bank.Questions')->find($test_id);
+            $questions = $testBankQuestions->bank[0]->Questions;
+            $shuffleQuestions = $questions->shuffle();
+            $finishTime = $startedTest->started_at->addHour($testBankQuestions->duration->format('H'));
+            $finishTime = $finishTime->addMinutes($testBankQuestions->duration->format('i'));
+            //setting questions, started test id to maintain when the test is started
+            session()->put('questions', $shuffleQuestions);
+            session()->put('submited_id', $startedTest->id);
+            return view('user.tests.question', ['questions' => $shuffleQuestions, 'order' => null, 'current' => null, 'finishTime' => $finishTime]);
+        }
+
+        if ($submited || !is_null($submited)) {
+            $message = 'Теста е направен!';
+            return redirect()->route('myProfile')->with('error', $message);
+        }
+    }
+
+    public function answer(Request $request)
+    {
+        if (session()->exists('questions')) {
+            $shuffleQuestions = session()->get('questions');
+            $isQuestionExisting = array_column($shuffleQuestions->toArray(), 'id');
+            $isQuestionExisting = array_map(function ($value) {
+                return (int)$value;
+            }, $isQuestionExisting);
+        }
+        //if request question id its not in started test questions
+        if (isset($isQuestionExisting) && !in_array($request->question, $isQuestionExisting)) {
+            $message = 'Невалиден въпрос';
+            return redirect()->route('myProfile')->with('error', $message);
+        }
+        $userTest = Auth::user()->load('Test');
+        foreach ($userTest->Test as $num => $test) {
+            $submited = TestUserSubmited::where([
+                ['user_id', Auth::user()->id],
+                ['test_id', $test->id]
+            ])->whereNotNull('submited_at')->first();
+            if ($submited) {
+                unset($userTest->Test[$num]);
+            }
+            $kcount = 0;
+            foreach ($userTest->Test as $test) {
+                $test_id = $test->id;
+                $kcount++;
+                if ($kcount == 1) {
+                    break;
+                }
+            }
+        }
+        if ($request->open_answer) {
+            $qAnswer = BankAnswer::where('tests_bank_question_id', $request->question)->first();
+            $isValid = 0;
+            if ($qAnswer && $request->open_answer == $qAnswer->answer) {
+                $isValid = 1;
+            }
+            $request->open_answer = mb_strtolower($request->open_answer, 'UTF-8');
+            $storeUpdAnswer = TestUserAnswer::updateOrCreate(['user_id' => Auth::user()->id, 'tests_bank_question_id' => $request->question],
+                ['answer' => $request->open_answer, 'test_id' => $test->id, 'is_answered' => 1, 'is_valid' => $isValid]);
+        }
+        if ($request->one_answer) {
+            $qAnswer = BankAnswer::find($request->one_answer);
+            $isValid = 0;
+            if ($qAnswer->correct > 0 || $qAnswer->correct != 0) {
+                $isValid = 1;
+            }
+
+            $storeUpdAnswer = TestUserAnswer::updateOrCreate(['user_id' => Auth::user()->id, 'tests_bank_question_id' => $request->question],
+                ['answer' => $request->one_answer, 'test_id' => $test->id, 'is_answered' => 1, 'is_valid' => $isValid]);
+        }
+        if ($request->many_answers) {
+            $deleteAnswers[] = TestUserAnswer::where([
+                ['user_id', Auth::user()->id],
+                ['tests_bank_question_id', $request->question]
+            ])->delete();
+            foreach ($request->many_answers as $answer) {
+                $qAnswer = BankAnswer::find($answer);
+                $isValid = 0;
+                if ($qAnswer->correct > 0 || $qAnswer->correct != 0) {
+                    $isValid = 1;
+                }
+                $insertNewAnswers = new TestUserAnswer;
+                $insertNewAnswers->user_id = Auth::user()->id;
+                $insertNewAnswers->tests_bank_question_id = $request->question;
+                $insertNewAnswers->test_id = $test_id;
+                $insertNewAnswers->is_answered = 1;
+                $insertNewAnswers->is_valid = $isValid;
+                $insertNewAnswers->answer = $answer;
+                $insertNewAnswers->save();
+            }
+        }
+        $test = Test::find($test_id);
+        $startedTest = TestUserSubmited::find(session()->get('submited_id'));
+        $finishTime = $startedTest->started_at->addHour($test->duration->format('H'));
+        $finishTime = $finishTime->addMinutes($test->duration->format('i'));
+
+        $max = count($shuffleQuestions);
+        //if time its not passed for the duration of test based on the time started the test
+        if ($finishTime > Carbon::now()) {
+            //if test is started and questions are inside session
+            if (session()->exists('questions')) {
+                //if is clicked next or prev buttons and empty on right bar question click
+                if (!$request->give_q) {
+                    foreach ($shuffleQuestions as $key => $question) {
+                        $isAnswered = TestUserAnswer::where([
+                            ['tests_bank_question_id', $question->id],
+                            ['user_id', Auth::user()->id],
+                            ['test_id', $test_id]
+                        ])->get();
+                        if (!$isAnswered->isEmpty()) {
+                            $shuffleQuestions[$key]['answered'] = true;
+                            if ($shuffleQuestions[$key]->type == 'open') {
+                                $shuffleQuestions[$key]['answers_open'] = $isAnswered->toArray();
+                            } elseif ($shuffleQuestions[$key]->type == 'many') {
+                                //parse id's of the answers to integer for later comparison
+                                $shuffleQuestions[$key]['answers_many'] = $isAnswered->toArray();
+                                $shuffleQuestions[$key]['answers_many'] = array_column($shuffleQuestions[$key]['answers_many'], 'answer');
+                                $shuffleQuestions[$key]['answers_many'] = array_map(function ($value) {
+                                    return (int)$value;
+                                }, $shuffleQuestions[$key]['answers_many']);
+                            } else {
+                                $shuffleQuestions[$key]['answers'] = $isAnswered->toArray();
+                            }
+                        }
+                    }
+                    foreach ($shuffleQuestions as $key => $question) {
+                        if ($question->id == $request->question) {
+                            //if is clicked next button
+                            if (is_null($request->prev) || !$request->prev || $request->prev != 'true') {
+                                if (($key + 1) != $max) {
+                                    $current = $shuffleQuestions[$key + 1];
+                                    $order = $key + 1;
+                                } else {
+                                    //if is reached last question on next click showing the first question
+                                    $current = $shuffleQuestions[0];
+                                    $order = null;
+                                }
+                            } else {
+                                //is clicked prev button
+                                if (($key - 1) >= 0) {
+                                    $current = $shuffleQuestions[$key - 1];
+                                    $order = $key - 1;
+                                } else {
+                                    //if is reached first question on prev click showing the last question
+                                    $current = $shuffleQuestions[$max - 1];
+                                    $order = null;
+                                }
+                            }
+                        }
+                    }
+                } else {
+                    //if rightbar is clicked on question
+                    foreach ($shuffleQuestions as $key => $question) {
+                        $isAnswered = TestUserAnswer::where([
+                            ['tests_bank_question_id', $question->id],
+                            ['user_id', Auth::user()->id],
+                            ['test_id', $test_id]
+                        ])->get();
+                        if (!$isAnswered->isEmpty()) {
+                            $shuffleQuestions[$key]['answered'] = true;
+                            $shuffleQuestions[$key]['answers'] = $isAnswered->toArray();
+                            if ($shuffleQuestions[$key]->type == 'many') {
+                                //parse id's of the answers to integer for later comparison
+                                $shuffleQuestions[$key]['answers_many'] = array_column($shuffleQuestions[$key]['answers'], 'answer');
+                                $shuffleQuestions[$key]['answers_many'] = array_map(function ($value) {
+                                    return (int)$value;
+                                }, $shuffleQuestions[$key]['answers_many']);
+                            }
+                        }
+                        if ($question->id == $request->give_q) {
+                            $current = $shuffleQuestions[$key];
+                            $order = $key;
+                        }
+                    }
+                }
+            }
+            return view('user.tests.question', [
+                'questions' => $shuffleQuestions,
+                'order' => $order,
+                'current' => $current,
+                'finishTime' => $finishTime,
+                'started' => true,
+            ]);
+        }
+        // $startedTest->submited_at = Carbon::now();
+        $submitVals = $this->prepareSubmitStats($test_id);
+        $submitVals['score'] = $this->generateScore(Auth::user()->id, $test_id);
+        $startedTest->score = isset($submitVals['score'][4]['percentage']) ? $submitVals['score'][4]['percentage'] : 0;
+        $startedTest->save();
+
+        return view('user.tests.ending', $submitVals);
+    }
+
+    public function prepareSubmitStats($testId)
+    {
+        if (session()->get('submited_id')) {
+            $userTest = Auth::user()->load('Test');
+            foreach ($userTest->Test as $num => $test) {
+                $submited = TestUserSubmited::where([
+                    ['user_id', Auth::user()->id],
+                    ['test_id', $test->id]
+                ])->whereNotNull('submited_at')->first();
+                if ($submited) {
+                    unset($userTest->Test[$num]);
+                }
+                $kcount = 0;
+                foreach ($userTest->Test as $test) {
+                    $test_id = $test->id;
+                    $kcount++;
+                    if ($kcount == 1) {
+                        break;
+                    }
+                }
+            }
+            $test = [];
+            $answered = TestUserAnswer::where([
+                ['user_id', Auth::user()->id],
+                ['test_id', $testId],
+                ['is_answered', 1]
+            ])->select('tests_bank_question_id')->groupBy('tests_bank_question_id')->get();
+            $answeredNum = count($answered);
+            $startedTest = TestUserSubmited::find(session()->get('submited_id'));
+            $started_at = $startedTest->started_at;
+            if(is_null($startedTest->submited_at)){
+                $startedTest->submited_at = Carbon::now();
+            }
+            $startedTest->save();
+            if (!session()->exists('time')) {
+                $time = $started_at->diff($startedTest->submited_at)->format('%H' . 'ч. ' . ':%I' . 'м. ' . ':%S' . 'с. ');
+                session()->put('time', $time);
+            }
+
+            return ['test' => $test, 'answeredNum' => $answeredNum, 'started_at' => $started_at, 'time' => isset($time) ? $time : session()->get('time')];
+        }
+        $message = 'Теста е направен!';
+        return redirect()->route('myProfile')->with('error', $message);
+    }
+
+    public function submitTest()
+    {
+        if (session()->get('submited_id')) {
+            $startedTest = TestUserSubmited::find(session()->get('submited_id'));
+            if($startedTest && is_null($startedTest->submited_at)){
+                $startedTest->submited_at = Carbon::now();
+            }
+            if(!$startedTest || $startedTest->empty() || empty($startedTest)){
+                $message = 'Теста е направен!';
+                return redirect()->route('myProfile')->with('error', $message);
+            }
+            // $startedTest->save();
+            $submitVals = $this->prepareSubmitStats($startedTest->test_id);
+            $submitVals['score'] = $this->generateScore(Auth::user()->id, $startedTest->test_id);
+            if (!empty($submitVals['score'] || count($submitVals['score']) > 0)) {
+                $startedTest->score = isset($submitVals['score'][4]['percentage']) ? $submitVals['score'][4]['percentage'] : 0;
+            }
+            $startedTest->save();
+            return view('user.tests.ending', $submitVals);
+        }
+        $message = 'Теста е направен!';
+        return redirect()->route('myProfile')->with('error', $message);
+    }
+
+    public function generateScore($userId = null, $testId = null)
+    {
+
+        $data = [];
+        $submited = TestUserSubmited::where([
+            ['user_id', $userId],
+            ['test_id', $testId]
+        ])->first();
+        if ($submited) {
+            $answered = TestUserAnswer::with('Question')->where([
+                ['user_id', is_null($userId) ? Auth::user()->id : $userId],
+                ['test_id', $testId],
+                ['is_answered', 1],
+                ['is_valid', '>', 0]
+            ])->whereHas('Question', function ($q) {
+                $q->where('type', '!=', 'many');
+            })->get();
+            $score = 0;
+            foreach ($answered as $key => $answer) {
+                $points = (int)$answer->Question->difficulty;
+                if (!is_null($answer->Question->bonus)) {
+                    $points += $answer->Question->bonus;
+                }
+                $score += $points;
+            }
+            unset($answered);
+            $answered = TestUserAnswer::with('Question')->where([
+                ['user_id', is_null($userId) ? Auth::user()->id : $userId],
+                ['test_id', $testId],
+                ['is_answered', 1],
+                ['is_valid', '>', 0]
+            ])->whereHas('Question', function ($q) {
+                $q->where('type', 'many');
+            })->get();
+            $evaluated = 0;
+            $multipleAnsweredCorrect = 0;
+            foreach ($answered as $key => $answer) {
+                //if this question its not allready evaluated
+                if ($answer->Question->id !== $evaluated) {
+                    $numCorrect = BankAnswer::where([
+                        ['tests_bank_question_id', $answer->Question->id],
+                        ['correct', '!=', 0]
+                    ])->orderBy('id')->get();
+                    $multipleAnswer = TestUserAnswer::with('Question')->where([
+                        ['user_id', is_null($userId) ? Auth::user()->id : $userId],
+                        ['test_id', $testId],
+                        ['tests_bank_question_id', $answer->Question->id],
+                    ])->orderBy('answer')->get();
+                    //if correct number of answers is the same as user answered number of answers
+                    if (count($numCorrect) == count($multipleAnswer)) {
+                        foreach ($numCorrect as $cKey => $correct) {
+                            //if correct answer id is the same as the answered
+                            if ($correct->id == (int)$multipleAnswer[$cKey]['answer']) {
+                                $multipleAnsweredCorrect++;
+                            } else {
+                                $multipleAnsweredCorrect--;
+                            }
+                        }
+                    }
+                    $evaluated = $answer->Question->id;
+                }
+            }
+            if ($multipleAnsweredCorrect > 0) {
+                $points = (int)$answer->Question->difficulty;
+                if (!is_null($answer->Question->bonus)) {
+                    $points += $answer->Question->bonus;
+                }
+                $score += $points;
+            }
+
+            $questions = Test::where('id', $testId)->first();
+            $questions->load('bank', 'bank.questions');
+            $questionsCount = $questions->bank[0]->questions->count();
+            $maxScore = 0;
+            foreach ($questions->bank[0]->questions as $q) {
+                $maxScore += (int)$q->difficulty;
+                if (!is_null($q->bonus)) {
+                    $maxScore += $q->bonus;
+                }
+            }
+
+            $answeredIds = TestUserAnswer::where([
+                ['user_id', is_null($userId) ? Auth::user()->id : $userId],
+                ['test_id', $testId],
+                ['is_answered', 1]
+            ])->select('tests_bank_question_id')->groupBy('tests_bank_question_id')->get();
+            $answeredNum = count($answeredIds);
+            $percent = $score / $maxScore;
+            $data[]['questionsCount'] = $questionsCount;
+            $data[]['answered'] = $answeredNum;
+            $data[]['score'] = $score;
+            $data[]['maxScore'] = $maxScore;
+            $data[]['percentage'] = (float)number_format($percent * 100, 1);
+            $data[]['test_title'] = $questions->title;
+        }
+        return $data;
     }
 
     /**
@@ -87,11 +467,7 @@ class TestController extends Controller
      */
     public function create()
     {
-        $banks = Bank::all();
-        $entries = Entry::select('user_id')->get()->toArray();
-        $candidates = User::whereIn('id', $entries)->get();
-
-        return view('admin.tests.create', ['banks' => $banks, 'candidates' => $candidates]);
+        //
     }
 
     /**
@@ -102,28 +478,7 @@ class TestController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->validate([
-            'title' => 'required',
-            'start_at' => 'required',
-            'expire_at' => 'required',
-            'hours' => 'required',
-            'minutes' => 'required',
-            'bank_id' => 'required',
-            'users' => 'required',
-        ]);
-        $duration = '' . $data['hours'] . '';
-        $duration .= ':' . $data['minutes'] . '';
-        $duration = Carbon::parse($duration)->format('H:i');
-        $testData['title'] = $data['title'];
-        $testData['start_at'] = $data['start_at'];
-        $testData['duration'] = $duration;
-        $testData['expire_at'] = $data['expire_at'];
-        $newTest = Test::create($testData);
-        $newTest->bank()->attach($data['bank_id']);
-        $newTest->Users()->attach($data['users']);
-
-        $message = __('Успешно добавен Тест !!!');
-        return redirect()->route('test.index')->with('success', $message);
+        //
     }
 
     /**
@@ -145,10 +500,7 @@ class TestController extends Controller
      */
     public function edit($id)
     {
-        $test = Test::with('bank', 'Users')->find($id);
-        $banks = Bank::all();
-
-        return view('admin.tests.editTest', ['banks' => $banks, 'test' => $test]);
+        //
     }
 
     /**
@@ -160,31 +512,7 @@ class TestController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $data = $request->validate([
-            'title' => 'required',
-            'start_at' => 'required',
-            'expire_at' => 'required',
-            'hours' => 'required',
-            'minutes' => 'required',
-            'bank_id' => 'required',
-            'users' => 'sometimes',
-        ]);
-        $duration = '' . $data['hours'] . '';
-        $duration .= ':' . $data['minutes'] . '';
-        $duration = Carbon::parse($duration)->format('H:i');
-        $testData['title'] = $data['title'];
-        $testData['start_at'] = $data['start_at'];
-        $testData['duration'] = $duration;
-        $testData['expire_at'] = $data['expire_at'];
-        $test = Test::find($id);
-        $test->update($testData);
-        $test->bank()->sync($data['bank_id']);
-        if (isset($data['users'])) {
-            $test->Users()->sync($data['users']);
-        }
-
-        $message = __('Успешно редактиран Тест !!!');
-        return redirect()->route('test.index')->with('success', $message);
+        //
     }
 
     /**
@@ -195,512 +523,6 @@ class TestController extends Controller
      */
     public function destroy($id)
     {
-        $deleteTest = Test::find($id);
-        $deleteTest->bank()->detach();
-        $deleteTest->Users()->detach();
-        $deleteTest->delete();
-
-        $message = __('Успешно изтрит Тест !');
-        return redirect()->back()->with('success', $message);
-    }
-
-    public function addUser(Request $request)
-    {
-        $data = $request->validate([
-            'mail' => 'required|email',
-            'test_id' => 'required|numeric',
-        ]);
-
-        $user = User::where('email', $request->mail)->first();
-        if (!is_null($user)) {
-            $test = Test::find($data['test_id']);
-            $test->Users()->attach($user->id);
-
-            $message = __('Успешно добавен курсист!');
-            return redirect()->back()->with('success', $message);
-        }
-        $message = __('Няма такъв потребител!');
-        return redirect()->back()->with('error', $message);
-    }
-
-    public function removeStudent(Request $request)
-    {
-        $test = Test::find($request->test);
-        $test->Users()->detach($request->user);
-
-        return response('success', 200);
-    }
-
-    public function createBank(Request $request)
-    {
-        $data = $request->validate([
-            'title' => 'required|',
-            'bank_img' => 'sometimes|file|image|mimes:jpeg,png,gif,webp,ico,jpg|max:4000',
-            'from_bank' => 'nullable|array',
-            'from_bank_easy' => 'nullable|array',
-            'from_bank_medium' => 'nullable|array',
-            'from_bank_hard' => 'nullable|array',
-        ]);
-        $newBank = new Bank;
-        if (Input::hasFile('bank_img')) {
-            $bankPic = Input::file('bank_img');
-            $image = Image::make($bankPic->getRealPath());
-            $image->fit(50, 50, function ($constraint) {
-                $constraint->upsize();
-            });
-            $name = time() . "_" . $bankPic->getClientOriginalName();
-            $name = str_replace(' ', '', strtolower($name));
-            $name = md5($name);
-            $path = public_path() . '/images/questions';
-            if (!File::exists($path)) {
-                $folder = mkdir($path, 0777, true);
-            }
-            $image->save($path . '/' . $name, 90);
-            $newBank->logo = $name;
-        }
-
-        $newBank->name = $data['title'];
-        $newBank->save();
-//        $this->loadQuestionsToBank($data, $newBank->id);
-
-        $message = __('Успешно добавена Банка ' . $newBank->name . ' !');
-        return redirect()->back()->with('success', $message);
-    }
-
-    public function loadQuestionsToBank($data, $newBank)
-    {
-        if (!is_null($data['from_bank'])) {
-            foreach ($data['from_bank'] as $num => $bank) {
-                if (!is_null($data['from_bank_easy'][$num])) {
-                    $questions = BankQuestion::where([
-                        ['difficulty', '1'],
-                        ['test_bank_id', $bank]
-                    ])->get();
-                    if (!$questions->isEmpty() && count($questions) >= (int)$data['from_bank_easy'][$num]) {
-                        $questions = $questions->random($data['from_bank_easy'][$num]);
-                        foreach ($questions as $question) {
-                            $newQ = $question->replicate();
-                            $newQ->test_bank_id = $newBank;
-                            $newQ->save();
-                            $answers = BankAnswer::where('tests_bank_question_id', $question->id)->get();
-                            foreach ($answers as $answer) {
-                                $newAnswer = $answer->replicate();
-                                $newAnswer->tests_bank_question_id = $newQ->id;
-                                $newAnswer->save();
-                            }
-                        }
-                    }
-                }
-
-                if (!is_null($data['from_bank_medium'][$num])) {
-                    $questions = BankQuestion::where([
-                        ['difficulty', '2'],
-                        ['test_bank_id', $bank]
-                    ])->get();
-                    if (!$questions->isEmpty() && count($questions) >= (int)$data['from_bank_medium'][$num]) {
-                        $questions = $questions->random($data['from_bank_medium'][$num]);
-                        foreach ($questions as $question) {
-                            $newQ = $question->replicate();
-                            $newQ->test_bank_id = $newBank;
-                            $newQ->save();
-                            $answers = BankAnswer::where('tests_bank_question_id', $question->id)->get();
-                            foreach ($answers as $answer) {
-                                $newAnswer = $answer->replicate();
-                                $newAnswer->tests_bank_question_id = $newQ->id;
-                                $newAnswer->save();
-                            }
-                        }
-                    }
-                }
-
-                if (!is_null($data['from_bank_hard'][$num])) {
-                    $questions = BankQuestion::where([
-                        ['difficulty', '3'],
-                        ['test_bank_id', $bank]
-                    ])->get();
-                    if (!$questions->isEmpty() && count($questions) >= (int)$data['from_bank_hard'][$num]) {
-                        $questions = $questions->random($data['from_bank_hard'][$num]);
-                        foreach ($questions as $question) {
-                            $newQ = $question->replicate();
-                            $newQ->test_bank_id = $newBank;
-                            $newQ->save();
-                            $answers = BankAnswer::where('tests_bank_question_id', $question->id)->get();
-                            foreach ($answers as $answer) {
-                                $newAnswer = $answer->replicate();
-                                $newAnswer->tests_bank_question_id = $newQ->id;
-                                $newAnswer->save();
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    public function storeQuestion(Request $request)
-    {
-        $data = $request->validate([
-            'type' => 'required|',
-            'bank' => 'required|numeric',
-            'question' => 'required|',
-            'difficulty' => 'required|numeric|min:1|max:3',
-            'bonus_radio' => 'sometimes|nullable|',
-            'answer' => 'sometimes|nullable',
-            'bonus' => 'sometimes',
-            'correct_one_answer' => 'sometimes'
-        ]);
-
-        switch ($data['type']) {
-            case 'open':
-                $data = $request->except([
-                    '_token',
-                    '_method',
-                    'answer',
-                    'bonus_radio',
-                    'open_a_image'
-                ]);
-
-                $data['test_bank_id'] = $data['bank'];
-                unset($data['bank']);
-                if (Input::hasFile('image')) {
-                    $qImg = Input::file('image');
-                    $data['image'] = $this->storeImage($qImg, '/images/questions/');
-                }
-                $newQ = BankQuestion::create($data);
-                if ($request->answer) {
-                    $data = [];
-                    $data['tests_bank_question_id'] = $newQ->id;
-                    $data['answer'] = $request->answer;
-                    $data['correct'] = 1;
-                    if (Input::hasFile('open_a_image')) {
-                        $aImg = Input::file('open_a_image');
-                        $data['image'] = $this->storeImage($aImg, '/images/questions/');
-                    }
-                    $newA = BankAnswer::create($data);
-                }
-                break;
-            case 'one':
-                $valdiate = $request->validate([
-                    'correct_one_answer' => 'required'
-                ]);
-                $correct = (int)$request->correct_one_answer;
-                $data = $request->except([
-                    '_token',
-                    '_method',
-                    'answer',
-                    'bonus_radio',
-                    'open_a_image',
-                    'correct_one_answer',
-                    'answers'
-                ]);
-                for ($r = 0; $r < count($request->answers); $r++) {
-                    unset($data['image_for_' . $r]);
-                    unset($data['image_for_']);
-                }
-
-                $data['test_bank_id'] = $data['bank'];
-                unset($data['bank']);
-                if (Input::hasFile('image')) {
-                    $qImg = Input::file('image');
-                    $data['image'] = $this->storeImage($qImg, '/images/questions/');
-                }
-                $newQ = BankQuestion::create($data);
-                foreach ($request->answers as $num => $answer) {
-                    $data = [];
-                    $data['tests_bank_question_id'] = $newQ->id;
-                    $data['answer'] = $answer;
-                    $data['correct'] = 0;
-                    if ($num == $correct) {
-                        $data['correct'] = 1;
-                    }
-
-                    if (isset($request->open_a_image)) {
-                        if (array_key_exists('image_for_' . $num, $request->all())) {
-                            foreach (Input::file('open_a_image') as $numImg => $file) {
-                                $fileName = str_replace(' ', '', $file->getClientOriginalName());
-                                $checkNames = $request->all();
-                                $checkNames['image_for_' . $num];
-                                if ($checkNames['image_for_' . $num] == $fileName) {
-                                    $data['image'] = $this->storeImage($file, '/images/questions/');
-                                }
-                            }
-                        }
-                    }
-                    $newA = BankAnswer::create($data);
-                }
-                break;
-            case 'many':
-                $valdiate = $request->validate([
-                    'correct_many_answer' => 'required'
-                ]);
-                $correctArr = explode(',', $request->correct_many_answer);
-                $correctArrNoEmpty = array_filter($correctArr, 'strlen');
-                $correct = array_map('intval', $correctArrNoEmpty);
-
-                $data = $request->except([
-                    '_token',
-                    '_method',
-                    'answer',
-                    'bonus_radio',
-                    'many_a_image',
-                    'correct_many_answer',
-                    'answers'
-                ]);
-                for ($r = 0; $r < count($request->answers); $r++) {
-                    unset($data['image_for_' . $r]);
-                    unset($data['image_for_']);
-                }
-
-                $data['test_bank_id'] = $data['bank'];
-                unset($data['bank']);
-                if (Input::hasFile('image')) {
-                    $qImg = Input::file('image');
-                    $data['image'] = $this->storeImage($qImg, '/images/questions/');
-                }
-                $newQ = BankQuestion::create($data);
-
-                foreach ($request->answers as $num => $answer) {
-                    $data = [];
-                    $data['tests_bank_question_id'] = $newQ->id;
-                    $data['answer'] = $answer;
-                    $data['correct'] = 0;
-
-                    if (in_array((int)$num, $correct)) {
-                        $data['correct'] = 1;
-                    }
-
-                    if (isset($request->many_a_image)) {
-                        if (array_key_exists('image_for_' . $num, $request->all())) {
-                            foreach (Input::file('many_a_image') as $numImg => $file) {
-                                $fileName = str_replace(' ', '', $file->getClientOriginalName());
-                                $checkNames = $request->all();
-                                $checkNames['image_for_' . $num];
-                                if ($checkNames['image_for_' . $num] == $fileName) {
-                                    $data['image'] = $this->storeImage($file, '/images/questions/');
-                                }
-                            }
-                        }
-                    }
-                    $newA = BankAnswer::create($data);
-                }
-
-                break;
-
-        }
-
-        $message = __('Успешно добавен въпрос !');
-        return redirect()->back()->with('success', $message);
-    }
-
-    public function editQuestion($question)
-    {
-        $question = BankQuestion::with('Answers')->find($question);
-
-        return view('admin.tests.edit', ['question' => $question]);
-    }
-
-    public function updateQuestion(Request $request, BankQuestion $question)
-    {
-        $data = $request->validate([
-            'type' => 'required|',
-            'question' => 'required|',
-            'difficulty' => 'required|numeric|min:1|max:3',
-            'bonus_radio' => 'sometimes|nullable|',
-            'answer' => 'sometimes|nullable',
-            'bonus' => 'sometimes',
-            'correct_one_answer' => 'sometimes'
-        ]);
-
-        switch ($data['type']) {
-            case 'open':
-                $data = $request->except([
-                    '_token',
-                    '_method',
-                    'answer',
-                    'bonus_radio',
-                    'open_a_image',
-                    'open_answer_id'
-                ]);
-
-                if (Input::hasFile('image')) {
-                    $oldImage = public_path() . '/images/questions/' . $question->image;
-                    if (File::exists($oldImage)) {
-                        File::delete($oldImage);
-                    }
-                    $qImg = Input::file('image');
-                    $data['image'] = $this->storeImage($qImg, '/images/questions/');
-                    $question->image = $data['image'];
-                }
-                unset($data['image']);
-                $question->bonus = $request->bonus;
-                $updQ = $question->fill($data);
-                $question->save();
-                if ($request->answer) {
-                    $data = [];
-                    $data['answer'] = $request->answer;
-                    $data['tests_bank_question_id'] = $updQ->id;
-                    $data['correct'] = 1;
-                    $updA = BankAnswer::find($request->open_answer_id);
-                    if (Input::hasFile('open_a_image')) {
-                        if ($updA) {
-                            $oldImage = public_path() . '/images/questions/' . $updA->image;
-                            if (File::exists($oldImage)) {
-                                File::delete($oldImage);
-                            }
-                        }
-                        $aImg = Input::file('open_a_image');
-                        $data['image'] = $this->storeImage($aImg, '/images/questions/');
-                    }
-                    $updA = BankAnswer::updateOrCreate(['id' => $request->open_answer_id], $data);
-                } else {
-                    $delA = BankAnswer::find($request->open_answer_id);
-                    if ($delA) {
-                        $delA->delete();
-                    }
-                }
-                break;
-            case 'one':
-                $valdiate = $request->validate([
-                    'correct_one_answer' => 'required'
-                ]);
-                $correct = (int)$request->correct_one_answer;
-                $data = $request->except([
-                    '_token',
-                    '_method',
-                    'answer',
-                    'bonus_radio',
-                    'open_a_image',
-                    'correct_one_answer',
-                    'answers',
-                    'answers_before'
-                ]);
-                for ($r = 0; $r < count($request->answers); $r++) {
-                    unset($data['image_for_' . $r]);
-                    unset($data['image_for_']);
-                }
-                if (Input::hasFile('image')) {
-                    $oldImage = public_path() . '/images/questions/' . $question->image;
-                    if (File::exists($oldImage)) {
-                        File::delete($oldImage);
-                    }
-                    $qImg = Input::file('image');
-                    $data['image'] = $this->storeImage($qImg, '/images/questions/');
-                    $question->image = $data['image'];
-
-                    unset($data['image']);
-                }
-                $question->bonus = $request->bonus;
-                $question->fill($data);
-                $question->save();
-                $clearA = BankAnswer::where('tests_bank_question_id', $question->id)->delete();
-                foreach ($request->answers as $num => $answer) {
-                    $data = [];
-                    $data['tests_bank_question_id'] = $question->id;
-                    $data['answer'] = $answer;
-                    $data['correct'] = 0;
-                    if ($num == $correct) {
-                        $data['correct'] = 1;
-                    }
-
-                    if (isset($request->open_a_image) && array_key_exists('image_for_' . $num, $request->all())) {
-                        if (array_key_exists('image_for_' . $num, $request->all())) {
-                            foreach (Input::file('open_a_image') as $numImg => $file) {
-                                $fileName = str_replace(' ', '', $file->getClientOriginalName());
-                                $checkNames = $request->all();
-                                $checkNames['image_for_' . $num];
-                                if ($checkNames['image_for_' . $num] == $fileName && !is_null($checkNames['image_for_' . $num])) {
-                                    $data['image'] = $this->storeImage($file, '/images/questions/');
-                                }
-                            }
-                        }
-                    } else {
-                        if (array_key_exists('old_image_' . $num, $request->all())) {
-                            $oldImages = $request->all();
-                            $data['image'] = $oldImages['old_image_' . $num];
-                        }
-                    }
-                    $newA = BankAnswer::create($data);
-                }
-                break;
-            case 'many':
-                $valdiate = $request->validate([
-                    'correct_many_answer' => 'required'
-                ]);
-                $correctArr = explode(',', $request->correct_many_answer);
-                $correctArrNoEmpty = array_filter($correctArr, 'strlen');
-                $correct = array_map('intval', $correctArrNoEmpty);
-
-                $data = $request->except([
-                    '_token',
-                    '_method',
-                    'answer',
-                    'bonus_radio',
-                    'many_a_image',
-                    'correct_many_answer',
-                    'answers'
-                ]);
-                for ($r = 0; $r < count($request->answers); $r++) {
-                    unset($data['image_for_' . $r]);
-                    unset($data['image_for_']);
-                    unset($data['old_image_' . $r]);
-                    unset($data['old_image_' . ($r+1)]);
-                }
-                if (Input::hasFile('image')) {
-                    $qImg = Input::file('image');
-                    $data['image'] = $this->storeImage($qImg, '/images/questions/');
-                    $question->image = $data['image'];
-                    unset($data['image']);
-                }
-                $question->bonus = $request->bonus;
-                $newQ = $question->fill($data);
-                $question->save();
-                $deleteOld = BankAnswer::where('tests_bank_question_id', $question->id)->delete();
-                foreach ($request->answers as $num => $answer) {
-                    $data = [];
-                    $data['tests_bank_question_id'] = $newQ->id;
-                    $data['answer'] = $answer;
-                    $data['correct'] = 0;
-
-                    if (in_array((int)$num, $correct)) {
-                        $data['correct'] = 1;
-                    }
-
-                    if (array_key_exists('image_for_' . $num, $request->all())) {
-                        foreach (Input::file('many_a_image') as $numImg => $file) {
-                            $fileName = str_replace(' ', '', $file->getClientOriginalName());
-                            $checkNames = $request->all();
-                            $checkNames['image_for_' . $num];
-                            if ($checkNames['image_for_' . $num] == $fileName) {
-                                $data['image'] = $this->storeImage($file, '/images/questions/');
-                            }
-                        }
-                    } else {
-                        if (array_key_exists('old_image_' . $num, $request->all())) {
-                            $oldImages = $request->all();
-                            $data['image'] = $oldImages['old_image_' . $num];
-                        }
-                    }
-
-                    $newA[] = BankAnswer::create($data);
-                }
-        }
-
-        $message = __('Успешно редактиран въпрос !');
-        return redirect('test')->with('success', $message);
-    }
-
-    public function deleteQuestion(BankQuestion $question)
-    {
-
-        if (!is_null($question->image)) {
-            $oldImage = public_path() . '/images/questions/' . $question->image;
-            if (File::exists($oldImage)) {
-                File::delete($oldImage);
-            }
-        }
-
-        $question->delete();
-        $message = __('Успешно изтрит въпрос !');
-        return redirect()->back()->with('success', $message);
+        //
     }
 }

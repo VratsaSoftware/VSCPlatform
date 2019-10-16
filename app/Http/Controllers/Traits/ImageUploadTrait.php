@@ -13,9 +13,11 @@ trait ImageUploadTrait
     {
         $userPic = $imageFile;
         $image = Image::make($userPic->getRealPath());
-        $image->fit(is_null($width) ? 800 : $width, is_null($height) ? 600 : $height, function ($constraint) {
-            $constraint->upsize();
-        });
+        if(!is_null($width) && !is_null($height)){
+            $image->fit($width, $height, function ($constraint) {
+                $constraint->upsize();
+            });
+        }
         $origin = $userPic->getClientOriginalName();
         $name = time() . "_" . $origin . '_' . rand(1, 100000);
         $name = str_replace(' ', '', strtolower($name));

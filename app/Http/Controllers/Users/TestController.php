@@ -49,11 +49,15 @@ class TestController extends Controller
                 }
             }
 
-            $questions = Test::with('bank', 'bank.Questions')->find($test_id);
-            $questionsCount = $questions->bank[0]->questions->count();
-            if ($userTest->Test()->exists()) {
-                return view('user.tests.prepare', ['test' => $questions, 'qCount' => $questionsCount]);
+            if(isset($test_id)){
+                $questions = Test::with('bank', 'bank.Questions')->find($test_id);
+                $questionsCount = $questions->bank[0]->questions->count();
+                if ($userTest->Test()->exists()) {
+                    return view('user.tests.prepare', ['test' => $questions, 'qCount' => $questionsCount]);
+                }
             }
+            $message = 'Няма активни тестове за този потребител';
+            return redirect()->route('myProfile')->with('error', $message);
         }
         $message = 'Няма активни тестове за този потребител';
         return redirect()->route('myProfile')->with('error', $message);
@@ -150,6 +154,10 @@ class TestController extends Controller
                 }
             }
         }
+        if(!isset($test_id)){
+            $message = 'Теста е направен!';
+            return redirect()->route('myProfile')->with('error', $message);
+        }
         if ($request->open_answer) {
             $qAnswer = BankAnswer::where('tests_bank_question_id', $request->question)->first();
             $isValid = 0;
@@ -213,18 +221,21 @@ class TestController extends Controller
                             $shuffleQuestions[$key]['answered'] = true;
                             if ($shuffleQuestions[$key]->type == 'open') {
                                 $shuffleQuestions[$key]['answers_open'] = $isAnswered->toArray();
-                            } elseif ($shuffleQuestions[$key]->type == 'many') {
+                            }
+                            if ($shuffleQuestions[$key]->type == 'many') {
                                 //parse id's of the answers to integer for later comparison
                                 $shuffleQuestions[$key]['answers_many'] = $isAnswered->toArray();
                                 $shuffleQuestions[$key]['answers_many'] = array_column($shuffleQuestions[$key]['answers_many'], 'answer');
                                 $shuffleQuestions[$key]['answers_many'] = array_map(function ($value) {
                                     return (int)$value;
                                 }, $shuffleQuestions[$key]['answers_many']);
-                            } else {
+                            }
+                            if ($shuffleQuestions[$key]->type == 'one')  {
                                 $shuffleQuestions[$key]['answers'] = $isAnswered->toArray();
                             }
                         }
                     }
+
                     foreach ($shuffleQuestions as $key => $question) {
                         if ($question->id == $request->question) {
                             //if is clicked next button
@@ -260,13 +271,19 @@ class TestController extends Controller
                         ])->get();
                         if (!$isAnswered->isEmpty()) {
                             $shuffleQuestions[$key]['answered'] = true;
-                            $shuffleQuestions[$key]['answers'] = $isAnswered->toArray();
+                            if ($shuffleQuestions[$key]->type == 'open') {
+                                $shuffleQuestions[$key]['answers_open'] = $isAnswered->toArray();
+                            }
                             if ($shuffleQuestions[$key]->type == 'many') {
                                 //parse id's of the answers to integer for later comparison
-                                $shuffleQuestions[$key]['answers_many'] = array_column($shuffleQuestions[$key]['answers'], 'answer');
+                                $shuffleQuestions[$key]['answers_many'] = $isAnswered->toArray();
+                                $shuffleQuestions[$key]['answers_many'] = array_column($shuffleQuestions[$key]['answers_many'], 'answer');
                                 $shuffleQuestions[$key]['answers_many'] = array_map(function ($value) {
                                     return (int)$value;
                                 }, $shuffleQuestions[$key]['answers_many']);
+                            }
+                            if ($shuffleQuestions[$key]->type == 'one')  {
+                                $shuffleQuestions[$key]['answers'] = $isAnswered->toArray();
                             }
                         }
                         if ($question->id == $request->give_q) {
@@ -284,7 +301,7 @@ class TestController extends Controller
                 'started' => true,
             ]);
         }
-        $startedTest->submited_at = Carbon::now();
+        // $startedTest->submited_at = Carbon::now();
         $submitVals = $this->prepareSubmitStats($test_id);
         $submitVals['score'] = $this->generateScore(Auth::user()->id, $test_id);
         $startedTest->score = isset($submitVals['score'][4]['percentage']) ? $submitVals['score'][4]['percentage'] : 0;
@@ -323,6 +340,10 @@ class TestController extends Controller
             $answeredNum = count($answered);
             $startedTest = TestUserSubmited::find(session()->get('submited_id'));
             $started_at = $startedTest->started_at;
+            if(is_null($startedTest->submited_at)){
+                $startedTest->submited_at = Carbon::now();
+            }
+            $startedTest->save();
             if (!session()->exists('time')) {
                 $time = $started_at->diff($startedTest->submited_at)->format('%H' . 'ч. ' . ':%I' . 'м. ' . ':%S' . 'с. ');
                 session()->put('time', $time);
@@ -338,7 +359,14 @@ class TestController extends Controller
     {
         if (session()->get('submited_id')) {
             $startedTest = TestUserSubmited::find(session()->get('submited_id'));
-            $startedTest->submited_at = Carbon::now();
+            if($startedTest && is_null($startedTest->submited_at)){
+                $startedTest->submited_at = Carbon::now();
+            }
+            if(!$startedTest || empty($startedTest)){
+                $message = 'Теста е направен!';
+                return redirect()->route('myProfile')->with('error', $message);
+            }
+            // $startedTest->save();
             $submitVals = $this->prepareSubmitStats($startedTest->test_id);
             $submitVals['score'] = $this->generateScore(Auth::user()->id, $startedTest->test_id);
             if (!empty($submitVals['score'] || count($submitVals['score']) > 0)) {

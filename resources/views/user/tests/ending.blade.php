@@ -59,7 +59,7 @@
                 @endif
             </div>
             <div class="col-md-12 text-center"><a href="{{route('application.index')}}">
-                    <button class="btn btn-outline-success">прогрес</button>
+                    <button class="btn btn-outline-success">напред</button>
                 </a></div>
         </div>
     </div>
