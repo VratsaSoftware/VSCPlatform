@@ -78,6 +78,7 @@ Route::post('/application/store/', 'Courses\ApplicationController@store')->name(
 //cw
 Route::get('/user/event/{event}/register','Events\EventController@cwRegister')->name('events.cw.register');
 Route::post('/user/event/{event}/cw', 'Events\EventController@cwStoreForm')->name('events.cw.form');
+Route::post('/user/{user}/event/{event}','Events\EventController@cwIsPresent')->name('events.cw.is_present');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/myProfile', 'HomeController@index')->name('myProfile');

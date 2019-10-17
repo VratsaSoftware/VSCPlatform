@@ -139,9 +139,9 @@ class EventController extends Controller
      */
     public function show($event)
     {
-        $applications = ExtraForm::where('event_id',$event)->with('User','User.Occupation','Event')->get();
+        $applications = ExtraForm::where('event_id', $event)->with('User', 'User.Occupation', 'Event')->get();
 
-        return view('events.show',['applications' => $applications]);
+        return view('events.show', ['applications' => $applications]);
     }
 
     /**
@@ -409,9 +409,9 @@ class EventController extends Controller
             ['event_team_id', $team],
             ['user_id', Auth::user()->id],
         ])->orWhere([
-                ['event_team_id', $team],
-                ['email', Auth::user()->email],
-            ])->first();
+            ['event_team_id', $team],
+            ['email', Auth::user()->email],
+        ])->first();
         $teamMember->user_id = Auth::user()->id;
         $teamMember->email = Auth::user()->email;
         $teamMember->confirmed = -1;
@@ -432,9 +432,9 @@ class EventController extends Controller
             ['event_team_id', $team->id],
             ['user_id', Auth::user()->id],
         ])->orWhere([
-                ['event_team_id', $team->id],
-                ['email', Auth::user()->email],
-            ])->first();
+            ['event_team_id', $team->id],
+            ['email', Auth::user()->email],
+        ])->first();
         $teamMember->user_id = Auth::user()->id;
         $teamMember->save();
         $user = User::find(Auth::user()->id);
@@ -569,7 +569,7 @@ class EventController extends Controller
     public function cwRegister(Event $event)
     {
         $occupations = Occupation::all();
-        if(!Auth::user()){
+        if (!Auth::user()) {
             $user = null;
             return view('events.cw.registration', [
                 'user' => $user,
@@ -588,8 +588,8 @@ class EventController extends Controller
 
         if ($event->to < Carbon::now() && Auth::user()->isOnCWEvent($event->id)) {
             $getLink = ExtraForm::where([
-                ['event_id',$event->id],
-                ['user_id',Auth::user()->id]
+                ['event_id', $event->id],
+                ['user_id', Auth::user()->id]
             ])->first();
 
             return view('events.cw.registration', [
@@ -597,7 +597,7 @@ class EventController extends Controller
                 'event' => $event,
                 'occupations' => Occupation::all(),
                 'for_link' => true,
-                'the_link' => isset($getLink->fields['link'])?$getLink->fields['link']:null,
+                'the_link' => isset($getLink->fields['link']) ? $getLink->fields['link'] : null,
             ]);
         }
 
@@ -607,7 +607,7 @@ class EventController extends Controller
 
     public function cwStoreForm(Request $request, $event)
     {
-        if(Auth::user()) {
+        if (Auth::user()) {
             if (isset($request->link)) {
                 $data = $request->validate([
                     'link' => 'required|string|max:255',
@@ -652,7 +652,7 @@ class EventController extends Controller
                 'userage',
                 'useremail'
             ]);
-        }else{
+        } else {
             //not logged in/registered
             $request['valid_categories'] = \Config::get('cwCategories');
             $data = $request->validate([
@@ -668,8 +668,8 @@ class EventController extends Controller
                 'sex' => ['required'],
             ]);
 
-            $isExisting = User::where('email',$data['useremail'])->first();
-            if($isExisting){
+            $isExisting = User::where('email', $data['useremail'])->first();
+            if ($isExisting) {
                 return back()->withErrors(['грешка' => 'Моля, влезте в акаунта си и след това се запишете за CodeWeek']);
             }
             $role = Role::where('role', 'user')->select('id')->first();
@@ -701,27 +701,44 @@ class EventController extends Controller
                 'sex',
             ]);
         }
-        if($request->days == '0' || $request->days == 0){
+        if ($request->days == '0' || $request->days == 0) {
             $data['categories'] = '--';
         }
         $newCWRegistration = new ExtraForm;
         $newCWRegistration->event_id = $event;
-        $newCWRegistration->user_id = isset($newUser)?$newUser->id:$user->id;
+        $newCWRegistration->user_id = isset($newUser) ? $newUser->id : $user->id;
         $newCWRegistration->fields = $data;
         $newCWRegistration->save();
         $link = 'https://www.facebook.com/events/354453948600024/';
         $webSite = 'https://codeweek.vratsasoftware.com/';
-        $email = isset($newUser)?$newUser->email:$user->email;
-        Mail::to($email)->send(new cwRegistered($link,$webSite));
+        $email = isset($newUser) ? $newUser->email : $user->email;
+        Mail::to($email)->send(new cwRegistered($link, $webSite));
 
-        if(!Auth::user()){
+        if (!Auth::user()) {
             $token = Password::getRepository()->create($newUser);
             $newUser->sendPasswordResetNotification($token);
 
-            return redirect('password/reset/'.$token);
+            return redirect('password/reset/' . $token);
         }
 
         $message = __('Успешно се регистрирахте за CodeWeek!');
         return redirect()->route('users.events')->with('success', $message);
+    }
+
+    public function cwIsPresent(Request $request, $userId, $eventId)
+    {
+        $data = $request->validate([
+            'present' => 'required|numeric|min:0|max:3',
+        ]);
+        $presentUpd = ExtraForm::where([
+            ['user_id',$userId],
+            ['event_id',$eventId]
+        ])->first();
+        if($presentUpd){
+            $presentUpd->is_present = $request->present;
+            $presentUpd->save();
+        }
+        $message = __('Успешно променихте посещаемостта на потребителя');
+        return redirect()->back()->with('success', $message);
     }
 }

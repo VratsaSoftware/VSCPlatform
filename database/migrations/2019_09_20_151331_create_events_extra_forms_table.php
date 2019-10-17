@@ -18,6 +18,7 @@ class CreateEventsExtraFormsTable extends Migration
             $table->integer('event_id')->unsigned()->nullable();
             $table->integer('user_id')->unsigned()->nullable();
             $table->longText('fields')->nullable();
+            $table->intege('is_present')->nullable();
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('set null');
