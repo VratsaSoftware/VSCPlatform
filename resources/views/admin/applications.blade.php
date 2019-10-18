@@ -109,6 +109,7 @@
             </div>
             <div class="overlay"></div>
         </div>
+        <div class="col-md-12 download-stats" style="bottom:1%;font-size:200%;position:fixed;left:-1%"><i class="fas fa-download"></i></div>
         <!-- end of modal -->
         <script type="text/javascript">
             $('.show-form').on('click',function(){

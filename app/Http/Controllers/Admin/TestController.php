@@ -145,7 +145,6 @@ class TestController extends Controller
      */
     public function edit($id)
     {
-        sleep(2);
         $test = Test::with('bank', 'Users')->find($id);
         $banks = Bank::all();
         $entries = Entry::select('user_id')->get()->toArray();
@@ -188,8 +187,9 @@ class TestController extends Controller
         $test->update($testData);
         $test->bank()->sync($data['bank_id']);
         if (isset($data['users'])) {
-            $test->Users()->detach();
-            $test->Users()->attach($data['users']);
+            foreach($data['users'] as $uId) {
+                $test->Users()->attach($uId);
+            }
         }
 
         $message = __('Успешно редактиран Тест !!!');

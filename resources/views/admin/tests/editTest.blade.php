@@ -185,9 +185,6 @@
     </div>
     <div class="col-md-12 d-flex flex-row flex-wrap text-center all-students-pool" id="assigned">
     @forelse ($test->Users as $user)
-        <div class="no-show hidden-users-ids">
-            <input type="hidden" name="users[]" id="user-{{$user->id}}" value="{{$user->id}}">
-        </div>
         <!--  one student -->
             <div class="col-md-3 d-flex flex-row flex-wrap one-student-holder">
                 <div class="col-md-12">

@@ -704,6 +704,13 @@ class EventController extends Controller
         if ($request->days == '0' || $request->days == 0) {
             $data['categories'] = '--';
         }
+        $isRegistered = ExtraForm::where([
+            ['user_id',isset($newUser) ? $newUser->id : $user->id],
+            ['event_id',$event]
+        ])->first();
+        if($isRegistered || !is_null($isRegistered)){
+            return back()->withErrors(['грешка' => 'вече сте регистриран!']);
+        }
         $newCWRegistration = new ExtraForm;
         $newCWRegistration->event_id = $event;
         $newCWRegistration->user_id = isset($newUser) ? $newUser->id : $user->id;

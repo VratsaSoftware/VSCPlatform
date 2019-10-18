@@ -1,6 +1,7 @@
 @extends('layouts.template')
 @section('title', 'Admin Кандидаствания')
 @section('content')
+    <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
     @if (!empty(Session::get('success')))
@@ -81,7 +82,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-md-12 text-center download-stats"><i class="fas fa-download"></i></div>
+        <div class="col-md-12 download-stats" style="bottom:1%;font-size:200%;position:fixed;left:-1%"><i class="fas fa-download"></i></div>
         <!-- modal for adding elements -->
         <div id="modal" style="position:absolute">
             <div class="modal-content print-body">
@@ -120,12 +121,5 @@
                     order: [[12, "desc"]],
                 });
             } );
-        </script>
-        <script>
-            $('.download-stats').on('click', function(){
-                var url='data:application/vnd.ms-excel,' + encodeURIComponent($('.table-for-download').html())
-                location.href=url
-                return false
-            });
         </script>
 @endsection
