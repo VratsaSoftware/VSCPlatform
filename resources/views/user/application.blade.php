@@ -71,7 +71,17 @@
                             <b>Регистрацията за записване на курсовете все още не е отворена!</b><br/>
                             <i>Записването ще стане след : {{env('APPLICATION_DATE', 'Септември')}}</i>
                         @else
-                            обща информация
+                            @if(is_null($entry->test_score) || isset($entry->more_test))
+                                <a href="{{route('prepare.test')}}" id="test" style="margin-top: -7%;display: inline-block;margin-bottom:3%;">
+                                    <button type="button" class="btn btn-success">ТЕСТ</button>
+                                    <br/>
+                                    Брой тестове: [ {{ isset($entry['test_count'])?$entry['test_count']:'' }} ]
+                                </a>
+                            @else
+                                @if(is_null($entry->test_score))
+                                    Очаквайте скоро да ви се покаже тук бутона за Тест
+                                @endif
+                            @endif
                         @endif
                     @endif
                 </div>
@@ -100,17 +110,17 @@
                             <span>предварителен тест</span>
                             <div class="personal-steps">
                                 @if(isset($entry) && !is_null($entry->entry_form_id))
-                                    @if(is_null($entry->test_score) || isset($entry->more_test))
-                                        <a href="{{route('prepare.test')}}" id="test" style="margin-top: -7%;display: inline-block;margin-bottom:3%;">
-                                            <button type="button" class="btn btn-success">ТЕСТ</button>
-                                            <br/>
-                                            Брой тестове: [ {{ isset($entry['test_count'])?$entry['test_count']:'' }} ]
-                                        </a>
-                                    @else
-                                        @if(is_null($entry->test_score))
-                                            Очаквайте скоро да ви се покаже тук бутона за Тест
-                                        @endif
-                                    @endif
+{{--                                    @if(is_null($entry->test_score) || isset($entry->more_test))--}}
+{{--                                        <a href="{{route('prepare.test')}}" id="test" style="margin-top: -7%;display: inline-block;margin-bottom:3%;">--}}
+{{--                                            <button type="button" class="btn btn-success">ТЕСТ</button>--}}
+{{--                                            <br/>--}}
+{{--                                            Брой тестове: [ {{ isset($entry['test_count'])?$entry['test_count']:'' }} ]--}}
+{{--                                        </a>--}}
+{{--                                    @else--}}
+{{--                                        @if(is_null($entry->test_score))--}}
+{{--                                            Очаквайте скоро да ви се покаже тук бутона за Тест--}}
+{{--                                        @endif--}}
+{{--                                    @endif--}}
                                     @if(isset($entry->test_stats))
                                         @foreach($entry->test_stats as $sKey => $stats)
                                             <div class="col-md-12 d-flex flex-row flex-wrap"
