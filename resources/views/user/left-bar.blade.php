@@ -1,5 +1,5 @@
 <div class="left-navigation">
-    <ul class="nav navbar-nav sidenav">
+    <ul class="nav navbar-nav sidenav" id="user-nav">
         <li>
             @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
                 <img src="{{asset('images/women-no-avatar.png')}}" alt="profile-pic" class="profile-pic">

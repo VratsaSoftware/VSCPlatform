@@ -404,7 +404,7 @@
                                                 </div>
                                             </a>
                                         @else
-                                            <a href="{{route('events.cw.register',['event' => $event->id])}}">
+                                            <a href="#">
                                             <div class="event-body-text show-more-event candidate-btn-in">
                                                 отминало
                                             </div>

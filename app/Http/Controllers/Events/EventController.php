@@ -568,40 +568,45 @@ class EventController extends Controller
 
     public function cwRegister(Event $event)
     {
-        $occupations = Occupation::all();
-        if (!Auth::user()) {
-            $user = null;
-            return view('events.cw.registration', [
-                'user' => $user,
-                'event' => $event,
-                'occupations' => Occupation::all(),
-            ]);
-        }
-        $user = User::find(Auth::user()->id);
-        if (!Auth::user()->isOnCWEvent($event->id)) {
-            return view('events.cw.registration', [
-                'user' => $user,
-                'event' => $event,
-                'occupations' => Occupation::all(),
-            ]);
+        if($event->to > Carbon::now()){
+            $occupations = Occupation::all();
+            if(!Auth::user()){
+                $user = null;
+                return view('events.cw.registration', [
+                    'user' => $user,
+                    'event' => $event,
+                    'occupations' => Occupation::all(),
+                ]);
+            }
+            $user = User::find(Auth::user()->id);
+            if (!Auth::user()->isOnCWEvent($event->id)) {
+                return view('events.cw.registration', [
+                    'user' => $user,
+                    'event' => $event,
+                    'occupations' => Occupation::all(),
+                ]);
+            }else{
+                $message = __('Вече сте записани за събитието');
+            }
+
+            if ($event->to < Carbon::now() && Auth::user()->isOnCWEvent($event->id)) {
+                $getLink = ExtraForm::where([
+                    ['event_id',$event->id],
+                    ['user_id',Auth::user()->id]
+                ])->first();
+
+                return view('events.cw.registration', [
+                    'user' => $user,
+                    'event' => $event,
+                    'occupations' => Occupation::all(),
+                    'for_link' => true,
+                    'the_link' => isset($getLink->fields['link'])?$getLink->fields['link']:null,
+                ]);
+            }
+        }else{
+            $message = __('Събитието е отминало!');
         }
 
-        if ($event->to < Carbon::now() && Auth::user()->isOnCWEvent($event->id)) {
-            $getLink = ExtraForm::where([
-                ['event_id', $event->id],
-                ['user_id', Auth::user()->id]
-            ])->first();
-
-            return view('events.cw.registration', [
-                'user' => $user,
-                'event' => $event,
-                'occupations' => Occupation::all(),
-                'for_link' => true,
-                'the_link' => isset($getLink->fields['link']) ? $getLink->fields['link'] : null,
-            ]);
-        }
-
-        $message = __('Вече сте записани за събитието');
         return redirect()->route('users.events')->with('error', $message);
     }
 

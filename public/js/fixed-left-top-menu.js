@@ -1,5 +1,21 @@
 $( document ).ready( function () {
-	var menuOpened = false;
+	if($('.navbar-nav').attr('id') == 'user-nav'){
+		$( '.navbar-nav > li:nth-child(1) > i' ).removeClass( 'fas fa-chevron-down' );
+		$( '.navbar-nav > li:nth-child(1) > i' ).addClass( 'fas fa-chevron-up' );
+		// $('.content-wrap').css('margin-left', '20vw');
+		$( '.content-wrap' ).addClass( 'move-left' );
+		$( '.sidenav' ).css( {
+			background: '#FFF',
+			height: '100%',
+		} );
+		$( '.sidenav > li:not(:first-child)' ).each(function( index ) {
+			$(this).show().css('display','list-item');
+		});
+		$( '.title-icons' ).css( 'margin-left', '4vw' )
+		var menuOpened = true;
+	}else{
+		menuOpened = false;
+	}
 	var nestedOpened = false;
 	$( '.navbar-nav > li:nth-child(1)' ).on( 'click', function () {
 		if ( !menuOpened ) {

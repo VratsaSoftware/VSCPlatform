@@ -46,6 +46,7 @@
                         <td>
                             @if(isset($entry['testScoreTest']))
                                 @foreach($entry['testScoreTest'] as $tkey => $test)
+                                    {{$entry['hidden']}}
                                     <p>
                                         {{$test->title}} =>
                                         отговорени:{{$entry['testScore'][$tkey][1]['answered'] .'/'. $entry['testScore'][$tkey][0]['questionsCount']}}<br/>

@@ -279,6 +279,13 @@ class ApplicationController extends Controller
             }
             $entry['testScoreTest'] = $tests;
             $entry['testScore'] = $scores;
+            $calculate = 0;
+            foreach($entry['testScoreTest'] as $tkey => $test){
+                $calculate += $entry['testScore'][$tkey][4]['percentage'];
+            }
+            if($calculate > 0){
+                $entry['hidden'] = $calculate / count($entry['testScore']);
+            }
         }
 
         return view('admin.applications', ['entries' => $entries]);
