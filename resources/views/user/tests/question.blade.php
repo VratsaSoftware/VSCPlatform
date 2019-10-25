@@ -112,7 +112,7 @@
                 @if($current->type == 'open')
                     <div class="col-md-12"><i class="fas fa-keyboard"></i> отворен отговор</div>
                     <div class="col-md-12 open-question-holder">
-                        @if($questions[0]->image || !is_null($current->image))
+                        @if($current->image || !is_null($current->image))
                             <p class="images-holder text-center">
                                 <img src="{{asset('images/questions/'.$current->image)}}" class="open-q-img small-img" title="click" alt="image">
                             </p>
