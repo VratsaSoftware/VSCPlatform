@@ -34,7 +34,9 @@ class CourseController extends Controller
      */
     public function create()
     {
-        return view('course.create');
+        $lecturers = User::where('cl_role_id',3)->get();
+
+        return view('course.create',['lecturers',$lecturers]);
     }
 
     /**

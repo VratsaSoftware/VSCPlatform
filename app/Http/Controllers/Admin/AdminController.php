@@ -29,30 +29,26 @@ class AdminController extends Controller
 
     public function showAllEvents()
     {
-        $events = Event::with('Teams', 'Teams.Members', 'Teams.Members.User', 'Teams.Members.User.Occupation',
-            'Teams.Members.Role', 'Teams.Members.Shirt', 'Teams.Category')->where('to', '>',
-            Carbon::now()->format('Y-m-d H:m:s'))->get();
-        $pastEvents = Event::with('Teams', 'Teams.Members', 'Teams.Category')->where('to', '<',
-            Carbon::now()->format('Y-m-d H:m:s'))->get();
+        $events = Event::with('Teams', 'Teams.Members', 'Teams.Members.User', 'Teams.Members.User.Occupation', 'Teams.Members.Role', 'Teams.Members.Shirt', 'Teams.Category')->where('to', '>', Carbon::now()->format('Y-m-d H:m:s'))->get();
+        $pastEvents = Event::with('Teams', 'Teams.Members', 'Teams.Category')->where('to', '<', Carbon::now()->format('Y-m-d H:m:s'))->get();
         return view('admin.events', ['events' => $events, 'pastEvents' => $pastEvents]);
     }
 
     public function createCertificate($course = null)
     {
         $users = User::get();
-        if(!is_null($course)){
-            foreach($users as $user) {
+        if (!is_null($course)) {
+            foreach ($users as $user) {
                 $userId = $user->id;
-                $isOnCourse = Course::with('Modules', 'Modules.ModulesStudent',
-                    'Modules.ModulesStudent.User')->where('id',$course)->whereHas('Modules.ModulesStudent', function ($query) use ($userId) {
+                $isOnCourse = Course::with('Modules', 'Modules.ModulesStudent', 'Modules.ModulesStudent.User')->where('id', $course)->whereHas('Modules.ModulesStudent', function ($query) use ($userId) {
                     $query->where('user_id', $userId);
                 })->first();
-                if($isOnCourse){
+                if ($isOnCourse) {
                     $usersOn[] = $user;
                 }
             }
         }
-        if(isset($usersOn)){
+        if (isset($usersOn)) {
             $users = $usersOn;
         }
 
@@ -65,7 +61,7 @@ class AdminController extends Controller
             }
         }
 
-        return view('certifications.create', ['users' => $users,'courses' => $courses]);
+        return view('certifications.create', ['users' => $users, 'courses' => $courses]);
     }
 
     public function storeCertificate(Request $request)
@@ -104,10 +100,10 @@ class AdminController extends Controller
 
     public function certificatePreview($user)
     {
-        $certificate = PersonalCertificate::where('user_id',$user)->first();
+        $certificate = PersonalCertificate::where('user_id', $user)->first();
         $certificate->modules = explode(",", $certificate->modules);
 
-        return View('certifications.show',['certificate' => $certificate]);
+        return View('certifications.show', ['certificate' => $certificate]);
     }
 
     public function getUserDataForCertificate($users = null)
@@ -149,5 +145,16 @@ class AdminController extends Controller
         }
 
         return response()->json('empty data', 404);
+    }
+
+    public function filterUsers()
+    {
+        $users = User::whereNotIn('id',function($query) {
+            $query->select('user_id')->from('entries');
+        })->whereNotIn('id',function($query) {
+            $query->select('user_id')->from('events_extra_forms');
+        })->get();
+        $users->load('Occupation');
+        return view('admin.filter_users',['users' => $users]);
     }
 }

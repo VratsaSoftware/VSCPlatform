@@ -133,7 +133,7 @@
                                 <br/>
                                 <span class="no-show">Модул <span class="req-star-form">*</span></span>
                                 <select class="section-el-bold no-show" name="sub" id="sub">
-
+                                
                                 </select>
                                 <script>
                                     $(function () {
@@ -142,11 +142,11 @@
                                     $('#course-select').on('change', function () {
                                         addSub();
                                     });
-
+                                    
                                     function addSub(){
                                         $('#sub').html(' ');
                                         var selectedCourse = $('#course-select').find(':selected').text().replace(/ /g, '');
-
+                                        
                                         if ($('#course-select').find(':selected').attr('data-count') > 0) {
                                             var clonedOptions = $('.course-' + selectedCourse).clone();
                                             $.each(clonedOptions, function (k, option) {
@@ -226,7 +226,7 @@
                                     @endforeach
                                 </select>
                             </p>
-
+                            
                             <p>
                                 <label for="source">От къде научихте за това обучение? <span
                                             class="req-star-form">*</span></label><br/>
@@ -241,7 +241,7 @@
                                     @endforeach
                                 </select>
                             </p>
-
+                            
                             <p>
                                 <label for="cv">Автобиография <span class="req-star-form">*</span></label>
                                 @if ($errors->has('cv'))
@@ -254,8 +254,7 @@
                             <br/>
                             <p>
                             <div class="col-md-12 create-course-button text-center">
-                                <a href="#" onclick="javascript:$('#application').submit()"
-                                   class="create-course-btn"><span class="create-course">Кандидаствай</span></a>
+                                <a href="#" id="submit_form" class="create-course-btn"><span class="create-course">Кандидаствай</span></a>
                             </div>
                             </p>
                         </form>
@@ -266,4 +265,15 @@
         </div>
     </div>
     <script src="{{asset('js/application-form-text-counter.js')}}" charset="utf-8"></script>
+    <script>
+        $('#submit_form').on('click', function(e){
+            e.preventDefault();
+            if($('#application').hasClass('submited')){
+                $(this).fadeOut();
+            }else{
+                $('#application').addClass('submited');
+                $('#application').submit()
+            }
+        });
+    </script>
 @endsection

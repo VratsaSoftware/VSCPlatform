@@ -294,8 +294,8 @@ class UserController extends Controller
 
         if (in_array($type, \Config::get('userInformationTypes'))) {
             $changeVis = VisibleInformation::where([
-                    ['user_id', Auth::user()->id],
-                    ['information_type',$type]
+                ['user_id', Auth::user()->id],
+                ['information_type',$type]
             ])->first();
             if (!is_null($changeVis)) {
                 $changeVis->visible = $visibility;
@@ -315,16 +315,16 @@ class UserController extends Controller
         $term = $request->search;
         if ('institution' == $request->type) {
             $queries = EducationInstitution::where('name', 'like', $term.'%')
-            ->orWhere('name', 'like', '%'.$term.'%')
-            ->orWhere('name', 'like', '%'.$term)
-            ->take(3)
-            ->get();
+                ->orWhere('name', 'like', '%'.$term.'%')
+                ->orWhere('name', 'like', '%'.$term)
+                ->take(3)
+                ->get();
         } else {
             $queries = EducationSpeciality::where('name', 'like', $term.'%')
-            ->orWhere('name', 'like', '%'.$term.'%')
-            ->orWhere('name', 'like', '%'.$term)
-            ->take(3)
-            ->get();
+                ->orWhere('name', 'like', '%'.$term.'%')
+                ->orWhere('name', 'like', '%'.$term)
+                ->take(3)
+                ->get();
         }
         $results = [];
         if (!$queries->isEmpty()) {
@@ -357,22 +357,25 @@ class UserController extends Controller
             ['course_id',$course]
         ])->first();
 
-        $personalCertificate->modules = explode(",", $personalCertificate->modules);
+        if(isset($personalCertificate) && $personalCertificate){
+            $personalCertificate->modules = explode(",", $personalCertificate->modules);
 
-        $mainTemplate = View('certifications.templates.main', [
-            'number' => $personalCertificate->number,
-            'color' => $personalCertificate->color,
-            'title' => $personalCertificate->title,
-            'subTitle' => $personalCertificate->sub_title,
-            'modules' => $personalCertificate->modules,
-            'username' => $personalCertificate->username,
-            'lecturer' => $personalCertificate->lecturer,
-            'date' => $personalCertificate->date->format('d/m/Y'),
-            'images' => 0,
-            'imageLeft' => '',
-            'imageRight' => '',
-            'centerLogo' => $personalCertificate->center_logo,
-        ]);
-        return $mainTemplate;
+            $mainTemplate = View('certifications.templates.main', [
+                'number' => $personalCertificate->number,
+                'color' => $personalCertificate->color,
+                'title' => $personalCertificate->title,
+                'subTitle' => $personalCertificate->sub_title,
+                'modules' => $personalCertificate->modules,
+                'username' => $personalCertificate->username,
+                'lecturer' => $personalCertificate->lecturer,
+                'date' => $personalCertificate->date->format('d/m/Y'),
+                'images' => 0,
+                'imageLeft' => '',
+                'imageRight' => '',
+                'centerLogo' => $personalCertificate->center_logo,
+            ]);
+            return $mainTemplate;
+        }
+        return back()->with('error','Все още нямате сертификат!');
     }
 }
