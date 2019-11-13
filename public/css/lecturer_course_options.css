@@ -13,8 +13,8 @@ a, ul>li>a, div>li>a {
 }
 
 .levels-title, .levels-btn, .levels-footer {
-    background: #658BA9 !important;
-    border: 1px solid #658BA9 !important;
+    background: #658BA9 ;
+    border: 1px solid #658BA9 ;
 }
 
 .levels-btn:hover {

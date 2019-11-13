@@ -30,7 +30,7 @@
                 </p>
                 @endif
               <div class="col-md-6 text-center left-option">
-                <div class="event-title col-md-12">Курс {{$course->name}}
+                <div class="event-title col-md-12" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">Курс {{$course->name}}
                     @if(strtolower($course->visibility) == 'public')
                         <i class="fas fa-eye"></i>
                     @endif
@@ -43,7 +43,7 @@
                 </div>
                 <div class="event-body col-md-12">
                   <a href="#modal" class="change-vis">
-                    <div class="event-body-text">
+                    <div class="event-body-text" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">
                       Прегледай
                     </div>
                   </a>
@@ -81,6 +81,10 @@
                                     <textarea id="description" cols="30" rows="5" name="description" placeholder="кратко описание" style="resize: none;">{{$course->description}}</textarea>
                                 </p>
                                 <p>
+                                    <label for="color">Цвят</label><br>
+                                    <input type="text" id="color" name="color" class="name-course" value="{{$course->color}}">
+                                </p>
+                                <p>
                                     <label for="starts">Започва</label>
                                     <input type="date" name="starts" id="starts" value="{{$course->starts->format('Y-m-d')}}">
                                 </p>
@@ -108,7 +112,7 @@
                     </div>
                   <img src="{{asset('/images/chart-bg.jpg')}}" alt="event-body">
                 </div>
-                <div class="event-footer col-md-12 d-flex flex-row flex-wrap">
+                <div class="event-footer col-md-12 d-flex flex-row flex-wrap" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">
                   <div class="col-md-6">Започнал - {{$course->starts->format('d-m-Y')}}</div>
                   <div class="col-md-6">Завършва - {{$course->ends->format('d-m-Y')}}</div>
                 </div>

@@ -34,9 +34,9 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $lecturers = User::where('cl_role_id',3)->get();
+        $lecturers = User::where('cl_role_id','!=',2)->get();
 
-        return view('course.create',['lecturers',$lecturers]);
+        return view('course.create',['lecturers' => $lecturers]);
     }
 
     /**
@@ -54,7 +54,9 @@ class CourseController extends Controller
             'description' => 'sometimes',
             'starts' => 'required|date_format:Y-m-d',
             'ends' => 'required|date_format:Y-m-d|after:starts',
-            'visibility' => 'required|in_array:valid_visibility.*'
+            'visibility' => 'required|in_array:valid_visibility.*',
+            'lecturer' => 'required',
+            'color' => 'sometimes',
         ]);
         $coursePic = Input::file('picture');
         $image = Image::make($coursePic->getRealPath());
@@ -66,10 +68,11 @@ class CourseController extends Controller
         $name = md5($name);
 
         $data['picture'] = $name;
+        unset($data['lecturer']);
         $createCourse = Course::create($data);
         $insLecturer = new CourseLecturer;
         $insLecturer->course_id = $createCourse->id;
-        $insLecturer->user_id = Auth::user()->id;
+        $insLecturer->user_id = $request->lecturer;
         $insLecturer->save();
 
         $path = public_path().'/images/course-'.$createCourse->id;
@@ -140,7 +143,8 @@ class CourseController extends Controller
             'description' => 'sometimes',
             'starts' => 'required|date_format:Y-m-d',
             'ends' => 'required|date_format:Y-m-d|after:starts',
-            'visibility' => 'required|in_array:valid_visibility.*'
+            'visibility' => 'required|in_array:valid_visibility.*',
+            'color' => 'required',
         ]);
         $course = Course::find($id);
         if (Input::file('picture2')) {
@@ -170,6 +174,7 @@ class CourseController extends Controller
         $course->starts = $request->starts;
         $course->ends = $request->ends;
         $course->visibility = $request->visibility;
+        $course->color = $request->color;
         $course->save();
 
         $message = __('Успешно направени промени!');
