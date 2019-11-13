@@ -175,10 +175,10 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('test/question/update/{question}','Admin\TestController@updateQuestion')->name('update.question');
         Route::delete('/test/delete/question/{question}',
             'Admin\TestController@deleteQuestion')->name('delete.question');
+        Route::get('applications/all', 'Courses\ApplicationController@applicationsAll')->name('admin.applications');
     });
 
     Route::group(['middleware' => 'isAdmin'], function () {
-        Route::get('applications/all', 'Courses\ApplicationController@applicationsAll')->name('admin.applications');
         Route::get('courses/all', 'Admin\AdminController@allCourses')->name('all.courses');
         Route::get('events/all', 'Admin\AdminController@showAllEvents')->name('admin.events');
 
@@ -195,7 +195,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('certificate/store/', 'Admin\AdminController@storeCertificate')->name('certification.store');
         Route::get('user/{user}/certificate/preview',
             'Admin\AdminController@certificatePreview')->name('certificate.preview');
-        Route::get('/filter/users','Admin\AdminController@filterUsers');
     });
 });
 Route::post('/lection/video/shown', 'Courses\LectionController@videoShown')->name('lection.video.show');

@@ -29,6 +29,11 @@
                 @endforelse
             </ul>
         </li>
+        <li>
+            <a href="{{route('admin.applications')}}">
+                <img src="{{asset('/images/profile/nav/results-icon.png')}}" alt="" class="img-fluid">Кандидастване
+            </a>
+        </li>
         <li class="nested-nav">
             <a href="{{route('users.events')}}">
                 <img src="{{asset('/images/profile/nav/events-icon.png')}}" alt="" class="img-fluid">Събития
