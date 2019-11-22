@@ -195,6 +195,9 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('certificate/store/', 'Admin\AdminController@storeCertificate')->name('certification.store');
         Route::get('user/{user}/certificate/preview',
             'Admin\AdminController@certificatePreview')->name('certificate.preview');
+
+        Route::get('course/payment/create', 'Admin\AdminController@createPayment')->name('course.payment.create');
+        Route::post('course/payment/store', 'Admin\AdminController@storePayment')->name('course.payment.store');
     });
 });
 Route::post('/lection/video/shown', 'Courses\LectionController@videoShown')->name('lection.video.show');

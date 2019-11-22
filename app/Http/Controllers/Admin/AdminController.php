@@ -6,6 +6,7 @@ use App\Models\CourseModules\ModulesStudent;
 use App\Models\CourseModules\Module;
 use App\Models\Courses\CourseLecturer;
 use App\Models\Courses\PersonalCertificate;
+use App\Services\ePayService;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Courses\Course;
@@ -156,5 +157,21 @@ class AdminController extends Controller
         })->get();
         $users->load('Occupation');
         return view('admin.filter_users',['users' => $users]);
+    }
+
+    public function createPayment()
+    {
+        $users = User::all();
+        return View('course.payment',['users' => $users]);
+    }
+
+    public function storePayment(Request $request)
+    {
+        $data = $request->validate([
+            "levels" => 'required|integer',
+            'user_email' => 'required',
+        ]);
+        $newPayMent = new ePayService($request);
+        return $newPayMent->sendPayment();
     }
 }
