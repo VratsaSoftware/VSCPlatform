@@ -83,6 +83,12 @@ Route::post('/user/{user}/event/{event}','Events\EventController@cwIsPresent')->
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/myProfile', 'HomeController@index')->name('myProfile');
     Route::resource('user', 'Users\UserController')->names('user');
+    //epay payments routes
+    Route::get('course/payment/create', 'Admin\AdminController@createPayment')->name('course.payment.create');
+    Route::post('course/payment/store', 'Admin\AdminController@storePayment')->name('course.payment.store');
+    Route::get('/course/payment/finish',function(){
+        return view('course.paymentThankYouPage');
+    })->name('course.payment.finish');
 
     //polls vote
     Route::post('poll/user/vote', 'Admin\PollController@userVote')->name('user.vote.poll');
@@ -195,9 +201,6 @@ Route::group(['middleware' => 'auth'], function () {
         Route::post('certificate/store/', 'Admin\AdminController@storeCertificate')->name('certification.store');
         Route::get('user/{user}/certificate/preview',
             'Admin\AdminController@certificatePreview')->name('certificate.preview');
-
-        Route::get('course/payment/create', 'Admin\AdminController@createPayment')->name('course.payment.create');
-        Route::post('course/payment/store', 'Admin\AdminController@storePayment')->name('course.payment.store');
     });
 });
 Route::post('/lection/video/shown', 'Courses\LectionController@videoShown')->name('lection.video.show');

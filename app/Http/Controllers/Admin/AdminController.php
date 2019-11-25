@@ -18,6 +18,7 @@ use View;
 use App\User;
 use Image;
 use File;
+use Auth;
 
 class AdminController extends Controller
 {
@@ -168,10 +169,16 @@ class AdminController extends Controller
     public function storePayment(Request $request)
     {
         $data = $request->validate([
-            "levels" => 'required|integer',
-            'user_email' => 'required',
+            "levels" => 'required|integer|min:1|max:2|'
         ]);
-        $newPayMent = new ePayService($request);
-        return $newPayMent->sendPayment();
+        $process['levels'] = 160;
+        if($data['levels'] > 1){
+            $process['levels'] = 300;
+        }
+        $process['user_email'] = Auth::user()->email;
+        $newPayMent = new ePayService($process);
+        $response =  $newPayMent->sendPayment();
+
+        return view('course.redirectPayment',['response' => $response]);
     }
 }
