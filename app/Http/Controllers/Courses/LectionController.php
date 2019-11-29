@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Courses;
 
+use App\Models\CourseModules\Homework;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Courses\Course;
@@ -42,7 +43,7 @@ class LectionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -55,10 +56,12 @@ class LectionController extends Controller
             'second_date' => 'sometimes|date_format:Y-m-d H:i',
             'description' => 'sometimes',
             'order' => 'sometimes|numeric',
-            'video' => 'sometimes', ['regex:/^(https|http):\/\/(?:www\.)?youtube.com\/embed\/[A-z0-9]+/'],
+            'video' => 'sometimes',
+            ['regex:/^(https|http):\/\/(?:www\.)?youtube.com\/embed\/[A-z0-9]+/'],
             'slides' => 'sometimes|',
             'homework' => 'sometimes|',
-            'demo' => 'sometimes',['regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
+            'demo' => 'sometimes',
+            ['regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
             'visibility' => 'sometimes|in_array:valid_visibility.*',
         ]);
         $store = false;
@@ -104,10 +107,10 @@ class LectionController extends Controller
 
         if (Input::hasFile('slides')) {
             $slides = $request->file('slides');
-            $name = time()."_".$slides->getClientOriginalName();
+            $name = time() . "_" . $slides->getClientOriginalName();
             $name = str_replace(' ', '', $name);
             // $name = md5($name);
-            $slidesUrl = public_path().'/data/course-'.$lection->Module->Course->id.'/modules/'.$lection->Module->id.'/slides-'.$lection->id.'/';
+            $slidesUrl = public_path() . '/data/course-' . $lection->Module->Course->id . '/modules/' . $lection->Module->id . '/slides-' . $lection->id . '/';
 
             $request->file('slides')->move($slidesUrl, $name);
             $lection->presentation = $name;
@@ -115,10 +118,10 @@ class LectionController extends Controller
 
         if (Input::hasFile('homework')) {
             $homework = $request->file('homework');
-            $name = time()."_".$homework->getClientOriginalName();
+            $name = time() . "_" . $homework->getClientOriginalName();
             $name = str_replace(' ', '', $name);
             // $name = md5($name);
-            $homeworkUrl = public_path().'/data/course-'.$lection->Module->Course->id.'/modules/'.$lection->Module->id.'/homework-'.$lection->id.'/';
+            $homeworkUrl = public_path() . '/data/course-' . $lection->Module->Course->id . '/modules/' . $lection->Module->id . '/homework-' . $lection->id . '/';
 
             $request->file('homework')->move($homeworkUrl, $name);
             $lection->homework_criteria = $name;
@@ -145,24 +148,24 @@ class LectionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($user = 0, Course $course, Module $module)
     {
         $lections = Module::getLections($module->id, false);
         if (!$lections->isEmpty()) {
-            return view('course.lections', ['module' => $module->load('Course'),'lections' => $lections]);
+            return view('course.lections', ['module' => $module->load('Course'), 'lections' => $lections]);
         }
 
         $message = __('Няма добавени лекции за този модул!');
-        return redirect()->route('user.course', ['user' => Auth::user()->id,'course' => $course->id])->with('error', $message);
+        return redirect()->route('user.course', ['user' => Auth::user()->id, 'course' => $course->id])->with('error', $message);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -173,8 +176,8 @@ class LectionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -188,7 +191,7 @@ class LectionController extends Controller
             'video' => ['sometimes', 'regex:/^(https|http):\/\/(?:www\.)?youtube.com\/embed\/[A-z0-9]+/'],
             'slides' => 'sometimes|file',
             'homework' => 'sometimes|file',
-            'demo' => ['sometimes','regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
+            'demo' => ['sometimes', 'regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
         ]);
         $lection = Lection::with('Module', 'Module.Course')->findOrFail($id);
 
@@ -215,11 +218,11 @@ class LectionController extends Controller
 
         if (Input::hasFile('slides')) {
             $slides = $request->file('slides');
-            $name = time()."_".$slides->getClientOriginalName();
+            $name = time() . "_" . $slides->getClientOriginalName();
             $name = str_replace(' ', '', $name);
             // $name = md5($name);
-            $slidesUrl = public_path().'/data/course-'.$lection->Module->Course->id.'/modules/'.$lection->Module->id.'/slides-'.$lection->id.'/';
-            $oldSlides = $slidesUrl.$lection->presentation;
+            $slidesUrl = public_path() . '/data/course-' . $lection->Module->Course->id . '/modules/' . $lection->Module->id . '/slides-' . $lection->id . '/';
+            $oldSlides = $slidesUrl . $lection->presentation;
             if (File::exists($oldSlides)) {
                 File::delete($oldSlides);
             }
@@ -229,11 +232,11 @@ class LectionController extends Controller
 
         if (Input::hasFile('homework')) {
             $homework = $request->file('homework');
-            $name = time()."_".$homework->getClientOriginalName();
+            $name = time() . "_" . $homework->getClientOriginalName();
             $name = str_replace(' ', '', $name);
             // $name = md5($name);
-            $homeworkUrl = public_path().'/data/course-'.$lection->Module->Course->id.'/modules/'.$lection->Module->id.'/homework-'.$lection->id.'/';
-            $oldhomework = $homeworkUrl.$lection->homework_criteria;
+            $homeworkUrl = public_path() . '/data/course-' . $lection->Module->Course->id . '/modules/' . $lection->Module->id . '/homework-' . $lection->id . '/';
+            $oldhomework = $homeworkUrl . $lection->homework_criteria;
             if (File::exists($oldhomework)) {
                 File::delete($oldhomework);
             }
@@ -266,17 +269,17 @@ class LectionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $lection = Lection::with('Module', 'Module.Course')->findOrFail($id);
 
-        $slidesUrl = public_path().'/data/course-'.$lection->Module->Course->id.'/modules/'.$lection->Module->id.'/slides-'.$lection->id;
+        $slidesUrl = public_path() . '/data/course-' . $lection->Module->Course->id . '/modules/' . $lection->Module->id . '/slides-' . $lection->id;
         File::deleteDirectory($slidesUrl);
 
-        $homeworkUrl = public_path().'/data/course-'.$lection->Module->Course->id.'/modules/'.$lection->Module->id.'/homework-'.$lection->id;
+        $homeworkUrl = public_path() . '/data/course-' . $lection->Module->Course->id . '/modules/' . $lection->Module->id . '/homework-' . $lection->id;
         File::deleteDirectory($homeworkUrl);
 
         if ($lection->lections_video_id) {
@@ -294,18 +297,15 @@ class LectionController extends Controller
         $isAllowed = Auth::user()->isOnThisCourse($course->id);
         if ($isAllowed) {
             if ($request->comment && !is_null($request->comment)) {
-                $insComment = LectionComment::firstOrCreate(
-                    ['course_lection_id' => $lection->id,'user_id' => $user->id],
-                    ['comment' => $request->comment]
-                );
-                $message = __('Успешно изпратен коментар за лекция '.$lection->title.' !');
-                return redirect()->route('user.module.lections', ['user' => $user->id,'course' => $course->id,'module' => $module->id])->with('success', $message);
+                $insComment = LectionComment::firstOrCreate(['course_lection_id' => $lection->id, 'user_id' => $user->id], ['comment' => $request->comment]);
+                $message = __('Успешно изпратен коментар за лекция ' . $lection->title . ' !');
+                return redirect()->route('user.module.lections', ['user' => $user->id, 'course' => $course->id, 'module' => $module->id])->with('success', $message);
             }
             $message = __('Попълнете полето за коментар!');
             return redirect()->back()->with('error', $message);
         }
         $message = __('Нямате право да достъпите този ресурс!');
-        return redirect()->route('user.module.lections', ['user' => $user->id,'course' => $course->id,'module' => $module->id])->with('error', $message);
+        return redirect()->route('user.module.lections', ['user' => $user->id, 'course' => $course->id, 'module' => $module->id])->with('error', $message);
     }
 
     public function videoShown(Request $request)
@@ -313,18 +313,54 @@ class LectionController extends Controller
         $isExisting = LectionVideoView::where([
             ['lection_video_id', $request->videoId],
             ['user_id', $request->user],
-            ])->first();
+        ])->first();
         if ($isExisting) {
             $isExisting->views_count = $isExisting->views_count + 1;
             $isExisting->save();
             return response('success', 200);
         }
         $addView = new LectionVideoView;
-        $addView->lection_video_id = isset($request->videoId)?$request->videoId:null;
+        $addView->lection_video_id = isset($request->videoId) ? $request->videoId : null;
         $addView->user_id = $request->user;
         $addView->views_count = 1;
         $addView->save();
         return response('success', 200);
+    }
+
+    public function userUploadHomework(Request $request)
+    {
+        $data = $request->validate([
+            'lection' => 'required|numeric',
+            'homework' => 'file|mimes:rar,zip'
+        ]);
+        $homeworkExist = Homework::where([
+            ['user_id',Auth::user()->id],
+            ['lection_id',$data['lection']]
+        ])->first();
+        $homeworkFile = $request->file('homework');
+        $name = time() . "_" . $homeworkFile->getClientOriginalName();
+        $name = str_replace(' ', '', $name);
+        $name = md5($name);
+        $homeworkPath = public_path() . '/data/homeworks/';
+        if($homeworkExist) {
+            $oldHomework = $homeworkPath . $homeworkExist->file;
+            if (File::exists($oldHomework)) {
+                File::delete($oldHomework);
+            }
+            $request->file('homework')->move($homeworkPath, $name);
+            $homeworkExist->file = $name;
+            $homeworkExist->save();
+        }else{
+            $newHomework = new Homework;
+            $newHomework->lection_id = $data['lection'];
+            $newHomework->user_id = Auth::user()->id;
+            $request->file('homework')->move($homeworkPath, $name);
+            $newHomework->file = $name;
+            $newHomework->save();
+        }
+
+        $message = __('Успешно изпратено домашно!');
+        return back()->with('success',$message);
     }
 
     public function parseDateTime($date, $hours, $minutes)
@@ -333,13 +369,13 @@ class LectionController extends Controller
         $outMinutes = $minutes;
         if ($hours < 10 && $hours[0] > 0) {
             $outHours = 0;
-            $outHours.= $hours;
+            $outHours .= $hours;
         }
         if ($minutes < 10 && $minutes[0] > 0) {
             $outMinutes = 0;
-            $outMinutes.= $minutes;
+            $outMinutes .= $minutes;
         }
-        $time = $outHours.$outMinutes;
-        return Carbon::parse($date.$time);
+        $time = $outHours . $outMinutes;
+        return Carbon::parse($date . $time);
     }
 }

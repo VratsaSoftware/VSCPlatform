@@ -46,6 +46,27 @@ $( function () {
 		$( '#modal' ).show();
 	} );
 
+	$('#upload-homework').on('click', function(){
+		var action = $(this).attr('data-url');
+		var lection = $(this).attr('data-lection');
+		$('#modal').show();
+		$('.modal-header > h2').text('');
+		$('.modal-header > h2').text('Изпрати Домашно');
+		$('.copy > p').html('');
+		$('.copy > p').html('<form action="' + action + '" method="POST" id="homework-form" enctype="multipart/form-data" files="true"><input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '"><input type="hidden" name="lection" id="lection" value="' + lection + '"><label>Файл:</label><br><input type="file" name="homework" id="homework"></form>');
+		$('.modal-content > .cf > div').html('<input class="btn close-modal send-homework-form" type="submit" name="submit" value="Изпрати">');
+
+		$('.send-homework-form').on('click', function () {
+			$('#homework-form').submit();
+		});
+	});
+
+	$('.homework-comments').on('click', function () {
+		$('#modal').show();
+		$('.copy > p').html($(this).next('.comments-homework').html());
+		$('.copy > p').find('.comments-homework').css('display','block');
+	});
+
 	//empty modal on close button click
 	$( '.close-modal' ).on( 'click', function () {
 		closeModal();

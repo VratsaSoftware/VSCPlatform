@@ -78,6 +78,14 @@ input[type=text], textarea, .options-title, .name-course, .phone-input, #color {
     padding: 5px;
 }
 
+.lecture-options>.homework-lecture-eval>a:hover , .lecture-options>.homework-lecture-upload>a:hover{
+    border:none;
+}
+
+.homework-stats{
+    font-size: 75%;
+}
+
 .lectures-wrapper {
     margin-bottom: 3vw;
     border: 1px solid #1C8800;
@@ -703,5 +711,15 @@ input[type=range]:focus {
         /* top: 25vw !important; */
         z-index: 10;
         /* position: fixed; */
+    }
+
+    .homework-time-user{
+        font-size:65%;
+        padding-left: 35%;
+        color:#f00;
+    }
+
+    .home-work-time-text{
+        margin-left:10%;
     }
 }

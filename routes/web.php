@@ -209,6 +209,7 @@ Route::post('/lection/video/shown', 'Courses\LectionController@videoShown')->nam
 Route::get('/user/{user?}/course/{course}', 'Courses\CourseController@showUserCourse')->name('user.course');
 Route::get('/user/{user?}/course/{course}/module/{module}/lections',
     'Courses\LectionController@show')->name('user.module.lections');
+Route::post('/user/upload/homework','Courses\LectionController@userUploadHomework')->name('user.upload.homework');
 Route::post('/user/{user?}/course/{course}/module/{module}/lection/{lection}/comment',
     'Courses\LectionController@addComment')->name('user.module.lection.comment');
 

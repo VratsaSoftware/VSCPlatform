@@ -4,6 +4,8 @@ namespace App;
 
 use App\Models\Admin\Poll;
 use App\Models\Admin\PollVote;
+use App\Models\CourseModules\Homework;
+use App\Models\CourseModules\HomeworkComment;
 use App\Models\CourseModules\ModulesStudent;
 use App\Models\Courses\Entry;
 use App\Models\Events\ExtraForm;
@@ -431,5 +433,42 @@ class User extends Authenticatable
             $optionIds = [];
         }
         return $valid[0];
+    }
+
+    public function isHomeWorkUploadedByLection($user_id = null, $lection_id)
+    {
+        is_null($user_id) ? $user_id = Auth::user()->id : $user_id;
+        $is_uploaded = Homework::where([
+            ['user_id', $user_id],
+            ['lection_id', $lection_id]
+        ])->first();
+
+        return $is_uploaded ? true : false;
+    }
+
+    public function evalutedHomeWorksCount($user_id = null, $lection_id)
+    {
+        is_null($user_id) ? $user_id = Auth::user()->id : $user_id;
+        $eval_count = HomeworkComment::with('homework')->where([
+            ['user_id', $user_id],
+            ['is_evaluated', '>', 0]
+        ])->whereHas('homework', function ($q) use ($lection_id) {
+            $q->where('lection_id', $lection_id);
+        })->count();
+
+        return $eval_count;
+    }
+
+    public function getHomeworkCommentsByLection($user_id = null, $lection_id)
+    {
+        is_null($user_id) ? $user_id = Auth::user()->id : $user_id;
+        $comments = HomeworkComment::with('homework','Author')->whereHas('homework',function($q) use ($user_id,$lection_id){
+            $q->where([
+                ['user_id', $user_id],
+                ['lection_id',$lection_id]
+            ]);
+        })->where('is_evaluated','>',0)->get();
+
+        return $comments;
     }
 }

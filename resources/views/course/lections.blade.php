@@ -40,7 +40,7 @@
         <div class="col-md-12 lvl-program-holder d-flex flex-row flex-wrap">
             <div class="col-md-12 lvl-title text-center">Учебна Програма <i class="fas fa-book-open"></i>&nbsp;{{count($lections)}}</div>
             <!-- modal for editing elements -->
-            <div id="modal">
+            <div id="modal" style="top:-140px">
                 <div class="modal-content print-body">
                     <div class="modal-header">
                         <h2></h2>
@@ -83,6 +83,12 @@
                             @if($lection->second_date)
                                 /&nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->second_date->format('H:i')}}</span>
                             @endif
+                            <br/>
+                            <div class="homework-time-user">
+                                <span class="home-work-time-text">срок за домашни:</span><br/>
+                                <i class="far fa-calendar-alt"></i> {{$lection->homework_end->subDays(1)->addHours('23')->addMinutes('59')->format('d-m-Y')}}
+                                <i class="far fa-clock"></i>&nbsp;{{$lection->homework_end->subDays(1)->addHours('23')->addMinutes('59')->format('H:i')}}
+                            </div>
                          </span><br>
 
                     @if(!Auth::user() && $lection->visibility != Config::get('courseVisibility.public'))
@@ -99,7 +105,7 @@
                         @endif
                         <br>
                         <div class="col-md-12 lecture-options text-center d-flex flex-row flex-wrap">
-                            <div class="col-md-3 video-lecture">
+                            <div class="col-md-1 video-lecture">
                                      @if($lection->Video()->exists())
                                          <a data-toggle="modal" data-target="#modal" href="#modal" data-user="{{isset(Auth::user()->id)?Auth::user()->id:0}}" data-video-id="{{$lection->Video->id}}" data-url="{{route('lection.video.show')}}">видео</a>
                                      @else
@@ -118,24 +124,103 @@
                                 @if($lection->presentation)
                                     <a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/slides-'.$lection->id.'/'.$lection->presentation)}}" target="__blank">слайдове </a>
                                 @else
-                                    <span class="empty-data">слайдове</span>
+                                    <span class="empty-data">презентация</span>
                                 @endif
                             </div>
                             <div class="col-md-2 homework-lecture">
                                 @if($lection->homework_criteria)
                                     <a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/homework-'.$lection->id.'/'.$lection->homework_criteria)}}" target="__blank">за домашно </a>
                                 @else
-                                    <span class="empty-data">за домашно</span>
+                                    <span class="empty-data">домашно</span>
                                 @endif
                             </div>
-                            <div class="col-md-2">
+                            <div class="col-md-2 homework-lecture-upload">
+                                @if($lection->homework_end->gt(\Carbon\Carbon::now()))
+                                    <a href="#modal" id="upload-homework" data-url="{{route('user.upload.homework')}}" data-lection="{{$lection->id}}"><span class="">качи домашно</span></a>
+                                @else
+                                    <span class="">изпратено домашно</span>
+                                @endif
+                                <br>
+                                <div class="homework-stats">
+                                    @if(Auth::user()->isHomeWorkUploadedByLection(null,$lection->id))
+                                        <img src="{{asset('images/tick-y-big.png')}}" alt="uploaded" width="10%">
+                                    @else
+                                        <img src="{{asset('images/profile/remove-icon.png')}}" alt="not-uploaded" width="10%">
+                                    @endif
+                                    <a href="#modal" class="homework-comments"><i class="fas fa-comment-dots"></i></a>
+                                    <div class="comments-homework" style="display:none;">
+                                        <div class="col-md-12 d-flex flex-row flex-wrap comment-modal-holder" style="align-content: flex-start">
+                                            <div class="comments-title col-md-12">Коментари</div>
+                                            @php
+                                                $homeworkComments = Auth::user()->getHomeworkCommentsByLection(null,$lection->id);
+                                            @endphp
+                                            @foreach ($homeworkComments as $comment)
+                                                <!-- one comment -->
+                                                    @if(!is_null($comment->Author))
+                                                        <div class="comment-pic-inside-modal col-md-12 d-flex flex-row flex-wrap">
+                                                            <div class="col-md-4">
+                                                                @if($comment->Author->picture && $comment->Author->cl_role_id !== 2)
+                                                                    <img src="{{asset('images/user-pics/'.$comment->Author->picture)}}" alt="botev" class="img-fluid modal-comment-pic">
+                                                                @else
+                                                                    <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="img-fluid modal-comment-pic">
+                                                                @endif
+                                                            </div>
+                                                            <div class="col-md-4">
+    
+                                                            </div>
+                                                            <div class="col-md-4">
+    
+                                                            </div>
+                                                            <div class="col-md-4 text-center">
+                                                                <span class="">
+                                                                    @if($comment->Author->cl_role_id !== 2)
+                                                                        {{$comment->Author->name}} {{$comment->Author->last_name}}
+                                                                    @else
+                                                                        Курсист
+                                                                    @endif
+                                                                </span>
+                                                            </div>
+                                                            <div class="col-md-4">
+    
+                                                            </div>
+                                                            <div class="col-md-4 text-right">
+                                                                <span class="">{{$comment->created_at->diffForHumans()}}</span>
+                                                            </div>
+    
+                                                            <div class="col-md-12">
+    
+                                                            </div>
+                                                            <div class="col-md-12 comment-text">
+                                                                {{$comment->comment}}
+                                                            </div>
+                                                            <div class="col-md-12 text-right">
+                                                                {{$comment->created_at->format('H:i A')}}
+                                                            </div>
+                                                        </div>
+                                                    @endif
+                                                <!-- end of one comment -->
+                                                @endforeach
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-2 homework-lecture-eval">
+                                @if($lection->homework_end->gt(\Carbon\Carbon::now()))
+                                    <a href=""><span class="">оцени домашно</span></a>
+                                @else
+                                    <span class="">оценeни домашни</span>
+                                @endif
+                                <br>
+                                <span class="homework-stats">{{Auth::user()->evalutedHomeWorksCount(null,$lection->id)}}</span>
+                            </div>
+                            <div class="col-md-1">
                                 @if($lection->demo)
                                     <a href="{{$lection->demo}}" target="__blank">демо </a>
                                 @else
                                     <span class="empty-data">демо</span>
                                 @endif
                             </div>
-                            <div class="col-md-3 edit-lecture comment">
+                            <div class="col-md-2 edit-lecture comment">
                                 @if(Auth::user() && !Auth::user()->isCommented($lection->id))
                                 <a href="#modal">коментар</a>
                                 <div class="col-md-12 comment-holder">
