@@ -170,6 +170,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('lection', 'Courses\LectionController')->names('lection');
         Route::post('change/lection/{lection}/visibility',
             'Courses\LectionController@changeVisibility')->name('lection.visibility');
+        Route::get('/lection/{lection}/homeworks', 'Courses\LectionController@showHomeworks')->name('homeworks.show');
+        Route::post('/lection/homework/{homework}','Courses\LectionController@addHomeworkLecturerComment')->name('lection.homework.lecturer.comment');
 
         //tests routes
         Route::resource('test', 'Admin\TestController')->names('test');

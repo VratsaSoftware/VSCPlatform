@@ -140,6 +140,10 @@
             <label for="order">Поредност</label>
             <input type="number" name="order" id="order" value="">
         </p>
+        <p>
+            <label for="order">Срок за домашни</label>
+            <input type="date" name="homework_end" id="homework_end" value="">
+        </p>
     </form>
     {{-- end editing form lecture --}}
     <div class="col-md-12 lvl-program-holder d-flex flex-row flex-wrap">
@@ -168,17 +172,28 @@
                                     <span class="second-hours-no-show" style="display:none"></span>
                                     <span class="second-minutes-no-show" style="display:none"></span>
                                 @endif
+                                @if(!is_null($lection->homework_end))
+                                    <span class="homework-end-no-show" style="display:none">{{$lection->homework_end->format('Y-m-d')}}</span>
+                                @else
+                                    <span class="homework-end-no-show" style="display:none"></span>
+                                @endif
                                 <div class="col-md-11 lecture-txt">
                                     <span class="lection-title">{{$lection->title}}</span>
                                     <span>
-                        @if($lection->first_date)
+                            @if($lection->first_date)
                                             &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->first_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->first_date->format('H:i')}}</span>
                                         @endif
-
+        
                                         @if($lection->second_date)
                                             /&nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->second_date->format('H:i')}}</span>
                                         @endif
-                     </span><br>
+                            <br/>
+                            <div class="homework-time-user">
+                                <span class="home-work-time-text">срок за домашни:</span><br/>
+                                <i class="far fa-calendar-alt"></i> {{isset($lection->homework_end)?$lection->homework_end->subDays(1)->addHours('23')->addMinutes('59')->format('d-m-Y'):'--'}}
+                                <i class="far fa-clock"></i>&nbsp;{{isset($lection->homework_end)?$lection->homework_end->subDays(1)->addHours('23')->addMinutes('59')->format('H:i'):'--'}}
+                            </div>
+                         </span><br>
 
                                     @if(strlen($lection->description) > 250)
                                         <span class="lection-description">{{mb_substr($lection->description,0,250)}}...<a href="#modal" data="{{$lection->description}}" class="read-more">още</a></span>
@@ -233,6 +248,8 @@
                                             @else
                                                 <a href="#modal" class="add-homework empty-data" data-url="{{route('lection.store')}}" data="{{$lection->id}}">добави домашно </a>
                                             @endif
+                                            <br/>
+                                                <a href="{{route('homeworks.show',$lection->id)}}" class="homework-exist">виж домашни</a>
                                         </div>
                                         <div class="col-md-2">
                                             @if($lection->demo)
@@ -346,14 +363,14 @@
                                                 <div class="col-md-11 lecture-txt">
                                                     <span class="lection-title">{{$lection->title}}</span>
                                                     <span>
-                        @if($lection->first_date)
+                                                        @if($lection->first_date)
                                                             &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->first_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->first_date->format('H:i')}}</span>
                                                         @endif
 
                                                         @if($lection->second_date && !is_null($lection->second_date))
                                                             /&nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->second_date->format('H:i')}}</span>
                                                         @endif
-                     </span><br>
+                                                    </span><br>
 
                                                     @if(strlen($lection->description) > 250)
                                                         <span class="lection-description">{{mb_substr($lection->description,0,250)}}...<a href="#modal" data="{{$lection->description}}" class="read-more">още</a></span>

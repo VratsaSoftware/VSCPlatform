@@ -46,7 +46,7 @@ $( function () {
 		$( '#modal' ).show();
 	} );
 
-	$('#upload-homework').on('click', function(){
+	$('.upload-homework').on('click', function(){
 		var action = $(this).attr('data-url');
 		var lection = $(this).attr('data-lection');
 		$('#modal').show();

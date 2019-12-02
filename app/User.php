@@ -467,8 +467,8 @@ class User extends Authenticatable
                 ['user_id', $user_id],
                 ['lection_id',$lection_id]
             ]);
-        })->where('is_evaluated','>',0)->get();
-
+        })->where('is_evaluated','>',0)->orderBy('is_lecturer_comment','DESC')->get();
+        //ordered by admin/lecturer comments first
         return $comments;
     }
 }

@@ -136,9 +136,9 @@
                             </div>
                             <div class="col-md-2 homework-lecture-upload">
                                 @if($lection->homework_end->gt(\Carbon\Carbon::now()))
-                                    <a href="#modal" id="upload-homework" data-url="{{route('user.upload.homework')}}" data-lection="{{$lection->id}}"><span class="">качи домашно</span></a>
+                                    <a href="#modal" class="upload-homework" data-url="{{route('user.upload.homework')}}" data-lection="{{$lection->id}}"><span class="">качи домашно</span></a>
                                 @else
-                                    <span class="">изпратено домашно</span>
+                                    <span class="">изтекло време</span>
                                 @endif
                                 <br>
                                 <div class="homework-stats">
@@ -159,7 +159,7 @@
                                                     @if(!is_null($comment->Author))
                                                         <div class="comment-pic-inside-modal col-md-12 d-flex flex-row flex-wrap">
                                                             <div class="col-md-4">
-                                                                @if($comment->Author->picture && $comment->Author->cl_role_id !== 2)
+                                                                @if($comment->Author->picture && $comment->is_lecturer_comment > 0)
                                                                     <img src="{{asset('images/user-pics/'.$comment->Author->picture)}}" alt="botev" class="img-fluid modal-comment-pic">
                                                                 @else
                                                                     <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="img-fluid modal-comment-pic">
@@ -173,7 +173,7 @@
                                                             </div>
                                                             <div class="col-md-4 text-center">
                                                                 <span class="">
-                                                                    @if($comment->Author->cl_role_id !== 2)
+                                                                    @if($comment->is_lecturer_comment > 0)
                                                                         {{$comment->Author->name}} {{$comment->Author->last_name}}
                                                                     @else
                                                                         Курсист
@@ -229,7 +229,7 @@
                                         <div class="col-md-12 text-center">
                                             <form action="{{route('user.module.lection.comment',['user' => Auth::user()->id,'course' => $module->Course->id,'module' => $module->id,'lection' => $lection->id])}}" id="comment_form" name="comment_form" method="POST">
                                                 {{ csrf_field() }}
-                                                <textarea name="comment" id="comment" cols="30" rows="10" placeholder="остави коментар"></textarea><br>
+                                                <textarea name="comment" id="comment" cols="30" rows="10" placeholder="остави коментар" form="comment_form"></textarea><br>
                                             </form>
                                         </div>
                                     </div>
