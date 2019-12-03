@@ -462,13 +462,26 @@ class User extends Authenticatable
     public function getHomeworkCommentsByLection($user_id = null, $lection_id)
     {
         is_null($user_id) ? $user_id = Auth::user()->id : $user_id;
-        $comments = HomeworkComment::with('homework','Author')->whereHas('homework',function($q) use ($user_id,$lection_id){
+        $comments = HomeworkComment::with('homework', 'Author')->whereHas('homework', function ($q) use ($user_id, $lection_id) {
             $q->where([
                 ['user_id', $user_id],
-                ['lection_id',$lection_id]
+                ['lection_id', $lection_id]
             ]);
-        })->where('is_evaluated','>',0)->orderBy('is_lecturer_comment','DESC')->get();
+        })->where('is_evaluated', '>', 0)->orderBy('is_lecturer_comment', 'DESC')->get();
         //ordered by admin/lecturer comments first
         return $comments;
+    }
+
+    public function isCompletedEval($user_id = null,$lection)
+    {
+        is_null($user_id) ? $user_id = Auth::user()->id : $user_id;
+
+        $isCompletedEval = HomeworkComment::with('homework', 'Author')->whereHas('homework', function ($q) use ($lection) {
+            $q->where([
+                ['lection_id', $lection]
+            ]);
+        })->where('is_evaluated', 0)->orWhereNull('is_evaluated')->where('user_id',$user_id)->first();
+
+        return $isCompletedEval?false:true;
     }
 }

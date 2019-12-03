@@ -212,6 +212,7 @@ Route::get('/user/{user?}/course/{course}', 'Courses\CourseController@showUserCo
 Route::get('/user/{user?}/course/{course}/module/{module}/lections',
     'Courses\LectionController@show')->name('user.module.lections');
 Route::post('/user/upload/homework','Courses\LectionController@userUploadHomework')->name('user.upload.homework');
+Route::post('/lection/homework/user/eval','Courses\LectionController@userEvalHomework')->name('user.eval.homeworks');
 Route::post('/user/{user?}/course/{course}/module/{module}/lection/{lection}/comment',
     'Courses\LectionController@addComment')->name('user.module.lection.comment');
 

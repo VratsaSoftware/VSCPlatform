@@ -347,13 +347,13 @@ class LectionController extends Controller
     public function addHomeworkLecturerComment(Request $request, $homework)
     {
         $isExisting = HomeworkComment::where([
-            ['user_id',Auth::user()->id],
-            ['homework_id',$homework]
+            ['user_id', Auth::user()->id],
+            ['homework_id', $homework]
         ])->first();
-        if($isExisting){
+        if ($isExisting) {
             $isExisting->comment = $request->comment;
             $isExisting->save();
-        }else {
+        } else {
             $newLecturerComment = new HomeworkComment;
             $newLecturerComment->user_id = Auth::user()->id;
             $newLecturerComment->homework_id = $homework;
@@ -361,11 +361,11 @@ class LectionController extends Controller
             $newLecturerComment->is_evaluated = 1;
             $newLecturerComment->is_lecturer_comment = 1;
             $newLecturerComment->save();
+            // only if new comment added then evaluted count must increase +1
+            $homeworkEval = Homework::find($homework);
+            $homeworkEval->evaluated_count += 1;
+            $homeworkEval->save();
         }
-
-        $homeworkEval = Homework::find($homework);
-        $homeworkEval->evaluated_count += 1;
-        $homeworkEval->save();
 
         $message = __('Успешно добавихте коментар');
         return back()->with('success', $message);
@@ -412,6 +412,12 @@ class LectionController extends Controller
         }
         $message = __('Датата за изпращане на домашно е изтекла!');
         return back()->with('error', $message);
+    }
+
+    public function userEvalHomework(Request $request)
+    {
+        $isCompletedEval = Auth::user()->isCompletedEval(null,$request->lection);
+        return response()->json($isCompletedEval);
     }
 
     public function parseDateTime($date, $hours, $minutes)

@@ -110,7 +110,12 @@
                             </form>
                         </div>
                     </div>
-                  <img src="{{asset('/images/chart-bg.jpg')}}" alt="event-body">
+                    
+                    @if($course->picture)
+                        <img src="{{asset('/images/course-'.$course->id.'/'.$course->picture)}}" alt="course-pic" class="course-picture-edit">
+                    @else
+                        <img src="{{asset('/images/chart-bg.jpg')}}" alt="event-body">
+                    @endif
                 </div>
                 <div class="event-footer col-md-12 d-flex flex-row flex-wrap" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">
                   <div class="col-md-6">Започнал - {{$course->starts->format('d-m-Y')}}</div>

@@ -206,7 +206,9 @@
                             </div>
                             <div class="col-md-2 homework-lecture-eval">
                                 @if($lection->homework_end->gt(\Carbon\Carbon::now()))
-                                    <a href=""><span class="">оцени домашно</span></a>
+                                    <a href="#modal" class="eval_homeworks" data-lection="{{$lection->id}}" data-url="{{route('user.eval.homeworks')}}">
+                                        <span>оцени домашно</span>
+                                    </a>
                                 @else
                                     <span class="">оценeни домашни</span>
                                 @endif
