@@ -371,6 +371,28 @@ class LectionController extends Controller
         return back()->with('success', $message);
     }
 
+    public function addHomeworkStudentComment(Request $request, $homework)
+    {
+        $data = $request->validate([
+            'comment' => 'required|min:3|max:255'
+        ]);
+
+        $eval = HomeworkComment::where([
+            ['user_id',Auth::user()->id],
+            ['homework_id',$homework]
+        ])->first();
+        $eval->comment = $data['comment'];
+        $eval->is_evaluated = 1;
+        $eval->save();
+
+        $homeworkEval = Homework::find($homework);
+        $homeworkEval->evaluated_count += 1;
+        $homeworkEval->save();
+
+        $message = __('Успешно оценихте домашно, сега можете да изтеглите ново!');
+        return back()->with('success', $message);
+    }
+
     public function userUploadHomework(Request $request)
     {
         $data = $request->validate([
@@ -416,8 +438,27 @@ class LectionController extends Controller
 
     public function userEvalHomework(Request $request)
     {
-        $isCompletedEval = Auth::user()->isCompletedEval(null,$request->lection);
-        return response()->json($isCompletedEval);
+        $isUploaded = Auth::user()->isHomeWorkUploadedByLection(null, $request->lection);
+        if ($isUploaded) {
+            $isCompletedEval = Auth::user()->isCompletedEval(null, $request->lection);
+            if ($isCompletedEval) {
+                //take new homework
+                $homework_id = Auth::user()->getRandomHomework(null, $request->lection);
+                $homework = Homework::findOrFail($homework_id);
+
+                if($homework->count()) {
+                    $newHomeWorkEval = new HomeworkComment;
+                    $newHomeWorkEval->user_id = Auth::user()->id;
+                    $newHomeWorkEval->homework_id = $homework_id;
+                    $newHomeWorkEval->save();
+                }
+            }else {
+                $homework = Auth::user()->getUnFinishedEval(null, $request->lection);
+            }
+            return view('course.lection_eval_homework', ['homework' => $homework]);
+        }
+        $notUploaded = __('Моля качете своето домашно, за да можете да оценявате домашно на други!');
+        return $notUploaded;
     }
 
     public function parseDateTime($date, $hours, $minutes)

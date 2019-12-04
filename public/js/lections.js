@@ -61,10 +61,8 @@ $(function () {
         });
     });
 
-    $('.eval_homeworks').on('click', function (e) {
-        e.preventDefault();
+    $('.eval_homeworks').on('click', function () {
         var url = $(this).attr('data-url');
-        console.log(url);
         var lection = $(this).attr('data-lection');
         $.ajax({
             headers: {
@@ -76,12 +74,12 @@ $(function () {
                 lection: lection
             },
             success: function (data, textStatus, xhr) {
-                console.log(data);
                 if (xhr.status == 200) {
-                    // $('.modal-header > h2').text('');
-                    // $('.modal-header > h2').text('Оцени Домашно');
-                    // $('.copy > p').html(data);
-                    // $('#modal').show();
+                    $('.modal-header > h2').text('');
+                    $('.modal-header > h2').text('Оцени Домашно');
+                    $('.copy > p').html(data);
+                    $('#modal').show();
+                    console.log(data);
                 }
             }
         });

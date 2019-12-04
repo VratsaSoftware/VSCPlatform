@@ -472,7 +472,7 @@ class User extends Authenticatable
         return $comments;
     }
 
-    public function isCompletedEval($user_id = null,$lection)
+    public function isCompletedEval($user_id = null, $lection)
     {
         is_null($user_id) ? $user_id = Auth::user()->id : $user_id;
 
@@ -480,8 +480,72 @@ class User extends Authenticatable
             $q->where([
                 ['lection_id', $lection]
             ]);
-        })->where('is_evaluated', 0)->orWhereNull('is_evaluated')->where('user_id',$user_id)->first();
+        })->where('is_evaluated', 0)->orWhereNull('is_evaluated')->where('user_id', $user_id)->first();
 
-        return $isCompletedEval?false:true;
+        return $isCompletedEval ? false : true;
+    }
+
+    public function getRandomHomework($user_id = null, $lection)
+    {
+        is_null($user_id) ? $user_id = Auth::user()->id : $user_id;
+        $evaluated = Homework::whereHas('comments', function ($q) use ($lection, $user_id) {
+            $q->where([
+                ['lection_id', $lection],
+                ['user_id', $user_id],
+                ['is_evaluated', '>', '0']
+            ]);
+        })->pluck('id')->toArray();
+
+        if (count($evaluated) < 0) {
+            $evaluated = Homework::where([
+                ['user_id', $user_id],
+                ['lection_id', $lection]
+            ])->pluck('id')->toArray();
+        }
+
+        $homeworksEvalSum = Homework::where([
+            ['lection_id', $lection],
+            ['user_id', '!=', $user_id]
+        ])->whereNotIn('id', $evaluated)->sum('evaluated_count');
+
+        $homeworksEvalCount = Homework::where([
+            ['lection_id', $lection],
+            ['user_id', '!=', $user_id]
+        ])->whereNotIn('id', $evaluated)->count();
+
+        if ($homeworksEvalCount > 0) {
+            $evalMax = floor($homeworksEvalSum / $homeworksEvalCount);
+            if ($evalMax < 1) {
+                $evalMax = 1;
+            }
+        } else {
+            $evalMax = 1;
+        }
+        $randomHomeWork = Homework::where('evaluated_count', '<', '' . $evalMax . '')->where([
+            ['lection_id', $lection],
+            ['user_id', '!=', $user_id],
+        ])->whereNotIn('id', $evaluated)->get();
+        if (count($randomHomeWork) > 0) {
+            $randomId = $randomHomeWork->random(1);
+        } else {
+            $randomHomeWork = Homework::where([
+                ['lection_id', $lection],
+                ['user_id', '!=', $user_id],
+            ])->whereNotIn('id', $evaluated)->get();
+            $randomId = count($randomHomeWork)?$randomHomeWork->random(1):[];
+        }
+
+        return isset($randomId[0]['id']) ? $randomId[0]['id'] : [];
+    }
+
+    public function getUnFinishedEval($user_id, $lection)
+    {
+        is_null($user_id) ? $user_id = Auth::user()->id : $user_id;
+        $unFinishedEval = HomeworkComment::with('homework', 'Author')->whereHas('homework', function ($q) use ($lection) {
+            $q->where([
+                ['lection_id', $lection]
+            ]);
+        })->where('is_evaluated', 0)->orWhereNull('is_evaluated')->where('user_id', $user_id)->first();
+        return $unFinishedEval->homework;
     }
 }

@@ -150,6 +150,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('user/{user}/course/{course}/certificate/show',
         'Users\UserController@showCertificate')->name('user.cert.show');
     Route::get('/user/event/{event}','Events\EventController@show')->name('event.show');
+    Route::post('/user/upload/homework','Courses\LectionController@userUploadHomework')->name('user.upload.homework');
+    Route::post('/lection/homework/user/eval','Courses\LectionController@userEvalHomework')->name('user.eval.homeworks');
+    Route::post('/lection/homework/{homework}/user/eval','Courses\LectionController@addHomeworkStudentComment')->name('student.homework.comment');
     Route::group(['middleware' => 'isLecturer'], function () {
         // lecturer routes
         Route::post('/lecturer/update/bio', 'Users\UserController@updateBio')->name('lecturer.update.bio');
@@ -211,8 +214,7 @@ Route::post('/lection/video/shown', 'Courses\LectionController@videoShown')->nam
 Route::get('/user/{user?}/course/{course}', 'Courses\CourseController@showUserCourse')->name('user.course');
 Route::get('/user/{user?}/course/{course}/module/{module}/lections',
     'Courses\LectionController@show')->name('user.module.lections');
-Route::post('/user/upload/homework','Courses\LectionController@userUploadHomework')->name('user.upload.homework');
-Route::post('/lection/homework/user/eval','Courses\LectionController@userEvalHomework')->name('user.eval.homeworks');
+
 Route::post('/user/{user?}/course/{course}/module/{module}/lection/{lection}/comment',
     'Courses\LectionController@addComment')->name('user.module.lection.comment');
 
