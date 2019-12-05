@@ -54,9 +54,9 @@
 				@foreach($homeworks as $num => $homework)
 					<tr class="text-center">
 						<th scope="row">{{is_null($homework->updated_at) || !isset($homework->updated_at)?$homework->created_at:$homework->updated_at}}</th>
-						<td>{{$homework->User->name}}</td>
-						<td>{{$homework->User->last_name}}</td>
-						<td>{{$homework->User->email}}</td>
+						<td>{{$homework->user->name}}</td>
+						<td>{{$homework->user->last_name}}</td>
+						<td>{{$homework->user->email}}</td>
 						<td><a href="{{asset('/data/homeworks/'.$homework->file)}}" download style="color:#00F">свали</a></td>
 						<td>{{is_null($homework->evaluated_count)?'0':$homework->evaluated_count}} пъти</td>
 						<td>
@@ -75,7 +75,7 @@
 											@endphp
 											<div class="comment-pic-inside-modal col-md-12 d-flex flex-row flex-wrap">
 												<div class="col-md-4">
-													@if($comment->Author->picture && $comment->Author->cl_role_id !== 2)
+													@if($comment->Author->picture)
 														<img src="{{asset('images/user-pics/'.$comment->Author->picture)}}" alt="botev" class="img-fluid modal-comment-pic">
 													@else
 														<img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="img-fluid modal-comment-pic">
@@ -89,11 +89,7 @@
 												</div>
 												<div class="col-md-4 text-center">
                                                                 <span class="">
-                                                                    @if($comment->Author->cl_role_id !== 2)
 		                                                                {{$comment->Author->name}} {{$comment->Author->last_name}}
-	                                                                @else
-		                                                                Курсист
-	                                                                @endif
                                                                 </span>
 												</div>
 												<div class="col-md-4">

@@ -87,6 +87,7 @@ $(function () {
 
     $('.homework-comments').on('click', function () {
         $('#modal').show();
+        console.log($(this).next('.comments-homework').html());
         $('.copy > p').html($(this).next('.comments-homework').html());
         $('.copy > p').find('.comments-homework').css('display', 'block');
     });

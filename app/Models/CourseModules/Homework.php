@@ -12,11 +12,16 @@ class Homework extends Model
 
     public function user()
     {
-        return $this->hasOne(User::class,'id','user_id');
+        return $this->hasOne(User::class, 'id', 'user_id');
     }
 
     public function comments()
     {
         return $this->hasMany(HomeworkComment::class, 'homework_id');
+    }
+
+    public function lection()
+    {
+        return $this->hasOne(Lection::class,'id','lection_id');
     }
 }

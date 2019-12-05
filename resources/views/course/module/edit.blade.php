@@ -470,8 +470,11 @@
                     <div class="col-md-6 edit-lection-students-pool">
                         <img src="{{asset('/images/profile/location-icon.png')}}" alt="map-icon">
                         <span class="location">
-                    {{$student->User->location}}
-                </span>
+                            {{$student->User->location}}
+                        </span>
+                    </div>
+                    <div class="col-md-12 text-center" title="Качени домашни / прегледани домашни">
+                        <i class="fas fa-upload"></i> {{Auth::user()->getUploadedHomeworksCount($module->id,$student->User->id)}} / <i class="fas fa-eye"></i> {{Auth::user()->getHomeWorkEvalCountModule($module->id,$student->User->id)}}
                     </div>
                     <div class="col-md-11 flex-row flex-wrap student-options">
                         <div class="col-md-6 add-student text-right">

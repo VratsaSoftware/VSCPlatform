@@ -532,7 +532,7 @@ class User extends Authenticatable
                 ['lection_id', $lection],
                 ['user_id', '!=', $user_id],
             ])->whereNotIn('id', $evaluated)->get();
-            $randomId = count($randomHomeWork)?$randomHomeWork->random(1):[];
+            $randomId = count($randomHomeWork) ? $randomHomeWork->random(1) : [];
         }
 
         return isset($randomId[0]['id']) ? $randomId[0]['id'] : [];
@@ -547,5 +547,27 @@ class User extends Authenticatable
             ]);
         })->where('is_evaluated', 0)->orWhereNull('is_evaluated')->where('user_id', $user_id)->first();
         return $unFinishedEval->homework;
+    }
+
+    public function getUploadedHomeworksCount($module, $user)
+    {
+        is_null($user) ? $user = Auth::user()->id : $user;
+        $homeWorkUploadCount = Homework::where('user_id', $user)->with('lection', 'lection.module')->whereHas('lection.module', function ($q) use ($module) {
+            $q->where('id', $module);
+        })->count();
+
+        return $homeWorkUploadCount;
+    }
+
+    public function getHomeWorkEvalCountModule($module, $user)
+    {
+        is_null($user) ? $user = Auth::user()->id : $user;
+        $homeWorkEvalCount = Homework::where('user_id', $user)->with('lection', 'lection.module')->whereHas('lection.module', function ($q) use ($module) {
+            $q->where('id', $module);
+        })->whereHas('comments', function($cquery){
+            $cquery->where('is_evaluated','>','0');
+        })->count();
+
+        return $homeWorkEvalCount;
     }
 }

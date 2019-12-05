@@ -135,85 +135,93 @@
                                 @endif
                             </div>
                             <div class="col-md-2 homework-lecture-upload">
-                                @if($lection->homework_end->gt(\Carbon\Carbon::now()))
-                                    <a href="#modal" class="upload-homework" data-url="{{route('user.upload.homework')}}" data-lection="{{$lection->id}}"><span class="">качи домашно</span></a>
-                                @else
-                                    <span class="">изтекло време</span>
-                                @endif
-                                <br>
-                                <div class="homework-stats">
-                                    @if(Auth::user()->isHomeWorkUploadedByLection(null,$lection->id))
-                                        <img src="{{asset('images/tick-y-big.png')}}" alt="uploaded" width="10%">
+                                @if(Auth::user())
+                                    @if($lection->homework_end->gt(\Carbon\Carbon::now()))
+                                        <a href="#modal" class="upload-homework" data-url="{{route('user.upload.homework')}}" data-lection="{{$lection->id}}"><span class="">качи домашно</span></a>
                                     @else
-                                        <img src="{{asset('images/profile/remove-icon.png')}}" alt="not-uploaded" width="10%">
+                                        <span class="">изтекло време</span>
                                     @endif
-                                    <a href="#modal" class="homework-comments"><i class="fas fa-comment-dots"></i></a>
-                                    <div class="comments-homework" style="display:none;">
-                                        <div class="col-md-12 d-flex flex-row flex-wrap comment-modal-holder" style="align-content: flex-start">
-                                            <div class="comments-title col-md-12">Коментари</div>
-                                            @php
-                                                $homeworkComments = Auth::user()->getHomeworkCommentsByLection(null,$lection->id);
-                                            @endphp
-                                            @foreach ($homeworkComments as $comment)
-                                                <!-- one comment -->
-                                                    @if(!is_null($comment->Author))
-                                                        <div class="comment-pic-inside-modal col-md-12 d-flex flex-row flex-wrap">
-                                                            <div class="col-md-4">
-                                                                @if($comment->Author->picture && $comment->is_lecturer_comment > 0)
-                                                                    <img src="{{asset('images/user-pics/'.$comment->Author->picture)}}" alt="botev" class="img-fluid modal-comment-pic">
-                                                                @else
-                                                                    <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="img-fluid modal-comment-pic">
-                                                                @endif
-                                                            </div>
-                                                            <div class="col-md-4">
-    
-                                                            </div>
-                                                            <div class="col-md-4">
-    
-                                                            </div>
-                                                            <div class="col-md-4 text-center">
-                                                                <span class="">
-                                                                    @if($comment->is_lecturer_comment > 0)
-                                                                        {{$comment->Author->name}} {{$comment->Author->last_name}}
+                                    <br>
+                                    <div class="homework-stats">
+                                        @if(Auth::user() && Auth::user()->isHomeWorkUploadedByLection(null,$lection->id))
+                                            <img src="{{asset('images/tick-y-big.png')}}" alt="uploaded" width="10%">
+                                        @else
+                                            <img src="{{asset('images/profile/remove-icon.png')}}" alt="not-uploaded" width="10%">
+                                        @endif
+                                        <a href="#modal" class="homework-comments"><i class="fas fa-comment-dots"></i></a>
+                                        <div class="comments-homework" style="display:none;">
+                                            <div class="col-md-12 d-flex flex-row flex-wrap comment-modal-holder" style="align-content: flex-start">
+                                                <div class="comments-title col-md-12">Коментари</div>
+                                                @php
+                                                    $homeworkComments = Auth::user()->getHomeworkCommentsByLection(null,$lection->id);
+                                                @endphp
+                                                @foreach ($homeworkComments as $comment)
+                                                    <!-- one comment -->
+                                                        @if(!is_null($comment->Author))
+                                                            <div class="comment-pic-inside-modal col-md-12 d-flex flex-row flex-wrap">
+                                                                <div class="col-md-4">
+                                                                    @if($comment->Author->picture && $comment->is_lecturer_comment > 0)
+                                                                        <img src="{{asset('images/user-pics/'.$comment->Author->picture)}}" alt="botev" class="img-fluid modal-comment-pic">
                                                                     @else
-                                                                        Курсист
+                                                                        <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="img-fluid modal-comment-pic">
                                                                     @endif
-                                                                </span>
+                                                                </div>
+                                                                <div class="col-md-4">
+        
+                                                                </div>
+                                                                <div class="col-md-4">
+        
+                                                                </div>
+                                                                <div class="col-md-4 text-center">
+                                                                    <span class="">
+                                                                        @if($comment->is_lecturer_comment > 0)
+                                                                            {{$comment->Author->name}} {{$comment->Author->last_name}}
+                                                                        @else
+                                                                            Курсист
+                                                                        @endif
+                                                                    </span>
+                                                                </div>
+                                                                <div class="col-md-4">
+        
+                                                                </div>
+                                                                <div class="col-md-4 text-right">
+                                                                    <span class="">{{$comment->created_at->diffForHumans()}}</span>
+                                                                </div>
+        
+                                                                <div class="col-md-12">
+        
+                                                                </div>
+                                                                <div class="col-md-12 comment-text">
+                                                                    {{$comment->comment}}
+                                                                </div>
+                                                                <div class="col-md-12 text-right">
+                                                                    {{$comment->created_at->format('H:i A')}}
+                                                                </div>
                                                             </div>
-                                                            <div class="col-md-4">
-    
-                                                            </div>
-                                                            <div class="col-md-4 text-right">
-                                                                <span class="">{{$comment->created_at->diffForHumans()}}</span>
-                                                            </div>
-    
-                                                            <div class="col-md-12">
-    
-                                                            </div>
-                                                            <div class="col-md-12 comment-text">
-                                                                {{$comment->comment}}
-                                                            </div>
-                                                            <div class="col-md-12 text-right">
-                                                                {{$comment->created_at->format('H:i A')}}
-                                                            </div>
-                                                        </div>
-                                                    @endif
-                                                <!-- end of one comment -->
-                                                @endforeach
+                                                        @endif
+                                                    <!-- end of one comment -->
+                                                    @endforeach
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
+                                @else
+                                    <span class="empty-data" style="font-size: 15px;">трябва да си влязъл в акаунта си, за да качиш домашно</span>
+                                @endif
                             </div>
                             <div class="col-md-2 homework-lecture-eval">
-                                @if($lection->homework_end->gt(\Carbon\Carbon::now()))
-                                    <a href="#modal" class="eval_homeworks" data-lection="{{$lection->id}}" data-url="{{route('user.eval.homeworks')}}">
-                                        <span>оцени домашно</span>
-                                    </a>
+                                @if(Auth::user())
+                                    @if($lection->homework_end->gt(\Carbon\Carbon::now()))
+                                        <a href="#modal" class="eval_homeworks" data-lection="{{$lection->id}}" data-url="{{route('user.eval.homeworks')}}">
+                                            <span>оцени домашно</span>
+                                        </a>
+                                    @else
+                                        <span class="">оценeни домашни</span>
+                                    @endif
+                                    <br>
+                                    <span class="homework-stats">{{Auth::user()?Auth::user()->evalutedHomeWorksCount(null,$lection->id):'0'}}</span>
                                 @else
-                                    <span class="">оценeни домашни</span>
+                                    <span class="empty-data" style="font-size: 15px;">трябва да си влязъл в акаунта си, за да оцениш домашно</span>
                                 @endif
-                                <br>
-                                <span class="homework-stats">{{Auth::user()->evalutedHomeWorksCount(null,$lection->id)}}</span>
                             </div>
                             <div class="col-md-1">
                                 @if($lection->demo)
