@@ -29,7 +29,9 @@
             </p>
             @endif
         <div class="col-md-12 text-center cert-link">
-            <a href="{{route('user.cert.show',[Auth::user()->id,$course->id])}}"><img src="{{asset('/images/awards/medal-1.png')}}" alt="medal" width="50px">Сертификат</a>
+            @if(isset(Auth::user()->id))
+                <a href="{{route('user.cert.show',[Auth::user()->id,$course->id])}}"><img src="{{asset('/images/awards/medal-1.png')}}" alt="medal" width="50px">Сертификат</a>
+            @endif
         </div>
         @foreach ($modules as $module)
         <div class="col-md-6 right-option">

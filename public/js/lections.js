@@ -49,15 +49,25 @@ $(function () {
     $('.upload-homework').on('click', function () {
         var action = $(this).attr('data-url');
         var lection = $(this).attr('data-lection');
+        var loader = $(this).attr('data-loader');
         $('#modal').show();
         $('.modal-header > h2').text('');
         $('.modal-header > h2').text('Изпрати Домашно');
         $('.copy > p').html('');
-        $('.copy > p').html('<form action="' + action + '" method="POST" id="homework-form" enctype="multipart/form-data" files="true"><input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '"><input type="hidden" name="lection" id="lection" value="' + lection + '"><label>Файл:</label><br><input type="file" name="homework" id="homework"></form>');
+        $('.copy > p').html('<form action="' + action + '" method="POST" id="homework-form" enctype="multipart/form-data" files="true"><input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '"><input type="hidden" name="lection" id="lection" value="' + lection + '"><label>Файл:</label><br><input type="file" name="homework" id="homework">(max:50mb,extension:zip,rar,txt)</form>');
         $('.modal-content > .cf > div').html('<input class="btn close-modal send-homework-form" type="submit" name="submit" value="Изпрати">');
 
         $('.send-homework-form').on('click', function () {
-            $('#homework-form').submit();
+            var fileInput = $('#homework-form > #homework').val();
+            if(fileInput.length){
+                if(!$('#homework-form').hasClass('submited')){
+                    $('#homework-form').addClass('submited');
+                    $('#homework-form').fadeOut();
+                    $('#homework-form').after('<p>Моля изчакайте файла се качва...</p><img src="'+loader+'">');
+                    $('#homework-form').submit();
+                }
+            }
+            $('#homework-form > #homework').css('border','1px solid #f00')
         });
     });
 

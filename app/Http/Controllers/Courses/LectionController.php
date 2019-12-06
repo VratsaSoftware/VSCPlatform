@@ -397,7 +397,7 @@ class LectionController extends Controller
     {
         $data = $request->validate([
             'lection' => 'required|numeric',
-            'homework' => 'file|mimes:rar,zip'
+            'homework' => 'file|max:50000|mimes:rar,zip,txt'
         ]);
         $lection = Lection::find($data['lection']);
 

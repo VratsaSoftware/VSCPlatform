@@ -111,7 +111,7 @@
             </div>
             <div class="cf footer">
                 <div></div>
-                <a href="#close" class="btn close-modal">Затвори</a>
+                <a href="#" class="btn close-modal" data-dismiss = "modal">Затвори</a>
             </div>
         </div>
         <div class="overlay"></div>
