@@ -23,12 +23,12 @@
 				</div>
 			@endif
 			@if ($message = Session::get('error'))
-					<div class="alert alert-danger slide-on">
-						<button type="button" class="close" data-dismiss="alert">
-						</button>
-							<p>{{ $message }}</p>
-					</div>
-	        @endif
+				<div class="alert alert-danger slide-on">
+					<button type="button" class="close" data-dismiss="alert">
+					</button>
+					<p>{{ $message }}</p>
+				</div>
+			@endif
 		</div>
 		<div class="col-md-12 d-flex flex-row flex-wrap options-wrap">
 			<div class="col-md-12" style="margin-bottom:2vw;">
@@ -46,7 +46,8 @@
 					<th scope="col">оценено домашно</th>
 					<th scope="col">оценени домашни (на други)</th>
 					<th>коментари</th>
-					<th>добави коментар</th>
+					<th style="text-align:center">добави коментар</th>
+					<th>коментиран ли е от теб </th>
 				</tr>
 				</thead>
 				<tbody>
@@ -71,7 +72,10 @@
 									<!-- one comment -->
 										@if(!is_null($comment->Author))
 											@php
-												$validComment = $comment->Author->id === Auth::user()->id?$comment->comment:'';
+												$isCommented[] = $comment->Author->id === Auth::user()->id?1:0;
+												if($comment->Author->id === Auth::user()->id){
+													$validComment[$homework->id] = $comment->comment;
+												}
 											@endphp
 											<div class="comment-pic-inside-modal col-md-12 d-flex flex-row flex-wrap">
 												<div class="col-md-4">
@@ -116,15 +120,25 @@
 							</div>
 						</td>
 						<td>
-							<a href="#modal" class="add-comment-homework"><button class="btn btn-success">коментирай</button></a>
+							<a href="#modal" class="add-comment-homework">
+								<button class="btn btn-success">коментирай</button>
+							</a>
 							<div class="col-md-12 text-center comment-form-wrapper" style="display:none;">
 								<form action="{{route('lection.homework.lecturer.comment',['homework' => $homework->id])}}" id="comment_form-{{$homework->id}}" name="comment_form" method="POST">
 									{{ csrf_field() }}
-									<textarea name="comment" id="comment" cols="30" rows="10" placeholder="остави коментар">{{isset($validComment)?$validComment:''}}</textarea><br>
+									<textarea name="comment" id="comment" cols="30" rows="10" placeholder="остави коментар">{{isset($validComment[$homework->id])?$validComment[$homework->id]:''}}</textarea><br>
 								</form>
 							</div>
 						</td>
+						<td style="width:12%">
+							@if(isset($isCommented) && in_array(1,$isCommented))
+								<img src="{{asset("/images/tick-y-big.png")}}" width="10%">
+							@else
+								<img src="{{asset("/images/profile/remove-icon.png")}}" width="13%">
+							@endif
+						</td>
 					</tr>
+					@php $isCommented = [];@endphp
 				@endforeach
 				</tbody>
 			</table>
@@ -154,13 +168,13 @@
 	</div>
 	<!-- end of modal -->
 	<script>
-		$('.show-comments').on('click', function(){
+        $('.show-comments').on('click', function(){
             $('#modal').show();
             $('.copy > p').html($(this).next('.comments-homework').html());
             $('.copy > p').find('.comments-homework').css('display','block');
-		});
-		
-		$('.add-comment-homework').on('click', function(){
+        });
+
+        $('.add-comment-homework').on('click', function(){
             $('#modal').show();
             $('.copy > p').html($(this).next('.comment-form-wrapper').html());
             $('.copy > p').find('.comment-form-wrapper').css('display','block');
@@ -168,7 +182,7 @@
             $( '#send_comment' ).on( 'click', function () {
                 $( '.copy > p > form' ).submit();
             } );
-		});
+        });
 	</script>
 	<script>
         $(document).ready(function() {
@@ -178,4 +192,4 @@
             });
         } );
 	</script>
-	@endsection
+@endsection
