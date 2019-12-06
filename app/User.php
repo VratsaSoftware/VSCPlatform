@@ -562,10 +562,11 @@ class User extends Authenticatable
     public function getHomeWorkEvalCountModule($module, $user)
     {
         is_null($user) ? $user = Auth::user()->id : $user;
-        $homeWorkEvalCount = Homework::where('user_id', $user)->with('lection', 'lection.module')->whereHas('lection.module', function ($q) use ($module) {
+        $homeWorkEvalCount = HomeworkComment::where([
+            ['user_id',$user],
+            ['is_evaluated','>','0']
+        ])->with('homework','homework.lection','homework.lection.module')->whereHas('homework.lection.module', function ($q) use ($module) {
             $q->where('id', $module);
-        })->whereHas('comments', function($cquery){
-            $cquery->where('is_evaluated','>','0');
         })->count();
 
         return $homeWorkEvalCount;

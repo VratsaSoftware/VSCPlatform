@@ -39,6 +39,9 @@
         </div>
         <div class="col-md-12 lvl-program-holder d-flex flex-row flex-wrap">
             <div class="col-md-12 lvl-title text-center">Учебна Програма <i class="fas fa-book-open"></i>&nbsp;{{count($lections)}}</div>
+            <div class="col-md-12 text-center homework-stats-user" title="Качени домашни / прегледани домашни">
+                <i class="fas fa-upload"></i> {{Auth::user()->getUploadedHomeworksCount($module->id,Auth::user()->id)}} / <i class="fas fa-eye"></i> {{Auth::user()->getHomeWorkEvalCountModule($module->id,Auth::user()->id)}}
+            </div>
             <!-- modal for editing elements -->
             <div id="modal" style="top:-140px">
                 <div class="modal-content print-body">
