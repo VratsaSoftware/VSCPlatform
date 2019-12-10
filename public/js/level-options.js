@@ -150,7 +150,7 @@ $(function () {
         $('.modal-header > h2').text('');
         $('.modal-header > h2').text('Добави Лекция');
         $('.copy > p').html('');
-        $('.copy > p').html('<form id="create-lection" action="' + action + '" method="POST" enctype="multipart/form-data" files="true"><input type="hidden" name="module" id="module" value="' + module_id + '"><input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '"><p><label>Заглавие:<i class="fas fa-star-of-life req-star"></i></label><br><input type="text" name="title" id="title" value="' + oldTitle + '"></p><br><p><label>дата 1:<i class="fas fa-star-of-life req-star"></i></label><br><input type="date" id="first_date_create" value="' + oldFirst + '" name="first_date_create"><input type="tel" id="first_time_hours" name="first_time_hours" class="time-input" min="1" max="24" title="01 - 24">:<input type="tel" id="first_time_minutes" name="first_time_minutes" class="time-minutes" min="1" max="59" title="01-59"></p><br><p><label>дата 2:</label><br><input type="date" id="second_time" value="' + oldSecondTime + '" name="second_date_create"><input type="tel" id="second_time_hours" name="second_time_hours" class="time-input" min="1" max="24" title="01 - 24">:<input type="tel" id="second_time_minutes" name="second_time_minutes" class="time-minutes" min="1" max="59" title="01-59"></p><br><p><label>Описание:<i class="fas fa-star-of-life req-star"></i></label><br><textarea style="margin-top:1%" name="description" id="description">' + oldDesc + '</textarea></p><br><p><label for="order">Поредност:</label><input type="tel" name="order" id="order" value="' + order + '"></p><br><p><label>Презентация</label><br><input type="file" name="slides" id="slides"></p><br><p><label>Видео:</label><br><input type="text" name="video" id="video" value="' + oldVideo + '"></p><br><p><label>Критерии за домашно</label><br><input type="file" name="homework" id="homework"></p><br><p><label for="demo">Демо</label><input type="text" name="demo" id="demo" value="' + oldDemo + '"><p><br><p><label for="homework_end">Срок за домашни<i class="fas fa-star-of-life req-star" style="margin-right:-13vw"></i></label><br/><input type="date" name="homework_end"></p><p><label for="visibility">Видимост</label><select class="section-el-bold" name="visibility" id="visibility">' + visibility + '</select></p><br><p><label>Тип:</label><select name="type" class="section-el-bold" id="type"><option value="">Лекция</option><option value="other">Тест/Друго</option></select></p></form>');
+        $('.copy > p').html('<form id="create-lection" action="' + action + '" method="POST" enctype="multipart/form-data" files="true"><input type="hidden" name="module" id="module" value="' + module_id + '"><input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '"><p><label>Заглавие:<i class="fas fa-star-of-life req-star"></i></label><br><input type="text" name="title" id="title" value="' + oldTitle + '"></p><br><p><label>дата 1:<i class="fas fa-star-of-life req-star"></i></label><br><input type="date" id="first_date_create" value="' + oldFirst + '" name="first_date_create"><input type="tel" id="first_time_hours" name="first_time_hours" class="time-input" min="1" max="24" title="01 - 24">:<input type="tel" id="first_time_minutes" name="first_time_minutes" class="time-minutes" min="1" max="59" title="01-59"></p><br><p><label>дата 2:</label><br><input type="date" id="second_time" value="' + oldSecondTime + '" name="second_date_create"><input type="tel" id="second_time_hours" name="second_time_hours" class="time-input" min="1" max="24" title="01 - 24">:<input type="tel" id="second_time_minutes" name="second_time_minutes" class="time-minutes" min="1" max="59" title="01-59"></p><br><p><label>Описание:<i class="fas fa-star-of-life req-star"></i></label><br><textarea style="margin-top:1%" name="description" id="description">' + oldDesc + '</textarea></p><br><p><label for="order">Поредност:</label><input type="tel" name="order" id="order" value="' + order + '"></p><br><p><label>Презентация</label><br><input type="file" name="slides" id="slides"></p><br><p><label>Видео:</label><br><input type="text" name="video" id="video" value="' + oldVideo + '"></p><br><p><label>Критерии за домашно</label><br><input type="file" name="homework" id="homework"></p><br><p><label for="demo">Демо</label><input type="text" name="demo" id="demo" value="' + oldDemo + '"><p><br><p><label for="homework_end">Срок за домашни</label><br/><input type="date" name="homework_end"></p><p><label for="visibility">Видимост</label><select class="section-el-bold" name="visibility" id="visibility">' + visibility + '</select></p><br><p><label>Тип:</label><select name="type" class="section-el-bold" id="type"><option value="">Лекция</option><option value="other">Тест/Друго</option></select></p></form>');
         $('.time-input').on('keyup', function () {
             if ($(this).val().length < 3) {
                 if ($(this).val() > 24) {
@@ -184,8 +184,28 @@ $(function () {
     // EXISTING
     $('.video-exist').on('click', function () {
         var action = $(this).attr('data-url');
-        $('.copy > p').html('<iframe width="auto" height="auto" src=""></iframe>');
-        $('.copy > p').find('iframe').attr('src', $(this).attr('data')).after('<form action="' + action + '" id="change_video" method="POST"><input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '"><input name="_method" type="hidden" value="PUT"><label>Линк:</label><br><input type="text" name="video" id="video" value="' + $(this).attr('data') + '">');
+        var videoUrl = $(this).attr('data');
+        var arrayUrls = videoUrl.split(/\s+/);
+        $.each(arrayUrls, function( index, value ) {
+            var parsedVideo =  arrayUrls[index].split("=");
+            if(parsedVideo[1] !== undefined){
+                var noList = parsedVideo[1].split('&')[0];
+            }else{
+                noList = parsedVideo;
+            }
+            var embeddedUrl = "https://www.youtube.com/embed/"+noList;
+            if($('.copy > p').find('iframe').length){
+                $('.copy > p').find('iframe').after('<iframe width="auto" height="auto" src="" class="video-'+index+'"></iframe>')
+                $('.copy > p').find('.video-'+index).attr('src',embeddedUrl);
+            }else{
+                $('.copy > p').html('<iframe width="auto" height="auto" src="" class="video-'+index+'"></iframe>');
+                $('.copy > p').find('.video-'+index).attr('src',embeddedUrl);
+            }
+            parsedVideo = '';
+            embeddedUrl = '';
+        });
+
+        $('.copy > p').append('<form action="' + action + '" id="change_video" method="POST"><input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '"><input name="_method" type="hidden" value="PUT"><label>Линк:</label><br><input type="text" name="video" id="video" value="' + $(this).attr('data') + '">');
         $('.modal-header').find('h2').html($(this).next('.video-holder').find('.video-title').html());
         $('.modal-content > .cf > div').html('<input class="btn close-modal" type="submit" name="submit" id="change_video_btn" value="Изпрати"></form>');
         $('#modal').show();

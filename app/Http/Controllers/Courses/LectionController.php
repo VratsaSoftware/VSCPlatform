@@ -63,7 +63,7 @@ class LectionController extends Controller
             'homework' => 'sometimes|',
             'demo' => 'sometimes',
             ['regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
-            'homework_end' => 'required',
+            'homework_end' => 'sometimes',
             'visibility' => 'sometimes|in_array:valid_visibility.*',
         ]);
         $store = false;
@@ -89,7 +89,7 @@ class LectionController extends Controller
                 $lection->description = $request->description;
                 $lection->order = $request->order;
                 $lection->visibility = $request->visibility;
-                $lection->homework_end = $request->homework_end;
+                $lection->homework_end = is_null($request->homework_end)?$request->homework_end:Carbon::parse($request->homework_end)->addDays(1);
                 $lection->save();
 
                 $lection = Lection::with('Module', 'Module.Course')->findOrFail($lection->id);
@@ -211,7 +211,7 @@ class LectionController extends Controller
                 return redirect()->back()->with('error', $message)->withInput(Input::all());
             }
 
-            $lection->homework_end = $request->homework_end;
+            $lection->homework_end = is_null($request->homework_end)?$request->homework_end:Carbon::parse($request->homework_end)->addDays(1);
             $lection->description = $request->description;
             $lection->order = $request->order;
         }

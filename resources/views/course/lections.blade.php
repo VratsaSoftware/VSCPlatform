@@ -58,7 +58,7 @@
                     </div>
                     <div class="cf footer">
                         <div></div>
-                        <a href="#" class="btn close-modal" data-dismiss = "modal">Затвори</a>
+                        <a href="#close" class="btn close-modal" data-dismiss = "modal">Затвори</a>
                     </div>
                 </div>
                 <div class="overlay"></div>
@@ -90,7 +90,7 @@
                             <div class="homework-time-user">
                                 <span class="home-work-time-text">срок за домашни:</span><br/>
                                 <i class="far fa-calendar-alt"></i> {{isset($lection->homework_end)?$lection->homework_end->subDays(1)->addHours('23')->addMinutes('59')->format('d-m-Y'):'-'}}
-                                <i class="far fa-clock"></i>&nbsp;{{isset($lection->homework_end)?$lection->homework_end->subDays(1)->addHours('23')->addMinutes('59')->format('H:i'):'-'}}
+                                &nbsp;<i class="far fa-clock"></i>&nbsp;{{isset($lection->homework_end)?$lection->homework_end->subDays(1)->addHours('23')->addMinutes('59')->format('H:i'):'-'}}
                             </div>
                          </span><br>
                                         
@@ -142,7 +142,7 @@
                                                         @if(!is_null($lection->homework_end) && $lection->homework_end->gt(\Carbon\Carbon::now()))
                                                             <a href="#modal" class="upload-homework" data-loader="{{asset('/images/loaders/load-20.gif')}}" data-url="{{route('user.upload.homework')}}" data-lection="{{$lection->id}}"><span class="">качи домашно</span></a>
                                                         @else
-                                                            <span class="">изтекло време</span>
+                                                            <span class="empty-data">качи домашно</span>
                                                         @endif
                                                         <br>
                                                         <div class="homework-stats">
@@ -218,7 +218,7 @@
                                                                 <span>оцени домашно</span>
                                                             </a>
                                                         @else
-                                                            <span class="empty-data">оценяване на домашни</span>
+                                                            <span class="empty-data">оцени домашно</span>
                                                         @endif
                                                         <br>
                                                         <span class="homework-stats">{{Auth::user()?Auth::user()->evalutedHomeWorksCount(null,$lection->id):'0'}}</span>

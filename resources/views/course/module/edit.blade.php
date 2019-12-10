@@ -29,7 +29,7 @@
         </div>
         </p>
         @endif
-
+        
         <div class="col-md-12 text-center picture-title">
             Заглавна Снимка
         </div>
@@ -47,12 +47,12 @@
                     <br>
                 </label>
             </div>
-
+            
             <div class="col-md-12 picture-button text-center">
                 <label class="picture-label" for="picture"><span class="upload-pic">качи<input type="file" id="picture" name="picture" onChange="CourseimagePreview(this);" style="display:none"></span></label>
             </div>
     </div>
-
+    
     <div class="col-md-12 level-title-holder d-flex flex-row flex-wrap">
         <div class="col-md-12 text-center">
             <p>
@@ -73,7 +73,7 @@
             </p>
             <p>
                 <label for="order">Поредност на модула</label>
-
+                
                 <input type="number" name="order" id="order" value="{{$module->order}}" class="section-el-bold" min="1">
             </p>
             <p>
@@ -94,7 +94,7 @@
         </div>
     </div>
     </div>
-
+    
     <!-- modal for editing elements -->
     <div id="modal">
         <div class="modal-content print-body">
@@ -102,22 +102,22 @@
                 <h2></h2>
             </div>
             <div class="copy text-center">
-
+                
                 <p>
-
+                
                 </p>
-
+                
                 </form>
             </div>
             <div class="cf footer">
                 <div></div>
-                <a href="#" class="btn close-modal" data-dismiss = "modal">Затвори</a>
+                <a href="#close" class="btn close-modal">Затвори</a>
             </div>
         </div>
         <div class="overlay"></div>
     </div>
     <!-- end of modal -->
-
+    
     {{-- form editing lecture --}}
     <form class="edit-lection" id="edit-lection" action="" method="post" style="display:none">
         {{ method_field('PUT') }}
@@ -173,7 +173,7 @@
                                     <span class="second-minutes-no-show" style="display:none"></span>
                                 @endif
                                 @if(!is_null($lection->homework_end))
-                                    <span class="homework-end-no-show" style="display:none">{{$lection->homework_end->format('Y-m-d')}}</span>
+                                    <span class="homework-end-no-show" style="display:none">{{$lection->homework_end->subDays(1)->format('Y-m-d')}}</span>
                                 @else
                                     <span class="homework-end-no-show" style="display:none"></span>
                                 @endif
@@ -183,7 +183,7 @@
                             @if($lection->first_date)
                                             &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->first_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->first_date->format('H:i')}}</span>
                                         @endif
-        
+                                        
                                         @if($lection->second_date)
                                             /&nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->second_date->format('H:i')}}</span>
                                         @endif
@@ -194,7 +194,7 @@
                                 <i class="far fa-clock"></i>&nbsp;{{isset($lection->homework_end)?$lection->homework_end->subDays(1)->addHours('23')->addMinutes('59')->format('H:i'):'--'}}
                             </div>
                          </span><br>
-
+                                    
                                     @if(strlen($lection->description) > 250)
                                         <span class="lection-description">{{mb_substr($lection->description,0,250)}}...<a href="#modal" data="{{$lection->description}}" class="read-more">още</a></span>
                                     @else
@@ -249,7 +249,7 @@
                                                 <a href="#modal" class="add-homework empty-data" data-url="{{route('lection.store')}}" data="{{$lection->id}}">добави домашно </a>
                                             @endif
                                             <br/>
-                                                <a href="{{route('homeworks.show',$lection->id)}}" class="homework-exist">виж домашни</a>
+                                            <a href="{{route('homeworks.show',$lection->id)}}" class="homework-exist">виж домашни</a>
                                         </div>
                                         <div class="col-md-2">
                                             @if($lection->demo)
@@ -276,23 +276,23 @@
                                                                         @endif
                                                                     </div>
                                                                     <div class="col-md-4">
-
+                                                                    
                                                                     </div>
                                                                     <div class="col-md-4">
-
+                                                                    
                                                                     </div>
                                                                     <div class="col-md-4 text-center">
                                                                         <span class="">{{$comment->Author->name}} {{$comment->Author->last_name}}</span>
                                                                     </div>
                                                                     <div class="col-md-4">
-
+                                                                    
                                                                     </div>
                                                                     <div class="col-md-4 text-right">
                                                                         <span class="">{{$comment->created_at->diffForHumans()}}</span>
                                                                     </div>
-
+                                                                    
                                                                     <div class="col-md-12">
-
+                                                                    
                                                                     </div>
                                                                     <div class="col-md-12 comment-text">
                                                                         {{$comment->comment}}
@@ -307,7 +307,7 @@
                                                     </div>
                                                 </div>
                                             @else
-
+                                            
                                             @endif
                                         </div>
                                         <div class="col-md-2 edit-lecture">
@@ -322,7 +322,7 @@
                                                     <option value="{{strtolower($visibility)}}" data-url="{{route('lection.visibility',['lection' => $lection->id])}}">{{ucfirst($visibility)}}</option>
                                                 @endif
                                                 @endforeach
-
+                                            
                                             </select>
                                         </div>
                                         <div class="col-md-1">
@@ -334,7 +334,7 @@
                                         </div>
                                     </div>
                                 </div>
-
+                            
                             </div>
                             <!-- end of one lecture -->
                             @else
@@ -366,12 +366,12 @@
                                                         @if($lection->first_date)
                                                             &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->first_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->first_date->format('H:i')}}</span>
                                                         @endif
-
+                                                        
                                                         @if($lection->second_date && !is_null($lection->second_date))
                                                             /&nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->second_date->format('H:i')}}</span>
                                                         @endif
                                                     </span><br>
-
+                                                    
                                                     @if(strlen($lection->description) > 250)
                                                         <span class="lection-description">{{mb_substr($lection->description,0,250)}}...<a href="#modal" data="{{$lection->description}}" class="read-more">още</a></span>
                                                     @else
@@ -380,7 +380,7 @@
                                                     <br>
                                                     <div class="col-md-12 lecture-options text-center d-flex flex-row flex-wrap">
                                                         <div class="col-md-9">
-
+                                                        
                                                         </div>
                                                         <div class="col-md-2 edit-lecture">
                                                             <a href="#modal" data="{{route('lection.update',$lection->id)}}">Редактирай </a>
@@ -394,7 +394,7 @@
                                                                         <option value="{{strtolower($visibility)}}" data-url="{{route('lection.visibility',['lection' => $lection->id])}}">{{ucfirst($visibility)}}</option>
                                                                     @endif
                                                                 @endforeach
-
+                                                            
                                                             </select>
                                                         </div>
                                                         <div class="col-md-12">
@@ -413,10 +413,10 @@
                                             <?php $lastOrder = ($lection->order + 1 ); ?>
                                         @endif
                                         @empty
-
+                                        
                                         @endforelse
                                     </div>
-
+                    
                     </div>
     </div>
     <div class="col-md-12 d-flex flex-row flex-wrap add-lecture text-center">
@@ -427,7 +427,7 @@
             </a>
         </div>
     </div>
-
+    
     {{-- students --}}
     <div class="col-md-12 lvl-title text-center">
         <div class="col-md-12">Курсисти</div>
@@ -442,7 +442,7 @@
             </form>
         </div>
     </div>
-
+    
     <div class="col-md-12 d-flex flex-row flex-wrap text-center all-students-pool">
     @forelse ($students as $student)
         <!--  one student -->
@@ -461,7 +461,7 @@
                     </div>
                     <span class="edit-lection-students-pool col-md-12">
                 {{$student->User->name}}
-
+                        
                         {{$student->User->last_name}}
             </span>
                     <div class="col-md-6 edit-lection-students-pool">
@@ -478,7 +478,7 @@
                     </div>
                     <div class="col-md-11 flex-row flex-wrap student-options">
                         <div class="col-md-6 add-student text-right">
-
+                        
                         </div>
                         <div class="col-md-6 remove-student text-left" data-module="{{$module->id}}" data-url="{{route('module.remove.student')}}">
                             <img src="{{asset('/images/profile/remove-icon.png')}}" width="26px" class="remove-student ajax" data="{{$student->User->id}}">
@@ -494,7 +494,7 @@
             </p>
         @endforelse
     </div>
-
+    
     <div class="col-md-12 lvl-title text-center">Брой на това ниво</div>
     <div class="col-md-12">
         <div class="progress">
@@ -509,7 +509,7 @@
     <script src="{{asset('/js/level-options.js')}}"></script>
     <script src="{{asset('/js/delete-lection.js')}}"></script>
     <script src="{{asset('/js/lection-visibility-ajax.js')}}"></script>
-
+    
     <script type="text/javascript">
         $(function(){
             $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_events.css')}}" />');
