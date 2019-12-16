@@ -521,10 +521,17 @@ class User extends Authenticatable
         } else {
             $evalMax = 1;
         }
-        $randomHomeWork = Homework::where('evaluated_count', '<', '' . $evalMax . '')->where([
+        $randomHomeWork = Homework::whereNull('evaluated_count')->where([
             ['lection_id', $lection],
             ['user_id', '!=', $user_id],
         ])->whereNotIn('id', $evaluated)->get();
+
+        if(count($randomHomeWork) < 1) {
+            $randomHomeWork = Homework::where('evaluated_count', '<', $evalMax)->where([
+                ['lection_id', $lection],
+                ['user_id', '!=', $user_id],
+            ])->whereNotIn('id', $evaluated)->get();
+        }
         if (count($randomHomeWork) > 0) {
             $randomId = $randomHomeWork->random(1);
         } else {

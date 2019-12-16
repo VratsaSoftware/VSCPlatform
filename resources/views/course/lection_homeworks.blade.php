@@ -33,7 +33,7 @@
 		<div class="col-md-12 d-flex flex-row flex-wrap options-wrap">
 			<div class="col-md-12" style="margin-bottom:2vw;">
 				Лекция : {{$lection->title}}<br/>
-				Краен срок : {{$lection->homework_end}}
+				Краен срок : {{$lection->homework_end->subDays(1)}}
 			</div>
 			<table class="table" id="forms">
 				<thead>
@@ -54,7 +54,7 @@
 				
 				@foreach($homeworks as $num => $homework)
 					<tr class="text-center">
-						<th scope="row">{{is_null($homework->updated_at) || !isset($homework->updated_at)?$homework->created_at:$homework->updated_at}}</th>
+						<th scope="row">{{$homework->created_at}}</th>
 						<td>{{$homework->user->name}}</td>
 						<td>{{$homework->user->last_name}}</td>
 						<td>{{$homework->user->email}}</td>
