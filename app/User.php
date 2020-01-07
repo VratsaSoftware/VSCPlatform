@@ -476,11 +476,11 @@ class User extends Authenticatable
     {
         is_null($user_id) ? $user_id = Auth::user()->id : $user_id;
 
-        $isCompletedEval = HomeworkComment::with('homework', 'Author')->whereHas('homework', function ($q) use ($lection) {
+        $isCompletedEval = HomeworkComment::with('homework', 'Author')->where('is_evaluated', 0)->orWhereNull('is_evaluated')->where('user_id', $user_id)->whereHas('homework', function ($q) use ($lection) {
             $q->where([
                 ['lection_id', $lection]
             ]);
-        })->where('is_evaluated', 0)->orWhereNull('is_evaluated')->where('user_id', $user_id)->first();
+        })->first();
 
         return $isCompletedEval ? false : true;
     }
