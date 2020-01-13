@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Users;
 
+use App\Models\Courses\PersonalCertificate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
@@ -52,7 +53,7 @@ class UserController extends Controller
         if (Input::hasFile('picture')) {
             $userPic = Input::file('picture');
             $image = Image::make($userPic->getRealPath());
-            $image->fit(1024, 768, function ($constraint) {
+            $image->fit(1280,1280, function ($constraint) {
                 $constraint->upsize();
             });
             $name = time()."_".$userPic->getClientOriginalName();
@@ -100,13 +101,16 @@ class UserController extends Controller
     public function createEducation(Request $request)
     {
         $request['valid_instTypes'] = \Config::get('institutionTypes');
+        $request['valid_types'] = \Config::get('eduTypes');
         $data = $request->validate([
             'y_from' => 'required|numeric|min:1900|max:2099',
-            'y_to' => 'required|numeric|min:'.((int)$request->y_from-1).'|max:2099',
+            'y_to' => 'sometimes|nullable|numeric|min:'.((int)$request->y_from-1).'|max:2099',
             'edu_type' => 'required|numeric',
             'edu_institution_type' => "required|in_array:valid_instTypes.*",
             'institution_name' => 'required|string',
             'specialty' => 'string',
+            'edu_course' => 'sometimes',
+            'edu_type_second' => 'sometimes|in_array:valid_types.*'
         ]);
 
         $eduInstitution = EducationInstitution::firstOrCreate(
@@ -128,6 +132,9 @@ class UserController extends Controller
             $insEdu->institution_id = $eduInstitution->id;
             $insEdu->specialty_id = $eduSpeciality->id;
             $insEdu->description = $request->edu_description;
+            if($request->edu_type_second !== 'null') {
+                $insEdu->type = $request->edu_type_second;
+            }
             $insEdu->save();
 
             $message = __('Успешно добавено Образование!');
@@ -140,13 +147,15 @@ class UserController extends Controller
     public function updateEducation(Request $request)
     {
         $request['valid_instTypes'] = \Config::get('institutionTypes');
+        $request['valid_types'] = \Config::get('eduTypes');
         $data = $request->validate([
-            'y_from' => 'required|date|date_format:Y-m-d',
-            'y_to' => 'required|date|date_format:Y-m-d|after:y_from',
+            'y_from' => 'required|numeric|min:1900|max:2099',
+            'y_to' => 'sometimes|nullable|numeric|min:'.((int)$request->y_from-1).'|max:2099',
             'edu_type' => 'required|numeric',
             'edu_institution_type' => "required|in_array:valid_instTypes.*",
             'institution_name' => 'required|string',
             'specialty' => 'string',
+            'edu_type_second' => 'sometimes|in_array:valid_types.*'
         ]);
         $updEdu = Education::find($request->edu_id);
         $updEdu->y_from = $request->y_from;
@@ -161,6 +170,9 @@ class UserController extends Controller
         );
         $updEdu->specialty_id = $eduSpeciality->id;
         $updEdu->description = $request->edu_description;
+        if($request->edu_type_second !== 'null') {
+            $updEdu->type = $request->edu_type_second;
+        }
         $updEdu->save();
 
         $message = __('Успешно направени промени в секция Образование!');
@@ -178,7 +190,7 @@ class UserController extends Controller
     {
         $data = $request->validate([
             'y_from' => 'required|date|date_format:Y-m-d',
-            'y_to' => 'required|date|date_format:Y-m-d',
+            'y_to' => 'sometimes|nullable|date|date_format:Y-m-d',
             'work_company' => 'required|string',
             'work_position' => "required|string",
         ]);
@@ -186,7 +198,9 @@ class UserController extends Controller
         $createWorkExp = new WorkExperience;
         $createWorkExp->user_id = Auth::user()->id;
         $createWorkExp->y_from = $request->y_from;
-        $createWorkExp->y_to = $request->y_to;
+        if(!is_null($request->y_to)) {
+            $createWorkExp->y_to = $request->y_to;
+        }
         $workCompany = WorkCompany::firstOrCreate(
             ['name' => $request->work_company]
         );
@@ -280,8 +294,8 @@ class UserController extends Controller
 
         if (in_array($type, \Config::get('userInformationTypes'))) {
             $changeVis = VisibleInformation::where([
-                    ['user_id', Auth::user()->id],
-                    ['information_type',$type]
+                ['user_id', Auth::user()->id],
+                ['information_type',$type]
             ])->first();
             if (!is_null($changeVis)) {
                 $changeVis->visible = $visibility;
@@ -301,16 +315,16 @@ class UserController extends Controller
         $term = $request->search;
         if ('institution' == $request->type) {
             $queries = EducationInstitution::where('name', 'like', $term.'%')
-            ->orWhere('name', 'like', '%'.$term.'%')
-            ->orWhere('name', 'like', '%'.$term)
-            ->take(3)
-            ->get();
+                ->orWhere('name', 'like', '%'.$term.'%')
+                ->orWhere('name', 'like', '%'.$term)
+                ->take(3)
+                ->get();
         } else {
             $queries = EducationSpeciality::where('name', 'like', $term.'%')
-            ->orWhere('name', 'like', '%'.$term.'%')
-            ->orWhere('name', 'like', '%'.$term)
-            ->take(3)
-            ->get();
+                ->orWhere('name', 'like', '%'.$term.'%')
+                ->orWhere('name', 'like', '%'.$term)
+                ->take(3)
+                ->get();
         }
         $results = [];
         if (!$queries->isEmpty()) {
@@ -334,5 +348,34 @@ class UserController extends Controller
 
         $message = __('Успешно направени промени!');
         return redirect()->route('myProfile')->with('success', $message);
+    }
+
+    public function showCertificate($user,$course)
+    {
+        $personalCertificate = PersonalCertificate::where([
+            ['user_id',$user],
+            ['course_id',$course]
+        ])->first();
+
+        if(isset($personalCertificate) && $personalCertificate){
+            $personalCertificate->modules = explode(",", $personalCertificate->modules);
+
+            $mainTemplate = View('certifications.templates.main', [
+                'number' => $personalCertificate->number,
+                'color' => $personalCertificate->color,
+                'title' => $personalCertificate->title,
+                'subTitle' => $personalCertificate->sub_title,
+                'modules' => $personalCertificate->modules,
+                'username' => $personalCertificate->username,
+                'lecturer' => $personalCertificate->lecturer,
+                'date' => $personalCertificate->date->format('d/m/Y'),
+                'images' => 0,
+                'imageLeft' => '',
+                'imageRight' => '',
+                'centerLogo' => $personalCertificate->center_logo,
+            ]);
+            return $mainTemplate;
+        }
+        return back()->with('error','Все още нямате сертификат!');
     }
 }

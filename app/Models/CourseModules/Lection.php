@@ -6,11 +6,12 @@ use Illuminate\Database\Eloquent\Model;
 use App\Models\CourseModules\Module;
 use App\Models\CourseModules\LectionVideo;
 use App\Models\CourseModules\LectionComment;
+use App\Models\CourseModules\Homework;
 
 class Lection extends Model
 {
     protected $table = 'course_lections';
-    protected $dates = ['first_date','second_date'];
+    protected $dates = ['first_date', 'second_date','homework_end'];
 
     public function Module()
     {
@@ -25,6 +26,11 @@ class Lection extends Model
     public function Comments()
     {
         return $this->hasMany(LectionComment::class, 'course_lection_id');
+    }
+
+    public function HomeWorks()
+    {
+        return $this->hasMany(HomeWork::class,'lection_id');
     }
 
     public function getTitleAttribute($value)

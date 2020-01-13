@@ -4,11 +4,11 @@
     <div class="section">
         <div id="header" style="background: url(./images/cover-img-smallest.png)">
             <!-- hamburger -->
-            @include('static.hamburger_menu')
-            <!-- end of hamburger -->
+        @include('static.includes.bg.hamburger_menu')
+        <!-- end of hamburger -->
             <div class="overlay-marketing">
                 <div id="logo" class="col-md-12 text-center">
-                    <a href="{{route('home')}}"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="vso-logo" class="img-fluid"></a>
+                    <a href="{{route('home')}}"><img src="{{asset('/images/logoVStext.png')}}" alt="vso-logo" class="img-fluid" width="20%"></a>
                 </div>
 
                 <div class="header-title col-md-12 text-center">
@@ -26,7 +26,7 @@
                 <div class="header-menu col-md-12 header-marketing" id="header-sticky">
                     <nav class="text-center">
                         <ul class="d-flex flex-wrap main-nav-list">
-                           <li class="p-3"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="vso-logo" class="img-fluid"></li>
+                            <li class="p-3"><img src="{{asset('/images/logoVStext.png')}}" alt="vso-logo" class="img-fluid"></li>
                             <li class="p-3"><a href="{{route('home')}}">Начало</a></li>
                             <li class="p-3"><a href="#information-holder">Информация</a></li>
                             <li class="p-3"><a href="#program-holder">Програма</a></li>
@@ -294,14 +294,14 @@
     </div> --}}
     </div>
     <script>
-    // Set the date we're counting down to
-    var digitalDate = new Date("Feb 15, 2019 00:00:00").getTime();
-    var timerClass = '.timer-digital';
+        // Set the date we're counting down to
+        var digitalDate = new Date("Feb 15, 2019 00:00:00").getTime();
+        var timerClass = '.timer-digital';
 
-    // Update the count down every 1 second
-    var start = setInterval(function() {
-        timer(digitalDate,timerClass)
-    }, 1000);
+        // Update the count down every 1 second
+        var start = setInterval(function() {
+            timer(digitalDate,timerClass)
+        }, 1000);
     </script>
     <script>
         var headeroffset = $("#header-sticky").offset();
@@ -312,15 +312,15 @@
             // } else {
             //     $("#header-sticky").removeClass('sticky-marketing');
             // }
-            
+
             $(window).scroll(function() {
-            if (window.pageYOffset >= sticky && !$("#header-sticky").hasClass('sticky-marketing')) {
-                $("#header-sticky").addClass('sticky-marketing');
-            } 
-            if(window.pageYOffset < sticky && $("#header-sticky").hasClass('sticky-marketing')) {
-                $("#header-sticky").removeClass('sticky-marketing');
-            }
-        });
+                if (window.pageYOffset >= sticky && !$("#header-sticky").hasClass('sticky-marketing')) {
+                    $("#header-sticky").addClass('sticky-marketing');
+                }
+                if(window.pageYOffset < sticky && $("#header-sticky").hasClass('sticky-marketing')) {
+                    $("#header-sticky").removeClass('sticky-marketing');
+                }
+            });
         });
     </script>
     <script type="text/javascript">

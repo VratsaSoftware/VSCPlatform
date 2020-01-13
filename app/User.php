@@ -2,6 +2,14 @@
 
 namespace App;
 
+use App\Models\Admin\Poll;
+use App\Models\Admin\PollVote;
+use App\Models\CourseModules\Homework;
+use App\Models\CourseModules\HomeworkComment;
+use App\Models\CourseModules\ModulesStudent;
+use App\Models\Courses\Entry;
+use App\Models\Events\ExtraForm;
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -26,6 +34,7 @@ use App\Models\Events\TeamMember;
 use App\Models\Events\Event;
 use App\Models\Events\Team;
 use App\Models\Users\UsersTeamRole;
+use App\Models\Tests\Test;
 
 class User extends Authenticatable
 {
@@ -45,7 +54,8 @@ class User extends Authenticatable
      * @var array
      */
     protected $hidden = [
-        'password', 'remember_token',
+        'password',
+        'remember_token',
     ];
 
     public function Role()
@@ -66,6 +76,11 @@ class User extends Authenticatable
     public function Occupation()
     {
         return $this->hasOne(Occupation::class, 'id', 'cl_occupation_id');
+    }
+
+    public function Test()
+    {
+        return $this->belongsToMany(Test::class, 'test_users_assign');
     }
 
     public function isAdmin()
@@ -174,9 +189,9 @@ class User extends Authenticatable
     {
         if (in_array($type, \Config::get('userInformationTypes'))) {
             $visibleCheck = VisibleInformation::where([
-                    ['user_id', Auth::user()->id],
-                    ['information_type',$type],
-                    ['visible',true]
+                ['user_id', Auth::user()->id],
+                ['information_type', $type],
+                ['visible', true]
             ])->first();
             if (!is_null($visibleCheck)) {
                 return true;
@@ -189,7 +204,7 @@ class User extends Authenticatable
     public function hasWorkExp()
     {
         $hasWorkExp = WorkExperience::where([
-              ['user_id', Auth::user()->id],
+            ['user_id', Auth::user()->id],
         ])->first();
         if (!is_null($hasWorkExp)) {
             return true;
@@ -219,9 +234,9 @@ class User extends Authenticatable
     public function isCommented($lection)
     {
         $commented = LectionComment::where([
-            ['course_lection_id',$lection],
-            ['user_id',Auth::user()->id],
-            ])->first();
+            ['course_lection_id', $lection],
+            ['user_id', Auth::user()->id],
+        ])->first();
         if (!is_null($commented)) {
             return true;
         }
@@ -248,7 +263,7 @@ class User extends Authenticatable
         $this->notify(new PasswordReset($token));
     }
 
-    public function isOnEvent($eventId)
+    public function isOnTeamEvent($eventId)
     {
         $isMember = TeamMember::with('Teams')->where('user_id', Auth::user()->id)->orWhere('email', Auth::user()->email)->get();
         if (!is_null($isMember)) {
@@ -263,30 +278,36 @@ class User extends Authenticatable
         }
     }
 
+    public function isOnCWEvent($eventId)
+    {
+        $isOnCw = ExtraForm::where([
+            ['event_id', $eventId],
+            ['user_id', Auth::user()->id]
+        ])->first();
+        if ($isOnCw) {
+            return true;
+        }
+        return false;
+    }
+
     public function isEventInvited($status)
     {
         if ($status != 'confirmed') {
-            $isInvited = TeamMember::with('Teams')
-            ->where([
+            $isInvited = TeamMember::with('Teams')->where([
                 ['confirmed', 0],
                 ['user_id', Auth::user()->id]
-            ])
-            ->orWhere([
+            ])->orWhere([
                 ['confirmed', 0],
                 ['email', Auth::user()->email]
-            ])
-            ->get();
+            ])->get();
         } else {
-            $isInvited = TeamMember::with('Teams')
-            ->where([
+            $isInvited = TeamMember::with('Teams')->where([
                 ['confirmed', 1],
                 ['user_id', Auth::user()->id]
-            ])
-            ->orWhere([
+            ])->orWhere([
                 ['confirmed', 1],
                 ['email', Auth::user()->email]
-            ])
-            ->get();
+            ])->get();
         }
 
         if ($isInvited->isEmpty()) {
@@ -299,13 +320,9 @@ class User extends Authenticatable
     {
         $userId = Auth::user()->id;
         $userEmail = Auth::user()->email;
-        return Event::with('Teams', 'Teams.Members')->whereHas('Teams.Members', function ($query) use ($userId,$userEmail) {
-            $query->where('user_id', $userId)
-            ->orWhere('email', $userEmail);
-        })
-        ->where('visibility', '!=', 'draft')
-        ->select('name')
-        ->get();
+        return Event::with('Teams', 'Teams.Members')->whereHas('Teams.Members', function ($query) use ($userId, $userEmail) {
+            $query->where('user_id', $userId)->orWhere('email', $userEmail);
+        })->where('visibility', '!=', 'draft')->select('name')->get();
     }
 
     public function isConfirmedMember($event)
@@ -314,16 +331,13 @@ class User extends Authenticatable
             $query->where([
                 ['events_id', $event],
             ]);
-        })
-        ->where([
+        })->where([
             ['confirmed', 1],
             ['user_id', Auth::user()->id]
-        ])
-        ->orWhere([
+        ])->orWhere([
             ['confirmed', 1],
             ['email', Auth::user()->email]
-        ])
-        ->get();
+        ])->get();
 
         foreach ($isConfirmed as $key => $check) {
             foreach ($check->Teams as $team) {
@@ -340,21 +354,17 @@ class User extends Authenticatable
         $userId = Auth::user()->id;
         $userEmail = Auth::user()->email;
 
-        $invites = TeamMember::with('Teams')
-        ->where([
+        $invites = TeamMember::with('Teams')->where([
             ['user_id', $userId],
             ['confirmed', 0],
-            ])
-        ->orWhere([
+        ])->orWhere([
             ['email', $userEmail],
-            ['confirmed',0],
-        ])
-        ->whereHas('Teams', function ($query) use ($event) {
+            ['confirmed', 0],
+        ])->whereHas('Teams', function ($query) use ($event) {
             $query->where([
                 ['events_id', $event],
             ]);
-        })
-        ->get();
+        })->get();
 
         foreach ($invites as $invite) {
             foreach ($invite->Teams as $team) {
@@ -371,34 +381,201 @@ class User extends Authenticatable
         $userId = Auth::user()->id;
         $role = UsersTeamRole::where('role', 'капитан')->select('id')->first();
         if ($capitan) {
-            return Team::where('events_id', $event)->with('Members', 'Members.User')->whereHas('Members', function ($query) use ($userId,$role) {
+            return Team::where('events_id', $event)->with('Members', 'Members.User')->whereHas('Members', function ($query) use ($userId, $role) {
                 $query->where([
                     ['user_id', $userId],
                     ['cl_users_team_role_id', $role->id]
                 ]);
-            })
-            ->first();
+            })->first();
         }
-        return Team::with('Members', 'Members.User')->whereHas('Members', function ($query) use ($userId,$role) {
+        return Team::with('Members', 'Members.User')->whereHas('Members', function ($query) use ($userId, $role) {
             $query->where([
-                    ['user_id', $userId],
-                ]);
-        })
-            ->first();
+                ['user_id', $userId],
+            ]);
+        })->first();
     }
 
     public function isCapitan($team)
     {
         $userId = Auth::user()->id;
         $member = TeamMember::where([
-            ['event_team_id',$team],
-            ['user_id',$userId],
-            ['cl_users_team_role_id',1],//to do role from table for capitan
-            ])
-            ->first();
+            ['event_team_id', $team],
+            ['user_id', $userId],
+            ['cl_users_team_role_id', 1],//to do role from table for capitan
+        ])->first();
         if (!is_null($member)) {
             return true;
         }
         return false;
+    }
+
+    public function getPolls()
+    {
+        $valid = [0 => null];
+        $polls = Poll::with('Options', 'Options.Votes')->where([
+            ['start', '<', Carbon::now()],
+            ['ends', '>', Carbon::now()]
+        ])->where('visibility', '!=', 'draft')->get();
+
+        foreach ($polls as $key => $testPoll) {
+            foreach ($testPoll->Options as $option) {
+                $optionIds[] = $option->id;
+            }
+
+            $isVoted = PollVote::whereIn('poll_option_id', $optionIds)->where('user_id', Auth::user()->id)->first();
+            //if there is a poll started or close to start with datetime now under 1 minute we send the poll
+            if ($testPoll && is_null($isVoted)) {
+                if ($testPoll->start->diff(Carbon::now())->format('%m') < 1) {
+                    $valid = [];
+                    $valid[] = $testPoll;
+                }
+            }
+            $optionIds = [];
+        }
+        return $valid[0];
+    }
+
+    public function isHomeWorkUploadedByLection($user_id = null, $lection_id)
+    {
+        is_null($user_id) ? $user_id = Auth::user()->id : $user_id;
+        $is_uploaded = Homework::where([
+            ['user_id', $user_id],
+            ['lection_id', $lection_id]
+        ])->first();
+
+        return $is_uploaded ? true : false;
+    }
+
+    public function evalutedHomeWorksCount($user_id = null, $lection_id)
+    {
+        is_null($user_id) ? $user_id = Auth::user()->id : $user_id;
+        $eval_count = HomeworkComment::with('homework')->where([
+            ['user_id', $user_id],
+            ['is_evaluated', '>', 0]
+        ])->whereHas('homework', function ($q) use ($lection_id) {
+            $q->where('lection_id', $lection_id);
+        })->count();
+
+        return $eval_count;
+    }
+
+    public function getHomeworkCommentsByLection($user_id = null, $lection_id)
+    {
+        is_null($user_id) ? $user_id = Auth::user()->id : $user_id;
+        $comments = HomeworkComment::with('homework', 'Author')->whereHas('homework', function ($q) use ($user_id, $lection_id) {
+            $q->where([
+                ['user_id', $user_id],
+                ['lection_id', $lection_id]
+            ]);
+        })->where('is_evaluated', '>', 0)->orderBy('is_lecturer_comment', 'DESC')->get();
+        //ordered by admin/lecturer comments first
+        return $comments;
+    }
+
+    public function isCompletedEval($user_id = null, $lection)
+    {
+        is_null($user_id) ? $user_id = Auth::user()->id : $user_id;
+
+        $isCompletedEval = HomeworkComment::with('homework', 'Author')->where('is_evaluated', 0)->orWhereNull('is_evaluated')->where('user_id', $user_id)->whereHas('homework', function ($q) use ($lection) {
+            $q->where([
+                ['lection_id', $lection]
+            ]);
+        })->first();
+
+        return $isCompletedEval ? false : true;
+    }
+
+    public function getRandomHomework($user_id = null, $lection)
+    {
+        is_null($user_id) ? $user_id = Auth::user()->id : $user_id;
+        $evaluated = Homework::whereHas('comments', function ($q) use ($lection, $user_id) {
+            $q->where([
+                ['lection_id', $lection],
+                ['user_id', $user_id],
+                ['is_evaluated', '>', '0']
+            ]);
+        })->pluck('id')->toArray();
+
+        if (count($evaluated) < 0) {
+            $evaluated = Homework::where([
+                ['user_id', $user_id],
+                ['lection_id', $lection]
+            ])->pluck('id')->toArray();
+        }
+
+        $homeworksEvalSum = Homework::where([
+            ['lection_id', $lection],
+            ['user_id', '!=', $user_id]
+        ])->whereNotIn('id', $evaluated)->sum('evaluated_count');
+
+        $homeworksEvalCount = Homework::where([
+            ['lection_id', $lection],
+            ['user_id', '!=', $user_id]
+        ])->whereNotIn('id', $evaluated)->count();
+
+        if ($homeworksEvalCount > 0) {
+            $evalMax = floor($homeworksEvalSum / $homeworksEvalCount);
+            if ($evalMax < 1) {
+                $evalMax = 1;
+            }
+        } else {
+            $evalMax = 1;
+        }
+        $randomHomeWork = Homework::whereNull('evaluated_count')->where([
+            ['lection_id', $lection],
+            ['user_id', '!=', $user_id],
+        ])->whereNotIn('id', $evaluated)->get();
+
+        if(count($randomHomeWork) < 1) {
+            $randomHomeWork = Homework::where('evaluated_count', '<', $evalMax)->where([
+                ['lection_id', $lection],
+                ['user_id', '!=', $user_id],
+            ])->whereNotIn('id', $evaluated)->get();
+        }
+        if (count($randomHomeWork) > 0) {
+            $randomId = $randomHomeWork->random(1);
+        } else {
+            $randomHomeWork = Homework::where([
+                ['lection_id', $lection],
+                ['user_id', '!=', $user_id],
+            ])->whereNotIn('id', $evaluated)->get();
+            $randomId = count($randomHomeWork) ? $randomHomeWork->random(1) : [];
+        }
+
+        return isset($randomId[0]['id']) ? $randomId[0]['id'] : [];
+    }
+
+    public function getUnFinishedEval($user_id, $lection)
+    {
+        is_null($user_id) ? $user_id = Auth::user()->id : $user_id;
+        $unFinishedEval = HomeworkComment::with('homework', 'Author')->whereHas('homework', function ($q) use ($lection) {
+            $q->where([
+                ['lection_id', $lection]
+            ]);
+        })->where('is_evaluated', 0)->orWhereNull('is_evaluated')->where('user_id', $user_id)->first();
+        return $unFinishedEval->homework;
+    }
+
+    public function getUploadedHomeworksCount($module, $user)
+    {
+        is_null($user) ? $user = Auth::user()->id : $user;
+        $homeWorkUploadCount = Homework::where('user_id', $user)->with('lection', 'lection.module')->whereHas('lection.module', function ($q) use ($module) {
+            $q->where('id', $module);
+        })->count();
+
+        return $homeWorkUploadCount;
+    }
+
+    public function getHomeWorkEvalCountModule($module, $user)
+    {
+        is_null($user) ? $user = Auth::user()->id : $user;
+        $homeWorkEvalCount = HomeworkComment::where([
+            ['user_id',$user],
+            ['is_evaluated','>','0']
+        ])->with('homework','homework.lection','homework.lection.module')->whereHas('homework.lection.module', function ($q) use ($module) {
+            $q->where('id', $module);
+        })->count();
+
+        return $homeWorkEvalCount;
     }
 }

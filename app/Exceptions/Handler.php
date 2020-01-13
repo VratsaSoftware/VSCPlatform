@@ -4,6 +4,10 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Mail;
+use Symfony\Component\Debug\Exception\FlattenException;
+use Symfony\Component\Debug\ExceptionHandler as SymfonyExceptionHandler;
+use App\Mail\ExceptionOccured;
 
 class Handler extends ExceptionHandler
 {
@@ -34,6 +38,9 @@ class Handler extends ExceptionHandler
      */
     public function report(Exception $exception)
     {
+        if(env('ON_ERROR_SEND_MAIL',true)) {
+            $this->sendEmail($exception);
+        }
         parent::report($exception);
     }
 
@@ -47,5 +54,28 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $exception)
     {
         return parent::render($request, $exception);
+    }
+
+    /**
+     * Sends an email to the developer about the exception.
+     *
+     * @param  \Exception  $exception
+     * @return void
+     */
+    public function sendEmail(Exception $exception)
+    {
+        try {
+            $e = FlattenException::create($exception);
+
+            $handler = new SymfonyExceptionHandler();
+
+            $html = $handler->getHtml($e);
+            $mailsToSend = config('ExceptionsEmails');
+            foreach($mailsToSend as $mailMe) {
+                Mail::to($mailMe)->send(new ExceptionOccured($html));
+            }
+        } catch (Exception $ex) {
+            dd($ex);
+        }
     }
 }

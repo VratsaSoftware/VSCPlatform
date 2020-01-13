@@ -15,7 +15,7 @@ class CreateLectionsVideosTable extends Migration
     {
         Schema::create('lections_videos', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('url');
+            $table->string('url',1091);
             $table->timestamps();
             $table->softDeletes();
         });

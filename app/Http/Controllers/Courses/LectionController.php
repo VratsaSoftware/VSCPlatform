@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Courses;
 
+use App\Models\CourseModules\Homework;
+use App\Models\CourseModules\HomeworkComment;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Courses\Course;
@@ -42,7 +44,7 @@ class LectionController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -55,10 +57,13 @@ class LectionController extends Controller
             'second_date' => 'sometimes|date_format:Y-m-d H:i',
             'description' => 'sometimes',
             'order' => 'sometimes|numeric',
-            'video' => 'sometimes', ['regex:/^(https|http):\/\/(?:www\.)?youtube.com\/embed\/[A-z0-9]+/'],
+            'video' => 'sometimes',
+            ['regex:/^(https|http):\/\/(?:www\.)?youtube.com\/embed\/[A-z0-9]+/'],
             'slides' => 'sometimes|',
             'homework' => 'sometimes|',
-            'demo' => 'sometimes',['regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
+            'demo' => 'sometimes',
+            ['regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
+            'homework_end' => 'sometimes',
             'visibility' => 'sometimes|in_array:valid_visibility.*',
         ]);
         $store = false;
@@ -84,6 +89,7 @@ class LectionController extends Controller
                 $lection->description = $request->description;
                 $lection->order = $request->order;
                 $lection->visibility = $request->visibility;
+                $lection->homework_end = is_null($request->homework_end)?$request->homework_end:Carbon::parse($request->homework_end)->addDays(1);
                 $lection->save();
 
                 $lection = Lection::with('Module', 'Module.Course')->findOrFail($lection->id);
@@ -104,10 +110,10 @@ class LectionController extends Controller
 
         if (Input::hasFile('slides')) {
             $slides = $request->file('slides');
-            $name = time()."_".$slides->getClientOriginalName();
+            $name = time() . "_" . $slides->getClientOriginalName();
             $name = str_replace(' ', '', $name);
             // $name = md5($name);
-            $slidesUrl = public_path().'/data/course-'.$lection->Module->Course->id.'/modules/'.$lection->Module->id.'/slides-'.$lection->id.'/';
+            $slidesUrl = public_path() . '/data/course-' . $lection->Module->Course->id . '/modules/' . $lection->Module->id . '/slides-' . $lection->id . '/';
 
             $request->file('slides')->move($slidesUrl, $name);
             $lection->presentation = $name;
@@ -115,10 +121,10 @@ class LectionController extends Controller
 
         if (Input::hasFile('homework')) {
             $homework = $request->file('homework');
-            $name = time()."_".$homework->getClientOriginalName();
+            $name = time() . "_" . $homework->getClientOriginalName();
             $name = str_replace(' ', '', $name);
             // $name = md5($name);
-            $homeworkUrl = public_path().'/data/course-'.$lection->Module->Course->id.'/modules/'.$lection->Module->id.'/homework-'.$lection->id.'/';
+            $homeworkUrl = public_path() . '/data/course-' . $lection->Module->Course->id . '/modules/' . $lection->Module->id . '/homework-' . $lection->id . '/';
 
             $request->file('homework')->move($homeworkUrl, $name);
             $lection->homework_criteria = $name;
@@ -145,24 +151,24 @@ class LectionController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($user = 0, Course $course, Module $module)
     {
         $lections = Module::getLections($module->id, false);
         if (!$lections->isEmpty()) {
-            return view('course.lections', ['module' => $module->load('Course'),'lections' => $lections]);
+            return view('course.lections', ['module' => $module->load('Course'), 'lections' => $lections]);
         }
 
         $message = __('Няма добавени лекции за този модул!');
-        return redirect()->route('user.course', ['user' => Auth::user()->id,'course' => $course->id])->with('error', $message);
+        return redirect()->route('user.course', ['user' => Auth::user()->id, 'course' => $course->id])->with('error', $message);
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -173,8 +179,8 @@ class LectionController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -188,7 +194,8 @@ class LectionController extends Controller
             'video' => ['sometimes', 'regex:/^(https|http):\/\/(?:www\.)?youtube.com\/embed\/[A-z0-9]+/'],
             'slides' => 'sometimes|file',
             'homework' => 'sometimes|file',
-            'demo' => ['sometimes','regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
+            'homework_end' => 'sometimes',
+            'demo' => ['sometimes', 'regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
         ]);
         $lection = Lection::with('Module', 'Module.Course')->findOrFail($id);
 
@@ -203,6 +210,8 @@ class LectionController extends Controller
                 $message = __('Невалидна заявка с полетата за дата и час!');
                 return redirect()->back()->with('error', $message)->withInput(Input::all());
             }
+
+            $lection->homework_end = is_null($request->homework_end)?$request->homework_end:Carbon::parse($request->homework_end)->addDays(1);
             $lection->description = $request->description;
             $lection->order = $request->order;
         }
@@ -215,11 +224,11 @@ class LectionController extends Controller
 
         if (Input::hasFile('slides')) {
             $slides = $request->file('slides');
-            $name = time()."_".$slides->getClientOriginalName();
+            $name = time() . "_" . $slides->getClientOriginalName();
             $name = str_replace(' ', '', $name);
             // $name = md5($name);
-            $slidesUrl = public_path().'/data/course-'.$lection->Module->Course->id.'/modules/'.$lection->Module->id.'/slides-'.$lection->id.'/';
-            $oldSlides = $slidesUrl.$lection->presentation;
+            $slidesUrl = public_path() . '/data/course-' . $lection->Module->Course->id . '/modules/' . $lection->Module->id . '/slides-' . $lection->id . '/';
+            $oldSlides = $slidesUrl . $lection->presentation;
             if (File::exists($oldSlides)) {
                 File::delete($oldSlides);
             }
@@ -229,11 +238,11 @@ class LectionController extends Controller
 
         if (Input::hasFile('homework')) {
             $homework = $request->file('homework');
-            $name = time()."_".$homework->getClientOriginalName();
+            $name = time() . "_" . $homework->getClientOriginalName();
             $name = str_replace(' ', '', $name);
             // $name = md5($name);
-            $homeworkUrl = public_path().'/data/course-'.$lection->Module->Course->id.'/modules/'.$lection->Module->id.'/homework-'.$lection->id.'/';
-            $oldhomework = $homeworkUrl.$lection->homework_criteria;
+            $homeworkUrl = public_path() . '/data/course-' . $lection->Module->Course->id . '/modules/' . $lection->Module->id . '/homework-' . $lection->id . '/';
+            $oldhomework = $homeworkUrl . $lection->homework_criteria;
             if (File::exists($oldhomework)) {
                 File::delete($oldhomework);
             }
@@ -266,17 +275,17 @@ class LectionController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $lection = Lection::with('Module', 'Module.Course')->findOrFail($id);
 
-        $slidesUrl = public_path().'/data/course-'.$lection->Module->Course->id.'/modules/'.$lection->Module->id.'/slides-'.$lection->id;
+        $slidesUrl = public_path() . '/data/course-' . $lection->Module->Course->id . '/modules/' . $lection->Module->id . '/slides-' . $lection->id;
         File::deleteDirectory($slidesUrl);
 
-        $homeworkUrl = public_path().'/data/course-'.$lection->Module->Course->id.'/modules/'.$lection->Module->id.'/homework-'.$lection->id;
+        $homeworkUrl = public_path() . '/data/course-' . $lection->Module->Course->id . '/modules/' . $lection->Module->id . '/homework-' . $lection->id;
         File::deleteDirectory($homeworkUrl);
 
         if ($lection->lections_video_id) {
@@ -294,18 +303,15 @@ class LectionController extends Controller
         $isAllowed = Auth::user()->isOnThisCourse($course->id);
         if ($isAllowed) {
             if ($request->comment && !is_null($request->comment)) {
-                $insComment = LectionComment::firstOrCreate(
-                    ['course_lection_id' => $lection->id,'user_id' => $user->id],
-                    ['comment' => $request->comment]
-                );
-                $message = __('Успешно изпратен коментар за лекция '.$lection->title.' !');
-                return redirect()->route('user.module.lections', ['user' => $user->id,'course' => $course->id,'module' => $module->id])->with('success', $message);
+                $insComment = LectionComment::firstOrCreate(['course_lection_id' => $lection->id, 'user_id' => $user->id], ['comment' => $request->comment]);
+                $message = __('Успешно изпратен коментар за лекция ' . $lection->title . ' !');
+                return redirect()->route('user.module.lections', ['user' => $user->id, 'course' => $course->id, 'module' => $module->id])->with('success', $message);
             }
             $message = __('Попълнете полето за коментар!');
             return redirect()->back()->with('error', $message);
         }
         $message = __('Нямате право да достъпите този ресурс!');
-        return redirect()->route('user.module.lections', ['user' => $user->id,'course' => $course->id,'module' => $module->id])->with('error', $message);
+        return redirect()->route('user.module.lections', ['user' => $user->id, 'course' => $course->id, 'module' => $module->id])->with('error', $message);
     }
 
     public function videoShown(Request $request)
@@ -313,18 +319,146 @@ class LectionController extends Controller
         $isExisting = LectionVideoView::where([
             ['lection_video_id', $request->videoId],
             ['user_id', $request->user],
-            ])->first();
+        ])->first();
         if ($isExisting) {
             $isExisting->views_count = $isExisting->views_count + 1;
             $isExisting->save();
             return response('success', 200);
         }
         $addView = new LectionVideoView;
-        $addView->lection_video_id = isset($request->videoId)?$request->videoId:null;
+        $addView->lection_video_id = isset($request->videoId) ? $request->videoId : null;
         $addView->user_id = $request->user;
         $addView->views_count = 1;
         $addView->save();
         return response('success', 200);
+    }
+
+    public function showHomeworks(Request $request, $lection)
+    {
+        $homeWorks = Homework::with('user', 'comments', 'comments.Author')->where('lection_id', $lection)->get();
+        foreach ($homeWorks as $homework) {
+            $evaluated = new User;
+            $homework['evaluated'] = $evaluated->evalutedHomeWorksCount($homework->user_id, $lection);
+        }
+        $lection = Lection::find($lection);
+        return view('course.lection_homeworks', ['homeworks' => $homeWorks, 'lection' => $lection]);
+    }
+
+    public function addHomeworkLecturerComment(Request $request, $homework)
+    {
+        $isExisting = HomeworkComment::where([
+            ['user_id', Auth::user()->id],
+            ['homework_id', $homework]
+        ])->first();
+        if ($isExisting) {
+            $isExisting->comment = $request->comment;
+            $isExisting->save();
+        } else {
+            $newLecturerComment = new HomeworkComment;
+            $newLecturerComment->user_id = Auth::user()->id;
+            $newLecturerComment->homework_id = $homework;
+            $newLecturerComment->comment = $request->comment;
+            $newLecturerComment->is_evaluated = 1;
+            $newLecturerComment->is_lecturer_comment = 1;
+            $newLecturerComment->save();
+            // only if new comment added then evaluted count must increase +1
+            $homeworkEval = Homework::find($homework);
+            $homeworkEval->evaluated_count += 1;
+            $homeworkEval->save();
+        }
+
+        $message = __('Успешно добавихте коментар');
+        return back()->with('success', $message);
+    }
+
+    public function addHomeworkStudentComment(Request $request, $homework)
+    {
+        $data = $request->validate([
+            'comment' => 'required|min:3|max:255'
+        ]);
+
+        $eval = HomeworkComment::where([
+            ['user_id',Auth::user()->id],
+            ['homework_id',$homework]
+        ])->first();
+        $eval->comment = $data['comment'];
+        $eval->is_evaluated = 1;
+        $eval->save();
+
+        $homeworkEval = Homework::find($homework);
+        $homeworkEval->evaluated_count += 1;
+        $homeworkEval->save();
+
+        $message = __('Успешно оценихте домашно, сега можете да изтеглите ново!');
+        return back()->with('success', $message);
+    }
+
+    public function userUploadHomework(Request $request)
+    {
+        $data = $request->validate([
+            'lection' => 'required|numeric',
+            'homework' => 'file|max:50000|mimes:rar,zip,txt'
+        ]);
+        $lection = Lection::find($data['lection']);
+
+        if (Carbon::now() < $lection->homework_end) {
+            $homeworkExist = Homework::where([
+                ['user_id', Auth::user()->id],
+                ['lection_id', $data['lection']]
+            ])->first();
+            $homeworkFile = $request->file('homework');
+            $name = time() . "_" . $homeworkFile->getClientOriginalName();
+            $extension = $homeworkFile->getClientOriginalExtension();
+            $name = str_replace(' ', '', $name);
+            $name = md5($name) . '.' . $extension;
+            $homeworkPath = public_path() . '/data/homeworks/';
+            if ($homeworkExist) {
+                $oldHomework = $homeworkPath . $homeworkExist->file;
+                if (File::exists($oldHomework)) {
+                    File::delete($oldHomework);
+                }
+                $request->file('homework')->move($homeworkPath, $name);
+                $homeworkExist->file = $name;
+                $homeworkExist->save();
+            } else {
+                $newHomework = new Homework;
+                $newHomework->lection_id = $data['lection'];
+                $newHomework->user_id = Auth::user()->id;
+                $request->file('homework')->move($homeworkPath, $name);
+                $newHomework->file = $name;
+                $newHomework->save();
+            }
+
+            $message = __('Успешно изпратено домашно!');
+            return back()->with('success', $message);
+        }
+        $message = __('Датата за изпращане на домашно е изтекла!');
+        return back()->with('error', $message);
+    }
+
+    public function userEvalHomework(Request $request)
+    {
+        $isUploaded = Auth::user()->isHomeWorkUploadedByLection(null, $request->lection);
+        if ($isUploaded) {
+            $isCompletedEval = Auth::user()->isCompletedEval(null, $request->lection);
+            if ($isCompletedEval) {
+                //take new homework
+                $homework_id = Auth::user()->getRandomHomework(null, $request->lection);
+                $homework = Homework::findOrFail($homework_id);
+
+                if($homework->count()) {
+                    $newHomeWorkEval = new HomeworkComment;
+                    $newHomeWorkEval->user_id = Auth::user()->id;
+                    $newHomeWorkEval->homework_id = $homework_id;
+                    $newHomeWorkEval->save();
+                }
+            }else {
+                $homework = Auth::user()->getUnFinishedEval(null, $request->lection);
+            }
+            return view('course.lection_eval_homework', ['homework' => $homework]);
+        }
+        $notUploaded = __('Моля качете своето домашно, за да можете да оценявате домашно на други!');
+        return $notUploaded;
     }
 
     public function parseDateTime($date, $hours, $minutes)
@@ -333,13 +467,13 @@ class LectionController extends Controller
         $outMinutes = $minutes;
         if ($hours < 10 && $hours[0] > 0) {
             $outHours = 0;
-            $outHours.= $hours;
+            $outHours .= $hours;
         }
         if ($minutes < 10 && $minutes[0] > 0) {
             $outMinutes = 0;
-            $outMinutes.= $minutes;
+            $outMinutes .= $minutes;
         }
-        $time = $outHours.$outMinutes;
-        return Carbon::parse($date.$time);
+        $time = $outHours . $outMinutes;
+        return Carbon::parse($date . $time);
     }
 }

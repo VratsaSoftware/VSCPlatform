@@ -18,11 +18,19 @@
  		$( '.num-students-now' ).html( numStudents );
  	}
  	var userId = $( this ).attr( 'data' );
- 	$( '#create_module' ).append( '<input type="hidden" id="user-' + userId + '" name="students[]" value="' + $( this ).attr( 'data' ) + '">' );
+ 	if($('#create_test').length){
+		$('#create_test').append('<input type="hidden" id="user-' + userId + '" name="users[]" value="' + $(this).attr('data') + '">');
+	}else {
+		$('#create_module').append('<input type="hidden" id="user-' + userId + '" name="students[]" value="' + $(this).attr('data') + '">');
+	}
  	showOptions( $( this ).parent().parent().parent() );
  } );
 
  $( '.remove-student > img' ).on( 'click', function () {
+	 var userId = $( this ).attr( 'data' );
+	 if($('#create_test').length) {
+		 $('#create_test').find('#user-'+userId).remove();
+	 }
  	if ( numStudents > -1 && numStudents !== 0 ) {
  		if ( $( this ).parent().parent().parent().hasClass( 'added-student' ) ) {
  			$( this ).parent().parent().parent().removeClass( 'added-student' ).addClass( 'removed-student' );
@@ -37,7 +45,12 @@
  	$( '#create_module' ).find( '#user-' + userId ).remove();
  	showOptions( $( this ).parent().parent().parent() );
  	if ( $( this ).hasClass( 'ajax' ) ) {
- 		removeStudent( $( this ).parent().attr( 'data-url' ), $( this ).parent().attr( 'data-module' ), $( this ).attr( 'data' ) );
+ 		if($('#create_test').length){
+			removeStudentT($(this).parent().attr('data-url'), $(this).parent().attr('data-test'), $(this).attr('data'));
+			location.reload();
+ 		}else {
+			removeStudent($(this).parent().attr('data-url'), $(this).parent().attr('data-module'), $(this).attr('data'));
+		}
  		numStudents = parseInt( $( '.one-student-holder' ).length );
  		percentAdd = ( numStudents * 3 );
  		$( '.progress-bar' ).css( 'width', percentAdd + '%' );
@@ -62,6 +75,25 @@
  			}
  		}
  	} );
+ }
+
+ function removeStudentT( url, test, user ) {
+	 $.ajax( {
+		 headers: {
+			 'X-CSRF-TOKEN': $( 'meta[name="csrf-token"]' ).attr( 'content' )
+		 },
+		 type: "POST",
+		 url: url,
+		 data: {
+			 test: test,
+			 user: user,
+		 },
+		 success: function ( data, textStatus, xhr ) {
+			 if ( xhr.status == 200 ) {
+				 console.log( data );
+			 }
+		 }
+	 } );
  }
 
  function showOptions( element ) {

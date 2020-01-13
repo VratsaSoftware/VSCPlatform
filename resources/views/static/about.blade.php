@@ -1,61 +1,26 @@
 <!DOCTYPE html>
 <html lang="bg">
 
-<head>
-    <meta charset="UTF-8">
-
-    <title>Екип</title>
-
-    <link rel="stylesheet" href="{{asset('/css/landing.css')}}">
-
-    <link rel="stylesheet" href="{{asset('/css/about.css')}}">
-
-    <link rel="stylesheet" href="{{asset('/css/bootstrap.css')}}">
-
-    <link rel="stylesheet" href="{{asset('/css/bootstrap-grid.css')}}">
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <!-- JQuery -->
-    <script type="text/javascript" src="{{asset('/js/jquery-3.3.1.js')}}"></script>
-
-    <script type="text/javascript" src="{{asset('/js/jquery-ui.js')}}"></script>
-
-    <!-- scroll -->
-    <script type="text/javascript" src="{{asset('/js/jquery-sectionsnap.js')}}"></script>
-
-    <!-- favicon -->
-    <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png.png')}}" />
-
-    <!-- facebook -->
-    <meta property="og:url" content="" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="Враца Софтуер Общество" />
-    <meta property="og:description" content="Безплатни курсове по програмиране" />
-    <meta property="og:image" content="{{asset('/images/vso-png-big-2.png')}}" />
-
-    <link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}" />
-
-</head>
+@include('static.includes.bg.about_head')
 
 <body>
-    @include('static.lang_btn')
+    @include('static.includes.bg.lang_btn')
     <!-- header section - nav - gallery -->
-    <div class="section" id="header-section">
-        <div class="overlay-top-img">
-            <img src="{{asset('/images/team.png')}}" alt="bg-img" class="img-fluid">
-        </div>
-    </div>
+{{--    <div class="section" id="header-section">--}}
+    {{--        <div class="overlay-top-img">--}}
+    {{--            <img src="{{asset('/images/team.png')}}" alt="bg-img" class="img-fluid">--}}
+    {{--        </div>--}}
+    {{--    </div>--}}
     <div id="header" class="col-md-12 col-sm-12 d-flex flex-row flex-wrap header">
         <div id="logo" class="col-md-1 col-sm-1">
-            <h1><a href="{{route('home')}}"><img src="{{asset('/images/vso-png-white-bigger.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
+            <h1><a href="{{route('home')}}"><img src="{{asset('/images/logoVS_bg.png')}}" alt="vso-logo" class="img-responsive main-logo"></a></h1>
         </div>
         <div class="col-md-12 text-center d-flex flex-row flex-wrap top-text-wrap content-wrapper">
             <div class="col-md-12 header-about-text">
                 Екипът на Враца Софтуер Общество
             </div>
         </div>
-        @include('static.menu')
+        @include('static.includes.bg.menu')
 
         <div class="row buttons-right col-md-2">
             <div id="candidate-btn" class="col-md-2">
@@ -63,7 +28,7 @@
             </div>
         </div>
         <!-- hamburger -->
-        @include('static.hamburger_menu')
+        @include('static.includes.bg.hamburger_menu')
         <!-- end of hamburger -->
     </div>
     <!-- end of header section -->
@@ -237,7 +202,7 @@
     <!-- end of team section -->
 
     <div class="section">
-        @include('static.footer')
+        @include('static.includes.bg.footer')
     </div>
 
     <script src="{{asset('/js/hamburger-menu.js')}}"></script>

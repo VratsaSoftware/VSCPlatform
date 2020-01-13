@@ -4,7 +4,7 @@ $( '.delete-lection-btn' ).on( 'click', function () {
 	var x = confirm( "Сигурни ли сте че искате да изтриете ?" );
 	var count = $( '#lection-count' ).attr( 'data-count' );
 	if ( x ) {
-		var url = $( '#delete-lection' ).attr( 'action' );
+		var url = $(this).attr( 'data-url' );
 		$.ajax( {
 			headers: {
 				'X-CSRF-TOKEN': $( 'meta[name="csrf-token"]' ).attr( 'content' )

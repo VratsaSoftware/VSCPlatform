@@ -15,28 +15,28 @@
             2018
         </div>
         <div class="col-md-8 reports-holder">
-            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2018.pdf')}}" target=" _blank" class="reports-links">Vratsa Software report</a>
+            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC_Annual_report_2018_(EN).pdf')}}" target=" _blank" class="reports-links">Vratsa Software report</a>
         </div>
         <div class="col-md-4 reports-year">
             2017
         </div>
         <div class="col-md-8 reports-holder">
-            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2017.pdf')}}" target=" _blank" class="reports-links">Vratsa Software report</a>
+            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC_Report_2017_(EN).pdf')}}" target=" _blank" class="reports-links">Vratsa Software report</a>
         </div>
         <div class="col-md-4 reports-year">
             2016
         </div>
         <div class="col-md-8 reports-holder">
-            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2016.pdf')}}" target=" _blank" class="reports-links">Vratsa Software report</a>
+            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC_Report_2016_(EN).pdf')}}" target=" _blank" class="reports-links">Vratsa Software report</a>
         </div>
         <div class="col-md-4 reports-year">
             2015
         </div>
         <div class="col-md-8 reports-holder">
-            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2015.pdf')}}" target=" _blank" class="reports-links">Vratsa Software report</a>
+            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC_Report_2015_(EN).pdf')}}" target=" _blank" class="reports-links">Vratsa Software report</a>
         </div>
     </div>
     <div class="section" style="margin-top: 5%;">
-        @include('static.en.footer')
+        @include('static.includes.en.footer')
     </div>
 @endsection

@@ -1,4 +1,7 @@
 /*statistic section*/
+html {
+    scroll-behavior: smooth;
+}
 a {
     color: #1C8800;
 }
@@ -6,6 +9,8 @@ a {
 .test-statistic-wrapper {
     margin-top: 10vw;
     justify-content: space-between;
+    max-height: 20vh;
+    overflow-y: scroll;
 }
 
 .all-questions {
@@ -88,9 +93,12 @@ a {
 }
 
 .test-nav {
+    overflow-y: scroll;
     padding: 1vw;
     background: #fff;
     font-family: Comfortaa;
+    height: 500px !important;
+    min-height: 400px !important;
 }
 
 .test-nav>div {
@@ -144,8 +152,9 @@ a {
 .add-bank {
     color: #1C8800;
     padding: 1vw;
-    padding-left: 5vw;
-    padding-right: 5vw;
+    /*padding-left: 5vw;*/
+    /*padding-right: 5vw;*/
+    font-size:1vw !important;
 }
 
 .create-bank {
@@ -154,6 +163,8 @@ a {
 
 .tests-content {
     padding: 2vw;
+    max-height: 46vw;
+    overflow-y: scroll;
 }
 
 .tests-list>li:nth-child(1) {
@@ -199,6 +210,7 @@ a {
 .corect-answer {
     color: #1C8800;
     font-weight: bold;
+    border-color: #1C8800 !important;
 }
 
 @keyframes border-pulsate {
@@ -225,9 +237,9 @@ a {
 }
 
 .icon-click-many, .icon-edit, .remove-q {
-    position: absolute;
-    margin-left: -3vw;
-    margin-top: 1vw;
+    /*position: absolute;*/
+    /*margin-left: -3vw;*/
+    /*margin-top: 1vw;*/
 }
 
 .input-answers>a>i {
@@ -239,7 +251,7 @@ a {
 }
 
 .remove-q {
-    margin-left: 1vw;
+    /*margin-left: 1vw;*/
     color: #FF0000 !important;
 }
 
@@ -301,6 +313,43 @@ code {
 
 .q-open-wrap, .q-one-wrap, .q-many-wrap {
     display: none;
+}
+
+#modal:target{
+    top: -15%!important;
+}
+
+.delete-q{
+    margin-top: -40px;
+    margin-right: -20px;
+}
+
+.q_image{
+    transition: all 150ms linear;
+    width:200px;
+    max-height: 200px;
+    border-radius:5%;
+}
+
+.q_image_inside{
+    transition: all 150ms linear;
+    width: 100px;
+    max-height: 100px;
+    border-radius: 5%;
+}
+
+.img_big{
+    transition: all 150ms linear;
+    width:500px;
+    max-height: 500px;
+}
+
+.create-q-btn{
+    margin-top: 1%;
+}
+
+.missed-field{
+    border: 2px solid #dd3300 !important;
 }
 
 /*end of test section*/

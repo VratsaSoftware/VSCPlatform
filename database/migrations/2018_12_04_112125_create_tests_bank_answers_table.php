@@ -17,7 +17,8 @@ class CreateTestsBankAnswersTable extends Migration
             $table->increments('id');
             $table->integer('tests_bank_question_id')->unsigned()->nullable();
             $table->longText('answer');
-            $table->enum('correct',['1','0'])->default('0');
+            $table->longText('image')->nullable();
+            $table->integer('correct')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

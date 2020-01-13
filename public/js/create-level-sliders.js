@@ -1,18 +1,18 @@
 $( function () {
 	var slider1 = $( ".option1" );
 	var output = $( "#option1-val1" );
-	output.html( slider1.val() + '%' ); // Display the default slider value
+	output.html( slider1.val() + slider1.attr('data-type') ); // Display the default slider value
 
 	slider1.on( 'input', function () {
-		output.html( this.value + '%' );
+		output.html( this.value + slider1.attr('data-type') );
 	} );
 
 	var slider2 = $( ".option2" );
 	var output2 = $( "#option2-val2" );
-	output2.html( slider2.val() + '%' ); // Display the default slider value
+	output2.html( slider2.val() + slider2.attr('data-type') ); // Display the default slider value
 
 	slider2.on( 'input', function () {
-		output2.html( this.value + '%' );
+		output2.html( this.value + slider2.attr('data-type') );
 	} );
 
 	var slider3 = $( ".option3" );

@@ -13,69 +13,85 @@
 
 Route::get('language/{lang}', function ($lang) {
     Session::put('locale', $lang);
+    \Cookie::forget('locale');
+    Cookie::queue('locale', $lang, (60 * 60 * 24 * 365));
     return back();
 })->name('langroute');
 
 Route::get('/', function () {
-    if (Session::get('locale') == 'bg') {
-        return view('static.home');
+    if (Session::get('locale') == 'en') {
+        return view('static.en.home');
     }
-    return view('static.en.home');
+    return view('static.home');
 })->name('home');
 
 // static pages
 Route::get('/team', function () {
-    if (Session::get('locale') == 'bg') {
-        return view('static.about');
+    if (Session::get('locale') == 'en') {
+        return view('static.en.about');
     }
-    return view('static.en.about');
+    return view('static.about');
 })->name('about');
 
 Route::get('/train-devs', function () {
-    if (Session::get('locale') == 'bg') {
-        return view('static.programming');
+    if (Session::get('locale') == 'en') {
+        return view('static.en.programming');
     }
-    return view('static.en.programming');
+    return view('static.programming');
 })->name('programmingCourses');
 
 Route::get('/digital-marketing', function () {
-    if (Session::get('locale') == 'bg') {
-        return view('static.digital_marketing');
+    if (Session::get('locale') == 'en') {
+        return view('static.en.digital_marketing');
     }
-    return view('static.en.digital_marketing');
+    return view('static.digital_marketing');
 })->name('digitalMarketing');
 
 Route::get('/mission-2', function () {
-    if (Session::get('locale') == 'bg') {
-        return view('static.mission');
+    if (Session::get('locale') == 'en') {
+        return view('static.en.mission');
     }
-    return view('static.en.mission');
+    return view('static.mission');
 })->name('mission');
 
 Route::get('/reports', function () {
-    if (Session::get('locale') == 'bg') {
-        return view('static.reports');
+    if (Session::get('locale') == 'en') {
+        return view('static.en.reports');
     }
-    return view('static.en.reports');
+    return view('static.reports');
 })->name('year_reports');
 
 Route::get('/contacts', function () {
-    if (Session::get('locale') == 'bg') {
-        return view('static.contacts');
+    if (Session::get('locale') == 'en') {
+        return view('static.en.contacts');
     }
-    return view('static.en.contacts');
+    return view('static.contacts');
 })->name('contacts');
 
 Route::get('/subscribe/{email}', 'HomeController@subscribe');
 
 Auth::routes();
 
-Route::get('/application/create', 'Courses\ApplicationController@create')->name('application.create');
-Route::post('/application/store', 'Courses\ApplicationController@store')->name('application.store');
+Route::get('/application/create/{course?}/{module?}',
+    'Courses\ApplicationController@create')->name('application.create');
+Route::post('/application/store/', 'Courses\ApplicationController@store')->name('application.store');
+//cw
+Route::get('/user/event/{event}/register','Events\EventController@cwRegister')->name('events.cw.register');
+Route::post('/user/event/{event}/cw', 'Events\EventController@cwStoreForm')->name('events.cw.form');
+Route::post('/user/{user}/event/{event}','Events\EventController@cwIsPresent')->name('events.cw.is_present');
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/myProfile', 'HomeController@index')->name('myProfile');
     Route::resource('user', 'Users\UserController')->names('user');
+    //epay payments routes
+    Route::get('course/payment/create', 'Admin\AdminController@createPayment')->name('course.payment.create');
+    Route::post('course/payment/store', 'Admin\AdminController@storePayment')->name('course.payment.store');
+    Route::get('/course/payment/finish',function(){
+        return view('course.paymentThankYouPage');
+    })->name('course.payment.finish');
+
+    //polls vote
+    Route::post('poll/user/vote', 'Admin\PollController@userVote')->name('user.vote.poll');
 
     //applications
     Route::resource('application', 'Courses\ApplicationController', [
@@ -85,6 +101,14 @@ Route::group(['middleware' => 'auth'], function () {
         ]
     ])->names('application');
 
+    //cw loggedin redirect
+    Route::get('/user/in/event/{event}/register','Events\EventController@cwRegister')->name('logged.cw.register');
+
+    //tests user routes
+    Route::get('/prepare/test','Users\TestController@prepareUserTest')->name('prepare.test');
+    Route::get('/test/user/start','Users\TestController@start')->name('test.start');
+    Route::post('/test/user/answer','Users\TestController@answer')->name('test.send.answer');
+    Route::get('/test/user/submit','Users\TestController@submitTest')->name('test.submit');
     // users education section
     Route::post('/user/create/education/', 'Users\UserController@createEducation')->name('create.education');
     Route::post('/user/update/education/', 'Users\UserController@updateEducation')->name('update.education');
@@ -123,6 +147,12 @@ Route::group(['middleware' => 'auth'], function () {
         'Events\EventController@confirmInvite')->name('team.confirm.invite');
     Route::post('/user/invite/to/team/{team}/event/{event}',
         'Events\EventController@inviteToTeam')->name('invite.to.team');
+    Route::get('user/{user}/course/{course}/certificate/show',
+        'Users\UserController@showCertificate')->name('user.cert.show');
+    Route::get('/user/event/{event}','Events\EventController@show')->name('event.show');
+    Route::post('/user/upload/homework','Courses\LectionController@userUploadHomework')->name('user.upload.homework');
+    Route::post('/lection/homework/user/eval','Courses\LectionController@userEvalHomework')->name('user.eval.homeworks');
+    Route::post('/lection/homework/{homework}/user/eval','Courses\LectionController@addHomeworkStudentComment')->name('student.homework.comment');
     Route::group(['middleware' => 'isLecturer'], function () {
         // lecturer routes
         Route::post('/lecturer/update/bio', 'Users\UserController@updateBio')->name('lecturer.update.bio');
@@ -143,15 +173,39 @@ Route::group(['middleware' => 'auth'], function () {
         Route::resource('lection', 'Courses\LectionController')->names('lection');
         Route::post('change/lection/{lection}/visibility',
             'Courses\LectionController@changeVisibility')->name('lection.visibility');
+        Route::get('/lection/{lection}/homeworks', 'Courses\LectionController@showHomeworks')->name('homeworks.show');
+        Route::post('/lection/homework/{homework}','Courses\LectionController@addHomeworkLecturerComment')->name('lection.homework.lecturer.comment');
+
+        //tests routes
+        Route::resource('test', 'Admin\TestController')->names('test');
+        Route::post('test/add/student','Admin\TestController@addUser')->name('test.add.student');
+        Route::post('test/remove/student','Admin\TestController@removeStudent')->name('test.remove.student');
+        Route::post('test/bank/create','Admin\TestController@createBank')->name('create.bank');
+        Route::post('test/question/create','Admin\TestController@storeQuestion')->name('store.question');
+        Route::get('bank/question/{question}/edit','Admin\TestController@editQuestion')->name('question.edit');
+        Route::put('test/question/update/{question}','Admin\TestController@updateQuestion')->name('update.question');
+        Route::delete('/test/delete/question/{question}',
+            'Admin\TestController@deleteQuestion')->name('delete.question');
+        Route::get('applications/all', 'Courses\ApplicationController@applicationsAll')->name('admin.applications');
     });
 
     Route::group(['middleware' => 'isAdmin'], function () {
-        Route::get('applications/all', 'Courses\ApplicationController@applicationsAll')->name('admin.applications');
         Route::get('courses/all', 'Admin\AdminController@allCourses')->name('all.courses');
         Route::get('events/all', 'Admin\AdminController@showAllEvents')->name('admin.events');
 
         //events routes
         Route::resource('events', 'Events\EventController')->names('events');
+
+        //polls routes
+        Route::resource('polls', 'Admin\PollController')->names('polls');
+        Route::get('poll/{poll}/votes', 'Admin\PollController@getVotes')->name('poll.votes');
+
+        Route::get('course/certificate/create/{course?}', 'Admin\AdminController@createCertificate')->name('course.cert.create');
+        Route::get('course/certificate/user/{users?}',
+            'Admin\AdminController@getUserDataForCertificate')->name('users.modules');
+        Route::post('certificate/store/', 'Admin\AdminController@storeCertificate')->name('certification.store');
+        Route::get('user/{user}/certificate/preview',
+            'Admin\AdminController@certificatePreview')->name('certificate.preview');
     });
 });
 Route::post('/lection/video/shown', 'Courses\LectionController@videoShown')->name('lection.video.show');
@@ -160,5 +214,46 @@ Route::post('/lection/video/shown', 'Courses\LectionController@videoShown')->nam
 Route::get('/user/{user?}/course/{course}', 'Courses\CourseController@showUserCourse')->name('user.course');
 Route::get('/user/{user?}/course/{course}/module/{module}/lections',
     'Courses\LectionController@show')->name('user.module.lections');
+
 Route::post('/user/{user?}/course/{course}/module/{module}/lection/{lection}/comment',
     'Courses\LectionController@addComment')->name('user.module.lection.comment');
+
+
+//old routes redirects
+//Route::fallback(function ()
+//{
+//    if (Session::get('locale') == 'en') {
+//        return view('static.en.home');
+//    }
+//    return view('static.home');
+//});
+
+Route::get('/{lang}/team', function ($lang) {
+    Session::put('locale', $lang);
+    return redirect()->route('about');
+})->where('lang', '(bg|en)');
+
+Route::get('/{lang}/train-devs', function ($lang) {
+    Session::put('locale', $lang);
+    return redirect()->route('programmingCourses');
+})->where('lang', '(bg|en)');
+
+Route::get('/{lang}/digital-marketing', function ($lang) {
+    Session::put('locale', $lang);
+    return redirect()->route('digitalMarketing');
+})->where('lang', '(bg|en)');
+
+Route::get('/{lang}/mission-2', function ($lang) {
+    Session::put('locale', $lang);
+    return redirect()->route('mission');
+})->where('lang', '(bg|en)');
+
+Route::get('/{lang}/reports', function ($lang) {
+    Session::put('locale', $lang);
+    return redirect()->route('year_reports');
+})->where('lang', '(bg|en)');
+
+Route::get('/{lang}/contacts', function ($lang) {
+    Session::put('locale', $lang);
+    return redirect()->route('contacts');
+})->where('lang', '(bg|en)');

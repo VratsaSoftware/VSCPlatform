@@ -37,14 +37,14 @@ class Module extends Model
         return mb_strtoupper($value);
     }
 
-    public static function getLections($module, $user = null)
+    public static function getLections($module, $lecturer = null)
     {
-        if (!$user) {
+        if (!$lecturer) {
             return Lection::where([
                 ['course_modules_id', $module],
                 ['visibility', '!=', 'draft'],
                 ])->with('Video', 'Comments', 'Comments.Author')->oldest('order')->get();
         }
-        return Lection::where('course_modules_id', $module)->with('Video', 'Video.Viewed', 'Video.Viewed.User', 'Comments', 'Comments.Author')->oldest('order')->get();
+        return Lection::where('course_modules_id', $module)->with('Video', 'Video.Viewed', 'Video.Viewed.User', 'Comments', 'Comments.Author','HomeWorks','HomeWorks.Comments')->oldest('order')->get();
     }
 }

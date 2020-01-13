@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use App\Models\Users\Role;
+use Illuminate\Support\Facades\Redirect;
 
 class RegisterController extends Controller
 {
@@ -29,7 +30,8 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/myProfile';
+    // protected $redirectTo = '/myProfile';
+    protected $previus;
 
     /**
      * Create a new controller instance.
@@ -72,6 +74,9 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
+        if (preg_match('~[0-9]+~', $data['previous'])) {
+            $this->previus = $data['previous'];
+        }
         $role = Role::where('role', 'user')->first();
         return User::create([
             'name' => $data['name'],
@@ -82,5 +87,10 @@ class RegisterController extends Controller
             'cl_role_id' => $role->id,
             'password' => Hash::make($data['password']),
         ]);
+    }
+
+    public function redirectTo()
+    {
+        return $this->previus?$this->previus:'myProfile';
     }
 }

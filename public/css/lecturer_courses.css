@@ -393,6 +393,14 @@ a {
     float: none !important;
 }
 
+.no-show{
+    display: none;
+}
+
+.open-cert{
+    z-index: 999;
+}
+
 /*end of students section*/
 /*Query's
 --------------------------------------------------------------------------------------------------------*/

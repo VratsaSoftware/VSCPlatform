@@ -7,13 +7,16 @@
                 <div class="col-md-12 level-title-holder d-flex flex-row flex-wrap">
                     <div class="col-md-12 text-center" style="margin-top:7vw;">
                         <p>
-                            <p>
-                                <label for="">След формата, ще бъдете регистрирани в платформата, и от профила си ще може да следите прогреса на кандидатстване<br/>
+                        <p>
+                            <label for="">След формата, ще бъдете регистрирани в платформата, и от профила си ще може да следите прогреса на кандидатстване<br/>
                                 <i style="font-size:1vw;">на пощата ви ще получите писмо с линк към задаване на парола на акаунта си в платформата</i>
-                                </label>
-                            </p>
-                            <form action="{{route('application.store')}}" method="POST" class="col-md-12" id="application" name="application" enctype="multipart/form-data">
-                                {{ csrf_field() }}
+                            </label>
+                        </p>
+                        <form action="{{route('application.store')}}" method="POST" class="col-md-12" id="application" name="application" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            @if(collect(request()->segments())->last() !== 'create')
+                                <input type="hidden" name="source_url" value="{{collect(request()->segments())->last()}}">
+                            @endif
                             <p>
                                 <label for="username">Име <span class="req-star-form">*</span></label>
                                 @if ($errors->has('username'))
@@ -68,7 +71,7 @@
                                 @endif
                                 <select class="occupation section-el-bold" name="occupation" id="occupation">
                                     @foreach ($occupations as $occupation)
-                                            <option value="{{$occupation->id}}" {{ (old("occupation") == $occupation->id ? "selected":"") }}>{{$occupation->occupation}}</option>
+                                        <option value="{{$occupation->id}}" {{ (old("occupation") == $occupation->id ? "selected":"") }}>{{$occupation->occupation}}</option>
                                     @endforeach
                                 </select>
                             </p>
@@ -79,11 +82,57 @@
                                         <strong>{{ $errors->first('course') }}</strong>
                                     </span>
                                 @endif
-                                <select class="section-el-bold" name="course">
-                                    @foreach(Config::get('applicationForm.courses') as $course)
-                                            <option value="{{$course}}" {{ (old("course") == $course ? "selected":"") }}>{{ucfirst($course)}}</option>
+                                <select class="section-el-bold" name="course" id="course-select">
+                                    <option value="0" disabled selected="selected">-----</option>
+                                    @foreach(Config::get('applicationForm.courses') as $key => $modules)
+                                        @if(is_array($modules))
+                                            @foreach($modules as $sub)
+                                                <option class="no-show course-{{str_replace(' ', '', $key)}}"
+                                                        value="{{$sub}}">{{$sub}}</option>
+                                            @endforeach
+                                        @endif
+                                        @if(isset($course) && $course == $key)
+                                            <option value="{{$key}}"
+                                                    {{ (old("course") == $key ? "selected":"") }} selected="selected"
+                                                    data-count="{{count($modules)}}">{{ucfirst($key)}}</option>
+                                        @else
+                                            <option value="{{$key}}"
+                                                    {{ (old("course") == $key ? "selected":"") }} data-count="{{count($modules)}}">{{ucfirst($key)}}</option>
+                                        @endif
                                     @endforeach
                                 </select>
+                                <br>
+                                <br/>
+                                <span class="no-show">Модул <span class="req-star-form">*</span></span>
+                                <select class="section-el-bold no-show" name="module" id="module">
+                                
+                                </select>
+                                <script>
+                                    $(function () {
+                                        addSub();
+                                    });
+                                    $('#course-select').on('change', function () {
+                                        addSub();
+                                    });
+                                    
+                                    function addSub(){
+                                        $('#module').html(' ');
+                                        var selectedCourse = $('#course-select').find(':selected').text().replace(/ /g, '');
+                                        
+                                        if ($('#course-select').find(':selected').attr('data-count') > 0) {
+                                            var clonedOptions = $('.course-' + selectedCourse).clone();
+                                            $.each(clonedOptions, function (k, option) {
+                                                $('#module').append(option);
+                                                $('#module').find('option').removeClass('no-show');
+                                            });
+                                            $('#module').removeClass('no-show');
+                                            $('#module').prev('span').removeClass('no-show');
+                                        } else {
+                                            $('#module').addClass('no-show');
+                                            $('#module').prev('span').addClass('no-show');
+                                        }
+                                    }
+                                </script>
                             </p>
                             <p>
                                 <label for="suitable_candidate">Защо смятате, че тези обучения са подходящ за Вас? <span id="candidate-label"></span> <span class="req-star-form">*</span></label>
@@ -130,11 +179,11 @@
                                 @endif
                                 <select class="section-el-bold" name="use">
                                     @foreach(Config::get('applicationForm.use') as $use)
-                                            <option value="{{$use}}" {{ (old("use") == $use ? "selected":"") }}>{{ucfirst($use)}}</option>
+                                        <option value="{{$use}}" {{ (old("use") == $use ? "selected":"") }}>{{ucfirst($use)}}</option>
                                     @endforeach
                                 </select>
                             </p>
-
+                            
                             <p>
                                 <label for="source">От къде научихте за това обучение? <span class="req-star-form">*</span></label><br/>
                                 @if ($errors->has('source'))
@@ -144,11 +193,11 @@
                                 @endif
                                 <select class="section-el-bold" name="source">
                                     @foreach(Config::get('applicationForm.source') as $source)
-                                            <option value="{{$source}}" {{ (old("source") == $source ? "selected":"") }}>{{ucfirst($source)}}</option>
+                                        <option value="{{$source}}" {{ (old("source") == $source ? "selected":"") }}>{{ucfirst($source)}}</option>
                                     @endforeach
                                 </select>
                             </p>
-
+                            
                             <p>
                                 <label for="cv">Автобиография <span class="req-star-form">*</span></label>
                                 @if ($errors->has('cv'))
@@ -160,9 +209,9 @@
                             </p>
                             <br />
                             <p>
-                                <div class="col-md-12 create-course-button text-center">
-                                        <a href="#" onclick="javascript:$('#application').submit()" class="create-course-btn"><span class="create-course">Кандидаствай</span></a>
-                                </div>
+                            <div class="col-md-12 create-course-button text-center">
+                                <a href="#" id="submit_form" class="create-course-btn"><span class="create-course">Кандидаствай</span></a>
+                            </div>
                             </p>
                         </form>
                         </p>
@@ -172,4 +221,15 @@
         </div>
     </div>
     <script src="{{asset('js/application-form-text-counter.js')}}" charset="utf-8"></script>
+    <script>
+        $('#submit_form').on('click', function(e){
+            e.preventDefault();
+            if($('#application').hasClass('submited')){
+                $(this).fadeOut();
+            }else{
+                $('#application').addClass('submited');
+                $('#application').submit()
+            }
+        });
+    </script>
 @endsection

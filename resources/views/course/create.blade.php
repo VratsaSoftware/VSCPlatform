@@ -53,6 +53,10 @@
                         <input type="text" id="name" name="name" placeholder="..." class="name-course" value="{{old('name')}}">
                     </p>
                     <p>
+                        <label for="name">Цвят</label><br>
+                        <input type="text" id="color" name="color" placeholder="hex color" class="name-course" value="{{old('color')}}">
+                    </p>
+                    <p>
                         <label for="description">Описание</label><br>
                         <textarea id="description" cols="30" rows="5" name="description" placeholder="кратко описание" style="resize: none;">{{old('description')}}</textarea>
                     </p>
@@ -74,7 +78,12 @@
                     </p>
                     <p>
                         {{-- to do if admin load all lectors or users --}}
-                        <label for="lecturer">Лектор: {{Auth::user()->name}} {{Auth::user()->last_name}}</label>
+                        <label for="lecturer">Лектор: </label>
+                        <select name="lecturer" id="lecturer" class="section-el-bold">
+                            @foreach($lecturers as $lecturer)
+                                <option value="{{$lecturer->id}}">{{$lecturer->name}}</option>
+                            @endforeach
+                        </select>
                     </p>
                 </div>
             </div>

@@ -54,7 +54,7 @@ a {
     border: 2px solid rgba(255, 143, 41, 0.8) !important;
 }
 
-.sticky>nav>ul>li:nth-child(1)>img {
+.sticky>nav>ul>li:nth-child(1)>img , .sticky-marketing>nav>ul>li:nth-child(1)>img {
     display: block !important;
 }
 
@@ -1014,13 +1014,14 @@ a {
 
 .lang-menu{
     position: fixed;
-    right: -4.5%;
+    right: 0;
     top: 5%;
-    width: 8em;
+    /*width: 8em;*/
     margin-top: -2.5em;
     text-decoration: none;
     list-style: none;
     z-index: 9999;
+    /*display: block;*/
 }
 
 /*end of application section*/

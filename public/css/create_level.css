@@ -3,7 +3,7 @@
     margin-top: 10vw;
 }
 
-input[type=text], textarea, .options-title, .name-course, .phone-input {
+input[type=text], textarea, .options-title, .name-course, .phone-input, #color {
     background: #FFFFFF;
     border: 2px solid #243847;
     box-sizing: border-box;
@@ -76,6 +76,14 @@ input[type=text], textarea, .options-title, .name-course, .phone-input {
     border: 1px solid;
     border-radius: 5px;
     padding: 5px;
+}
+
+.lecture-options>.homework-lecture-eval>a:hover , .lecture-options>.homework-lecture-upload>a:hover{
+    border:none;
+}
+
+.homework-stats{
+    font-size: 75%;
 }
 
 .lectures-wrapper {
@@ -438,6 +446,26 @@ input[type=range]:focus {
     height: 25vw;
 }
 
+.lection-description{
+    overflow-wrap: break-word;
+}
+
+.course-wrap-filter{
+    border:1px solid #000;
+    margin-top: 5%;
+    margin-bottom: 2%;
+    padding:1%;
+    border-radius:10px;
+}
+
+.course-wrap-filter:hover{
+    background: #4CAF50;
+}
+
+.selected-filter{
+    background: #4CAF50 !important;
+}
+
 /*end of students section*/
 /*Query's
 --------------------------------------------------------------------------------------------------*/
@@ -683,5 +711,15 @@ input[type=range]:focus {
         /* top: 25vw !important; */
         z-index: 10;
         /* position: fixed; */
+    }
+
+    .homework-time-user{
+        font-size:65%;
+        padding-left: 35%;
+        color:#f00;
+    }
+
+    .home-work-time-text{
+        margin-left:10%;
     }
 }

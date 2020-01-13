@@ -68,7 +68,7 @@ body {
 
 .event-body-text:hover {
     background: #fff;
-    color: #1B8500;
+    color: #e5e5e5;
 }
 
 .event-footer {
@@ -111,7 +111,8 @@ body {
 }
 
 .events-now-text {
-    margin-top: 5vw;
+    margin-top: 7vw;
+    margin-bottom: 2vw;
     font-family: Ubuntu;
     letter-spacing: 1px;
     font-size: 2vw;
@@ -135,7 +136,7 @@ body {
     margin: 250px 0 0 -40% !important;
     opacity: 0;
     position: fixed;
-    top: -10vw;
+    top: -12vw;
     visibility: hidden;
     width: 80%;
     box-shadow: 0 3px 7px rgba(0, 0, 0, .25);
@@ -480,6 +481,31 @@ body {
 
 .in-team-pic>img {
     width: 8vw;
+}
+
+.in-modal-poll-vote-names{
+    list-style-type: none;
+    height: 100px;
+    overflow-y: scroll;
+}
+
+.in-modal-poll-vote-names > li{
+    margin-bottom: 1%;
+}
+
+.poll-option-title{
+    border-top: 1px solid #000000;
+    margin-top: 5%;
+    font-weight: bolder;
+    padding-top: 2.5%;
+}
+
+.cert-link{
+    font-family: Ubuntu;
+}
+
+.cert-link:hover{
+    color: #1B8500;
 }
 
 /*QUERY's
