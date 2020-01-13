@@ -58,7 +58,7 @@
 						<td>{{$homework->user->name}}</td>
 						<td>{{$homework->user->last_name}}</td>
 						<td>{{$homework->user->email}}</td>
-						<td><a href="{{asset('/data/homeworks/'.$homework->file)}}" download style="color:#00F">свали</a></td>
+						<td><a class="download-homeworks" data-name="{{$homework->user->name.'_'.$homework->user->last_name.'_['.$homework->created_at.']_'.$lection->title}}" href="{{asset('/data/homeworks/'.$homework->file)}}" download style="color:#00F">свали</a></td>
 						<td>{{is_null($homework->evaluated_count)?'0':$homework->evaluated_count}} пъти</td>
 						<td>
 							{{$homework->evaluated}}
@@ -145,6 +145,7 @@
 		</div>
 	</div>
 	<div class="col-md-12 download-stats" style="bottom:1%;font-size:200%;position:fixed;left:-1%"><i class="fas fa-download"></i></div>
+	<button onclick="downloadAll()" class="btn btn-outline-success" style="bottom:1%;font-size:200%;position:fixed;right:1%">свали всички</button>
 	<!-- modal for editing elements -->
 	<div id="modal" style="top:-140px">
 		<div class="modal-content print-body">
@@ -191,5 +192,29 @@
                 order: [[0, "desc"]],
             });
         } );
+	</script>
+	<script>
+        function downloadAll() {
+            var urls = [];
+            var filenames = [];
+            $('.download-homeworks').each(function(k,v){
+                urls.push($(v).attr('href'));
+                filenames.push($(v).attr('data-name'));
+            });
+            
+            var link = document.createElement('a');
+
+            link.setAttribute('download', null);
+            link.style.display = 'none';
+
+            document.body.appendChild(link);
+
+            for (var i = 0; i < urls.length; i++) {
+                link.setAttribute('href', urls[i]);
+                link.setAttribute('download',filenames[i]);
+                link.click();
+            }
+            document.body.removeChild(link);
+        }
 	</script>
 @endsection
