@@ -38,7 +38,7 @@ class ePayService
         $this->url_cancel = route('course.payment.create');
 
         //$this->encoded =  base64_encode('DATA');
-        $password = 'MS3P75C0ZKZMOTA01IPP9EGRT0WGFVERH5LN4C8IVFCJ76WX34CD218J1FI2KK2P';
+        $password = '';
         //$this->checksum = hash_hmac('sha1', $this->encoded, $password);
 
         $data = <<<DATA
