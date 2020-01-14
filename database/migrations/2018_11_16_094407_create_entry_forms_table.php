@@ -15,8 +15,9 @@ class CreateEntryFormsTable extends Migration
     {
         Schema::create('entry_forms', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('course_id')->unsigned()->nullable();
             $table->longText('course')->nullable();
+            $table->longText('module')->nullable();
             $table->longText('suitable_candidate')->nullabe();
             $table->longText('suitable_training')->nullabe();
             $table->longText('accompliments')->nullabe();
@@ -30,7 +31,7 @@ class CreateEntryFormsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('set null');
         });
     }
 

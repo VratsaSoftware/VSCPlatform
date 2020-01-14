@@ -34,17 +34,19 @@ Route::get('/team', function () {
 })->name('about');
 
 Route::get('/train-devs', function () {
+    $type = App\Models\Courses\TrainingType::where('type','Програмиране')->first();
     if (Session::get('locale') == 'en') {
-        return view('static.en.programming');
+        return view('static.en.programming',['type' => $type->id]);
     }
-    return view('static.programming');
+    return view('static.programming',['type' => $type->id]);
 })->name('programmingCourses');
 
 Route::get('/digital-marketing', function () {
+    $type = App\Models\Courses\TrainingType::where('type','Дигитален Маркетинг')->first();
     if (Session::get('locale') == 'en') {
-        return view('static.en.digital_marketing');
+        return view('static.en.digital_marketing',['type' => $type->id]);
     }
-    return view('static.digital_marketing');
+    return view('static.digital_marketing',['type' => $type->id]);
 })->name('digitalMarketing');
 
 Route::get('/mission-2', function () {
@@ -72,7 +74,7 @@ Route::get('/subscribe/{email}', 'HomeController@subscribe');
 
 Auth::routes();
 
-Route::get('/application/create/{course?}/{module?}',
+Route::get('/application/create/{type?}/{course?}/{module?}',
     'Courses\ApplicationController@create')->name('application.create');
 Route::post('/application/store/', 'Courses\ApplicationController@store')->name('application.store');
 //cw
@@ -186,7 +188,8 @@ Route::group(['middleware' => 'auth'], function () {
         Route::put('test/question/update/{question}','Admin\TestController@updateQuestion')->name('update.question');
         Route::delete('/test/delete/question/{question}',
             'Admin\TestController@deleteQuestion')->name('delete.question');
-        Route::get('applications/all', 'Courses\ApplicationController@applicationsAll')->name('admin.applications');
+        Route::get('applications/all/{type?}', 'Courses\ApplicationController@applicationsAll')->name('admin.applications');
+        Route::post('applications/filter','Courses\ApplicationController@loadApplications')->name('admin.ajax.applications');
     });
 
     Route::group(['middleware' => 'isAdmin'], function () {

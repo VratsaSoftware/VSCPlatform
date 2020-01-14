@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Courses;
 
+use App\Models\Courses\TrainingType;
 use App\Models\Tests\Test;
 use App\Models\Tests\TestUserAssign;
 use App\Models\Tests\TestUserSubmited;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Password;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\CourseApplicationCreated;
+use App\Models\Courses\Course;
 
 class ApplicationController extends Controller
 {
@@ -31,16 +33,16 @@ class ApplicationController extends Controller
     {
         $entry = Entry::with('User', 'Form')->where('user_id', Auth::user()->id)->first();
         $submited = TestUserSubmited::where([
-            ['user_id',Auth::user()->id],
+            ['user_id', Auth::user()->id],
         ])->whereNotNull('submited_at')->select('test_id')->get()->toArray();
-        if($entry) {
+        if ($entry) {
             $entry->test_score = 0;
             $entry->save();
         }
         if ($submited) {
             $addMe = 0;
-            foreach($submited as $skey => $submitedTest) {
-                $score = app('App\Http\Controllers\Users\TestController')->generateScore(Auth::user()->id,$submitedTest['test_id']);
+            foreach ($submited as $skey => $submitedTest) {
+                $score = app('App\Http\Controllers\Users\TestController')->generateScore(Auth::user()->id, $submitedTest['test_id']);
                 if ($entry && isset($score[4]['percentage'])) {
                     $addMe += $score[4]['percentage'];
                     $allScore[] = $score;
@@ -51,14 +53,14 @@ class ApplicationController extends Controller
             $entry['test_stats'] = $allScore;
         }
         $notSubmited = TestUserAssign::where([
-            ['user_id',Auth::user()->id],
-        ])->whereNotIn('test_id',$submited)->get();
-        if(count($notSubmited) > 0 || !$notSubmited->isEmpty()){
+            ['user_id', Auth::user()->id],
+        ])->whereNotIn('test_id', $submited)->get();
+        if (count($notSubmited) > 0 || !$notSubmited->isEmpty()) {
             $entry['test_count'] = count($notSubmited);
             $entry['more_test'] = true;
         }
 
-        return view('user.application', ['entry'=>$entry]);
+        return view('user.application', ['entry' => $entry]);
     }
 
     /**
@@ -66,16 +68,24 @@ class ApplicationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create(Request $request)
+    public function create(Request $request, $type = null)
     {
         $course = null;
         $module = null;
-        if($request->course && $request->module) {
-            $courses = \Config::get('applicationForm.courses');
-            foreach ($courses as $course => $module){
-                $coursesOnly[] = $course;
-                $modulesOnly[] = $module;
-            }
+        $courses = \Config::get('applicationForm.courses');
+        $applicationFor = null;
+
+        foreach ($courses as $course => $module) {
+            $coursesOnly[] = $course;
+            $modulesOnly[] = $module;
+        }
+        if (!is_null($type)) {
+            $applicationFor = Course::where([
+                ['training_type', $type]
+            ])->whereNotNull('form_active')->get();
+        }
+
+        if ($request->course && $request->module) {
             $request['valid_course'] = $coursesOnly;
             $request['valid_modules'] = $modulesOnly;
             $data = $request->validate([
@@ -86,28 +96,31 @@ class ApplicationController extends Controller
             $module = $request->module;
         }
         $occupations = Occupation::all();
+
         if (Auth::user()) {
             $user = User::find(Auth::user()->id);
-            return view('user.application_form', ['user'=>$user,'occupations'=>$occupations,'course' => $course,'module' => $module]);
+            return view('user.application_form', ['user' => $user, 'occupations' => $occupations, 'course' => $course, 'module' => $module, 'applicationFor' => $applicationFor]);
         }
-        return view('user.non_register_application_form', ['occupations'=>$occupations]);
+
+        return view('user.non_register_application_form', ['occupations' => $occupations, 'applicationFor' => $applicationFor]);
     }
+
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $courses = \Config::get('applicationForm.courses');
-        foreach ($courses as $course => $module){
-            $coursesOnly[] = $course;
-            $modulesOnly[] = $module;
-        }
-        $request['valid_course'] = $coursesOnly;
-        $request['valid_modules'] = $modulesOnly;
+//        $courses = \Config::get('applicationForm.courses');
+//        foreach ($courses as $course => $module) {
+//            $coursesOnly[] = $course;
+//            $modulesOnly[] = $module;
+//        }
+//        $request['valid_course'] = $coursesOnly;
+//        $request['valid_modules'] = $modulesOnly;
         $request['valid_use'] = \Config::get('applicationForm.use');
         $request['valid_source'] = \Config::get('applicationForm.source');
 
@@ -118,7 +131,8 @@ class ApplicationController extends Controller
                 "email" => 'sometimes|string|email|max:255|unique:users',
                 "phone" => 'required|digits:10',
                 "occupation" => 'required',
-                "course" => 'required|in_array:valid_course.*',
+                'course' => 'required',
+//                "course" => 'required|in_array:valid_course.*',
                 "suitable_candidate" => 'required|min:100|max:500',
                 "suitable_training" => 'required|min:100|max:500',
                 "accompliments" => 'required|min:100|max:500',
@@ -129,6 +143,9 @@ class ApplicationController extends Controller
                 "module" => 'sometimes|string|in_array:valid_modules.*',
                 "source_url" => 'sometimes'
             ]);
+            $data['course_id'] = $data['course'];
+            $course = Course::where('id', $data['course_id'])->select('name')->first();
+            $data['course'] = $course->name;
 
             $user = User::find(Auth::user()->id);
             $user->cl_occupation_id = $data['occupation'];
@@ -139,14 +156,14 @@ class ApplicationController extends Controller
                 $user->dob = $dob;
             }
             $user->save();
-            $cv = $user->name.time().'.'.$request->cv->getClientOriginalExtension();
+            $cv = $user->name . time() . '.' . $request->cv->getClientOriginalExtension();
             $cvName = str_replace(' ', '', strtolower($cv));
             // $cvName = md5($cvName);
 
             $data['cv'] = $cvName;
-            $request->cv->move(public_path().'/entry/cv/', $cvName);
+            $request->cv->move(public_path() . '/entry/cv/', $cvName);
             unset($data['occupation']);
-            if(isset($request->source_url)){
+            if (isset($request->source_url)) {
                 $data['source_url'] = $request->source_url;
             }
             $newForm = EntryForm::create($data);
@@ -166,7 +183,8 @@ class ApplicationController extends Controller
             "userage" => 'required|numeric|max:120',
             "phone" => 'required|digits:10',
             "occupation" => 'required',
-            "course" => 'required|in_array:valid_course.*',
+            'course' => 'required',
+//            "course" => 'required|in_array:valid_course.*',
             "suitable_candidate" => 'required|min:100|max:500',
             "suitable_training" => 'required|min:100|max:500',
             "accompliments" => 'required|min:100|max:500',
@@ -176,6 +194,9 @@ class ApplicationController extends Controller
             "cv" => 'required|file',
             "module" => 'sometimes|string|in_array:valid_modules.*',
         ]);
+        $data['course_id'] = $data['course'];
+        $course = Course::where('id', $data['course_id'])->select('name')->first();
+        $data['course'] = $course->name;
 
         $role = Role::where('role', 'user')->select('id')->first();
         $dob = null;
@@ -194,17 +215,17 @@ class ApplicationController extends Controller
         ]);
 
 
-        $cv = $newUser->name.time().'.'.$request->cv->getClientOriginalExtension();
+        $cv = $newUser->name . time() . '.' . $request->cv->getClientOriginalExtension();
         $cvName = str_replace(' ', '', strtolower($cv));
         // $cvName = md5($cvName);
 
         $data['cv'] = $cvName;
-        $request->cv->move(public_path().'/entry/cv/', $cvName);
+        $request->cv->move(public_path() . '/entry/cv/', $cvName);
         unset($data['occupation']);
         unset($data['username']);
         unset($data['lastname']);
         unset($data['email']);
-        if(isset($request->source_url)){
+        if (isset($request->source_url)) {
             $data['source_url'] = $request->source_url;
         }
         $newForm = EntryForm::create($data);
@@ -216,13 +237,13 @@ class ApplicationController extends Controller
         $token = Password::getRepository()->create($newUser);
         $newUser->sendPasswordResetNotification($token);
 
-        return redirect('password/reset/'.$token);
+        return redirect('password/reset/' . $token);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show($id)
@@ -233,7 +254,7 @@ class ApplicationController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -244,8 +265,8 @@ class ApplicationController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -256,7 +277,7 @@ class ApplicationController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
@@ -264,30 +285,53 @@ class ApplicationController extends Controller
         //
     }
 
-    public function applicationsAll()
+    public function applicationsAll($type = null)
+    {
+        $types = TrainingType::all();
+
+        return view('admin.applications', ['types' => $types,'type' => $type]);
+    }
+
+    public function loadApplications(Request $request)
     {
         $entries = Entry::with('User.Occupation', 'Form')->get();
-        foreach($entries as $entry){
+        if($request->type) {
+            $courses = Course::where('training_type', $request->type)->select('id')->get()->toArray();
+            $entries = Entry::with('User.Occupation', 'Form')->whereHas('Form', function ($q) use ($courses) {
+                $q->whereIn('course_id', $courses);
+            })->get();
+        }
+        if($request->course){
+            $theCourse = $request->course;
+            $entries = Entry::with('User.Occupation', 'Form')->whereHas('Form', function ($q) use ($theCourse) {
+                $q->where('course_id', $theCourse);
+            })->get();
+        }
+        foreach ($entries as $entry) {
             $tests = [];
             $scores = [];
             $submitedTests = TestUserSubmited::where([
-                ['user_id',$entry->user_id]
+                ['user_id', $entry->user_id]
             ])->get();
-            foreach($submitedTests as $tkey => $test){
+            foreach ($submitedTests as $tkey => $test) {
                 $tests[] = Test::find($test->test_id);
-                $scores[] = app('App\Http\Controllers\Users\TestController')->generateScore($entry->user_id,$test->test_id);
+                $scores[] = app('App\Http\Controllers\Users\TestController')->generateScore($entry->user_id, $test->test_id);
             }
             $entry['testScoreTest'] = $tests;
             $entry['testScore'] = $scores;
             $calculate = 0;
-            foreach($entry['testScoreTest'] as $tkey => $test){
+            foreach ($entry['testScoreTest'] as $tkey => $test) {
                 $calculate += $entry['testScore'][$tkey][4]['percentage'];
             }
-            if($calculate > 0){
+            if ($calculate > 0) {
                 $entry['hidden'] = $calculate / count($entry['testScore']);
             }
         }
 
-        return view('admin.applications', ['entries' => $entries]);
+        $courses = Course::where('training_type',$request->type)->get();
+        if(isset($request->final) || $request->final){
+            return view('admin.ajax_applications_data',['entries' => $entries,'courses' => isset($courses)?$courses:null]);
+        }
+        return view('admin.ajax_applications', ['entries' => $entries,'courses' => isset($courses)?$courses:null]);
     }
 }

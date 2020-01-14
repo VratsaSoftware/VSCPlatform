@@ -378,7 +378,7 @@
     </div>
     </div>
     <div class="col-md-12 text-center">
-        <span id="prepare" class="end-candidate programming-candidate-btn"><a href="{{route('application.create')}}">APPLY</a></span>
+        <span id="prepare" class="end-candidate programming-candidate-btn"><a href="{{route('application.create',['type' => $type])}}">APPLY</a></span>
     </div>
     </div>
 

@@ -14,13 +14,13 @@
                 <div class="header-title col-md-12 text-center">
                     <span>Покори върховете на<br /> Дигиталния Маркетинг</span>
                 </div>
-                {{-- <div class="header-sub-title col-md-12 text-center">
+                <div class="header-sub-title col-md-12 text-center">
                     <span>Курса започва след</span><br/>
                 </br/>
                     <span class="timer-digital"><img src="{{asset('/images/loaders/load-32.gif')}}" alt="timer"/></span>
-                </div> --}}
-                <div class="header-button col-md-12 text-center mb-5" style="visibility:hidden">
-                    <span id="prepare"><a href="#application">Запиши се</a></span>
+                </div>
+                <div class="header-button col-md-12 text-center mb-5" style="visibility:visible">
+                    <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="#application">Запиши се</a></span>
                 </div>
 
                 <div class="header-menu col-md-12 header-marketing" id="header-sticky">
@@ -289,13 +289,13 @@
             </div>
         </div>
     </div>
-    {{-- <div class="col-md-12 text-center">
-        <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="#">КАНДИДАТСТВАЙ</a></span>
-    </div> --}}
+    <div class="col-md-12 text-center">
+        <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="{{route('application.create',['type' => $type])}}">КАНДИДАТСТВАЙ</a></span>
+    </div>
     </div>
     <script>
         // Set the date we're counting down to
-        var digitalDate = new Date("Feb 15, 2019 00:00:00").getTime();
+        var digitalDate = new Date("Feb 01, 2020 00:00:00").getTime();
         var timerClass = '.timer-digital';
 
         // Update the count down every 1 second

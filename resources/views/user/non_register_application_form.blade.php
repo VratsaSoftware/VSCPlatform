@@ -77,65 +77,85 @@
                             </p>
                             <p>
                                 <label for="course">Направление <span class="req-star-form">*</span></label><br/>
-                                @if ($errors->has('course'))
-                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                        <strong>{{ $errors->first('course') }}</strong>
-                                    </span>
-                                @endif
-                                <select class="section-el-bold" name="course" id="course-select">
-                                    <option value="0" disabled selected="selected">-----</option>
-                                    @foreach(Config::get('applicationForm.courses') as $key => $modules)
-                                        @if(is_array($modules))
-                                            @foreach($modules as $sub)
-                                                <option class="no-show course-{{str_replace(' ', '', $key)}}"
-                                                        value="{{$sub}}">{{$sub}}</option>
-                                            @endforeach
-                                        @endif
-                                        @if(isset($course) && $course == $key)
-                                            <option value="{{$key}}"
-                                                    {{ (old("course") == $key ? "selected":"") }} selected="selected"
-                                                    data-count="{{count($modules)}}">{{ucfirst($key)}}</option>
-                                        @else
-                                            <option value="{{$key}}"
-                                                    {{ (old("course") == $key ? "selected":"") }} data-count="{{count($modules)}}">{{ucfirst($key)}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                                <br>
-                                <br/>
-                                <span class="no-show">Модул <span class="req-star-form">*</span></span>
-                                <select class="section-el-bold no-show" name="module" id="module">
-                                
-                                </select>
-                                <script>
-                                    $(function () {
-                                        addSub();
-                                    });
-                                    $('#course-select').on('change', function () {
-                                        addSub();
-                                    });
+                                @if(is_null($applicationFor) || empty($applicationFor) || count($applicationFor) < 1)
+                                    @if ($errors->has('course'))
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                            <strong>{{ $errors->first('course') }}</strong>
+                                        </span>
+                                    @endif
+                                    <select class="section-el-bold" name="course" id="course-select">
+                                        <option value="0" disabled selected="selected">-----</option>
+                                        @foreach(Config::get('applicationForm.courses') as $key => $modules)
+                                            @if(is_array($modules))
+                                                @foreach($modules as $sub)
+                                                    <option class="no-show course-{{str_replace(' ', '', $key)}}"
+                                                            value="{{$sub}}">{{$sub}}</option>
+                                                @endforeach
+                                            @endif
+                                            @if(isset($course) && $course == $key)
+                                                <option value="{{$key}}"
+                                                        {{ (old("course") == $key ? "selected":"") }} selected="selected"
+                                                        data-count="{{count($modules)}}">{{ucfirst($key)}}</option>
+                                            @else
+                                                <option value="{{$key}}"
+                                                        {{ (old("course") == $key ? "selected":"") }} data-count="{{count($modules)}}">{{ucfirst($key)}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    <br>
+                                    <br/>
+                                    <span class="no-show">Модул <span class="req-star-form">*</span></span>
+                                    <select class="section-el-bold no-show" name="module" id="module">
                                     
-                                    function addSub(){
-                                        $('#module').html(' ');
-                                        var selectedCourse = $('#course-select').find(':selected').text().replace(/ /g, '');
+                                    </select>
+                                    <script>
+                                        $(function () {
+                                            addSub();
+                                        });
+                                        $('#course-select').on('change', function () {
+                                            addSub();
+                                        });
                                         
-                                        if ($('#course-select').find(':selected').attr('data-count') > 0) {
-                                            var clonedOptions = $('.course-' + selectedCourse).clone();
-                                            $.each(clonedOptions, function (k, option) {
-                                                $('#module').append(option);
-                                                $('#module').find('option').removeClass('no-show');
-                                            });
-                                            $('#module').removeClass('no-show');
-                                            $('#module').prev('span').removeClass('no-show');
-                                        } else {
-                                            $('#module').addClass('no-show');
-                                            $('#module').prev('span').addClass('no-show');
+                                        function addSub(){
+                                            $('#module').html(' ');
+                                            var selectedCourse = $('#course-select').find(':selected').text().replace(/ /g, '');
+                                            
+                                            if ($('#course-select').find(':selected').attr('data-count') > 0) {
+                                                var clonedOptions = $('.course-' + selectedCourse).clone();
+                                                $.each(clonedOptions, function (k, option) {
+                                                    $('#module').append(option);
+                                                    $('#module').find('option').removeClass('no-show');
+                                                });
+                                                $('#module').removeClass('no-show');
+                                                $('#module').prev('span').removeClass('no-show');
+                                            } else {
+                                                $('#module').addClass('no-show');
+                                                $('#module').prev('span').addClass('no-show');
+                                            }
                                         }
-                                    }
-                                </script>
+                                    </script>
+                                @else
+                                    <select class="section-el-bold" name="course" id="course-select">
+                                        @foreach($applicationFor as $course)
+                                            <option value="{{$course->id}}" selected>{{$course->name}}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
                             </p>
                             <p>
-                                <label for="suitable_candidate">Защо смятате, че тези обучения са подходящ за Вас? <span id="candidate-label"></span> <span class="req-star-form">*</span></label>
+                                <label for="suitable_candidate">Защо смятате, че тези обучения са подходящ за Вас?
+                                    <br/>
+                                    <small>(защо искате да учите
+                                        <small>(защо искате да учите
+                                            @forelse($applicationFor as $course)
+                                                {{$course->name}}
+                                                @if(!$loop->last)
+                                                    ,
+                                                @endif
+                                            @empty
+                                            @endforelse
+											)</small>
+                                    <span id="candidate-label"></span> <span class="req-star-form">*</span></label>
                                 @if ($errors->has('suitable_candidate'))
                                     <span class="invalid-feedback" role="alert" style="display: block !important;">
                                         <strong>{{ $errors->first('suitable_candidate') }}</strong>
@@ -144,7 +164,18 @@
                                 <textarea maxlength="500" name="suitable_candidate" rows="8" cols="80" placeholder="между 100 и 500 символа" class="section-el-bold">{{old('suitable_candidate')}}</textarea>
                             </p>
                             <p>
-                                <label for="suitable_training">Защо смятате, че именно Вие сте подходящ за ИТ обучение? <span id="training-label"></span><span class="req-star-form">*</span></label>
+                                <label for="suitable_training">Защо смятате, че именно Вие сте подходящ за ИТ обучение?
+                                    <br>
+                                    <small>(кои ваши качества и интереси ви правят подходящ участник в курс по
+                                        @forelse($applicationFor as $course)
+                                            {{$course->name}}
+                                            @if(!$loop->last)
+                                                ,
+                                            @endif
+                                        @empty
+                                        @endforelse
+                                        )</small>
+                                    <span id="training-label"></span><span class="req-star-form">*</span></label>
                                 @if ($errors->has('suitable_training'))
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $errors->first('suitable_training') }}</strong>
@@ -226,6 +257,7 @@
             e.preventDefault();
             if($('#application').hasClass('submited')){
                 $(this).fadeOut();
+                $('.create-course-button').html('<p>Моля изчакайте, докато заявката се обработи...</p>');
             }else{
                 $('#application').addClass('submited');
                 $('#application').submit()

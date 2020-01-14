@@ -26,7 +26,7 @@ class CreateCoursesModulesTable extends Migration
             $table->timestamps();
             $table->softDeletes();
 
-            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('set null');
         });
     }
 

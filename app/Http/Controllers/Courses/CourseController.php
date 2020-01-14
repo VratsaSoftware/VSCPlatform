@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Courses;
 
 use App\Models\Courses\PersonalCertificate;
+use App\Models\Courses\TrainingType;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Courses\Course;
@@ -35,8 +36,9 @@ class CourseController extends Controller
     public function create()
     {
         $lecturers = User::where('cl_role_id','!=',2)->get();
+        $trainingTypes = TrainingType::all();
 
-        return view('course.create',['lecturers' => $lecturers]);
+        return view('course.create',['lecturers' => $lecturers,'trainingTypes' => $trainingTypes]);
     }
 
     /**
@@ -57,7 +59,11 @@ class CourseController extends Controller
             'visibility' => 'required|in_array:valid_visibility.*',
             'lecturer' => 'required',
             'color' => 'sometimes',
+            'training_type' => 'required',
+            'form_active' => 'required',
         ]);
+        $data['form_active'] !== '1' || $data['form_active'] < 1 ? $data['form_active'] = null : 1;
+
         $coursePic = Input::file('picture');
         $image = Image::make($coursePic->getRealPath());
         $image->fit(800, 600, function ($constraint) {

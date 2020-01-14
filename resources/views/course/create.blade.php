@@ -53,6 +53,14 @@
                         <input type="text" id="name" name="name" placeholder="..." class="name-course" value="{{old('name')}}">
                     </p>
                     <p>
+                        <label for="type">Тип</label>
+                        <select name="training_type" id="training_type">
+                            @foreach($trainingTypes as $type)
+                                <option value="{{$type->id}}">{{$type->type}}</option>
+                            @endforeach
+                        </select>
+                    </p>
+                    <p>
                         <label for="name">Цвят</label><br>
                         <input type="text" id="color" name="color" placeholder="hex color" class="name-course" value="{{old('color')}}">
                     </p>
@@ -75,6 +83,16 @@
                                 <option value="{{strtolower($visibility)}}">{{ucfirst($visibility)}}</option>
                             @endforeach
                         </select>
+                    </p>
+                    <p>
+                        <label for="form_active">Отворен за кандидастване</label>
+                        <br/>
+                        <small>
+                            <i>курса ще бъде в статус отворен за кандидастване (ако му е зададен да бъде, докато стане Старт времето му)</i>
+                        </small>
+                        <br/>
+                        <input type="radio" name="form_active" value="1" id="on-form" checked="checked"> <label for="on-form">Да</label>
+                        <input type="radio" name="form_active" value=NULL id="off-form"> <label for="off-form">Не</label>
                     </p>
                     <p>
                         {{-- to do if admin load all lectors or users --}}

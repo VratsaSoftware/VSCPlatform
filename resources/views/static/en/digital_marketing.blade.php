@@ -291,9 +291,9 @@
         </div>
     </div>
     </div>
-    {{-- <div class="col-md-12 text-center">
-        <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="#">APPLY NOW</a></span>
-    </div> --}}
+    <div class="col-md-12 text-center">
+        <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="{{route('application.create',['type' => $type])}}">APPLY NOW</a></span>
+    </div>
     </div>
     <script>
         // Set the date we're counting down to
