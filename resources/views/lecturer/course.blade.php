@@ -6,13 +6,13 @@
             <div class="col-md-12 d-flex flex-row flex-wrap options-wrap">
                 @if (!empty(Session::get('success')))
                 <p>
-                    <div class="alert alert-success slide-on">
+                    <div class="alert alert-success slide-on" style="margin-top: -4vw;margin-left: 1vw;">
                         <p>{{ session('success') }}</p>
                     </div>
                 </p>
                 @endif
                 @if ($errors->any())
-                <div class="alert alert-danger slide-on">
+                <div class="alert alert-danger slide-on" style="margin-top: -4vw;margin-left: 1vw;">
                     <ul>
                         @foreach ($errors->all() as $error)
                         <li>{{ $error }}</li>
@@ -93,6 +93,12 @@
                                     <input type="date" name="ends" id="ends" value="{{$course->ends->format('Y-m-d')}}">
                                 </p>
                                 <p>
+                                    <label for="form_active">Отворен за кандидастване</label>
+                                    <br/>
+                                    от <input type="date" name="applications_from" id="applications_from" value="{{$course->applications_from->format('Y-m-d')}}">
+                                    до <input type="date" name="applications_to" id="applications_to" value="{{$course->applications_to->format('Y-m-d')}}">
+                                </p>
+                                <p>
                                     <label for="visibility">Видимост на курса</label>
                                     <select class="course-visibility section-el-bold" name="visibility">
                                         @foreach(Config::get('courseVisibility') as $visibility)
@@ -105,7 +111,7 @@
                                     </select>
                                 </p>
                                 <p class="col-md-12 text-center">
-                                    <button type="submit" class="btn btn-success btn-update-course" value="Промени" href="#modal">Промени</button>
+                                    <button type="submit" class="btn btn-success btn-update-course" value="Промени" href="">Промени</button>
                                 </p>
                             </form>
                         </div>

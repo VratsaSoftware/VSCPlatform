@@ -13,53 +13,39 @@
                 </div>
                 </p>
             @endif
+            <!-- opened courses -->
+                <div class="col-md-12 events-now-text text-center" style="margin-top:0">Отворени Курсове</div>
+                    <div class="col-md-12 available-events d-flex flex-row flex-wrap">
+                    @foreach($courses as $course)
+                        <div class="col-md-6">
+                            <div class="event-title col-md-12" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">{{$course->name}}</div>
+                            <div class="event-body col-md-12 text-center">
+                                <a href="{{route('application.create',[$course->training_type,$course->id])}}">
+                                    <div class="event-body-text levels-btn" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">
+                                        Запиши се
+                                    </div>
+                                </a>
+                                <img src="{{asset('images/course-'.$course->id.'/'.$course->picture)}}" style="height:auto" alt="event-body">
+                            </div>
+                            <div class="event-footer col-md-12 d-flex flex-row flex-wrap" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">
+                                <div class="col-md-6">Лектор(и):<br/>
+                                    @foreach($course->Lecturers as $lecturer)
+                                        {{$lecturer->User->name}} {{$lecturer->User->last_name}} <br/>
+                                    @endforeach
+                                </div>
+                                <div class="col-md-6">Начало: <br/>
+                                    {{$course->starts->format('d-m-Y')}}
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    <!-- end of opened courses -->
+                </div>
             <!-- course candidation statistic -->
                 <div class="col-md-12 candidation-title">
                     @if($entry && is_null($entry->entry_form_id) || is_null($entry))
                         <div class="form-group">
-                            <label for="sel1">Избери направление/модул:</label>
-                            <select class="form-control" id="sel1" name="course">
-                                <option value="0" disabled selected="selected">-----</option>
-                                @foreach(Config::get('applicationForm.courses') as $key => $modules)
-                                    @if(is_array($modules))
-                                        @foreach($modules as $sub)
-                                            <option class="no-show course-{{str_replace(' ', '', $key)}}"
-                                                    value="{{$key}}">{{$sub}}</option>
-                                        @endforeach
-                                    @endif
-                                    <option value="{{$key}}"
-                                            {{ (old("course") == $key ? "selected":"") }} data-count="{{count($modules)}}">{{ucfirst($key)}}</option>
-                                @endforeach
-                            </select>
-                            <br/>
-                            <select class="form-control no-show" name="sub" id="sub">
-                            
-                            </select>
-                            <script>
-                                $('#sel1').on('change', function () {
-                                    $('#sub').html(' ');
-                                    var selectedCourse = this.value.replace(/ /g, '');
-                                    
-                                    if ($(this).find(':selected').attr('data-count') > 0) {
-                                        var clonedOptions = $('.course-' + selectedCourse).clone();
-                                        $.each(clonedOptions, function (k, option) {
-                                            $('#sub').append(option);
-                                            $('#sub').find('option').removeClass('no-show');
-                                        });
-                                        $('#sub').removeClass('no-show');
-                                    } else {
-                                        $('#sub').addClass('no-show');
-                                    }
-                                });
-                                
-                                $('#sub').on('change', function () {
-                                    var selectedSub = $("#sub").find(':selected').text();
-                                    var rawValue = $('#sel1').find(':selected').text();
-                                    var applicationUrl = $('#candidate').attr('data-url');
-                                    $('#candidate').attr('href', '');
-                                    $('#candidate').attr('href', applicationUrl + '/' + rawValue + '/' + selectedSub);
-                                });
-                            </script>
+                            <label for="sel1">Процес на кандидстване</label>
                         </div>
                     @endif
                 </div>
@@ -117,10 +103,10 @@
                             <span>електронна форма</span>
                             <div class="personal-steps">
                                 @if(is_null($entry) || !is_null($entry) && is_null($entry->entry_form_id))
-                                    <a href="{{route('application.create')}}" id="candidate"
-                                       data-url="{{route('application.create')}}">
-                                        <button type="button" class="btn btn-success">Кандидаствай</button>
-                                    </a>
+{{--                                    <a href="{{route('application.create')}}" id="candidate"--}}
+{{--                                       data-url="{{route('application.create')}}">--}}
+{{--                                        <button type="button" class="btn btn-success">Кандидаствай</button>--}}
+{{--                                    </a>--}}
                                 @else
                                     вече сте изпратили своята форма
                                 @endif

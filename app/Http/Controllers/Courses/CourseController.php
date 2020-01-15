@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Courses;
 
 use App\Models\Courses\PersonalCertificate;
 use App\Models\Courses\TrainingType;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Courses\Course;
@@ -57,12 +58,21 @@ class CourseController extends Controller
             'starts' => 'required|date_format:Y-m-d',
             'ends' => 'required|date_format:Y-m-d|after:starts',
             'visibility' => 'required|in_array:valid_visibility.*',
-            'lecturer' => 'required',
+            'lecturers' => 'required',
             'color' => 'sometimes',
             'training_type' => 'required',
-            'form_active' => 'required',
+            'applications_from' => 'required|date_format:Y-m-d',
+            'applications_to' => 'required|date_format:Y-m-d|after:applications_from'
         ]);
-        $data['form_active'] !== '1' || $data['form_active'] < 1 ? $data['form_active'] = null : 1;
+
+        if($data['applications_from'] < Carbon::now() || $data['applications_from'] == Carbon::now()){
+            $data['form_active'] = 1;
+        }
+
+        $switchActiveStatus = Course::where([
+            ['training_type',$data['training_type'] ],
+            ['applications_to', '<' , Carbon::now()->subDays(1)]
+        ])->whereNotNull('form_active')->update(['form_active' => NULL]);
 
         $coursePic = Input::file('picture');
         $image = Image::make($coursePic->getRealPath());
@@ -74,12 +84,14 @@ class CourseController extends Controller
         $name = md5($name);
 
         $data['picture'] = $name;
-        unset($data['lecturer']);
+        unset($data['lecturers']);
         $createCourse = Course::create($data);
-        $insLecturer = new CourseLecturer;
-        $insLecturer->course_id = $createCourse->id;
-        $insLecturer->user_id = $request->lecturer;
-        $insLecturer->save();
+        foreach($request->lecturers as $lecturer_id) {
+            $insLecturer = new CourseLecturer;
+            $insLecturer->course_id = $createCourse->id;
+            $insLecturer->user_id = $lecturer_id;
+            $insLecturer->save();
+        }
 
         $path = public_path().'/images/course-'.$createCourse->id;
         if (!File::exists($path)) {
@@ -150,9 +162,22 @@ class CourseController extends Controller
             'starts' => 'required|date_format:Y-m-d',
             'ends' => 'required|date_format:Y-m-d|after:starts',
             'visibility' => 'required|in_array:valid_visibility.*',
-            'color' => 'required',
+            'color' => 'sometimes',
+            'applications_from' => 'required|date_format:Y-m-d',
+            'applications_to' => 'required|date_format:Y-m-d|after:applications_from'
         ]);
+
         $course = Course::find($id);
+        $data['form_active'] = NULL;
+        if($data['applications_from'] < Carbon::now() || $data['applications_from'] == Carbon::now()){
+            $data['form_active'] = 1;
+        }
+
+        $switchActiveStatus = Course::where([
+            ['training_type',$course->training_type ],
+            ['applications_to', '<' , Carbon::now()->subDays(1)]
+        ])->whereNotNull('form_active')->update(['form_active' => NULL]);
+
         if (Input::file('picture2')) {
             $coursePic = Input::file('picture2');
             $image = Image::make($coursePic->getRealPath());
@@ -181,6 +206,9 @@ class CourseController extends Controller
         $course->ends = $request->ends;
         $course->visibility = $request->visibility;
         $course->color = $request->color;
+        $course->applications_from = $request->applications_from;
+        $course->applications_to = $request->applications_to;
+        $course->form_active = $data['form_active'];
         $course->save();
 
         $message = __('Успешно направени промени!');

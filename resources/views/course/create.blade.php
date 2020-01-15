@@ -87,17 +87,13 @@
                     <p>
                         <label for="form_active">Отворен за кандидастване</label>
                         <br/>
-                        <small>
-                            <i>курса ще бъде в статус отворен за кандидастване (ако му е зададен да бъде, докато стане Старт времето му)</i>
-                        </small>
-                        <br/>
-                        <input type="radio" name="form_active" value="1" id="on-form" checked="checked"> <label for="on-form">Да</label>
-                        <input type="radio" name="form_active" value=NULL id="off-form"> <label for="off-form">Не</label>
+                        от <input type="date" name="applications_from" id="applications_from" value="{{old('applications_from')}}">
+                        до <input type="date" name="applications_to" id="applications_to" value="{{old('applications_to')}}">
                     </p>
                     <p>
                         {{-- to do if admin load all lectors or users --}}
-                        <label for="lecturer">Лектор: </label>
-                        <select name="lecturer" id="lecturer" class="section-el-bold">
+                        <label for="lecturer">Лектор(и): </label><br/>
+                        <select name="lecturers[]" id="lecturers[]" class="section-el-bold" multiple style="width:50%">
                             @foreach($lecturers as $lecturer)
                                 <option value="{{$lecturer->id}}">{{$lecturer->name}}</option>
                             @endforeach

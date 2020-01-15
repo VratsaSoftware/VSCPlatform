@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Courses;
 
+use App\Models\Courses\Entry;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Courses\Course;
@@ -37,9 +38,15 @@ class ModuleController extends Controller
         $users = User::whereHas('Role', function ($q) {
             $q->where('role', 'user');
         })->get();
+        $users->load('Applications');
+        $course_id = $request->course;
+        $candidates = Entry::with('User','Form')->whereHas('Form', function ($q) use($course_id){
+            $q->where('course_id',$course_id);
+        })->get()->pluck('User')->flatten();
+
         $modules = Module::where('course_id', $course->id)->get();
 
-        return view('course.module.create', ['users' => $users,'course' => $course,'modules' => $modules]);
+        return view('course.module.create', ['users' => $users, 'candidates' => $candidates,'course' => $course,'modules' => $modules]);
     }
 
     /**
@@ -210,16 +217,17 @@ class ModuleController extends Controller
     public function addUser(Request $request)
     {
         $data = $request->validate([
-            'mail' => 'required|email',
+            'mail' => 'required',
             'module_id' => 'required|numeric',
         ]);
-
-        $user = User::where('email', $request->mail)->first();
-        if (!is_null($user)) {
-            ModulesStudent::firstOrCreate(
-                ['course_modules_id' => $request->module_id,'user_id' => $user->id]
-            );
-
+        $emails = explode (",", $data['mail']);
+        foreach($emails as $mail) {
+            $user = User::where('email', $mail)->first();
+            if (!is_null($user)) {
+                $inserted[] = ModulesStudent::firstOrCreate(['course_modules_id' => $request->module_id, 'user_id' => $user->id]);
+            }
+        }
+        if(isset($inserted) && count($inserted) > 0) {
             $message = __('Успешно добавен курсист!');
             return redirect()->back()->with('success', $message);
         }

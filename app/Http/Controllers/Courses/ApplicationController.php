@@ -59,8 +59,12 @@ class ApplicationController extends Controller
             $entry['test_count'] = count($notSubmited);
             $entry['more_test'] = true;
         }
+        //open courses for applications
+        $courses = Course::where('visibility','public')->whereNotNull('form_active')->where('applications_to','>=',Carbon::now())->orderBy('id','DESC')->get();
+        $courses->load('Lecturers');
+        $courses->load('Lecturers.User');
 
-        return view('user.application', ['entry' => $entry]);
+        return view('user.application', ['entry' => $entry,'courses' => $courses]);
     }
 
     /**
@@ -80,9 +84,15 @@ class ApplicationController extends Controller
             $modulesOnly[] = $module;
         }
         if (!is_null($type)) {
+            //getting current active courses of this type, who expiration date for applications is not past
             $applicationFor = Course::where([
                 ['training_type', $type]
-            ])->whereNotNull('form_active')->get();
+            ])->whereNotNull('form_active')->where('applications_to','>=',Carbon::now())->orderBy('id','DESC')->get();
+            //deactivating past date courses
+            $switchActiveStatus = Course::where([
+                ['training_type',$type ],
+                ['applications_to', '<' , Carbon::now()->subDays(1)]
+            ])->whereNotNull('form_active')->update(['form_active' => NULL]);
         }
 
         if ($request->course && $request->module) {

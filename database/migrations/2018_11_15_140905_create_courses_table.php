@@ -23,6 +23,8 @@ class CreateCoursesTable extends Migration
             $table->string('visibility');
             $table->string('color')->nullable();
             $table->integer('form_active')->nullable();
+            $table->date('applications_from')->nullable();
+            $table->date('applications_to')->nullable();
             $table->integer('training_type')->unsigned()->nullable();
             $table->timestamps();
             $table->softDeletes();

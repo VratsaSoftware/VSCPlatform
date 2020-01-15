@@ -83,6 +83,11 @@ class User extends Authenticatable
         return $this->belongsToMany(Test::class, 'test_users_assign');
     }
 
+    public function Applications()
+    {
+        return $this->hasMany(Entry::class,'user_id','id');
+    }
+
     public function isAdmin()
     {
         $role = Role::find(Auth::user()->cl_role_id);
@@ -526,7 +531,7 @@ class User extends Authenticatable
             ['user_id', '!=', $user_id],
         ])->whereNotIn('id', $evaluated)->get();
 
-        if(count($randomHomeWork) < 1) {
+        if (count($randomHomeWork) < 1) {
             $randomHomeWork = Homework::where('evaluated_count', '<', $evalMax)->where([
                 ['lection_id', $lection],
                 ['user_id', '!=', $user_id],
@@ -570,9 +575,9 @@ class User extends Authenticatable
     {
         is_null($user) ? $user = Auth::user()->id : $user;
         $homeWorkEvalCount = HomeworkComment::where([
-            ['user_id',$user],
-            ['is_evaluated','>','0']
-        ])->with('homework','homework.lection','homework.lection.module')->whereHas('homework.lection.module', function ($q) use ($module) {
+            ['user_id', $user],
+            ['is_evaluated', '>', '0']
+        ])->with('homework', 'homework.lection', 'homework.lection.module')->whereHas('homework.lection.module', function ($q) use ($module) {
             $q->where('id', $module);
         })->count();
 

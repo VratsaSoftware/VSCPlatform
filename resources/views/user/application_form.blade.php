@@ -165,7 +165,7 @@
                                 @else
                                     <select class="section-el-bold" name="course" id="course-select">
                                         @foreach($applicationFor as $course)
-                                            <option value="{{$course->id}}" selected>{{$course->name}}</option>
+                                            <option value="{{$course->id}}" {{Request::segment(4) == $course->id?'selected':''}}>{{$course->name}}</option>
                                         @endforeach
                                     </select>
                                 @endif
