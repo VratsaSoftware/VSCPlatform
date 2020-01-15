@@ -13,41 +13,11 @@
                 </div>
                 </p>
             @endif
-            <!-- opened courses -->
-                <div class="col-md-12 events-now-text text-center" style="margin-top:0">Отворени Курсове</div>
-                    <div class="col-md-12 available-events d-flex flex-row flex-wrap">
-                    @foreach($courses as $course)
-                        <div class="col-md-6">
-                            <div class="event-title col-md-12" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">{{$course->name}}</div>
-                            <div class="event-body col-md-12 text-center">
-                                <a href="{{route('application.create',[$course->training_type,$course->id])}}">
-                                    <div class="event-body-text levels-btn" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">
-                                        Запиши се
-                                    </div>
-                                </a>
-                                <img src="{{asset('images/course-'.$course->id.'/'.$course->picture)}}" style="height:auto" alt="event-body">
-                            </div>
-                            <div class="event-footer col-md-12 d-flex flex-row flex-wrap" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">
-                                <div class="col-md-6">Лектор(и):<br/>
-                                    @foreach($course->Lecturers as $lecturer)
-                                        {{$lecturer->User->name}} {{$lecturer->User->last_name}} <br/>
-                                    @endforeach
-                                </div>
-                                <div class="col-md-6">Начало: <br/>
-                                    {{$course->starts->format('d-m-Y')}}
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                    <!-- end of opened courses -->
-                </div>
             <!-- course candidation statistic -->
                 <div class="col-md-12 candidation-title">
-                    @if($entry && is_null($entry->entry_form_id) || is_null($entry))
                         <div class="form-group">
                             <label for="sel1">Процес на кандидстване</label>
                         </div>
-                    @endif
                 </div>
                 <div class="col-md-12 candidation-text" style="margin-bottom:0">
                     @if(isset($entry->approved) && is_null($entry->approved))
@@ -257,8 +227,37 @@
       </div> --}}
     <!-- end of opened courses -->
     </div>
+    <!-- opened courses -->
+    <div class="col-md-12 events-now-text text-center" style="border-top:1px solid #d3d3d3;padding-top: 1%;">Отворени Курсове</div>
+    <div class="col-md-12 available-events d-flex flex-row flex-wrap">
+        @foreach($courses as $course)
+            <div class="col-md-6">
+                <div class="event-title col-md-12" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">{{$course->name}}</div>
+                <div class="event-body col-md-12 text-center">
+                    <a href="{{route('application.create',[$course->training_type,$course->id])}}">
+                        <div class="event-body-text levels-btn" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">
+                            Запиши се
+                        </div>
+                    </a>
+                    <img src="{{asset('images/course-'.$course->id.'/'.$course->picture)}}" style="height:auto" alt="event-body">
+                </div>
+                <div class="event-footer col-md-12 d-flex flex-row flex-wrap" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">
+                    <div class="col-md-6">Лектор(и):<br/>
+                        @foreach($course->Lecturers as $lecturer)
+                            {{$lecturer->User->name}} {{$lecturer->User->last_name}} <br/>
+                        @endforeach
+                    </div>
+                    <div class="col-md-6">Начало: <br/>
+                        {{$course->starts->format('d-m-Y')}}
+                    </div>
+                </div>
+            </div>
+    @endforeach
+    <!-- end of opened courses -->
     </div>
     </div>
+    </div>
+    
     <script src="./js/fixed-left-top-menu.js"></script>
     <script>
         $(function () {
