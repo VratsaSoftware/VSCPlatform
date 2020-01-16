@@ -17,6 +17,7 @@
 				<th>Модул</th>
 				<th scope="col">Форма</th>
 				<th>Резултат от Тестове</th>
+				<th>Добави във</th>
 			</tr>
 			</thead>
 			<tbody>
@@ -51,11 +52,47 @@
 							@endforeach
 						@endif
 					</td>
+					<td>
+						<form action="{{route('add.student.to.course')}}" method="POST" id="add-student" class="add-student">
+							@csrf
+							<input type="hidden" name="user" value="{{$entry->User->id}}">
+							<select name="add_to_course" id="add_to_course">
+								<option value="0" disabled selected>----</option>
+								@foreach($allCourses as $course)
+									<option value="{{$course->id}}">{{$course->name}}</option>
+								@endforeach
+							</select>
+							<button class="btn btn-outline-success">добави</button>
+						</form>
+					</td>
 				</tr>
 			@endforeach
 			</tbody>
 		</table>
 	</div>
+	<script>
+        // this is the id of the form
+        $(".add-student").submit(function(e) {
+
+            e.preventDefault(); // avoid to execute the actual submit of the form.
+
+            var form = $(this);
+            var url = form.attr('action');
+
+            $.ajax({
+                type: "POST",
+                url: url,
+                data: form.serialize(), // serializes the form's elements.
+                success: function(data)
+                {
+                    console.log(data); // show response from the php script.
+	                form.stop(true, true).fadeOut('fast').fadeIn('fast');
+                }
+            });
+
+
+        });
+	</script>
 	<!-- modal for adding elements -->
 	<div id="modal" style="position:absolute">
 		<div class="modal-content print-body">

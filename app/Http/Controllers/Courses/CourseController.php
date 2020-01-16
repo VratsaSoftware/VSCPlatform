@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers\Courses;
 
+use App\Models\Courses\Entry;
+use App\Models\Courses\EntryForm;
 use App\Models\Courses\PersonalCertificate;
 use App\Models\Courses\TrainingType;
 use Carbon\Carbon;
@@ -36,16 +38,16 @@ class CourseController extends Controller
      */
     public function create()
     {
-        $lecturers = User::where('cl_role_id','!=',2)->get();
+        $lecturers = User::where('cl_role_id', '!=', 2)->get();
         $trainingTypes = TrainingType::all();
 
-        return view('course.create',['lecturers' => $lecturers,'trainingTypes' => $trainingTypes]);
+        return view('course.create', ['lecturers' => $lecturers, 'trainingTypes' => $trainingTypes]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
@@ -65,52 +67,52 @@ class CourseController extends Controller
             'applications_to' => 'required|date_format:Y-m-d|after:applications_from'
         ]);
 
-        if($data['applications_from'] < Carbon::now() || $data['applications_from'] == Carbon::now()){
+        if ($data['applications_from'] < Carbon::now() || $data['applications_from'] == Carbon::now()) {
             $data['form_active'] = 1;
         }
 
         $switchActiveStatus = Course::where([
-            ['training_type',$data['training_type'] ],
-            ['applications_to', '<' , Carbon::now()->subDays(1)]
-        ])->whereNotNull('form_active')->update(['form_active' => NULL]);
+            ['training_type', $data['training_type']],
+            ['applications_to', '<', Carbon::now()->subDays(1)]
+        ])->whereNotNull('form_active')->update(['form_active' => null]);
 
         $coursePic = Input::file('picture');
         $image = Image::make($coursePic->getRealPath());
         $image->fit(800, 600, function ($constraint) {
             $constraint->upsize();
         });
-        $name = time()."_".$coursePic->getClientOriginalName();
+        $name = time() . "_" . $coursePic->getClientOriginalName();
         $name = str_replace(' ', '', strtolower($name));
         $name = md5($name);
 
         $data['picture'] = $name;
         unset($data['lecturers']);
         $createCourse = Course::create($data);
-        foreach($request->lecturers as $lecturer_id) {
+        foreach ($request->lecturers as $lecturer_id) {
             $insLecturer = new CourseLecturer;
             $insLecturer->course_id = $createCourse->id;
             $insLecturer->user_id = $lecturer_id;
             $insLecturer->save();
         }
 
-        $path = public_path().'/images/course-'.$createCourse->id;
+        $path = public_path() . '/images/course-' . $createCourse->id;
         if (!File::exists($path)) {
             $folder = mkdir($path, 0777, true);
         }
         if ($coursePic->getClientOriginalExtension() == 'gif') {
-            copy($coursePic->getRealPath(), public_path().'/images/course-'.$createCourse->id);
+            copy($coursePic->getRealPath(), public_path() . '/images/course-' . $createCourse->id);
         } else {
-            $image->save(public_path().'/images/course-'.$createCourse->id.'/'.$name, 90);
+            $image->save(public_path() . '/images/course-' . $createCourse->id . '/' . $name, 90);
         }
 
-        $message = __('Успешно създаден курс '.ucfirst($data['name']).'!');
+        $message = __('Успешно създаден курс ' . ucfirst($data['name']) . '!');
         return redirect()->route('myProfile')->with('success', $message);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function showUserCourse($user = 0, Course $course)
@@ -118,26 +120,37 @@ class CourseController extends Controller
         $modules = Course::getModules($course->id, $isLecturer = false);
         $courses = [];
         if (Auth::user()) {
-            $certificate = PersonalCertificate::where('user_id',Auth::user()->id)->first();
-            if($certificate) {
+            $certificate = PersonalCertificate::where('user_id', Auth::user()->id)->first();
+            if ($certificate) {
                 $certificate = true;
             }
             $courses = Auth::user()->studentGetCourse();
         }
-        return view('user.course', ['courses' => $courses,'course' => $course,'modules' => $modules,'certificate' => isset($certificate)?$certificate:false]);
+        return view('user.course', ['courses' => $courses, 'course' => $course, 'modules' => $modules, 'certificate' => isset($certificate) ? $certificate : false]);
     }
 
     public function showLecturerCourse(Course $course)
     {
         $modules = Course::getModules($course->id, $isLecturer = true);
 
-        return view('lecturer.course', ['course' => $course,'modules' => $modules]);
+        return view('lecturer.course', ['course' => $course, 'modules' => $modules]);
+    }
+
+    public function addStudent(Request $request)
+    {
+        $entry = Entry::where('user_id',$request->user)->first();
+        $entry->load('Form');
+        $form = EntryForm::find($entry->Form->id);
+        $form->course_id = $request->add_to_course;
+        $form->save();
+
+        return $form;
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit($id)
@@ -148,8 +161,8 @@ class CourseController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, $id)
@@ -168,15 +181,15 @@ class CourseController extends Controller
         ]);
 
         $course = Course::find($id);
-        $data['form_active'] = NULL;
-        if($data['applications_from'] < Carbon::now() || $data['applications_from'] == Carbon::now()){
+        $data['form_active'] = null;
+        if ($data['applications_from'] < Carbon::now() || $data['applications_from'] == Carbon::now()) {
             $data['form_active'] = 1;
         }
 
         $switchActiveStatus = Course::where([
-            ['training_type',$course->training_type ],
-            ['applications_to', '<' , Carbon::now()->subDays(1)]
-        ])->whereNotNull('form_active')->update(['form_active' => NULL]);
+            ['training_type', $course->training_type],
+            ['applications_to', '<', Carbon::now()->subDays(1)]
+        ])->whereNotNull('form_active')->update(['form_active' => null]);
 
         if (Input::file('picture2')) {
             $coursePic = Input::file('picture2');
@@ -184,18 +197,18 @@ class CourseController extends Controller
             $image->fit(800, 600, function ($constraint) {
                 $constraint->upsize();
             });
-            $name = time()."_".$coursePic->getClientOriginalName();
+            $name = time() . "_" . $coursePic->getClientOriginalName();
             $name = str_replace(' ', '', strtolower($name));
             $name = md5($name);
 
-            if (file_exists(public_path().'/images/course-'.$course->id.'/'.$course->picture)) {
-                File::delete(public_path().'/images/course-'.$course->id.'/'.$course->picture);
+            if (file_exists(public_path() . '/images/course-' . $course->id . '/' . $course->picture)) {
+                File::delete(public_path() . '/images/course-' . $course->id . '/' . $course->picture);
             }
 
             if ($coursePic->getClientOriginalExtension() == 'gif') {
-                copy($coursePic->getRealPath(), public_path().'/images/course-'.$course->id.'/'.$name);
+                copy($coursePic->getRealPath(), public_path() . '/images/course-' . $course->id . '/' . $name);
             } else {
-                $image->save(public_path().'/images/course-'.$course->id.'/'.$name, 50);
+                $image->save(public_path() . '/images/course-' . $course->id . '/' . $name, 50);
             }
             $course->picture = $name;
         }
@@ -218,14 +231,14 @@ class CourseController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id)
     {
         $deleteCourse = Course::find($id);
-        $courseDir = public_path().'/images/course-'.$deleteCourse->id;
-        $courseData = public_path().'/data/course-'.$deleteCourse->id;
+        $courseDir = public_path() . '/images/course-' . $deleteCourse->id;
+        $courseData = public_path() . '/data/course-' . $deleteCourse->id;
         File::deleteDirectory($courseDir);
         File::deleteDirectory($courseData);
         $deleteCourse->delete();

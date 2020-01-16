@@ -21,6 +21,13 @@
 				</a>
 			</div>
 		@endforeach
+		<div class="col-md-3 text-center filter-holder">
+			<a href="#" data-type="0" class="filter-courses-link">
+				<div class="col-md-12 course-wrap-filter">
+					всички
+				</div>
+			</a>
+		</div>
 	</div>
 	<div id="apps-content" class="col-md-12">
 	

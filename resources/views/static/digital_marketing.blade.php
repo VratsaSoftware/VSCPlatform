@@ -14,14 +14,12 @@
                 <div class="header-title col-md-12 text-center">
                     <span>Покори върховете на<br /> Дигиталния Маркетинг</span>
                 </div>
-{{--                <div class="header-sub-title col-md-12 text-center">--}}
-{{--                    <span>Курса започва след</span><br/>--}}
-{{--                </br/>--}}
-{{--                    <span class="timer-digital"><img src="{{asset('/images/loaders/load-32.gif')}}" alt="timer"/></span>--}}
-{{--                </div>--}}
-{{--                <div class="header-button col-md-12 text-center mb-5" style="visibility:visible">--}}
-{{--                    <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="#application">Запиши се</a></span>--}}
-{{--                </div>--}}
+                <div class="header-button col-md-12 text-center mb-5" style="visibility:visible">
+                    <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="#application">Запиши се</a></span>
+                </div>
+                <div class="header-sub-title col-md-12 text-center">
+                    <span class="timer-digital"><img src="{{asset('/images/loaders/load-32.gif')}}" alt="timer"/></span>
+                </div>
 
                 <div class="header-menu col-md-12 header-marketing" id="header-sticky">
                     <nav class="text-center">

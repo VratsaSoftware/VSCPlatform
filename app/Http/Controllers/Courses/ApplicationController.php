@@ -304,12 +304,16 @@ class ApplicationController extends Controller
 
     public function loadApplications(Request $request)
     {
+        $allCourses = Course::where('visibility','!=','draft')->get();
         $entries = Entry::with('User.Occupation', 'Form')->get();
         if($request->type) {
             $courses = Course::where('training_type', $request->type)->select('id')->get()->toArray();
-            $entries = Entry::with('User.Occupation', 'Form')->whereHas('Form', function ($q) use ($courses) {
-                $q->whereIn('course_id', $courses);
-            })->get();
+            $entries = Entry::with('User.Occupation', 'Form')->get();
+            if($request->type > 0) {
+                $entries = Entry::with('User.Occupation', 'Form')->whereHas('Form', function ($q) use ($courses) {
+                    $q->whereIn('course_id', $courses);
+                })->get();
+            }
         }
         if($request->course){
             $theCourse = $request->course;
@@ -339,8 +343,8 @@ class ApplicationController extends Controller
         }
 
         $courses = Course::where('training_type',$request->type)->get();
-        if(isset($request->final) || $request->final){
-            return view('admin.ajax_applications_data',['entries' => $entries,'courses' => isset($courses)?$courses:null]);
+        if(isset($request->final) || $request->final || $request->type < 1){
+            return view('admin.ajax_applications_data',['entries' => $entries,'courses' => isset($courses)?$courses:null,'allCourses' => $allCourses]);
         }
         return view('admin.ajax_applications', ['entries' => $entries,'courses' => isset($courses)?$courses:null]);
     }
