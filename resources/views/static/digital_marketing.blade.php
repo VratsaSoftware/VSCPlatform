@@ -15,7 +15,7 @@
                     <span>Покори върховете на<br /> Дигиталния Маркетинг</span>
                 </div>
                 <div class="header-button col-md-12 text-center mb-5" style="visibility:visible">
-                    <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="#application">Запиши се</a></span>
+                    <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="{{route('application.create',['type' => $type])}}">Кандидаствай</a></span>
                 </div>
                 <div class="header-sub-title col-md-12 text-center">
                     <span class="timer-digital"><img src="{{asset('/images/loaders/load-32.gif')}}" alt="timer"/></span>
@@ -268,27 +268,27 @@
             <div class="candidate-imgs col-md-12 flex-row flex-wrap text-center">
                 <div class="col-md-1"></div>
                 <div class="steps col-md-2 first-candidate-img">
-                    <img src="{{asset('/images/candidate-img-step-1.png')}}" alt="step" class="img-fluid candidate-img">
+                    <img src="{{asset('/images/digi-1.png')}}" alt="step" class="img-fluid candidate-img">
                 </div>
 
                 <div class="steps col-md-2">
-                    <img src="{{asset('/images/candidate-img-step-2.png')}}" alt="step" class="img-fluid candidate-img">
+                    <img src="{{asset('/images/digi-2.png')}}" alt="step" class="img-fluid candidate-img">
                 </div>
                 <div class="steps col-md-2">
-                    <img src="{{asset('/images/candidate-img-step-3.png')}}" alt="step" class="img-fluid candidate-img">
+                    <img src="{{asset('/images/digi-3.png')}}" alt="step" class="img-fluid candidate-img">
                 </div>
                 <div class="steps col-md-2">
-                    <img src="{{asset('/images/candidate-img-step-4.png')}}" alt="step" class="img-fluid candidate-img">
+                    <img src="{{asset('/images/digi-4.png')}}" alt="step" class="img-fluid candidate-img">
                 </div>
                 <div class="steps col-md-2">
-                    <img src="{{asset('/images/candidate-img-step-5.png')}}" alt="step" class="img-fluid candidate-img">
+                    <img src="{{asset('/images/digi-5.png')}}" alt="step" class="img-fluid candidate-img">
                 </div>
                 <div class="col-md-1"></div>
             </div>
         </div>
     </div>
     <div class="col-md-12 text-center">
-        <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="{{route('application.create',['type' => $type])}}">КАНДИДАТСТВАЙ</a></span>
+        <span id="prepare-digi" class="end-candidate marketing-candidate-btn"><a href="{{route('application.create',['type' => $type])}}">КАНДИДАТСТВАЙ</a></span>
     </div>
     </div>
     <script>

@@ -82,7 +82,7 @@ a {
     border: 1px solid #128900 !important;
 }
 
-.programming-candidate-btn:hover, .programming-candidate-btn:hover a {
+.programming-candidate-btn:hover {
     background: #fff !important;
     color: #128900 !important;
 }
@@ -130,21 +130,21 @@ a {
 
 #prepare {
     padding: 1%;
-    border: 1px solid #FFE900;
-    background: #FFE900;
+    border: 1px solid #FDE701 !important;
+    background: #FDE701 !important;
     box-shadow: 0px 10px 50px rgba(7, 42, 68, 0.12);
     border-radius: 8px;
     margin-bottom: 5vw;
     display: inline-block;
-    margin-top: 6vw;
+    margin-top: 5vw;
 }
 
-#prepare:hover {
-    background: #ffd94b;
+#prepare:hover, #prepare > a:hover {
+    background: #FDE701 !important;
 }
 
 #prepare>a {
-    color: #000
+    color: #000 !important;
 }
 
 .header-menu {
@@ -857,7 +857,7 @@ a {
 }
 
 .end-candidate>a {
-    color: #FFF !important;
+
 }
 
 .program-info-img, .program-info {
@@ -943,7 +943,7 @@ a {
 }
 
 .marketing-steps {
-    color: #000 !important;
+    color: #CB6615 !important;
     background: #FDE701 !important;
 }
 
@@ -958,18 +958,50 @@ a {
     z-index: -1;
 }
 
+.marketing-steps > span{
+    color:#FF8F29 !important;
+}
+
 .marketing-candidate-btn {
     background: #FF8F29 !important;
     border: 1px solid #FF8F29 !important;
 }
 
 .marketing-candidate-btn:hover, .marketing-candidate-btn:hover a {
-    background: #fff !important;
-    color: #FF8F29 !important;
+    /*background: #fff;*/
+    /*color: #FF8F29 !important;*/
 }
 
 .marketing-candidate-btn>a, .programming-candidate-btn>a {
     padding: 10px;
+}
+
+#prepare-digi{
+    background: #FF8F29;
+    padding: 1%;
+    border: 1px solid #FF8F29 !important;
+    background: #FF8F29 !important;
+    box-shadow: 0px 10px 50px rgba(7, 42, 68, 0.12);
+    border-radius: 8px;
+    margin-bottom: 5vw;
+    display: inline-block;
+    margin-top: 5vw;
+}
+
+#prepare-digi > a {
+    color: #fff;
+}
+
+#prepare-programing{
+    background: #1C8800;
+    padding: 1%;
+    border: 1px solid #1C8800 !important;
+    background: #1C8800 !important;
+    box-shadow: 0px 10px 50px rgba(7, 42, 68, 0.12);
+    border-radius: 8px;
+    margin-bottom: 5vw;
+    display: inline-block;
+    margin-top: 5vw;
 }
 
 .timer-programming, .timer-digital {
@@ -977,7 +1009,7 @@ a {
     font-size: 5vw;
     display: block;
     /* margin-bottom: 10vw; */
-    margin-top: 5vw;
+    margin-top: -7vw;
     /* -webkit-text-stroke: 1px black; */
 }
 
@@ -1443,7 +1475,7 @@ a {
         font-size: 1.5vw;
     }
 
-    #prepare {
+    #prepare, #prepare-digi,#prepare-programing {
         font-size: 1.4vw;
     }
 
@@ -1534,7 +1566,7 @@ a {
     }
 
     .timer-programming, .timer-digital {
-        font-size: 5vw;
+        font-size: 6vw;
     }
 
     body {

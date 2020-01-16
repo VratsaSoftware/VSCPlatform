@@ -19,8 +19,8 @@
                 </br/>
                     <span class="timer-programming"><img src="{{asset('/images/loaders/load-31.gif')}}" alt="timer"/></span>
                 </div> --}}
-                <div class="header-button col-md-12 text-center mb-5" style="visibility:hidden">
-                    <span id="prepare"><a href="#application">Запиши се</a></span>
+                <div class="header-button col-md-12 text-center mb-5" style="visibility:visible">
+                    <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="{{route('application.create',['type' => $type])}}">Кандидаствай</a></span>
                 </div>
 
                 <div class="header-menu col-md-12" id="header-sticky">
@@ -378,7 +378,7 @@
     </div>
     </div>
     <div class="col-md-12 text-center">
-        <span id="prepare" class="end-candidate programming-candidate-btn"><a href="{{route('application.create',['type' => $type])}}">КАНДИДАТСТВАЙ</a></span>
+        <span id="prepare-programing" class="end-candidate programming-candidate-btn" style="background:#1C8800!important;"><a style="color:#fff!important" href="{{route('application.create',['type' => $type])}}">КАНДИДАТСТВАЙ</a></span>
     </div>
     </div>
 
