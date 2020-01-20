@@ -92,68 +92,53 @@
     <div id="program-holder">
 
     </div>
-    <div class="section">
-        <div id="program">
-            <div class="program-title text-center">ПРОГРАМА</div>
-            <div class="program-scheme col-md-12 text-center program-no-tabs">
-                <div id="tabs">
-                    <div class="program-holder d-flex justify-content-center">
-                        <!-- php tab -->
-                        <div id="tabs-1" class="p-3 php">
-                            <div class="col-md-12 d-flex flex-row flex-wrap php-program-holder">
-                                <!-- first lvl -->
-                                <div class="col-md-12 d-flex flex-row flex-wrap">
-                                    <div class="col-md-7 lvl-info lvl-marketing">
-                                        <p class="program-info">
-                                            Основи на маркетинга
-                                        </p>
-                                    </div>
-                                    <div class="col-md-1 clear-tick tick-marketing"><img src="{{asset('/images/tick-y-big-orange.png')}}" alt="tick"></div>
-                                    <div class="col-md-4 program-info-img info-marketing">
-                                        <p class="program-mentors">
-                                            <a href="https://www.linkedin.com/in/aleksey-potebnya-7523b152/" target=" _blank">лектор Алексей Потебня</a>
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- end of first-lvl -->
-
-                                <!-- second lvl -->
-                                <div class="col-md-12 d-flex flex-row flex-wrap">
-                                    <div class="col-md-7 lvl-info lvl-marketing">
-                                        <p class="program-info">
-                                            Създаване на съдържание онлайн
-                                        </p>
-                                    </div>
-                                    <div class="col-md-1 clear-tick tick-marketing"><img src="{{asset('/images/tick-y-big-orange.png')}}" alt="tick"></div>
-                                    <div class="col-md-4 program-info-img info-marketing">
-                                        <p class="program-mentors">
-                                            <a href="https://www.linkedin.com/in/ivaylo-yordanov/" target=" _blank">лектор Ивайло Йорданов</a>
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- end of second lvl -->
-
-                                <!-- third lvl -->
-                                <div class="col-md-12 d-flex flex-row flex-wrap">
-                                    <div class="col-md-7 lvl-info lvl-marketing">
-                                        <p class="program-info">
-                                            Рекламиране в социални мрежи
-                                        </p>
-                                    </div>
-                                    <div class="col-md-1 clear-tick tick-marketing"><img src="{{asset('/images/tick-y-big-orange.png')}}" alt="tick"></div>
-                                    <div class="col-md-4 program-info-img info-marketing">
-                                        <p class="program-mentors">
-                                            <a href="https://www.linkedin.com/in/ivaylo-yordanov/" target=" _blank">лектор Ивайло Йорданов</a>
-                                        </p>
-                                    </div>
-                                </div>
-                                <!-- end of third lvl -->
-                            </div>
-                        </div>
-                        <!-- end of php tab -->
-                    </div>
-                </div>
-            </div>
+    <div id="program">
+        <div class="program-title text-center">ПРОГРАМА</div>
+    </div>
+    <div class="section d-flex flex-row flex-wrap text-center">
+        <div class="col-md-4 text-center">
+        <div class="snip1527">
+            <div class="image"><img src="{{asset('images/digi_marketing/writing-923882_1920_test.jpg')}}" alt="pr-sample23" /></div>
+            <figcaption>
+                <div class="date"><span class="day">1</span><span class="month">ниво</span></div>
+                <h3>The World Ended Yesterday</h3>
+                <p>
+                
+                    You know what we need, Hobbes? We need an attitude. Yeah, you can't be cool if you don't have an attitude.
+                </p>
+            </figcaption>
+            <a href="#"></a>
+        </div>
+        </div>
+        
+        <div class="col-md-4 text-center">
+        <div class="snip1527">
+            <div class="image"><img src="{{asset('images/digi_marketing/student-849828_1920_test.jpg')}}" alt="pr-sample24" /></div>
+            <figcaption>
+                <div class="date"><span class="day">2</span><span class="month">ниво</span></div>
+                <h3>An Abstract Post Heading</h3>
+                <p>
+                
+                    Sometimes the surest sign that intelligent life exists elsewhere in the universe is that none of it has tried to contact us.
+                </p>
+            </figcaption>
+            <a href="#"></a>
+        </div>
+        </div>
+        
+        <div class="col-md-4 text-center">
+        <div class="snip1527">
+            <div class="image"><img src="{{asset('images/digi_marketing/student-849821_1920_test.jpg')}}" alt="pr-sample25" /></div>
+            <figcaption>
+                <div class="date"><span class="day">3</span><span class="month">ниво</span></div>
+                <h3>Down with this sort of thing</h3>
+                <p>
+                
+                    I don't need to compromise my principles, because they don't have the slightest bearing on what happens to me anyway.
+                </p>
+            </figcaption>
+            <a href="#"></a>
+        </div>
         </div>
     </div>
 
@@ -164,75 +149,172 @@
         <div id="details" class="marketing-details">
             <div class="details-title text-center">Детайли</div>
             <div class="details-container col-md-12 d-flex flex-wrap flex-row">
-                <div class="col-md-4 first-detail text-center">
-                    <img src="{{asset('/images/detail-1-marketing.png')}}" alt="info-php-second" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        Продължителност: 4 месеца
-                    </span>
+                <div class="col-md-4">
+                    <div class="card card-2 text-center">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/detail-1-marketing.png')}}" alt="">
+                            </div>
+                            <div class="col-md-12">
+                                Заглавие
+                            </div>
+                            <div class="col-md-12">
+                                Текст текст текст Текст текст текстТекст текст текстТекст текст текст
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4 second-detail text-center">
-                    <img src="{{asset('/images/detail-2-marketing.png')}}" alt="icon" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        Два пъти седмично
-                    </span>
+    
+                <div class="col-md-4">
+                    <div class="card card-2 text-center">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/rocket-extra-small-marketing.png')}}" alt="">
+                            </div>
+                            <div class="col-md-12">
+                                Заглавие
+                            </div>
+                            <div class="col-md-12">
+                                Текст текст текст Текст текст текстТекст текст текстТекст текст текст
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4 third-detail text-center">
-                    <img src="{{asset('/images/rocket-extra-small-marketing.png')}}" alt="icon" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        Предназначен за начинаещи
-                    </span>
+    
+                <div class="col-md-4">
+                    <div class="card card-2 text-center">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/detail-2-marketing.png')}}" alt="">
+                            </div>
+                            <div class="col-md-12">
+                                Заглавие
+                            </div>
+                            <div class="col-md-12">
+                                Текст текст текст Текст текст текстТекст текст текстТекст текст текст
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col-md-2"></div>
-
-                <div class="col-md-3 fourth-detail text-center">
-                    <img src="{{asset('/images/detail-4-marketing.png')}}" alt="info-php-second" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        ~ 10ч. седмично за подготовка вкъщи
-                    </span>
+                
+                <div class="col-md-12 spacer-program"></div>
+    
+                <div class="col-md-4">
+                    <div class="card card-2 text-center">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/detail-1-marketing.png')}}" alt="">
+                            </div>
+                            <div class="col-md-12">
+                                Заглавие
+                            </div>
+                            <div class="col-md-12">
+                                Текст текст текст Текст текст текстТекст текст текстТекст текст текст
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col-md-2"></div>
-
-                <div class="col-md-3 fifth-detail text-center">
-                    <img src="{{asset('/images/detail-5-marketing.png')}}" alt="icon" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        всяко ниво завършва с<br/>
-                        изпит и проект
-                    </span>
+    
+                <div class="col-md-4">
+                    <div class="card card-2 text-center">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/detail-1-marketing.png')}}" alt="">
+                            </div>
+                            <div class="col-md-12">
+                                Заглавие
+                            </div>
+                            <div class="col-md-12">
+                                Текст текст текст Текст текст текстТекст текст текстТекст текст текст
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col-md-2"></div>
-
-                <div class="col-md-2"></div>
-
-                <div class="col-md-3 sixth-detail text-center">
-                    <img src="{{asset('/images/detail-6-marketing.png')}}" alt="info-php-second" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        Сертификати:<br />
-                        Професионален<br /> (над 80%)<br />
-                        Обикновен<br /> (над 50%)<br />
-                    </span>
+    
+                <div class="col-md-4">
+                    <div class="card card-2 text-center">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/detail-1-marketing.png')}}" alt="">
+                            </div>
+                            <div class="col-md-12">
+                                Заглавие
+                            </div>
+                            <div class="col-md-12">
+                                Текст текст текст Текст текст текстТекст текст текстТекст текст текст
+                            </div>
+                        </div>
+                    </div>
                 </div>
+{{--                <div class="col-md-4 first-detail text-center">--}}
+{{--                    <img src="{{asset('/images/detail-1-marketing.png')}}" alt="info-php-second" class="img-fluid">--}}
+{{--                    <br />--}}
+{{--                    <span class="detail-text">--}}
+{{--                        Продължителност: 4 месеца--}}
+{{--                    </span>--}}
+{{--                </div>--}}
+{{--                <div class="col-md-4 second-detail text-center">--}}
+{{--                    <img src="{{asset('/images/detail-2-marketing.png')}}" alt="icon" class="img-fluid">--}}
+{{--                    <br />--}}
+{{--                    <span class="detail-text">--}}
+{{--                        Два пъти седмично--}}
+{{--                    </span>--}}
+{{--                </div>--}}
+{{--                <div class="col-md-4 third-detail text-center">--}}
+{{--                    <img src="{{asset('/images/rocket-extra-small-marketing.png')}}" alt="icon" class="img-fluid">--}}
+{{--                    <br />--}}
+{{--                    <span class="detail-text">--}}
+{{--                        Предназначен за начинаещи--}}
+{{--                    </span>--}}
+{{--                </div>--}}
 
-                <div class="col-md-2"></div>
+{{--                <div class="col-md-2"></div>--}}
 
-                <div class="col-md-3 seventh-detail text-center">
-                    <img src="{{asset('/images/detail-7-marketing.png')}}" alt="icon" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        Менторска програма
-                    </span>
-                </div>
+{{--                <div class="col-md-3 fourth-detail text-center">--}}
+{{--                    <img src="{{asset('/images/detail-4-marketing.png')}}" alt="info-php-second" class="img-fluid">--}}
+{{--                    <br />--}}
+{{--                    <span class="detail-text">--}}
+{{--                        ~ 10ч. седмично за подготовка вкъщи--}}
+{{--                    </span>--}}
+{{--                </div>--}}
 
-                <div class="col-md-2"></div>
-            </div>
+{{--                <div class="col-md-2"></div>--}}
+
+{{--                <div class="col-md-3 fifth-detail text-center">--}}
+{{--                    <img src="{{asset('/images/detail-5-marketing.png')}}" alt="icon" class="img-fluid">--}}
+{{--                    <br />--}}
+{{--                    <span class="detail-text">--}}
+{{--                        всяко ниво завършва с<br/>--}}
+{{--                        изпит и проект--}}
+{{--                    </span>--}}
+{{--                </div>--}}
+
+{{--                <div class="col-md-2"></div>--}}
+
+{{--                <div class="col-md-2"></div>--}}
+
+{{--                <div class="col-md-3 sixth-detail text-center">--}}
+{{--                    <img src="{{asset('/images/detail-6-marketing.png')}}" alt="info-php-second" class="img-fluid">--}}
+{{--                    <br />--}}
+{{--                    <span class="detail-text">--}}
+{{--                        Сертификати:<br />--}}
+{{--                        Професионален<br /> (над 80%)<br />--}}
+{{--                        Обикновен<br /> (над 50%)<br />--}}
+{{--                    </span>--}}
+{{--                </div>--}}
+
+{{--                <div class="col-md-2"></div>--}}
+
+{{--                <div class="col-md-3 seventh-detail text-center">--}}
+{{--                    <img src="{{asset('/images/detail-7-marketing.png')}}" alt="icon" class="img-fluid">--}}
+{{--                    <br />--}}
+{{--                    <span class="detail-text">--}}
+{{--                        Менторска програма--}}
+{{--                    </span>--}}
+{{--                </div>--}}
+
+{{--                <div class="col-md-2"></div>--}}
+{{--            </div>--}}
         </div>
     </div>
 
@@ -328,6 +410,11 @@
 
             $('body').append(programTabs);
             tickAnimation(2);
+            $(".hover").mouseleave(
+                    function() {
+                        $(this).removeClass("hover");
+                    }
+            );
         });
     </script>
 @endsection
