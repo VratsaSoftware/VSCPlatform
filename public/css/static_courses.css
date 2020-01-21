@@ -784,7 +784,7 @@ a {
 
 #details {
     /* padding-top: 10vw; */
-    margin-top: 5vw;
+    margin-top: 6vw;
 }
 
 .details-container {
@@ -943,7 +943,7 @@ a {
 }
 
 .marketing-steps {
-    color: #CB6615 !important;
+    color: #FF8F29 !important;
     background: #FDE701 !important;
 }
 
@@ -1781,9 +1781,13 @@ a {
     font-family: Ubuntu;
 }
 
+.title-details-digi{
+    font-size: 29px;
+}
+
 .card:hover{
-    background: rgb(251,143,42);
-    background: linear-gradient(188deg, rgba(251,143,42,1) 0%, rgba(242,242,242,1) 98%);
+    color: #fff;
+    background-image: linear-gradient(39deg,#fa8211 0%,#fabc11 100%);
 }
 
 .card-2 {
@@ -1794,8 +1798,18 @@ a {
     box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 
+.card-programing:hover{
+    color: #fff;
+    background-image: linear-gradient(39deg,#1D8800 0%,#2dd500 100%);
+}
+
 .spacer-program{
     visibility: hidden;
     height: 100px;
 }
+
+.details-info{
+    padding-top:10%;
+}
+
 

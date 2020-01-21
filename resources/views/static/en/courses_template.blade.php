@@ -46,6 +46,18 @@
         $('body').append(sectionsnap);
         $('body').append(hamburger);
         $('body').append(countdownTimer);
+        
+        $('.card').on('mouseenter',function() {
+            var hoverImg = $(this).find('img').attr('data-hover-img');
+            $(this).find('img').attr('data-hover-img',$(this).find('img').attr('src'));
+            $(this).find('img').attr('src', hoverImg);
+        });
+    
+        $('.card').on('mouseleave', function(){
+            var hoverImg = $(this).find('img').attr('data-hover-img');
+            $(this).find('img').attr('data-hover-img',$(this).find('img').attr('src'));
+            $(this).find('img').attr('src', hoverImg);
+        });
     });
 </script>
 </body>

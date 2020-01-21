@@ -98,10 +98,10 @@
     <div class="section d-flex flex-row flex-wrap text-center">
         <div class="col-md-4 text-center">
         <div class="snip1527">
-            <div class="image"><img src="{{asset('images/digi_marketing/writing-923882_1920_test.jpg')}}" alt="pr-sample23" /></div>
+            <div class="image"><img src="{{asset('images/digi_marketing/software-development-4165307_1920.jpg')}}" alt="pr-sample23" /></div>
             <figcaption>
                 <div class="date"><span class="day">1</span><span class="month">ниво</span></div>
-                <h3>The World Ended Yesterday</h3>
+                <h3>Основи на дигиталния маркетинг</h3>
                 <p>
                 
                     You know what we need, Hobbes? We need an attitude. Yeah, you can't be cool if you don't have an attitude.
@@ -113,10 +113,10 @@
         
         <div class="col-md-4 text-center">
         <div class="snip1527">
-            <div class="image"><img src="{{asset('images/digi_marketing/student-849828_1920_test.jpg')}}" alt="pr-sample24" /></div>
+            <div class="image"><img src="{{asset('images/digi_marketing/student-849822_1920.jpg')}}" alt="pr-sample24" /></div>
             <figcaption>
                 <div class="date"><span class="day">2</span><span class="month">ниво</span></div>
-                <h3>An Abstract Post Heading</h3>
+                <h3>Бизнесът и социалните мрежи</h3>
                 <p>
                 
                     Sometimes the surest sign that intelligent life exists elsewhere in the universe is that none of it has tried to contact us.
@@ -128,10 +128,10 @@
         
         <div class="col-md-4 text-center">
         <div class="snip1527">
-            <div class="image"><img src="{{asset('images/digi_marketing/student-849821_1920_test.jpg')}}" alt="pr-sample25" /></div>
+            <div class="image"><img src="{{asset('images/digi_marketing/success-4165306_1920.jpg')}}" alt="pr-sample25" /></div>
             <figcaption>
                 <div class="date"><span class="day">3</span><span class="month">ниво</span></div>
-                <h3>Down with this sort of thing</h3>
+                <h3>Анализ на потребителкси данни</h3>
                 <p>
                 
                     I don't need to compromise my principles, because they don't have the slightest bearing on what happens to me anyway.
@@ -153,29 +153,13 @@
                     <div class="card card-2 text-center">
                         <div class="details-info col-md-12 d-flex flex-row flex-wrap">
                             <div class="col-md-12">
-                                <img src="{{asset('/images/detail-1-marketing.png')}}" alt="">
+                                <img src="{{asset('/images/digi_marketing/icons/calendar_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/calendar.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Speed Optimization
                             </div>
                             <div class="col-md-12">
-                                Заглавие
-                            </div>
-                            <div class="col-md-12">
-                                Текст текст текст Текст текст текстТекст текст текстТекст текст текст
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="col-md-4">
-                    <div class="card card-2 text-center">
-                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
-                            <div class="col-md-12">
-                                <img src="{{asset('/images/rocket-extra-small-marketing.png')}}" alt="">
-                            </div>
-                            <div class="col-md-12">
-                                Заглавие
-                            </div>
-                            <div class="col-md-12">
-                                Текст текст текст Текст текст текстТекст текст текстТекст текст текст
+                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
                             </div>
                         </div>
                     </div>
@@ -185,13 +169,29 @@
                     <div class="card card-2 text-center">
                         <div class="details-info col-md-12 d-flex flex-row flex-wrap">
                             <div class="col-md-12">
-                                <img src="{{asset('/images/detail-2-marketing.png')}}" alt="">
+                                <img src="{{asset('/images/digi_marketing/icons/startup_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/startup.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Speed Optimization
                             </div>
                             <div class="col-md-12">
-                                Заглавие
+                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+                <div class="col-md-4">
+                    <div class="card card-2 text-center">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/digi_marketing/icons/contract_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/contract.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Speed Optimization
                             </div>
                             <div class="col-md-12">
-                                Текст текст текст Текст текст текстТекст текст текстТекст текст текст
+                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
                             </div>
                         </div>
                     </div>
@@ -203,13 +203,13 @@
                     <div class="card card-2 text-center">
                         <div class="details-info col-md-12 d-flex flex-row flex-wrap">
                             <div class="col-md-12">
-                                <img src="{{asset('/images/detail-1-marketing.png')}}" alt="">
+                                <img src="{{asset('/images/digi_marketing/icons/medal_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/medal.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Speed Optimization
                             </div>
                             <div class="col-md-12">
-                                Заглавие
-                            </div>
-                            <div class="col-md-12">
-                                Текст текст текст Текст текст текстТекст текст текстТекст текст текст
+                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
                             </div>
                         </div>
                     </div>
@@ -219,13 +219,13 @@
                     <div class="card card-2 text-center">
                         <div class="details-info col-md-12 d-flex flex-row flex-wrap">
                             <div class="col-md-12">
-                                <img src="{{asset('/images/detail-1-marketing.png')}}" alt="">
+                                <img src="{{asset('/images/digi_marketing/icons/payment_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/payment.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Speed Optimization
                             </div>
                             <div class="col-md-12">
-                                Заглавие
-                            </div>
-                            <div class="col-md-12">
-                                Текст текст текст Текст текст текстТекст текст текстТекст текст текст
+                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
                             </div>
                         </div>
                     </div>
@@ -235,86 +235,17 @@
                     <div class="card card-2 text-center">
                         <div class="details-info col-md-12 d-flex flex-row flex-wrap">
                             <div class="col-md-12">
-                                <img src="{{asset('/images/detail-1-marketing.png')}}" alt="">
+                                <img src="{{asset('/images/digi_marketing/icons/goal_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/goal.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Speed Optimization
                             </div>
                             <div class="col-md-12">
-                                Заглавие
-                            </div>
-                            <div class="col-md-12">
-                                Текст текст текст Текст текст текстТекст текст текстТекст текст текст
+                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
                             </div>
                         </div>
                     </div>
                 </div>
-{{--                <div class="col-md-4 first-detail text-center">--}}
-{{--                    <img src="{{asset('/images/detail-1-marketing.png')}}" alt="info-php-second" class="img-fluid">--}}
-{{--                    <br />--}}
-{{--                    <span class="detail-text">--}}
-{{--                        Продължителност: 4 месеца--}}
-{{--                    </span>--}}
-{{--                </div>--}}
-{{--                <div class="col-md-4 second-detail text-center">--}}
-{{--                    <img src="{{asset('/images/detail-2-marketing.png')}}" alt="icon" class="img-fluid">--}}
-{{--                    <br />--}}
-{{--                    <span class="detail-text">--}}
-{{--                        Два пъти седмично--}}
-{{--                    </span>--}}
-{{--                </div>--}}
-{{--                <div class="col-md-4 third-detail text-center">--}}
-{{--                    <img src="{{asset('/images/rocket-extra-small-marketing.png')}}" alt="icon" class="img-fluid">--}}
-{{--                    <br />--}}
-{{--                    <span class="detail-text">--}}
-{{--                        Предназначен за начинаещи--}}
-{{--                    </span>--}}
-{{--                </div>--}}
-
-{{--                <div class="col-md-2"></div>--}}
-
-{{--                <div class="col-md-3 fourth-detail text-center">--}}
-{{--                    <img src="{{asset('/images/detail-4-marketing.png')}}" alt="info-php-second" class="img-fluid">--}}
-{{--                    <br />--}}
-{{--                    <span class="detail-text">--}}
-{{--                        ~ 10ч. седмично за подготовка вкъщи--}}
-{{--                    </span>--}}
-{{--                </div>--}}
-
-{{--                <div class="col-md-2"></div>--}}
-
-{{--                <div class="col-md-3 fifth-detail text-center">--}}
-{{--                    <img src="{{asset('/images/detail-5-marketing.png')}}" alt="icon" class="img-fluid">--}}
-{{--                    <br />--}}
-{{--                    <span class="detail-text">--}}
-{{--                        всяко ниво завършва с<br/>--}}
-{{--                        изпит и проект--}}
-{{--                    </span>--}}
-{{--                </div>--}}
-
-{{--                <div class="col-md-2"></div>--}}
-
-{{--                <div class="col-md-2"></div>--}}
-
-{{--                <div class="col-md-3 sixth-detail text-center">--}}
-{{--                    <img src="{{asset('/images/detail-6-marketing.png')}}" alt="info-php-second" class="img-fluid">--}}
-{{--                    <br />--}}
-{{--                    <span class="detail-text">--}}
-{{--                        Сертификати:<br />--}}
-{{--                        Професионален<br /> (над 80%)<br />--}}
-{{--                        Обикновен<br /> (над 50%)<br />--}}
-{{--                    </span>--}}
-{{--                </div>--}}
-
-{{--                <div class="col-md-2"></div>--}}
-
-{{--                <div class="col-md-3 seventh-detail text-center">--}}
-{{--                    <img src="{{asset('/images/detail-7-marketing.png')}}" alt="icon" class="img-fluid">--}}
-{{--                    <br />--}}
-{{--                    <span class="detail-text">--}}
-{{--                        Менторска програма--}}
-{{--                    </span>--}}
-{{--                </div>--}}
-
-{{--                <div class="col-md-2"></div>--}}
-{{--            </div>--}}
         </div>
     </div>
 
@@ -375,7 +306,7 @@
     </div>
     <script>
         // Set the date we're counting down to
-        var digitalDate = new Date("Feb 01, 2020 00:00:00").getTime();
+        var digitalDate = new Date("Feb 07, 2020 00:00:00").getTime();
         var timerClass = '.timer-digital';
 
         // Update the count down every 1 second

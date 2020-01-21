@@ -253,74 +253,103 @@
         <div id="details">
             <div class="details-title text-center">Details</div>
             <div class="details-container col-md-12 d-flex flex-wrap flex-row">
-                <div class="col-md-4 first-detail text-center">
-                    <img src="{{asset('/images/detail-1.png')}}" alt="info-php-second" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        Duration 9 months
-                    </span>
+                <div class="col-md-4">
+                    <div class="card card-2 text-center card-programing">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/programing/icons/calendar_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/calendar.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Speed Optimization
+                            </div>
+                            <div class="col-md-12">
+                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4 second-detail text-center">
-                    <img src="{{asset('/images/detail-2.png')}}" alt="icon" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        Twice a week
-                    </span>
+        
+                <div class="col-md-4">
+                    <div class="card card-2 text-center card-programing">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/programing/icons/startup_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/startup.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Speed Optimization
+                            </div>
+                            <div class="col-md-12">
+                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4 third-detail text-center">
-                    <img src="{{asset('/images/rocket-extra-small.png')}}" alt="icon" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        Good for beginners
-                    </span>
+        
+                <div class="col-md-4">
+                    <div class="card card-2 text-center card-programing">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/programing/icons/contract_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/contract.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Speed Optimization
+                            </div>
+                            <div class="col-md-12">
+                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col-md-2"></div>
-
-                <div class="col-md-3 fourth-detail text-center">
-                    <img src="{{asset('/images/detail-4.png')}}" alt="info-php-second" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        ~ 10h. of a week work from home
-                    </span>
+        
+                <div class="col-md-12 spacer-program"></div>
+        
+                <div class="col-md-4">
+                    <div class="card card-2 text-center card-programing">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/programing/icons/medal_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/medal.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Speed Optimization
+                            </div>
+                            <div class="col-md-12">
+                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col-md-2"></div>
-
-                <div class="col-md-3 fifth-detail text-center">
-                    <img src="{{asset('/images/detail-5.png')}}" alt="icon" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        every level ends with<br/>
-                        test and project
-                    </span>
+        
+                <div class="col-md-4">
+                    <div class="card card-2 text-center card-programing">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/programing/icons/payment_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/payment.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Speed Optimization
+                            </div>
+                            <div class="col-md-12">
+                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col-md-2"></div>
-
-                <div class="col-md-2"></div>
-
-                <div class="col-md-3 sixth-detail text-center">
-                    <img src="{{asset('/images/detail-6.png')}}" alt="info-php-second" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        Certificates:<br />
-                        Proffesional<br /> (above 80%)<br />
-                        Basic<br /> (above 50%)<br />
-                    </span>
+        
+                <div class="col-md-4">
+                    <div class="card card-2 text-center card-programing">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/programing/icons/goal_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/goal.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Speed Optimization
+                            </div>
+                            <div class="col-md-12">
+                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col-md-2"></div>
-
-                <div class="col-md-3 seventh-detail text-center">
-                    <img src="{{asset('/images/detail-7.png')}}" alt="icon" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        Mentorship program
-                    </span>
-                </div>
-
-                <div class="col-md-2"></div>
             </div>
         </div>
     </div>
