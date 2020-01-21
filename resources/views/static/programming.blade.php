@@ -260,10 +260,10 @@
                                 <img src="{{asset('/images/programing/icons/calendar_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/calendar.png')}}">
                             </div>
                             <div class="col-md-12 title-details-digi">
-                                Speed Optimization
+                                Продължителност
                             </div>
                             <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                                Занятията се провеждат два пъти седмично в удобно време, съобразено с работещи и ученици.
                             </div>
                         </div>
                     </div>
@@ -276,10 +276,10 @@
                                 <img src="{{asset('/images/programing/icons/startup_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/startup.png')}}">
                             </div>
                             <div class="col-md-12 title-details-digi">
-                                Speed Optimization
+                                Трудност
                             </div>
                             <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                                Курсът е предназначен за начинаещи, но въпреки това е интензивен и е нужно да се полагат много усилия.
                             </div>
                         </div>
                     </div>
@@ -292,10 +292,10 @@
                                 <img src="{{asset('/images/programing/icons/contract_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/contract.png')}}">
                             </div>
                             <div class="col-md-12 title-details-digi">
-                                Speed Optimization
+                                Практически насочен
                             </div>
                             <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                                Курсът включва малко теория и много практика. Всяко ниво завършва с изпит и финален проект.
                             </div>
                         </div>
                     </div>
@@ -310,10 +310,10 @@
                                 <img src="{{asset('/images/programing/icons/medal_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/medal.png')}}">
                             </div>
                             <div class="col-md-12 title-details-digi">
-                                Speed Optimization
+                                Сертификат
                             </div>
                             <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                                Успешно покрилите 50% от критериите получават сертификат за участие, а тези над 80% - професионален сертификат.
                             </div>
                         </div>
                     </div>
@@ -326,10 +326,10 @@
                                 <img src="{{asset('/images/programing/icons/payment_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/payment.png')}}">
                             </div>
                             <div class="col-md-12 title-details-digi">
-                                Speed Optimization
+                                Цена
                             </div>
                             <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                                Всеки за един модул е 160лв, а за два - 300лв. Най-добре представилите се на подбора получават пълна стипендия.
                             </div>
                         </div>
                     </div>
@@ -342,10 +342,10 @@
                                 <img src="{{asset('/images/programing/icons/goal_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/goal.png')}}">
                             </div>
                             <div class="col-md-12 title-details-digi">
-                                Speed Optimization
+                                Менторска програма
                             </div>
                             <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                                Успешните курсисти имат възможност да работят заедно с опитен ментор по реален проект за НПО.
                             </div>
                         </div>
                     </div>

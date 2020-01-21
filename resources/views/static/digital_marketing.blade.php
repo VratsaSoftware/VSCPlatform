@@ -28,6 +28,7 @@
                             <li class="p-3"><a href="{{route('home')}}">Начало</a></li>
                             <li class="p-3"><a href="#information-holder">Информация</a></li>
                             <li class="p-3"><a href="#program-holder">Програма</a></li>
+                            <li class="p-3"><a href="#lecturers-holder">Лектори</a></li>
                             <li class="p-3"><a href="#details-holder">Детайли</a></li>
                             <li class="p-3"><a href="#application-holder">Кандидастване</a></li>
                             <!-- <li class=""><a href="">Такса</a></li> -->
@@ -93,15 +94,15 @@
 
     </div>
     <div id="program">
-        <div class="program-title text-center">ПРОГРАМА</div>
+        <div class="program-title text-center">Програма</div>
     </div>
     <div class="section d-flex flex-row flex-wrap text-center">
-        <div class="col-md-4 text-center">
+        <div class="col-md-4 col-xs-12 text-center">
         <div class="snip1527">
             <div class="image"><img src="{{asset('images/digi_marketing/software-development-4165307_1920.jpg')}}" alt="pr-sample23" /></div>
             <figcaption>
                 <div class="date"><span class="day">1</span><span class="month">ниво</span></div>
-                <h3>Основи на дигиталния маркетинг</h3>
+                <h3 class="levels-title">Основи на дигиталния маркетинг</h3>
                 <p>
                 
                     You know what we need, Hobbes? We need an attitude. Yeah, you can't be cool if you don't have an attitude.
@@ -111,12 +112,12 @@
         </div>
         </div>
         
-        <div class="col-md-4 text-center">
+        <div class="col-md-4 col-xs-12 text-center">
         <div class="snip1527">
             <div class="image"><img src="{{asset('images/digi_marketing/student-849822_1920.jpg')}}" alt="pr-sample24" /></div>
             <figcaption>
                 <div class="date"><span class="day">2</span><span class="month">ниво</span></div>
-                <h3>Бизнесът и социалните мрежи</h3>
+                <h3 class="levels-title">Бизнесът и социалните мрежи</h3>
                 <p>
                 
                     Sometimes the surest sign that intelligent life exists elsewhere in the universe is that none of it has tried to contact us.
@@ -126,12 +127,12 @@
         </div>
         </div>
         
-        <div class="col-md-4 text-center">
+        <div class="col-md-4 col-xs-12 text-center">
         <div class="snip1527">
             <div class="image"><img src="{{asset('images/digi_marketing/success-4165306_1920.jpg')}}" alt="pr-sample25" /></div>
             <figcaption>
                 <div class="date"><span class="day">3</span><span class="month">ниво</span></div>
-                <h3>Анализ на потребителкси данни</h3>
+                <h3 class="levels-title">Оптимизация за търсачки (SEO)</h3>
                 <p>
                 
                     I don't need to compromise my principles, because they don't have the slightest bearing on what happens to me anyway.
@@ -141,6 +142,105 @@
         </div>
         </div>
     </div>
+    
+    <div id="lecturers-holder">
+    
+    </div>
+    <div class="section">
+        <div class="program-title text-center lecturers-title">Лектори</div>
+        <!-- Team -->
+        <section id="team" class="pb-5">
+                <div class="d-flex flex-row flex-wrap text-center">
+                    <!-- Team member -->
+                    <div class="col-md-4">
+                        <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                            <div class="mainflip">
+                                <div class="frontside">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
+                                            <h4 class="card-title under-program">Ивайло Йорданов</h4>
+                                            <p class="card-text">This is basic card with image on top, title, description and button.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="backside">
+                                    <div class="card">
+                                        <div class="card-body text-center mt-4">
+                                            <h4 class="card-title under-program">Ивайло Йорданов</h4>
+                                            <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
+                                            <ul class="list-inline">
+                                                <li><a href="" class="lecturer-in-link"><img src="{{asset('images/digi_marketing/linkedin.png')}}" data-hover-img="{{asset('images/digi_marketing/linkedin.png')}}" alt="linkedin"></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./Team member -->
+    
+                    <!-- Team member -->
+                    <div class="col-md-4">
+                        <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                            <div class="mainflip">
+                                <div class="frontside">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
+                                            <h4 class="card-title under-program">Катя Тодорова</h4>
+                                            <p class="card-text">This is basic card with image on top, title, description and button.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="backside">
+                                    <div class="card">
+                                        <div class="card-body text-center mt-4">
+                                            <h4 class="card-title under-program">Катя Тодорова</h4>
+                                            <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
+                                            <ul class="list-inline">
+                                                <li><a href="" class="lecturer-in-link"><img src="{{asset('images/digi_marketing/linkedin.png')}}" data-hover-img="{{asset('images/digi_marketing/linkedin.png')}}" alt="linkedin"></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./Team member -->
+    
+                    <!-- Team member -->
+                    <div class="col-md-4">
+                        <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                            <div class="mainflip">
+                                <div class="frontside">
+                                    <div class="card">
+                                        <div class="card-body text-center">
+                                            <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
+                                            <h4 class="card-title under-program">Калин Георгиев</h4>
+                                            <p class="card-text">This is basic card with image on top, title, description and button.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="backside">
+                                    <div class="card">
+                                        <div class="card-body text-center mt-4">
+                                            <h4 class="card-title under-program">Калин Георгиев</h4>
+                                            <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
+                                            <ul class="list-inline">
+                                                <li><a href="" class="lecturer-in-link"><img src="{{asset('images/digi_marketing/linkedin.png')}}" data-hover-img="{{asset('images/digi_marketing/linkedin.png')}}" alt="linkedin"></a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ./Team member -->
+                </div>
+        </section>
+        <!-- Team -->
+    </div>
 
     <div id="details-holder">
 
@@ -148,7 +248,7 @@
     <div class="section">
         <div id="details" class="marketing-details">
             <div class="details-title text-center">Детайли</div>
-            <div class="details-container col-md-12 d-flex flex-wrap flex-row">
+            <div class="details-container d-flex flex-row flex-wrap text-center">
                 <div class="col-md-4">
                     <div class="card card-2 text-center">
                         <div class="details-info col-md-12 d-flex flex-row flex-wrap">
@@ -156,10 +256,10 @@
                                 <img src="{{asset('/images/digi_marketing/icons/calendar_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/calendar.png')}}">
                             </div>
                             <div class="col-md-12 title-details-digi">
-                                Speed Optimization
+                                Продължителност
                             </div>
                             <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                                Занятията се провеждат веднъж или два пъти седмично в удобно време, съобразено с работещи и ученици.
                             </div>
                         </div>
                     </div>
@@ -172,10 +272,10 @@
                                 <img src="{{asset('/images/digi_marketing/icons/startup_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/startup.png')}}">
                             </div>
                             <div class="col-md-12 title-details-digi">
-                                Speed Optimization
+                                Трудност
                             </div>
                             <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                                Курсът е предназначен за начинаещи, но въпреки това е интензивен и е нужно да се полагат много усилия.
                             </div>
                         </div>
                     </div>
@@ -188,10 +288,10 @@
                                 <img src="{{asset('/images/digi_marketing/icons/contract_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/contract.png')}}">
                             </div>
                             <div class="col-md-12 title-details-digi">
-                                Speed Optimization
+                                Практически насочен
                             </div>
                             <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                                Курсът включва малко теория и много практика. Всяко ниво завършва с изпит и финален проект.
                             </div>
                         </div>
                     </div>
@@ -206,10 +306,10 @@
                                 <img src="{{asset('/images/digi_marketing/icons/medal_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/medal.png')}}">
                             </div>
                             <div class="col-md-12 title-details-digi">
-                                Speed Optimization
+                                Сертификат
                             </div>
                             <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                                Успешно покрилите 50% от критериите получават сертификат за участие, а тези над 80% - професионален сертификат.
                             </div>
                         </div>
                     </div>
@@ -222,10 +322,10 @@
                                 <img src="{{asset('/images/digi_marketing/icons/payment_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/payment.png')}}">
                             </div>
                             <div class="col-md-12 title-details-digi">
-                                Speed Optimization
+                                Цена
                             </div>
                             <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                                Първо ниво е безплатно. <br/>Пакетната цена за второ и трето ниво е 150лв.
                             </div>
                         </div>
                     </div>
@@ -238,10 +338,10 @@
                                 <img src="{{asset('/images/digi_marketing/icons/goal_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/goal.png')}}">
                             </div>
                             <div class="col-md-12 title-details-digi">
-                                Speed Optimization
+                                Менторска програма
                             </div>
                             <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
+                                Успешните курсисти имат възможност да работят заедно с опитен ментор по реален проект за НПО.
                             </div>
                         </div>
                     </div>
