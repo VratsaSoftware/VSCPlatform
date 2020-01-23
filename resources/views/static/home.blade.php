@@ -44,19 +44,19 @@
         <div id="carousel">
             <div class="slideshow-container">
                 {{-- title = 33 characters, text min = 125 / max = 290 --}}
-                <div class="mySlides" data-src="{{asset('/images/home-top-slider/hack.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                <div class="mySlides" data-src="{{asset('/images/home-top-slider/digi_20_20.jpeg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                     <img src="" width="100%" alt="events">
                     <div class="text text-wrap-gallery col-md-12 text-center">
                         <p>
-                            <span class="slider-title">Hack Vratsa</span>
+                            <span class="slider-title">Нов курс по Дигитален Маркетинг</span>
                         </p>
                         <p>
                         <p class="slider-subtitle-content">
-                            В HackVratsa могат да участват всички ученици, студенти и работещи, с интереси към програмирането, дизайна и предприемачеството. Целта на инициативата е заедно в екип да формулират концепция за софтуерен продукт и да стартират работа по неговото разработване.
+                            Търсиш вълнуваща работа в дигиталната сфера? Искаш да работиш за клиенти от България и света или да ползваш наученото за своя собствен бизнес? Кандидатствай за курса ни по дигитален маркетинг до 7 февруари.
                         </p>
                         <br/>
 
-                        <span class="title-btns-content"><a class="sub-btn" href="http://hack.vratsa.net/" target=" _blank">виж още</a></span>
+                        <span class="title-btns-content"><a class="sub-btn" href="{{url('/digital-marketing')}}" target=" _blank">виж още</a></span>
                         </p>
                     </div>
                 </div>
@@ -124,7 +124,7 @@
                         <p>
                         <p class="slider-subtitle-content">
                             Обучението ще ви помогне да придобиете основни познания по програмиране и да имате възможност да започнете стаж в софтуерна компания във Враца!
-                            Към момента 24 човека завършили курсовете работят в ИТ сферата във Враца и 3 компании отвориха офиси в града.
+                            Към момента 30 човека завършили курсовете работят в ИТ сферата във Враца и 4 компании отвориха офиси в града.
                         </p>
                         <br/>
 
@@ -140,7 +140,7 @@
             <br>
 
             <div id="thumbnails" class="col-md-12">
-                <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/hack_thumb.png')}}" width="100%" alt="gallery-nav"></span>
+                <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/digi_20_20_small.png')}}" width="100%" alt="gallery-nav"></span>
                 <span class="dot" onclick="currentSlide(2)"><img src="{{asset('/images/home-top-slider/gnezdoto_logo_cropped.jpg')}}" width="100%" alt="gallery-nav"></span>
                 <span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/arduino_logo.png')}}" width="100%" alt="gallery-nav"></span>
                 <span class="dot" onclick="currentSlide(4)"><img src="{{asset('/images/home-top-slider/mind-hub-crop.png')}}" width="100%" alt="gallery-nav"></span>
@@ -166,7 +166,7 @@
 
 
                 <div class="num-num col-md-2 bd-highlight">
-                    <div class="num-big-num count">1570</div>
+                    <div class="num-big-num count">1890</div>
                     <div class="num-content">души посетили наши събития</div>
                 </div>
                 <div class="right-line col-md-1">
@@ -175,7 +175,7 @@
 
 
                 <div class="num-num col-md-2 bd-highlight">
-                    <div class="num-big-num count">250</div>
+                    <div class="num-big-num count">400</div>
                     <div class="num-content">души започнали курс</div>
                 </div>
                 <div class="right-line col-md-1">
@@ -184,7 +184,7 @@
 
 
                 <div class="num-num col-md-2 bd-highlight">
-                    <div class="num-big-num count">4</div>
+                    <div class="num-big-num count">5</div>
                     <div class="num-content">години</div>
                 </div>
 

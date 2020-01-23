@@ -102,13 +102,11 @@
             <div class="image"><img src="{{asset('images/digi_marketing/software-development-4165307_1920.jpg')}}" alt="pr-sample23" /></div>
             <figcaption>
                 <div class="date"><span class="day">1</span><span class="month">ниво</span></div>
-                <h3 class="levels-title">Основи на дигиталния маркетинг</h3>
+                <span class="levels-title">Основи на дигиталния маркетинг</span>
                 <p>
-                
-                    You know what we need, Hobbes? We need an attitude. Yeah, you can't be cool if you don't have an attitude.
+                    Въвеждащ курс по дигитален маркетинг. Обучението е безплатно и дава възможност да придобиете основни знания в сферата на дигиталния маркетинг. Всяка лекция от курса обхваща, както теоретични знания, така и  конкретни примери за подход и резултати.
                 </p>
             </figcaption>
-            <a href="#"></a>
         </div>
         </div>
         
@@ -117,13 +115,11 @@
             <div class="image"><img src="{{asset('images/digi_marketing/student-849822_1920.jpg')}}" alt="pr-sample24" /></div>
             <figcaption>
                 <div class="date"><span class="day">2</span><span class="month">ниво</span></div>
-                <h3 class="levels-title">Бизнесът и социалните мрежи</h3>
+                <span class="levels-title">Маркетинг чрез съдържание и социални мрежи</span>
                 <p>
-                
-                    Sometimes the surest sign that intelligent life exists elsewhere in the universe is that none of it has tried to contact us.
+                    В рамките на този модул ще опознаете в детайли как работи най-използваната социална мрежа в България. Как се създават правилно рекламни кампании и как да създаваме съдържание за постигането на качествено ангажиране с Вашия бизнес.
                 </p>
             </figcaption>
-            <a href="#"></a>
         </div>
         </div>
         
@@ -132,13 +128,11 @@
             <div class="image"><img src="{{asset('images/digi_marketing/success-4165306_1920.jpg')}}" alt="pr-sample25" /></div>
             <figcaption>
                 <div class="date"><span class="day">3</span><span class="month">ниво</span></div>
-                <h3 class="levels-title">Оптимизация за търсачки (SEO)</h3>
+                <span class="levels-title">Оптимизация за търсачки (SEO)</span>
                 <p>
-                
-                    I don't need to compromise my principles, because they don't have the slightest bearing on what happens to me anyway.
+                    Открий как да оптимизираш онлайн присъствието на един бизнес с цел увеличаване стойноста на бранда и привличането на нови клиенти. Научи повече за алгоритъма на Google и кои добри практики помагат за подобряване  класирането в резултатите.
                 </p>
             </figcaption>
-            <a href="#"></a>
         </div>
         </div>
     </div>
@@ -158,9 +152,9 @@
                                 <div class="frontside">
                                     <div class="card">
                                         <div class="card-body text-center">
-                                            <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
+                                            <p><img class=" img-fluid" src="{{asset('/images/digi_marketing/Ivailo_pic.jpg')}}" alt="card image"></p>
                                             <h4 class="card-title under-program">Ивайло Йорданов</h4>
-                                            <p class="card-text">This is basic card with image on top, title, description and button.</p>
+                                            <p class="card-text">Основател и управител на дигитална агенция evol.bg</p>
                                         </div>
                                     </div>
                                 </div>
@@ -168,9 +162,10 @@
                                     <div class="card">
                                         <div class="card-body text-center mt-4">
                                             <h4 class="card-title under-program">Ивайло Йорданов</h4>
-                                            <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
+                                            <p class="card-text">Консултант по дигитален маркетинг и основател на агенция за дигитален маркетинг
+                                                <a href="https://www.evol.bg/">evol.bg</a>. Работил е за bTV Media Group, Havas, Hewlett Packard Enterprise. В момента от услугите му се възползват и фирми от Враца и региона.</p>
                                             <ul class="list-inline">
-                                                <li><a href="" class="lecturer-in-link"><img src="{{asset('images/digi_marketing/linkedin.png')}}" data-hover-img="{{asset('images/digi_marketing/linkedin.png')}}" alt="linkedin"></a></li>
+                                                <li><a href="https://www.linkedin.com/in/ivaylo-yordanov/" target="_blank" class="lecturer-in-link"><img src="{{asset('images/digi_marketing/linkedin.png')}}" data-hover-img="{{asset('images/digi_marketing/linkedin.png')}}" alt="linkedin"></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -187,9 +182,9 @@
                                 <div class="frontside">
                                     <div class="card">
                                         <div class="card-body text-center">
-                                            <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
+                                            <p><img class=" img-fluid" src="{{asset('images/digi_marketing/katya_small.jpg')}}" alt="card image"></p>
                                             <h4 class="card-title under-program">Катя Тодорова</h4>
-                                            <p class="card-text">This is basic card with image on top, title, description and button.</p>
+                                            <p class="card-text">Founder & CEO, MEmotion <br/> Managing Partner & CMO, Clientric Group</p>
                                         </div>
                                     </div>
                                 </div>
@@ -197,9 +192,10 @@
                                     <div class="card">
                                         <div class="card-body text-center mt-4">
                                             <h4 class="card-title under-program">Катя Тодорова</h4>
-                                            <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
+                                            <p class="card-text">Катя основава бутиковата дигитална бранд агенция <a href="https://memotion.net/" target="_blank">MЕmotion</a> през 2013 г. През 2015 MEmotion става част от
+                                                <a href="https://www.clientric.bg/" target="_blank">CLIENTRIC</a> Group. - консорциум от компании в сферата на иновативните софтуерни и интерактивни маркетинг решения, в който Катя е управляващ партньор.</p>
                                             <ul class="list-inline">
-                                                <li><a href="" class="lecturer-in-link"><img src="{{asset('images/digi_marketing/linkedin.png')}}" data-hover-img="{{asset('images/digi_marketing/linkedin.png')}}" alt="linkedin"></a></li>
+                                                <li><a href="https://www.linkedin.com/in/katyatodorova/" target="_blank" class="lecturer-in-link"><img src="{{asset('images/digi_marketing/linkedin.png')}}" data-hover-img="{{asset('images/digi_marketing/linkedin.png')}}" alt="linkedin"></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -216,9 +212,9 @@
                                 <div class="frontside">
                                     <div class="card">
                                         <div class="card-body text-center">
-                                            <p><img class=" img-fluid" src="https://sunlimetech.com/portfolio/boot4menu/assets/imgs/team/img_01.png" alt="card image"></p>
+                                            <p><img class=" img-fluid" src="{{asset('images/digi_marketing/kalin_georgiev.jpg')}}" alt="card image"></p>
                                             <h4 class="card-title under-program">Калин Георгиев</h4>
-                                            <p class="card-text">This is basic card with image on top, title, description and button.</p>
+                                            <p class="card-text">Управител на дигитална агенция <br/> Тракиада</p>
                                         </div>
                                     </div>
                                 </div>
@@ -226,9 +222,10 @@
                                     <div class="card">
                                         <div class="card-body text-center mt-4">
                                             <h4 class="card-title under-program">Калин Георгиев</h4>
-                                            <p class="card-text">This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.This is basic card with image on top, title, description and button.</p>
+                                            <p class="card-text">Калин Георгиев е енергичен и бързомислещ предприемач с 20 години опит в дигиталната индустрия. Започнал като web developer за агенция в Лондон, след това маркетинг консултант във Валенсия и Малта, а сега управляващ дигитална агенция
+                                                <a href="https://www.trakiada.com/" target="_blank">Тракиада</a>  във Враца.</p>
                                             <ul class="list-inline">
-                                                <li><a href="" class="lecturer-in-link"><img src="{{asset('images/digi_marketing/linkedin.png')}}" data-hover-img="{{asset('images/digi_marketing/linkedin.png')}}" alt="linkedin"></a></li>
+                                                <li><a href="https://www.linkedin.com/in/kalin-gueorguiev-91255612a/" target="_blank" class="lecturer-in-link"><img src="{{asset('images/digi_marketing/linkedin.png')}}" data-hover-img="{{asset('images/digi_marketing/linkedin.png')}}" alt="linkedin"></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -363,38 +360,31 @@
                     <span>електронна форма</span>
                 </li>
                 <li class="marketing-steps">2
-                    <span>предварителен тест</span>
-                </li>
-                <li class="marketing-steps">3
                     <span>самостоятелна задача</span>
                 </li>
-                <li class="marketing-steps">4
-                    <span>интервю</span>
+                <li class="marketing-steps">3
+                    <span style="margin-left:-4vw">интервю</span>
                 </li>
-                <li class="marketing-steps">5
-                    <span>прием</span>
+                <li class="marketing-steps">4
+                    <span style="margin-left:-3vw">прием</span>
                 </li>
             </ul>
 
             <!-- images -->
 
             <div class="candidate-imgs col-md-12 flex-row flex-wrap text-center">
-                <div class="col-md-1"></div>
+                <div class="col-md-2"></div>
                 <div class="steps col-md-2 first-candidate-img">
-                    <img src="{{asset('/images/digi-1.png')}}" alt="step" class="img-fluid candidate-img">
-                </div>
-
-                <div class="steps col-md-2">
-                    <img src="{{asset('/images/digi-2.png')}}" alt="step" class="img-fluid candidate-img">
+                    <img src="{{asset('/images/digi-1.png')}}" alt="step" class="img-fluid candidate-img" style="margin-left:-30%">
                 </div>
                 <div class="steps col-md-2">
-                    <img src="{{asset('/images/digi-3.png')}}" alt="step" class="img-fluid candidate-img">
+                    <img src="{{asset('/images/digi-3.png')}}" alt="step" class="img-fluid candidate-img" style="margin-left:-12%">
                 </div>
                 <div class="steps col-md-2">
-                    <img src="{{asset('/images/digi-4.png')}}" alt="step" class="img-fluid candidate-img">
+                    <img src="{{asset('/images/digi-4.png')}}" alt="step" class="img-fluid candidate-img" style="margin-right:-17%">
                 </div>
                 <div class="steps col-md-2">
-                    <img src="{{asset('/images/digi-5.png')}}" alt="step" class="img-fluid candidate-img">
+                    <img src="{{asset('/images/digi-5.png')}}" alt="step" class="img-fluid candidate-img" style="margin-left:54%;">
                 </div>
                 <div class="col-md-1"></div>
             </div>
