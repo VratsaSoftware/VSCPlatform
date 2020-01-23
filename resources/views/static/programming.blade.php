@@ -19,8 +19,8 @@
                 </br/>
                     <span class="timer-programming"><img src="{{asset('/images/loaders/load-31.gif')}}" alt="timer"/></span>
                 </div> --}}
-                <div class="header-button col-md-12 text-center mb-5" style="visibility:hidden">
-                    <span id="prepare"><a href="#application">Запиши се</a></span>
+                <div class="header-button col-md-12 text-center mb-5" style="visibility:visible">
+                    <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="{{route('application.create',['type' => $type])}}">Кандидаствай</a></span>
                 </div>
 
                 <div class="header-menu col-md-12" id="header-sticky">
@@ -253,74 +253,103 @@
         <div id="details">
             <div class="details-title text-center">Детайли</div>
             <div class="details-container col-md-12 d-flex flex-wrap flex-row">
-                <div class="col-md-4 first-detail text-center">
-                    <img src="{{asset('/images/detail-1.png')}}" alt="info-php-second" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        Продължителност 9 месеца
-                    </span>
+                <div class="col-md-4">
+                    <div class="card card-2 text-center card-programing">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/programing/icons/calendar_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/calendar.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Продължителност
+                            </div>
+                            <div class="col-md-12">
+                                Занятията се провеждат два пъти седмично в удобно време, съобразено с работещи и ученици.
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4 second-detail text-center">
-                    <img src="{{asset('/images/detail-2.png')}}" alt="icon" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        Два пъти седмично
-                    </span>
+        
+                <div class="col-md-4">
+                    <div class="card card-2 text-center card-programing">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/programing/icons/startup_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/startup.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Трудност
+                            </div>
+                            <div class="col-md-12">
+                                Курсът е предназначен за начинаещи, но въпреки това е интензивен и е нужно да се полагат много усилия.
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-4 third-detail text-center">
-                    <img src="{{asset('/images/rocket-extra-small.png')}}" alt="icon" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        Предназначен за начинаещи
-                    </span>
+        
+                <div class="col-md-4">
+                    <div class="card card-2 text-center card-programing">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/programing/icons/contract_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/contract.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Практически насочен
+                            </div>
+                            <div class="col-md-12">
+                                Курсът включва малко теория и много практика. Всяко ниво завършва с изпит и финален проект.
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col-md-2"></div>
-
-                <div class="col-md-3 fourth-detail text-center">
-                    <img src="{{asset('/images/detail-4.png')}}" alt="info-php-second" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        ~ 10ч. седмично за подготовка вкъщи
-                    </span>
+        
+                <div class="col-md-12 spacer-program"></div>
+        
+                <div class="col-md-4">
+                    <div class="card card-2 text-center card-programing">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/programing/icons/medal_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/medal.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Сертификат
+                            </div>
+                            <div class="col-md-12">
+                                Успешно покрилите 50% от критериите получават сертификат за участие, а тези над 80% - професионален сертификат.
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col-md-2"></div>
-
-                <div class="col-md-3 fifth-detail text-center">
-                    <img src="{{asset('/images/detail-5.png')}}" alt="icon" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        всяко ниво завършва с<br/>
-                        изпит и проект
-                    </span>
+        
+                <div class="col-md-4">
+                    <div class="card card-2 text-center card-programing">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/programing/icons/payment_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/payment.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Цена
+                            </div>
+                            <div class="col-md-12">
+                                Всеки за един модул е 160лв, а за два - 300лв. Най-добре представилите се на подбора получават пълна стипендия.
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col-md-2"></div>
-
-                <div class="col-md-2"></div>
-
-                <div class="col-md-3 sixth-detail text-center">
-                    <img src="{{asset('/images/detail-6.png')}}" alt="info-php-second" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        Сертификати:<br />
-                        Професионален<br /> (над 80%)<br />
-                        Обикновен<br /> (над 50%)<br />
-                    </span>
+        
+                <div class="col-md-4">
+                    <div class="card card-2 text-center card-programing">
+                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
+                            <div class="col-md-12">
+                                <img src="{{asset('/images/programing/icons/goal_green.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/goal.png')}}">
+                            </div>
+                            <div class="col-md-12 title-details-digi">
+                                Менторска програма
+                            </div>
+                            <div class="col-md-12">
+                                Успешните курсисти имат възможност да работят заедно с опитен ментор по реален проект за НПО.
+                            </div>
+                        </div>
+                    </div>
                 </div>
-
-                <div class="col-md-2"></div>
-
-                <div class="col-md-3 seventh-detail text-center">
-                    <img src="{{asset('/images/detail-7.png')}}" alt="icon" class="img-fluid">
-                    <br />
-                    <span class="detail-text">
-                        Менторска програма
-                    </span>
-                </div>
-
-                <div class="col-md-2"></div>
             </div>
         </div>
     </div>
@@ -378,7 +407,7 @@
     </div>
     </div>
     <div class="col-md-12 text-center">
-        <span id="prepare" class="end-candidate programming-candidate-btn"><a href="{{route('application.create')}}">КАНДИДАТСТВАЙ</a></span>
+        <span id="prepare-programing" class="end-candidate programming-candidate-btn" style="background:#1C8800!important;"><a style="color:#fff!important" href="{{route('application.create',['type' => $type])}}">КАНДИДАТСТВАЙ</a></span>
     </div>
     </div>
 

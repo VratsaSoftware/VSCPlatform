@@ -66,10 +66,10 @@ body {
     font-weight: bold;
 }
 
-.event-body-text:hover {
-    background: #fff;
-    color: #e5e5e5;
-}
+/*.event-body-text:hover {*/
+/*    background: #fff;*/
+/*    color: #e5e5e5;*/
+/*}*/
 
 .event-footer {
     border-bottom-right-radius: 10px;

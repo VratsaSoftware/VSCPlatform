@@ -53,6 +53,14 @@
                         <input type="text" id="name" name="name" placeholder="..." class="name-course" value="{{old('name')}}">
                     </p>
                     <p>
+                        <label for="type">Тип</label>
+                        <select name="training_type" id="training_type">
+                            @foreach($trainingTypes as $type)
+                                <option value="{{$type->id}}">{{$type->type}}</option>
+                            @endforeach
+                        </select>
+                    </p>
+                    <p>
                         <label for="name">Цвят</label><br>
                         <input type="text" id="color" name="color" placeholder="hex color" class="name-course" value="{{old('color')}}">
                     </p>
@@ -77,9 +85,15 @@
                         </select>
                     </p>
                     <p>
+                        <label for="form_active">Отворен за кандидастване</label>
+                        <br/>
+                        от <input type="date" name="applications_from" id="applications_from" value="{{old('applications_from')}}">
+                        до <input type="date" name="applications_to" id="applications_to" value="{{old('applications_to')}}">
+                    </p>
+                    <p>
                         {{-- to do if admin load all lectors or users --}}
-                        <label for="lecturer">Лектор: </label>
-                        <select name="lecturer" id="lecturer" class="section-el-bold">
+                        <label for="lecturer">Лектор(и): </label><br/>
+                        <select name="lecturers[]" id="lecturers[]" class="section-el-bold" multiple style="width:50%">
                             @foreach($lecturers as $lecturer)
                                 <option value="{{$lecturer->id}}">{{$lecturer->name}}</option>
                             @endforeach

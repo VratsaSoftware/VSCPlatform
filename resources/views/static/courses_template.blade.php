@@ -26,6 +26,22 @@
                 scrollTop: $($(this).attr('href')).offset().top
             }, 1000, 'linear');
         });
+    
+        $('.card').on('mouseenter',function() {
+            if($(this).find('img').attr('data-hover-img')) {
+                var hoverImg = $(this).find('img').attr('data-hover-img');
+                $(this).find('img').attr('data-hover-img', $(this).find('img').attr('src'));
+                $(this).find('img').attr('src', hoverImg);
+            }
+        });
+    
+        $('.card').on('mouseleave', function(){
+            if($(this).find('img').attr('data-hover-img')) {
+                var hoverImg = $(this).find('img').attr('data-hover-img');
+                $(this).find('img').attr('data-hover-img', $(this).find('img').attr('src'));
+                $(this).find('img').attr('src', hoverImg);
+            }
+        });
     });
 </script>
 <script type="text/javascript">

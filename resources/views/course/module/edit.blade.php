@@ -436,7 +436,7 @@
             <label for="mail-search">Добави по мейл:</label>
             <form class="add-by-mail-form" action="{{route('module.add.student')}}" method="POST" name="addStudent" id="addStudent">
                 {{ csrf_field() }}
-                <input type="email" placeholder="test@test.com" size="30" title="Must be a valid email address" name="mail" />
+                <input type="text" placeholder="test@test.com,test2@gmail.com,test3@abv.bg" size="" title="Must be a valid email address" name="mail" />
                 <input type="hidden" name="module_id" id="module_id" value="{{$module->id}}">
                 <img src="{{asset('/images/profile/add-icon.png')}}" alt="add" class="img-fluid add-by-mail">
             </form>
