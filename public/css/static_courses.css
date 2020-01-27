@@ -1056,11 +1056,19 @@ a {
     /*display: block;*/
 }
 
+.levels-title, .under-program{
+    font-family: Comfortaa;
+    font-weight: bolder;
+}
+
 /*end of application section*/
 /*----------------------------------------------------------------------------------------------------*/
 /*QUERY's */
 /* Extra small devices (phones, 600px and down) */
 @media only screen and (max-width: 600px) {
+    .card-text{
+        font-size:12px;
+    }
     .card{
         width:auto !important;
         margin-bottom:5% !important;
@@ -1180,6 +1188,15 @@ a {
 
 /* Small devices (portrait tablets and large phones, 600px and up) */
 @media only screen and (min-width: 600px) {
+    .title-details-digi + div{
+        font-size:12px;
+    }
+    .card-text{
+        font-size:8px;
+    }
+    .levels-title{
+        font-size:16px;
+    }
     .header-title, .header-sub-title, .header-button {
         margin-top: 10vw;
     }
@@ -1280,6 +1297,12 @@ a {
 
 /* Medium devices (landscape tablets, 768px and up) */
 @media only screen and (min-width: 768px) {
+    .card-text{
+        font-size:13px;
+    }
+    .levels-title{
+        font-size:18px;
+    }
     .header-title, .header-sub-title, .header-button {
         margin-top: 15vw;
     }
@@ -1380,6 +1403,9 @@ a {
 
 /* Large devices (laptops/desktops, 992px and up) */
 @media only screen and (min-width: 992px) {
+    .levels-title{
+        font-size:20px;
+    }
     .header-title, .header-sub-title, .header-button {
         margin-top: 10vw;
     }
@@ -1466,6 +1492,12 @@ a {
 
 /* Extra large devices (large laptops and desktops, 1200px and up) */
 @media only screen and (min-width: 1200px) {
+    .title-details-digi{
+        font-size:22px;
+    }
+    .title-details-digi + div{
+        font-size:16px;
+    }
     .header-title, .header-sub-title, .header-button {
         margin-top: 5vw;
     }
@@ -1579,6 +1611,21 @@ a {
     body {
         padding-left: 5%;
         padding-right: 5%;
+    }
+}
+
+@media only screen and (min-width: 1500px) {
+    .card-text{
+        font-size:15px;
+    }
+    .levels-title{
+        font-size:23px;
+    }
+    .card{
+        width:410px !important;
+    }
+    .title-details-digi{
+        font-size:25px;
     }
 }
 
@@ -1781,7 +1828,7 @@ a {
     height: 300px;
     /*margin: 1rem;*/
     position: relative;
-    width: 410px;
+    /*width: auto;*/
     /*margin-left: 17%;*/
     margin: 0 auto;
     padding: 20px;
@@ -1789,7 +1836,7 @@ a {
 }
 
 .title-details-digi{
-    font-size: 25px;
+    /*font-size: 25px;*/
     font-family: Comfortaa;
 }
 
@@ -1962,8 +2009,4 @@ section .section-title {
     height: 32px !important;
 }
 
-.levels-title, .under-program{
-    font-family: Comfortaa;
-    font-size: 23px;
-}
 
