@@ -35,10 +35,10 @@ class ApplicationController extends Controller
         $submited = TestUserSubmited::where([
             ['user_id', Auth::user()->id],
         ])->whereNotNull('submited_at')->select('test_id')->get()->toArray();
-        if ($entry) {
-            $entry->test_score = 0;
-            $entry->save();
-        }
+//        if ($entry) {
+//            $entry->test_score = NULL;
+//            $entry->save();
+//        }
         if ($submited) {
             $addMe = 0;
             foreach ($submited as $skey => $submitedTest) {

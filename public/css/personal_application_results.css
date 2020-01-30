@@ -388,3 +388,22 @@
         margin-left: -2.5vw;
     }
 }
+
+/*//progress bar*/
+
+.progress-bar{
+    font-size: medium !important;
+    text-align:right;
+    padding-right:1%;
+}
+
+.progress > bg-gradient, .progress-bar{
+    background: rgb(29,133,0);
+    background: linear-gradient(270deg, rgba(29,133,0,1) 57%, rgba(255,255,255,1) 100%);
+}
+
+.progress, .candidation-title{
+    -webkit-box-shadow: 3px 13px 7px 0px rgba(0,0,0,0.2);
+    -moz-box-shadow: 3px 13px 7px 0px rgba(0,0,0,0.2);
+    box-shadow: 3px 13px 7px 0px rgba(0,0,0,0.2);
+}
