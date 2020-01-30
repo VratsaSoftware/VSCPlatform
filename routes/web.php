@@ -85,6 +85,7 @@ Route::post('/user/{user}/event/{event}','Events\EventController@cwIsPresent')->
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/myProfile', 'HomeController@index')->name('myProfile');
     Route::resource('user', 'Users\UserController')->names('user');
+    Route::get('/user/{user}/notifications', 'Users\NotificationController@userNotifications')->name('user.notifications');
     //epay payments routes
     Route::get('course/payment/create', 'Admin\AdminController@createPayment')->name('course.payment.create');
     Route::post('course/payment/store', 'Admin\AdminController@storePayment')->name('course.payment.store');

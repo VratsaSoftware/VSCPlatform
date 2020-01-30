@@ -18,6 +18,7 @@ use Redirect;
 use File;
 use Illuminate\Support\Facades\Input;
 use Carbon\Carbon;
+use App\Notifications\UserNotification;
 
 class LectionController extends Controller
 {
@@ -92,8 +93,13 @@ class LectionController extends Controller
                 $lection->homework_end = is_null($request->homework_end)?$request->homework_end:Carbon::parse($request->homework_end)->addDays(1);
                 $lection->save();
 
-                $lection = Lection::with('Module', 'Module.Course')->findOrFail($lection->id);
+                $lection = Lection::with('Module', 'Module.Course','Module.ModulesStudent','Module.ModulesStudent.User')->findOrFail($lection->id);
                 $store = true;
+                foreach($lection->Module->ModulesStudent as $student) {
+                    $message = 'Курс - '.$lection->Module->Course.' модул - '.$lection->Module.' е добавена нова лекция - '.$lection->title;
+                    $level = 'success';
+                    $student->User->notify(new UserNotification($message,$level));
+                }
             } else {
                 $message = __('Невалидна Заявка!');
                 return redirect()->back()->with('error', $message)->withInput(Input::all());

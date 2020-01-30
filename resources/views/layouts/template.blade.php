@@ -35,6 +35,7 @@
         @if(Auth::user() && !Auth::user()->isLecturer() && !Auth::user()->isAdmin())
             @include('user.left-bar')
         @endif
+                @include('user.notifications')
                 @yield('content')
                 <script>
                     $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
