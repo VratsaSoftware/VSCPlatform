@@ -1,7 +1,16 @@
 .selected-filter{
     background: #4CAF50 !important;
+    color:#000 !important;
 }
 
 #forms_wrapper{
     width: 100%;
+}
+
+.course-wrap-filter{
+    color:#000;
+}
+
+.tab-pane{
+    padding:1%;
 }

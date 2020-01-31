@@ -1,6 +1,14 @@
 @extends('layouts.template')
 @section('title', 'Admin Кандидаствания')
 @section('content')
+	<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="{{asset('css/applications.css')}}">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
 	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
@@ -69,4 +77,22 @@
             } );
         }
 	</script>
+	<!-- jQuery 3 -->
+	<script src="{{asset('/bower_components/jquery/dist/jquery.min.js')}}"></script>
+	<!-- Bootstrap 3.3.7 -->
+	<script src="{{asset('/bower_components/bootstrap/dist/js/bootstrap.min.js')}}"></script>
+	<!-- jQuery UI 1.11.4 -->
+	<script src="{{asset('/bower_components/jquery-ui/jquery-ui.min.js')}}"></script>
+	<!-- Slimscroll -->
+	<script src="{{asset('/bower_components/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
+	<!-- FastClick -->
+	<script src="{{asset('/bower_components/fastclick/lib/fastclick.js')}}"></script>
+	<!-- AdminLTE App -->
+	<script src="{{asset('/dist/js/adminlte.min.js')}}"></script>
+	<!-- AdminLTE for demo purposes -->
+	<script src="{{asset('/dist/js/demo.js')}}"></script>
+	<!-- fullCalendar -->
+	<script src="{{asset('/bower_components/moment/moment.js')}}"></script>
+	<script src="{{asset('/bower_components/fullcalendar/dist/fullcalendar.min.js')}}"></script>
+	<!-- Page specific script -->
 @endsection

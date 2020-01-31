@@ -1,74 +1,101 @@
 <div class="section col-md-12">
 	<div class="col-md-12 d-flex flex-row flex-wrap options-wrap">
-		<table class="table" id="forms">
-			<thead>
-			<tr>
-				<th scope="col">Поредност</th>
-				<th scope="col">#ID</th>
-				<th scope="col">Име</th>
-				<th scope="col">Фамилия</th>
-				<th scope="col">Е-Поща</th>
-				<th scope="col">Локация</th>
-				<th scope="col">Възраст</th>
-				<th scope="col">Занимание</th>
-				<th scope="col">Телефон</th>
-				<th scope="col">Източник на формата</th>
-				<th>Направление</th>
-				<th>Модул</th>
-				<th scope="col">Форма</th>
-				<th>Резултат от Тестове</th>
-				<th>Добави във</th>
-			</tr>
-			</thead>
-			<tbody>
-			@foreach($entries as $num => $entry)
-				<tr>
-					<th>{{$num}}</th>
-					<th scope="row">{{$entry->User->id}}</th>
-					<td>{{$entry->User->name}}</td>
-					<td>{{$entry->User->last_name}}</td>
-					<td>{{$entry->User->email}}</td>
-					<td>{{$entry->User->location}}</td>
-					<td>{{(Carbon\Carbon::now()->format('Y') - $entry->User->dob->format('Y'))}}</td>
-					<td>{{$entry->User->Occupation->occupation}}</td>
-					<td>{{$entry->Form->phone}}</td>
-					<td>{{$entry->Form->source_url}}</td>
-					<td>{{$entry->Form->course}}</td>
-					<td>{{$entry->Form->module}}</td>
-					<td data-course="{{$entry->Form->course}}" data-sex="{{$entry->User->sex}}" data-module="{{$entry->Form->module}}" data-suitable_candidate="{{$entry->Form->suitable_candidate}}" data-suitable_training="{{$entry->Form->suitable_training}}" data-accompliments="{{$entry->Form->accompliments}}" data-expecatitions="{{$entry->Form->expecatitions}}" data-use="{{$entry->Form->use}}" data-source="{{$entry->Form->source}}" data-cv="{{$entry->Form->cv}}" data-created_at="{{$entry->Form->created_at}}">
-						<a href="#modal" class="show-form"><button class="btn btn-success">Виж</button>
-						</a>
-					</td>
-					<td>
-						@if(isset($entry['testScoreTest']))
-							@foreach($entry['testScoreTest'] as $tkey => $test)
-								{{$entry['hidden']}}
-								<p>
-									{{$test->title}} =>
-									отговорени:{{$entry['testScore'][$tkey][1]['answered'] .'/'. $entry['testScore'][$tkey][0]['questionsCount']}}<br/>
-									резултат:{{$entry['testScore'][$tkey][2]['score'] .'/'. $entry['testScore'][$tkey][3]['maxScore']}}<br/>
-									процент:{{$entry['testScore'][$tkey][4]['percentage']}}%
-								</p>
+		<ul class="nav nav-tabs col-md-12">
+			<li class="active"><a data-toggle="tab" href="#home">Кандидастване</a></li>
+			<li><a data-toggle="tab" href="#tests">Тестове</a></li>
+			<li><a data-toggle="tab" href="#interviews">Интервюта</a></li>
+		</ul>
+		
+		<div class="tab-content col-md-12">
+			<div id="home" class="tab-pane fade in active">
+						<table class="table" id="forms">
+							<thead>
+							<tr>
+								<th scope="col">Поредност</th>
+								<th scope="col">#ID</th>
+								<th scope="col">Име</th>
+								<th scope="col">Фамилия</th>
+								<th scope="col">Е-Поща</th>
+								<th scope="col">Локация</th>
+								<th scope="col">Възраст</th>
+								<th scope="col">Занимание</th>
+								<th scope="col">Телефон</th>
+								<th scope="col">Източник на формата</th>
+								<th>Направление</th>
+								<th>Модул</th>
+								<th scope="col">Форма</th>
+								<th>Резултат от Тестове</th>
+								<th>Добави във</th>
+							</tr>
+							</thead>
+							<tbody>
+							@foreach($entries as $num => $entry)
+								<tr>
+									<th>{{$num}}</th>
+									<th scope="row">{{$entry->User->id}}</th>
+									<td>{{$entry->User->name}}</td>
+									<td>{{$entry->User->last_name}}</td>
+									<td>{{$entry->User->email}}</td>
+									<td>{{$entry->User->location}}</td>
+									<td>{{(Carbon\Carbon::now()->format('Y') - $entry->User->dob->format('Y'))}}</td>
+									<td>{{$entry->User->Occupation->occupation}}</td>
+									<td>{{$entry->Form->phone}}</td>
+									<td>{{$entry->Form->source_url}}</td>
+									<td>{{$entry->Form->course}}</td>
+									<td>{{$entry->Form->module}}</td>
+									<td data-course="{{$entry->Form->course}}" data-sex="{{$entry->User->sex}}" data-module="{{$entry->Form->module}}" data-suitable_candidate="{{$entry->Form->suitable_candidate}}" data-suitable_training="{{$entry->Form->suitable_training}}" data-accompliments="{{$entry->Form->accompliments}}" data-expecatitions="{{$entry->Form->expecatitions}}" data-use="{{$entry->Form->use}}" data-source="{{$entry->Form->source}}" data-cv="{{$entry->Form->cv}}" data-created_at="{{$entry->Form->created_at}}">
+										<a href="#modal" class="show-form"><button class="btn btn-success">Виж</button>
+										</a>
+									</td>
+									<td>
+										@if(isset($entry['testScoreTest']))
+											@foreach($entry['testScoreTest'] as $tkey => $test)
+												{{$entry['hidden']}}
+												<p>
+													{{$test->title}} =>
+													отговорени:{{$entry['testScore'][$tkey][1]['answered'] .'/'. $entry['testScore'][$tkey][0]['questionsCount']}}<br/>
+													резултат:{{$entry['testScore'][$tkey][2]['score'] .'/'. $entry['testScore'][$tkey][3]['maxScore']}}<br/>
+													процент:{{$entry['testScore'][$tkey][4]['percentage']}}%
+												</p>
+											@endforeach
+										@endif
+									</td>
+									<td>
+										<form action="{{route('add.student.to.course')}}" method="POST" id="add-student" class="add-student">
+											@csrf
+											<input type="hidden" name="user" value="{{$entry->User->id}}">
+											<select name="add_to_course" id="add_to_course">
+												<option value="0" disabled selected>----</option>
+												@foreach($allCourses as $course)
+													<option value="{{$course->id}}">{{$course->name}}</option>
+												@endforeach
+											</select>
+											<button class="btn btn-outline-success">добави</button>
+										</form>
+									</td>
+								</tr>
 							@endforeach
-						@endif
-					</td>
-					<td>
-						<form action="{{route('add.student.to.course')}}" method="POST" id="add-student" class="add-student">
-							@csrf
-							<input type="hidden" name="user" value="{{$entry->User->id}}">
-							<select name="add_to_course" id="add_to_course">
-								<option value="0" disabled selected>----</option>
-								@foreach($allCourses as $course)
-									<option value="{{$course->id}}">{{$course->name}}</option>
-								@endforeach
-							</select>
-							<button class="btn btn-outline-success">добави</button>
-						</form>
-					</td>
-				</tr>
-			@endforeach
-			</tbody>
-		</table>
+							</tbody>
+						</table>
+			</div>
+			<div id="tests" class="tab-pane fade">
+				<div class="col-md-12 d-flex flex-row flex-wrap">
+					<div class="col-md-12">
+						@include('admin.test_calendar')
+					</div>
+					<div class="col-md-12">
+						<!-- Date and time range -->
+						<div id='calendar'></div>
+						<!-- /.form group -->
+					</div>
+				</div>
+			</div>
+			<div id="interviews" class="tab-pane fade">
+				<div class="col-md-12 text-center">
+					<button class="btn btn-outline-info">добави слотове за интервюта</button>
+				</div>
+			</div>
+		</div>
 	</div>
 	<script>
         // this is the id of the form
@@ -173,11 +200,12 @@
 
             $( '#modal' ).show();
         });
-        // $(document).ready(function() {
-        //     $('#forms').DataTable({
-        //         responsive: true,
-        //         order: [[0, "desc"]],
-        //     });
-        // } );
+        $(document).ready(function() {
+            $('#calendar').fullCalendar({
+                defaultDate: '2020-09-12',
+                editable: true,
+                eventLimit: true, // allow "more" link when too many events
+            });
+        } );
 	</script>
 </div>
