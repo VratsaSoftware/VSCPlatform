@@ -10,6 +10,7 @@ class CourseLecturer extends Model
 {
     protected $table = 'courses_lecturers';
     protected $dates = ['created_at'];
+    protected $guarded = [];
 
     public function User()
     {

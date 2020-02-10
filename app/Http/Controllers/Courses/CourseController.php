@@ -132,8 +132,9 @@ class CourseController extends Controller
     public function showLecturerCourse(Course $course)
     {
         $modules = Course::getModules($course->id, $isLecturer = true);
-
-        return view('lecturer.course', ['course' => $course, 'modules' => $modules]);
+        $lecturers = User::where('cl_role_id', '!=', 2)->get();
+        $course->load('Lecturers','Lecturers.User');
+        return view('lecturer.course', ['course' => $course, 'modules' => $modules,'lecturers' => $lecturers]);
     }
 
     public function addStudent(Request $request)
@@ -177,10 +178,22 @@ class CourseController extends Controller
             'visibility' => 'required|in_array:valid_visibility.*',
             'color' => 'sometimes',
             'applications_from' => 'required|date_format:Y-m-d',
-            'applications_to' => 'required|date_format:Y-m-d|after:applications_from'
+            'applications_to' => 'required|date_format:Y-m-d|after:applications_from',
+            'lecturers' => 'required',
         ]);
-
         $course = Course::find($id);
+
+        unset($data['lecturers']);
+        $deleteLecturer = CourseLecturer::where([
+            ['course_id',$course->id],
+        ])->delete();
+        foreach($request->lecturers as $user) {
+            $lecturer = CourseLecturer::firstOrCreate([
+                'course_id' => $course->id,
+                'user_id' => $user
+            ]);
+        }
+
         $data['form_active'] = null;
         if ($data['applications_from'] < Carbon::now() || $data['applications_from'] == Carbon::now()) {
             $data['form_active'] = 1;

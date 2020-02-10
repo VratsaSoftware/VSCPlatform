@@ -110,6 +110,24 @@
                                     @endforeach
                                 </select>
                             </p>
+                            @if(Auth::user()->isAdmin())
+                                <p>
+                                    {{-- to do if admin load all lectors or users --}}
+                                    <label for="lecturer">Лектор(и):
+                                        @foreach($course->Lecturers as $lecturer)
+                                            [ {{$lecturer->User->name}} ],
+                                        @endforeach
+                                        <br/>
+                                        <small><i>задръж ctrl копчето за селектиране на повече от един</i></small>
+										</label><br/>
+										<select name="lecturers[]" id="lecturers[]" class="section-el-bold" multiple style="width:50%">
+											@foreach($lecturers as $lecturer)
+												{{in_array($lecturer->id,$course->Lecturers->pluck('id')->toArray())}}
+                                            <option value="{{$lecturer->id}}" {{in_array($lecturer->id,$course->Lecturers->pluck('user_id')->toArray())?'selected':''}}>{{$lecturer->name}}</option>
+                                        @endforeach
+                                    </select>
+                                </p>
+                            @endif
                             <p class="col-md-12 text-center">
                                 <button type="submit" class="btn btn-success btn-update-course" value="Промени" href="">Промени</button>
                             </p>

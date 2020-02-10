@@ -91,7 +91,7 @@ class User extends Authenticatable
     public function isAdmin()
     {
         $role = Role::find(Auth::user()->cl_role_id);
-        if ($role->role != 'admin') {
+        if ($role->role !== 'admin' && $role->role !== 'lecturer') {
             return false;
         }
         return true;
