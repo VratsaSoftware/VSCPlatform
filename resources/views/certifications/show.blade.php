@@ -15,24 +15,24 @@
         src: url("{{asset('/css/fonts/CANDARA.TTF')}}");
     url("{{asset('/css/fonts/CANDARA.TTF')}}")  format('truetype');
     }
-
+    
     @font-face {
         font-family: 'Segoe';
         src: url("{{asset('/css/fonts/segoesc.ttf')}}");
     url("{{asset('/css/fonts/segoesc.ttf')}}")  format('truetype');
     }
-
-
+    
+    
     html {
         width: 1254px;
         /*height: 876px;*/
     }
-
+    
     * {
         -webkit-print-color-adjust: exact !important; /* Chrome, Safari */
         color-adjust: exact !important; /*Firefox*/
     }
-
+    
     #cert-holder {
         background-image: url("{{asset('/certificates/bg.png')}}");
         height: 886px;
@@ -42,68 +42,71 @@
         font-family: 'Candara';
         color: #595757;
         font-weight: bold;
+        margin-left:25%;
+        margin-top:1%;
     }
-
+    
     #number {
-        font-size: 24pt;
+        font-size: 27pt;
     }
-
+    
     #title {
         font-size: 100pt;
         letter-spacing: 15px;
         margin-top: 40px;
     }
-
+    
     #sub-title {
         font-size: 32pt;
         letter-spacing: 2px;
         margin-top: 20px;
         margin-bottom: 20px;
     }
-
+    
     .modules {
         margin-bottom: 15px;
         font-size: 34pt;
     }
-
+    
     #pre-username {
         font-size: 24pt;
         letter-spacing: 2px;
         font-family: 'Candara';
     }
-
+    
     #username {
         font-family: 'Segoe';
         font-size: 60pt;
         color: #525050;
     }
-
+    
     #footer {
-        margin-top: 20px;
+        /*margin-top: 20px;*/
     }
-
+    
     #logo {
         width: 180px;
         height: 110px;
-        margin-top: -20px;
+        margin-top: -25px;
     }
-
+    
+    
     #lecturer {
         margin-top: -5px;
         font-weight: bold;
         letter-spacing: 1px;
     }
-
+    
     #image-holder {
         position: absolute;
         margin-top: 100px;
     }
-
+    
     #image-holder2 {
         position: absolute;
         margin-top: 450px;
     }
-
+    
     /*.print-wrapper{*/
     /*    margin-top: 50px;*/
     /*    margin-bottom: 50px;*/
@@ -118,29 +121,29 @@
     <div class="col-md-12 text-right" id="cert-number">
         <span style="color:{{$certificate->color}}">№ {{$certificate->number}}</span>
     </div>
-
+    
     <div class="col-md-12 text-center" id="title">
         {{$certificate->title}}
     </div>
-
+    
     <div class="col-md-12 text-center" id="sub-title">
         {{$certificate->sub_title}}
     </div>
-
+    
     <div class="d-flex flex-row flex-wrap justify-content-center col-md-12 text-center">
         @foreach ($certificate->modules as $module)
             <div class="col-md-3 modules" style="color:{{$certificate->color}}">{{$module}}</div>
         @endforeach
     </div>
-
+    
     <div class="col-md-12 text-center" id="pre-username">
         НА
     </div>
-
+    
     <div class="col-md-12 text-center" style="color:{{$certificate->color}}" id="username">
         {{$certificate->username}}
     </div>
-
+    
     @if($certificate->center_logo > 0)
         <div class="col-md-12 d-flex flex-row flex-wrap" id="footer" style="margin-top: -10px;">
             <div class="col-md-12 text-center">
@@ -159,5 +162,30 @@
                     @endif
                 </div>
         </div>
+        @if(Auth::user() && Auth::user()->isAdmin())
+            <a href="#" id="download">download</a>
+            <div id="previewImage" style="display:none"></div>
+        
+        <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script>
+        <script>
+            var element = $("#cert-holder");
+            var getCanvas;
+            $('document').ready(function(){
+                html2canvas(element, {
+                    onrendered: function (canvas) {
+                        $("#previewImage").append(canvas);
+                        getCanvas = canvas;
+                    }
+                });
+            });
+            $("#download").on('click', function () {
+                var imageData = getCanvas.toDataURL("image/png");
+                var newData = imageData.replace(/^data:image\/png/, "data:application/octet-stream");
+                var name = "cert_{{$certificate->username}}_{{$certificate->number}}.png";
+                $("#download").attr("download", name).attr("href", newData);
+            });
+        </script>
+        @endif
 </body>
 </html>

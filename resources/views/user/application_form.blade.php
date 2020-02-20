@@ -80,24 +80,26 @@
                                            placeholder="въведете години..." class="small-field-register">
                                 @endif
                             </p>
-                            <p>
-                                <label for="occupation">Занимание <span class="req-star-form">*</span></label><br>
-                                @if ($errors->has('occupation'))
-                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                            @if(!$disableExtraFields)
+                                <p>
+                                    <label for="occupation">Занимание <span class="req-star-form">*</span></label><br>
+                                    @if ($errors->has('occupation'))
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
                                         <strong>{{ $errors->first('occupation') }}</strong>
                                     </span>
-                                @endif
-                                <select class="occupation section-el-bold" name="occupation" id="occupation">
-                                    @foreach ($occupations as $occupation)
-                                        @if(!is_null($user->cl_occupation_id) && $user->cl_occupation_id == $occupation->id)
-                                            <option value="{{$occupation->id}}"
-                                                    selected>{{$occupation->occupation}}</option>
-                                        @else
-                                            <option value="{{$occupation->id}}" {{ (old("occupation") == $occupation->id ? "selected":"") }}>{{$occupation->occupation}}</option>
-                                        @endif
-                                    @endforeach
-                                </select>
-                            </p>
+                                    @endif
+                                    <select class="occupation section-el-bold" name="occupation" id="occupation">
+                                        @foreach ($occupations as $occupation)
+                                            @if(!is_null($user->cl_occupation_id) && $user->cl_occupation_id == $occupation->id)
+                                                <option value="{{$occupation->id}}"
+                                                        selected>{{$occupation->occupation}}</option>
+                                            @else
+                                                <option value="{{$occupation->id}}" {{ (old("occupation") == $occupation->id ? "selected":"") }}>{{$occupation->occupation}}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                </p>
+                            @endif
                             <p>
                                 <label for="course">Направление <span class="req-star-form">*</span></label><br/>
                                 @if(is_null($applicationFor) || empty($applicationFor) || count($applicationFor) < 1)
@@ -170,115 +172,122 @@
                                     </select>
                                 @endif
                             </p>
-                            <p>
-                                <label for="suitable_candidate">Защо смятате, че тези обучения са подходящ за Вас?
-                                    <br/>
-                                    <small>(защо искате да учите
-                                        @forelse($applicationFor as $course)
-                                            {{$course->name}}
-                                            @if(!$loop->last)
-                                                ,
+                            @if(!$disableExtraFields)
+                                <p>
+                                    <label for="suitable_candidate">Защо смятате, че тези обучения са подходящ за Вас?
+                                        <br/>
+                                        <small>(защо искате да учите
+                                            @if(!is_null($applicationFor))
+                                                @forelse($applicationFor as $course)
+                                                    {{$course->name}}
+                                                    @if(!$loop->last)
+                                                        ,
+                                                    @endif
+                                                @empty
+                                                @endforelse
                                             @endif
-                                        @empty
-                                        @endforelse
-                                        )</small>
-                                    <span id="candidate-label"></span> <span class="req-star-form">*</span></label>
-                                @if ($errors->has('suitable_candidate'))
-                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+												)</small>
+                                        <span id="candidate-label"></span> <span class="req-star-form">*</span></label>
+                                    @if ($errors->has('suitable_candidate'))
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
                                         <strong>{{ $errors->first('suitable_candidate') }}</strong>
                                     </span>
-                                @endif
-                                <textarea maxlength="500" name="suitable_candidate" rows="8" cols="80"
-                                          placeholder="между 100 и 500 символа"
-                                          class="section-el-bold">{{old('suitable_candidate')}}</textarea>
-                            </p>
-                            <p>
-                                <label for="suitable_training">Защо смятате, че именно Вие сте подходящ за ИТ обучение?
-                                    <br>
-                                    <small>(кои ваши качества и интереси ви правят подходящ участник в курс по
-                                        @forelse($applicationFor as $course)
-                                            {{$course->name}}
-                                            @if(!$loop->last)
-                                                ,
+                                    @endif
+                                    <textarea maxlength="500" name="suitable_candidate" rows="8" cols="80"
+                                              placeholder="между 100 и 500 символа"
+                                              class="section-el-bold">{{old('suitable_candidate')}}</textarea>
+                                </p>
+                                <p>
+                                    <label for="suitable_training">Защо смятате, че именно Вие сте подходящ за ИТ обучение?
+                                        <br>
+                                        <small>(кои ваши качества и интереси ви правят подходящ участник в курс по
+                                            @if(!is_null($applicationFor))
+                                                @forelse($applicationFor as $course)
+                                                    {{$course->name}}
+                                                    @if(!$loop->last)
+                                                        ,
+                                                    @endif
+                                                @empty
+                                                @endforelse
                                             @endif
-                                        @empty
-                                        @endforelse
-                                        )</small>
-                                    <span id="training-label"></span> <span class="req-star-form">*</span></label>
-                                @if ($errors->has('suitable_training'))
-                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+												)</small>
+                                        <span id="training-label"></span> <span class="req-star-form">*</span></label>
+                                    @if ($errors->has('suitable_training'))
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
                                         <strong>{{ $errors->first('suitable_training') }}</strong>
                                     </span>
-                                @endif
-                                <textarea maxlength="500" name="suitable_training" rows="8" cols="80"
-                                          placeholder="между 100 и 500 символа"
-                                          class="section-el-bold">{{old('suitable_training')}}</textarea>
-                            </p>
-                            <p>
-                                <label for="accompliments">Опишете 3 постижения, с които се гордеете (може да са в
-                                    личен, професионален план или свързани с учене).<span
-                                            id="accompliments-label"></span> <span
-                                            class="req-star-form">*</span></label>
-                                @if ($errors->has('accompliments'))
-                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    @endif
+                                    <textarea maxlength="500" name="suitable_training" rows="8" cols="80"
+                                              placeholder="между 100 и 500 символа"
+                                              class="section-el-bold">{{old('suitable_training')}}</textarea>
+                                </p>
+                                <p>
+                                    <label for="accompliments">Опишете 3 постижения, с които се гордеете (може да са в
+                                        личен, професионален план или свързани с учене).<span
+                                                id="accompliments-label"></span> <span
+                                                class="req-star-form">*</span></label>
+                                    @if ($errors->has('accompliments'))
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
                                         <strong>{{ $errors->first('accompliments') }}</strong>
                                     </span>
-                                @endif
-                                <textarea maxlength="500" name="accompliments" rows="8" cols="80"
-                                          placeholder="между 100 и 500 символа"
-                                          class="section-el-bold">{{old('accompliments')}}</textarea>
-                            </p>
-                            <p>
-                                <label for="expecatitions">Какви са очакванията Ви за това обучение? <span
-                                            id="expecatitions-label"></span><span class="req-star-form">*</span></label>
-                                @if ($errors->has('expecatitions'))
-                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    @endif
+                                    <textarea maxlength="500" name="accompliments" rows="8" cols="80"
+                                              placeholder="между 100 и 500 символа"
+                                              class="section-el-bold">{{old('accompliments')}}</textarea>
+                                </p>
+                                <p>
+                                    <label for="expecatitions">Какви са очакванията Ви за това обучение? <span
+                                                id="expecatitions-label"></span><span class="req-star-form">*</span></label>
+                                    @if ($errors->has('expecatitions'))
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
                                         <strong>{{ $errors->first('expecatitions') }}</strong>
                                     </span>
-                                @endif
-                                <textarea maxlength="500" name="expecatitions" rows="8" cols="80"
-                                          placeholder="между 100 и 500 символа"
-                                          class="section-el-bold">{{old('expecatitions')}}</textarea>
-                            </p>
-                            <p>
-                                <label for="use">Как смятате да използвате наученото от това обучение? <span
-                                            class="req-star-form">*</span></label><br/>
-                                @if ($errors->has('use'))
-                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    @endif
+                                    <textarea maxlength="500" name="expecatitions" rows="8" cols="80"
+                                              placeholder="между 100 и 500 символа"
+                                              class="section-el-bold">{{old('expecatitions')}}</textarea>
+                                </p>
+                                <p>
+                                    <label for="use">Как смятате да използвате наученото от това обучение? <span
+                                                class="req-star-form">*</span></label><br/>
+                                    @if ($errors->has('use'))
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
                                         <strong>{{ $errors->first('use') }}</strong>
                                     </span>
-                                @endif
-                                <select class="section-el-bold" name="use">
-                                    @foreach(Config::get('applicationForm.use') as $use)
-                                        <option value="{{$use}}" {{ (old("use") == $use ? "selected":"") }}>{{ucfirst($use)}}</option>
-                                    @endforeach
-                                </select>
-                            </p>
-                            
-                            <p>
-                                <label for="source">От къде научихте за това обучение? <span
-                                            class="req-star-form">*</span></label><br/>
-                                @if ($errors->has('source'))
-                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    @endif
+                                    <select class="section-el-bold" name="use">
+                                        @foreach(Config::get('applicationForm.use') as $use)
+                                            <option value="{{$use}}" {{ (old("use") == $use ? "selected":"") }}>{{ucfirst($use)}}</option>
+                                        @endforeach
+                                    </select>
+                                </p>
+                                
+                                <p>
+                                    <label for="source">От къде научихте за това обучение? <span
+                                                class="req-star-form">*</span></label><br/>
+                                    @if ($errors->has('source'))
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
                                         <strong>{{ $errors->first('source') }}</strong>
                                     </span>
-                                @endif
-                                <select class="section-el-bold" name="source">
-                                    @foreach(Config::get('applicationForm.source') as $source)
-                                        <option value="{{$source}}" {{ (old("source") == $source ? "selected":"") }}>{{$source}}</option>
-                                    @endforeach
-                                </select>
-                            </p>
-                            
-                            <p>
-                                <label for="cv">Автобиография <span class="req-star-form">*</span></label>
-                                @if ($errors->has('cv'))
-                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                    @endif
+                                    <select class="section-el-bold" name="source">
+                                        @foreach(Config::get('applicationForm.source') as $source)
+                                            <option value="{{$source}}" {{ (old("source") == $source ? "selected":"") }}>{{$source}}</option>
+                                        @endforeach
+                                    </select>
+                                </p>
+                            @endif
+                            @if(!$disableCV)
+                                <p>
+                                    <label for="cv">Автобиография <span class="req-star-form">*</span></label>
+                                    @if ($errors->has('cv'))
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
                                         <strong>{{ $errors->first('cv') }}</strong>
                                     </span>
-                                @endif
-                                <input type="file" name="cv" value="">
-                            </p>
+                                    @endif
+                                    <input type="file" name="cv" value="">
+                                </p>
+                            @endif
                             <br/>
                             <p>
                             <div class="col-md-12 create-course-button text-center">

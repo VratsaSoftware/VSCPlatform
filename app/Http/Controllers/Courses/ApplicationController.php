@@ -35,10 +35,10 @@ class ApplicationController extends Controller
         $submited = TestUserSubmited::where([
             ['user_id', Auth::user()->id],
         ])->whereNotNull('submited_at')->select('test_id')->get()->toArray();
-//        if ($entry) {
-//            $entry->test_score = NULL;
-//            $entry->save();
-//        }
+        if ($entry) {
+            $entry->test_score = 0;
+            $entry->save();
+        }
         if ($submited) {
             $addMe = 0;
             foreach ($submited as $skey => $submitedTest) {
@@ -106,13 +106,25 @@ class ApplicationController extends Controller
             $module = $request->module;
         }
         $occupations = Occupation::all();
+        $disableCV = false;
+        //disable fields from form for digital marketing applications
+        if(!is_null($applicationFor)){
+            foreach($applicationFor as $course){
+                if (str_contains($course->name, 'Дигитален Маркетинг') || str_contains(strtolower($course->name), 'дигитален маркетинг') || str_contains(strtolower($course->name), 'фотография')){
+                    $disableExtraFields = true;
+                }
+                if(str_contains(strtolower($course->name), 'фотография')){
+                    $disableCV = true;
+                }
+            }
+        }
 
         if (Auth::user()) {
             $user = User::find(Auth::user()->id);
-            return view('user.application_form', ['user' => $user, 'occupations' => $occupations, 'course' => $course, 'module' => $module, 'applicationFor' => $applicationFor]);
+            return view('user.application_form', ['user' => $user, 'occupations' => $occupations, 'course' => $course, 'module' => $module, 'applicationFor' => $applicationFor,'disableExtraFields' => isset($disableExtraFields)?$disableExtraFields:null, 'disableCV' => $disableCV]);
         }
 
-        return view('user.non_register_application_form', ['occupations' => $occupations, 'applicationFor' => $applicationFor]);
+        return view('user.non_register_application_form', ['occupations' => $occupations, 'applicationFor' => $applicationFor,'disableExtraFields' => isset($disableExtraFields)?$disableExtraFields:null, 'disableCV' => $disableCV]);
     }
 
 
@@ -140,25 +152,39 @@ class ApplicationController extends Controller
                 "lastname" => 'sometimes|string|max:255',
                 "email" => 'sometimes|string|email|max:255|unique:users',
                 "phone" => 'required|digits:10',
-                "occupation" => 'required',
+                "occupation" => 'sometimes',
                 'course' => 'required',
 //                "course" => 'required|in_array:valid_course.*',
-                "suitable_candidate" => 'required|min:100|max:500',
-                "suitable_training" => 'required|min:100|max:500',
-                "accompliments" => 'required|min:100|max:500',
-                "expecatitions" => 'required|min:100|max:500',
-                "use" => 'required|in_array:valid_use.*',
-                "source" => 'required|in_array:valid_source.*',
-                "cv" => 'required|file',
+                "suitable_candidate" => 'sometimes|min:100|max:500',
+                "suitable_training" => 'sometimes|min:100|max:500',
+                "accompliments" => 'sometimes|min:100|max:500',
+                "expecatitions" => 'sometimes|min:100|max:500',
+                "use" => 'sometimes|in_array:valid_use.*',
+                "source" => 'sometimes|in_array:valid_source.*',
+                "cv" => 'sometimes|file',
                 "module" => 'sometimes|string|in_array:valid_modules.*',
                 "source_url" => 'sometimes'
             ]);
             $data['course_id'] = $data['course'];
-            $course = Course::where('id', $data['course_id'])->select('name')->first();
-            $data['course'] = $course->name;
+            $course = Course::where('id', (int)$data['course_id'])->select('id','name')->first();
+            if(!is_null($course)){
+                $data['course'] = isset($course->name)?$course->name:NULL;
+            }else{
+                $data['course_id'] = null;
+                $data['course'] = null;
+            }
+            $course_id = $course->id;
+            $isExisting = Entry::where('user_id',Auth::user()->id)->whereHas('Form', function($q) use ($course_id){
+                $q->where('course_id',$course_id);
+            })->first();
+
+            if(!empty($isExisting) || count($isExisting) > 0){
+                $message_bag = ['username' => 'вече сте кандидатствали за този курс'];
+                return back()->withErrors($message_bag);
+            }
 
             $user = User::find(Auth::user()->id);
-            $user->cl_occupation_id = $data['occupation'];
+            $user->cl_occupation_id = isset($data['occupation'])?$data['occupation']:null;
             if (isset($request->userage)) {
                 $year = Carbon::now()->subYears($request->userage)->format('Y');
                 $year .= '-01-01';
@@ -166,12 +192,15 @@ class ApplicationController extends Controller
                 $user->dob = $dob;
             }
             $user->save();
-            $cv = $user->name . time() . '.' . $request->cv->getClientOriginalExtension();
-            $cvName = str_replace(' ', '', strtolower($cv));
-            // $cvName = md5($cvName);
+            if($request->cv){
+                $cv = $user->name . time() . '.' . $request->cv->getClientOriginalExtension();
+                $cvName = str_replace(' ', '', strtolower($cv));
+                // $cvName = md5($cvName);
 
-            $data['cv'] = $cvName;
-            $request->cv->move(public_path() . '/entry/cv/', $cvName);
+                $data['cv'] = $cvName;
+                $request->cv->move(public_path() . '/entry/cv/', $cvName);
+            }
+
             unset($data['occupation']);
             if (isset($request->source_url)) {
                 $data['source_url'] = $request->source_url;
@@ -181,32 +210,38 @@ class ApplicationController extends Controller
             $newEntry->user_id = $user->id;
             $newEntry->entry_form_id = $newForm->id;
             $newEntry->save();
-            Mail::to($user->email)->send(new CourseApplicationCreated($data['course']));
+            Mail::to($user->email)->send(new CourseApplicationCreated(isset($course->name)?$course->name:$data['course']));
             $message = __('Успешно изпратихте форма за кандидатстване!');
             return redirect()->route('application.index')->with('success', $message);
         }
         // not registered
+
         $data = $request->validate([
             "username" => 'required|string|max:255',
             "lastname" => 'required|string|max:255',
             "email" => 'required|string|email|max:255|unique:users',
             "userage" => 'required|numeric|max:120',
             "phone" => 'required|digits:10',
-            "occupation" => 'required',
+            "occupation" => 'sometimes',
             'course' => 'required',
 //            "course" => 'required|in_array:valid_course.*',
-            "suitable_candidate" => 'required|min:100|max:500',
-            "suitable_training" => 'required|min:100|max:500',
-            "accompliments" => 'required|min:100|max:500',
-            "expecatitions" => 'required|min:100|max:500',
-            "use" => 'required|in_array:valid_use.*',
-            "source" => 'required|in_array:valid_source.*',
-            "cv" => 'required|file',
-            "module" => 'sometimes|string|in_array:valid_modules.*',
+            "suitable_candidate" => 'sometimes|min:100|max:500',
+            "suitable_training" => 'sometimes|min:100|max:500',
+            "accompliments" => 'sometimes|min:100|max:500',
+            "expecatitions" => 'sometimes|min:100|max:500',
+            "use" => 'sometimes|in_array:valid_use.*',
+            "source" => 'sometimes|in_array:valid_source.*',
+            "cv" => 'sometimes|file',
+            // "module" => 'sometimes|string|in_array:valid_modules.*',
         ]);
+
         $data['course_id'] = $data['course'];
-        $course = Course::where('id', $data['course_id'])->select('name')->first();
-        $data['course'] = $course->name;
+        $course = Course::where('id', (int)$data['course_id'])->select('name')->first();
+        if(!is_null($course)){
+            $data['course'] = isset($course->name)?$course->name:NULL;
+        }else{
+            $data['course_id'] = null;
+        }
 
         $role = Role::where('role', 'user')->select('id')->first();
         $dob = null;
@@ -220,17 +255,19 @@ class ApplicationController extends Controller
             'email' => $data['email'],
             'cl_role_id' => $role->id,
             'dob' => $dob,
-            'cl_occupation_id' => $data['occupation'],
+            'cl_occupation_id' => isset($data['occupation'])?$data['occupation']:null,
             'password' => Hash::make(str_random(12)),
         ]);
 
+        if($request->cv){
+            $cv = $newUser->name . time() . '.' . $request->cv->getClientOriginalExtension();
+            $cvName = str_replace(' ', '', strtolower($cv));
+            // $cvName = md5($cvName);
 
-        $cv = $newUser->name . time() . '.' . $request->cv->getClientOriginalExtension();
-        $cvName = str_replace(' ', '', strtolower($cv));
-        // $cvName = md5($cvName);
+            $data['cv'] = $cvName;
+            $request->cv->move(public_path() . '/entry/cv/', $cvName);
+        }
 
-        $data['cv'] = $cvName;
-        $request->cv->move(public_path() . '/entry/cv/', $cvName);
         unset($data['occupation']);
         unset($data['username']);
         unset($data['lastname']);
@@ -315,12 +352,14 @@ class ApplicationController extends Controller
                 })->get();
             }
         }
+
         if($request->course){
             $theCourse = $request->course;
             $entries = Entry::with('User.Occupation', 'Form')->whereHas('Form', function ($q) use ($theCourse) {
                 $q->where('course_id', $theCourse);
             })->get();
         }
+
         foreach ($entries as $entry) {
             $tests = [];
             $scores = [];
@@ -344,6 +383,7 @@ class ApplicationController extends Controller
 
         $courses = Course::where('training_type',$request->type)->get();
         if(isset($request->final) || $request->final || $request->type < 1){
+
             return view('admin.ajax_applications_data',['entries' => $entries,'courses' => isset($courses)?$courses:null,'allCourses' => $allCourses]);
         }
         return view('admin.ajax_applications', ['entries' => $entries,'courses' => isset($courses)?$courses:null]);

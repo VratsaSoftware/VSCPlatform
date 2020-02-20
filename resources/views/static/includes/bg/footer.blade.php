@@ -18,6 +18,7 @@
         <div class="col-md-12">
             <p><a href="{{route('programmingCourses')}}">Програмиране</a></p>
             <p><a href="{{route('digitalMarketing')}}">Дигитален Маркетинг</a></p>
+            <p><a href="{{route('design')}}">Дизайн</a></p>
         </div>
     </div>
 

@@ -10,7 +10,7 @@
                 <div id="logo" class="col-md-12 text-center">
                     <a href="{{route('home')}}"><img src="{{asset('/images/logoVStext.png')}}" alt="vso-logo" class="img-fluid" width="20%"></a>
                 </div>
-
+                
                 <div class="header-title col-md-12 text-center">
                     <span>9-месечни курсове по програмиране за ученици и възрастни</span>
                 </div>
@@ -22,7 +22,7 @@
                 <div class="header-button col-md-12 text-center mb-5" style="visibility:visible">
                     <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="{{route('application.create',['type' => $type])}}">Кандидаствай</a></span>
                 </div>
-
+                
                 <div class="header-menu col-md-12" id="header-sticky">
                     <nav class="text-center">
                         <ul class="d-flex flex-wrap main-nav-list">
@@ -39,9 +39,9 @@
             </div>
         </div>
     </div>
-
+    
     <div id="information-holder">
-
+    
     </div>
     <div id="information" class="section">
         <div class="d-flex flex-wrap flex-row">
@@ -91,7 +91,7 @@
         </div>
     </div>
     <div id="program-holder">
-
+    
     </div>
     <div class="section">
         <div id="program">
@@ -122,7 +122,7 @@
                                     </div>
                                 </div>
                                 <!-- end of first-lvl -->
-
+                                
                                 <!-- second lvl -->
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
@@ -137,7 +137,7 @@
                                     </div>
                                 </div>
                                 <!-- end of second lvl -->
-
+                                
                                 <!-- third lvl -->
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
@@ -154,7 +154,7 @@
                                     </div>
                                 </div>
                                 <!-- end of third lvl -->
-
+                                
                                 <!-- fourth lvl -->
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
@@ -172,7 +172,7 @@
                             </div>
                         </div>
                         <!-- end of php tab -->
-
+                        
                         <!-- java tab -->
                         <div id="tabs-2" class="p-3 java">
                             <div class="col-md-12 d-flex flex-row flex-wrap php-program-holder">
@@ -191,7 +191,7 @@
                                     </div>
                                 </div>
                                 <!-- end of first-lvl -->
-
+                                
                                 <!-- second lvl -->
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
@@ -206,7 +206,7 @@
                                     </div>
                                 </div>
                                 <!-- end of second lvl -->
-
+                                
                                 <!-- third lvl -->
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
@@ -221,7 +221,7 @@
                                     </div>
                                 </div>
                                 <!-- end of third lvl -->
-
+                                
                                 <!-- fourth lvl -->
                                 <div class="col-md-12 d-flex flex-row flex-wrap">
                                     <div class="col-md-7 lvl-info">
@@ -247,7 +247,7 @@
     </div>
     </div>
     <div id="details-holder">
-
+    
     </div>
     <div class="section">
         <div id="details">
@@ -268,7 +268,7 @@
                         </div>
                     </div>
                 </div>
-        
+                
                 <div class="col-md-4">
                     <div class="card card-2 text-center card-programing">
                         <div class="details-info col-md-12 d-flex flex-row flex-wrap">
@@ -284,7 +284,7 @@
                         </div>
                     </div>
                 </div>
-        
+                
                 <div class="col-md-4">
                     <div class="card card-2 text-center card-programing">
                         <div class="details-info col-md-12 d-flex flex-row flex-wrap">
@@ -300,9 +300,9 @@
                         </div>
                     </div>
                 </div>
-        
+                
                 <div class="col-md-12 spacer-program"></div>
-        
+                
                 <div class="col-md-4">
                     <div class="card card-2 text-center card-programing">
                         <div class="details-info col-md-12 d-flex flex-row flex-wrap">
@@ -318,7 +318,7 @@
                         </div>
                     </div>
                 </div>
-        
+                
                 <div class="col-md-4">
                     <div class="card card-2 text-center card-programing">
                         <div class="details-info col-md-12 d-flex flex-row flex-wrap">
@@ -329,12 +329,12 @@
                                 Цена
                             </div>
                             <div class="col-md-12">
-                                Всеки за един модул е 160лв, а за два - 300лв. Най-добре представилите се на подбора получават пълна стипендия.
+                                Всеки един модул е 160лв, а за два - 300лв. Най-добре представилите се на подбора получават пълна стипендия.
                             </div>
                         </div>
                     </div>
                 </div>
-        
+                
                 <div class="col-md-4">
                     <div class="card card-2 text-center card-programing">
                         <div class="details-info col-md-12 d-flex flex-row flex-wrap">
@@ -353,9 +353,9 @@
             </div>
         </div>
     </div>
-
+    
     <div id="application-holder">
-
+    
     </div>
     <div class="section">
         <div id="application">
@@ -380,15 +380,15 @@
                     <span>прием</span>
                 </li>
             </ul>
-
+            
             <!-- images -->
-
+            
             <div class="candidate-imgs col-md-12 flex-row flex-wrap text-center">
                 <div class="col-md-1"></div>
                 <div class="steps col-md-2 first-candidate-img">
                     <img src="{{asset('/images/candidate-img-step-1.png')}}" alt="step" class="img-fluid candidate-img">
                 </div>
-
+                
                 <div class="steps col-md-2">
                     <img src="{{asset('/images/candidate-img-step-2.png')}}" alt="step" class="img-fluid candidate-img">
                 </div>
@@ -410,12 +410,12 @@
         <span id="prepare-programing" class="end-candidate programming-candidate-btn" style="background:#1C8800!important;"><a style="color:#fff!important" href="{{route('application.create',['type' => $type])}}">КАНДИДАТСТВАЙ</a></span>
     </div>
     </div>
-
+    
     <script>
         // Set the date we're counting down to
         var programmingDate = new Date("Feb 10, 2019 00:00:00").getTime();
         var timerClass = '.timer-programming';
-
+        
         // Update the count down every 1 second
         var start = setInterval(function() {
             timer(programmingDate,timerClass)
@@ -424,7 +424,7 @@
     <script>
         var headeroffset = $("#header-sticky").offset();
         var sticky = (headeroffset.top - 50);
-
+        
         $(window).scroll(function() {
             if (window.pageYOffset >= sticky && !$("#header-sticky").hasClass('sticky')) {
                 $("#header-sticky").addClass('sticky');
@@ -438,7 +438,7 @@
         $(function(){
             var programTabs = document.createElement("script");
             programTabs.src = "{{asset('/js/program-tabs.js')}}";
-
+            
             $('body').append(programTabs);
             tickAnimation(3);
         });
