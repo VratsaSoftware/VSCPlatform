@@ -88,7 +88,7 @@
                                         <strong>{{ $errors->first('occupation') }}</strong>
                                     </span>
                                     @endif
-                                    <select class="occupation section-el-bold" name="occupation" id="occupation">
+                                    <select class="occupation section-el-bold col-md-8" name="occupation" id="occupation">
                                         @foreach ($occupations as $occupation)
                                             @if(!is_null($user->cl_occupation_id) && $user->cl_occupation_id == $occupation->id)
                                                 <option value="{{$occupation->id}}"
@@ -108,7 +108,7 @@
                                             <strong>{{ $errors->first('course') }}</strong>
                                         </span>
                                     @endif
-                                    <select class="section-el-bold" name="course" id="course-select">
+                                    <select class="section-el-bold col-md-8" name="course" id="course-select">
                                         <option value="0" disabled selected="selected">-----</option>
                                         @foreach(Config::get('applicationForm.courses') as $key => $modules)
                                             @if(is_array($modules))
@@ -135,7 +135,7 @@
                                     <br>
                                     <br/>
                                     <span class="no-show">Модул <span class="req-star-form">*</span></span>
-                                    <select class="section-el-bold no-show" name="sub" id="sub">
+                                    <select class="section-el-bold no-show col-md-8" name="sub" id="sub">
                                     
                                     </select>
                                     <script>
@@ -165,7 +165,7 @@
                                         }
                                     </script>
                                 @else
-                                    <select class="section-el-bold" name="course" id="course-select">
+                                    <select class="section-el-bold col-md-8" name="course" id="course-select">
                                         @foreach($applicationFor as $course)
                                             <option value="{{$course->id}}" {{Request::segment(4) == $course->id?'selected':''}}>{{$course->name}}</option>
                                         @endforeach
@@ -255,7 +255,7 @@
                                         <strong>{{ $errors->first('use') }}</strong>
                                     </span>
                                     @endif
-                                    <select class="section-el-bold" name="use">
+                                    <select class="section-el-bold col-md-8" name="use">
                                         @foreach(Config::get('applicationForm.use') as $use)
                                             <option value="{{$use}}" {{ (old("use") == $use ? "selected":"") }}>{{ucfirst($use)}}</option>
                                         @endforeach
@@ -270,7 +270,7 @@
                                         <strong>{{ $errors->first('source') }}</strong>
                                     </span>
                                     @endif
-                                    <select class="section-el-bold" name="source">
+                                    <select class="section-el-bold col-md-8" name="source">
                                         @foreach(Config::get('applicationForm.source') as $source)
                                             <option value="{{$source}}" {{ (old("source") == $source ? "selected":"") }}>{{$source}}</option>
                                         @endforeach

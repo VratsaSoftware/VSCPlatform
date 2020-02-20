@@ -85,7 +85,7 @@
                                             <strong>{{ $errors->first('course') }}</strong>
                                         </span>
 									@endif
-									<select class="section-el-bold" name="course" id="course-select">
+									<select class="section-el-bold col-md-8" name="course" id="course-select">
 										<option value="0" disabled selected="selected">-----</option>
 										@foreach(Config::get('applicationForm.courses') as $key => $modules)
 											@if(is_array($modules))
@@ -107,7 +107,7 @@
 									<br>
 									<br/>
 									<span class="no-show">Модул <span class="req-star-form">*</span></span>
-									<select class="section-el-bold no-show" name="module" id="module">
+									<select class="section-el-bold no-show col-md-8" name="module" id="module">
 									
 									</select>
 									<script>
@@ -137,7 +137,7 @@
                                         }
 									</script>
 								@else
-									<select class="section-el-bold" name="course" id="course-select">
+									<select class="section-el-bold col-md-8" name="course" id="course-select">
 										@if(!is_null($applicationFor))
 											@foreach($applicationFor as $position => $course)
 												<option value="{{$course->id}}" {{$position < 1?'selected':''}}>{{$course->name}}</option>
@@ -216,7 +216,7 @@
                                         <strong>{{ $errors->first('use') }}</strong>
                                     </span>
 									@endif
-									<select class="section-el-bold" name="use">
+									<select class="section-el-bold col-md-8" name="use">
 										@foreach(Config::get('applicationForm.use') as $use)
 											<option value="{{$use}}" {{ (old("use") == $use ? "selected":"") }}>{{ucfirst($use)}}</option>
 										@endforeach
@@ -229,7 +229,7 @@
                                         <strong>{{ $errors->first('source') }}</strong>
                                     </span>
 									@endif
-									<select class="section-el-bold" name="source">
+									<select class="section-el-bold col-md-8" name="source">
 										@foreach(Config::get('applicationForm.source') as $source)
 											<option value="{{$source}}" {{ (old("source") == $source ? "selected":"") }}>{{ucfirst($source)}}</option>
 										@endforeach
