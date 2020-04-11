@@ -13,6 +13,7 @@
             <li class="nav-item"><a class="edu-hamburger" href="#">Обучения <i class="fas fa-angle-down"></i></a></li>
             <li class="edu-go bg-secondary"><a class="text-light" href="{{route('programmingCourses')}}">Програмиране</a></li>
             <li class="edu-go bg-secondary"><a class="text-light" href="{{route('digitalMarketing')}}">Дигитален Маркетинг</a></li>
+            <li class="edu-go bg-secondary"><a href="{{route('design')}}">Дизайн</a></li>
             <li class="nav-item"><a href="{{route('login')}}" class="right-mobile">Вход</a></li>
             {{-- <li class="nav-item"><a href="#" class="right-mobile">Кандидатствай</a></li> --}}
             <li>
@@ -43,7 +44,7 @@
             $('.about-go').hide();
         }
     });
-
+    
     $('.edu-hamburger').on('click',function(){
         if(!$(this).hasClass('opened')){
             $(this).addClass('opened');

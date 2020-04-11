@@ -44,7 +44,7 @@ Route::get('/train-devs', function () {
 Route::get('/digital-marketing', function () {
     $type = App\Models\Courses\TrainingType::where('type','Дигитален Маркетинг')->first();
     if (Session::get('locale') == 'en') {
-        return view('static.en.digital_marketing',['type' => $type->id]);
+        return view('static.digital_marketing',['type' => $type->id]);
     }
     return view('static.digital_marketing',['type' => $type->id]);
 })->name('digitalMarketing');
@@ -52,7 +52,7 @@ Route::get('/digital-marketing', function () {
 Route::get('/design', function () {
     $type = App\Models\Courses\TrainingType::where('type','Дизайн')->first();
     if (Session::get('locale') == 'en') {
-        return view('static.en.design',['type' => $type->id]);
+        return view('static.design',['type' => $type->id]);
     }
     return view('static.design',['type' => $type->id]);
 })->name('design');
