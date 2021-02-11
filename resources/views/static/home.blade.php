@@ -75,6 +75,7 @@
                                 <p>
                                     <p class="slider-subtitle-content">
                                         В HackVratsa могат да участват всички ученици, студенти и работещи, с интереси към програмирането, дизайна и предприемачеството. Целта на инициативата е заедно в екип да формулират концепция за софтуерен продукт и да стартират работа по неговото разработване.
+
                                     </p>
                                     <br/>
 
@@ -149,7 +150,7 @@
                                         Към момента 24 човека завършили курсовете работят в ИТ сферата във Враца и 3 компании отвориха офиси в града.
                                     </p>
                                     <br/>
-
+                            
                                     <span class="title-btns-content"><a class="sub-btn" href="{{route('programmingCourses')}}">виж още</a></span>
                             </p>
                         </div>
@@ -244,7 +245,9 @@
                 </div>
                 <div class="main-events d-flex mb-12 flex-row col-md-12 flex-wrap">
                     <div class="p-6 col-md-6 text-center main-event-first">
+
                         <a href="https://hack.vratsa.net/" target=" _blank">
+
                             <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/HackVratsa.jpg')}}" alt="events">
                         </a>
                         <div class="event-title-top">
@@ -252,11 +255,13 @@
                         </div>
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-second">
+
                         <a href="https://hunt.vratsa.net/" target=" _blank">
                             <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/th.jpg')}}" alt="events">
                         </a>
                         <div class="event-title-top">
                             <a href="https://hunt.vratsa.net/" target=" _blank" class="event-top-link">TreasureHunt</a>
+
                         </div>
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-first">
@@ -268,7 +273,9 @@
                         </div>
                     </div>
                     <div class="p-6 col-md-6 text-center main-event-second">
+
                         <a href="https://codeweek.vratsa.net/" target=" _blank">
+
                             <img src="{{asset('/images/loaders/load-22.gif')}}" data-img="{{asset('/images/home-events/cw18.png')}}" alt="events">
                         </a>
                         <div class="event-title-top">
@@ -478,6 +485,7 @@
 					} );
             });
         </script>
+    </div>
 </body>
 
 </html>

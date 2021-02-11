@@ -324,7 +324,9 @@ a, .title-btns-content>a {
     opacity: 0.2;
 }
 
+
 .dot > img{
+
     /*border-radius:50px;*/
 }
 
@@ -538,6 +540,7 @@ a, .title-btns-content>a {
 }
 
 .main-event-first>img, .main-event-second>img, .main-event-first>a >img,  .main-event-second>a>img{
+
     z-index: -1;
     width: 90%;
     position: relative;
@@ -548,8 +551,10 @@ a, .title-btns-content>a {
     border-collapse: collapse;
 }
 
+
 .main-event-first > a, .main-event-second>a {
     display:block;
+
 }
 
 .slider {
@@ -896,6 +901,7 @@ a, .title-btns-content>a {
     padding-bottom: 2%;
     padding-left: 27%;
     padding-right: 27%;
+
 }
 
 .about-go, .edu-go {

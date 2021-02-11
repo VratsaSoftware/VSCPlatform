@@ -69,11 +69,19 @@
 					window.clearTimeout( scrollTimer );
 					animating = false;
 				} );
+<<<<<<< HEAD
 				// if ( $target.find( '#events' ).length ) {
 				// 	$( '.main-events > div' ).each( function ( k, v ) {
 				// 		$( this ).find( 'img' ).attr( 'src', $( this ).find( 'img' ).attr( 'data-img' ) );
 				// 	} );
 				// }
+=======
+				if ( $target.find( '#events' ).length ) {
+					// $( '.main-events > div' ).each( function ( k, v ) {
+					// 	$( this ).find( 'img' ).attr( 'src', $( this ).find( 'img' ).attr( 'data-img' ) );
+					// } );
+				}
+>>>>>>> b7f09e1a9f8b0c77e5d9ea984a4d57ccf5abe52c
 			}
 		}
 		// on window scroll
