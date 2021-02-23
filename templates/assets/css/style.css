@@ -569,16 +569,46 @@ button {
   .accordion-button .time {
     font-weight: normal;
   }
-  /* .slide > .show {
+  #right-side .tab-pane.active {
     position: fixed;
-    background: white !important;
-    height: 812px;
     top: 0;
     bottom: 0;
     left: 0;
     right: 0;
     z-index: 999;
-  } */
+    padding: 10px;
+    background-color: #4b6280;
+    overflow-y: scroll;
+  }
+  #right-side .tab-pane .tab-body {
+    max-width: 600px;
+    padding: 30px 20px;
+    margin: 30px auto;
+    background-color: #eaf1fa;
+    border-radius: 15px;
+  }
+  #right-side .tab-pane .tab-body .close {
+    font-size: 28px;
+    top: 10px;
+    right: 20px;
+  }
+  .calendar input {
+    width: 100%;
+  }
+  .video-upload {
+    border-radius: 11px;
+    max-height: 375px;
+  }
+  .video-upload-btn {
+    top: 28%;
+    font-size: 14px;
+    color: #8de219;
+    line-height: 11px;
+    text-transform: capitalize;
+  }
+  .video-upload img {
+    height: 33px;
+  }
   .nav-item {
     padding-bottom: 30px;
   }
