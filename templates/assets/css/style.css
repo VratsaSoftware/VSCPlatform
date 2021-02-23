@@ -589,6 +589,7 @@ button {
   }
   #right-side .tab-pane .tab-body .close {
     font-size: 28px;
+    font-weight: bold;
     top: 10px;
     right: 20px;
   }
@@ -608,6 +609,18 @@ button {
   }
   .video-upload img {
     height: 33px;
+  }
+  .btn-add {
+    border-radius: 15px;
+    width: 50px;
+    height: 50px;
+    color: #fff;
+    font-size: 30px;
+    font-weight: normal;
+    line-height: 15px;
+    text-align: center;
+    background-color: #69b501;
+    border: none;
   }
   .nav-item {
     padding-bottom: 30px;
