@@ -5,7 +5,7 @@ $(document).ready(function(){
     });
 
     $('.btn-green').on('click', function () {
-        $('.btn-green.active').toggleClass("active");;
+        $('.btn-green.active').toggleClass("active");
     });
 
     $('#tab_selector').on('change', function () {
@@ -13,12 +13,12 @@ $(document).ready(function(){
     });
 
     $(".date-input").datepicker("dd-mm-yy");
+
+    $('#right-side .tab-pane .close').on('click', function () {
+        $("#right-side .tab-pane.active").removeClass("active");
+    });
         
     if ($(window).width() < 992) {
-        $("#right-side .tab-pane").removeClass("active");
-        $('#right-side .tab-pane .close').on('click', function () {
-            $("#right-side .tab-pane.active").removeClass("active");
-            
-        });
+        $("#right-side .tab-pane.active").removeClass("active");
     }
 });

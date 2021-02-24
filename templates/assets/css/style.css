@@ -55,6 +55,9 @@
 .text-orange {
   color: #d07d1e;
 }
+.text-navy-blue {
+  color: #00214b;
+}
 /** custom boodstrap colors and fonts END**/
 body {
   font-family: "Roboto" !important;
@@ -145,8 +148,9 @@ button {
   cursor: pointer;
 }
 .slide-item {
-  max-width: auto;
-  transition: all 1s;
+  margin-left: 25px;
+  max-width: 270px;
+  transition: all 0.3s;
 }
 .slide-item img {
   transform: rotate(-90deg);
@@ -154,7 +158,6 @@ button {
 }
 .icon {
   width: 27px;
-  margin-right: 25px;
 }
 /** Nav menu END **/
 
@@ -204,6 +207,7 @@ button {
 .nav-tabs .nav-link.active {
   border-bottom: solid 3px #69b501;
   background-color: transparent;
+  color: #69b501;
 }
 .nav-tabs .nav-link {
   border: none;
@@ -251,11 +255,13 @@ button {
 .accordion-item {
   border-radius: 20px;
   background-color: #f2f3f5;
-  padding-bottom: 20px;
+  padding-bottom: 14px;
   padding-right: 20px;
   padding-left: 36px;
-  margin-bottom: 45px;
+  margin-bottom: 35px;
+  color: #000 !important;
 }
+
 .accordion-item img {
   margin-right: 11px;
 }
@@ -263,8 +269,8 @@ button {
   padding: 27px 0;
 }
 .accordion-button.collapsed {
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 17px;
+  padding-bottom: 17px;
 }
 .accordion-button,
 .accordion-button:focus,
@@ -286,7 +292,7 @@ button {
   transition: all 0.2s;
 }
 .accordion-button.collapsed ~ .btn-see {
-  margin-top: -60px;
+  margin-top: -58px;
 }
 .accordion-button.collapsed ~ .btn-see .btn-green .col-auto {
   display: none;
@@ -303,7 +309,7 @@ button {
   -webkit-box-orient: vertical;
 }
 .btn-see .btn-green .col-auto {
-  width: 80px;
+  width: 75px;
   overflow: hidden;
   word-break: keep-all;
   transition: width 0.4s;
@@ -313,6 +319,9 @@ button {
   height: 45px;
   line-height: 1.18;
   border-radius: 15px;
+}
+.eval {
+  color: #00214b;
 }
 .accordion-button.collapsed ~ .btn-see .eval {
   opacity: 0;
@@ -361,6 +370,10 @@ button {
   height: 60px;
   padding: 0 20px;
 }
+.input-button {
+  font-weight: normal !important;
+  font-size: 32px;
+}
 .edit-content .btn-edit {
   width: 270px;
 }
@@ -406,10 +419,14 @@ button {
   padding: 0 2px 3px 2px;
   width: 15px;
 }
-.date-pill {
+.btn-plus {
+  margin-bottom: 2px;
+}
+.date-pill input {
   border-radius: 10px;
   width: 103px;
   height: 45px;
+  color: #e29821;
   border: solid 1px #00214b;
 }
 .home-work {
@@ -439,6 +456,7 @@ button {
     margin-bottom: 10px;
   }
   .btn-edit {
+    width: 100%;
     min-width: auto;
   }
   .accordion-item {
@@ -470,6 +488,12 @@ button {
   }
   .lectures {
     margin-right: -10px;
+  }
+  .accordion-body {
+    padding-right: 0;
+  }
+  .accordion-item img {
+    margin-right: 6px;
   }
 }
 @media only screen and (max-width: 1400px) {
@@ -569,6 +593,9 @@ button {
   .accordion-button .time {
     font-weight: normal;
   }
+  #right-side .tab-pane {
+    height: 0;
+  }
   #right-side .tab-pane.active {
     position: fixed;
     top: 0;
@@ -577,6 +604,7 @@ button {
     right: 0;
     z-index: 999;
     padding: 10px;
+    height: 100vh;
     background-color: #4b6280;
     overflow-y: scroll;
   }
@@ -592,6 +620,7 @@ button {
     font-weight: bold;
     top: 10px;
     right: 20px;
+    cursor: pointer;
   }
   .calendar input {
     width: 100%;
@@ -629,8 +658,15 @@ button {
 @media only screen and (min-width: 992px) {
   .toggled .slide-item {
     max-width: 0;
+    margin-left: 0;
     overflow: hidden;
-    transition: max-width 1s;
+    transition: all 0.3s;
+  }
+  .toggled {
+    margin-right: 35px;
+  }
+  .toggled .pill {
+    right: 0;
   }
   .toggled .pill a {
     -ms-transform: rotate(180deg); /* IE 9 */
