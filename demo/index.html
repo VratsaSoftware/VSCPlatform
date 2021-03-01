@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VSO</title>
+    <link rel="stylesheet" type="text/css" href="assets/bootstrap/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="assets/custom/style.css">
+</head>
+
+<body>
+    <div class="container-fluid g-0">
+        <div class="row g-0 p-0 m-0">
+            <div class="col-auto navigation position-relative">
+                <div class="logo d-flex justify-content-center">
+                    <a class="d-inline-block" href="#">
+                        <img src="assets/imgs/logo-black.png" alt="VSO Logo">
+                    </a>
+                </div>
+                <ul class="navigation-links list-unstyled pb-4">
+                    <li class="mb-lg-4">
+                        <a class="d-flex justify-content-start align-items-center active" href="#">
+                            <img src="assets/icons/Courses.svg" class="icon" alt="Icon">
+                            <span>Курсове</span>
+                        </a>
+                    </li>
+                    <li class="mb-lg-4">
+                        <a class="d-flex justify-content-start align-items-center" href="#">
+                            <img src="assets/icons/Events.svg" class="icon" alt="Icon">
+                            <span>Събития</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="row d-flex g-0 mt-5 justify-content-center user-profile">
+                    <div class="col-auto">
+                        <img src="assets/imgs/avatar.png" class="profile-picture-sm" alt="Avatar">
+                    </div>
+                    <div class="col d-flex flex-wrap flex-column align-self-center ps-lg-4 ps-2">
+                        <span class="d-block fw-bold username text-break">Kalin Iliev</span>
+                        <span class="d-block role">Студент</span>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="d-flex justify-content-start align-items-center mt-4 p-0">
+                            <a href="#" class="d-inline-block">
+                                <img src="assets/icons/Log out.svg" class="icon" alt="Icon">
+                                <span>Изход</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="row g-0">
+                    <div class="col g-0 p-0 position-relative">
+                        <div
+                            class="toggler mt-4 d-flex position-absolute end-0 justify-content-center align-items-center">
+                            <img src="assets/icons/arrow.svg" alt="#">
+                        </div>
+                    </div>
+                </div>
+                <div
+                    class="notification-message d-flex flex-column position-absolute bottom-0 translate-middle-x start-50 mb-5">
+                    <img src="assets/icons/bell.svg" width="72" alt="Notification">
+                    <span class="d-block mx-auto fw-bold notification-message-text">
+                        Нещо
+                        важно
+                    </span>
+                    <a href="#" class="d-inline-block py-3 mx-3 mt-3">
+                        <div class="row g-0 p-0 m-0">
+                            <div class="col ps-4">
+                                <span class="fw-bold">Виж</span>
+                            </div>
+                            <div class="col pe-4 text-end">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="27" height="27" fill="currentColor"
+                                    class="bi bi-arrow-right-short" viewBox="0 0 16 16">
+                                    <path fill-rule="evenodd"
+                                        d="M4 8a.5.5 0 0 1 .5-.5h5.793L8.146 5.354a.5.5 0 1 1 .708-.708l3 3a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708-.708L10.293 8.5H4.5A.5.5 0 0 1 4 8z" />
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg">
+                <div class="row g-0 mt-1 pt-5 ms-3 ps-5 me-1 pe-5">
+                    <div class="col-auto courses">
+                        <div class="row g-0 position-relative">
+                            <div class="col d-flex justify-content-end position-absolute filter">
+                                <img src="assets/icons/filter.svg" width="32" alt="#">
+                            </div>
+                        </div>
+                        <ul class="list-unstyled m-0">
+                            <li>
+                                <p class="fw-bold text-uppercase courses-section-title">Записани курсове</p>
+                            </li>
+                            <li>
+                                <div class="course">
+                                    <div class="row g-0">
+                                        <div class="col-auto">
+                                            <img src="assets/icons/Programirane.svg" alt="#">
+                                        </div>
+                                        <div class="col text-end">
+                                            <span class="fw-bold course-status-active">Активен</span>
+                                        </div>
+                                    </div>
+                                    <div class="row g-0 mt-4 d-flex align-items-center">
+                                        <div class="col">
+                                            <p class="m-0 p-0 course-title">Програмиране</p>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button class="btn view-course-btn d-flex py-0 px-3">
+                                                <div class="row w-100 g-0 align-self-center">
+                                                    <div class="col text-start">
+                                                        <span class="fw-bold">Виж</span>
+                                                    </div>
+                                                    <div class="col-auto d-flex align-items-center">
+                                                        <img src="assets/icons/action icon.svg" width="27" alt="#">
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <p class="fw-bold text-uppercase courses-section-title">Активни курсове</p>
+                            </li>
+                            <li>
+                                <div class="course">
+                                    <div class="row g-0">
+                                        <div class="col-auto">
+                                            <img src="assets/icons/Design.svg" alt="#">
+                                        </div>
+                                        <div class="col text-end">
+                                            <span class="fw-bold course-status-active">Активен</span>
+                                        </div>
+                                    </div>
+                                    <div class="row g-0 mt-4 d-flex align-items-center">
+                                        <div class="col">
+                                            <p class="m-0 p-0 course-title">Дизайн</p>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button class="btn view-course-btn d-flex py-0 px-3">
+                                                <div class="row w-100 g-0 align-self-center">
+                                                    <div class="col text-start">
+                                                        <span class="fw-bold">Виж</span>
+                                                    </div>
+                                                    <div class="col-auto d-flex align-items-center">
+                                                        <img src="assets/icons/action icon.svg" width="27" alt="#">
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="course">
+                                    <div class="row g-0">
+                                        <div class="col-auto">
+                                            <img src="assets/icons/Marketing.svg" alt="#">
+                                        </div>
+                                        <div class="col text-end">
+                                            <span class="fw-bold course-status-active">Активен</span>
+                                        </div>
+                                    </div>
+                                    <div class="row g-0 mt-4 d-flex align-items-center">
+                                        <div class="col">
+                                            <p class="m-0 p-0 course-title">Дигитален маркетинг</p>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button class="btn view-course-btn d-flex py-0 px-3">
+                                                <div class="row w-100 g-0 align-self-center">
+                                                    <div class="col text-start">
+                                                        <span class="fw-bold">Виж</span>
+                                                    </div>
+                                                    <div class="col-auto d-flex align-items-center">
+                                                        <img src="assets/icons/action icon.svg" width="27" alt="#">
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="course">
+                                    <div class="row g-0">
+                                        <div class="col-auto">
+                                            <img src="assets/icons/Software.svg" alt="#">
+                                        </div>
+                                        <div class="col text-end">
+                                            <span class="fw-bold course-status-active">Активен</span>
+                                        </div>
+                                    </div>
+                                    <div class="row g-0 mt-4 d-flex align-items-center">
+                                        <div class="col">
+                                            <p class="m-0 p-0 course-title">Софтуерно тестване</p>
+                                        </div>
+                                        <div class="col-auto">
+                                            <button class="btn view-course-btn d-flex py-0 px-3">
+                                                <div class="row w-100 g-0 align-self-center">
+                                                    <div class="col text-start">
+                                                        <span class="fw-bold">Виж</span>
+                                                    </div>
+                                                    <div class="col-auto d-flex align-items-center">
+                                                        <img src="assets/icons/action icon.svg" width="27" alt="#">
+                                                    </div>
+                                                </div>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col student-info">
+                        <div class="row g-0 m-0 p-0">
+                            <div class="col">
+                                <p class="m-0 p-0 text-uppercase student-name">Калин илиев</p>
+                                <p class="m-0 p-0 text-uppercase role-name">Студент</p>
+                            </div>
+                            <div class="col">
+                                <div class="row g-0">
+                                    <div class="col d-flex align-items-stretch">
+                                        <div class="row g-0">
+                                            <div class="col">
+                                                <ul class="list-inline text-end">
+                                                    <li class="list-inline-item me-3">
+                                                        <img src="assets/imgs/facebook.png" alt="#">
+                                                    </li>
+                                                    <li class="list-inline-item me-3">
+                                                        <img src="assets/imgs/insta.png" alt="#">
+                                                    </li>
+                                                    <li class="list-inline-item me-3">
+                                                        <img src="assets/imgs/facebook.png" alt="#">
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <div class="w-100"></div>
+                                            <div class="col d-flex justify-content-end">
+                                                <button
+                                                    class="btn edit-profile-btn d-flex align-items-center py-0 px-3 me-4">
+                                                    <div class="row w-100 g-0">
+                                                        <div class="col text-start">
+                                                            <span class="fw-bold">Редактирай</span>
+                                                        </div>
+                                                        <div class="col-auto d-flex align-items-center">
+                                                            <img src="assets/icons/edit.svg" width="20" alt="#">
+                                                        </div>
+                                                    </div>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-auto">
+                                        <img src="assets/imgs/avatar_2.png" alt="Avatar">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col mt-5 pt-2 profile-details">
+                                <div class="row g-0 d-flex align-items-center">
+                                    <div class="col">
+                                        <img src="assets/icons/location.svg" width="24" alt="#">
+                                        <span class="ps-3">Враца</span>
+                                    </div>
+                                    <div class="col">
+                                        <img src="assets/icons/birthday.svg" width="30" alt="#">
+                                        <span class="ps-3">01.11.1994</span>
+                                    </div>
+                                    <div class="col">
+                                        <img src="assets/icons/email.svg" width="30" alt="#">
+                                        <span class="ps-3">Kalin.a.iliev@gmail.com</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col mt-5 pt-4">
+                                <div class="row g-0">
+                                    <div class="col pe-2 me-5">
+                                        <p class="fw-bold bio-title">За мен</p>
+                                        <p class="bio-description">
+                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
+                                            nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+                                            wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
+                                            lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+                                            dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+                                            dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+                                            dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
+                                            feugait nulla facilisi.
+                                        </p>
+                                    </div>
+                                    <div class="col">
+                                        <p class="fw-bold bio-title">Образование</p>
+                                        <p class="bio-description">
+                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
+                                            nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+                                            wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
+                                            lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+                                            dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+                                            dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+                                            dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
+                                            feugait nulla facilisi.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col mt-4 pt-3">
+                                <div class="row g-0">
+                                    <div class="col pe-2 me-5">
+                                        <p class="fw-bold bio-title">Работен опит</p>
+                                        <div class="row g-0">
+                                            <div class="col-auto pe-3 fw-bold item-number">1.</div>
+                                            <div class="col mb-3 bio-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                                sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+                                                erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                                                ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+                                                molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+                                                eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
+                                                zzril delenit augue duis dolore te feugait nulla facilisi.
+                                            </div>
+                                            <div class="w-100"></div>
+                                            <div class="col-auto pe-3 fw-bold item-number">2.</div>
+                                            <div class="col bio-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit,
+                                                sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+                                                erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                                                ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+                                                molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+                                                eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
+                                                zzril delenit augue duis dolore te feugait nulla facilisi.
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col">
+                                        <p class="fw-bold bio-title">Интереси</p>
+                                        <p class="bio-description">
+                                            Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
+                                            nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+                                            wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
+                                            lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+                                            dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+                                            dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+                                            dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
+                                            feugait nulla facilisi.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col-auto notebook">
+                                <div class="row g-0 d-flex align-items-center">
+                                    <div class="col">
+                                        Бележник
+                                    </div>
+                                    <div class="col-auto">
+                                        <img src="assets/icons/notebook.svg" width="48" alt="#">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="w-100"></div>
+                            <div class="col">
+                                <div class="row g-0">
+                                    <div class="col">
+                                        <p class="fw-bold bio-title">Предстоящо събитие</p>
+                                    </div>
+                                    <div class="w-100"></div>
+                                    <div class="col upcoming-event">
+                                        <div class="row g-0">
+                                            <div class="col">
+                                                <p class="text-uppercase event-title pb-4 mb-1">CODE WEEK VRATSA</p>
+                                            </div>
+                                            <div class="row g-0 d-flex align-items-center">
+                                                <div class="col event-info">
+                                                    <span>10.09.2020</span>
+                                                    <span class="h-100 vertical-line"></span>
+                                                    <span>Зала “БОТЕВ”</span>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <button class="btn view-event-btn d-flex py-0 px-3">
+                                                        <div class="row w-100 g-0 align-self-center">
+                                                            <div class="col text-start">
+                                                                Виж повече
+                                                            </div>
+                                                            <div class="col-auto d-flex align-items-center">
+                                                                <img src="assets/icons/action icon.svg" width="27" alt="#">
+                                                            </div>
+                                                        </div>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+        crossorigin="anonymous"></script>
+    <script src="assets/bootstrap/js/bootstrap.js"></script>
+</body>
+
+</html>

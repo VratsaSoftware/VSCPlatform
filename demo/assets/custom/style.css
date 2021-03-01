@@ -1,0 +1,322 @@
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Regular.ttf");
+  font-weight: normal;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Medium.ttf");
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Roboto";
+  src: url("fonts/Roboto-Bold.ttf");
+  font-weight: bold;
+}
+
+body{
+    background-color: #f6f9ff;
+    color: #00214b !important;
+	font-family: "Roboto" !important;
+}
+
+.navigation{
+    max-width: 270px;
+    height: 1080px !important;
+    background-color: #fff;
+}
+
+.logo{
+    padding: 50px 40px 156px 50px;
+}
+
+.logo img{
+    max-width: 180px !important;
+}
+
+a, a:hover{
+    color: #00214b;
+    text-decoration: none;
+}
+
+.navigation-links{
+    padding-right: 64px;
+}
+
+.navigation-links a{
+    height: 50px;
+    padding-left: 50px;
+    padding-right: 29px;
+    font-size: 17px;
+    line-height: 17px;
+    letter-spacing: 0.34px;
+    border-top-right-radius: 22px;
+    border-bottom-right-radius: 22px;
+}
+
+.active{
+    background-color: rgba(59, 59, 170, 0.08);
+    font-weight: bold;
+}
+
+.icon{
+    width: 27px;
+    margin-right: 30px;
+}
+
+.profile-picture-sm{
+    width: 55px;
+    height: 55px;
+}
+
+.username{
+    font-size: 17px;
+    letter-spacing: 0.34px;
+}
+
+.role{
+    font-size: 14px;
+    letter-spacing: 0.28px;
+    color: #666666;
+}
+
+.user-profile{
+    padding-left: 50px;
+}
+
+.notification-message{
+    width: 170px;
+    background-color: #fff;
+    box-shadow: 10px 23px 50px rgba(217, 139, 30, 0.38);
+    border-radius: 20px;
+}
+
+.notification-message img{
+    margin-left: 42px;
+    margin-top: -44px;
+}
+
+.notification-message-text{
+    width: 4rem;
+    text-align: center;
+    color: #d07d1e;
+    font-size: 20px;
+    line-height: 23px;
+    padding-top: 32.5px;
+    letter-spacing: 0.4px;
+}
+
+.notification-message a{
+    font-size: 17px;
+    letter-spacing: 0.34px;
+}
+
+.toggler{
+    width: 42px;
+    height: 42px;
+    margin-right: -21px;
+    background-color: #fff;
+    box-shadow: 0 0 0 11px #f8fafe;
+    border-radius: 50%;
+    box-sizing: content-box;
+    cursor: pointer;
+}
+
+.filter{
+    padding-right: 50px;
+}
+
+.courses{
+    width: 700px !important;
+    padding: 71px 25px 9px 0;
+    background-color: #fff;
+    box-shadow: 0 103px 80px rgba(0, 15, 67, 0.35);
+    backdrop-filter: blur(8px);
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+}
+
+.courses ul{
+    width: 100%;
+    max-height: 1300px;
+    overflow-y: scroll;
+    padding-left: 52px;
+    padding-right: 47px;
+    box-sizing: border-box;
+}
+
+.courses ul::-webkit-scrollbar{
+    width: 6px;
+}
+
+.courses ul::-webkit-scrollbar-track{
+    margin-top: 100px;
+    margin-bottom: 371px;
+    background-color: #cccccc;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.courses ul::-webkit-scrollbar-thumb{
+    background-color: #00214b;
+    width: 6px;
+    border-radius: 3px;
+}
+
+.courses-section-title{
+    margin: 0;
+    padding-bottom: 92px;
+    font-size: 20px;
+    line-height: 23px;
+    letter-spacing: 0.4px;
+}
+
+.course{
+    margin-bottom: 72px;
+    padding: 24px 32px 33px 40px;
+    background-color: rgba(255, 255, 255, 0.33);
+    box-shadow: 0 0 20px rgba(0, 15, 67, 0.35);
+    border-radius: 20px;
+}
+
+.course-status-active{
+    color: #69b501;
+    line-height: 20px;
+    letter-spacing: 0.34px;
+}
+
+.course-status-active::before{
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin-right: 15px;
+    border-radius: 50%;
+    background-color: #69b501;
+}
+
+.course-title{
+    font-size: 25px;
+    line-height: 28px;
+    letter-spacing: 0.5px;
+}
+
+.view-course-btn{
+    background-color: #69b501;
+    min-width: 140px;
+    height: 45px;
+    border-radius: 15px;
+    color: #fff !important;
+    line-height: 1.18;
+    letter-spacing: 0.34px;
+    border: none !important;
+}
+
+/* End Courses Section */
+
+.student-info{
+    padding-left: 70px;
+}
+
+.student-name{
+    font-size: 30px;
+    color: #00214b;
+    font-weight: 900;
+    letter-spacing: 0.6px;
+    line-height: 1;
+}
+
+.role-name{
+    margin-top: 9px !important;
+    font-size: 25px;
+    letter-spacing: 0.5px;
+    line-height: 1;
+}
+
+.edit-profile-btn{
+    min-width: 180px;
+    height: 45px;
+    border: 1px solid #00214b;
+    border-radius: 15px;
+    line-height: 1.18;
+    letter-spacing: 0.34px;
+}
+
+.profile-details{
+    color: #000;
+}
+
+.bio-title{
+    padding-bottom: 22px;
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.15;
+    letter-spacing: 0.4px;
+}
+
+.bio-description{
+    height: 48px;
+    font-size: 14px;
+    line-height: 1.21;
+    letter-spacing: 0.28px;
+    overflow: hidden;
+}
+
+.item-number{
+    font-size: 20px;
+    line-height: 1.15;
+    letter-spacing: 0.4px;
+}
+
+.notebook{
+    min-width: 348px;
+    margin-top: 40px;
+    margin-bottom: 47px;
+    padding: 12px 12px 12px 26px;
+    font-size: 25px;
+    line-height: 1;
+    letter-spacing: 0.5px;
+    background-color: #fff;
+    border-radius: 10px;
+}
+
+.upcoming-event{
+    padding: 27px 38px 26px 34px;
+    background-color: #fff;
+    border-radius: 15px;
+}
+
+.event-title{
+    font-weight: 900;
+    font-size: 30px;
+    line-height: 1;
+    letter-spacing: 0.6px;
+}
+
+.event-info{
+    font-size: 25px;
+    line-height: 1;
+    letter-spacing: 0.5px;
+}
+
+.vertical-line{
+    width: 0;
+    border: 1px solid #707070;
+    margin-left: 47.6px;
+    margin-right: 30.4px;
+}
+
+.view-event-btn{
+    min-width: 180px;
+    height: 45px;
+    background-color: #00214b;
+    color: #fff;
+    border-radius: 15px;
+    border: none !important;
+}
+
+@media only screen and (max-width: 1024px){
+    .courses{
+        width: auto !important;
+    }
+}
