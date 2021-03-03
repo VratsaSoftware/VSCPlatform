@@ -24,15 +24,18 @@ body{
     max-width: 270px;
     height: 1080px !important;
     background-color: #fff;
+    transition: max-width .5s ease;
 }
 
 .logo{
     padding: 50px 40px 156px 50px;
 }
 
+/*
 .logo img{
     max-width: 180px !important;
 }
+*/
 
 a, a:hover{
     color: #00214b;
@@ -319,4 +322,69 @@ a, a:hover{
     .courses{
         width: auto !important;
     }
+}
+
+.shrinked{
+    transition: all .5s ease;
+}
+
+.navigation.shrinked{
+    max-width: 150px !important;
+    margin-right: 40px;
+}
+
+.shrinked .logo{
+    padding: 50px 30px 156px 30px;
+}
+
+.shrinked .navigation-links{
+    padding-right: 30px;
+}
+
+.shrinked .navigation-links a{
+    justify-content: center !important;
+}
+
+.shrinked .navigation-links img{
+    margin: 0;
+}
+
+.shrinked .navigation-links span{
+    width: 0;
+    overflow: hidden;
+}
+
+.shrinked .user-profile{
+    padding-left: 0; 
+}
+
+.shrinked .user-profile-info{
+    display: none !important;
+}
+
+.shrinked .logout-link{
+    text-align: center;
+}
+
+.shrinked .logout-link span{
+    display: inline-block;
+    width: 0;
+    overflow: hidden;
+}
+
+.shrinked .logout-link img{
+    margin: 0;
+}
+
+.shrinked .username, .shrinked .role{
+    width: 0;
+    overflow: hidden;
+}
+
+.shrinked .toggler img{
+    transform: rotateY(180deg);
+}
+
+.shrinked .notification-message{
+    left: 100% !important;
 }

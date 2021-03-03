@@ -13,10 +13,10 @@
 <body>
     <div class="container-fluid g-0">
         <div class="row g-0 p-0 m-0">
-            <div class="col-auto navigation position-relative">
+            <div class="col-auto navigation position-relative" id="navigation">
                 <div class="logo d-flex justify-content-center">
                     <a class="d-inline-block" href="#">
-                        <img src="assets/imgs/logo-black.png" alt="VSO Logo">
+                        <img src="assets/imgs/logo-black.png" class="img-fluid" alt="VSO Logo">
                     </a>
                 </div>
                 <ul class="navigation-links list-unstyled pb-4">
@@ -37,13 +37,13 @@
                     <div class="col-auto">
                         <img src="assets/imgs/avatar.png" class="profile-picture-sm" alt="Avatar">
                     </div>
-                    <div class="col d-flex flex-wrap flex-column align-self-center ps-lg-4 ps-2">
+                    <div class="col d-flex flex-wrap flex-column align-self-center ps-lg-4 ps-2 user-profile-info">
                         <span class="d-block fw-bold username text-break">Kalin Iliev</span>
                         <span class="d-block role">Студент</span>
                     </div>
                     <div class="col-lg-12">
                         <div class="d-flex justify-content-start align-items-center mt-4 p-0">
-                            <a href="#" class="d-inline-block">
+                            <a href="javascript:void(0)" class="d-block w-100 logout-link">
                                 <img src="assets/icons/Log out.svg" class="icon" alt="Icon">
                                 <span>Изход</span>
                             </a>
@@ -53,7 +53,7 @@
                 <div class="row g-0">
                     <div class="col g-0 p-0 position-relative">
                         <div
-                            class="toggler mt-4 d-flex position-absolute end-0 justify-content-center align-items-center">
+                            class="toggler mt-4 d-flex position-absolute end-0 justify-content-center align-items-center" id="toggleNavigationBtn">
                             <img src="assets/icons/arrow.svg" alt="#">
                         </div>
                     </div>
@@ -406,6 +406,7 @@
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
         crossorigin="anonymous"></script>
     <script src="assets/bootstrap/js/bootstrap.js"></script>
+    <script src="assets/js/app.js"></script>
 </body>
 
 </html>
