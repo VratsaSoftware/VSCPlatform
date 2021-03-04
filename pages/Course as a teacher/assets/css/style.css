@@ -459,6 +459,30 @@ button {
   height: 45px;
   border-radius: 15px;
 }
+.file-add {
+  font-size: 17px;
+}
+.deadline-2 {
+  font-size: 17px;
+}
+.data-07 {
+  font-size: 20px;
+  color: #e29821;
+}
+.btn-4 {
+  width: 270px;
+  height: 50px;
+}
+.text-5 {
+  font-size: 17px;
+  color: #00214b;
+}
+.enddata {
+  margin-left: -18px;
+}
+.enddata1 {
+  margin-left: -27px;
+}
 
 /** Right side END**/
 /** Media query**/
@@ -481,6 +505,7 @@ button {
     font-weight: bold;
   }
 }
+
 @media only screen and (max-width: 992px) {
   .slide {
     height: auto;
