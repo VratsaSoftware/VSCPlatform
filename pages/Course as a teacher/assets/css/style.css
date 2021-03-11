@@ -483,6 +483,11 @@ button {
 .enddata1 {
   margin-left: -27px;
 }
+.role {
+  color: #999999;
+  font-weight: 100;
+  font-size: 14px;
+}
 
 /** Right side END**/
 /** Media query**/
@@ -501,7 +506,7 @@ button {
     font-size: 14px;
   }
   .add {
-    font-size: 15px;
+    font-size: 14px;
     font-weight: bold;
   }
 }
@@ -517,5 +522,25 @@ button {
   }
   .card {
     margin: 10px auto;
+  }
+  .card-title1 {
+    font-size: 20px;
+  }
+  .text-normal {
+    font-size: 17px;
+  }
+  .sub-heading {
+    font-size: 14px;
+  }
+  .lecture2 {
+    font-size: 17px;
+    color: #00214b;
+  }
+  .accordion-button {
+    padding: 25px 0px 10px 0px;
+  }
+  .orange-dot {
+    width: 12px;
+    height: 12px;
   }
 }
