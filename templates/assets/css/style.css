@@ -237,15 +237,19 @@ button {
 ::-webkit-scrollbar {
   width: 6px;
 }
-
 /* Track */
 ::-webkit-scrollbar-track {
   background: #cccccc;
+  margin-top: 10px!important;
+  margin-bottom: 10px!important;
+  margin-right: 5px!important;
+  border-radius: 3px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #666666;
+  border-radius: 3px;
 }
 
 /* Handle on hover */
@@ -405,6 +409,10 @@ button {
   height: 170px;
   width: 100%;
 }
+/* ::-webkit-scrollbar-track {
+  margin-top: 10px;
+  margin-bottom: 10px;
+} */
 .btn-add {
   padding: 5px 15px;
   width: 180px;
@@ -466,6 +474,10 @@ button {
   }
 }
 @media only screen and (max-width: 1546px) {
+  .calendar input {
+    width: 160px;
+    padding: 0 40px 0 20px;
+  }
   .card-title {
     font-size: 24px;
   }

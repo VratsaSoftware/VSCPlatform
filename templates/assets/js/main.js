@@ -20,5 +20,6 @@ $(document).ready(function(){
         
     if ($(window).width() < 992) {
         $("#right-side .tab-pane.active").removeClass("active");
+        $('.btn-green.active').removeClass("active");
     }
 });
