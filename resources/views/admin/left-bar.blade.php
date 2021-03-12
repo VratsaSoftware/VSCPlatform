@@ -125,13 +125,16 @@
                 </div>
                 <div class="row g-0 pt-lg-2">
                     <ul class="nav">
-                        <li class="nav-item w-100">
-                            <a href="" class="d-flex fw-bold">
+                        <li id="logout-btn" class="nav-item w-100">
+                            <a href="{{ route('logout') }}" class="d-flex fw-bold" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                                 <img src="{{ asset('assets/img/Log_out.svg') }}" alt="">
                                 <span class="slide-item text-navy-blue">
                                     Изход
                                 </span>
                             </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
                         </li>
                     </ul>
                 </div>
