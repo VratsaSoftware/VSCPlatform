@@ -92,6 +92,11 @@ button {
   border: none !important;
   color: #ffffff !important;
 }
+.btn-navy-blue {
+  background-color: #00214b;
+  border: none !important;
+  color: #ffffff !important;
+}
 /** Nav menu **/
 .slide {
   height: 1080px;
@@ -434,6 +439,85 @@ button {
   border: solid 1px #00214b;
 }
 /** Right side END**/
+/** Login**/
+.logo-black {
+  width: 180px;
+  height: 73px;
+  object-fit: contain;
+  margin-top: 88px;
+}
+.login {
+  width: 148px;
+  height: 66px;
+  font-family: Roboto;
+  font-size: 50px;
+  font-weight: 900;
+  color: var(--navy-blue);
+  margin-top: 85px;
+}
+.create {
+  font-family: Roboto;
+  font-size: 17px;
+  color: #778aa4;
+  margin-top: 14px;
+}
+.text-color {
+  color: #00214b;
+}
+.login-inputs {
+  max-width: 400px;
+  border-radius: 15px;
+}
+.text-password {
+  font-family: Roboto;
+  font-size: 17px;
+  color: #00214b;
+}
+.background-programming {
+  border: solid 8px #ffffff;
+  background-color: #eef4ff;
+  border-radius: 143px;
+  height: 1080px;
+}
+.programirane {
+  width: 150px;
+}
+.new {
+  width: 67px;
+  height: 46px;
+  background-position: center;
+  background-image: url(../img/new_course_shape.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.figures-2 {
+  height: 183px;
+}
+.basics-programming {
+  font-family: Roboto;
+  font-size: 50px;
+  font-weight: 900;
+  color: #00214b;
+  text-align: center;
+}
+.btn-program {
+  width: 180px;
+  height: 45px;
+  border-radius: 15px;
+  width: 180px;
+  height: 45px;
+  padding: 9.6px 15.6px 12.4px 15px;
+}
+.input-user {
+  margin-top: 118px;
+}
+.btn-margin {
+  margin-top: 60px;
+}
+.figures-margin {
+  margin-top: 118px;
+}
+/** Login END**/
 /** Media query**/
 @media only screen and (max-width: 1850px) {
   .edit-content {
@@ -653,6 +737,52 @@ button {
   }
   .nav-item {
     padding-bottom: 30px;
+  }
+  .basics-programming {
+    font-size: 20px;
+  }
+  .background-programming {
+    height: 800px;
+  }
+  .login {
+    margin-top: 36px;
+    font-size: 20px;
+  }
+  .logo-black {
+    width: 113px;
+    height: 46px;
+    margin-top: 0px;
+  }
+  .login-inputs {
+    padding: 54px 37px;
+  }
+  .input-user {
+    margin-top: 0px;
+  }
+  .create-account {
+    font-size: 14px;
+    color: #00214b;
+  }
+  .btn-margin {
+    margin-top: 30px;
+  }
+  .background-programming-2 {
+    border: solid 8px #ffffff;
+    background-color: #eef4ff;
+    border-radius: 52px;
+  }
+  .figures-margin {
+    margin-top: 44px;
+  }
+  .programirane {
+    width: 100px;
+    height: 100px;
+  }
+  .figures-2 {
+    width: 70px;
+  }
+  .new {
+    margin-top: -60px;
   }
 }
 @media only screen and (min-width: 992px) {
