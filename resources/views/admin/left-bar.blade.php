@@ -1,22 +1,34 @@
-<link href="{{ asset('css/app.css') }}" rel="stylesheet" />   
+<link href="{{ asset('css/app.css') }}" rel="stylesheet" />
 
 <div class="col-lg-auto position-relative">
     <nav class="slide navbar-expand-lg navbar-light bg-white fw-bold" id="mySidenav">
-        <a class="navbar-brand d-lg-block d-none mx-auto" href="#">
+        <a class="navbar-brand d-lg-block d-none mx-auto" href="{{ asset('myProfile') }}">
             <img src="{{ asset('assets/img/logo.png') }}" alt="" class="logo">
         </a>
         <div class="row g-0 d-lg-none d-flex pb-4 align-items-center">
             <div class="col">
                 <div class="row g-0 user-info justify-content-center">
                     <div class="col-auto">
-                        <img src="{{ asset('assets/img/avatar.png') }}" alt="" class="avatar">
+                        @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
+                            <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" class="avatar">
+                        @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
+                            <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" class="avatar">
+                        @else
+                            <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" class="avatar">
+                        @endif
                     </div>
                     <div class="col align-self-center ps-2 ms-1">
                         <div class="user_name fw-bold d-block">
-                            Ставри
+                            {{ Auth::user()->name }}
                         </div>
                         <div class="role text-xs text-warm-grey d-block">
-                            Учител
+                            @if (Auth::user()->cl_role_id == 1)
+                                Админ
+                            @elseif (Auth::user()->cl_role_id == 2)
+                                Ученик
+                            @else
+                                Лектор
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -31,7 +43,7 @@
             <div class="pt-lg-5">
                 <ul class="nav d-block col-12 pb-2">
                     <li class="nav-item align-items-center mb-lg-5">
-                        <a href="{{route('admin.applications')}}" class="d-flex align-items-center">
+                        <a href="{{ route('admin.applications') }}" class="d-flex align-items-center">
                             <span class="icon">
                                 <img src="{{ asset('assets/img/Application.svg') }}" alt="">
                             </span>
@@ -39,27 +51,33 @@
                         </a>
                     </li>
                     <li class="nav-item align-items-center mb-lg-5">
-                        <div class="dropdown">
-                            <a href="" class="d-flex align-items-center dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <!-- <div class="dropdown">
+                            <a href="{{ route('course.create') }}" class="d-flex align-items-center dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="icon">
                                     <img src="{{ asset('assets/img/Courses.svg') }}" alt="">
                                 </span>
                                 <span class="slide-item text-navy-blue">
-                                    Курсове 
+                                    Курсове
                                     <span>
                                         <img src="{{ asset('assets/img/arrow.svg') }}" alt="" class="ms-4">
                                     </span>
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                <a class="dropdown-item" href="{{route('course.create')}}">Добави</a>
-                                <a class="dropdown-item" href="{{route('all.courses')}}">Виж всички</a>
+                                <a class="dropdown-item" href="{{ route('course.create') }}">Добави</a>
+                                <a class="dropdown-item" href="{{ route('all.courses') }}">Виж всички</a>
                             </div>
-                        </div>
+                        </div> -->
+                        <a href="{{ route('all.courses') }}" class="d-flex align-items-center">
+                            <span class="icon">
+                                <img src="{{ asset('assets/img/Courses.svg') }}" alt="">
+                            </span>
+                            <span class="slide-item text-navy-blue">Курсове</span>
+                        </a>
                     </li>
                     <li class="nav-item align-items-center mb-lg-5">
                         <div class="dropdown">
-                            <a href="{{route('admin.events')}}" class="d-flex align-items-center dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <a href="{{ route('admin.events') }}" class="d-flex align-items-center dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="icon">
                                     <img src="{{ asset('assets/img/Events.svg') }}" alt="">
                                 </span>
@@ -86,7 +104,7 @@
                         </a>
                     </li>
                     <li class="nav-item align-items-center mb-lg-5">
-                        <a href="{{route('test.index')}}" class="d-flex align-items-center">
+                        <a href="{{ route('test.index') }}" class="d-flex align-items-center">
                             <span class="icon">
                                 <img src="{{ asset('assets/img/Tests.svg') }}" alt="">
                             </span>
@@ -96,14 +114,14 @@
                         </a>
                     </li>
                 </ul>
-                <div class="row  d-lg-flex d-none g-0 user-info py-lg-4 justify-content-center">
+                <div class="row d-lg-flex d-none g-0 user-info py-lg-4 justify-content-center">
                     <div class="col-auto">
                         @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
-                            <img src="{{asset('images/women-no-avatar.png')}}" alt="profile-pic" class="avatar">
+                            <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" class="avatar">
                         @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
-                            <img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="avatar">
+                            <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" class="avatar">
                         @else
-                            <img src="{{asset('images/user-pics/'.Auth::user()->picture)}}" alt="profile-pic" class="avatar">
+                            <img src="{{ asset('images/user-pics/' . Auth::user()->picture) }}" alt="profile-pic" class="avatar">
                         @endif
                     </div>
                     <div class="col align-self-center ps-4">
@@ -123,6 +141,7 @@
                         </div>
                     </div>
                 </div>
+
                 <div class="row g-0 pt-lg-2">
                     <ul class="nav">
                         <li id="logout-btn" class="nav-item w-100">
@@ -167,4 +186,4 @@
             </div>
         </div>
     </nav>
-</div>  
+</div>

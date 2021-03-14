@@ -1,16 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
     <meta charset="UTF-8">
-
     <title>@yield('title')</title>
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <!-- favicon -->
     <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png.png')}}" />
-
     <!-- facebook -->
     <meta property="og:url" content="" />
     <meta property="og:type" content="website" />
@@ -37,26 +32,25 @@
                 <!-- JQuery -->
                 <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
 
-                @include('layouts.top-bar')
                 @if(Auth::user() && Auth::user()->isAdmin())
-                @include('admin.left-bar')
+                    @include('admin.left-bar')
                 @endif
-                @if(Auth::user() && Auth::user()->isLecturer() && !Auth::user()->isAdmin())
-                @include('lecturer.left-bar')
+                    @if(Auth::user() && Auth::user()->isLecturer() && !Auth::user()->isAdmin())
+                    @include('lecturer.left-bar')
                 @endif
-                @if(Auth::user() && !Auth::user()->isLecturer() && !Auth::user()->isAdmin())
-                @include('user.left-bar')
+                    @if(Auth::user() && !Auth::user()->isLecturer() && !Auth::user()->isAdmin())
+                    @include('user.left-bar')
                 @endif
-                <!-- left side -->
-                <div class="col-xl-auto col ps-xxl-0 ps-lg-4">
+                <!-- nav menu END -->
+                <!-- <div class="col-xl-auto col ps-xxl-0 ps-lg-4">
                     <div class="card">
                         <div class="card-body">
-                            <div class="row g-0 pb-lg-4 mb-lg-3">
+                            <div class="row g-0 pb-lg-4 mb-lg-3"> -->
                                 @yield('content')
-                            </div>
+                            <!-- </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
                 <script>
                     $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
                         options.async = true;
@@ -67,11 +61,8 @@
                 <script src="{{asset('/js/slide-alerts.js')}}"></script>
                 <!-- //preview picture before saving -->
                 <script src="{{asset('/js/profile-picture-preview.js')}}" charset="utf-8" async></script>
-                <!-- nav menu END -->  
-                
             </div>
-        </div>      
-        
+        </div>
     </div>
     <!-- Bootstrap core JS Files -->
     <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
@@ -106,16 +97,12 @@
 
         , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
 
-
-
         var table = document.getElementById(table)
         var name = 'test';
 
         var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
 
         window.location.href = uri + base64(format(template, ctx))
-
     });
 </script>
-
 </html>

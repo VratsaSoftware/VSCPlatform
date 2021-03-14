@@ -2,7 +2,7 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 <head>
 	<meta charset="UTF-8">
-	<title>Login/Register</title>
+	<title>Reset Password</title>
     <!-- favicon -->
     <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png.png')}}" />
 
@@ -171,9 +171,9 @@
 <script>
 	$('#login-button').click(function(){
 		$('#login-button').fadeOut("slow",function(){
-			$("#register-container").fadeIn();
-			TweenMax.from("#register-container", .4, { scale: 0, ease:Sine.easeInOut});
-			TweenMax.to("#register-container", .4, { scale: 1, ease:Sine.easeInOut});
+			$("#forgotten-container").fadeIn();
+			TweenMax.from("#forgotten-container", .4, { scale: 0, ease:Sine.easeInOut});
+			TweenMax.to("#forgotten-container", .4, { scale: 1, ease:Sine.easeInOut});
 		});
 	});
 

@@ -52,11 +52,11 @@
                         <form action="{{route('course.update',['course' => $course->id])}}" method="POST" class="col-md-12" id="update-course-form" name="update-course-form" enctype="multipart/form-data" files="true">
                             {{ method_field('PUT') }}
                             {{ csrf_field() }}
-                            
+
                             <div class="col-md-12 text-center picture-title">
                                 Заглавна Снимка
                             </div>
-                            
+
                             <div class="col-md-12 picture-holder text-center">
                                 <label for="picture">
                                     @if($course->picture)
@@ -67,7 +67,7 @@
                                     <br>
                                 </label>
                             </div>
-                            
+
                             <div class="col-md-12 picture-button text-center">
                                 <input type="file" id="picture2" name="picture2" onChange="CourseimagePreview(this);">
                             </div>
@@ -116,7 +116,7 @@
                         </form>
                     </div>
                 </div>
-                
+
                 @if($course->picture)
                     <img src="{{asset('/images/course-'.$course->id.'/'.$course->picture)}}" alt="course-pic" class="course-picture-edit">
                 @else
@@ -128,7 +128,7 @@
                 <div class="col-md-6">Завършва - {{$course->ends->format('d-m-Y')}}</div>
             </div>
         </div>
-        
+
         <div class="col-md-6 right-option">
             <div class="event-title col-md-12 levels-title">Нива/Модули</div>
             <div class="event-body col-md-12">
@@ -158,7 +158,7 @@
                         @empty
                             <div class="col-md-12 text-center"><i class="fas fa-times"></i></div>
                         @endforelse
-                        
+
                         <a href="{{route('module.create',['course'=> $course->id])}}" class="col-md-12">
                             <li class="list-group-item list-group-item-action">
                                 <img src="{{asset('/images/profile/add-icon.png')}}" alt="add">
@@ -167,7 +167,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <img src="{{asset('/images/levels-bg.jpg')}}" alt="event-body">
             </div>
             <div class="event-footer col-md-12 d-flex flex-row flex-wrap levels-footer">
@@ -208,11 +208,11 @@
                     <h2></h2>
                 </div>
                 <div class="copy text-center">
-                    
+
                     <p>
-                    
+
                     </p>
-                    
+
                     </form>
                 </div>
                 <div class="cf footer">
@@ -230,7 +230,7 @@
                 $('.copy > p').html($(this).next('.levels-holder').html());
                 $('#modal').show();
             });
-            
+
             $('.change-vis').on("click", function(){
                 $('.copy > p').html($(this).next('.for-modal-course-visibility').html());
                 $('#modal').show();
@@ -257,7 +257,7 @@
                     $('.close-modal').append('<i class="fas fa-times"></i>');
                     $('#modal').show();
                 });
-                
+
                 $('.close-modal').on('click', function(){
                     $('.event-title').removeClass('for-delete');
                     $('.event-footer').removeClass('for-delete');

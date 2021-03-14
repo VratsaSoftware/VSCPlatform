@@ -8,22 +8,6 @@ textarea {
     outline: none;
 }
 
-#bio::-webkit-scrollbar {
-    width: 12px;
-}
-
-#bio::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    border-radius: 2px;
-}
-
-#bio::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background-color: #1B8500;
-    outline: 1px solid slategrey;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-}
-
 .bio-title {
     font-weight: bold;
     margin-bottom: 1vw;

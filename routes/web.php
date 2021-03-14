@@ -11,6 +11,15 @@
 |
 */
 
+/* auth */
+Route::get('user/register', function () {
+    return view('auth.register');
+})->name('user/register');
+
+Route::get('user/forgotPassword', function () {
+    return view('auth.passwords.forgot');
+})->name('auth.password.reset');
+
 Route::get('language/{lang}', function ($lang) {
     Session::put('locale', $lang);
     \Cookie::forget('locale');
