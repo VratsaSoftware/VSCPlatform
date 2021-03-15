@@ -8,6 +8,7 @@
 			<img class="logo-black" src="{{ asset('assets/img/logo.png') }}">
 		</div>
 	</div>
+
 	<form method="POST" action="{{ route('password.email') }}" id="reset-password">
 		@csrf
 
