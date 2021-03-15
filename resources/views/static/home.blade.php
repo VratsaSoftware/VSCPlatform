@@ -44,23 +44,6 @@
         <div id="carousel">
             <div class="slideshow-container">
                 {{-- title = 33 characters, text min = 125 / max = 290 --}}
-                <div class="mySlides" data-src="{{asset('/images/home-top-slider/digi_20_20.jpeg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
-                    <img src="" width="100%" alt="events">
-                    <div class="text text-wrap-gallery col-md-12 text-center">
-                        <p>
-                            <span class="slider-title">Нов курс по Дигитален Маркетинг</span>
-                        </p>
-                        <p>
-                        <p class="slider-subtitle-content">
-                            Търсиш вълнуваща работа в дигиталната сфера? Искаш да работиш за клиенти от България и света или да ползваш наученото за своя собствен бизнес? Кандидатствай за курса ни по дигитален маркетинг до 7 февруари.
-                        </p>
-                        <br/>
-
-                        <span class="title-btns-content"><a class="sub-btn" href="{{url('/digital-marketing')}}" target=" _blank">виж още</a></span>
-                        </p>
-                    </div>
-                </div>
-
                 <div class="mySlides" data-src="{{asset('/images/home-top-slider/cws_fb_cover2 (1).png')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                     <img src="" width="100%" alt="events">
                     <div class="text text-wrap-gallery col-md-12 text-center">
@@ -75,24 +58,6 @@
                         <br/>
 
                         <span class="title-btns-content"><a class="sub-btn" href="http://gnezdoto.vratsasoftware.com/" target=" _blank">виж още</a></span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="mySlides" data-src="{{asset('/images/home-top-slider/arduino.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
-                    <img src="" width="100%" alt="events">
-                    <div class="text text-wrap-gallery col-md-12 text-center">
-                        <p>
-                            <span class="slider-title">Arduino</span>
-                        </p>
-                        <p>
-                        <p class="slider-subtitle-content">
-                            Скоро стартираме курс по Arduino!
-                            Arduino е една от най-разпространените платформи за хоби роботика. Това е микроконтролер с огромно общество от потребители, като през годините е използван за хиляди разнообразни проекти.
-                        </p>
-                        <br/>
-
-                        <span class="title-btns-content"><a class="sub-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSf5-bKSKqJcMDONIrp93ggmYvaW84x3DR9e2em-uQf5LhH6aA/viewform" target=" _blank">кандидатствай</a></span>
                         </p>
                     </div>
                 </div>
@@ -115,20 +80,20 @@
                     </div>
                 </div>
 
-                <div class="mySlides" data-src="{{asset('/images/home-top-slider/programming-pic.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                <div class="mySlides" data-src="{{asset('/images/home-top-slider/cws_fb_cover2 (1).png')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                     <img src="" width="100%" alt="events">
                     <div class="text text-wrap-gallery col-md-12 text-center">
                         <p>
-                            <span class="slider-title">9-месечни курсове по програмиране</span>
+                            <span class="slider-title">Гнездото</span>
                         </p>
                         <p>
                         <p class="slider-subtitle-content">
-                            Обучението ще ви помогне да придобиете основни познания по програмиране и да имате възможност да започнете стаж в софтуерна компания във Враца!
-                            Към момента 30 човека завършили курсовете работят в ИТ сферата във Враца и 4 компании отвориха офиси в града.
+                            "Гнездото" е първото споделено работно пространство в Северозападна България и е проект на <b>"Враца софтуер общество".</b>
+                            <br />В момента работим по неговото създаване!
                         </p>
                         <br/>
 
-                        <span class="title-btns-content"><a class="sub-btn" href="{{route('programmingCourses')}}">виж още</a></span>
+                        <span class="title-btns-content"><a class="sub-btn" href="http://gnezdoto.vratsasoftware.com/" target=" _blank">виж още</a></span>
                         </p>
                     </div>
                 </div>
@@ -140,11 +105,9 @@
             <br>
 
             <div id="thumbnails" class="col-md-12">
-                <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/digi_20_20_small.png')}}" width="100%" alt="gallery-nav"></span>
-                <span class="dot" onclick="currentSlide(2)"><img src="{{asset('/images/home-top-slider/gnezdoto_logo_cropped.jpg')}}" width="100%" alt="gallery-nav"></span>
-                <span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/arduino_logo.png')}}" width="100%" alt="gallery-nav"></span>
-                <span class="dot" onclick="currentSlide(4)"><img src="{{asset('/images/home-top-slider/mind-hub-crop.png')}}" width="100%" alt="gallery-nav"></span>
-                <span class="dot" onclick="currentSlide(5)"><img src="{{asset('/images/home-top-slider/vsc-thumb-big-2.png')}}" width="100%" alt="gallery-nav"></span>
+                <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/gnezdoto_logo_cropped.jpg')}}" width="100%" alt="gallery-nav"></span>
+                <span class="dot" onclick="currentSlide(2)"><img src="{{asset('/images/home-top-slider/mind-hub-crop.png')}}" width="100%" alt="gallery-nav"></span>
+                <span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/vsc-thumb-big-2.png')}}" width="100%" alt="gallery-nav"></span>
             </div>
 
         </div>
