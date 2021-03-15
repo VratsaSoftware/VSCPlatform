@@ -197,7 +197,7 @@
                         <img src="" data-img="{{asset('/images/home-events/th.jpg')}}" alt="events">
                     </a>
                     <div class="event-title-top">
-                        <a href="https://hunt.vratsa.net/" target=" _blank" class="event-top-link">TreasureHunt</a>
+                        <a href="{{asset('/images/home-events/th.jpg')}}" target=" _blank" class="event-top-link">TreasureHunt</a>
                     </div>
                 </div>
                 <div class="p-6 col-md-6 text-center main-event-first">
