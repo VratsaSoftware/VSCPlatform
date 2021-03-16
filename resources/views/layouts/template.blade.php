@@ -56,11 +56,11 @@
                         options.async = true;
                     });
                 </script>
-                <script src="{{asset('/js/fixed-left-top-menu.js')}}"></script>
+                <!-- <script src="{{asset('/js/fixed-left-top-menu.js')}}"></script>
                 <script src="{{asset('/js/edit-showing-pencil.js')}}"></script>
-                <script src="{{asset('/js/slide-alerts.js')}}"></script>
+                <script src="{{asset('/js/slide-alerts.js')}}"></script> -->
                 <!-- //preview picture before saving -->
-                <script src="{{asset('/js/profile-picture-preview.js')}}" charset="utf-8" async></script>
+                <!-- <script src="{{asset('/js/profile-picture-preview.js')}}" charset="utf-8" async></script> -->
             </div>
         </div>
     </div>
@@ -71,38 +71,38 @@
 </body>
 
 <script type="text/javascript">
-    $(function() {
-        $('head').append('<link rel="stylesheet" href="{{asset('/css/bootstrap-grid.min.css')}}" />');
-        $('head').append('<link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}" />');
-        $('head').append('<link rel="stylesheet" href="{{asset('/css/bootstrap.css')}}" />');
-        $('head').append('<link rel="stylesheet" href="{{asset('/css/public_profile.css')}}" />');
-        $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_profile.css')}}" />');
-        $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_application_results.css')}}" />');
-        $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_events.css')}}" />');
-        $('head').append('<link rel="stylesheet" href="{{asset('/css/lecturer_profile.css')}}" />');
-        $('head').append('<link rel="stylesheet" href="{{asset('/css/create_course.css')}}" />');
-        $('head').append('<link rel="stylesheet" href="{{asset('/css/create_level.css')}}" />');
-        $('head').append('<link rel="stylesheet" href="{{asset('/css/lecturer_course_options.css')}}" />');
-        $('head').append('<link rel="stylesheet" href="{{asset('/css/lecturer_courses.css')}}" />');
-    });
+    // $(function() {
+    //     $('head').append('<link rel="stylesheet" href="{{asset('/css/bootstrap-grid.min.css')}}" />');
+    //     $('head').append('<link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}" />');
+    //     $('head').append('<link rel="stylesheet" href="{{asset('/css/bootstrap.css')}}" />');
+    //     $('head').append('<link rel="stylesheet" href="{{asset('/css/public_profile.css')}}" />');
+    //     $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_profile.css')}}" />');
+    //     $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_application_results.css')}}" />');
+    //     $('head').append('<link rel="stylesheet" href="{{asset('/css/personal_events.css')}}" />');
+    //     $('head').append('<link rel="stylesheet" href="{{asset('/css/lecturer_profile.css')}}" />');
+    //     $('head').append('<link rel="stylesheet" href="{{asset('/css/create_course.css')}}" />');
+    //     $('head').append('<link rel="stylesheet" href="{{asset('/css/create_level.css')}}" />');
+    //     $('head').append('<link rel="stylesheet" href="{{asset('/css/lecturer_course_options.css')}}" />');
+    //     $('head').append('<link rel="stylesheet" href="{{asset('/css/lecturer_courses.css')}}" />');
+    // });
 </script>
 <script>
-    $('.download-stats').on('click', function(){
-        var table = 'forms';
-        var uri = 'data:application/vnd.ms-excel;base64,'
-
-        , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>'
-
-        , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
-
-        , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
-
-        var table = document.getElementById(table)
-        var name = 'test';
-
-        var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
-
-        window.location.href = uri + base64(format(template, ctx))
-    });
+    // $('.download-stats').on('click', function(){
+    //     var table = 'forms';
+    //     var uri = 'data:application/vnd.ms-excel;base64,'
+    //
+    //     , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>'
+    //
+    //     , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+    //
+    //     , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+    //
+    //     var table = document.getElementById(table)
+    //     var name = 'test';
+    //
+    //     var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+    //
+    //     window.location.href = uri + base64(format(template, ctx))
+    // });
 </script>
 </html>
