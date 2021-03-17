@@ -35,7 +35,7 @@ class Course extends Model
         if ($isLecturer) {
             return Module::where('course_id', $course)->with('Lections')->oldest('order')->get();
         }
-        
+
         if (Auth::user()) {
             $onModules = ModulesStudent::select('course_modules_id')->where('user_id', Auth::user()->id)->get()->toArray();
             return Module::where([

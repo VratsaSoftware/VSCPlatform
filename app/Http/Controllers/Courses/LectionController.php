@@ -194,6 +194,7 @@ class LectionController extends Controller
             'video' => ['sometimes', 'regex:/^(https|http):\/\/(?:www\.)?youtube.com\/embed\/[A-z0-9]+/'],
             'slides' => 'sometimes|file',
             'homework' => 'sometimes|file',
+            'video_file' => 'sometimes|file',
             'homework_end' => 'sometimes',
             'demo' => ['sometimes', 'regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
         ]);
@@ -216,10 +217,29 @@ class LectionController extends Controller
             $lection->order = $request->order;
         }
 
-        if ($request->has('video')) {
-            $video = LectionVideo::findOrFail($lection->lections_video_id);
-            $video->url = $data['video'];
-            $video->save();
+        if ($request->has('video_file')) {
+            $slides = $request->file('video_file');
+            $name = time() . "_" . $slides->getClientOriginalName();
+            $name = str_replace(' ', '', $name);
+            // $name = md5($name);
+            $slidesUrl = public_path() . '/data/course-' . $lection->Module->Course->id . '/modules-' . $lection->Module->id . '/video-' . $lection->id . '/';
+            $oldSlides = $slidesUrl . $lection->presentation;
+            if (File::exists($oldSlides)) {
+                File::delete($oldSlides);
+            }
+            $request->file('video_file')->move($slidesUrl, $name);
+
+            if ($lection->lections_video_id) {
+                $video = LectionVideo::findOrFail($lection->lections_video_id);
+                $video->url = $name;
+                $video->save();
+            } else {
+                $video = new LectionVideo;
+                $video->url = $name;
+                $video->save();
+
+                $lection->lections_video_id = $video->id;
+            }
         }
 
         if (Input::hasFile('slides')) {

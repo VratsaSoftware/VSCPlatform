@@ -178,8 +178,8 @@
                                     <div class="accordion-body py-lg-3 py-1">
                                         <div class="d-flex justify-content-between pb-4 text-small">
                                             <div class="">
-                                                <img src="{{ asset('assets/img/Homework.svg') }}" alt="">
                                                 @if (!is_null($lection->homework_end))
+                                                <img src="{{ asset('assets/img/Homework.svg') }}" alt="">
                                                 <span class="">
                                                     Домашно до
                                                 </span>
@@ -199,8 +199,10 @@
                                                 <span class="">Файлове</span>
                                             </div>
                                             <div class="d-lg-inline-block d-none">
-                                                <i class="fas fa-play text-green me-2"></i>
-                                                <span class="">Видео</span>
+                                                @if (isset($lection->Video->url))
+                                                    <i class="fas fa-play text-green me-2"></i>
+                                                    <span class="">Видео</span>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -248,7 +250,7 @@
 </div>
 </div>
 <!-- right side -->
-<div id="right-side" class="col-xl pt-md-5 mt-md-4 tab-content edit-content">
+<div id="right-side" data-countLections="{{ count($lections) }}" class="col-xl pt-md-5 mt-md-4 tab-content edit-content">
     @foreach ($lections as $lection)
     <!-- Single lection content -->
     <div class="tab-pane fade @if ($loop->iteration == 1) show active @endif mt-xl-2 pt-xl-1" id="lection-{{ $loop->iteration }}" role="tabpanel" aria-labelledby="lection-2-tab">
@@ -280,18 +282,23 @@
 
                 <div class="video-upload row g-0 my-4 position-relative">
                     <div class="video-upload-btn position-absolute text-center">
-                        <label for="slides-video">
+                        <label for="video-file{{ $loop->iteration }}">
                             <img src="{{ asset('assets/img/upload_video.svg') }}" alt="">
                             <div class="text-center fw-bold pt-lg-4 pt-3">
                                 Upload
                                 <br class="d-lg-block d-none">
                                 video
                             </div>
+                            <span id="video-file-count{{ $loop->iteration }}">
+                                @if (isset($lection->Video->url))
+                                <br><a href="{{ asset('/') . 'data/course-' . $module->Course->id . '/modules-' . $module->id . '/video-' . $lection->id . '/' . $lection->Video->url }}">Виж</a>
+                                @endif
+                            </span>
                         </div>
                     </lable>
                 </div>
 
-                <input id="slides-video" name="slides" style="display: none;" type="file">
+                <input id="video-file{{ $loop->iteration }}" name="video_file" style="display: none;" type="file">
 
                 <div class="edit-decsription pt-3">
                     <textarea name="description" class="p-2">{{ $lection->description }}</textarea>
@@ -302,17 +309,22 @@
                         Файлове
                     </div>
                     <div class="col-lg-4 col-auto order-lg-0 order-2">
-                        <button class="btn-add row g-0 align-items-center">
-                            <div class="col text-small text-start pe-3 d-lg-block d-none">Добави</div>
-                            <div class="col-auto mx-lg-0 mx-auto">
-                                <div class="d-inline-block border d-lg-block d-none">
-                                    <img src="{{ asset('assets/img/plus.svg') }}" alt="">
+                        <label for="lection-files{{ $loop->iteration }}">
+                            <span style="border-radius: 15px" class="btn-add row g-0 align-items-center">
+                                <div class="col text-small text-start pe-3 d-lg-block d-none">Добави</div>
+                                <div class="col-auto mx-lg-0 mx-auto">
+                                    <div class="d-inline-block border d-lg-block d-none">
+                                        <img src="{{ asset('assets/img/plus.svg') }}" alt="">
+                                    </div>
+                                    <div class="d-lg-none btn-plus">
+                                        +
+                                    </div>
                                 </div>
-                                <div class="d-lg-none btn-plus">
-                                    +
-                                </div>
-                            </div>
-                        </button>
+                            </span>
+                            <span id="lection-files-count{{ $loop->iteration }}"></span>
+                        </label>
+
+                        <input id="lection-files{{ $loop->iteration }}" name="slides[]" style="display: none;" type="file" multiple="multiple">
                     </div>
                     <div class="col">
                         <div class="row g-0">
@@ -410,4 +422,32 @@
 </div>
 <!-- right side END -->
 </div>
+
+<script>
+$(document).ready(function(){
+    $("#right-side").click(function() {
+        var count = $(this).attr("data-countLections");
+
+        for (var i = 1; i <= count; i++) {
+            countFiles(i);
+        }
+    });
+
+    function countFiles(i) {
+        var lectionFilesParse = "#lection-files" + i;
+        var lectionFilesCountParse = "#lection-files-count" + i;
+        $(lectionFilesParse).change(function() {
+            var count = $(lectionFilesParse).get(0).files.length;
+            $(lectionFilesCountParse).after().html('Файлове:' + count);
+        });
+
+        var videoFile = "#video-file" + i;
+        var videoCountFile = "#video-file-count" + i;
+        $(videoFile).change(function() {
+            $(videoCountFile).after().html('<br>Файлове: 1');
+        });
+    }
+});
+</script>
+
 @endsection

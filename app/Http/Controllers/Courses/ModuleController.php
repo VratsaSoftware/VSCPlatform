@@ -136,6 +136,7 @@ class ModuleController extends Controller
         $lections = Module::getLections($module->id, true);
         $students = ModulesStudent::where('course_modules_id', $module->id)->with('User')->get();
         $module = $module->load('Course');
+        $lections = $lections->load('Video');
 
         return view('course.module.editNew', ['module' => $module,'lections' => $lections, 'students' => $students]);
     }
