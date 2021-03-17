@@ -138,7 +138,14 @@ class ModuleController extends Controller
         $module = $module->load('Course');
         $lections = $lections->load('Video');
 
-        return view('course.module.editNew', ['module' => $module,'lections' => $lections, 'students' => $students]);
+        $allModule = Module::where('course_id', $module->Course->id)->get();
+
+        return view('course.module.editNew', [
+            'module' => $module,
+            'lections' => $lections,
+            'students' => $students,
+            'allModules' => $allModule
+        ]);
     }
 
     /**

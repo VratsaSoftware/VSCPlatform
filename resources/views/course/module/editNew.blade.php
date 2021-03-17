@@ -32,19 +32,21 @@
             <!-- Nav tabs -->
             <nav>
                 <div class="nav nav-tabs row align-items-center g-0 mb-4 p-sm-0 pt-3 pb-4">
-                    <a class="nav-link col-auto ps-0 active d-sm-block d-none" id="module-1-tab" data-bs-toggle="tab" href="#module-1" role="tab" aria-controls="module-1" aria-selected="true">Mодул 1</a>
-                    <a class="nav-link col-auto ps-xxl-3 ps-lg-2 ps-3 d-sm-block d-none" id="module-2-tab" data-bs-toggle="tab" href="#module-2" role="tab" aria-controls="module-1" aria-selected="false">Mодул 2</a>
-                    <a class="nav-link col-auto ps-xxl-3 ps-lg-2 ps-3 d-sm-block d-none" id="module-3-tab" data-bs-toggle="tab" href="#module-3" role="tab" aria-controls="module-1" aria-selected="false">Mодул 3</a>
+                    @foreach ($allModules as $moduleNav)
+                        <a class="nav-link col-auto ps-0 @if ($module->id == $moduleNav->id) active @endif d-sm-block d-none" href="{{ asset('module/' . $moduleNav->id . '/edit') }}" aria-controls="module-1" aria-selected="true">{{ $moduleNav->name }}</a>
+                    @endforeach
+
                     <div class="col d-sm-none">
                         <div class="position-relative d-inline-block">
                             <select class="border-0 form-control text-small text-green position-relative ps-0 py-0" id="tab_selector">
-                                <option value="0">Mодул 1</option>
-                                <option value="1">Mодул 2</option>
-                                <option value="2">Mодул 3</option>
+                                @foreach ($allModules as $moduleNav)
+                                    <option value="{{ asset('module/' . $moduleNav->id . '/edit') }}" @if ($module->id == $moduleNav->id) selected @endif>{{ $moduleNav->name }}</option>
+                                @endforeach
                             </select>
                             <img src="{{ asset('assets/img/arrow.svg') }}" alt="" class="position-absolute">
                         </div>
                     </div>
+
                     <div class="col add text-end align-self-end pb-lg-2 text-small">
                         <a href="">
                             <span class="me-2"><img src="{{ asset('assets/img/plus.svg') }}" alt=""></span>
@@ -103,130 +105,71 @@
                         <!-- Accordion sections  -->
                         <div class="accordion accordion-flush position-relative" id="accordionExample">
                             @foreach ($lections as $lection)
-                            <!-- Accordion item  -->
-                            <!-- <div class="accordion-item">
-                                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->iteration }}" aria-expanded="true" aria-controls="collapse{{ $loop->iteration }}">
-                                    <div class="row d-flex w-100 align-items-center g-0 text-start text-uppercase">
-                                        <div class="col lection-title text-large">
-                                            {{ $loop->iteration }}. {{ $lection->title }}
+                                <!-- Accordion item -->
+                                <div class="accordion-item">
+                                    <button class="accordion-button @if ($loop->iteration !== 1) collapsed @endif" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapse{{ $loop->iteration }}">
+                                        <div class="row d-flex w-100 align-items-end g-0 text-start text-uppercase">
+                                            <div class="col lection-title text-large">
+                                                {{ $loop->iteration }}. {{ $lection->title }}
+                                            </div>
+                                            <div class="col-auto time">
+                                                {{ $lection->first_date->format('H:i') }}
+                                            </div>
                                         </div>
-                                        <div class="col-auto time">
-                                            {{ $lection->first_date->format('H:i') }}
-                                        </div>
-                                    </div>
-                                </button>
-                                <div id="collapse{{ $loop->iteration }}" class="accordion-collapse collapse @if ($loop->iteration == 1) show @endif" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body py-lg-3 py-1">
-                                        <div class="d-flex justify-content-between pb-4 text-small">
-                                            <div>
-                                                <img src="{{ asset('assets/img/Homework.svg') }}" alt="">
-                                                <span class="">
-                                                    Домашно до
-                                                </span>
-                                                <span class="text-orange fw-bold">
-                                                    07.05
-                                                </span>
-                                                <div class="text-orange mt-lg-2 ms-lg-0 ms-2 ps-lg-0 ps-4 pt-lg-1 fw-bold row g-0 align-items-center">
-                                                    <span class="orange-dot col-auto"></span>
-                                                    <span class=col>Не е качено</span>
+                                    </button>
+                                    <div id="collapse{{ $loop->iteration }}" class="accordion-collapse collapse @if ($loop->iteration == 1) show @endif" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
+                                        <div class="accordion-body py-lg-3 py-1">
+                                            <div class="d-flex justify-content-between pb-4 text-small">
+                                                <div class="">
+                                                    @if (!is_null($lection->homework_end))
+                                                    <img src="{{ asset('assets/img/Homework.svg') }}" alt="">
+                                                    <span class="">
+                                                        Домашно до
+                                                    </span>
+                                                    <span class="text-orange fw-bold">
+                                                        {{ $lection->homework_end->format('d.m.Y') }}
+                                                    </span>
+                                                    @endif
+                                                    @if (!is_null($lection->homework_criteria))
+                                                        <div class="text-orange mt-2 ms-lg-0 ms-2 ps-lg-0 ps-4 pt-1 fw-bold row g-0 align-items-center">
+                                                            <span class="orange-dot col-auto"></span>
+                                                            <span class=col>Не е качено</span>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                                                <div class="d-lg-inline-block d-none">
+                                                    <img src="{{ asset('assets/img/download.svg') }}" alt="">
+                                                    <span class="">Файлове</span>
+                                                </div>
+                                                <div class="d-lg-inline-block d-none">
+                                                    @if (isset($lection->Video->url))
+                                                        <i class="fas fa-play text-green me-2"></i>
+                                                        <span class="">Видео</span>
+                                                    @endif
                                                 </div>
                                             </div>
-                                            <div class="d-xxl-inline-block d-none">
-                                                <img src="{{ asset('assets/img/download.svg') }}" alt="">
-                                                <span class="">Файлове</span>
+                                        </div>
+                                    </div>
+                                    <div class="btn-see row g-0">
+                                        <div class="col eval text-normal">ОЦЕНКA:</div>
+                                        <div class="col-auto file-notification d-xxl-flex d-xl-none d-sm-flex d-none align-items-center">
+                                            <div class="big-orange-dot position-relative">
+                                                <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}" alt="">
                                             </div>
-                                            <div class="d-xxl-inline-block d-none">
-                                                <i class="fas fa-play text-green me-2"></i>
-                                                <span class="">Видео</span>
-                                            </div>
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="btn-see row g-0">
-                                    <div class="col eval text-normal">ОЦЕНКA:</div>
-                                    <div class="col-auto file-notification d-xxl-flex d-xl-none d-sm-flex d-none align-items-center">
-                                        <div class="big-orange-dot position-relative">
-                                            <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <button class="nav btn btn-green active py-0 pe-2 d-flex" id="lection-1-tab" data-bs-toggle="tab" href="#lection-1" role="tab" aria-controls="lection-1" aria-selected="true">
-                                            <div class="row g-0 align-self-center">
-                                                <div class="col-auto text-start text-small">Виж</div>
-                                                <div class="col text-end align-items-center d-flex">
-                                                    <img src="{{ asset('assets/img/action_icon.svg') }}" alt="">
-                                                </div>
-                                            </div>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div> -->
-
-                            <!-- Accordion item -->
-                            <div class="accordion-item">
-                                <button class="accordion-button @if ($loop->iteration !== 1) collapsed @endif" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapse{{ $loop->iteration }}">
-                                    <div class="row d-flex w-100 align-items-end g-0 text-start text-uppercase">
-                                        <div class="col lection-title text-large">
-                                            {{ $loop->iteration }}. {{ $lection->title }}
-                                        </div>
-                                        <div class="col-auto time">
-                                            {{ $lection->first_date->format('H:i') }}
-                                        </div>
-                                    </div>
-                                </button>
-                                <div id="collapse{{ $loop->iteration }}" class="accordion-collapse collapse @if ($loop->iteration == 1) show @endif" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
-                                    <div class="accordion-body py-lg-3 py-1">
-                                        <div class="d-flex justify-content-between pb-4 text-small">
-                                            <div class="">
-                                                @if (!is_null($lection->homework_end))
-                                                <img src="{{ asset('assets/img/Homework.svg') }}" alt="">
-                                                <span class="">
-                                                    Домашно до
-                                                </span>
-                                                <span class="text-orange fw-bold">
-                                                    {{ $lection->homework_end->format('d.m.Y') }}
-                                                </span>
-                                                @endif
-                                                @if (!is_null($lection->homework_criteria))
-                                                    <div class="text-orange mt-2 ms-lg-0 ms-2 ps-lg-0 ps-4 pt-1 fw-bold row g-0 align-items-center">
-                                                        <span class="orange-dot col-auto"></span>
-                                                        <span class=col>Не е качено</span>
+                                        <div class="col-auto">
+                                            <button data-lections="{{ $lection }}" class="nav btn btn-green active py-0 pe-2 d-flex" id="lection-1-tab" data-bs-toggle="tab" href="#lection-{{ $loop->iteration }}" role="tab" aria-controls="lection-1" aria-selected="true">
+                                                <div class="row g-0 align-self-center">
+                                                    <div class="col-auto text-start text-small">Виж</div>
+                                                    <div class="col text-end align-items-center d-flex">
+                                                        <img src="{{ asset('assets/img/action_icon.svg') }}" alt="">
                                                     </div>
-                                                @endif
-                                            </div>
-                                            <div class="d-lg-inline-block d-none">
-                                                <img src="{{ asset('assets/img/download.svg') }}" alt="">
-                                                <span class="">Файлове</span>
-                                            </div>
-                                            <div class="d-lg-inline-block d-none">
-                                                @if (isset($lection->Video->url))
-                                                    <i class="fas fa-play text-green me-2"></i>
-                                                    <span class="">Видео</span>
-                                                @endif
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="btn-see row g-0">
-                                    <div class="col eval text-normal">ОЦЕНКA:</div>
-                                    <div class="col-auto file-notification d-xxl-flex d-xl-none d-sm-flex d-none align-items-center">
-                                        <div class="big-orange-dot position-relative">
-                                            <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}" alt="">
-                                        </div>
-                                    </div>
-                                    <div class="col-auto">
-                                        <button data-lections="{{ $lection }}" class="nav btn btn-green active py-0 pe-2 d-flex" id="lection-1-tab" data-bs-toggle="tab" href="#lection-{{ $loop->iteration }}" role="tab" aria-controls="lection-1" aria-selected="true">
-                                            <div class="row g-0 align-self-center">
-                                                <div class="col-auto text-start text-small">Виж</div>
-                                                <div class="col text-end align-items-center d-flex">
-                                                    <img src="{{ asset('assets/img/action_icon.svg') }}" alt="">
                                                 </div>
-                                            </div>
-                                        </button>
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- Accordion item END-->
+                                <!-- Accordion item END-->
                             @endforeach
                         </div>
                     </div>
@@ -398,12 +341,14 @@
 
                 <div class="row g-0">
                     <div class="col-lg col-auto mx-lg-0 mx-auto">
-                        <button class="ms-xxl-2 mt-xxl-0 mt-3 btn-edit row g-0 align-items-center">
-                            <div class="col text-start fw-bold">Изтрий лекция</div>
-                            <div class="col-auto">
-                                <img src="{{ asset('assets/img/Delete.svg') }}" alt="">
-                            </div>
-                        </button>
+                        <div class="delete-lection">
+                            <button form="delete-lection-form-{{ $loop->iteration }}" class="ms-xxl-2 mt-xxl-0 mt-3 btn-edit row g-0 align-items-center">
+                                <div class="col text-start fw-bold">Изтрий лекция</div>
+                                <div class="col-auto">
+                                    <img src="{{ asset('assets/img/Delete.svg') }}" alt="">
+                                </div>
+                            </button>
+                        </div>
                     </div>
                     <div class="col-auto mx-lg-0 mx-auto">
                         <button class="ms-xxl-2 mt-xxl-0 mt-3 btn-edit btn-green row g-0 align-items-center">
@@ -417,6 +362,11 @@
             </div>
         </form>
     </div>
+
+    <form method="post" id="delete-lection-form-{{ $loop->iteration }}" action="{{ route('lection.destroy', $lection->id) }}">
+        @csrf
+        @method('DELETE')
+    </form>
     @endforeach
     <!-- Single lection content END-->
 </div>
@@ -425,6 +375,20 @@
 
 <script>
 $(document).ready(function(){
+    $("#tab_selector").change(function() {
+        window.location.href = $("#tab_selector").val();
+    });
+
+    $(".delete-lection").click(function() {
+        /* delete user */
+        var conf = confirm("Найстина ли искате да изтриете тази Лекция?");
+        if (conf == true) {
+            return true;
+        } else {
+            return false;
+        }
+    });
+
     $("#right-side").click(function() {
         var count = $(this).attr("data-countLections");
 
