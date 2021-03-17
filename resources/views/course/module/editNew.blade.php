@@ -48,8 +48,8 @@
                     </div>
 
                     <div class="col add text-end align-self-end pb-lg-2 text-small">
-                        <a href="">
-                            <span class="me-2"><img src="{{ asset('assets/img/plus.svg') }}" alt=""></span>
+                        <a href="{{ asset('module/create?course=' . $module->Course->id) }}">
+                            <span class="me-2"><img src="{{ asset('assets/img/plus.svg') }}"></span>
                             Добави модул
                         </a>
                     </div>
@@ -130,7 +130,7 @@
                                                         {{ $lection->homework_end->format('d.m.Y') }}
                                                     </span>
                                                     @endif
-                                                    @if (!is_null($lection->homework_criteria))
+                                                    @if (!$lection->homework_criteria)
                                                         <div class="text-orange mt-2 ms-lg-0 ms-2 ps-lg-0 ps-4 pt-1 fw-bold row g-0 align-items-center">
                                                             <span class="orange-dot col-auto"></span>
                                                             <span class=col>Не е качено</span>
@@ -152,11 +152,14 @@
                                     </div>
                                     <div class="btn-see row g-0">
                                         <div class="col eval text-normal">ОЦЕНКA:</div>
-                                        <div class="col-auto file-notification d-xxl-flex d-xl-none d-sm-flex d-none align-items-center">
-                                            <div class="big-orange-dot position-relative">
-                                                <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}" alt="">
+                                        <!--  -->
+                                        @if (!$lection->homework_criteria)
+                                            <div class="col-auto file-notification d-xxl-flex d-sm-flex d-none align-items-center">
+                                                <div class="big-orange-dot position-relative">
+                                                    <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
+                                                </div>
                                             </div>
-                                        </div>
+                                        @endif
                                         <div class="col-auto">
                                             <button data-lections="{{ $lection }}" class="nav btn btn-green active py-0 pe-2 d-flex" id="lection-1-tab" data-bs-toggle="tab" href="#lection-{{ $loop->iteration }}" role="tab" aria-controls="lection-1" aria-selected="true">
                                                 <div class="row g-0 align-self-center">
