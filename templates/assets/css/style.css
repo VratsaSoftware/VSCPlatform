@@ -687,7 +687,7 @@ button {
   padding-left: 36px;
   margin-bottom: 35px;
   color: #000 !important;
-  max-width: 302px;
+  min-width: 302px;
   max-height: 139px;
 }
 .active-lection {
@@ -701,9 +701,12 @@ button {
   display: flex;
   overflow-x: auto;
 }
-.text-title-sm {
+.text-title-md {
   font-size: 20px;
   color: #000000;
+}
+.active-courses {
+  margin-top: 62px;
 }
 /** Dashboard_error END**/
 /**Homework for Lecture**/
@@ -1006,6 +1009,29 @@ button {
   }
   .wrapper {
     overflow-x: auto;
+  }
+  .card-notebook-2 {
+    width: 302px;
+    height: 115px;
+    margin-top: 161px;
+  }
+  .data1 {
+    font-size: 14px;
+    color: #000;
+  }
+  .titel-code {
+    font-size: 17px;
+    color: #000;
+  }
+  .btn-code-card {
+    width: 107px;
+    height: 40px;
+    background-color: #000000;
+    color: #ffffff;
+  }
+  .activ-input {
+    background-color: #f6f9ff;
+    border: none;
   }
   /**Homework for Lecture**/
   .main {
