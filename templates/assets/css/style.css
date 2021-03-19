@@ -15,6 +15,9 @@
   font-weight: bold;
 }
 /** custom boodstrap colors and fonts **/
+.text-xxl {
+  font-size: 50px;
+}
 .text-large {
   font-size: 25px;
 }
@@ -48,6 +51,9 @@
 }
 .text-warm-grey {
   color: #999999;
+}
+.text-blue-grey {
+  color: #778aa4;
 }
 .text-green {
   color: #69b501 !important;
@@ -700,6 +706,22 @@ button {
   color: #000000;
 }
 /** Dashboard_error END**/
+/**Homework for Lecture**/
+.main .table-grid .file label {
+  cursor: pointer;
+}
+.main .table-grid .btn-comments {
+  width: 120px;
+  border-radius: 10px;
+  padding: 0 18px;
+  color: #ffffff;
+  height: 45px;
+  background-color: #00214b;
+}
+.main .table-grid .btn-comments img {
+  width: 16px;
+}
+/** Homework for Lecture END**/
 /** Media query**/
 @media only screen and (max-width: 1850px) {
   .edit-content {
@@ -763,6 +785,9 @@ button {
   }
 }
 @media only screen and (max-width: 1400px) {
+  .text-xxl {
+    font-size: 50px;
+  }
   .text-large {
     font-size: 17px;
     font-weight: bold;
@@ -802,6 +827,12 @@ button {
   }
 }
 @media only screen and (max-width: 992px) {
+  .text-xxl {
+    font-size: 20px;
+  }
+  .text-large {
+    font-size: 14px;
+  }
   .card {
     width: auto;
     margin: 0;
@@ -920,6 +951,7 @@ button {
   .nav-item {
     padding-bottom: 30px;
   }
+
   .basics-programming {
     font-size: 20px;
   }
@@ -975,6 +1007,17 @@ button {
   .wrapper {
     overflow-x: auto;
   }
+  /**Homework for Lecture**/
+  .main {
+    padding: 0 10px;
+  }
+  .main .text-large {
+    color: #778aa4;
+  }
+  .table-grid .row + .row {
+    padding: 37px 0 35px 0;
+    border-top: solid 1px #00214b;
+  }
 }
 @media only screen and (min-width: 992px) {
   .toggled .slide-item {
@@ -1011,5 +1054,38 @@ button {
   }
   .edit-content {
     min-width: 520px;
+  }
+  /**Homework for Lecture**/
+  .main .text-xxl,
+  .main .text-large {
+    text-transform: uppercase;
+  }
+  .main .text-small {
+    font-weight: bold;
+  }
+  .main .border {
+    border-color: #707070 !important;
+  }
+  .main .table-grid .number {
+    width: 32px;
+  }
+  .main .table-grid .student-name {
+    max-width: 340px;
+  }
+  .main .table-grid .file {
+    max-width: 295px;
+  }
+  .main .table-grid .comments {
+    max-width: 295px;
+  }
+  .main .table-grid .date {
+    max-width: 295px;
+  }
+  .main .table-grid .settings {
+    width: 270px;
+  }
+  .table-grid .row + .row {
+    padding: 33px 0 45px 0;
+    border-bottom: solid 1px #00214b;
   }
 }
