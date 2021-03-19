@@ -237,7 +237,7 @@
                             </div>
                             <span id="video-file-count{{ $loop->iteration }}">
                                 @if (isset($lection->Video->url))
-                                <br><a href="{{ asset('/') . 'data/course-' . $module->Course->id . '/modules-' . $module->id . '/video-' . $lection->id . '/' . $lection->Video->url }}">Виж</a>
+                                <a class=" d-inline-block pt-1" href="{{ asset('/') . 'data/course-' . $module->Course->id . '/modules-' . $module->id . '/video-' . $lection->id . '/' . $lection->Video->url }}">Виж</a>
                                 @endif
                             </span>
                         </div>

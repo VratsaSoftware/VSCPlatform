@@ -158,8 +158,8 @@
                     </ul>
                 </div>
                 <div class="toogler d-flex justify-content-end mb-lg-4 d-lg-block d-none">
-                    <div class="pill d-flex align-items-center float-right rounded-circle overflow-hidden">
-                        <a class="btn px-2 col p-0 text-center" id="toggleNav">
+                    <div class="pill d-lg-none d-none align-items-center float-right rounded-circle overflow-hidden">
+                        <a class="d-lg-inline btn px-2 col p-0 text-center" id="toggleNav">
                             <img src="{{ asset('assets/img/arrow.svg') }}" alt="">
                         </a>
                     </div>

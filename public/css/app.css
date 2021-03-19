@@ -22,6 +22,9 @@
   font-weight: bold;
 }
 /** custom boodstrap colors and fonts **/
+.text-xxl{
+  font-size: 50px;
+}
 .text-large {
   font-size: 25px;
 }
@@ -55,6 +58,9 @@
 }
 .text-warm-grey {
   color: #999999;
+}
+.text-blue-grey {
+  color: #778aa4;
 }
 .text-green {
   color: #69b501 !important;
@@ -244,19 +250,15 @@ button {
 ::-webkit-scrollbar {
   width: 6px;
 }
+
 /* Track */
 ::-webkit-scrollbar-track {
   background: #cccccc;
-  margin-top: 10px!important;
-  margin-bottom: 10px!important;
-  margin-right: 5px!important;
-  border-radius: 3px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #666666;
-  border-radius: 3px;
 }
 
 /* Handle on hover */
@@ -416,17 +418,6 @@ button {
   height: 170px;
   width: 100%;
 }
-.Upload-video {
-  font-family: Roboto;
-  font-size: 30px;
-  font-weight: 900;
-  text-align: center;
-  color: #8de219;
-}
-/* ::-webkit-scrollbar-track {
-  margin-top: 10px;
-  margin-bottom: 10px;
-} */
 .btn-add {
   padding: 5px 15px;
   width: 180px;
@@ -456,6 +447,22 @@ button {
   border: solid 1px #00214b;
 }
 /** Right side END**/
+/**Homework for Lecture**/
+.main .table-grid .file label{
+  cursor: pointer;
+}
+.main .table-grid .btn-comments{
+  width: 120px;
+  border-radius: 10px;
+  padding: 0 18px;
+  color: #ffffff;
+  height: 45px;
+  background-color: #00214b;
+}
+.main .table-grid .btn-comments img {
+  width: 16px;
+}
+/** Homework for Lecture END**/
 /** Media query**/
 @media only screen and (max-width: 1850px) {
   .edit-content {
@@ -488,10 +495,6 @@ button {
   }
 }
 @media only screen and (max-width: 1546px) {
-  .calendar input {
-    width: 160px;
-    padding: 0 40px 0 20px;
-  }
   .card-title {
     font-size: 24px;
   }
@@ -523,6 +526,9 @@ button {
   }
 }
 @media only screen and (max-width: 1400px) {
+  .text-xxl{
+    font-size: 50px;
+  }
   .text-large {
     font-size: 17px;
     font-weight: bold;
@@ -562,6 +568,12 @@ button {
   }
 }
 @media only screen and (max-width: 992px) {
+  .text-xxl{
+    font-size: 20px;
+  }
+  .text-large {
+    font-size: 14px;
+  }
   .card {
     width: auto;
     margin: 0;
@@ -680,6 +692,17 @@ button {
   .nav-item {
     padding-bottom: 30px;
   }
+   /**Homework for Lecture**/
+   .main{
+     padding: 0 10px;
+   }
+  .main .text-large {
+    color: #778aa4;
+  }
+  .table-grid .row + .row{
+    padding: 37px 0 35px 0;
+    border-top: solid 1px #00214b;
+  }
 }
 @media only screen and (min-width: 992px) {
   .toggled .slide-item {
@@ -717,4 +740,36 @@ button {
   .edit-content {
     min-width: 520px;
   }
+   /**Homework for Lecture**/
+   .main .text-xxl, .main .text-large {
+    text-transform: uppercase;
+  }
+  .main .text-small{
+    font-weight: bold;
+  }
+  .main .border{
+    border-color: #707070!important;
+  }
+  .main .table-grid .number{
+    width: 32px;
+  }
+  .main .table-grid .student-name{
+    max-width: 340px;
+  }
+  .main .table-grid .file{
+   max-width: 295px;
+  }
+  .main .table-grid .comments{
+    max-width: 295px;
+   }
+   .main .table-grid .date{
+    max-width: 295px;
+   }
+   .main .table-grid .settings{
+    width: 270px;
+   }
+   .table-grid .row + .row{
+     padding: 33px 0 45px 0;
+     border-bottom: solid 1px #00214b;
+   }
 }
