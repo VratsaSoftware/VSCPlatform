@@ -1,0 +1,53 @@
+.data {
+    font-family: Roboto;
+    font-size: 25px;
+}
+
+#data-border {
+    padding-right: calc(var(--bs-gutter-x)/ 2);
+    padding-left: calc(var(--bs-gutter-x)/ 2);
+    color: #00214b;
+}
+
+.arrow1 {
+    width: 6.5px;
+    height: 13.1px;
+}
+
+.pill1 {
+    position: absolute;
+    background-color: #fff;
+    height: 30px;
+    width: 30px;
+}
+
+.pill1 a {
+    z-index: 1;
+    cursor: pointer;
+}
+
+.pill1 a {
+    -ms-transform: rotate(0deg); /* IE 9 */
+    transform: rotate(0deg);
+}
+
+.pill2 {
+    position: absolute;
+    background-color: #fff;
+    height: 30px;
+    width: 30px;
+}
+
+.pill2 a {
+    z-index: 1;
+    cursor: pointer;
+}
+
+.pill2 a {
+    -ms-transform: rotate(180deg); /* IE 9 */
+    transform: rotate(180deg);
+}
+
+.pill2 a img {
+    color: #fff;
+}
