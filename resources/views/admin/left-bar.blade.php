@@ -141,15 +141,19 @@
                         </div>
                     </div>
                 </div>
-
                 <div class="row g-0 pt-lg-2">
                     <ul class="nav">
                         <li id="logout-btn" class="nav-item w-100">
                             <a href="{{ route('logout') }}" class="d-flex fw-bold" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                <img src="{{ asset('assets/img/Log_out.svg') }}" alt="">
-                                <span class="slide-item text-navy-blue">
+                                <div class="ml-3">
+                                    <img src="{{ asset('assets/img/Log_out.svg') }}">
+                                </div>
+                                <div class="slide-item d-lg-flex d-none text-navy-blue">
                                     Изход
-                                </span>
+                                </div>
+                                <div class="d-lg-none text-navy-blue">
+                                    Изход
+                                </div>
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                                 @csrf
@@ -158,7 +162,7 @@
                     </ul>
                 </div>
                 <div class="toogler d-flex justify-content-end mb-lg-4 d-lg-block d-none">
-                    <div class="pill d-lg-none d-none align-items-center float-right rounded-circle overflow-hidden">
+                    <div class="pill d-lg-flex d-none align-items-center float-right rounded-circle overflow-hidden">
                         <a class="d-lg-inline btn px-2 col p-0 text-center" id="toggleNav">
                             <img src="{{ asset('assets/img/arrow.svg') }}" alt="">
                         </a>

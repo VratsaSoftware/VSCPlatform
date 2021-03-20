@@ -22,7 +22,7 @@
 			<input type="hidden" name="previous" value="{{ URL::previous() }}">
 		@endif
 
-		<div class="mb-3 input-user">
+		<div class="mb-3 mt-lg-5">
 			<input type="text" class="w-100 btn-edit" name="name" placeholder="Име" value="{{ old('name') }}" required autofocus>
 		</div>
 

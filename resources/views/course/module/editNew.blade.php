@@ -1,16 +1,6 @@
 @extends('layouts.template')
 @section('title', 'Редактирай Модул/Ниво')
 @section('content')
-<!-- Fonts and Icons -->
-<link href="{{ asset('assets/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
-<!-- Bootstrap core CSS -->
-<link href="{{ asset('css/app.css') }}" rel="stylesheet" />
-<!-- CSS Files -->
-<link href="{{ asset('assets/css/style.css') }}" rel="stylesheet" />
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<link rel= "stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-
 <!-- left side -->
 <div class="col-xl-auto col ps-xxl-0 ps-lg-4">
     <div class="card">
@@ -207,17 +197,17 @@
                 <span class="close d-lg-none position-absolute">&times;</span>
                 <div class="row pt-lg-0 pt-4 g-0">
                     <div class="col-md pe-md-3 me-xl-2">
-                        <input class="w-100 lection-title-input text-navy-blue" type="text" name="title" value="@if (isset($lection->title)){{ $lection->title }}@endif">
+                        <input class="w-100 lection-title-input text-navy-blue" type="text" name="title" value="@if (isset($lection->title)){{ $lection->title }}@endif" placeholder="Име">
                     </div>
                     <div class="col-md-auto pe-md-3 me-xl-1">
                         <div class="position-relative calendar">
-                            <input type="text" name="first_date" value="@if (isset($lection->first_date)){{ $lection->first_date->format('Y-m-d') }}@endif" class="date-input ext-navy-blue">
+                            <input type="text" name="first_date" value="@if (isset($lection->first_date)){{ $lection->first_date->format('Y-m-d') }}@endif" class="date-input ext-navy-blue" placeholder="Начало">
                             <img src="{{ asset('assets/img/arrow.svg') }}">
                         </div>
                     </div>
                     <div class="col-md-auto pe-md-3 me-xl-1">
                         <div class="position-relative calendar">
-                            <input type="text" name="second_date" value="@if (isset($lection->second_date)){{ $lection->second_date->format('Y-m-d') }}@endif" class="date-input ext-navy-blue">
+                            <input type="text" name="second_date" value="@if (isset($lection->second_date)){{ $lection->second_date->format('Y-m-d') }}@endif" class="date-input ext-navy-blue" placeholder="Край">
                             <img src="{{ asset('assets/img/arrow.svg') }}">
                         </div>
                     </div>
@@ -247,7 +237,7 @@
                 <input id="video-file{{ $loop->iteration }}" name="video_file" style="display: none;" type="file">
 
                 <div class="edit-decsription pt-3">
-                    <textarea name="description" class="p-2">{{ $lection->description }}</textarea>
+                    <textarea name="description" class="p-2" placeholder="Описание на лекцията">{{ $lection->description }}</textarea>
                 </div>
 
                 <div class="row g-0 align-items-lg-center lh-1 pb-5">
@@ -257,13 +247,13 @@
                     <div class="col-lg-4 col-auto order-lg-0 order-2">
                         <label for="lection-files{{ $loop->iteration }}">
                             <span style="border-radius: 15px" class="btn-add row g-0 align-items-center">
+                                <div class="d-lg-none btn-plus">
+                                    +
+                                </div>
                                 <div class="col text-small text-start pe-3 d-lg-block d-none">Добави</div>
                                 <div class="col-auto mx-lg-0 mx-auto">
                                     <div class="d-inline-block border d-lg-block d-none">
                                         <img src="{{ asset('assets/img/plus.svg') }}" alt="">
-                                    </div>
-                                    <div class="d-lg-none btn-plus">
-                                        +
                                     </div>
                                 </div>
                             </span>
@@ -320,7 +310,7 @@
                             </div>
                             <div class="col-auto">
                                 <div class="date-pill d-flex align-items-center">
-                                    <input class="text-center fw-bold" value="@if(isset($lection->homework_end)){{ $lection->homework_end->format('d.m') }}@endif">
+                                    <input class="text-center fw-bold" value="@if(isset($lection->homework_end)){{ $lection->homework_end->format('d.m') }}@endif" placeholder="Няма">
                                 </div>
                             </div>
                         </div>
@@ -333,7 +323,7 @@
                             </div>
                             <div class="col-auto">
                                 <div class="date-pill d-flex align-items-center">
-                                    <input class="text-center fw-bold" value="07.05">
+                                    <input class="text-center fw-bold" value="@if(isset($lection->homework_check_end)){{ $lection->homework_check_end->format('d.m') }}@endif" placeholder="Няма">
                                 </div>
                             </div>
                         </div>

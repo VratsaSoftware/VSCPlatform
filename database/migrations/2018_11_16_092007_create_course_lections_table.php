@@ -28,6 +28,7 @@ class CreateCourseLectionsTable extends Migration
             $table->string('visibility');
             $table->string('type')->nullable();
             $table->date('homework_end')->nullable();
+            $table->date('homework_check_end')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
