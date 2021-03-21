@@ -1,5 +1,3 @@
-<link href="{{ asset('css/app.css') }}" rel="stylesheet" />
-
 <div class="col-lg-auto position-relative">
     <nav class="slide navbar-expand-lg navbar-light bg-white fw-bold" id="mySidenav">
         <a class="navbar-brand d-lg-block d-none mx-auto" href="{{ asset('myProfile') }}">
@@ -47,7 +45,7 @@
                             <span class="icon">
                                 <img src="{{ asset('assets/img/Application.svg') }}" alt="">
                             </span>
-                            <span class="slide-item text-navy-blue">Кандидатстване</span>
+                            <span class="slide-item text-navy-blue" style="font-size:16px;">Кандидатстване</span>
                         </a>
                     </li>
                     <li class="nav-item align-items-center mb-lg-5">
@@ -72,18 +70,18 @@
                             <span class="icon">
                                 <img src="{{ asset('assets/img/Courses.svg') }}" alt="">
                             </span>
-                            <span class="slide-item text-navy-blue">Курсове</span>
+                            <span class="slide-item text-navy-blue" style="font-size:16px;">Курсове</span>
                         </a>
                     </li>
                     <li class="nav-item align-items-center mb-lg-5">
                         <div class="dropdown">
                             <a href="{{ route('admin.events') }}" class="d-flex align-items-center dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <span class="icon">
-                                    <img src="{{ asset('assets/img/Events.svg') }}" alt="">
+                                    <img src="{{ asset('assets/img/Events.svg') }}">
                                 </span>
-                                <span class="slide-item text-navy-blue">
+                                <span class="slide-item text-navy-blue" style="font-size:16px;">
                                     Събития
-                                    <img src="{{ asset('assets/img/arrow.svg') }}" alt="" class="ms-4">
+                                    <img src="{{ asset('assets/img/arrow.svg') }}" class="ms-4">
                                 </span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
@@ -96,9 +94,9 @@
                     <li class="nav-item align-items-center mb-lg-5">
                         <a href="{{route('polls.index')}}" class="d-flex align-items-center">
                             <span class="icon">
-                                <img src="{{ asset('assets/img/Surveys.svg') }}" alt="">
+                                <img src="{{ asset('assets/img/Surveys.svg') }}">
                             </span>
-                            <span class="slide-item text-navy-blue">
+                            <span class="slide-item text-navy-blue" style="font-size:16px;">
                                 Анкети
                             </span>
                         </a>
@@ -108,7 +106,7 @@
                             <span class="icon">
                                 <img src="{{ asset('assets/img/Tests.svg') }}" alt="">
                             </span>
-                            <span class="slide-item text-navy-blue">
+                            <span class="slide-item text-navy-blue" style="font-size:16px;">
                                 Тестове
                             </span>
                         </a>
@@ -125,7 +123,7 @@
                         @endif
                     </div>
                     <div class="col align-self-center ps-4">
-                        <div class="user_name fw-bold lh-xs d-block">
+                        <div class="user_name fw-bold lh-xs d-block" style="font-size:16px;">
                             {{ Auth::user()->name }}
                             <br>
                             {{ Auth::user()->last_name }}
@@ -148,10 +146,10 @@
                                 <div class="ml-3">
                                     <img src="{{ asset('assets/img/Log_out.svg') }}">
                                 </div>
-                                <div class="slide-item d-lg-flex d-none text-navy-blue">
+                                <div class="slide-item d-lg-flex d-none text-navy-blue" style="font-size:16px;">
                                     Изход
                                 </div>
-                                <div class="d-lg-none text-navy-blue">
+                                <div class="d-lg-none text-navy-blue" style="font-size:16px;">
                                     Изход
                                 </div>
                             </a>
