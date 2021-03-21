@@ -51,7 +51,7 @@
 				</tr>
 				</thead>
 				<tbody>
-				
+
 				@foreach($homeworks as $num => $homework)
 					<tr class="text-center">
 						<th scope="row">{{$homework->created_at}}</th>
@@ -86,10 +86,10 @@
 													@endif
 												</div>
 												<div class="col-md-4">
-												
+
 												</div>
 												<div class="col-md-4">
-												
+
 												</div>
 												<div class="col-md-4 text-center">
                                                                 <span class="">
@@ -97,14 +97,14 @@
                                                                 </span>
 												</div>
 												<div class="col-md-4">
-												
+
 												</div>
 												<div class="col-md-4 text-right">
 													<span class="">{{$comment->created_at->diffForHumans()}}</span>
 												</div>
-												
+
 												<div class="col-md-12">
-												
+
 												</div>
 												<div class="col-md-12 comment-text">
 													{{$comment->comment}}
@@ -131,7 +131,7 @@
 							</div>
 						</td>
 						<td style="width:12%">
-							@if(isset($isCommented) && in_array(1,$isCommented))
+							@if(isset($isCommented) && in_array(1, $isCommented))
 								<img src="{{asset("/images/tick-y-big.png")}}" width="10%">
 							@else
 								<img src="{{asset("/images/profile/remove-icon.png")}}" width="13%">
@@ -153,11 +153,11 @@
 				<h2></h2>
 			</div>
 			<div class="copy text-center">
-				
+
 				<p>
-				
+
 				</p>
-				
+
 				</form>
 			</div>
 			<div class="cf footer">
@@ -201,7 +201,7 @@
                 urls.push($(v).attr('href'));
                 filenames.push($(v).attr('data-name'));
             });
-            
+
             var link = document.createElement('a');
 
             link.setAttribute('download', null);

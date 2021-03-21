@@ -361,7 +361,11 @@ class LectionController extends Controller
             $homework['evaluated'] = $evaluated->evalutedHomeWorksCount($homework->user_id, $lection);
         }
         $lection = Lection::find($lection);
-        return view('course.lection_homeworks', ['homeworks' => $homeWorks, 'lection' => $lection]);
+
+        return view('course.lection_homeworksNew', [
+            'homeworks' => $homeWorks,
+            'lection' => $lection
+        ]);
     }
 
     public function addHomeworkLecturerComment(Request $request, $homework)

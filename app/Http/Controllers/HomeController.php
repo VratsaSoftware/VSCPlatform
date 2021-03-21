@@ -74,7 +74,7 @@ class HomeController extends Controller
         if ($isAdmin) {
             $courses = Course::where('ends', '>', Carbon::now()->format('Y-m-d H:m:s'))->get();
             $lecturer = User::find(Auth::user()->id);
-            return view('admin.my_profile', ['social_links' => $socialLinks,'certificates' => $certificates,'courses' => $courses,'lecturer' => $lecturer]);
+            return view('admin.my_profileNew', ['social_links' => $socialLinks,'certificates' => $certificates,'courses' => $courses,'lecturer' => $lecturer]);
         }
         if ($isLecturer) {
             $courses = Course::with('Lecturers')->whereHas('Lecturers', function ($query) use ($userId) {

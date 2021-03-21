@@ -108,7 +108,7 @@
 
         <div class="row g-0 home-work align-items-center p-3 mt-1">
             <div class="col-lg-3 ps-3 text-normal text-uppercase pe-4">
-                ДОМАШНО
+                <a href="{{ route('homeworks.show',$lection->id) }}">ДОМАШНО</a>
             </div>
             <div class="col pr-3">
                 <div class="row g-0 ps-3">
