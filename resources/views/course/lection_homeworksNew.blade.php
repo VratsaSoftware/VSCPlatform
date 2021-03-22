@@ -134,7 +134,7 @@
                     </div>
                 @else
                     @foreach ($homework->Comments as $comment)
-                        @if (!$comment->user_id == 1)
+                        @if ($comment->user_id !== 1)
                             <div class="col-lg-auto col-sm-5 settings pt-lg-0 pt-4 mt-lg-0 mt-2">
                                 <button class="btn-green btn-edit" style="width: 270px; height: 50px">
                                     <div class="row g-0 align-items-center">
@@ -147,6 +147,7 @@
                                     </div>
                                 </button>
                             </div>
+                            @break
                         @else
                             <div class="col-lg-auto col-sm-5 settings pt-lg-0 pt-4 mt-lg-0 mt-2">
                                 <button class="btn-edit" style="width: 270px; height: 50px">
@@ -160,6 +161,7 @@
                                     </div>
                                 </button>
                             </div>
+                            @break
                         @endif
                     @endforeach
                 @endif

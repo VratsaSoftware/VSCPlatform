@@ -355,7 +355,11 @@ class LectionController extends Controller
 
     public function showHomeworks(Request $request, $lection)
     {
-        $homeWorks = Homework::with('user', 'comments', 'comments.Author')->where('lection_id', $lection)->get();
+        $homeWorks = Homework::with('user', 'comments', 'comments.Author')
+            ->where('lection_id', $lection)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
         foreach ($homeWorks as $homework) {
             $evaluated = new User;
             $homework['evaluated'] = $evaluated->evalutedHomeWorksCount($homework->user_id, $lection);
