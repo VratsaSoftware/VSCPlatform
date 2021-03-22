@@ -23,9 +23,16 @@
                 </div>
             </div>
             <div class="col-auto d-lg-none">
-                <a href="">
+                <span id="search-homework-user-btn">
                     <i class="fas fa-search"></i>
-                </a>
+                </span>
+            </div>
+            <div class="tab-body position-relative d-lg-none" id="search-homework-user-input" style="display: none">
+                <div class="col-md-auto pe-md-3 me-xl-1">
+                    <div class="position-relative calendar d-flex justify-content-end">
+                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Търси по име" style="width: 270px; height: 50px">
+                    </div>
+                </div>
             </div>
             <div class="col-lg-auto pb-lg-0 pb-4 mb-lg-0 mb-3 mt-lg-0 mt-2">
                 <div class="row g-0">
@@ -46,7 +53,7 @@
         </div>
         <!-- header section END-->
         <!-- table section -->
-        <div class="table-grid text-normal">
+        <div class="table-grid text-normal" id="myUL">
             <!-- table header -->
             <div class="row d-lg-flex d-none g-0 text-blue-grey pt-lg-5">
                 <div class="col-lg-auto number">
@@ -71,13 +78,15 @@
             <!-- table header END-->
             <!-- table content-->
             @foreach($homeworks as $homework)
-            <div class="row g-0 align-items-center">
+            <div class="filter row g-0 align-items-center">
                 <div class="col-lg-auto d-lg-block d-none number text-center">
                     {{ $loop->iteration }}
                 </div>
                 <div class="col-lg col-6 student-name px-lg-5">
                     <span class="d-lg-none">1.</span>
-                    {{ $homework->user->name }} {{ $homework->user->last_name }}
+                    <span>
+                        {{ $homework->user->name }} {{ $homework->user->last_name }}
+                    </span>
                 </div>
                 <div class="col-lg col-auto mx-lg-0 ms-auto file fw-normal">
                     <label for="file-1">
@@ -162,4 +171,7 @@
     </div>
 </div>
 <!-- main content END-->
+
+<script src="{{ asset('js/lection/homework.js') }}"></script>
+
 @endsection
