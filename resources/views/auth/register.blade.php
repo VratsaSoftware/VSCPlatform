@@ -31,7 +31,7 @@
 		</div>
 
 		<div class="mb-3">
-			<input type="email" class="w-100 btn-edit" id="register_email" name="email" placeholder="Електронна поща" value="{{ old('email') }}" required>
+			<input type="email" class="w-100 btn-edit" id="register_email" name="email" placeholder="E-mail" value="{{ old('email') }}" required>
 		</div>
 
 		<div class="mb-3">

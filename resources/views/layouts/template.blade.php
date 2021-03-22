@@ -28,29 +28,16 @@
     <div class="row g-0 p-lg-0 px-4 py-4 mt-lg-0 mt-2" style="margin-right: calc(var(--bs-gutter-x)/ -2);">
 		<div class="col-xl-auto pe-xl-0 pe-lg-5">
 			<div class="row g-0" style="margin-right: calc(var(--bs-gutter-x)/ -2);">
-                <!-- nav menu -->
                 <!-- JQuery -->
                 <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
-
-                @if(Auth::user() && Auth::user()->isAdmin())
-                    @include('admin.left-bar')
-                @endif
-                    @if(Auth::user() && Auth::user()->isLecturer() && !Auth::user()->isAdmin())
-                    @include('lecturer.left-bar')
-                @endif
-                    @if(Auth::user() && !Auth::user()->isLecturer() && !Auth::user()->isAdmin())
-                    @include('user.left-bar')
-                @endif
+                <!-- nav menu -->
+                @include('navigation-left-bar')
                 <!-- nav menu END -->
-                <!-- <div class="col-xl-auto col ps-xxl-0 ps-lg-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="row g-0 pb-lg-4 mb-lg-3"> -->
-                                @yield('content')
-                            <!-- </div>
-                        </div>
-                    </div>
-                </div> -->
+
+                <!-- Content START -->
+                @yield('content')
+                <!-- Content END -->
+
                 <script>
                     $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
                         options.async = true;
