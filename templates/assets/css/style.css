@@ -746,7 +746,50 @@ button {
 .main .table-grid .btn-comments img {
   width: 16px;
 }
+.main .hw-section-header img {
+  height: 30px;
+  margin-right: 50px;
+}
+.comments-table .collapse {
+  height: 80px !important;
+}
 /** Homework for Lecture END**/
+/** Comments**/
+.comment-row {
+  background-color: #d9e0eb;
+  padding: 17px 19px 18px 26px;
+  border-radius: 20px;
+}
+.comment-text {
+  word-wrap: break-word;
+  overflow: hidden;
+  transition: all 0.8s ease-out;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.comment-text.active {
+  white-space: inherit;
+  transition: all 0.8s ease-out;
+  text-overflow: inherit;
+}
+.comment-toggler {
+  background-color: #00214b;
+  max-width: 180px;
+  height: 45px;
+}
+.comment-toggler img {
+  width: 13px;
+  transform: rotate(90deg);
+}
+.comment-toggler.active img {
+  transform: rotate(-90deg);
+}
+.comment-avatar img {
+  width: 45px;
+  height: 45px;
+}
+/** Comments END**/
 /** Media query**/
 @media only screen and (max-width: 1850px) {
   .edit-content {
@@ -1066,6 +1109,9 @@ button {
   .main .hw-section-header i {
     font-size: 21px;
     margin-bottom: 10px;
+  }
+  .main .hw-section-header img {
+    height: 28px;
   }
   .main .text-large {
     color: #778aa4;
