@@ -251,9 +251,9 @@ button {
 /* Track */
 ::-webkit-scrollbar-track {
   background: #cccccc;
-  margin-top: 10px!important;
-  margin-bottom: 10px!important;
-  margin-right: 5px!important;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+  margin-right: 5px !important;
   border-radius: 3px;
 }
 
@@ -879,7 +879,7 @@ button {
   .slide {
     height: auto;
     max-width: 100%;
-    padding: 10px;
+    padding: 12px;
     background-color: transparent !important;
   }
   .navbar-toggler,
@@ -1061,7 +1061,11 @@ button {
   }
   /**Homework for Lecture**/
   .main {
-    padding: 0 10px;
+    padding: 0 12px;
+  }
+  .main .hw-section-header i {
+    font-size: 21px;
+    margin-bottom: 10px;
   }
   .main .text-large {
     color: #778aa4;
