@@ -755,6 +755,9 @@ button {
 }
 /** Homework for Lecture END**/
 /** Comments**/
+.comments-header img {
+  height: 28px;
+}
 .comment-row {
   background-color: #d9e0eb;
   padding: 17px 19px 18px 26px;
@@ -1119,6 +1122,10 @@ button {
   .table-grid .row + .row {
     padding: 37px 0 35px 0;
     border-top: solid 1px #00214b;
+  }
+  /**Comments**/
+  .comments-header img {
+    height: 20px;
   }
 }
 @media only screen and (min-width: 992px) {
