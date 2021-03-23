@@ -70,7 +70,6 @@
                         </div>
                     </span>
                 </div>
-                <span id="lection-files-count{{ $loop->iteration }}"></span>
 
                 <select name="fileType" id="file-type-{{ $loop->iteration }}" class="file-type" style="padding: 5px 15px; width: 180px; height: 45px; border-radius: 15px; display: none; background-color: #f6f9ff;">
                     <option value="">Тип Файл</option>
@@ -78,11 +77,12 @@
                     <option value="Демо">Демо</option>
                     <option value="Домашно">Домашно</option>
                 </select>
+                <span class="lection-select-element"></span>
 
                 <!-- files -->
-                <input type="file" id="slides-{{ $loop->iteration }}" name="slides" style="display: none;">
-                <input type="file" id="demo-{{ $loop->iteration }}" name="demo_file" style="display: none;">
-                <input type="file" id="homework-{{ $loop->iteration }}" name="homework" style="display: none;">
+                <input type="file" id="slides-{{ $loop->iteration }}" class="lection-slides" name="slides" style="display: none;">
+                <input type="file" id="demo-{{ $loop->iteration }}" name="demo_file" class="lection-demo-file" style="display: none;">
+                <input type="file" id="homework-{{ $loop->iteration }}" name="homework" class="lection-homework" style="display: none;">
             </div>
             <div class="col">
                 <div class="row g-0">

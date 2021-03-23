@@ -259,6 +259,25 @@ $(document).ready(function() {
         });
     });
 
+    /* Messages for what type of files are selected for upload */
+    $('.lection-slides').change(function() {
+        if ($(this).val() != null) {
+            $('.lection-select-element').append(' Презентация');
+        }
+    });
+
+    $('.lection-demo-file').change(function() {
+        if ($(this).val() != null) {
+            $('.lection-select-element').append(' Демо');
+        }
+    });
+
+    $('.lection-homework').change(function() {
+        if ($(this).val() != null) {
+            $('.lection-select-element').append(' Домашно');
+        }
+    });
+
     /* lection files */
     function lectionFiles(i) {
         var fileType = '#file-type-' + i;
