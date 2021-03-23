@@ -445,6 +445,89 @@ button {
   border: solid 1px #00214b;
 }
 /** Right side END**/
+/** Course-as-teacher **/
+.text-l1 {
+  font-family: Roboto;
+  font-size: 30px;
+  font-weight: 900;
+}
+.data1 {
+  font-family: Roboto;
+  font-size: 25px;
+}
+.arrow1 {
+  width: 6.5px;
+  height: 13.1px;
+}
+.pill1 {
+  position: absolute;
+  background-color: #fff;
+  height: 30px;
+  width: 30px;
+}
+.pill1 a {
+  z-index: 1;
+  cursor: pointer;
+}
+.pill1 a {
+  -ms-transform: rotate(0deg); /* IE 9 */
+  transform: rotate(0deg);
+}
+.pill2 {
+  position: absolute;
+  background-color: #fff;
+  height: 30px;
+  width: 30px;
+}
+.pill2 a {
+  z-index: 1;
+  cursor: pointer;
+}
+.pill2 a {
+  -ms-transform: rotate(180deg); /* IE 9 */
+  transform: rotate(180deg);
+}
+.pill2 a img {
+  color: #fff;
+}
+.lorem {
+  font-size: 14px;
+}
+.home-work-1 {
+  border-radius: 20px;
+  border: solid 1px #00214b;
+  background-color: #00214b;
+}
+.data-07 {
+  font-size: 20px;
+  color: #e29821;
+}
+.date-pill {
+  border-radius: 10px;
+  width: 103px;
+  height: 45px;
+  border: solid 1px #00214b;
+}
+.enddata {
+  margin-left: -18px;
+}
+.enddata1 {
+  margin-left: -27px;
+}
+.deadline-2 {
+  font-size: 17px;
+}
+.btn1-d {
+  width: 70px;
+  height: 45px;
+  border-radius: 15px;
+}
+.btn-green {
+  background-color: #69b501;
+  border: none !important;
+  color: #ffffff !important;
+}
+/** END Course-as-teacher **/
 /** Login**/
 .logo-black {
   width: 180px;
@@ -799,6 +882,20 @@ button {
   }
   .accordion-item img {
     margin-right: 6px;
+  }
+  .text-l1 {
+    font-family: Roboto;
+    font-size: 24px;
+    font-weight: 900;
+  }
+  .data1 {
+    font-size: 19px;
+  }
+  .enddata {
+    margin-left: 0px;
+  }
+  .enddata1 {
+    margin-left: -7px;
   }
 }
 @media only screen and (max-width: 1400px) {
