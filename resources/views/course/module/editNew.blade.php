@@ -1,5 +1,5 @@
 @extends('layouts.template')
-@section('title', 'Редактирай Модул/Ниво')
+@section('title', 'Курс „' . $module->Course->name . '“ Лекции')
 @section('content')
 <!-- left side -->
 <div class="col-xl-auto col ps-xxl-0 ps-lg-4">
@@ -216,8 +216,8 @@ $(document).ready(function() {
         window.location.href = $("#tab_selector").val();
     });
 
+    /* delete lection */
     $('.delete-lection').click(function() {
-        /* delete user */
         var conf = confirm("Найстина ли искате да изтриете тази Лекция?");
         if (conf == true) {
             return true;
@@ -226,7 +226,8 @@ $(document).ready(function() {
         }
     });
 
-    $('#right-side').click(function() {
+    /* count lections */
+    $('#right-side').mouseup(function() {
         var count = $(this).attr('data-countLections');
 
         for (var i = 1; i <= count; i++) {
@@ -234,6 +235,47 @@ $(document).ready(function() {
         }
     });
 
+    $('.lection-files-btn').click(function() {
+        var lectionId = $(this).attr('data-lection-id');
+        var lectionFiles = '#lection-files' + lectionId;
+        var fileType = '#file-type-' + lectionId;
+
+        $(lectionFiles).hide();
+        $(fileType).show();
+
+        $('.file-type').change(function() {
+            var fileType = '#file-type-' + lectionId;
+            var slides = '#slides-' + lectionId;
+            var demo = '#demo-' + lectionId;
+            var homework = '#homework-' + lectionId;
+
+            if ($(fileType).val() == 'Презентация') {
+                $(slides).trigger('click');
+            } else if ($(fileType).val() == 'Демо') {
+                $(demo).trigger('click');
+            } else if ($(fileType).val() == 'Домашно') {
+                $(homework).trigger('click');
+            }
+        });
+    });
+
+    /* lection files */
+    function lectionFiles(i) {
+        var fileType = '#file-type-' + i;
+        var slides = '#slides-' + i;
+        var demo = '#demo-' + i;
+        var homework = '#homework-' + i;
+
+        if ($(fileType).val() == 'Презентация') {
+            $(slides).trigger('click');
+        } else if ($(fileType).val() == 'Демо') {
+            $(demo).trigger('click');
+        } else if ($(fileType).val() == 'Домашно') {
+            $(homework).trigger('click');
+        }
+    }
+
+    /* count files */
     function countFiles(i) {
         var lectionFilesParse = "#lection-files" + i;
         var lectionFilesCountParse = "#lection-files-count" + i;

@@ -1,6 +1,7 @@
 <form action="{{ url('lection/' . $lection->id) }}" method="post" enctype="multipart/form-data">
     {{ method_field('PUT') }}
     {{ csrf_field() }}
+
     <div class="tab-body position-relative">
         <span class="close d-lg-none position-absolute">&times;</span>
         <div class="row pt-lg-0 pt-4 g-0">
@@ -35,12 +36,15 @@
                     </div>
                     <span id="video-file-count{{ $loop->iteration }}">
                         @if (isset($lection->Video->url))
-                        <a class=" d-inline-block pt-1" href="{{ asset('/') . 'data/course-' . $module->Course->id . '/modules-' . $module->id . '/video-' . $lection->id . '/' . $lection->Video->url }}">Виж</a>
+                            <a class="d-inline-block pt-1" href="{{ asset('/') . 'data/course-' . $module->Course->id . '/modules-' . $module->id . '/video-' . $lection->id . '/' . $lection->Video->url }}">Виж</a>
                         @endif
                     </span>
-                </div>
-            </lable>
+                </lable>
+            </div>
         </div>
+        <!-- <video style="border-radius: 45px; max-height: auto; max-width: 100%" frameborder="0" scrolling="yes" controls>
+            <source src="{{ asset('/') . 'data/course-' . $module->Course->id . '/modules-' . $module->id . '/video-' . $lection->id . '/' . $lection->Video->url }}" type="video/mp4">
+        </video> -->
 
         <input id="video-file{{ $loop->iteration }}" name="video_file" style="display: none;" type="file">
 
@@ -53,8 +57,8 @@
                 Файлове
             </div>
             <div class="col-lg-4 col-auto order-lg-0 order-2">
-                <label for="lection-files{{ $loop->iteration }}">
-                    <span style="border-radius: 15px" class="btn-add row g-0 align-items-center">
+                <div class="lection-files-btn" data-lection-id="{{ $loop->iteration }}">
+                    <span id="lection-files{{ $loop->iteration }}" style="border-radius: 15px" class="btn-add row g-0 align-items-center">
                         <div class="d-lg-none btn-plus">
                             +
                         </div>
@@ -65,40 +69,55 @@
                             </div>
                         </div>
                     </span>
-                    <span id="lection-files-count{{ $loop->iteration }}"></span>
-                </label>
+                </div>
+                <span id="lection-files-count{{ $loop->iteration }}"></span>
 
-                <input id="lection-files{{ $loop->iteration }}" name="slides[]" style="display: none;" type="file" multiple="multiple">
+                <select name="fileType" id="file-type-{{ $loop->iteration }}" class="file-type" style="padding: 5px 15px; width: 180px; height: 45px; border-radius: 15px; display: none; background-color: #f6f9ff;">
+                    <option value="">Тип Файл</option>
+                    <option value="Презентация">Презентация</option>
+                    <option value="Демо">Демо</option>
+                    <option value="Домашно">Домашно</option>
+                </select>
+
+                <!-- files -->
+                <input type="file" id="slides-{{ $loop->iteration }}" name="slides" style="display: none;">
+                <input type="file" id="demo-{{ $loop->iteration }}" name="demo_file" style="display: none;">
+                <input type="file" id="homework-{{ $loop->iteration }}" name="homework" style="display: none;">
             </div>
             <div class="col">
                 <div class="row g-0">
                     <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
                         <div class="row g-0">
-                            <div class="col-lg col-auto text-small align-self-end pe-3">Файл1</div>
-                            <div class="col-auto">
+                            <div class="col-lg col-auto text-small align-self-end pe-3">
+                                Презент.
+                                <span>
+                                    <img class=""src="{{ asset('assets/img/Delete.svg') }}">
+                                </span>
+                            </div>
+                            <!-- <div class="col-auto">
                                 <a href="">
-                                    <img class="" src="{{ asset('assets/img/Delete.svg') }}" alt="">
+                                    <img src="{{ asset('assets/img/Delete.svg') }}">
                                 </a>
+                            </div> -->
+                        </div>
+                    </div>
+                    <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
+                        <div class="row g-0">
+                            <div class="col-lg col-auto text-small align-self-end pe-3">
+                                Демо
+                                <span>
+                                    <img class=""src="{{ asset('assets/img/Delete.svg') }}">
+                                </span>
                             </div>
                         </div>
                     </div>
                     <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
                         <div class="row g-0">
-                            <div class="col-lg col-auto text-small align-self-end pe-3">Файл1</div>
-                            <div class="col-auto">
-                                <a href="">
-                                    <img class="" src="{{ asset('assets/img/Delete.svg') }}" alt="">
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
-                        <div class="row g-0">
-                            <div class="col-lg col-auto text-small align-self-end pe-3">Файл1</div>
-                            <div class="col-auto">
-                                <a href="">
-                                    <img class=""src="{{ asset('assets/img/Delete.svg') }}" alt="">
-                                </a>
+                            <div class="col-lg col-auto text-small align-self-end pe-3">
+                                Домашно
+                                <span>
+                                    <img class=""src="{{ asset('assets/img/Delete.svg') }}">
+                                </span>
                             </div>
                         </div>
                     </div>
