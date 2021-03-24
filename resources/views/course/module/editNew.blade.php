@@ -206,11 +206,6 @@
             @csrf
             @method('DELETE')
         </form>
-
-        <form action="{{ url('lection/' . $lection->id) }}" id="lection-delete-file-{{ $loop->iteration }}" method="post" enctype="multipart/form-data">
-            {{ method_field('PUT') }}
-            {{ csrf_field() }}
-        </form>
     @endforeach
     <!-- Single lection content END-->
 </div>
@@ -241,7 +236,18 @@ $(document).ready(function() {
 
         var conf = confirm("Найстина ли искате да изтриете този Файл-" + lectionType + "?");
         if (conf == true) {
-            alert(lectionId);
+            if (lectionType == 'Презентация') {
+                var input = '<input type="hidden" name="slides_delete" value="delete" required>';
+            } else if (lectionType == 'Демо') {
+                var input = '<input type="hidden" name="demo_file_delete" value="delete" required>';
+            } else if (lectionType == 'Домашно') {
+                var input = '<input type="hidden" name="homework_delete" value="delete" required>';
+            }
+
+            $('.file-delete-input').after().html(input);
+            var formId = '#lection-delete-file-form-' + lectionId;
+
+            $(formId).submit();
         } else {
             return false;
         }

@@ -1,4 +1,4 @@
-<form action="{{ url('lection/' . $lection->id) }}" method="post" enctype="multipart/form-data">
+<form action="{{ url('lection/' . $lection->id) }}" method="post" id="lection-delete-file-form-{{ $loop->iteration }}" enctype="multipart/form-data">
     {{ method_field('PUT') }}
     {{ csrf_field() }}
 
@@ -126,6 +126,8 @@
                             </div>
                         </div>
                     @endif
+
+                    <span class="file-delete-input"></span>
                 </div>
             </div>
         </div>
