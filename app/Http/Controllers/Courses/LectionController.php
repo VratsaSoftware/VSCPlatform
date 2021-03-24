@@ -200,22 +200,22 @@ class LectionController extends Controller
         ]);
         $lection = Lection::with('Module', 'Module.Course')->findOrFail($id);
 
-        if ($request->has('title') || $request->has('first_date') && $request->has('first_time_hours') && $request->has('first_time_minutes') || $request->has('second_date') && $request->has('second_time_hours') && $request->has('second_time_minutes') || $request->has('description') || $request->has('order')) {
+        // if ($request->has('title') || $request->has('first_date') && $request->has('first_time_hours') && $request->has('first_time_minutes') || $request->has('second_date') && $request->has('second_time_hours') && $request->has('second_time_minutes') || $request->has('description') || $request->has('order')) {
             $lection->title = $request->title;
-            try {
-                $lection->first_date = $this->parseDateTime($request->first_date, $request->first_time_hours, $request->first_time_minutes);
-                if (!is_null($request->second_date)) {
-                    $lection->second_date = $this->parseDateTime($request->second_date, $request->second_time_hours, $request->second_time_minutes);
-                }
-            } catch (\Exception $err) {
-                $message = __('Невалидна заявка с полетата за дата и час!');
-                return redirect()->back()->with('error', $message)->withInput(Input::all());
-            }
+            // try {
+            //     $lection->first_date = $this->parseDateTime($request->first_date, $request->first_time_hours, $request->first_time_minutes);
+            //     if (!is_null($request->second_date)) {
+            //         $lection->second_date = $this->parseDateTime($request->second_date, $request->second_time_hours, $request->second_time_minutes);
+            //     }
+            // } catch (\Exception $err) {
+            //     $message = __('Невалидна заявка с полетата за дата и час!');
+            //     return redirect()->back()->with('error', $message)->withInput(Input::all());
+            // }
 
-            $lection->homework_end = !is_null($request->homework_end) ? $request->homework_end : Carbon::parse($request->homework_end)->addDays(1);
-            $lection->description = $request->description;
-            $lection->order = !is_null($request->order) ?: $request->order;
-        }
+        //     $lection->homework_end = !is_null($request->homework_end) ? $request->homework_end : Carbon::parse($request->homework_end)->addDays(1);
+        //     $lection->description = $request->description;
+        //     $lection->order = !is_null($request->order) ?: $request->order;
+        // }
 
         if ($request->has('video_file')) {
             $slides = $request->file('video_file');
@@ -293,7 +293,7 @@ class LectionController extends Controller
             if (File::exists($oldSlides)) {
                 File::delete($oldSlides);
             }
-        } else if ($request->demo_delete == 'delete') {
+        } else if ($request->demo_file_delete == 'delete') {
             $lection->demo = null;
         } else if ($request->homework_delete == 'delete') {
             $lection->homework_criteria = null;
