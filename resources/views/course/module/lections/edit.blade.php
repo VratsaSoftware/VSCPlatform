@@ -10,13 +10,13 @@
             </div>
             <div class="col-md-auto pe-md-3 me-xl-1">
                 <div class="position-relative calendar">
-                    <input type="text" name="first_date" value="@if (isset($lection->first_date)){{ $lection->first_date->format('Y-m-d') }}@endif" class="date-input ext-navy-blue" placeholder="Начало">
+                    <input type="text" name="first_date" value="@if (isset($lection->first_date)){{ $lection->first_date }}@endif" class="date-input ext-navy-blue" placeholder="Начало">
                     <img src="{{ asset('assets/img/arrow.svg') }}">
                 </div>
             </div>
             <div class="col-md-auto pe-md-3 me-xl-1">
                 <div class="position-relative calendar">
-                    <input type="text" name="second_date" value="@if (isset($lection->second_date)){{ $lection->second_date->format('Y-m-d') }}@endif" class="date-input ext-navy-blue" placeholder="Край">
+                    <input type="text" name="second_date" value="@if (isset($lection->second_date)){{ $lection->second_date }}@endif" class="date-input ext-navy-blue" placeholder="Край">
                     <img src="{{ asset('assets/img/arrow.svg') }}">
                 </div>
             </div>
@@ -42,9 +42,13 @@
                 </lable>
             </div>
         </div>
-        <!-- <video style="border-radius: 45px; max-height: auto; max-width: 100%" frameborder="0" scrolling="yes" controls>
+        <!--
+        @if (isset($lection->Video->url))
+         <video style="border-radius: 45px; max-height: auto; max-width: 100%" frameborder="0" scrolling="yes" controls>
             <source src="{{ asset('/') . 'data/course-' . $module->Course->id . '/modules-' . $module->id . '/video-' . $lection->id . '/' . $lection->Video->url }}" type="video/mp4">
-        </video> -->
+        </video>
+        @endif
+        -->
 
         <input id="video-file{{ $loop->iteration }}" name="video_file" style="display: none;" type="file">
 
@@ -86,41 +90,42 @@
             </div>
             <div class="col">
                 <div class="row g-0">
-                    <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
-                        <div class="row g-0">
-                            <div class="col-lg col-auto text-small align-self-end pe-3">
-                                Презент.
-                                <span>
-                                    <img class=""src="{{ asset('assets/img/Delete.svg') }}">
-                                </span>
-                            </div>
-                            <!-- <div class="col-auto">
-                                <a href="">
-                                    <img src="{{ asset('assets/img/Delete.svg') }}">
-                                </a>
-                            </div> -->
-                        </div>
-                    </div>
-                    <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
-                        <div class="row g-0">
-                            <div class="col-lg col-auto text-small align-self-end pe-3">
-                                Демо
-                                <span>
-                                    <img class=""src="{{ asset('assets/img/Delete.svg') }}">
-                                </span>
+                    @if ($lection->presentation)
+                        <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
+                            <div class="row g-0">
+                                <div class="col-lg col-auto text-small align-self-end pe-3">
+                                    <a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/slides-'.$lection->id.'/'.$lection->presentation)}}" download>Презент.</a>
+                                    <span id="btn-delete-file-slides-{{ $loop->iteration }}" class="btn-delete-file" data-lection-file-id="{{ $loop->iteration }}" data-lection-file-type="Презентация">
+                                        <img src="{{ asset('assets/img/Delete.svg') }}">
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
-                        <div class="row g-0">
-                            <div class="col-lg col-auto text-small align-self-end pe-3">
-                                Домашно
-                                <span>
-                                    <img class=""src="{{ asset('assets/img/Delete.svg') }}">
-                                </span>
+                    @endif
+                    @if ($lection->demo)
+                        <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
+                            <div class="row g-0">
+                                <div class="col-lg col-auto text-small align-self-end pe-3">
+                                    Демо
+                                    <span id="btn-delete-file-demo-{{ $loop->iteration }}" class="btn-delete-file" data-lection-file-id="{{ $loop->iteration }}" data-lection-file-type="Демо">
+                                        <img src="{{ asset('assets/img/Delete.svg') }}">
+                                    </span>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
+                    @if ($lection->homework_criteria)
+                        <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
+                            <div class="row g-0">
+                                <div class="col-lg col-auto text-small align-self-end pe-3">
+                                    <a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/homework-'.$lection->id.'/'.$lection->homework_criteria)}}" download>Домашно</a>
+                                    <span id="btn-delete-file-homework-{{ $loop->iteration }}" class="btn-delete-file" data-lection-file-id="{{ $loop->iteration }}" data-lection-file-type="Домашно">
+                                        <img src="{{ asset('assets/img/Delete.svg') }}">
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -137,7 +142,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="date-pill d-flex align-items-center">
-                            <input class="text-center fw-bold" value="@if(isset($lection->homework_end)){{ $lection->homework_end->format('d.m') }}@endif" placeholder="Няма">
+                            <input type="text" class="text-center fw-bold date-input ext-navy-blue" value="@if(isset($lection->homework_end)){{ $lection->homework_end }}@endif" placeholder="Няма">
                         </div>
                     </div>
                 </div>

@@ -110,15 +110,17 @@
                                     <div id="collapse{{ $loop->iteration }}" class="accordion-collapse collapse @if ($loop->iteration == 1) show @endif" aria-labelledby="headingThree" data-bs-parent="#accordionExample">
                                         <div class="accordion-body py-lg-3 py-1">
                                             <div class="d-flex justify-content-between pb-4 text-small">
-                                                <div class="">
+                                                <div>
+                                                    @if (is_null($lection->homework_end))
+                                                        <img src="{{ asset('assets/img/Homework.svg') }}">
+                                                    @endif
                                                     @if (!is_null($lection->homework_end))
-                                                    <img src="{{ asset('assets/img/Homework.svg') }}" alt="">
-                                                    <span class="">
-                                                        Домашно до
-                                                    </span>
-                                                    <span class="text-orange fw-bold">
-                                                        {{ $lection->homework_end->format('d.m.Y') }}
-                                                    </span>
+                                                        <span class="">
+                                                            Домашно до
+                                                        </span>
+                                                        <span class="text-orange fw-bold">
+                                                            {{ $lection->homework_end->format('d.m.Y') }}
+                                                        </span>
                                                     @endif
                                                     @if (!$lection->homework_criteria)
                                                         <div class="text-orange mt-2 ms-lg-0 ms-2 ps-lg-0 ps-4 pt-1 fw-bold row g-0 align-items-center">
@@ -128,8 +130,10 @@
                                                     @endif
                                                 </div>
                                                 <div class="d-lg-inline-block d-none">
-                                                    <img src="{{ asset('assets/img/download.svg') }}" alt="">
-                                                    <span class="">Файлове</span>
+                                                    @if ($lection->homework_criteria || $lection->demo || $lection->slides)
+                                                        <img src="{{ asset('assets/img/download.svg') }}" alt="">
+                                                        <span>Файлове</span>
+                                                    @endif
                                                 </div>
                                                 <div class="d-lg-inline-block d-none">
                                                     @if (isset($lection->Video->url))
@@ -202,6 +206,11 @@
             @csrf
             @method('DELETE')
         </form>
+
+        <form action="{{ url('lection/' . $lection->id) }}" id="lection-delete-file-{{ $loop->iteration }}" method="post" enctype="multipart/form-data">
+            {{ method_field('PUT') }}
+            {{ csrf_field() }}
+        </form>
     @endforeach
     <!-- Single lection content END-->
 </div>
@@ -216,6 +225,28 @@ $(document).ready(function() {
         window.location.href = $("#tab_selector").val();
     });
 
+    /* count lections */
+    $('#right-side').mouseup(function() {
+        var count = $(this).attr('data-countLections');
+
+        for (var i = 1; i <= count; i++) {
+            countFiles(i);
+        }
+    });
+
+    /* delete lection file */
+    $('.btn-delete-file').click(function() {
+        var lectionId = $(this).attr('data-lection-file-id');
+        var lectionType = $(this).attr('data-lection-file-type');
+
+        var conf = confirm("Найстина ли искате да изтриете този Файл-" + lectionType + "?");
+        if (conf == true) {
+            alert(lectionId);
+        } else {
+            return false;
+        }
+    });
+
     /* delete lection */
     $('.delete-lection').click(function() {
         var conf = confirm("Найстина ли искате да изтриете тази Лекция?");
@@ -226,15 +257,7 @@ $(document).ready(function() {
         }
     });
 
-    /* count lections */
-    $('#right-side').mouseup(function() {
-        var count = $(this).attr('data-countLections');
-
-        for (var i = 1; i <= count; i++) {
-            countFiles(i);
-        }
-    });
-
+    /* lection add files */
     $('.lection-files-btn').click(function() {
         var lectionId = $(this).attr('data-lection-id');
         var lectionFiles = '#lection-files' + lectionId;
