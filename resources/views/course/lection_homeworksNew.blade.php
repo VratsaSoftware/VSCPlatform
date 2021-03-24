@@ -1,4 +1,4 @@
-@extends('layouts.homework')
+@extends('layouts.home')
 @section('title', 'Домашни')
 @section('content')
 <!-- main content -->

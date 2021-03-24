@@ -25,20 +25,13 @@
 		<div class="col-xl-auto pe-xl-0 pe-lg-5">
 			<div class="row g-0" style="margin-right: calc(var(--bs-gutter-x)/ -2);">
 				<!-- nav menu -->
-                @if(Auth::user() && Auth::user()->isAdmin())
-                    @include('admin.left-bar')
-                @endif
-                    @if(Auth::user() && Auth::user()->isLecturer() && !Auth::user()->isAdmin())
-                    @include('lecturer.left-bar')
-                @endif
-                    @if(Auth::user() && !Auth::user()->isLecturer() && !Auth::user()->isAdmin())
-                    @include('user.left-bar')
-                @endif
+                @include('navigation-left-bar')
 				<!-- nav menu END -->
 			</div>
 		</div>
 		@yield('content')
 	</div>
+
 	<!-- Bootstrap core JS Files -->
 	<script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
 	<script src="{{ asset('assets/js/main.js') }}" type="text/javascript"></script>
