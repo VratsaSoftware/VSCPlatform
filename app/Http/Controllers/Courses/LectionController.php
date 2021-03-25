@@ -398,6 +398,19 @@ class LectionController extends Controller
         ]);
     }
 
+    public function homeworkComment($homework)
+    {
+        $comments = HomeworkComment::where('homework_id', $homework)
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $comments = $comments->load('Author');
+
+        return view('course.lection_homework_comment', [
+            'allComments' => $comments,
+        ]);
+    }
+
     public function addHomeworkLecturerComment(Request $request, $homework)
     {
         $isExisting = HomeworkComment::where([

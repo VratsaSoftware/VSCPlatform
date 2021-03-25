@@ -163,6 +163,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/event/{event}','Events\EventController@show')->name('event.show');
     Route::post('/user/upload/homework','Courses\LectionController@userUploadHomework')->name('user.upload.homework');
     Route::post('/lection/homework/user/eval','Courses\LectionController@userEvalHomework')->name('user.eval.homeworks');
+
+    Route::get('/lection/homework/{homework}/coments','Courses\LectionController@homeworkComment');
+
     Route::post('/lection/homework/{homework}/user/eval','Courses\LectionController@addHomeworkStudentComment')->name('student.homework.comment');
     Route::group(['middleware' => 'isLecturer'], function () {
         // lecturer routes

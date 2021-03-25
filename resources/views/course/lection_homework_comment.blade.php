@@ -25,158 +25,41 @@
             </div>
         </div>
         <!-- header section END-->
-        <!-- table section -->
-        <div class="text-normal comments-table pt-lg-5 mt-4">
-            <!-- table content-->
-            <div class="row comment-row g-0 fw-normal mb-3">
-                <div class="col-lg-auto col-12 comment-avatar">
-                    <div class="row g-0 align-items-center">
-                        <div class="col-auto me-4">
-                            <img src="{{ asset('assets/img/avatar2.png') }}" alt="">
-                        </div>
-                        <div class="col-auto text-small">
-                            Калин Илиев
+        @foreach($allComments as $comment)
+            <!-- table section -->
+            <div class="text-normal @if ($loop->iteration == 1)comments-table pt-lg-5 mt-4 @endif">
+                <!-- table content-->
+                <div class="row comment-row g-0 fw-normal mb-3">
+                    <div class="col-lg-auto col-12 comment-avatar">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-auto me-4">
+                                @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
+                                    <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" class="avatar" style="border-radius: 5px">
+                                @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
+                                    <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" class="avatar" style="border-radius: 5px">
+                                @else
+                                    <img src="{{ asset('images/user-pics/'. $comment->Author->picture) }}" alt="profile-pic" class="avatar" style="border-radius: 5px">
+                                @endif
+                            </div>
+                            <div class="col-auto text-small">
+                                {{ $comment->Author->name }} {{ $comment->Author->last_name }}
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="col-lg col-12 d-flex overflow-hidden">
-                    <div class="d-inline-block text-small align-self-center comment-text position-relative px-lg-5 me-lg-4 py-2">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
+                    <div class="col-lg col-12 d-flex overflow-hidden">
+                        <div class="d-inline-block text-small align-self-center comment-text position-relative px-lg-5 me-lg-4 py-2">
+                            {{ $comment->comment }}
+                        </div>
+                    </div>
+                    <div class="col-auto">
+                        <button class="comment-toggler text-white text-small px-3 d-flex align-items-center">
+                            <span class="me-4 pe-2 fw-bold d-md-inline-block d-none lh-xs mb-1">Виж повече</span>
+                            <img src="{{ asset('assets/img/arrow-right-white.svg') }}" alt="">
+                        </button>
                     </div>
                 </div>
-                <div class="col-auto">
-                    <button class="comment-toggler text-white text-small px-3 d-flex align-items-center">
-                        <span class="me-4 pe-2 fw-bold d-md-inline-block d-none lh-xs mb-1">Виж повече</span>
-                        <img src="{{ asset('assets/img/arrow-right-white.svg') }}" alt="">
-                    </button>
-                </div>
-            </div>
             <!-- table content END-->
-            <!-- table content-->
-            <div class="row comment-row g-0 fw-normal mb-3">
-                <div class="col-lg-auto col-12 comment-avatar">
-                    <div class="row g-0 align-items-center">
-                        <div class="col-auto me-4">
-                            <img src="{{ asset('assets/img/avatar2.png') }}">
-                        </div>
-                        <div class="col-auto text-small">
-                            Калин Илиев
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg col-12 d-flex overflow-hidden">
-                    <div class="d-inline-block text-small align-self-center comment-text position-relative px-lg-5 me-lg-4 py-2">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                    </div>
-                </div>
-                <div class="col-auto">
-                    <button class="comment-toggler text-white text-small px-3 d-flex align-items-center">
-                        <span class="me-4 pe-2 fw-bold d-md-inline-block d-none lh-xs mb-1">Виж повече</span>
-                        <img src="{{ asset('assets/img/arrow-right-white.svg') }}">
-                    </button>
-                </div>
-            </div>
-            <!-- table content END-->
-            <!-- table content-->
-            <div class="row comment-row g-0 fw-normal mb-3">
-                <div class="col-lg-auto col-12 comment-avatar">
-                    <div class="row g-0 align-items-center">
-                        <div class="col-auto me-4">
-                            <img src="{{ asset('assets/img/avatar2.png') }}">
-                        </div>
-                        <div class="col-auto text-small">
-                            Калин Илиев
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg col-12 d-flex overflow-hidden">
-                    <div class="d-inline-block text-small align-self-center comment-text position-relative px-lg-5 me-lg-4 py-2">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                    </div>
-                </div>
-                <div class="col-auto">
-                    <button class="comment-toggler text-white text-small px-3 d-flex align-items-center">
-                        <span class="me-4 pe-2 fw-bold d-md-inline-block d-none lh-xs mb-1">Виж повече</span>
-                        <img src="{{ asset('assets/img/arrow-right-white.svg') }}" alt="">
-                    </button>
-                </div>
-            </div>
-            <!-- table content END-->
-            <!-- table content-->
-            <div class="row comment-row g-0 fw-normal mb-3">
-                <div class="col-lg-auto col-12 comment-avatar">
-                    <div class="row g-0 align-items-center">
-                        <div class="col-auto me-4">
-                            <img src="{{ asset('assets/img/avatar2.png') }}" alt="">
-                        </div>
-                        <div class="col-auto text-small">
-                            Калин Илиев
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg col-12 d-flex overflow-hidden">
-                    <div class="d-inline-block text-small align-self-center comment-text position-relative px-lg-5 me-lg-4 py-2">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                    </div>
-                </div>
-                <div class="col-auto">
-                    <button class="comment-toggler text-white text-small px-3 d-flex align-items-center">
-                        <span class="me-4 pe-2 fw-bold d-md-inline-block d-none lh-xs mb-1">Виж повече</span>
-                        <img src="{{ asset('assets/img/arrow-right-white.svg') }}" alt="">
-                    </button>
-                </div>
-            </div>
-            <!-- table content END-->
-            <!-- table content-->
-            <div class="row comment-row g-0 fw-normal mb-3">
-                <div class="col-lg-auto col-12 comment-avatar">
-                    <div class="row g-0 align-items-center">
-                        <div class="col-auto me-4">
-                            <img src="{{ asset('assets/img/avatar2.png') }}" alt="">
-                        </div>
-                        <div class="col-auto text-small">
-                            Калин Илиев
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg col-12 d-flex overflow-hidden">
-                    <div class="d-inline-block text-small align-self-center comment-text position-relative px-lg-5 me-lg-4 py-2">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                    </div>
-                </div>
-                <div class="col-auto">
-                    <button class="comment-toggler text-white text-small px-3 d-flex align-items-center">
-                        <span class="me-4 pe-2 fw-bold d-md-inline-block d-none lh-xs mb-1">Виж повече</span>
-                        <img src="{{ asset('assets/img/arrow-right-white.svg') }}" alt="">
-                    </button>
-                </div>
-            </div>
-            <!-- table content END-->
-            <!-- table content-->
-            <div class="row comment-row g-0 fw-normal mb-3">
-                <div class="col-lg-auto col-12 comment-avatar">
-                    <div class="row g-0 align-items-center">
-                        <div class="col-auto me-4">
-                            <img src="{{ asset('assets/img/avatar2.png') }}" alt="">
-                        </div>
-                        <div class="col-auto text-small">
-                            Калин Илиев
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg col-12 d-flex overflow-hidden">
-                    <div class="d-inline-block text-small align-self-center comment-text position-relative px-lg-5 me-lg-4 py-2">
-                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.
-                    </div>
-                </div>
-                <div class="col-auto">
-                    <button class="comment-toggler text-white text-small px-3 d-flex align-items-center">
-                        <span class="me-4 pe-2 fw-bold d-md-inline-block d-none lh-xs mb-1">Виж повече</span>
-                        <img src="{{ asset('assets/img/arrow-right-white.svg') }}" alt="">
-                    </button>
-                </div>
-            </div>
-            <!-- table content END-->
+        @endforeach
         </div>
         <!-- table section END-->
     </div>

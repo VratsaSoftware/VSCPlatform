@@ -106,14 +106,16 @@
                 </div>
                 <div class="col-lg col-6 comments pt-lg-0 pt-4 mt-lg-0 mt-2">
                     <button class="btn-comments">
-                        <div class="row g-0">
-                            <div class="col text-start">
-                                {{ $homework->Comments->count() }}
+                        <a href="{{ $homework->Comments->count() ? asset('lection/homework/' . $homework->id . '/coments') : '' }}">
+                            <div class="row g-0" style="color: white;">
+                                <div class="col text-start">
+                                    {{ $homework->Comments->count() }}
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
                             </div>
-                            <div class="col-auto">
-                                <i class="fas fa-chevron-right"></i>
-                            </div>
-                        </div>
+                        </a>
                     </button>
                 </div>
                 <div class="col-lg col-auto ms-lg-0 ms-auto date fw-normal pt-lg-0 pt-4 mt-lg-0 mt-2">

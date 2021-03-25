@@ -8,11 +8,11 @@
                 <div class="row g-0 user-info justify-content-center">
                     <div class="col-auto">
                         @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
-                            <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" class="avatar">
+                            <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px" class="avatar">
                         @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
-                            <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" class="avatar">
+                            <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px" class="avatar">
                         @else
-                            <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" class="avatar">
+                            <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px" class="avatar">
                         @endif
                     </div>
                     <div class="col align-self-center ps-2 ms-1">
@@ -97,11 +97,11 @@
                 <div class="row d-lg-flex d-none g-0 user-info py-lg-4 justify-content-center">
                     <div class="col-auto">
                         @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
-                            <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" class="avatar">
+                            <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px" class="avatar">
                         @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
-                            <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" class="avatar">
+                            <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px" class="avatar">
                         @else
-                            <img src="{{ asset('images/user-pics/' . Auth::user()->picture) }}" alt="profile-pic" class="avatar">
+                            <img src="{{ asset('images/user-pics/' . Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px" class="avatar">
                         @endif
                     </div>
                     <div class="col align-self-center ps-4">
