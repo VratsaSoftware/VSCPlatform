@@ -27,7 +27,7 @@
         <!-- header section END-->
         @foreach($allComments as $comment)
             <!-- table section -->
-            <div class="text-normal @if ($loop->iteration == 1)comments-table pt-lg-5 mt-4 @endif">
+            <div class="text-normal @if ($loop->iteration == 1)comments-table pt-lg-5 mt-4 @endif" title="{{ $comment->created_at->format('d.m.Y H:i') }}">
                 <!-- table content-->
                 <div class="row comment-row g-0 fw-normal mb-3">
                     <div class="col-lg-auto col-12 comment-avatar">
@@ -49,6 +49,7 @@
                     <div class="col-lg col-12 d-flex overflow-hidden">
                         <div class="d-inline-block text-small align-self-center comment-text position-relative px-lg-5 me-lg-4 py-2">
                             {{ $comment->comment }}
+                                <b>({{ $comment->created_at->format('d.m.Y H:i') }})</b>
                         </div>
                     </div>
                     <div class="col-auto">
