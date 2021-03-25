@@ -33,9 +33,9 @@
                     <div class="col-lg-auto col-12 comment-avatar">
                         <div class="row g-0 align-items-center">
                             <div class="col-auto me-4">
-                                @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
+                                @if($comment->Author->sex != 'male')
                                     <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" class="avatar" style="border-radius: 5px">
-                                @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
+                                @elseif($comment->Author->sex != 'female')
                                     <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" class="avatar" style="border-radius: 5px">
                                 @else
                                     <img src="{{ asset('images/user-pics/'. $comment->Author->picture) }}" alt="profile-pic" class="avatar" style="border-radius: 5px">
@@ -72,7 +72,7 @@ $(document).ready(function() {
         toggler.prev().children().toggleClass("active");
         $(this).toggleClass("active");
     });
-       
+
     if ($(window).width() < 992) {
         $("#right-side .tab-pane.active").removeClass("active");
         $('.btn-green.active').removeClass("active");
