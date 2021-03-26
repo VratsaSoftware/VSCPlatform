@@ -248,15 +248,19 @@ button {
 ::-webkit-scrollbar {
   width: 6px;
 }
-
 /* Track */
 ::-webkit-scrollbar-track {
   background: #cccccc;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+  margin-right: 5px !important;
+  border-radius: 3px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
   background: #666666;
+  border-radius: 3px;
 }
 
 /* Handle on hover */
@@ -416,6 +420,10 @@ button {
   height: 170px;
   width: 100%;
 }
+/* ::-webkit-scrollbar-track {
+  margin-top: 10px;
+  margin-bottom: 10px;
+} */
 .btn-add {
   padding: 5px 15px;
   width: 180px;
@@ -821,7 +829,53 @@ button {
 .main .table-grid .btn-comments img {
   width: 16px;
 }
+.main .hw-section-header img {
+  height: 30px;
+  margin-right: 50px;
+}
+.comments-table .collapse {
+  height: 80px !important;
+}
 /** Homework for Lecture END**/
+/** Comments**/
+.comments-header img {
+  height: 28px;
+}
+.comment-row {
+  background-color: #d9e0eb;
+  padding: 17px 19px 18px 26px;
+  border-radius: 20px;
+}
+.comment-text {
+  word-wrap: break-word;
+  overflow: hidden;
+  transition: all 0.8s ease-out;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.comment-text.active {
+  white-space: inherit;
+  transition: all 0.8s ease-out;
+  text-overflow: inherit;
+}
+.comment-toggler {
+  background-color: #00214b;
+  max-width: 180px;
+  height: 45px;
+}
+.comment-toggler img {
+  width: 13px;
+  transform: rotate(90deg);
+}
+.comment-toggler.active img {
+  transform: rotate(-90deg);
+}
+.comment-avatar img {
+  width: 45px;
+  height: 45px;
+}
+/** Comments END**/
 /** Media query**/
 @media only screen and (max-width: 1850px) {
   .edit-content {
@@ -854,6 +908,10 @@ button {
   }
 }
 @media only screen and (max-width: 1546px) {
+  .calendar input {
+    width: 160px;
+    padding: 0 40px 0 20px;
+  }
   .card-title {
     font-size: 24px;
   }
@@ -964,7 +1022,7 @@ button {
   .slide {
     height: auto;
     max-width: 100%;
-    padding: 10px;
+    padding: 12px;
     background-color: transparent !important;
   }
   .navbar-toggler,
@@ -1146,7 +1204,14 @@ button {
   }
   /**Homework for Lecture**/
   .main {
-    padding: 0 10px;
+    padding: 0 12px;
+  }
+  .main .hw-section-header i {
+    font-size: 21px;
+    margin-bottom: 10px;
+  }
+  .main .hw-section-header img {
+    height: 28px;
   }
   .main .text-large {
     color: #778aa4;
@@ -1154,6 +1219,10 @@ button {
   .table-grid .row + .row {
     padding: 37px 0 35px 0;
     border-top: solid 1px #00214b;
+  }
+  /**Comments**/
+  .comments-header img {
+    height: 20px;
   }
 }
 @media only screen and (min-width: 992px) {
