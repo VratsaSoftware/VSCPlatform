@@ -12,8 +12,6 @@ $(document).ready(function(){
         $('.nav-tabs a').eq($(this).val()).tab('show');
     });
 
-    $(".date-input").datepicker("dd-mm-yy");
-
     $('#right-side .tab-pane .close').on('click', function () {
         $("#right-side .tab-pane.active").removeClass("active");
     });
