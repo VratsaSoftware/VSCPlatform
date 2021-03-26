@@ -1224,6 +1224,27 @@ button {
   .comments-header img {
     height: 20px;
   }
+  .home-work-1 {
+    margin-left: -20px;
+    margin-right: -20px;
+    margin-bottom: -60px;
+  }
+  .bell-size {
+    width: 29px;
+    height: 47px;
+  }
+  .deadline-2 {
+    font-size: 14px;
+  }
+  .enddata {
+    font-size: 14px;
+  }
+  .enddata1 {
+    font-size: 14px;
+  }
+  .text-l1 {
+    font-size: 20px;
+  }
 }
 @media only screen and (min-width: 992px) {
   .toggled .slide-item {
