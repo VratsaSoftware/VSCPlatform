@@ -1119,6 +1119,7 @@ button {
     text-align: center;
     background-color: #69b501;
     border: none;
+    margin-top: -13px;
   }
   .nav-item {
     padding-bottom: 30px;
@@ -1224,13 +1225,14 @@ button {
   .comments-header img {
     height: 20px;
   }
+  /**Course as teacher**/
   .home-work-1 {
     margin-left: -20px;
     margin-right: -20px;
     margin-bottom: -60px;
   }
   .bell-size {
-    width: 29px;
+    width: 39px;
     height: 47px;
   }
   .deadline-2 {
@@ -1245,6 +1247,8 @@ button {
   .text-l1 {
     font-size: 20px;
   }
+
+  /**End course as teacher**/
 }
 @media only screen and (min-width: 992px) {
   .toggled .slide-item {
