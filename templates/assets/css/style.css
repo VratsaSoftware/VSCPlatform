@@ -1095,7 +1095,7 @@ button {
     width: 100%;
   }
   .video-upload {
-    border-radius: 11px;
+    /**border-radius: 11px;**/
     max-height: 375px;
   }
   .video-upload-btn {
@@ -1247,7 +1247,13 @@ button {
   .text-l1 {
     font-size: 20px;
   }
-
+  .btn-view-1 {
+    margin-bottom: -75px;
+    width: 351px;
+    height: 70px;
+    margin-left: -20px;
+    margin-right: -20px;
+  }
   /**End course as teacher**/
 }
 @media only screen and (min-width: 992px) {
