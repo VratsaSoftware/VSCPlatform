@@ -1231,15 +1231,19 @@ button {
     margin-right: -20px;
     margin-bottom: -60px;
   }
-  .bell-size {
-    width: 39px;
-    height: 47px;
-  }
   .deadline-2 {
-    font-size: 14px;
+    font-size: 26px;
   }
   .enddata {
-    font-size: 14px;
+    font-size: 26px;
+  }
+  .bell-size {
+    width: 85px;
+    height: 93px;
+    margin-left: 25px;
+  }
+  .text-normal {
+    font-size: 28px;
   }
   .enddata1 {
     font-size: 14px;
@@ -1249,10 +1253,14 @@ button {
   }
   .btn-view-1 {
     margin-bottom: -75px;
-    width: 351px;
     height: 70px;
-    margin-left: -20px;
-    margin-right: -20px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    width: 100%;
+  }
+  .see-all {
+    font-size: 21px;
   }
   /**End course as teacher**/
 }
@@ -1324,5 +1332,124 @@ button {
   .table-grid .row + .row {
     padding: 33px 0 45px 0;
     border-bottom: solid 1px #00214b;
+  }
+}
+
+@media only screen and (max-width: 600px) {
+  .deadline-2 {
+    font-size: 24px;
+  }
+  .enddata {
+    font-size: 24px;
+  }
+  .bell-size {
+    width: 75px;
+    height: 83px;
+    margin-left: 25px;
+  }
+  .text-normal {
+    font-size: 26px;
+  }
+  .see-all {
+    font-size: 19px;
+  }
+}
+@media only screen and (max-width: 550px) {
+  .deadline-2 {
+    font-size: 22px;
+  }
+  .enddata {
+    font-size: 22px;
+  }
+  .bell-size {
+    width: 65px;
+    height: 73px;
+    margin-left: 20px;
+  }
+  .text-normal {
+    font-size: 24px;
+  }
+  .see-all {
+    font-size: 18px;
+  }
+}
+@media only screen and (max-width: 495px) {
+  .deadline-2 {
+    font-size: 19px;
+  }
+  .enddata {
+    font-size: 19px;
+  }
+  .bell-size {
+    width: 55px;
+    height: 53px;
+    margin-left: 15px;
+  }
+  .text-normal {
+    font-size: 21px;
+  }
+}
+@media only screen and (max-width: 438px) {
+  .deadline-2 {
+    font-size: 16px;
+  }
+  .enddata {
+    font-size: 16px;
+  }
+  .bell-size {
+    width: 45px;
+    height: 53px;
+    margin-left: 15px;
+  }
+  .text-normal {
+    font-size: 19px;
+  }
+  .see-all {
+    font-size: 14px;
+  }
+}
+@media only screen and (max-width: 393px) {
+  .deadline-2 {
+    font-size: 14px;
+  }
+  .enddata {
+    font-size: 14px;
+  }
+  .bell-size {
+    width: 35px;
+    height: 43px;
+    margin-left: 15px;
+  }
+}
+@media only screen and (max-width: 346px) {
+  .deadline-2 {
+    font-size: 12px;
+  }
+  .enddata {
+    font-size: 12px;
+  }
+  .bell-size {
+    width: 30px;
+    height: 37px;
+    margin-left: 15px;
+  }
+  .text-normal {
+    font-size: 17px;
+  }
+}
+@media only screen and (max-width: 315px) {
+  .deadline-2 {
+    font-size: 10px;
+  }
+  .enddata {
+    font-size: 10px;
+  }
+  .bell-size {
+    width: 28px;
+    height: 34px;
+    margin-left: 13px;
+  }
+  .text-normal {
+    font-size: 16px;
   }
 }
