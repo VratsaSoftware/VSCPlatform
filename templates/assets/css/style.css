@@ -18,6 +18,9 @@
 .text-xxl {
   font-size: 50px;
 }
+.text-xl {
+  font-size: 30px;
+}
 .text-large {
   font-size: 25px;
 }
@@ -63,6 +66,12 @@
 }
 .text-navy-blue {
   color: #00214b;
+}
+.text-grey {
+  color: #666666;
+}
+.text-kermit-green {
+  color: #69b501;
 }
 /** custom boodstrap colors and fonts END**/
 body {
@@ -377,7 +386,7 @@ button {
 
 /** Right side **/
 .edit-content {
-  padding-left: 70px;
+  padding-left: 81px;
   padding-right: 50px;
 }
 .edit-content input,
@@ -876,6 +885,52 @@ button {
   height: 45px;
 }
 /** Comments END**/
+/** Student application **/
+.card-body-application {
+  padding: 71px 52px 60px 67px;
+}
+.card-title-application {
+  font-size: 20px;
+  color: #000000;
+}
+.text-priem-xxl {
+  font-size: 50px;
+}
+.text-priem-lg {
+  font-size: 25px;
+}
+.top-text-approved {
+  margin-top: 143px;
+}
+.btn-top {
+  margin-top: 221px;
+}
+.img-design {
+  width: 100px;
+  margin-top: -20px;
+}
+.card-mini {
+  border: none;
+  margin: 56px 0 56px 75px;
+  border-radius: 45px;
+  width: 255px;
+  height: 344px;
+  background-color: #ffffff;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  background: rgb(254, 254, 254);
+}
+.priem-img {
+  margin-top: 60px;
+  margin-left: 30px;
+}
+.text-priem-xl {
+  font-size: 30px;
+}
+.text-priem-sm {
+  font-size: 17px;
+}
+/** Student application END **/
 /** Media query**/
 @media only screen and (max-width: 1850px) {
   .edit-content {
