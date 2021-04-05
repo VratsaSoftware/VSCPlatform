@@ -8,7 +8,7 @@
         <div class="hw-section-header row align-items-center g-0">
             <div class="col-auto d-lg-none d-block me-4">
                 <a href="">
-                    <img src="{{ asset('assets/img/arrow.svg') }}" class="me-1" alt="">
+                    <img src="{{ asset('assets/img/arrow.svg') }}" class="me-1">
                 </a>
             </div>
             <div class="col">
@@ -27,7 +27,7 @@
         <!-- header section END-->
         @foreach($allComments as $comment)
             <!-- table section -->
-            <div class="text-normal @if ($loop->iteration == 1)comments-table pt-lg-5 mt-4 @endif" title="{{ $comment->created_at->format('d.m.Y H:i') }}">
+            <div class="text-normal @if ($loop->iteration == 1)comments-table pt-lg-5 mt-4 @endif" title="{{ (date('Y') == $comment->created_at->format('Y')) ? $comment->created_at->format('d.m H:i') : $comment->created_at->format('d.m.Y H:i') }}">
                 <!-- table content-->
                 <div class="row comment-row g-0 fw-normal mb-3">
                     <div class="col-lg-auto col-12 comment-avatar">
@@ -41,7 +41,7 @@
                                     <img src="{{ asset('images/user-pics/'. $comment->Author->picture) }}" alt="profile-pic" class="avatar" style="border-radius: 5px">
                                 @endif
                             </div>
-                            <div class="col-auto text-small">
+                            <div class="col-auto text-small" title="{{ $comment->Author->email }}">
                                 {{ $comment->Author->name }} {{ $comment->Author->last_name }}
                             </div>
                         </div>
@@ -49,13 +49,13 @@
                     <div class="col-lg col-12 d-flex overflow-hidden">
                         <div class="d-inline-block text-small align-self-center comment-text position-relative px-lg-5 me-lg-4 py-2">
                             {{ $comment->comment }}
-                                <b>({{ $comment->created_at->format('d.m.Y H:i') }})</b>
+                            <b>({{ (date('Y') == $comment->created_at->format('Y')) ? $comment->created_at->format('d.m H:i') : $comment->created_at->format('d.m.Y H:i') }})</b>
                         </div>
                     </div>
                     <div class="col-auto">
                         <button class="comment-toggler text-white text-small px-3 d-flex align-items-center">
                             <span class="me-4 pe-2 fw-bold d-md-inline-block d-none lh-xs mb-1">Виж повече</span>
-                            <img src="{{ asset('assets/img/arrow-right-white.svg') }}" alt="">
+                            <img src="{{ asset('assets/img/arrow-right-white.svg') }}">
                         </button>
                     </div>
                 </div>

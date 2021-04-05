@@ -1,11 +1,11 @@
 $(document).ready(function() {
-    $('.show-lection').hide();
+    $('.edit-lection').show();
 
     /* open create lection section */
     $('.input-button').click(function() {
         $('.show-lection').hide();
-        $('.edit-lection').hide();
-        $('.add-lection').show();
+        $('.edit-lection').toggle();
+        $('.add-lection').toggle();
     });
 
     $('#tab_selector').change(function() {
@@ -47,7 +47,9 @@ $(document).ready(function() {
 
     /* delete lection */
     $('.delete-lection').click(function() {
-        var conf = confirm("Найстина ли искате да изтриете тази Лекция?");
+        var lectionTitle = $(this).attr('data-lection-title');
+
+        var conf = confirm("Найстина ли искате да изтриете тази Лекция - " + lectionTitle + '?');
         if (conf == true) {
             return true;
         } else {

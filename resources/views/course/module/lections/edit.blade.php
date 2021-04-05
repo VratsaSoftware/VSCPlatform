@@ -10,13 +10,13 @@
             </div>
             <div class="col-md-auto pe-md-3 me-xl-1">
                 <div class="position-relative calendar">
-                    <input type="text" name="first_date" value="@if (isset($lection->first_date)){{ $lection->first_date }}@endif" class="date-input ext-navy-blue" placeholder="Начало">
+                    <input type="text" name="first_date" value="@if (isset($lection->first_date)){{ $lection->first_date->format('m/d/Y') }}@endif" class="date-input ext-navy-blue" placeholder="Начало">
                     <img src="{{ asset('assets/img/arrow.svg') }}">
                 </div>
             </div>
             <div class="col-md-auto pe-md-3 me-xl-1">
                 <div class="position-relative calendar">
-                    <input type="text" name="second_date" value="@if (isset($lection->second_date)){{ $lection->second_date }}@endif" class="date-input ext-navy-blue" placeholder="Край">
+                    <input type="text" name="second_date" value="@if (isset($lection->second_date)){{ $lection->second_date->format('m/d/Y') }}@endif" class="date-input ext-navy-blue" placeholder="Край">
                     <img src="{{ asset('assets/img/arrow.svg') }}">
                 </div>
             </div>
@@ -42,13 +42,17 @@
                 </lable>
             </div>
         </div>
-        <!--
-        @if (isset($lection->Video->url))
+        {{-- @if (isset($lection->Video->url))
+            <div class="video-upload row g-0 my-4 position-relative">
+    			<iframe width="762" height="375" src="{{ asset('/') . 'data/course-' . $module->Course->id . '/modules-' . $module->id . '/video-' . $lection->id . '/' . $lection->Video->url }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 45px;"></iframe>
+    		</div>
+        @endif --}}
+
+        {{-- @if (isset($lection->Video->url))
          <video style="border-radius: 45px; max-height: auto; max-width: 100%" frameborder="0" scrolling="yes" controls>
             <source src="{{ asset('/') . 'data/course-' . $module->Course->id . '/modules-' . $module->id . '/video-' . $lection->id . '/' . $lection->Video->url }}" type="video/mp4">
         </video>
-        @endif
-        -->
+        @endif --}}
 
         <input id="video-file{{ $loop->iteration }}" name="video_file" style="display: none;" type="file">
 
@@ -152,7 +156,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="date-pill d-flex align-items-center">
-                            <input type="text" class="text-center fw-bold date-input ext-navy-blue" value="@if(isset($lection->homework_end)){{ $lection->homework_end }}@endif" placeholder="Няма">
+                            <input name="homework_end" type="text" class="text-center fw-bold date-input ext-navy-blue" value="@if(isset($lection->homework_end)){{ $lection->homework_end->format('m/d/Y') }}@endif" placeholder="Няма">
                         </div>
                     </div>
                 </div>
@@ -165,7 +169,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="date-pill d-flex align-items-center">
-                            <input class="text-center fw-bold" value="@if(isset($lection->homework_check_end)){{ $lection->homework_check_end->format('d.m') }}@endif" placeholder="Няма">
+                            <input name="homework_check_end" class="text-center fw-bold date-input ext-navy-blue" value="@if(isset($lection->homework_check_end)){{ $lection->homework_check_end->format('m/d/Y') }}@endif" placeholder="Няма">
                         </div>
                     </div>
                 </div>
@@ -176,7 +180,7 @@
 
         <div class="row g-0">
             <div class="col-lg col-auto mx-lg-0 mx-auto">
-                <div class="delete-lection">
+                <div class="delete-lection" data-lection-title="{{ $lection->title }}">
                     <button form="delete-lection-form-{{ $loop->iteration }}" class="ms-xxl-2 mt-xxl-0 mt-3 btn-edit row g-0 align-items-center">
                         <div class="col text-start fw-bold">Изтрий лекция</div>
                         <div class="col-auto">

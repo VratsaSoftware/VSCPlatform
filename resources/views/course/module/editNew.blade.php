@@ -194,10 +194,10 @@
     <!-- Single lection content -->
     @foreach ($lections as $lection)
         <div class="tab-pane fade @if ($loop->iteration == 1) show active @endif mt-xl-2 pt-xl-1" id="lection-{{ $loop->iteration }}" role="tabpanel" aria-labelledby="lection-2-tab">
-            <span class="show-lection">
+            <span class="show-lection" style="display: none">
                 @include('course.module.lections.show')
             </span>
-            <span class="edit-lection">
+            <span class="edit-lection" style="display: none">
                 @include('course.module.lections.edit')
             </span>
             <span class="add-lection" style="display: none">
@@ -216,5 +216,6 @@
 </div>
 
 <script src="{{ asset('js/lection/lection.js') }}"></script>
+<script src="{{ asset('js/lection/create.js') }}"></script>
 
 @endsection

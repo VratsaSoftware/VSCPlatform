@@ -53,17 +53,19 @@ class LectionController extends Controller
         $data = $request->validate([
             'lection' => 'sometimes|numeric',
             'title' => 'sometimes',
-            'first_date' => 'sometimes|date_format:Y-m-d H:i',
-            'second_date' => 'sometimes|date_format:Y-m-d H:i',
+            'first_date' => 'sometimes|date_format:m/d/Y',
+            'second_date' => 'sometimes|date_format:m/d/Y',
             'description' => 'sometimes',
             'order' => 'sometimes|numeric',
             'video' => 'sometimes',
+            'video_file' => 'sometimes|file',
             ['regex:/^(https|http):\/\/(?:www\.)?youtube.com\/embed\/[A-z0-9]+/'],
             'slides' => 'sometimes|',
             'homework' => 'sometimes|',
             'demo' => 'sometimes',
             ['regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
             'homework_end' => 'sometimes',
+            'homework_check_end' => 'sometimes',
             'visibility' => 'sometimes|in_array:valid_visibility.*',
         ]);
         $store = false;
@@ -72,24 +74,31 @@ class LectionController extends Controller
             $lection = Lection::with('Module', 'Module.Course')->findOrFail($request->lection);
             $store = true;
         } else {
-            if (!is_null($request->title) && !empty($request->title) && !is_null($request->first_date_create) && !is_null($request->first_time_hours) && !is_null($request->first_time_minutes) && !is_null($request->description) && !empty($request->description)) {
+            if ($request->title && $request->description && $request->first_date && $request->second_date) {
                 $lection = new Lection;
                 $lection->course_modules_id = $request->module;
                 $lection->title = $request->title;
-                try {
-                    $lection->first_date = $this->parseDateTime($request->first_date_create, $request->first_time_hours, $request->first_time_minutes);
-                    if (!is_null($request->second_date_create)) {
-                        $lection->second_date = $this->parseDateTime($request->second_date_create, $request->second_time_hours, $request->second_time_minutes);
-                    }
-                } catch (\Exception $err) {
-                    $message = __('Невалидна заявка с полетата за дата и час!');
-                    return redirect()->back()->with('error', $message)->withInput(Input::all());
-                }
+
+                $lection->first_date = $this->dateParse($request->first_date);
+                $lection->second_date = $this->dateParse($request->second_date);
+
+                // try {
+                //     $lection->first_date = $this->parseDateTime($request->first_date_create, $request->first_time_hours, $request->first_time_minutes);
+                //     if (!is_null($request->second_date_create)) {
+                //         $lection->second_date = $this->parseDateTime($request->second_date_create, $request->second_time_hours, $request->second_time_minutes);
+                //     }
+                // } catch (\Exception $err) {
+                //     $message = __('Невалидна заявка с полетата за дата и час!');
+                //     return redirect()->back()->with('error', $message)->withInput(Input::all());
+                // }
+
+                $lection->homework_end = !is_null($request->homework_end) ? $this->dateParse($request->homework_end) : Carbon::parse($request->homework_end)->addDays(1);
+                $lection->homework_check_end = !is_null($request->homework_check_end) ? $this->dateParse($request->homework_check_end) : Carbon::parse($request->homework_check_end)->addDays(1);
 
                 $lection->description = $request->description;
-                $lection->order = $request->order;
-                $lection->visibility = $request->visibility;
-                $lection->homework_end = is_null($request->homework_end)?$request->homework_end:Carbon::parse($request->homework_end)->addDays(1);
+                // $lection->order = $request->order;
+                $lection->visibility = 'public';
+                $lection->homework_end = is_null($request->homework_end) ? $request->homework_end:Carbon::parse($request->homework_end)->addDays(1);
                 $lection->save();
 
                 $lection = Lection::with('Module', 'Module.Course')->findOrFail($lection->id);
@@ -100,12 +109,29 @@ class LectionController extends Controller
             }
         }
 
-        if ($request->has('video') && !is_null($request->video) && $store) {
-            $video = new LectionVideo;
-            $video->url = $request->video;
-            $video->save();
+        if ($request->has('video_file')) {
+            $slides = $request->file('video_file');
+            $name = time() . "_" . $slides->getClientOriginalName();
+            $name = str_replace(' ', '', $name);
+            // $name = md5($name);
+            $slidesUrl = public_path() . '/data/course-' . $lection->Module->Course->id . '/modules-' . $lection->Module->id . '/video-' . $lection->id . '/';
+            $oldSlides = $slidesUrl . $lection->presentation;
+            if (File::exists($oldSlides)) {
+                File::delete($oldSlides);
+            }
+            $request->file('video_file')->move($slidesUrl, $name);
 
-            $lection->lections_video_id = $video->id;
+            if ($lection->lections_video_id) {
+                $video = LectionVideo::findOrFail($lection->lections_video_id);
+                $video->url = $name;
+                $video->save();
+            } else {
+                $video = new LectionVideo;
+                $video->url = $name;
+                $video->save();
+
+                $lection->lections_video_id = $video->id;
+            }
         }
 
         if (Input::hasFile('slides')) {
@@ -114,7 +140,10 @@ class LectionController extends Controller
             $name = str_replace(' ', '', $name);
             // $name = md5($name);
             $slidesUrl = public_path() . '/data/course-' . $lection->Module->Course->id . '/modules/' . $lection->Module->id . '/slides-' . $lection->id . '/';
-
+            $oldSlides = $slidesUrl . $lection->presentation;
+            if (File::exists($oldSlides)) {
+                File::delete($oldSlides);
+            }
             $request->file('slides')->move($slidesUrl, $name);
             $lection->presentation = $name;
         }
@@ -146,6 +175,14 @@ class LectionController extends Controller
 
         $message = __('Невалидна Заявка!');
         return redirect()->back()->with('error', $message);
+    }
+
+    /* date parse */
+    private function dateParse($date)
+    {
+        $parseDete = date_parse($date);
+
+        return $parseDete['year'] . '-' . $parseDete['month'] . '-' . $parseDete['day'];
     }
 
     /**
@@ -196,12 +233,15 @@ class LectionController extends Controller
             'homework' => 'sometimes|file',
             'video_file' => 'sometimes|file',
             'homework_end' => 'sometimes',
+            'homework_check_end' => 'sometimes',
             'demo' => ['sometimes', 'regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
         ]);
         $lection = Lection::with('Module', 'Module.Course')->findOrFail($id);
 
         // if ($request->has('title') || $request->has('first_date') && $request->has('first_time_hours') && $request->has('first_time_minutes') || $request->has('second_date') && $request->has('second_time_hours') && $request->has('second_time_minutes') || $request->has('description') || $request->has('order')) {
             $lection->title = $request->title;
+            $lection->first_date = $this->dateParse($request->first_date);
+            $lection->second_date = $this->dateParse($request->second_date);
             // try {
             //     $lection->first_date = $this->parseDateTime($request->first_date, $request->first_time_hours, $request->first_time_minutes);
             //     if (!is_null($request->second_date)) {
@@ -212,9 +252,11 @@ class LectionController extends Controller
             //     return redirect()->back()->with('error', $message)->withInput(Input::all());
             // }
 
-        //     $lection->homework_end = !is_null($request->homework_end) ? $request->homework_end : Carbon::parse($request->homework_end)->addDays(1);
-        //     $lection->description = $request->description;
-        //     $lection->order = !is_null($request->order) ?: $request->order;
+            $lection->homework_end = !is_null($request->homework_end) ? $this->dateParse($request->homework_end) : Carbon::parse($request->homework_end)->addDays(1);
+            $lection->homework_check_end = !is_null($request->homework_check_end) ? $this->dateParse($request->homework_check_end) : Carbon::parse($request->homework_check_end)->addDays(1);
+
+            $lection->description = $request->description;
+            // $lection->order = !is_null($request->order) ?: $request->order;
         // }
 
         if ($request->has('video_file')) {
@@ -341,7 +383,7 @@ class LectionController extends Controller
 
         $lection->delete();
 
-        return response('success', 200);
+        return redirect()->back()->with('success', 'Успешно изтрита лекция!');
     }
 
     public function addComment(Request $request, User $user, Course $course, Module $module, Lection $lection)

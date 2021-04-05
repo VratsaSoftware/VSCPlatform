@@ -82,7 +82,7 @@
                 <div class="col-lg-auto d-lg-block d-none number text-center">
                     {{ $loop->iteration }}
                 </div>
-                <div class="col-lg col-6 student-name px-lg-5">
+                <div class="col-lg col-6 student-name px-lg-5" title="{{ $homework->user->email }}">
                     <span class="d-lg-none">1.</span>
                     <span>
                         {{ $homework->user->name }} {{ $homework->user->last_name }}
@@ -129,7 +129,7 @@
                                     Остави коментар
                                 </div>
                                 <div class="col-auto">
-                                    <img src="{{ asset('assets/img/action_icon.svg') }}" alt="">
+                                    <img src="{{ asset('assets/img/action_icon.svg') }}">
                                 </div>
                             </div>
                         </button>

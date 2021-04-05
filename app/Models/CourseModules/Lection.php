@@ -11,7 +11,7 @@ use App\Models\CourseModules\Homework;
 class Lection extends Model
 {
     protected $table = 'course_lections';
-    protected $dates = ['first_date', 'second_date','homework_end'];
+    protected $dates = ['first_date', 'second_date','homework_end', 'homework_check_end'];
 
     public function Module()
     {

@@ -16,7 +16,7 @@ class CreateCourseLectionsTable extends Migration
         Schema::create('course_lections', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('course_modules_id')->unsigned()->nullable();
-            $table->bigInteger('order');
+            $table->bigInteger('order')->nullable();
             $table->string('title');
             $table->longText('description');
             $table->dateTime('first_date')->nullable();

@@ -134,7 +134,9 @@ class ModuleController extends Controller
     public function edit(Module $module)
     {
         $lections = Module::getLections($module->id, true);
-        $students = ModulesStudent::where('course_modules_id', $module->id)->with('User')->get();
+        $students = ModulesStudent::where('course_modules_id', $module->id)
+            ->with('User')
+            ->get();
         $module = $module->load('Course');
         $lections = $lections->load('Video');
 
