@@ -92,8 +92,8 @@ class LectionController extends Controller
                 //     return redirect()->back()->with('error', $message)->withInput(Input::all());
                 // }
 
-                $lection->homework_end = !is_null($request->homework_end) ? $this->dateParse($request->homework_end) : Carbon::parse($request->homework_end)->addDays(1);
-                $lection->homework_check_end = !is_null($request->homework_check_end) ? $this->dateParse($request->homework_check_end) : Carbon::parse($request->homework_check_end)->addDays(1);
+                $lection->homework_end = !is_null($request->homework_end) ? $this->dateParse($request->homework_end) : null;
+                $lection->homework_check_end = !is_null($request->homework_check_end) ? $this->dateParse($request->homework_check_end) : null;
 
                 $lection->description = $request->description;
                 // $lection->order = $request->order;
@@ -252,8 +252,8 @@ class LectionController extends Controller
             //     return redirect()->back()->with('error', $message)->withInput(Input::all());
             // }
 
-            $lection->homework_end = !is_null($request->homework_end) ? $this->dateParse($request->homework_end) : Carbon::parse($request->homework_end)->addDays(1);
-            $lection->homework_check_end = !is_null($request->homework_check_end) ? $this->dateParse($request->homework_check_end) : Carbon::parse($request->homework_check_end)->addDays(1);
+            $lection->homework_end = !is_null($request->homework_end) ? $this->dateParse($request->homework_end) : null;
+            $lection->homework_check_end = !is_null($request->homework_check_end) ? $this->dateParse($request->homework_check_end) : null;
 
             $lection->description = $request->description;
             // $lection->order = !is_null($request->order) ?: $request->order;

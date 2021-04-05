@@ -6,17 +6,17 @@
         <span class="close d-lg-none position-absolute">&times;</span>
         <div class="row pt-lg-0 pt-4 g-0">
             <div class="col-md pe-md-3 me-xl-2">
-                <input class="w-100 lection-title-input text-navy-blue" type="text" name="title" value="@if (isset($lection->title)){{ $lection->title }}@endif" placeholder="Заглавие">
+                <input class="edit-lection-title w-100 lection-title-input text-navy-blue" type="text" name="title" value="@if (isset($lection->title)){{ $lection->title }}@endif" placeholder="Заглавие" required>
             </div>
             <div class="col-md-auto pe-md-3 me-xl-1">
                 <div class="position-relative calendar">
-                    <input type="text" name="first_date" value="@if (isset($lection->first_date)){{ $lection->first_date->format('m/d/Y') }}@endif" class="date-input ext-navy-blue" placeholder="Начало">
+                    <input type="text" name="first_date" value="@if (isset($lection->first_date)){{ $lection->first_date->format('m/d/Y') }}@endif" class="edit-lection-first_date date-input ext-navy-blue" placeholder="Начало" required>
                     <img src="{{ asset('assets/img/arrow.svg') }}">
                 </div>
             </div>
             <div class="col-md-auto pe-md-3 me-xl-1">
                 <div class="position-relative calendar">
-                    <input type="text" name="second_date" value="@if (isset($lection->second_date)){{ $lection->second_date->format('m/d/Y') }}@endif" class="date-input ext-navy-blue" placeholder="Край">
+                    <input type="text" name="second_date" value="@if (isset($lection->second_date)){{ $lection->second_date->format('m/d/Y') }}@endif" class="edit-lection-second_date date-input ext-navy-blue" placeholder="Край" required>
                     <img src="{{ asset('assets/img/arrow.svg') }}">
                 </div>
             </div>
@@ -57,7 +57,7 @@
         <input id="video-file{{ $loop->iteration }}" name="video_file" style="display: none;" type="file">
 
         <div class="edit-decsription pt-3">
-            <textarea name="description" class="p-2" placeholder="Описание на лекцията">{{ $lection->description }}</textarea>
+            <textarea name="description" class="edit-lection-description p-2" placeholder="Описание на лекцията" required>{{ $lection->description }}</textarea>
         </div>
 
         <div class="row g-0 align-items-lg-center lh-1 pb-5">
@@ -190,7 +190,7 @@
                 </div>
             </div>
             <div class="col-auto mx-lg-0 mx-auto">
-                <button class="ms-xxl-2 mt-xxl-0 mt-3 btn-edit btn-green row g-0 align-items-center">
+                <button class="submit-form ms-xxl-2 mt-xxl-0 mt-3 btn-edit btn-green row g-0 align-items-center">
                     <div class="col text-start fw-bold">Запази промените</div>
                     <div class="col-auto">
                         <img src="{{ asset('assets/img/action_icon.svg') }}" alt="">

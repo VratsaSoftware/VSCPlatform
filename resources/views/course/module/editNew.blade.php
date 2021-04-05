@@ -190,32 +190,39 @@
 </div>
 </div>
 <!-- right side -->
-<div id="right-side" data-countLections="{{ count($lections) }}" class="col-xl pt-md-5 mt-md-4 tab-content edit-content">
-    <!-- Single lection content -->
-    @foreach ($lections as $lection)
-        <div class="tab-pane fade @if ($loop->iteration == 1) show active @endif mt-xl-2 pt-xl-1" id="lection-{{ $loop->iteration }}" role="tabpanel" aria-labelledby="lection-2-tab">
-            <span class="show-lection" style="display: none">
-                @include('course.module.lections.show')
-            </span>
-            <span class="edit-lection" style="display: none">
-                @include('course.module.lections.edit')
-            </span>
-            <span class="add-lection" style="display: none">
-                @include('course.module.lections.create')
-            </span>
-        </div>
+@if ($lections->count() == 0)
+    <div id="right-side" data-countLections="0" class="col-xl pt-md-5 mt-md-4 tab-content edit-content">
+        @include('course.module.lections.create')
+    </div>
+@else
+    <div id="right-side" data-countLections="{{ count($lections) }}" class="col-xl pt-md-5 mt-md-4 tab-content edit-content">
+        <!-- Single lection content -->
+        @foreach ($lections as $lection)
+            <div class="tab-pane fade @if ($loop->iteration == 1) show active @endif mt-xl-2 pt-xl-1" id="lection-{{ $loop->iteration }}" role="tabpanel" aria-labelledby="lection-2-tab">
+                <span class="show-lection" style="display: none">
+                    @include('course.module.lections.show')
+                </span>
+                <span class="edit-lection" style="display: none">
+                    @include('course.module.lections.edit')
+                </span>
+                <span class="add-lection" style="display: none">
+                    @include('course.module.lections.create')
+                </span>
+            </div>
 
-        <form method="post" id="delete-lection-form-{{ $loop->iteration }}" action="{{ route('lection.destroy', $lection->id) }}">
-            @csrf
-            @method('DELETE')
-        </form>
-    @endforeach
-    <!-- Single lection content END-->
-</div>
+            <form method="post" id="delete-lection-form-{{ $loop->iteration }}" action="{{ route('lection.destroy', $lection->id) }}">
+                @csrf
+                @method('DELETE')
+            </form>
+        @endforeach
+        <!-- Single lection content END-->
+    </div>
+@endif
 <!-- right side END -->
 </div>
 
 <script src="{{ asset('js/lection/lection.js') }}"></script>
 <script src="{{ asset('js/lection/create.js') }}"></script>
+<script src="{{ asset('js/lection/validation.js') }}"></script>
 
 @endsection

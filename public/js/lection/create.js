@@ -3,8 +3,12 @@ $(document).ready(function() {
     $('#right-side').mouseup(function() {
         var count = $(this).attr('data-countLections');
 
-        for (var i = 1; i <= count; i++) {
-            createLectionCountFiles(i);
+        if (count != 0) {
+            for (var i = 1; i <= count; i++) {
+                createLectionCountFiles(i);
+            }
+        } else {
+            createLectionCountFiles('');
         }
     });
 
