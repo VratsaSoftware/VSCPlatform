@@ -36,6 +36,8 @@
                         Upload
                         <br class="d-lg-block d-none">
                         video
+
+                        <!-- <input class="create-lection-title w-100 lection-title-input text-navy-blue" type="text" style="background-color: #f6f9ff;" name="title" placeholder="Заглавие*" required> -->
                     </div>
                     <span id="video-file-count-{{ isset($loop->iteration) ? $loop->iteration : '' }}"></span>
                 </lable>
@@ -167,16 +169,7 @@
         <hr class="my-5">
 
         <div class="row g-0">
-            <div class="col-lg col-auto mx-lg-0 mx-auto">
-                <div class="delete-lection" data-lection-title="{{ isset($lection->title) ? $lection->title : '' }}">
-                    <button form="delete-lection-form-{{ isset($loop->iteration) ? $loop->iteration : '' }}" class="ms-xxl-2 mt-xxl-0 mt-3 btn-edit row g-0 align-items-center">
-                        <div class="col text-start fw-bold">Изтрий лекция</div>
-                        <div class="col-auto">
-                            <img src="{{ asset('assets/img/Delete.svg') }}" alt="">
-                        </div>
-                    </button>
-                </div>
-            </div>
+            <div class="col-lg col-auto mx-lg-0 mx-auto"></div>
             <div class="col-auto mx-lg-0 mx-auto">
                 <button class="submit-form ms-xxl-2 mt-xxl-0 mt-3 btn-edit btn-green row g-0 align-items-center">
                     <div class="col text-start fw-bold">Създай лекция</div>
