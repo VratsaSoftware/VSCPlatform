@@ -911,7 +911,7 @@ button {
 }
 .card-mini {
   border: none;
-  margin: 56px 0 56px 75px;
+  margin: 36px 0 56px 75px;
   border-radius: 45px;
   width: 255px;
   height: 344px;
@@ -929,6 +929,21 @@ button {
 }
 .text-priem-sm {
   font-size: 17px;
+}
+.card-small {
+  border: none;
+  border-radius: 4px;
+  width: 7px;
+  height: 322px;
+  background: linear-gradient(
+    184deg,
+    rgba(105, 181, 1, 1) 35%,
+    rgba(141, 226, 25, 1) 100%
+  );
+}
+.priem-avatar-img {
+  margin-top: 290px;
+  margin-left: -22px;
 }
 /** Student application END **/
 /** Media query**/
@@ -1010,501 +1025,580 @@ button {
   .enddata1 {
     margin-left: -7px;
   }
-}
-@media only screen and (max-width: 1400px) {
-  .text-xxl {
-    font-size: 50px;
+  .text-priem-xxl {
+    font-size: 40px;
   }
-  .text-large {
-    font-size: 17px;
-    font-weight: bold;
+  .btn-top {
+    margin-top: 180px;
   }
-  .text-normal {
-    font-size: 17px;
+  .img-design {
+    width: 80px;
   }
-  .text-small {
-    font-size: 14px;
-  }
-  .card {
-    width: auto;
-    margin: 56px 0;
-  }
-  .card-body {
-    padding: 20px;
-  }
-  .btn-see .btn-green .col-auto {
-    width: 40px;
-  }
-  .btn-see .btn-green {
-    padding: 14px 12px;
-    height: 35px;
-  }
-  .accordion-button.collapsed ~ .btn-see {
-    margin-top: -47px;
-    margin-bottom: -4px;
-  }
-  .orange-dot {
-    width: 12px;
-    height: 12px;
-    margin-right: 8px;
-  }
-  .slide {
-    padding-left: 25px;
-    padding-right: 15px;
-  }
-}
-@media only screen and (max-width: 992px) {
-  .text-xxl {
-    font-size: 20px;
-  }
-  .text-large {
-    font-size: 14px;
-  }
-  .card {
-    width: auto;
-    margin: 0;
-    background: transparent;
-    border-radius: 0;
-    backdrop-filter: 0;
-    box-shadow: none;
-  }
-  .card-body {
-    padding: 0 10px;
-  }
-  .card-title {
-    font-size: 20px;
-  }
-  .slide {
-    height: auto;
-    max-width: 100%;
-    padding: 12px;
-    background-color: transparent !important;
-  }
-  .navbar-toggler,
-  .navbar-toggler.collapsed,
-  .navbar-toggler:active,
-  .navbar-toggler-icon:focus {
-    padding: 0;
-    border: none !important;
-    box-shadow: none !important;
-    outline: none !important;
-  }
-  .btn-edit {
-    min-width: auto;
-  }
-  #tab_selector {
-    background-color: transparent;
-    width: auto;
-    box-shadow: none !important;
-  }
-  #tab_selector ~ img {
-    height: 13px;
-    top: 4px;
-    right: -5px;
-    transform: rotate(-90deg);
-  }
-  .lectures {
-    max-height: auto;
-    margin-right: 0;
-    padding-right: 0;
-    overflow-y: inherit;
-  }
-  .accordion-button,
-  .accordion-button:focus,
-  .accordion-item:last-of-type .accordion-collapse {
-    font-size: 17px;
-  }
-  .accordion-button .time {
-    font-weight: normal;
-  }
-  #right-side .tab-pane {
-    height: 0;
-  }
-  #right-side .tab-pane.active {
-    position: fixed;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: 999;
-    padding: 10px;
-    height: 100vh;
-    background-color: #4b6280;
-    overflow-y: scroll;
-  }
-  #right-side .tab-pane .tab-body {
-    max-width: 600px;
-    padding: 30px 20px;
-    margin: 30px auto;
-    background-color: #eaf1fa;
-    border-radius: 15px;
-  }
-  #right-side .tab-pane .tab-body .close {
-    font-size: 28px;
-    font-weight: bold;
-    top: 10px;
-    right: 20px;
-    cursor: pointer;
-  }
-  .calendar input {
-    width: 100%;
-  }
-  .video-upload {
-    /**border-radius: 11px;**/
-    max-height: 375px;
-  }
-  .video-upload-btn {
-    top: 28%;
-    font-size: 14px;
-    color: #8de219;
-    line-height: 11px;
-    text-transform: capitalize;
-  }
-  .video-upload img {
-    height: 33px;
-  }
-  .btn-add {
-    border-radius: 15px;
-    width: 50px;
-    height: 50px;
-    color: #fff;
-    font-size: 30px;
-    font-weight: normal;
-    line-height: 15px;
-    text-align: center;
-    background-color: #69b501;
+  .card-mini {
     border: none;
-    margin-top: -13px;
+    margin: 56px 0 56px 75px;
+    border-radius: 45px;
+    width: 210px;
+    height: 264px;
+    background-color: #ffffff;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    background: rgb(254, 254, 254);
   }
-  .nav-item {
-    padding-bottom: 30px;
+  .text-priem-xl {
+    font-size: 25px;
+  }
+  .priem-img {
+    width: 150px;
+  }
+}
+@media only screen and (max-width: 1460px) {
+  .card-mini {
+    margin: 56px 0 56px 30px;
+  }
+  .text-priem-xl {
+    font-size: 20px;
+  }
+  .text-priem-sm {
+    font-size: 15px;
+  }
+  .card-small {
+    height: 244px;
+  }
+  .priem-avatar-img {
+    margin-top: 220px;
+    margin-left: -22px;
+  }
+  @media only screen and (max-width: 1400px) {
+    .text-xxl {
+      font-size: 50px;
+    }
+    .text-large {
+      font-size: 17px;
+      font-weight: bold;
+    }
+    .text-normal {
+      font-size: 17px;
+    }
+    .text-small {
+      font-size: 14px;
+    }
+    .card {
+      width: auto;
+      margin: 56px 0;
+    }
+    .card-body {
+      padding: 20px;
+    }
+    .btn-see .btn-green .col-auto {
+      width: 40px;
+    }
+    .btn-see .btn-green {
+      padding: 14px 12px;
+      height: 35px;
+    }
+    .accordion-button.collapsed ~ .btn-see {
+      margin-top: -47px;
+      margin-bottom: -4px;
+    }
+    .orange-dot {
+      width: 12px;
+      height: 12px;
+      margin-right: 8px;
+    }
+    .slide {
+      padding-left: 25px;
+      padding-right: 15px;
+    }
+    .btn-top {
+      margin-top: 140px;
+    }
+    .card-mini {
+      width: 180px;
+    }
+    .priem-img {
+      width: 130px;
+      margin-left: 25px;
+    }
+  }
+  @media only screen and (max-width: 992px) {
+    .text-xxl {
+      font-size: 20px;
+    }
+    .text-large {
+      font-size: 14px;
+    }
+    .card {
+      width: auto;
+      margin: 0;
+      background: transparent;
+      border-radius: 0;
+      backdrop-filter: 0;
+      box-shadow: none;
+    }
+    .card-body {
+      padding: 0 10px;
+    }
+    .card-title {
+      font-size: 20px;
+    }
+    .slide {
+      height: auto;
+      max-width: 100%;
+      padding: 12px;
+      background-color: transparent !important;
+    }
+    .navbar-toggler,
+    .navbar-toggler.collapsed,
+    .navbar-toggler:active,
+    .navbar-toggler-icon:focus {
+      padding: 0;
+      border: none !important;
+      box-shadow: none !important;
+      outline: none !important;
+    }
+    .btn-edit {
+      min-width: auto;
+    }
+    #tab_selector {
+      background-color: transparent;
+      width: auto;
+      box-shadow: none !important;
+    }
+    #tab_selector ~ img {
+      height: 13px;
+      top: 4px;
+      right: -5px;
+      transform: rotate(-90deg);
+    }
+    .lectures {
+      max-height: auto;
+      margin-right: 0;
+      padding-right: 0;
+      overflow-y: inherit;
+    }
+    .accordion-button,
+    .accordion-button:focus,
+    .accordion-item:last-of-type .accordion-collapse {
+      font-size: 17px;
+    }
+    .accordion-button .time {
+      font-weight: normal;
+    }
+    #right-side .tab-pane {
+      height: 0;
+    }
+    #right-side .tab-pane.active {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 999;
+      padding: 10px;
+      height: 100vh;
+      background-color: #4b6280;
+      overflow-y: scroll;
+    }
+    #right-side .tab-pane .tab-body {
+      max-width: 600px;
+      padding: 30px 20px;
+      margin: 30px auto;
+      background-color: #eaf1fa;
+      border-radius: 15px;
+    }
+    #right-side .tab-pane .tab-body .close {
+      font-size: 28px;
+      font-weight: bold;
+      top: 10px;
+      right: 20px;
+      cursor: pointer;
+    }
+    .calendar input {
+      width: 100%;
+    }
+    .video-upload {
+      /**border-radius: 11px;**/
+      max-height: 375px;
+    }
+    .video-upload-btn {
+      top: 28%;
+      font-size: 14px;
+      color: #8de219;
+      line-height: 11px;
+      text-transform: capitalize;
+    }
+    .video-upload img {
+      height: 33px;
+    }
+    .btn-add {
+      border-radius: 15px;
+      width: 50px;
+      height: 50px;
+      color: #fff;
+      font-size: 30px;
+      font-weight: normal;
+      line-height: 15px;
+      text-align: center;
+      background-color: #69b501;
+      border: none;
+      margin-top: -13px;
+    }
+    .nav-item {
+      padding-bottom: 30px;
+    }
+
+    .basics-programming {
+      font-size: 20px;
+    }
+    .background-programming {
+      height: 800px;
+    }
+    .login {
+      margin-top: 36px;
+      font-size: 20px;
+    }
+    .logo-black {
+      width: 113px;
+      height: 46px;
+      margin-top: 0px;
+    }
+    .login-inputs {
+      padding: 54px 37px;
+    }
+    .input-user {
+      margin-top: 0px;
+    }
+    .create-account {
+      font-size: 14px;
+      color: #00214b;
+    }
+    .btn-margin {
+      margin-top: 30px;
+    }
+    .background-programming-2 {
+      border: solid 8px #ffffff;
+      background-color: #eef4ff;
+      border-radius: 52px;
+    }
+    .figures-margin {
+      margin-top: 44px;
+    }
+    .programirane {
+      width: 100px;
+      height: 100px;
+    }
+    .figures-2 {
+      width: 70px;
+    }
+    .new {
+      margin-top: -60px;
+    }
+    .lection-programirane {
+      font-size: 17px;
+    }
+    .img-program {
+      width: 65px;
+    }
+    .wrapper {
+      overflow-x: auto;
+    }
+    .card-notebook-2 {
+      width: 302px;
+      height: 115px;
+      margin-top: 161px;
+    }
+    .data1 {
+      font-size: 14px;
+      color: #000;
+    }
+    .titel-code {
+      font-size: 17px;
+      color: #000;
+    }
+    .btn-code-card {
+      width: 107px;
+      height: 40px;
+      background-color: #000000;
+      color: #ffffff;
+    }
+    .activ-input {
+      background-color: #f6f9ff;
+      border: none;
+    }
+    /**Homework for Lecture**/
+    .main {
+      padding: 0 12px;
+    }
+    .main .hw-section-header i {
+      font-size: 21px;
+      margin-bottom: 10px;
+    }
+    .main .hw-section-header img {
+      height: 28px;
+    }
+    .main .text-large {
+      color: #778aa4;
+    }
+    .table-grid .row + .row {
+      padding: 37px 0 35px 0;
+      border-top: solid 1px #00214b;
+    }
+    /**Comments**/
+    .comments-header img {
+      height: 20px;
+    }
+    /**Course as teacher**/
+    .home-work-1 {
+      margin-left: -20px;
+      margin-right: -20px;
+      margin-bottom: -60px;
+    }
+    .deadline-2 {
+      font-size: 26px;
+    }
+    .enddata {
+      font-size: 26px;
+    }
+    .bell-size {
+      width: 85px;
+      height: 93px;
+      margin-left: 25px;
+    }
+    .text-normal {
+      font-size: 28px;
+    }
+    .enddata1 {
+      font-size: 14px;
+    }
+    .text-l1 {
+      font-size: 20px;
+    }
+    .btn-view-1 {
+      margin-bottom: -75px;
+      height: 70px;
+      position: absolute;
+      left: 0;
+      right: 0;
+      width: 100%;
+    }
+    .see-all {
+      font-size: 21px;
+    }
+    /**End course as teacher**/
+    /**Student application**/
+    .text-priem-lg {
+      font-size: 20px;
+    }
+    .text-priem-sm {
+      font-size: 14px;
+      color: #778aa4;
+    }
+    .text-priem-xl {
+      font-size: 25px;
+    }
+    .text-priem-xxl {
+      font-size: 30px;
+      color: #69b501;
+    }
+    .text-priem-sm-1 {
+      font-size: 14px;
+    }
+    .btn-top-1 {
+      margin-top: 54px;
+    }
+    .text-titel-top {
+      margin-top: -10px;
+    }
+    /**END Student application**/
+  }
+  @media only screen and (min-width: 992px) {
+    .toggled .slide-item {
+      max-width: 0;
+      margin-left: 0;
+      overflow: hidden;
+      transition: all 0.3s;
+    }
+    .toggled {
+      margin-right: 35px;
+    }
+    .toggled .pill {
+      right: 0;
+    }
+    .toggled .pill a {
+      -ms-transform: rotate(180deg); /* IE 9 */
+      transform: rotate(180deg);
+    }
+    .toggled .logo {
+      max-width: 90px;
+      margin-bottom: 86px;
+      transition: all 0.5s;
+    }
+    .toggled .nav-item a {
+      justify-content: center;
+      transition: all 0.5s;
+    }
+    .toggled .user-info .col {
+      display: none;
+    }
+    .slide.toggled {
+      padding: 50px 27px 50px 33px !important;
+      transition: all 0.5s;
+    }
+    .edit-content {
+      min-width: 520px;
+    }
+    /**Homework for Lecture**/
+    .main .text-xxl,
+    .main .text-large {
+      text-transform: uppercase;
+    }
+    .main .text-small {
+      font-weight: bold;
+    }
+    .main .border {
+      border-color: #707070 !important;
+    }
+    .main .table-grid .number {
+      width: 32px;
+    }
+    .main .table-grid .student-name {
+      max-width: 340px;
+    }
+    .main .table-grid .file {
+      max-width: 295px;
+    }
+    .main .table-grid .comments {
+      max-width: 295px;
+    }
+    .main .table-grid .date {
+      max-width: 295px;
+    }
+    .main .table-grid .settings {
+      width: 270px;
+    }
+    .table-grid .row + .row {
+      padding: 33px 0 45px 0;
+      border-bottom: solid 1px #00214b;
+    }
   }
 
-  .basics-programming {
-    font-size: 20px;
-  }
-  .background-programming {
-    height: 800px;
-  }
-  .login {
-    margin-top: 36px;
-    font-size: 20px;
-  }
-  .logo-black {
-    width: 113px;
-    height: 46px;
-    margin-top: 0px;
-  }
-  .login-inputs {
-    padding: 54px 37px;
-  }
-  .input-user {
-    margin-top: 0px;
-  }
-  .create-account {
-    font-size: 14px;
-    color: #00214b;
-  }
-  .btn-margin {
-    margin-top: 30px;
-  }
-  .background-programming-2 {
-    border: solid 8px #ffffff;
-    background-color: #eef4ff;
-    border-radius: 52px;
-  }
-  .figures-margin {
-    margin-top: 44px;
-  }
-  .programirane {
-    width: 100px;
-    height: 100px;
-  }
-  .figures-2 {
-    width: 70px;
-  }
-  .new {
-    margin-top: -60px;
-  }
-  .lection-programirane {
-    font-size: 17px;
-  }
-  .img-program {
-    width: 65px;
-  }
-  .wrapper {
-    overflow-x: auto;
-  }
-  .card-notebook-2 {
-    width: 302px;
-    height: 115px;
-    margin-top: 161px;
-  }
-  .data1 {
-    font-size: 14px;
-    color: #000;
-  }
-  .titel-code {
-    font-size: 17px;
-    color: #000;
-  }
-  .btn-code-card {
-    width: 107px;
-    height: 40px;
-    background-color: #000000;
-    color: #ffffff;
-  }
-  .activ-input {
-    background-color: #f6f9ff;
-    border: none;
-  }
-  /**Homework for Lecture**/
-  .main {
-    padding: 0 12px;
-  }
-  .main .hw-section-header i {
-    font-size: 21px;
-    margin-bottom: 10px;
-  }
-  .main .hw-section-header img {
-    height: 28px;
-  }
-  .main .text-large {
-    color: #778aa4;
-  }
-  .table-grid .row + .row {
-    padding: 37px 0 35px 0;
-    border-top: solid 1px #00214b;
-  }
-  /**Comments**/
-  .comments-header img {
-    height: 20px;
-  }
-  /**Course as teacher**/
-  .home-work-1 {
-    margin-left: -20px;
-    margin-right: -20px;
-    margin-bottom: -60px;
-  }
-  .deadline-2 {
-    font-size: 26px;
-  }
-  .enddata {
-    font-size: 26px;
-  }
-  .bell-size {
-    width: 85px;
-    height: 93px;
-    margin-left: 25px;
-  }
-  .text-normal {
-    font-size: 28px;
-  }
-  .enddata1 {
-    font-size: 14px;
-  }
-  .text-l1 {
-    font-size: 20px;
-  }
-  .btn-view-1 {
-    margin-bottom: -75px;
-    height: 70px;
-    position: absolute;
-    left: 0;
-    right: 0;
-    width: 100%;
-  }
-  .see-all {
-    font-size: 21px;
-  }
-  /**End course as teacher**/
-}
-@media only screen and (min-width: 992px) {
-  .toggled .slide-item {
-    max-width: 0;
-    margin-left: 0;
-    overflow: hidden;
-    transition: all 0.3s;
-  }
-  .toggled {
-    margin-right: 35px;
-  }
-  .toggled .pill {
-    right: 0;
-  }
-  .toggled .pill a {
-    -ms-transform: rotate(180deg); /* IE 9 */
-    transform: rotate(180deg);
-  }
-  .toggled .logo {
-    max-width: 90px;
-    margin-bottom: 86px;
-    transition: all 0.5s;
-  }
-  .toggled .nav-item a {
-    justify-content: center;
-    transition: all 0.5s;
-  }
-  .toggled .user-info .col {
-    display: none;
-  }
-  .slide.toggled {
-    padding: 50px 27px 50px 33px !important;
-    transition: all 0.5s;
-  }
-  .edit-content {
-    min-width: 520px;
-  }
-  /**Homework for Lecture**/
-  .main .text-xxl,
-  .main .text-large {
-    text-transform: uppercase;
-  }
-  .main .text-small {
-    font-weight: bold;
-  }
-  .main .border {
-    border-color: #707070 !important;
-  }
-  .main .table-grid .number {
-    width: 32px;
-  }
-  .main .table-grid .student-name {
-    max-width: 340px;
-  }
-  .main .table-grid .file {
-    max-width: 295px;
-  }
-  .main .table-grid .comments {
-    max-width: 295px;
-  }
-  .main .table-grid .date {
-    max-width: 295px;
-  }
-  .main .table-grid .settings {
-    width: 270px;
-  }
-  .table-grid .row + .row {
-    padding: 33px 0 45px 0;
-    border-bottom: solid 1px #00214b;
-  }
-}
-
-@media only screen and (max-width: 600px) {
-  .deadline-2 {
-    font-size: 24px;
-  }
-  .enddata {
-    font-size: 24px;
-  }
-  .bell-size {
-    width: 75px;
-    height: 83px;
-    margin-left: 25px;
-  }
-  .text-normal {
-    font-size: 26px;
-  }
-  .see-all {
-    font-size: 19px;
-  }
-}
-@media only screen and (max-width: 550px) {
-  .deadline-2 {
-    font-size: 22px;
-  }
-  .enddata {
-    font-size: 22px;
-  }
-  .bell-size {
-    width: 65px;
-    height: 73px;
-    margin-left: 20px;
-  }
-  .text-normal {
-    font-size: 24px;
-  }
-  .see-all {
-    font-size: 18px;
-  }
-}
-@media only screen and (max-width: 495px) {
-  .deadline-2 {
-    font-size: 19px;
-  }
-  .enddata {
-    font-size: 19px;
-  }
-  .bell-size {
-    width: 55px;
-    height: 53px;
-    margin-left: 15px;
-  }
-  .text-normal {
-    font-size: 21px;
-  }
-}
-@media only screen and (max-width: 438px) {
-  .deadline-2 {
-    font-size: 16px;
-  }
-  .enddata {
-    font-size: 16px;
-  }
-  .bell-size {
-    width: 45px;
-    height: 53px;
-    margin-left: 15px;
-  }
-  .text-normal {
-    font-size: 19px;
-  }
-  .see-all {
-    font-size: 14px;
-  }
-}
-@media only screen and (max-width: 393px) {
-  .deadline-2 {
-    font-size: 14px;
-  }
-  .enddata {
-    font-size: 14px;
-  }
-  .bell-size {
-    width: 35px;
-    height: 43px;
-    margin-left: 15px;
-  }
-}
-@media only screen and (max-width: 346px) {
-  .deadline-2 {
-    font-size: 12px;
-  }
-  .enddata {
-    font-size: 12px;
-  }
-  .bell-size {
-    width: 30px;
-    height: 37px;
-    margin-left: 15px;
-  }
-  .text-normal {
-    font-size: 17px;
-  }
-}
-@media only screen and (max-width: 315px) {
-  .deadline-2 {
-    font-size: 10px;
-  }
-  .enddata {
-    font-size: 10px;
-  }
-  .bell-size {
-    width: 28px;
-    height: 34px;
-    margin-left: 13px;
-  }
-  .text-normal {
-    font-size: 16px;
+  @media only screen and (max-width: 600px) {
+    .deadline-2 {
+      font-size: 24px;
+    }
+    .enddata {
+      font-size: 24px;
+    }
+    .bell-size {
+      width: 75px;
+      height: 83px;
+      margin-left: 25px;
+    }
+    .text-normal {
+      font-size: 26px;
+    }
+    .see-all {
+      font-size: 19px;
+    }
+  }
+  @media only screen and (max-width: 550px) {
+    .deadline-2 {
+      font-size: 22px;
+    }
+    .enddata {
+      font-size: 22px;
+    }
+    .bell-size {
+      width: 65px;
+      height: 73px;
+      margin-left: 20px;
+    }
+    .text-normal {
+      font-size: 24px;
+    }
+    .see-all {
+      font-size: 18px;
+    }
+  }
+  @media only screen and (max-width: 495px) {
+    .deadline-2 {
+      font-size: 19px;
+    }
+    .enddata {
+      font-size: 19px;
+    }
+    .bell-size {
+      width: 55px;
+      height: 53px;
+      margin-left: 15px;
+    }
+    .text-normal {
+      font-size: 21px;
+    }
+  }
+  @media only screen and (max-width: 438px) {
+    .deadline-2 {
+      font-size: 16px;
+    }
+    .enddata {
+      font-size: 16px;
+    }
+    .bell-size {
+      width: 45px;
+      height: 53px;
+      margin-left: 15px;
+    }
+    .text-normal {
+      font-size: 19px;
+    }
+    .see-all {
+      font-size: 14px;
+    }
+  }
+  @media only screen and (max-width: 393px) {
+    .deadline-2 {
+      font-size: 14px;
+    }
+    .enddata {
+      font-size: 14px;
+    }
+    .bell-size {
+      width: 35px;
+      height: 43px;
+      margin-left: 15px;
+    }
+  }
+  @media only screen and (max-width: 346px) {
+    .deadline-2 {
+      font-size: 12px;
+    }
+    .enddata {
+      font-size: 12px;
+    }
+    .bell-size {
+      width: 30px;
+      height: 37px;
+      margin-left: 15px;
+    }
+    .text-normal {
+      font-size: 17px;
+    }
+  }
+  @media only screen and (max-width: 315px) {
+    .deadline-2 {
+      font-size: 10px;
+    }
+    .enddata {
+      font-size: 10px;
+    }
+    .bell-size {
+      width: 28px;
+      height: 34px;
+      margin-left: 13px;
+    }
+    .text-normal {
+      font-size: 16px;
+    }
   }
 }
