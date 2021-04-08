@@ -1391,7 +1391,7 @@ button {
   line-height: 1.21;
   letter-spacing: 0.28px;
   overflow: hidden;
-  word-break: break-all;
+  word-break: break-word;
 }
 
 .item-number{
@@ -1573,7 +1573,7 @@ button {
   text-align: left;
   color: #00214b;
   overflow: hidden;
-  word-break: break-all;
+  word-break: break-word;
 }
 
 @media only screen and (max-width: 1500px){
