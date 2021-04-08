@@ -1534,6 +1534,46 @@ button {
   height: 40px;
 }
 
+/* Mobile Profile */
+
+.mobile-profile{
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  padding: 42.2px 38px 107px 35.6px;
+  background-image: linear-gradient(336deg, #eef4ff 101%, #fff 6%);
+  overflow-y: scroll;
+}
+
+
+.mobile-profile .details{
+  padding-bottom: 56.6px;
+  border-bottom: solid 0.3px #707070;
+}
+
+.mobile-profile .about{
+  padding-bottom: 55.9px !important;
+  margin-bottom: 24px !important;
+  border-bottom: solid 0.3px #707070;
+}
+
+.mobile-profile .about p{
+  width: 100%;
+  height: 48px;
+  font-family: Roboto;
+  font-size: 14px;
+  font-weight: normal;
+  font-stretch: normal;
+  font-style: normal;
+  line-height: 1.21;
+  letter-spacing: 0.28px;
+  text-align: left;
+  color: #00214b;
+  overflow: hidden;
+}
+
 @media only screen and (max-width: 1500px){
   .profile-details .separator{
       display: block;
@@ -1562,6 +1602,16 @@ button {
   .view-course-btn span{
   padding-right: 9px;
   font-size: 14px;
+  }
+
+  .course{
+    padding: 24px;
+  }
+}
+
+@media only screen and (max-width: 1024px){
+  .course{
+    padding: 15px;
   }
 }
 
