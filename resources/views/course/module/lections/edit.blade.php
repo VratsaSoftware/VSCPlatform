@@ -92,7 +92,7 @@
             <div class="col demo-edit-url" style="display: none;">
                 <div class="row g-0">
                     <div class="col ml-lg-5">
-                        <input class="demo-edit-url-input w-100 text-navy-blue" type="url" style="background-color: #f6f9ff; height: 50px;" name="demo" placeholder="Видео URL" value="{{ isset($lection->demo) ? $lection->Video->url : null }}">
+                        <input class="demo-edit-url-input w-100 text-navy-blue" type="url" style="background-color: #f6f9ff; height: 50px;" name="demo" placeholder="Демо URL" value="{{ isset($lection->demo) ? $lection->demo : null }}">
                     </div>
                 </div>
             </div>

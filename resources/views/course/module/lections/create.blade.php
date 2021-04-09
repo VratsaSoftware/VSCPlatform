@@ -68,7 +68,7 @@
                     </button>
                 </div>
 
-                <select name="fileType" id="file-select-type-{{ isset($loop->iteration) ? $loop->iteration : '' }}" class="create-lection-file-type" style="padding: 5px 15px; width: 180px; height: 45px; border-radius: 15px; display: none; background-color: #f6f9ff;">
+                <select name="fileType" id="file-select-type-{{ isset($loop->iteration) ? $loop->iteration : '' }}" class="create-lection-file-type row g-0" style="padding: 5px 15px; width: 180px; height: 45px; border-radius: 15px; display: none; background-color: #f6f9ff;">
                     <option value="">Тип Файл</option>
                     <option value="Презентация">Презентация</option>
                     <option value="Демо">Демо</option>
@@ -81,54 +81,12 @@
                 <input type="file" id="create-demo-{{ isset($loop->iteration) ? $loop->iteration : '' }}" name="demo_file" class="create-lection-demo-file" style="display: none;">
                 <input type="file" id="create-homework-{{ isset($loop->iteration) ? $loop->iteration : '' }}" name="homework" class="create-lection-homework" style="display: none;">
             </div>
-            <div class="col">
-                <div class="row g-0">
-                    {{-- @if ($lection->presentation)
-                        <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
-                            <div class="row g-0">
-                                <div class="col-lg col-auto text-small align-self-end pe-3">
-                                    <a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/slides-'.$lection->id.'/'.$lection->presentation)}}" download>
-                                        @if ($lection->homework_criteria && $lection->presentation && $lection->demo)
-                                            Презент.
-                                        @else
-                                            Презентация
-                                        @endif
-                                    </a>
-                                    <span id="btn-delete-file-slides-{{ isset($loop->iteration) ? $loop->iteration : '' }}" class="btn-delete-file" data-lection-file-id="{{ isset($loop->iteration) ? $loop->iteration : '' }}" data-lection-file-type="Презентация">
-                                        <img src="{{ asset('assets/img/Delete.svg') }}">
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                    @if ($lection->demo)
-                        <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
-                            <div class="row g-0">
-                                <div class="col-lg col-auto text-small align-self-end pe-3">
-                                    <a href="{{ $lection->demo }}" download>
-                                        Демо
-                                    </a>
-                                    <span id="btn-delete-file-demo-{{ isset($loop->iteration) ? $loop->iteration : '' }}" class="btn-delete-file" data-lection-file-id="{{ isset($loop->iteration) ? $loop->iteration : '' }}" data-lection-file-type="Демо">
-                                        <img src="{{ asset('assets/img/Delete.svg') }}">
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                    @if ($lection->homework_criteria)
-                        <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
-                            <div class="row g-0">
-                                <div class="col-lg col-auto text-small align-self-end pe-3">
-                                    <a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/homework-'.$lection->id.'/'.$lection->homework_criteria)}}" download>Домашно</a>
-                                    <span id="btn-delete-file-homework-{{ isset($loop->iteration) ? $loop->iteration : '' }}" class="btn-delete-file" data-lection-file-id="{{ isset($loop->iteration) ? $loop->iteration : '' }}" data-lection-file-type="Домашно">
-                                        <img src="{{ asset('assets/img/Delete.svg') }}">
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    @endif --}}
 
-                    <span class="file-delete-input"></span>
+            <div class="col demo-create-url" style="display: none;">
+                <div class="row g-0">
+                    <div class="col ml-lg-5">
+                        <input class="demo-create-url-input w-100 text-navy-blue" type="url" style="background-color: #f6f9ff; height: 50px;" name="demo" placeholder="Демо URL">
+                    </div>
                 </div>
             </div>
         </div>

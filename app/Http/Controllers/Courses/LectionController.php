@@ -59,7 +59,6 @@ class LectionController extends Controller
             'order' => 'sometimes|numeric',
             'video' => 'sometimes',
             'video_file' => 'sometimes|file',
-            ['regex:/^(https|http):\/\/(?:www\.)?youtube.com\/embed\/[A-z0-9]+/'],
             'slides' => 'sometimes|',
             'homework' => 'sometimes|',
             'demo' => 'sometimes',

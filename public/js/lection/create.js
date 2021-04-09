@@ -40,10 +40,12 @@ $(document).ready(function() {
 
             if ($(fileType).val() == 'Презентация') {
                 $(slides).trigger('click');
+                $('.demo-create-url').hide();
             } else if ($(fileType).val() == 'Демо') {
-                $(demo).trigger('click');
+                $('.demo-create-url').show();
             } else if ($(fileType).val() == 'Домашно') {
                 $(homework).trigger('click');
+                $('.demo-create-url').hide();
             }
         });
     });
@@ -55,8 +57,8 @@ $(document).ready(function() {
         }
     });
 
-    $('.create-lection-demo-file').change(function() {
-        if ($(this).val() != null) {
+    $('.demo-create-url-input').change(function() {
+        if ($(this).val() != '') {
             $('.create-lection-select-element').append(' Демо');
         }
     });
