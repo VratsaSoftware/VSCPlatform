@@ -581,7 +581,11 @@ button {
 }
 .background-programming {
   border: solid 8px #ffffff;
-  background-color: #eef4ff;
+  background: linear-gradient(
+    140deg,
+    rgba(238, 244, 255, 1) 35%,
+    rgba(255, 255, 255, 1) 100%
+  );
   border-radius: 143px;
   height: 1080px;
 }
@@ -1278,7 +1282,11 @@ button {
     }
     .background-programming-2 {
       border: solid 8px #ffffff;
-      background-color: #eef4ff;
+      background: linear-gradient(
+        184deg,
+        rgba(238, 244, 255, 1) 35%,
+        rgba(255, 255, 255, 1) 100%
+      );
       border-radius: 52px;
     }
     .figures-margin {
