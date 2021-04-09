@@ -84,10 +84,15 @@ $(document).ready(function() {
             var homework = '#homework-' + lectionId;
 
             if ($(fileType).val() == 'Презентация') {
+                $('.demo-edit-url').hide();
+                $('.available-files').show();
                 $(slides).trigger('click');
             } else if ($(fileType).val() == 'Демо') {
-                $(demo).trigger('click');
+                $('.demo-edit-url').show();
+                $('.available-files').hide();
             } else if ($(fileType).val() == 'Домашно') {
+                $('.demo-edit-url').hide();
+                $('.available-files').show();
                 $(homework).trigger('click');
             }
         });
@@ -100,7 +105,7 @@ $(document).ready(function() {
         }
     });
 
-    $('.lection-demo-file').change(function() {
+    $('.demo-edit-url-input').change(function() {
         if ($(this).val() != null) {
             $('.lection-select-element').append(' Демо');
         }

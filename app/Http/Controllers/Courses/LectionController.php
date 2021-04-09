@@ -63,7 +63,6 @@ class LectionController extends Controller
             'slides' => 'sometimes|',
             'homework' => 'sometimes|',
             'demo' => 'sometimes',
-            ['regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
             'homework_end' => 'sometimes',
             'homework_check_end' => 'sometimes',
             'visibility' => 'sometimes|in_array:valid_visibility.*',
@@ -217,7 +216,7 @@ class LectionController extends Controller
             'video_file' => 'sometimes|file',
             'homework_end' => 'sometimes',
             'homework_check_end' => 'sometimes',
-            'demo' => ['sometimes', 'regex:/^((?:https?\:\/\/|www\.)(?:[-a-z0-9]+\.)*[-a-z0-9]+.*)$/'],
+            'demo' => ['sometimes'],
         ]);
         $lection = Lection::with('Module', 'Module.Course')->findOrFail($id);
 
@@ -242,7 +241,7 @@ class LectionController extends Controller
             // $lection->order = !is_null($request->order) ?: $request->order;
         // }
 
-        if ($request->has('video')) {
+        if ($request->video && $request->has('video')) {
             $video = LectionVideo::findOrFail($lection->lections_video_id);
             $video->url = $data['video'];
             $video->save();

@@ -75,7 +75,7 @@
                     </button>
                 </div>
 
-                <select name="fileType" id="file-type-{{ $loop->iteration }}" class="file-type" style="padding: 5px 15px; width: 180px; height: 45px; border-radius: 15px; display: none; background-color: #f6f9ff;">
+                <select name="fileType" id="file-type-{{ $loop->iteration }}" class="file-type row g-0" style="padding: 5px 15px; width: 180px; height: 45px; border-radius: 15px; display: none; background-color: #f6f9ff;">
                     <option value="">Тип Файл</option>
                     <option value="Презентация">Презентация</option>
                     <option value="Демо">Демо</option>
@@ -88,7 +88,16 @@
                 <input type="file" id="demo-{{ $loop->iteration }}" name="demo_file" class="lection-demo-file" style="display: none;">
                 <input type="file" id="homework-{{ $loop->iteration }}" name="homework" class="lection-homework" style="display: none;">
             </div>
-            <div class="col">
+
+            <div class="col demo-edit-url" style="display: none;">
+                <div class="row g-0">
+                    <div class="col ml-lg-5">
+                        <input class="demo-edit-url-input w-100 text-navy-blue" type="url" style="background-color: #f6f9ff; height: 50px;" name="demo" placeholder="Видео URL" value="{{ isset($lection->demo) ? $lection->Video->url : null }}">
+                    </div>
+                </div>
+            </div>
+
+            <div class="available-files col">
                 <div class="row g-0">
                     @if ($lection->presentation)
                         <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
@@ -96,7 +105,7 @@
                                 <div class="col-lg col-auto text-small align-self-end pe-3">
                                     <a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/slides-'.$lection->id.'/'.$lection->presentation)}}" download>
                                         @if ($lection->homework_criteria && $lection->presentation && $lection->demo)
-                                            Презент.
+                                            Презент
                                         @else
                                             Презентация
                                         @endif
@@ -112,7 +121,7 @@
                         <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
                             <div class="row g-0">
                                 <div class="col-lg col-auto text-small align-self-end pe-3">
-                                    <a href="{{ $lection->demo }}" download>
+                                    <a href="{{ $lection->demo }}">
                                         Демо
                                     </a>
                                     <span id="btn-delete-file-demo-{{ $loop->iteration }}" class="btn-delete-file" data-lection-file-id="{{ $loop->iteration }}" data-lection-file-type="Демо">
@@ -126,7 +135,13 @@
                         <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
                             <div class="row g-0">
                                 <div class="col-lg col-auto text-small align-self-end pe-3">
-                                    <a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/homework-'.$lection->id.'/'.$lection->homework_criteria)}}" download>Домашно</a>
+                                    <a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/homework-'.$lection->id.'/'.$lection->homework_criteria)}}" download>
+                                        @if ($lection->homework_criteria && $lection->presentation && $lection->demo)
+                                            Домаш
+                                        @else
+                                            Домашно
+                                        @endif
+                                    </a>
                                     <span id="btn-delete-file-homework-{{ $loop->iteration }}" class="btn-delete-file" data-lection-file-id="{{ $loop->iteration }}" data-lection-file-type="Домашно">
                                         <img src="{{ asset('assets/img/Delete.svg') }}">
                                     </span>
