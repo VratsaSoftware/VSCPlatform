@@ -1,6 +1,17 @@
 $(document).ready(function() {
     $('.edit-lection').show();
 
+    /* toggle video url input */
+    $('.edit-btn-video-url').click(function() {
+        $('.video-url-edit').toggle().stop();
+        $('.video-edit-upload-message').toggle().stop();
+    });
+
+    $('.video-edit-url-input').click(function() {
+        $('.video-url-edit').toggle();
+        $('.video-edit-upload-message').toggle();
+    });
+
     /* open create lection section */
     $('.input-button').click(function() {
         $('.show-lection').hide();

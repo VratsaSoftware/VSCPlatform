@@ -12,6 +12,17 @@ $(document).ready(function() {
         }
     });
 
+    /* toggle video url input */
+    $('.add-video-url').click(function() {
+        $('.video-url').toggle().stop();
+        $('.video-upload-message').toggle().stop();
+    });
+
+    $('.video-url-input').click(function() {
+        $('.video-url').toggle();
+        $('.video-upload-message').toggle();
+    });
+
     /* lection add files */
     $('.create-lection-files-btn').click(function() {
         var lectionId = $(this).attr('data-lection-id');

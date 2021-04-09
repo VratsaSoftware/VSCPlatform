@@ -6,17 +6,17 @@
         <span class="close d-lg-none position-absolute">&times;</span>
         <div class="row pt-lg-0 pt-4 g-0">
             <div class="col-md pe-md-3 me-xl-2">
-                <input class="edit-lection-title w-100 lection-title-input text-navy-blue" type="text" name="title" value="@if (isset($lection->title)){{ $lection->title }}@endif" placeholder="Заглавие" required>
+                <input class="edit-lection-title w-100 lection-title-input text-navy-blue" type="text" name="title" value="@if (isset($lection->title)){{ $lection->title }}@endif" placeholder="Заглавие*" required>
             </div>
             <div class="col-md-auto pe-md-3 me-xl-1">
                 <div class="position-relative calendar">
-                    <input type="text" name="first_date" value="@if (isset($lection->first_date)){{ $lection->first_date->format('m/d/Y') }}@endif" class="edit-lection-first_date date-input ext-navy-blue" placeholder="Начало" required>
+                    <input type="text" name="first_date" value="@if (isset($lection->first_date)){{ $lection->first_date->format('m/d/Y') }}@endif" class="edit-lection-first_date date-input ext-navy-blue" placeholder="Начало*" required>
                     <img src="{{ asset('assets/img/arrow.svg') }}">
                 </div>
             </div>
             <div class="col-md-auto pe-md-3 me-xl-1">
                 <div class="position-relative calendar">
-                    <input type="text" name="second_date" value="@if (isset($lection->second_date)){{ $lection->second_date->format('m/d/Y') }}@endif" class="edit-lection-second_date date-input ext-navy-blue" placeholder="Край" required>
+                    <input type="text" name="second_date" value="@if (isset($lection->second_date)){{ $lection->second_date->format('m/d/Y') }}@endif" class="edit-lection-second_date date-input ext-navy-blue" placeholder="Край*" required>
                     <img src="{{ asset('assets/img/arrow.svg') }}">
                 </div>
             </div>
@@ -25,21 +25,19 @@
             </div>
         </div>
 
-        <div class="video-upload row g-0 my-4 position-relative">
+        <div class="edit-btn-video-url video-upload row g-0 my-4 position-relative">
             <div class="video-upload-btn position-absolute text-center">
-                <label for="video-file{{ $loop->iteration }}">
-                    <img src="{{ asset('assets/img/upload_video.svg') }}" alt="">
-                    <div class="text-center fw-bold pt-lg-4 pt-3">
+                <img src="{{ asset('assets/img/upload_video.svg') }}">
+                <div class="text-center fw-bold pt-lg-4 pt-3">
+                    <span class="video-edit-upload-message">
                         Upload
                         <br class="d-lg-block d-none">
                         video
-                    </div>
-                    <span id="video-file-count{{ $loop->iteration }}">
-                        @if (isset($lection->Video->url))
-                            <a class="d-inline-block pt-1" href="{{ asset('/') . 'data/course-' . $module->Course->id . '/modules-' . $module->id . '/video-' . $lection->id . '/' . $lection->Video->url }}">Виж</a>
-                        @endif
                     </span>
-                </lable>
+                    <div class="video-url-edit col-md pe-md-3 me-xl-2" style="display: none">
+                        <input class="video-edit-url-input w-60 text-navy-blue" type="url" style="background-color: #f6f9ff; height: 50px;" name="video" placeholder="Видео URL" value="{{ isset($lection->Video->url) ? $lection->Video->url : null }}">
+                    </div>
+                </div>
             </div>
         </div>
         {{-- @if (isset($lection->Video->url))
@@ -53,8 +51,6 @@
             <source src="{{ asset('/') . 'data/course-' . $module->Course->id . '/modules-' . $module->id . '/video-' . $lection->id . '/' . $lection->Video->url }}" type="video/mp4">
         </video>
         @endif --}}
-
-        <input id="video-file{{ $loop->iteration }}" name="video_file" style="display: none;" type="file">
 
         <div class="edit-decsription pt-3">
             <textarea name="description" class="edit-lection-description p-2" placeholder="Описание на лекцията" required>{{ $lection->description }}</textarea>
@@ -73,7 +69,7 @@
                         <div class="col text-small text-start pe-3 d-lg-block d-none">Добави</div>
                         <div class="col-auto mx-lg-0 mx-auto d-none d-lg-block">
                             <div class="d-inline-block border d-lg-block d-none">
-                                <img src="{{ asset('assets/img/plus.svg') }}" alt="">
+                                <img src="{{ asset('assets/img/plus.svg') }}">
                             </div>
                         </div>
                     </button>

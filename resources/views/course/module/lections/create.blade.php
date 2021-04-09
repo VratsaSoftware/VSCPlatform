@@ -28,23 +28,22 @@
             @endif
         </div>
 
-        <div class="video-upload row g-0 my-4 position-relative">
+        <div class="add-video-url video-upload row g-0 my-4 position-relative">
             <div class="video-upload-btn position-absolute text-center">
-                <label for="video-file-{{ isset($loop->iteration) ? $loop->iteration : '' }}">
-                    <img src="{{ asset('assets/img/upload_video.svg') }}" alt="">
-                    <div class="text-center fw-bold pt-lg-4 pt-3">
+                <img src="{{ asset('assets/img/upload_video.svg') }}">
+                <div class="text-center fw-bold pt-lg-4 pt-3">
+                    <span class="video-upload-message">
                         Upload
                         <br class="d-lg-block d-none">
                         video
-
-                        <!-- <input class="create-lection-title w-100 lection-title-input text-navy-blue" type="text" style="background-color: #f6f9ff;" name="title" placeholder="Заглавие*" required> -->
+                    </span>
+                    <div class="video-url col-md pe-md-3 me-xl-2" style="display: none">
+                        <input class="video-url-input w-60 text-navy-blue" type="url" style="background-color: #f6f9ff; height: 50px;" name="video" placeholder="Видео URL">
                     </div>
-                    <span id="video-file-count-{{ isset($loop->iteration) ? $loop->iteration : '' }}"></span>
-                </lable>
+                </div>
+                <span id="video-file-count-{{ isset($loop->iteration) ? $loop->iteration : '' }}"></span>
             </div>
         </div>
-
-        <input id="video-file-{{ isset($loop->iteration) ? $loop->iteration : '' }}" name="video_file" style="display: none;" type="file">
 
         <div class="edit-decsription pt-3">
             <textarea name="description" class="create-lection-description p-2" placeholder="Описание на лекцията*" required></textarea>
