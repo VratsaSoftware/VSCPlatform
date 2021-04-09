@@ -1125,6 +1125,11 @@ button {
       margin-left: 25px;
     }
   }
+  @media only screen and (max-width: 1280px) {
+    .text-priem-sm {
+      font-size: 14px;
+    }
+  }
   @media only screen and (max-width: 992px) {
     .text-xxl {
       font-size: 20px;
@@ -1417,6 +1422,49 @@ button {
     }
     .text-titel-top {
       margin-top: -10px;
+    }
+    .card-mobil {
+      background-color: #ffffff;
+      padding: 17px 19px 18px 26px;
+      border-radius: 20px;
+    }
+    .card-title-application-mobil {
+      font-size: 20px;
+      color: #00214b;
+    }
+    .img-design {
+      width: 59px;
+      height: 60px;
+      margin-top: 0;
+    }
+    .btn-top-mobil {
+      margin-top: 50px;
+    }
+    .btn-white {
+      background-color: #ffffff;
+    }
+    .card-small-mobil {
+      width: 7px;
+      height: 315px;
+      border-radius: 4px;
+      background: linear-gradient(
+        180deg,
+        rgba(105, 181, 1, 1) 5%,
+        rgba(141, 226, 25, 1) 8%,
+        rgba(204, 204, 204, 1) 15%
+      );
+    }
+    .priem-mobil-img {
+      margin-top: 15px;
+      margin-left: -22px;
+    }
+    .text-priem-xl-mobil {
+      font-size: 20px;
+      color: #00214b;
+    }
+    .text-priem-sm-mobil {
+      font-size: 17px;
+      color: #999999;
     }
     /**END Student application**/
   }
