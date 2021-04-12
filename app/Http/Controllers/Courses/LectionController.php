@@ -409,6 +409,7 @@ class LectionController extends Controller
             ->get();
 
         $comments = $comments->load('Author');
+        $comments = $comments->load('Homework');
 
         return view('course.lection_homework_comment', [
             'allComments' => $comments,
