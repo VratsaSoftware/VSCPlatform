@@ -1425,8 +1425,8 @@ button {
     }
     .card-mobil {
       background-color: #ffffff;
-      padding: 17px 19px 18px 26px;
-      border-radius: 20px;
+      padding: 17px 19px 0px 26px;
+      border-radius: 40px;
     }
     .card-title-application-mobil {
       font-size: 20px;
@@ -1439,23 +1439,24 @@ button {
     }
     .btn-top-mobil {
       margin-top: 50px;
+      margin-bottom: -20px;
     }
     .btn-white {
       background-color: #ffffff;
     }
     .card-small-mobil {
       width: 7px;
-      height: 315px;
+      height: 260px;
       border-radius: 4px;
       background: linear-gradient(
         180deg,
-        rgba(105, 181, 1, 1) 5%,
-        rgba(141, 226, 25, 1) 8%,
+        rgba(105, 181, 1, 1) 4%,
+        rgba(141, 226, 25, 1) 6%,
         rgba(204, 204, 204, 1) 15%
       );
     }
     .priem-mobil-img {
-      margin-top: 15px;
+      margin-top: 10px;
       margin-left: -22px;
     }
     .text-priem-xl-mobil {
@@ -1465,6 +1466,12 @@ button {
     .text-priem-sm-mobil {
       font-size: 17px;
       color: #999999;
+    }
+    .application-slide {
+      padding: 10px 36px 11px 36px;
+    }
+    .text-btn-sm {
+      font-size: 14px;
     }
     /**END Student application**/
   }
