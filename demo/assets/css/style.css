@@ -1373,8 +1373,40 @@ button {
   letter-spacing: 0.34px;
 }
 
+.edit-profile-btn-filled{
+  min-width: 180px;
+  height: 45px;
+  color: #fff;
+  background-color: #00214b;
+  border-radius: 15px;
+  line-height: 1.18;
+  letter-spacing: 0.34px;
+}
+
+.edit-profile-btn-filled:hover{
+  color: #fff !important;
+}
+
 .profile-details{
   color: #000;
+}
+
+.profile-details input, .profile-details textarea{
+  border: 0 !important;
+  outline: none !important;
+}
+
+.input{
+  max-width: 170px;
+  height: 50px;
+  padding: 0 5px;
+  border: solid 0.5px #00214b;
+  border-radius: 15px;
+}
+
+.input input[type="text"]{
+  width: 100%;
+  padding: 0 0 0 15px !important;
 }
 
 .bio-title{
@@ -1385,13 +1417,62 @@ button {
   letter-spacing: 0.4px;
 }
 
-.bio-description{
+div.bio-description, p.bio-description{
   height: 100px;
   font-size: 14px;
   line-height: 1.21;
   letter-spacing: 0.28px;
   overflow: hidden;
   word-break: break-word;
+}
+
+textarea.bio-description{
+  width: 100%;
+  height: 80px;
+  padding: 15px;
+  border: solid 0.5px #00214b;
+  border-radius: 15px;
+  text-align: left;
+  resize: none;
+}
+
+textarea.bio-description-large{
+  position: relative;
+  width: 100%;
+  height: 203px;
+  padding: 15px;
+  border: solid 0.5px #00214b;
+  border-radius: 15px;
+  text-align: left;
+  resize: none;
+}
+
+.bio-description-large .bio-description{
+  height: 35px;
+  font-size: 14px;
+  line-height: 1.21;
+  letter-spacing: 0.28px;
+}
+
+div.bio-description-large{
+  position: relative;
+  width: 100%;
+  height: 203px;
+  padding: 15px;
+  border: solid 0.5px #00214b;
+  border-radius: 15px;
+  text-align: left;
+}
+
+.bio-pill{
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid #00214b;
+  text-align: center;
+  line-height: 26px;
+  font-size: 1.8rem;
+  cursor: pointer;
 }
 
 .item-number{
