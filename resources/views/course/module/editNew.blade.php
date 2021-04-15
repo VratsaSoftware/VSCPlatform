@@ -48,24 +48,6 @@
             <div class="tab-content pt-lg-2">
                 <!--First tab-->
                 <div class="tab-pane fade show active" id="module-1" role="tabpanel" aria-labelledby="module-1-tab">
-                    {{--<div class="row g-0 pb-4 mb-2">
-                        <div class="col-xxl d-flex justify-content-start">
-                            <button class="w-100 btn-edit row g-0 align-items-center add-c">
-                                <div class="col text-start">Добави курсист</div>
-                                <div class="col-auto">
-                                    <i class="fas fa-arrow-right"></i>
-                                </div>
-                            </button>
-                        </div>
-                        <div class="col-xxl ms-xxl-3 d-flex justify-content-end">
-                            <button class="ms-xxl-2 mt-xxl-0 w-100 btn-edit row g-0 align-items-center add-m">
-                                <div class="col text-start">Редактирай модул</div>
-                                <div class="col-auto">
-                                    <img src="{{ asset('assets/img/edit.svg') }}" alt="">
-                                </div>
-                            </button>
-                        </div>
-                    </div>--}}
                     <div class="row g-0 pb-4 mb-2">
                                         <div class="col-xxl col-xl-12 col-sm d-flex justify-content-start">
                                             <button class="btn-edit row g-0 align-items-center mb-0">

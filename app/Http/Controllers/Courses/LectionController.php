@@ -241,10 +241,19 @@ class LectionController extends Controller
         // }
 
         if ($request->video && $request->has('video')) {
-            $video = LectionVideo::findOrFail($lection->lections_video_id);
-            $video->url = $data['video'];
-            $video->save();
+            $video = LectionVideo::find($lection->lections_video_id);
+            if ($video) {
+                $video->url = $data['video'];
+                $video->save();
+            } else {
+                $video = new LectionVideo;
+
+                $video->url = $data['video'];
+                $video->save();
+            }
         }
+
+        $lection->lections_video_id = isset($video->id) ? $video->id : null;
 
         if (Input::hasFile('slides')) {
             $slides = $request->file('slides');

@@ -135,7 +135,7 @@
                         <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
                             <div class="row g-0">
                                 <div class="col-lg col-auto text-small align-self-end pe-3">
-                                    <a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/homework-'.$lection->id.'/'.$lection->homework_criteria)}}" download>
+                                    <a href="{{ asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/homework-'.$lection->id.'/'.$lection->homework_criteria) }}" download>
                                         @if ($lection->homework_criteria && $lection->presentation && $lection->demo)
                                             Домаш
                                         @else
@@ -195,7 +195,7 @@
                     <button form="delete-lection-form-{{ $loop->iteration }}" class="ms-xxl-2 mt-xxl-0 mt-3 btn-edit row g-0 align-items-center">
                         <div class="col text-start fw-bold">Изтрий лекция</div>
                         <div class="col-auto">
-                            <img src="{{ asset('assets/img/Delete.svg') }}" alt="">
+                            <img src="{{ asset('assets/img/Delete.svg') }}">
                         </div>
                     </button>
                 </div>
@@ -204,7 +204,7 @@
                 <button class="submit-form ms-xxl-2 mt-xxl-0 mt-3 btn-edit btn-green row g-0 align-items-center">
                     <div class="col text-start fw-bold">Запази промените</div>
                     <div class="col-auto">
-                        <img src="{{ asset('assets/img/action_icon.svg') }}" alt="">
+                        <img src="{{ asset('assets/img/action_icon.svg') }}">
                     </div>
                 </button>
             </div>

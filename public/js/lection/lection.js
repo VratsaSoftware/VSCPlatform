@@ -1,5 +1,5 @@
 $(document).ready(function() {
-    $('.edit-lection').show();
+    $('.show-lection').show();
 
     /* toggle video url input */
     $('.edit-btn-video-url').click(function() {
@@ -17,6 +17,13 @@ $(document).ready(function() {
         $('.show-lection').hide();
         $('.edit-lection').toggle();
         $('.add-lection').toggle();
+    });
+
+    /* open edit lection section */
+    $('.edit-lection-btn').click(function() {
+        $('.show-lection').hide();
+        $('.edit-lection').show();
+        $('.add-lection').hide();
     });
 
     $('#tab_selector').change(function() {
