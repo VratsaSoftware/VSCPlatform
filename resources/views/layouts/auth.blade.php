@@ -92,7 +92,7 @@
 			</div>
 		</div>
 		<div class="col-lg-7 d-lg-none">
-			<div class="background-programming-2 rounded-bottom border-end">
+			<div class="background-programming-2 rounded-bottom">
 				<div class="d-flex justify-content-around figures-margin">
 					<img src="{{ asset('assets/img/coding-elements-2.svg') }}" class="figures-2">
 					<div class="d-flex justify-content-center">
@@ -112,7 +112,7 @@
 					<br>
 					програмирането
 				</div>
-				<div class="d-flex justify-content-center mb-5">
+				<div class="d-flex justify-content-center pb-5">
 					<button class="btn-4 btn-program btn-navy-blue row g-0 align-items-center mt-1">
 						<div class="col text-start text-5"><b>Виж повече</b></div>
 						<div class="col-auto">
@@ -171,38 +171,38 @@
 
     <!-- //changing background -->
     <script>
-    	$(function(){
-    		$('#login-button').click();
-    		changeBg();
-    		setTimeout(function(){
-    			if ($(window).width() > 1000) {
-    				changeBg();
-    			}
-    		}, 10000);
+    	// $(function(){
+    	// 	$('#login-button').click();
+    	// 	changeBg();
+    	// 	setTimeout(function(){
+    	// 		if ($(window).width() > 1000) {
+    	// 			changeBg();
+    	// 		}
+    	// 	}, 10000);
 
-    		function changeBg(){
-    			console.log($(window).width()+'/'+$(window).height());
-    			// images for background
-    			var items = ["1","2","3","4","5","6"];
-    			var item = items[Math.floor(Math.random()*items.length)];
-    			setTimeout(function(){
-    				$('<img/>').attr('src', './images/bg/login/'+item+'.jpg').on('load', function() {
-    					$(this).remove();
-    					$('html').css({
-    						'background-image':'url(./images/bg/login/'+item+'.jpg)',
-    						'background-size':'cover',
-    					});
-    					$('html').fadeIn();
-    				});
+    	// 	function changeBg(){
+    	// 		console.log($(window).width()+'/'+$(window).height());
+    	// 		// images for background
+    	// 		var items = ["1","2","3","4","5","6"];
+    	// 		var item = items[Math.floor(Math.random()*items.length)];
+    	// 		setTimeout(function(){
+    	// 			$('<img/>').attr('src', './images/bg/login/'+item+'.jpg').on('load', function() {
+    	// 				$(this).remove();
+    	// 				$('html').css({
+    	// 					'background-image':'url(./images/bg/login/'+item+'.jpg)',
+    	// 					'background-size':'cover',
+    	// 				});
+    	// 				$('html').fadeIn();
+    	// 			});
 
-    			},500);
-    			setTimeout(function(){
-    				if ($(window).width() > 1000) {
-    					changeBg();
-    				}
-    			}, 10000);
-    		};
-    	});
+    	// 		},500);
+    	// 		setTimeout(function(){
+    	// 			if ($(window).width() > 1000) {
+    	// 				changeBg();
+    	// 			}
+    	// 		}, 10000);
+    	// 	};
+    	// });
     </script>
 
     <script>
