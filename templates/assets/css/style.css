@@ -950,6 +950,26 @@ button {
   margin-left: -22px;
 }
 /** Student application END **/
+/** Course as student**/
+.uploaded-home-1 {
+  border-radius: 20px;
+  border: solid 1px #00214b;
+  background-color: #00214b;
+}
+.btn1-cs {
+  width: 180px;
+  height: 45px;
+  border-radius: 15px;
+}
+.bell-img {
+  width: 41px;
+  height: 49px;
+}
+.text-uploaded-home {
+  font-size: 20px;
+  font-weight: bold;
+}
+/** Course as student END **/
 /** Media query**/
 @media only screen and (max-width: 1850px) {
   .edit-content {
@@ -958,7 +978,6 @@ button {
   }
   .card {
     margin: 56px 0 56px 20px;
-    width: auto;
   }
   .lection-title-input {
     min-width: 110px;
@@ -979,6 +998,20 @@ button {
     padding-left: 19px;
     border-radius: 10px;
     padding-bottom: 12px;
+  }
+}
+@media only screen and (max-width: 1600px) {
+  .btn1-cs {
+    width: 130px;
+    height: 45px;
+    border-radius: 10px;
+  }
+  .bell-img {
+    width: 35px;
+    height: 49px;
+  }
+  .text-uploaded-home {
+    font-size: 15px;
   }
 }
 @media only screen and (max-width: 1546px) {
@@ -1073,6 +1106,15 @@ button {
     margin-top: 220px;
     margin-left: -22px;
   }
+  @media only screen and (max-width: 1400px) and (min-width: 992px) {
+    .card {
+      width: 500px;
+    }
+    .card-body-application {
+      padding: 71px 22px 60px 67px;
+    }
+  }
+
   @media only screen and (max-width: 1400px) {
     .text-xxl {
       font-size: 50px;
@@ -1088,7 +1130,6 @@ button {
       font-size: 14px;
     }
     .card {
-      width: auto;
       margin: 56px 0;
     }
     .card-body {
