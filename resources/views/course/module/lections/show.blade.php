@@ -38,6 +38,15 @@
     <div class="video-upload row g-0 my-4 position-relative">
         @if (isset($lection->Video->url))
             <iframe width="762" height="375" src="{{ $lection->Video->url }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 45px;"></iframe>
+        @else
+            <div class="video-upload-btn position-absolute text-center">
+                <img src="{{ asset('assets/img/upload_video.svg') }}">
+                <div class="text-center fw-bold pt-lg-4 pt-3">
+                    Upload
+                    <br class="d-lg-block d-none">
+                    video
+                </div>
+            </div>
         @endif
     </div>
     <div class="edit-decsription pt-3 pb-2">
@@ -61,7 +70,7 @@
             Файлове
         </div>
         <div class="col-lg-4 col-auto order-lg-0 order-2">
-            <button class="btn-add row g-0 align-items-center">
+            <button class="edit-lection-btn  btn-add row g-0 align-items-center">
                 <div class="col text-small text-start pe-3 d-lg-block d-none">Добави</div>
                 <div class="col-auto mx-lg-0 mx-auto">
                     <div class="d-inline-block border d-lg-block d-none">

@@ -41,12 +41,6 @@
             </div>
         </div>
         {{-- @if (isset($lection->Video->url))
-            <div class="video-upload row g-0 my-4 position-relative">
-    			<iframe width="762" height="375" src="{{ asset('/') . 'data/course-' . $module->Course->id . '/modules-' . $module->id . '/video-' . $lection->id . '/' . $lection->Video->url }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 45px;"></iframe>
-    		</div>
-        @endif --}}
-
-        {{-- @if (isset($lection->Video->url))
          <video style="border-radius: 45px; max-height: auto; max-width: 100%" frameborder="0" scrolling="yes" controls>
             <source src="{{ asset('/') . 'data/course-' . $module->Course->id . '/modules-' . $module->id . '/video-' . $lection->id . '/' . $lection->Video->url }}" type="video/mp4">
         </video>
