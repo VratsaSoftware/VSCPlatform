@@ -18,13 +18,21 @@ $(document).ready(function(){
         
     if ($(window).width() < 992) {
         $("#right-side .tab-pane.active").removeClass("active");
-        
-        $('#avatar-menu').on('click', function(){
-            $('.mobile-profile').css('left', '0');
-        });
-
-        $('#close-mobile-profile').on('click', function(){
-            $('.mobile-profile').css('left', '-100%');
-        });
     }
+
+    $('#avatar-menu').on('click', function(){
+        $('.mobile-profile').css('left', '0');
+    });
+
+    $('#close-mobile-profile').on('click', function(){
+        $('.mobile-profile').css('left', '-100%');
+    });
+
+    $('#open-edit-menu').on('click', function(){
+        $('.mobile-profile-edit').css('left', '0');
+    });
+
+    $('#close-edit-menu').on('click', function(){
+        $('.mobile-profile-edit').css('left', '-100%');
+    });
 });

@@ -285,7 +285,7 @@
                     </div>
                 </div>
             </div>
-            <div id="right-side" class="col-xl pt-md-5 mt-md-4 tab-content edit-content">
+            <div id="right-side" class="col-lg pt-md-5 mt-md-4 tab-content edit-content">
                 <div class="row g-0 m-0 p-0">
                     <div class="col-auto">
                         <p class="m-0 p-0 text-uppercase student-name">Калин илиев</p>
@@ -330,13 +330,34 @@
                     <div class="col mt-5 pt-2 profile-details">
                         <div class="row g-0 d-flex align-items-center">
                             <div class="col">
-                                <label class="d-flex align-items-center input me-3">
+                                <label class="d-flex align-items-center input">
+                                    <img src="assets/imgs/facebook.png" width="30" alt="#">
+                                    <input type="text" name="facebook" placeholder="Facebook" value="FB/Kalin_Iliev">
+                                </label>
+                            </div>
+                            <div class="col">
+                                <label class="d-flex align-items-center input mx-3">
+                                    <img src="assets/imgs/insta.png" width="30" alt="#">
+                                    <input type="text" name="instagram" placeholder="Instagram"
+                                        value="Instagram/Kalin_Iliev">
+                                </label>
+                            </div>
+                            <div class="col">
+                                <label class="d-flex align-items-center input">
+                                    <img src="assets/imgs/facebook.png" width="30" alt="#">
+                                    <input type="text" name="facebook" placeholder="Facebook" value="FB/Kalin_Iliev">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="row g-0 mt-5 pt-4 d-flex justify-content-end">
+                            <div class="col">
+                                <label class="d-flex align-items-center input">
                                     <img src="assets/icons/location.svg" width="24" alt="#">
                                     <input type="text" name="location" placeholder="Град" value="Враца">
                                 </label>
                             </div>
                             <div class="col">
-                                <label class="d-flex align-items-center input me-3">
+                                <label class="d-flex align-items-center input mx-3">
                                     <img src="assets/icons/birthday.svg" width="30" alt="#">
                                     <input type="text" name="birthdate" placeholder="Дата на раждане"
                                         value="01.11.1994">
@@ -614,9 +635,21 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-center justify-content-end">
-                    <span class="d-inline-block me-4"><img src="./assets/img/edit.svg" alt="edit" width="20.3"></span>
+                    <span class="d-inline-block me-4" id="open-edit-menu"><img src="./assets/img/edit.svg" alt="edit"
+                            width="20.3"></span>
                     <span class="d-inline-block" id="close-mobile-profile">&#10006;</span>
                 </div>
+            </div>
+            <div class="col d-flex align-items-center justify-content-between pb-4">
+                <a href="#">
+                    <img src="assets/imgs/facebook.png" width="30" alt="#">
+                </a>
+                <a href="#">
+                    <img src="assets/imgs/insta.png" width="25" alt="#">
+                </a>
+                <a href="#">
+                    <img src="assets/imgs/facebook.png" width="30" alt="#">
+                </a>
             </div>
             <div class="row g-0 p-0 m-0">
                 <div class="col details">
@@ -654,6 +687,143 @@
                 <span class="fw-bold ps-4">Изход</span>
             </button>
         </div>
+        <div class="col-12 mobile-profile-edit">
+            <div class="row g-0 p-0 pb-5 m-0">
+                <div class="col-auto">
+                    <div class="row g-0 p-0 m-0 d-flex align-items-center">
+                        <div class="col">
+                            <img src="./assets/img/avatar.png" width="55" alt="Avatar">
+                        </div>
+                        <div class="col-auto ps-2 ms-1">
+                            <div class="user_name fw-bold d-block">
+                                Ставри
+                            </div>
+                            <div class="role text-xs text-warm-grey d-block">
+                                Учител
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col d-flex align-items-center justify-content-end">
+                    <span class="d-inline-block" id="close-edit-menu">&#10006;</span>
+                </div>
+            </div>
+            <div class="col profile-details">
+                <div class="row g-0 d-flex align-items-center flex-column">
+                    <div class="col pb-2">
+                        <label class="d-flex align-items-center input">
+                            <img src="assets/imgs/facebook.png" width="30" alt="#">
+                            <input type="text" name="facebook" placeholder="Facebook" value="FB/Kalin_Iliev">
+                        </label>
+                    </div>
+                    <div class="col pb-2">
+                        <label class="d-flex align-items-center input">
+                            <img src="assets/imgs/insta.png" width="30" alt="#">
+                            <input type="text" name="instagram" placeholder="Instagram" value="Instagram/Kalin_Iliev">
+                        </label>
+                    </div>
+                    <div class="col pb-2">
+                        <label class="d-flex align-items-center input">
+                            <img src="assets/imgs/facebook.png" width="30" alt="#">
+                            <input type="text" name="facebook" placeholder="Facebook" value="FB/Kalin_Iliev">
+                        </label>
+                    </div>
+                </div>
+                <div class="row g-0 pt-4 d-flex justify-content-end flex-column">
+                    <div class="col pb-2">
+                        <label class="d-flex align-items-center input">
+                            <img src="assets/icons/location.svg" width="24" alt="#">
+                            <input type="text" name="location" placeholder="Град" value="Враца">
+                        </label>
+                    </div>
+                    <div class="col pb-2">
+                        <label class="d-flex align-items-center input">
+                            <img src="assets/icons/birthday.svg" width="30" alt="#">
+                            <input type="text" name="birthdate" placeholder="Дата на раждане" value="01.11.1994">
+                        </label>
+                    </div>
+                    <div class="col pb-2">
+                        <label class="d-flex align-items-center input">
+                            <img src="assets/icons/email.svg" width="30" alt="#">
+                            <input type="text" name="email" placeholder="Електронна поща"
+                                value="Kalin.a.iliev@gmail.com">
+                        </label>
+                    </div>
+                </div>
+                <div class="row g-0 pt-4 flex-column">
+                    <div class="col pb-2">
+                        <p class="fw-bold bio-title">За мен</p>
+                        <textarea class="bio-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
+                            nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+                            wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
+                            lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+                            dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+                            dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+                            dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
+                            feugait nulla facilisi.
+                        </textarea>
+                    </div>
+                    <div class="col pb-2">
+                        <p class="fw-bold bio-title">Образование</p>
+                        <textarea class="bio-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
+                            nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+                            wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
+                            lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+                            dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+                            dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+                            dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
+                            feugait nulla facilisi.
+                        </textarea>
+                    </div>
+                    <div class="col pb-2">
+                        <p class="fw-bold bio-title">Работен опит</p>
+                        <div class="bio-description-large">
+                            <div class="row g-0">
+                                <div class="col-auto pe-3 fw-bold item-number">1.</div>
+                                <div class="col mb-3 bio-description">Lorem ipsum dolor sit amet,
+                                    consectetuer adipiscing elit,
+                                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+                                    erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+                                    molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+                                    eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
+                                    zzril delenit augue duis dolore te feugait nulla facilisi.
+                                </div>
+                            </div>
+                            <div class="row g-0">
+                                <div class="col-auto pe-3 fw-bold item-number">2.</div>
+                                <div class="col bio-description">Lorem ipsum dolor sit amet, consectetuer
+                                    adipiscing elit,
+                                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+                                    erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+                                    molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+                                    eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
+                                    zzril delenit augue duis dolore te feugait nulla facilisi.
+                                </div>
+                            </div>
+                            <div class="bio-pill position-absolute bottom-0 start-0 m-2">+</div>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <p class="fw-bold bio-title">Интереси</p>
+                        <textarea class="bio-description-large">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
+                            nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
+                            wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
+                            lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+                            dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
+                            dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
+                            dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
+                            feugait nulla facilisi.
+                        </textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
