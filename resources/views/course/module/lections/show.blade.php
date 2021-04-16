@@ -39,7 +39,7 @@
         @if (isset($lection->Video->url))
             <iframe width="762" height="375" src="{{ $lection->Video->url }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 45px;"></iframe>
         @else
-            <div class="video-upload-btn position-absolute text-center">
+            <div class="edit-lection-btn video-upload-btn position-absolute text-center">
                 <img src="{{ asset('assets/img/upload_video.svg') }}">
                 <div class="text-center fw-bold pt-lg-4 pt-3">
                     Upload
@@ -70,7 +70,7 @@
             Файлове
         </div>
         <div class="col-lg-4 col-auto order-lg-0 order-2">
-            <button class="edit-lection-btn  btn-add row g-0 align-items-center">
+            <button class="edit-lection-btn btn-add row g-0 align-items-center">
                 <div class="col text-small text-start pe-3 d-lg-block d-none">Добави</div>
                 <div class="col-auto mx-lg-0 mx-auto">
                     <div class="d-inline-block border d-lg-block d-none">
@@ -194,7 +194,7 @@
             </div>
         </div>
         <div class="col-auto mx-lg-0 mx-auto d-lg-none">
-            <button onclick="window.location.href='{{ route('homeworks.show',$lection->id) }}'" class="ms-xxl-2 mt-xxl-0 mt-4 btn-view-1 btn-green row g-0 align-items-center ">
+            <button onclick="window.location.href='{{ route('homeworks.show', $lection->id) }}'" class="ms-xxl-2 mt-xxl-0 mt-4 btn-view-1 btn-green row g-0 align-items-center ">
                 <div class="col-auto mx-auto fw-bold see-all">Виж всички <img src="{{ asset('assets/img/action_icon.svg') }}" alt=""></div>
             </button>
         </div>

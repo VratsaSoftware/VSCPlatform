@@ -18,10 +18,14 @@ $(document).ready(function() {
     changeValidation('.edit-lection-description');
 
     /* Edit lection Click input css messages */
-    clickValidation('.edit-lection-title');
-    clickValidation('.edit-lection-first_date');
-    clickValidation('.edit-lection-second_date');
-    clickValidation('.edit-lection-description');
+    $('.submit-form').click(function() {
+        var lectionId = $(this).attr('data-edit-lection-id');
+
+        clickValidation('#edit-title-lection-' . lectionId);
+        clickValidation('#edit-first_date-lection-' . lectionId);
+        clickValidation('#edit-second_date-lection-' . lectionId);
+        clickValidation('#edit-description-lection-' . lectionId);
+    });
 
     // --- functions --- //
     /* Change input css messages - function */
