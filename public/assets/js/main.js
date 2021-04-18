@@ -15,9 +15,9 @@ $(document).ready(function() {
     $(".date-input").datepicker("dd-mm-yy");
 
     /* datetimepicker */
-    $(".datetimepicker-input").datetimepicker({
-        format: 'MM/DD/YYYY HH:mm'
-    });
+    // $(".datetimepicker-input").datetimepicker({
+    //     format: 'MM/DD/YYYY HH:mm'
+    // });
 
     $('#right-side .tab-pane .close').on('click', function () {
         $("#right-side .tab-pane.active").removeClass("active");

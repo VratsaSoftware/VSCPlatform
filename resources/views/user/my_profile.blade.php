@@ -1,4 +1,4 @@
-@extends('layouts.template')
+@extends('layouts.home')
 @section('title', 'Моят Профил')
 @section('content')
     <div class="content-wrap">

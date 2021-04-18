@@ -10,11 +10,11 @@
             <h2 class="text-l1">{{ $lection->title }}</h2>
         </div>
         <div class="col-auto pe-4">
-            <div class="data1">{{ $lection->first_date->format('d.m.Y') }}</div> 
+            <div class="data1">{{ $lection->first_date->format('d.m.Y') }}</div>
         </div>
         <div class="col-auto align-self-stretch border d-none d-lg-block"></div>
         <div class="col pe-4 ps-4 d-none d-lg-block">
-            <div class="data1">{{ $lection->second_date->format('d.m.Y') }}</div> 
+            <div class="data1">{{ $lection->second_date->format('d.m.Y') }}</div>
         </div>
         <div class="col-auto pe-5 d-none d-lg-block">
             <div class="pill1 d-flex align-items-center float-right rounded-circle overflow-hidden">
@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-    <div class="video-upload row g-0 my-4 position-relative">
+    <div class="video-upload row g-0 my-4 position-relative" @if (isset($lection->Video->url))style="background-color: transparent;"@endif>
         @if (isset($lection->Video->url))
             <iframe width="762" height="375" src="{{ $lection->Video->url }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 45px;"></iframe>
         @else
@@ -55,17 +55,19 @@
         </div>
     </div>
     <div class="row g-0 align-items-lg-center lh-1 pb-5">
-        <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end d-block d-sm-none">
-            <div class="row g-0 mt-2">
-                <div class="col-lg col-auto text-small align-self-end pe-3">Презентация</div> 
-                <div class="col-auto">
-                    <a href="">
-                        <img src="{{ asset('assets/img/download.svg') }}">
-                    </a>
+        @if ($lection->presentation)
+            <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end d-block d-sm-none">
+                <div class="row g-0 mt-2">
+                    <div class="col-lg col-auto text-small align-self-end pe-3">Презентация</div>
+                    <div class="col-auto">
+                        <a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/slides-'.$lection->id.'/'.$lection->presentation)}}" download>
+                            <img src="{{ asset('assets/img/download.svg') }}">
+                        </a>
+                    </div>
                 </div>
             </div>
-        </div>
-        <hr class="d-block d-sm-none mt-4">
+            <hr class="d-block d-sm-none mt-4">
+        @endif
         <div class="col-12 text-normal py-4">
             Файлове
         </div>
@@ -85,7 +87,7 @@
         <div class="col">
             <div class="row g-0">
                 @if ($lection->presentation)
-                    <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
+                    <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end d-none d-lg-block">
                         <div class="row g-0">
                             <div class="col-lg col-auto text-small align-self-end pe-3">
                                 @if ($lection->homework_criteria && $lection->presentation && $lection->demo)
@@ -93,7 +95,7 @@
                                 @else
                                     Презентация
                                 @endif
-                            </div> 
+                            </div>
                             <div class="col-auto">
                                 <a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/slides-'.$lection->id.'/'.$lection->presentation)}}" download>
                                     <img src="{{ asset('assets/img/download.svg') }}">
@@ -105,7 +107,7 @@
                 @if ($lection->demo)
                     <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
                         <div class="row g-0">
-                            <div class="col-lg col-auto text-small align-self-end pe-3">Демо</div> 
+                            <div class="col-lg col-auto text-small align-self-end pe-3">Демо</div>
                             <div class="col-auto">
                                 <a href="{{ $lection->demo }}">
                                     <img src="{{ asset('assets/img/download.svg') }}">
@@ -117,7 +119,7 @@
                 @if ($lection->homework_criteria)
                     <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end d-none d-lg-block">
                         <div class="row g-0">
-                            <div class="col-lg col-auto text-small align-self-end pe-3">Домашно</div> 
+                            <div class="col-lg col-auto text-small align-self-end pe-3">Домашно</div>
                             <div class="col-auto">
                                 <a href="{{ asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/homework-'.$lection->id.'/'.$lection->homework_criteria) }}" download>
                                     <img src="{{ asset('assets/img/download.svg') }}">
@@ -158,7 +160,7 @@
             <div class="row g-0">
                 <div class="col text-white deadline-2">
                     Краен срок
-                    за домашно: 
+                    за домашно:
                 </div>
                 <div class="col-auto">
                     <div class="d-flex align-items-center data-07 ps-4">
@@ -178,10 +180,10 @@
             <div class="row g-0">
                 <div class="col text-white deadline-2">
                     Краен срок
-                    за проверка: 
+                    за проверка:
                 </div>
                 <div class="col-auto">
-                    <div class=" d-flex align-items-center data-07 ps-4">
+                    <div class="d-flex align-items-center data-07 ps-4">
                         <div class="w-100 text-center fw-bold enddata">
                             @if ($lection->homework_check_end)
                                 {{ ($lection->homework_check_end->format('Y') == date('Y')) ? $lection->homework_check_end->format('d.m') : $lection->homework_check_end->format('d.m.Y') }}
@@ -208,7 +210,7 @@
             <div class="row g-0">
                 <div class="col ps-4 text-white deadline-2">
                     Краен срок<br>
-                    за домашно: 
+                    за домашно:
                 </div>
                 <div class="col-auto">
                     <div class="date-pill d-flex align-items-center data-07">
@@ -227,7 +229,7 @@
             <div class="row g-0">
                 <div class="col ps-3 text-white deadline-2">
                     Краен срок<br>
-                    за проверка: 
+                    за проверка:
                 </div>
                 <div class="col-auto">
                     <div class="date-pill d-flex align-items-center data-07">
@@ -259,7 +261,7 @@
     <hr class="my-5 d-none d-lg-block">
 
     <div class="row g-0">
-        <div class="col-lg col-auto mx-lg-0 mx-auto">
+        <div class="col-lg col-auto mx-lg-0 mx-auto d-none d-lg-block">
             <div class="delete-lection" data-lection-title="{{ $lection->title }}">
                 <button form="delete-lection-form-{{ $loop->iteration }}" class="ms-xxl-2 mt-xxl-0 mt-3 btn-edit row g-0 align-items-center">
                     <div class="col text-start fw-bold">Изтрий лекция</div>
