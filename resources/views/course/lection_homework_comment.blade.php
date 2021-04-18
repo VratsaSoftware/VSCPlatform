@@ -57,12 +57,12 @@
                         </div>
                     </div>
                     <div class="col-lg col-12 d-flex overflow-hidden">
-                        <div class="col-lg-9 inline-block text-small align-self-center comment-text position-relative px-lg-5 me-lg-4 py-2">
+                        <div class="col-lg-11 inline-block text-small align-self-center comment-text position-relative px-lg-5 me-lg-4 py-2">
                             {{ $comment->comment }}
                         </div>
-                        <div class="col-auto position-relative d-none d-lg-block mt-1 px-3 position-absolute end-0">
+                        <!-- <div class="col-auto d-none d-lg-block mt-1 px-3">
                             {{ $comment->created_at->diffForHumans() }}
-                        </div>
+                        </div> -->
                     </div>
                     <div class="col-auto">
                         <button class="comment-toggler text-white text-small px-3 d-flex align-items-center">
@@ -70,8 +70,8 @@
                             <img src="{{ asset('assets/img/arrow-right-white.svg') }}">
                         </button>
                     </div>
-                    <div class="col-auto d-lg-none">
-                        {{ $comment->created_at->diffForHumans() }}
+                    <div class="col-auto ms-5 mt-2 d-lg-none">
+                        <b>{{ $comment->created_at->diffForHumans() }}</b>
                     </div>
                 </div>
             <!-- table content END-->
