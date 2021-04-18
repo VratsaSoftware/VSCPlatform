@@ -1,0 +1,14 @@
+.alert-close-btn {
+    margin-left: 15px;
+    color: gray;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.alert-close-btn:hover {
+    color: black;
+}

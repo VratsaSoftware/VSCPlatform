@@ -56,7 +56,7 @@
             </div>
             <div class="col-lg-4 col-auto order-lg-0 order-2">
                 <div class="lection-files-btn" data-lection-id="{{ $loop->iteration }}">
-                    <button id="lection-files{{ $loop->iteration }}" onclick="return false;" style="padding: 15px 15px;" class="btn-add row g-0 align-items-center">
+                    <button id="lection-files{{ $loop->iteration }}" onclick="return false;" class="btn-add row g-0 align-items-center">
                         <div class="d-lg-none btn-plus">
                             +
                         </div>

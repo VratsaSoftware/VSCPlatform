@@ -1,36 +1,36 @@
-@if ($success = Session::get('success'))
-<div class="alert">
-	<span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
-	<strong>{{ $success }}</strong>
-</div>
-@endif
-
-@if ($message = Session::get('error'))
-<div class="alert alert-danger alert-block">
-	<button type="button" class="close" data-dismiss="alert">×</button>
-	<strong>{{ $message }}</strong>
-</div>
-@endif
-
-@if ($message = Session::get('warning'))
-<div class="alert alert-warning alert-block">
-	<button type="button" class="close" data-dismiss="alert">×</button>
-	<strong>{{ $message }}</strong>
-</div>
-@endif
-
-@if ($message = Session::get('info'))
-<div class="alert alert-info alert-block">
-	<button type="button" class="close" data-dismiss="alert">×</button>
-	<strong>{{ $message }}</strong>
-</div>
-@endif
-
 @if ($errors->any())
-<div class="alert alert-danger">
-	<button type="button" class="close" data-dismiss="alert">×</button>
-	Please check the form below for errors
-</div>
+	<div class="alert alert-secondary" role="alert">
+		Моля, проверете формата по-долу за грешки!
+		<span class="alert-close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+	</div>
+@endif
+
+@if ($success = Session::get('success'))
+	<div class="alert alert-success" role="alert">
+		{{ $success }}
+		<span class="alert-close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+	</div>
+@endif
+
+@if ($error = Session::get('error'))
+	<div class="alert alert-danger" role="alert">
+		{{ $error }}
+		<span class="alert-close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+	</div>
+@endif
+
+@if ($warning = Session::get('warning'))
+	<div class="alert alert-warning" role="alert">
+		{{ $warning }}
+		<span class="alert-close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+	</div>
+@endif
+
+@if ($info = Session::get('info'))
+	<div class="alert alert-info" role="alert">
+		{{ $info }}
+		<span class="alert-close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
+	</div>
 @endif
 
 <script>

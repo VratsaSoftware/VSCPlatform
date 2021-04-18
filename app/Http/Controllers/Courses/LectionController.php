@@ -150,7 +150,7 @@ class LectionController extends Controller
 
         if ($store) {
             $lection->save();
-            $message = __('Успешно направени промени!');
+            $message = __('Успешно създадена лекция!');
             return redirect()->back()->with('success', $message);
         }
 
@@ -291,7 +291,7 @@ class LectionController extends Controller
 
         $lection->save();
 
-        $message = __('Успешно направени промени!');
+        $message = __('Успешно редактирана лекция!');
         return redirect()->back()->with('success', $message);
     }
 
