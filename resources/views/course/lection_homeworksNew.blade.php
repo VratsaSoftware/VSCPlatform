@@ -4,6 +4,8 @@
 <!-- main content -->
 <div class="col ps-lg-4">
     <div class="main pt-lg-5 px-xxl-5 px-lg-4">
+        <!-- flash-message -->
+		@include('flash-message')
         <!-- header section -->
         <div class="hw-section-header row align-items-center g-0">
             <div class="col-auto d-lg-none d-block me-4">

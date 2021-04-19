@@ -434,6 +434,8 @@ class LectionController extends Controller
         if ($isExisting) {
             $isExisting->comment = $request->comment;
             $isExisting->save();
+
+            $message = __('Успешно редактиран коментар');
         } else {
             $newLecturerComment = new HomeworkComment;
             $newLecturerComment->user_id = Auth::user()->id;
@@ -446,9 +448,10 @@ class LectionController extends Controller
             $homeworkEval = Homework::find($homework);
             $homeworkEval->evaluated_count += 1;
             $homeworkEval->save();
+
+            $message = __('Успешно добавен коментар');
         }
 
-        $message = __('Успешно добавихте коментар');
         return back()->with('success', $message);
     }
 

@@ -29,6 +29,7 @@
 				<!-- nav menu END -->
 			</div>
 		</div>
+		<!-- content -->
 		@yield('content')
 	</div>
 

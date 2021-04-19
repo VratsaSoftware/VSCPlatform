@@ -26,4 +26,8 @@
 	$(document).ready( function () {
         $('.alert').show().fadeOut(8000);
     });
+
+    $('.alert').click(function () {
+        $(this).hide();
+    });
 </script>

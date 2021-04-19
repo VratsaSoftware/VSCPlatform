@@ -117,7 +117,7 @@
                     </div>
                 @endif
                 @if ($lection->homework_criteria)
-                    <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end d-none d-lg-block">
+                    <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end">
                         <div class="row g-0">
                             <div class="col-lg col-auto text-small align-self-end pe-3">Домашно</div>
                             <div class="col-auto">
