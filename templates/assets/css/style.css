@@ -1000,7 +1000,10 @@ button {
     padding-bottom: 12px;
   }
 }
-@media only screen and (max-width: 1600px) {
+@media only screen and (max-width: 1601px) {
+  .card {
+    width: 580px;
+  }
   .btn1-cs {
     width: 130px;
     height: 45px;
@@ -1012,6 +1015,21 @@ button {
   }
   .text-uploaded-home {
     font-size: 15px;
+  }
+  .text-priem-xl {
+    font-size: 22px;
+  }
+  .card-body-application {
+    padding: 71px 52px 60px 58px;
+  }
+  .priem-img {
+    width: 160px;
+    margin-left: 20px;
+  }
+  .card-mini {
+    width: 210px;
+    height: 264px;
+    margin: 56px 0 56px 30px;
   }
 }
 @media only screen and (max-width: 1546px) {
@@ -1073,7 +1091,7 @@ button {
   }
   .card-mini {
     border: none;
-    margin: 56px 0 56px 75px;
+    margin: 56px 0 56px 35px;
     border-radius: 45px;
     width: 210px;
     height: 264px;
@@ -1083,7 +1101,7 @@ button {
     background: rgb(254, 254, 254);
   }
   .text-priem-xl {
-    font-size: 25px;
+    font-size: 20px;
   }
   .priem-img {
     width: 150px;
@@ -1092,9 +1110,6 @@ button {
 @media only screen and (max-width: 1460px) {
   .card-mini {
     margin: 56px 0 56px 30px;
-  }
-  .text-priem-xl {
-    font-size: 20px;
   }
   .text-priem-sm {
     font-size: 15px;
@@ -1111,7 +1126,7 @@ button {
       width: 500px;
     }
     .card-body-application {
-      padding: 71px 22px 60px 67px;
+      padding: 71px 22px 60px 57px;
     }
   }
 
@@ -1604,6 +1619,10 @@ button {
     }
     .see-all {
       font-size: 19px;
+    }
+    .deadline-student {
+      font-size: 14px;
+      font-weight: 200;
     }
   }
   @media only screen and (max-width: 550px) {
