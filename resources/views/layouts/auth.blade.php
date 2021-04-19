@@ -22,38 +22,14 @@
 	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
 </head>
 <body>
-    @if ($errors->has('name'))
-    	<span class="invalid-feedback" role="alert" id="err0">
-    	                    <strong>{{ $errors->first('name') }}</strong>
-    	                </span>
-    @endif
-    @if ($errors->has('last_name'))
-    	<span class="invalid-feedback" role="alert" id="err1">
-    	                    <strong>{{ $errors->first('last_name') }}</strong>
-    	                </span>
-    @endif
-    @if ($errors->has('email'))
-    	<span class="invalid-feedback" role="alert" id="err2">
-    	                    <strong>{{ $errors->first('email') }}</strong>
-    	                </span>
-    @endif
-    @if ($errors->has('password'))
-    	<span class="invalid-feedback" role="alert" id="err3">
-    	            <strong>{{ $errors->first('password') }}</strong>
-    	        </span>
-    @endif
-    @if ($errors->has('sex'))
-    	<span class="invalid-feedback" role="alert" id="err4">
-    	                    <strong>{{ $errors->first('sex') }}</strong>
-    	                </span>
-    @endif
-
 	<div class="row g-0">
 		<div class="col-lg-5">
 			<div class="login-inputs mx-auto">
+				<!-- auth flash message -->
+				@include('auth-flash-message')
 
+				<!-- content -->
 				@yield('content')
-
 			</div>
 		</div>
 		<div class="col-lg-7 d-none d-lg-block">
@@ -125,88 +101,7 @@
 	</div>
 
     <script>
-    	$('#login-button').click(function(){
-    		$('#login-button').fadeOut("slow",function(){
-    			$("#forgotten-container").fadeIn();
-    			TweenMax.from("#forgotten-container", .4, { scale: 0, ease:Sine.easeInOut});
-    			TweenMax.to("#forgotten-container", .4, { scale: 1, ease:Sine.easeInOut});
-    		});
-    	});
-
-    	$(".close-btn").click(function(){
-    		TweenMax.from("#container", .4, { scale: 1, ease:Sine.easeInOut});
-    		TweenMax.to("#container", .4, { left:"0px", scale: 0, ease:Sine.easeInOut});
-    		$("#container, #forgotten-container, #register-container").fadeOut(800, function(){
-    			$("#login-button").fadeIn(800);
-    			TweenMax.from("#container", 0, { scale: 0.4, ease:Sine.easeInOut});
-    			TweenMax.to("#container", 1, { scale: 0.4, ease:Sine.easeInOut});
-
-    			TweenMax.from("#forgotten-container", 0, { scale: 0.4, ease:Sine.easeInOut});
-    			TweenMax.to("#forgotten-container", 1, { scale: 0.4, ease:Sine.easeInOut});
-
-    			TweenMax.from("#register-container", 0, { scale: 0.4, ease:Sine.easeInOut});
-    			TweenMax.to("#register-container", 1, { scale: 0.4, ease:Sine.easeInOut});
-    		});
-    	});
-
-    	/* Forgotten Password */
-    	$('#forgotten').click(function(){
-    		$("#container").fadeOut(function(){
-    			$("#forgotten-container").fadeIn();
-    			TweenMax.from("#forgotten-container", .4, { scale: 0, ease:Sine.easeInOut});
-    			TweenMax.to("#forgotten-container", .4, { scale: 1, ease:Sine.easeInOut});
-    		});
-    	});
-
-    	// register
-    	$('#register').click(function(){
-    		$("#container").fadeOut(function(){
-    			$("#register-container").fadeIn();
-    			TweenMax.from("#register-container", .4, { scale: 0, ease:Sine.easeInOut});
-    			TweenMax.to("#register-container", .4, { scale: 1, ease:Sine.easeInOut});
-    		});
-    	});
-    </script>
-
-
-    <!-- //changing background -->
-    <script>
-    	// $(function(){
-    	// 	$('#login-button').click();
-    	// 	changeBg();
-    	// 	setTimeout(function(){
-    	// 		if ($(window).width() > 1000) {
-    	// 			changeBg();
-    	// 		}
-    	// 	}, 10000);
-
-    	// 	function changeBg(){
-    	// 		console.log($(window).width()+'/'+$(window).height());
-    	// 		// images for background
-    	// 		var items = ["1","2","3","4","5","6"];
-    	// 		var item = items[Math.floor(Math.random()*items.length)];
-    	// 		setTimeout(function(){
-    	// 			$('<img/>').attr('src', './images/bg/login/'+item+'.jpg').on('load', function() {
-    	// 				$(this).remove();
-    	// 				$('html').css({
-    	// 					'background-image':'url(./images/bg/login/'+item+'.jpg)',
-    	// 					'background-size':'cover',
-    	// 				});
-    	// 				$('html').fadeIn();
-    	// 			});
-
-    	// 		},500);
-    	// 		setTimeout(function(){
-    	// 			if ($(window).width() > 1000) {
-    	// 				changeBg();
-    	// 			}
-    	// 		}, 10000);
-    	// 	};
-    	// });
-    </script>
-
-    <script>
-    	$(function(){
+    	$(function() {
     		var cities = {
     			"0":"Враца",
     			"1":"Борован",
@@ -220,69 +115,13 @@
     			"9":"Хайредин",
     			"10": "Друго"
     		};
+
     		var options = [];
     		$.each( cities, function( key, val ) {
     			options.push( "<option value='"+val+"'>" + val + "</option>" );
     		});
     		$('#location').append(options);
     	})
-    </script>
-    <script>
-    	$(document).on('keypress',function(e) {
-    		if(e.which == 13) {
-    			if($('#container').is(":visible")){
-    				$('#login-form').submit();
-    			}else if($('#forgotten-container').is(":visible")){
-    				$('#reset-password').submit();
-    			}else if($('#register-container').is(":visible")){
-    				$('#register-form').submit();
-    			}else{
-    				$('#login-button').fadeOut("slow",function(){
-    					$("#container").fadeIn();
-    					TweenMax.from("#container", .4, { scale: 0, ease:Sine.easeInOut});
-    					TweenMax.to("#container", .4, { scale: 1, ease:Sine.easeInOut});
-    				});
-    			}
-    		}
-    	});
-
-    	$('#login-btn-send').on('click', function(){
-    		$('#login-form').submit();
-    	});
-
-    	$('#reset-password-btn').on('click', function(){
-    		$('#reset-password').submit();
-    	});
-
-    	$('#register-btn-send').on('click', function(){
-    		$('#register-form').submit();
-    	});
-    </script>
-
-    <script>
-    	$(function(){
-    		var err = 0;
-    		setTimeout(function(){
-    			$('#err'+err).toggle("slide");
-    			err++;
-    		},4000);
-    		setTimeout(function(){
-    			$('#err'+err).toggle("slide");
-    			err++;
-    		},5000);
-    		setTimeout(function(){
-    			$('#err'+err).toggle("slide");
-    			err++;
-    		},6000);
-    		setTimeout(function(){
-    			$('#err'+err).toggle("slide");
-    			err++;
-    		},7000);
-    		setTimeout(function(){
-    			$('#err'+err).toggle("slide");
-    			err++;
-    		},8000);
-    	});
     </script>
 
 	<!-- Bootstrap core JS Files -->

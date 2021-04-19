@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'Нова парола')
+@section('title', 'Забравена парола')
 
 @section('content')
 	<div class="row g-0">
@@ -17,6 +17,11 @@
 		</div>
 		<div class="create d-none d-lg-block"></div>
 		<div class="mb-4 input-user">
+			@if (session('status'))
+				<div class="mb-4 font-medium text-sm text-green-600">
+					{{ session('status') }}
+				</div>
+			@endif
 			<input id="email" type="email" class="w-100 btn-edit" placeholder="E-mail" aria-label="Username" aria-describedby="addon-wrapping" name="email" value="{{ old('email') }}" placeholder="e-mail" required>
 		</div>
 

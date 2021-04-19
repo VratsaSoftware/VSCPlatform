@@ -1,6 +1,6 @@
 @extends('layouts.auth')
 
-@section('title', 'Нова парола')
+@section('title', 'Регистрация')
 
 @section('content')
 	<div class="row g-0">

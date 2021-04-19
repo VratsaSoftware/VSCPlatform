@@ -1,6 +1,8 @@
+<link rel= "stylesheet" href= "{{ asset('css/flash-message.css') }}"/>
+
 @if ($errors->any())
-	<div class="alert alert-secondary" role="alert">
-		Моля, проверете формата по-долу за грешки!
+	<div class="alert alert-danger" role="alert">
+		Проверете формата по-долу за грешки!
 		<span class="alert-close-btn" onclick="this.parentElement.style.display='none';">&times;</span>
 	</div>
 @endif

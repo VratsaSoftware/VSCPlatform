@@ -167,20 +167,21 @@
                         @endif
                     @endforeach
                 @endif
-                {{--@if ($loop->iteration == 2)
-                <textarea name="description" class="create-lection-description mt-5 p-2" placeholder="Описание на лекцията*" required></textarea>
-
-                <button class="btn-green btn-edit mt-4" style="width: 270px; height: 50px">
-                    <div class="row g-0 align-items-center">
-                        <div class="col text-start text-small">
-                            Запази
+                {{-- @if ($loop->iteration == 2)
+                <textarea name="description" class="create-lection-description mt-4 p-2" placeholder="Остави коментар*" rows="4" required></textarea>
+                <div class="d-flex flex-row-reverse">
+                    <button class="btn-green btn-edit mt-4 end-0" style="width: 270px; height: 50px">
+                        <div class="row g-0 align-items-center">
+                            <div class="col text-start text-small">
+                                Запази
+                            </div>
+                            <div class="col-auto">
+                                <img src="{{ asset('assets/img/action_icon.svg') }}">
+                            </div>
                         </div>
-                        <div class="col-auto">
-                            <img src="{{ asset('assets/img/action_icon.svg') }}">
-                        </div>
-                    </div>
-                </button>
-                @endif--}}
+                    </button>
+                </div>
+                @endif --}}
             </div>
             @endforeach
             <!-- table content END-->
