@@ -121,9 +121,31 @@
                 <div class="col-lg col-auto ms-lg-0 ms-auto date fw-normal pt-lg-0 pt-4 mt-lg-0 mt-2">
                     {{ $homework->created_at->format('d.m H:i') }}
                 </div>
-                @if ($homework->Comments->count() == 0)
+                @foreach ($homework->Comments as $comment)
+                    @if ($comment->user_id == Auth::user()->id)
+                        @php
+                            $validComment = true;
+                        @endphp
+                        @break
+                    @endif
+                @endforeach
+
+                @if (isset($validComment) && $validComment)
                     <div class="col-lg-auto col-sm-5 settings pt-lg-0 pt-4 mt-lg-0 mt-2">
-                        <button class="btn-green btn-edit" style="width: 270px; height: 50px">
+                        <button class="btn-edit edit-comment" data-comment-id="{{ $homework->id }}">
+                            <div class="row g-0 align-items-center">
+                                <div class="col text-start text-small">
+                                    Редактирай коментар
+                                </div>
+                                <div class="col-auto">
+                                    <img src="{{ asset('assets/img/action_icon _black.svg') }}">
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                @else
+                    <div class="col-lg-auto col-sm-5 settings pt-lg-0 pt-4 mt-lg-0 mt-2">
+                        <button class="btn-green btn-edit edit-comment" data-comment-id="{{ $homework->id }}">
                             <div class="row g-0 align-items-center">
                                 <div class="col text-start text-small">
                                     Остави коментар
@@ -134,54 +156,12 @@
                             </div>
                         </button>
                     </div>
-                @else
-                    @foreach ($homework->Comments as $comment)
-                        @if ($comment->user_id !== 1)
-                            <div class="col-lg-auto col-sm-5 settings pt-lg-0 pt-4 mt-lg-0 mt-2">
-                                <button class="btn-green btn-edit" style="width: 270px; height: 50px">
-                                    <div class="row g-0 align-items-center">
-                                        <div class="col text-start text-small">
-                                            Остави коментар
-                                        </div>
-                                        <div class="col-auto">
-                                            <img src="{{ asset('assets/img/action_icon.svg') }}">
-                                        </div>
-                                    </div>
-                                </button>
-                            </div>
-                            @break
-                        @else
-                            <div class="col-lg-auto col-sm-5 settings pt-lg-0 pt-4 mt-lg-0 mt-2">
-                                <button class="btn-edit" style="width: 270px; height: 50px">
-                                    <div class="row g-0 align-items-center">
-                                        <div class="col text-start text-small">
-                                            Редактирай коментар
-                                        </div>
-                                        <div class="col-auto">
-                                            <img src="{{ asset('assets/img/action_icon _black.svg') }}">
-                                        </div>
-                                    </div>
-                                </button>
-                            </div>
-                            @break
-                        @endif
-                    @endforeach
                 @endif
-                {{-- @if ($loop->iteration == 2)
-                <textarea name="description" class="create-lection-description mt-4 p-2" placeholder="Остави коментар*" rows="4" required></textarea>
-                <div class="d-flex flex-row-reverse">
-                    <button class="btn-green btn-edit mt-4 end-0" style="width: 270px; height: 50px">
-                        <div class="row g-0 align-items-center">
-                            <div class="col text-start text-small">
-                                Запази
-                            </div>
-                            <div class="col-auto">
-                                <img src="{{ asset('assets/img/action_icon.svg') }}">
-                            </div>
-                        </div>
-                    </button>
-                </div>
-                @endif --}}
+                @php
+                    $validComment = null;
+                @endphp
+
+                @include('course.module.lections.homework-comments.edit')
             </div>
             @endforeach
             <!-- table content END-->
@@ -193,4 +173,16 @@
 
 <script src="{{ asset('js/lection/homework.js') }}"></script>
 
+<script>
+$(document).ready(function() {
+    $('.edit-comment').click(function() {
+        var commentId = $(this).attr('data-comment-id');
+        var commentTextarea = '#comment-edit-textarea-' + commentId;
+        var btnSaveComment = '#btn-edit-comment-' + commentId;
+        $(commentTextarea).toggle();
+        $(btnSaveComment).toggle();
+        // alert(commentId);
+    });
+});
+</script>
 @endsection
