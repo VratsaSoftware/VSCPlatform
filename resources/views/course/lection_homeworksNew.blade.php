@@ -1,5 +1,5 @@
 @extends('layouts.home')
-@section('title', 'Домашни')
+@section('title', 'Домашни - ' . $lection->title)
 @section('content')
 <!-- main content -->
 <div class="col ps-lg-4">
@@ -183,7 +183,6 @@ $(document).ready(function() {
         var btnSaveComment = '#btn-edit-comment-' + commentId;
         $(commentTextarea).toggle();
         $(btnSaveComment).toggle();
-        // alert(commentId);
     });
 });
 </script>

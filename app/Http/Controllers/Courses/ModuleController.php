@@ -142,7 +142,7 @@ class ModuleController extends Controller
 
         $allModule = Module::where('course_id', $module->Course->id)->get();
 
-        return view('course.module.editNew', [
+        return view('course.module.left-lection', [
             'module' => $module,
             'lections' => $lections,
             'students' => $students,

@@ -49,23 +49,23 @@
                 <!--First tab-->
                 <div class="tab-pane fade show active" id="module-1" role="tabpanel" aria-labelledby="module-1-tab">
                     <div class="row g-0 pb-4 mb-2">
-                                        <div class="col-xxl col-xl-12 col-sm d-flex justify-content-start">
-                                            <button class="btn-edit row g-0 align-items-center mb-0">
-                                                <div class="col text-start">Добави курсист</div>
-                                                <div class="col-auto">
-                                                    <i class="fas fa-arrow-right"></i>
-                                                </div>
-                                            </button>
-                                        </div>
-                                        <div class="col-xxl col-xl-12 col-sm ms-xxl-3 ms-xl-0 ms-sm-3 d-flex justify-content-end">
-                                            <button class="ms-xxl-2 mt-xxl-0 mt-xl-4 mt-sm-0 mt-4 mb-0 btn-edit row g-0 align-items-center">
-                                                <div class="col text-start">Редактирай модул</div>
-                                                <div class="col-auto">
-                                                    <img src="{{ asset('assets/img/edit.svg') }}">
-                                                </div>
-                                            </button>
-                                        </div>
-                                    </div>
+                        <div class="col-xxl col-xl-12 col-sm d-flex justify-content-start">
+                            <button class="btn-edit row g-0 align-items-center mb-0">
+                                <div class="col text-start">Добави курсист</div>
+                                <div class="col-auto">
+                                    <i class="fas fa-arrow-right"></i>
+                                </div>
+                            </button>
+                        </div>
+                        <div class="col-xxl col-xl-12 col-sm ms-xxl-3 ms-xl-0 ms-sm-3 d-flex justify-content-end">
+                            <button class="ms-xxl-2 mt-xxl-0 mt-xl-4 mt-sm-0 mt-4 mb-0 btn-edit row g-0 align-items-center">
+                                <div class="col text-start">Редактирай модул</div>
+                                <div class="col-auto">
+                                    <img src="{{ asset('assets/img/edit.svg') }}">
+                                </div>
+                            </button>
+                        </div>
+                    </div>
                     <div class="row g-0 pb-4 mb-lg-0 mb-1 pt-lg-0 pt-1">
                         <div class="col pe-lg-0 pe-4 me-xxl-3">
                             <span class="text-normal">
