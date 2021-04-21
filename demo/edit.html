@@ -19,6 +19,27 @@
 </head>
 
 <body>
+    <!-- Modals Start -->
+    <div class="modal fade" id="workExperienceModal" tabindex="-1" aria-labelledby="workExperienceModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
+                </div>
+                <div class="modal-body">
+                    <form action="#" method="POST" onsubmit="return false;">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Работен опит" id="workingExperience"
+                                style="height: 100px"></textarea>
+                            <label for="workingExperience">Работен опит</label>
+                        </div>
+                        <button class="btn btn-primary mt-2">Запази</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modals End -->
     <div class="container-fluid g-0">
         <div class="row g-0 p-0 m-0">
             <div class="col-lg-auto pe-xl-0 pe-lg-5">
@@ -433,7 +454,7 @@
                                             zzril delenit augue duis dolore te feugait nulla facilisi.
                                         </div>
                                     </div>
-                                    <div class="bio-pill position-absolute bottom-0 start-0 m-2">+</div>
+                                    <button class="bio-pill position-absolute bottom-0 start-0 m-2 p-0" data-bs-toggle="modal" data-bs-target="#workExperienceModal">+</button>
                                 </div>
                             </div>
                             <div class="col">
@@ -804,7 +825,8 @@
                                     zzril delenit augue duis dolore te feugait nulla facilisi.
                                 </div>
                             </div>
-                            <div class="bio-pill position-absolute bottom-0 start-0 m-2">+</div>
+                            <!-- Modal Open Button -->
+                            <button class="bio-pill position-absolute bottom-0 start-0 m-2 p-0" data-bs-toggle="modal" data-bs-target="#workExperienceModal">+</button>
                         </div>
                     </div>
                     <div class="col">
