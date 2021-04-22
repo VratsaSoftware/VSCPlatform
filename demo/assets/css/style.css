@@ -1264,8 +1264,7 @@ button {
   box-shadow: 0 103px 80px rgba(0, 15, 67, 0.35);
   -webkit-backdrop-filter: blur(8px);
   backdrop-filter: blur(8px);
-  border-top-right-radius: 20px;
-  border-top-left-radius: 20px;
+  border-radius: 20px;
 }
 
 .courses ul{
@@ -1418,7 +1417,8 @@ button {
 }
 
 div.bio-description, p.bio-description{
-  height: 100px;
+  min-height: 40px;
+  max-height: 100px;
   font-size: 14px;
   line-height: 1.21;
   letter-spacing: 0.28px;
