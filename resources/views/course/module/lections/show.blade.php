@@ -71,19 +71,6 @@
         <div class="col-12 text-normal py-4">
             Файлове
         </div>
-        <div class="col-lg-4 col-auto order-lg-0 order-2">
-            <button class="edit-lection-btn btn-add row g-0 align-items-center">
-                <div class="col text-small text-start pe-3 d-lg-block d-none">Добави</div>
-                <div class="col-auto mx-lg-0 mx-auto">
-                    <div class="d-inline-block border d-lg-block d-none">
-                        <img src="{{ asset('assets/img/plus.svg') }}" alt="">
-                    </div>
-                    <div class="d-lg-none btn-plus">
-                        +
-                    </div>
-                </div>
-            </button>
-        </div>
         <div class="col">
             <div class="row g-0">
                 @if ($lection->presentation)

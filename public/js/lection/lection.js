@@ -13,15 +13,17 @@ $(document).ready(function() {
     });
 
     /* open create lection section */
-    $('.input-button').click(function() {
-        $('.show-lection').hide();
-        $('.edit-lection').toggle();
-        $('.add-lection').toggle();
+    $('.btn-form-close').click(function() {
+        $('.edit-lection').hide();
+        $('.show-lection').show();
+        $('.add-lection').hide();
     });
 
+    /* open create lection section */
     $('.add-lection-button').click(function() {
-        $('.show-lection').toggle();
-        $('.add-lection').toggle();
+        $('.show-lection').hide();
+        $('.add-lection').show();
+        $('.edit-lection').hide();
     });
 
     /* open edit lection section */

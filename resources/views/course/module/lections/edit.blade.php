@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="col-auto mx-lg-0 mx-auto">
-                <button class="input-button" onclick="return false;">+</button>
+                <button class="input-button btn-form-close" onclick="return false;">&times;</button>
             </div>
         </div>
 

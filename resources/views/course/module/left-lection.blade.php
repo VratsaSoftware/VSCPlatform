@@ -199,16 +199,13 @@
 </div>
 </div>
 <!-- right side -->
-@if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
-    @if ($lections->count() == 0)
-        <div id="right-side" data-countLections="0" class="col-xl pt-md-5 mt-md-4 tab-content edit-content">
+<div id="right-side" data-countLections="{{ count($lections) }}" class="col-xl pt-md-5 mt-md-4 tab-content edit-content">
+    @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
+        @if ($lections->count() == 0)
             @include('flash-message')
             @include('course.module.lections.create')
-        </div>
-    @else
-        <div id="right-side" data-countLections="{{ count($lections) }}" class="col-xl pt-md-5 mt-md-4 tab-content edit-content">
+        @else
             @include('flash-message')
-            <!-- Single lection content -->
             @foreach ($lections as $lection)
                 <div class="tab-pane fade @if ($loop->iteration == 1) show active @endif mt-xl-2 pt-xl-1" id="lection-{{ $loop->iteration }}" role="tabpanel" aria-labelledby="lection-2-tab">
                     <span class="show-lection" style="display: none">
@@ -227,15 +224,14 @@
                     @method('DELETE')
                 </form>
             @endforeach
-            <!-- Single lection content END-->
-        </div>
-    @endif
-@else
-    <div id="right-side" data-countLections="0" class="col-xl pt-md-5 mt-md-4 tab-content edit-content">
-            @include('flash-message')
+        @endif
+    @else
+        @include('flash-message')
+        @foreach ($lections as $lection)
             @include('course.student.lections')
-    </div>
-@endif
+        @endforeach
+    @endif
+</div>
 <!-- right side END -->
 </div>
 
