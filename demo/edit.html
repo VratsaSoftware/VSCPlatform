@@ -20,25 +20,70 @@
 
 <body>
     <!-- Modals Start -->
-    <div class="modal fade" id="workExperienceModal" tabindex="-1" aria-labelledby="workExperienceModal" aria-hidden="true">
+    <!-- Work Experience Modal -->
+    <div class="modal fade" id="workExperienceModal" tabindex="-1" aria-labelledby="workExperienceModal"
+        aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
                 </div>
                 <div class="modal-body">
-                    <form action="#" method="POST" onsubmit="return false;">
+                    <form class="d-flex flex-column" action="#" method="POST" onsubmit="return false;">
                         <div class="form-floating">
                             <textarea class="form-control" placeholder="Работен опит" id="workingExperience"
                                 style="height: 100px"></textarea>
                             <label for="workingExperience">Работен опит</label>
                         </div>
-                        <button class="btn btn-primary mt-2">Запази</button>
+                        <button class="btn align-self-end btn-navy-blue mt-2 col-4">Запази</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+    <!-- Work Experience Modal End -->
+    <!-- Education Modal -->
+    <div class="modal fade" id="educationModal" tabindex="-1" aria-labelledby="educationModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="d-flex flex-column" action="#" method="POST" onsubmit="return false;">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Образование" id="education"
+                                style="height: 100px"></textarea>
+                            <label for="education">Образование</label>
+                        </div>
+                        <button class="btn align-self-end btn-navy-blue mt-2 col-4">Запази</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Education Modal End -->
+    <!-- Interests Modal -->
+    <div class="modal fade" id="interestsModal" tabindex="-1" aria-labelledby="interestsModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
+                </div>
+                <div class="modal-body">
+                    <form class="d-flex flex-column" action="#" method="POST" onsubmit="return false;">
+                        <div class="form-floating">
+                            <textarea class="form-control" placeholder="Интереси" id="interests"
+                                style="height: 100px"></textarea>
+                            <label for="interests">Интереси</label>
+                        </div>
+                        <button class="btn align-self-end btn-navy-blue mt-2 col-4">Запази</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Interests Modal End -->
     <!-- Modals End -->
     <div class="container-fluid g-0">
         <div class="row g-0 p-0 m-0">
@@ -410,15 +455,36 @@
                             </div>
                             <div class="col">
                                 <p class="fw-bold bio-title">Образование</p>
-                                <textarea class="bio-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-                                    nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
-                                    wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                                    lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
-                                    dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
-                                    dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
-                                    dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
-                                    feugait nulla facilisi.
-                                </textarea>
+                                <div class="bio-description-large">
+                                    <div class="row g-0">
+                                        <div class="col-auto pe-3 fw-bold item-number">1.</div>
+                                        <div class="col mb-3 bio-description">Lorem ipsum dolor sit amet,
+                                            consectetuer adipiscing elit,
+                                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+                                            erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                                            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+                                            molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+                                            eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
+                                            zzril delenit augue duis dolore te feugait nulla facilisi.
+                                        </div>
+                                    </div>
+                                    <div class="row g-0">
+                                        <div class="col-auto pe-3 fw-bold item-number">2.</div>
+                                        <div class="col bio-description">Lorem ipsum dolor sit amet, consectetuer
+                                            adipiscing elit,
+                                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+                                            erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                                            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+                                            molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+                                            eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
+                                            zzril delenit augue duis dolore te feugait nulla facilisi.
+                                        </div>
+                                    </div>
+                                    <button class="bio-pill position-absolute bottom-0 start-0 m-2 p-0"
+                                        data-bs-toggle="modal" data-bs-target="#educationModal">+</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -454,20 +520,42 @@
                                             zzril delenit augue duis dolore te feugait nulla facilisi.
                                         </div>
                                     </div>
-                                    <button class="bio-pill position-absolute bottom-0 start-0 m-2 p-0" data-bs-toggle="modal" data-bs-target="#workExperienceModal">+</button>
+                                    <button class="bio-pill position-absolute bottom-0 start-0 m-2 p-0"
+                                        data-bs-toggle="modal" data-bs-target="#workExperienceModal">+</button>
                                 </div>
                             </div>
                             <div class="col">
                                 <p class="fw-bold bio-title">Интереси</p>
-                                <textarea class="bio-description-large">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-                                    nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
-                                    wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                                    lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
-                                    dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
-                                    dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
-                                    dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
-                                    feugait nulla facilisi.
-                                </textarea>
+                                <div class="bio-description-large">
+                                    <div class="row g-0">
+                                        <div class="col-auto pe-3 fw-bold item-number">1.</div>
+                                        <div class="col mb-3 bio-description">Lorem ipsum dolor sit amet,
+                                            consectetuer adipiscing elit,
+                                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+                                            erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                                            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+                                            molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+                                            eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
+                                            zzril delenit augue duis dolore te feugait nulla facilisi.
+                                        </div>
+                                    </div>
+                                    <div class="row g-0">
+                                        <div class="col-auto pe-3 fw-bold item-number">2.</div>
+                                        <div class="col bio-description">Lorem ipsum dolor sit amet, consectetuer
+                                            adipiscing elit,
+                                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+                                            erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                                            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+                                            molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+                                            eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
+                                            zzril delenit augue duis dolore te feugait nulla facilisi.
+                                        </div>
+                                    </div>
+                                    <button class="bio-pill position-absolute bottom-0 start-0 m-2 p-0"
+                                        data-bs-toggle="modal" data-bs-target="#interestsModal">+</button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -698,7 +786,58 @@
                     facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
                     delenit augue duis dolore te feugait nulla facilisi.
                 </p>
-                <button class="btn p-0 m-0 d-flex align-items-center">
+                <div class="collapse" id="mobileSeeMore">
+                    <!-- TO DO See More -->
+                    <h3 class="mt-4">Образование</h3>
+                    <p class="m-0 mt-3 mb-3">
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+                        tincidunt ut
+                        laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
+                        tation
+                        ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+                        dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla
+                        facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+                        delenit augue duis dolore te feugait nulla facilisi.
+                    </p>
+                    <h3 class="mt-4">Интереси</h3>
+                    <p class="m-0 mt-3 mb-3">
+                        Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod
+                        tincidunt ut
+                        laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci
+                        tation
+                        ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
+                        dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla
+                        facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril
+                        delenit augue duis dolore te feugait nulla facilisi.
+                    </p>
+                    <h3 class="mt-4">Работен опит</h3>
+                    <div class="row g-0">
+                        <div class="col-auto pe-3 fw-bold item-number">1.</div>
+                        <div class="col mb-3 bio-description">Lorem ipsum dolor sit amet,
+                            consectetuer adipiscing elit,
+                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+                            erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+                            molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+                            eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
+                            zzril delenit augue duis dolore te feugait nulla facilisi.
+                        </div>
+                        <div class="w-100"></div>
+                        <div class="col-auto pe-3 fw-bold item-number">2.</div>
+                        <div class="col bio-description">Lorem ipsum dolor sit amet, consectetuer
+                            adipiscing elit,
+                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+                            erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+                            molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+                            eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
+                            zzril delenit augue duis dolore te feugait nulla facilisi.
+                        </div>
+                    </div>
+                </div>
+                <button class="btn p-0 m-0 mt-2 d-flex align-items-center" type="button" data-bs-toggle="collapse" data-bs-target="#mobileSeeMore" aria-expanded="false" aria-controls="mobileSeeMore">
                     <span class="fw-bold pe-4">Виж повече</span>
                     <img src="./assets/img/action_icon _black.svg" width="27.7" class="d-inline-block" alt="#">
                 </button>
@@ -786,15 +925,36 @@
                     </div>
                     <div class="col pb-2">
                         <p class="fw-bold bio-title">Образование</p>
-                        <textarea class="bio-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-                            nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
-                            wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                            lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
-                            dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
-                            dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
-                            dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
-                            feugait nulla facilisi.
-                        </textarea>
+                        <div class="bio-description-large">
+                            <div class="row g-0">
+                                <div class="col-auto pe-3 fw-bold item-number">1.</div>
+                                <div class="col mb-3 bio-description">Lorem ipsum dolor sit amet,
+                                    consectetuer adipiscing elit,
+                                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+                                    erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+                                    molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+                                    eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
+                                    zzril delenit augue duis dolore te feugait nulla facilisi.
+                                </div>
+                            </div>
+                            <div class="row g-0">
+                                <div class="col-auto pe-3 fw-bold item-number">2.</div>
+                                <div class="col bio-description">Lorem ipsum dolor sit amet, consectetuer
+                                    adipiscing elit,
+                                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+                                    erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+                                    molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+                                    eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
+                                    zzril delenit augue duis dolore te feugait nulla facilisi.
+                                </div>
+                            </div>
+                            <button class="bio-pill position-absolute bottom-0 start-0 m-2 p-0" data-bs-toggle="modal"
+                                data-bs-target="#educationModal">+</button>
+                        </div>
                     </div>
                     <div class="col pb-2">
                         <p class="fw-bold bio-title">Работен опит</p>
@@ -826,20 +986,42 @@
                                 </div>
                             </div>
                             <!-- Modal Open Button -->
-                            <button class="bio-pill position-absolute bottom-0 start-0 m-2 p-0" data-bs-toggle="modal" data-bs-target="#workExperienceModal">+</button>
+                            <button class="bio-pill position-absolute bottom-0 start-0 m-2 p-0" data-bs-toggle="modal"
+                                data-bs-target="#workExperienceModal">+</button>
                         </div>
                     </div>
                     <div class="col">
                         <p class="fw-bold bio-title">Интереси</p>
-                        <textarea class="bio-description-large">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-                            nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
-                            wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                            lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
-                            dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
-                            dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
-                            dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
-                            feugait nulla facilisi.
-                        </textarea>
+                        <div class="bio-description-large">
+                            <div class="row g-0">
+                                <div class="col-auto pe-3 fw-bold item-number">1.</div>
+                                <div class="col mb-3 bio-description">Lorem ipsum dolor sit amet,
+                                    consectetuer adipiscing elit,
+                                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+                                    erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+                                    molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+                                    eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
+                                    zzril delenit augue duis dolore te feugait nulla facilisi.
+                                </div>
+                            </div>
+                            <div class="row g-0">
+                                <div class="col-auto pe-3 fw-bold item-number">2.</div>
+                                <div class="col bio-description">Lorem ipsum dolor sit amet, consectetuer
+                                    adipiscing elit,
+                                    sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
+                                    erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                                    ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
+                                    Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
+                                    molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
+                                    eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
+                                    zzril delenit augue duis dolore te feugait nulla facilisi.
+                                </div>
+                            </div>
+                            <button class="bio-pill position-absolute bottom-0 start-0 m-2 p-0" data-bs-toggle="modal"
+                                data-bs-target="#interestsModal">+</button>
+                        </div>
                     </div>
                 </div>
             </div>
