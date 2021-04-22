@@ -36,36 +36,39 @@
                             <img src="{{ asset('assets/img/arrow.svg') }}" class="position-absolute">
                         </div>
                     </div>
-
-                    <div class="col add text-end align-self-end pb-lg-2 text-small">
-                        <a href="{{ asset('module/create?course=' . $module->Course->id) }}">
-                            <span class="me-2"><img src="{{ asset('assets/img/plus.svg') }}"></span>
-                            Добави модул
-                        </a>
-                    </div>
+                    @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
+                        <div class="col add text-end align-self-end pb-lg-2 text-small">
+                            <a href="{{ asset('module/create?course=' . $module->Course->id) }}">
+                                <span class="me-2"><img src="{{ asset('assets/img/plus.svg') }}"></span>
+                                Добави модул
+                            </a>
+                        </div>
+                    @endif
                 </div>
             </nav>
             <div class="tab-content pt-lg-2">
                 <!--First tab-->
                 <div class="tab-pane fade show active" id="module-1" role="tabpanel" aria-labelledby="module-1-tab">
-                    <div class="row g-0 pb-4 mb-2">
-                        <div class="col-xxl col-xl-12 col-sm d-flex justify-content-start">
-                            <button class="btn-edit row g-0 align-items-center mb-0">
-                                <div class="col text-start">Добави курсист</div>
-                                <div class="col-auto">
-                                    <i class="fas fa-arrow-right"></i>
-                                </div>
-                            </button>
+                    @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
+                        <div class="row g-0 pb-4 mb-2">
+                            <div class="col-xxl col-xl-12 col-sm d-flex justify-content-start">
+                                <button class="btn-edit row g-0 align-items-center mb-0">
+                                    <div class="col text-start">Добави курсист</div>
+                                    <div class="col-auto">
+                                        <i class="fas fa-arrow-right"></i>
+                                    </div>
+                                </button>
+                            </div>
+                            <div class="col-xxl col-xl-12 col-sm ms-xxl-3 ms-xl-0 ms-sm-3 d-flex justify-content-end">
+                                <button class="ms-xxl-2 mt-xxl-0 mt-xl-4 mt-sm-0 mt-4 mb-0 btn-edit row g-0 align-items-center">
+                                    <div class="col text-start">Редактирай модул</div>
+                                    <div class="col-auto">
+                                        <img src="{{ asset('assets/img/edit.svg') }}">
+                                    </div>
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-xxl col-xl-12 col-sm ms-xxl-3 ms-xl-0 ms-sm-3 d-flex justify-content-end">
-                            <button class="ms-xxl-2 mt-xxl-0 mt-xl-4 mt-sm-0 mt-4 mb-0 btn-edit row g-0 align-items-center">
-                                <div class="col text-start">Редактирай модул</div>
-                                <div class="col-auto">
-                                    <img src="{{ asset('assets/img/edit.svg') }}">
-                                </div>
-                            </button>
-                        </div>
-                    </div>
+                    @endif
                     <div class="row g-0 pb-4 mb-lg-0 mb-1 pt-lg-0 pt-1">
                         <div class="col pe-lg-0 pe-4 me-xxl-3">
                             <span class="text-normal">
@@ -91,6 +94,12 @@
                     <div class="lectures">
                         <div class="fw-bold text-warm-grey text-small text-uppercase py-lg-4 pb-3 pt-4 my-lg-0 my-1">
                             Учебна програма
+                            @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
+                                <button class="add-lection-button" style="float: right; color: #000; border: 0px">
+                                    <span class="me-2"><img src="{{ asset('assets/img/plus.svg') }}"></span>
+                                    Добави лекция
+                                </button>
+                            @endif
                         </div>
                         <!-- Accordion sections  -->
                         <div class="accordion accordion-flush position-relative" id="accordionExample">
@@ -190,34 +199,41 @@
 </div>
 </div>
 <!-- right side -->
-@if ($lections->count() == 0)
-    <div id="right-side" data-countLections="0" class="col-xl pt-md-5 mt-md-4 tab-content edit-content">
-        @include('flash-message')
-        @include('course.module.lections.create')
-    </div>
-@else
-    <div id="right-side" data-countLections="{{ count($lections) }}" class="col-xl pt-md-5 mt-md-4 tab-content edit-content">
-        @include('flash-message')
-        <!-- Single lection content -->
-        @foreach ($lections as $lection)
-            <div class="tab-pane fade @if ($loop->iteration == 1) show active @endif mt-xl-2 pt-xl-1" id="lection-{{ $loop->iteration }}" role="tabpanel" aria-labelledby="lection-2-tab">
-                <span class="show-lection" style="display: none">
-                    @include('course.module.lections.show')
-                </span>
-                <span class="edit-lection" style="display: none">
-                    @include('course.module.lections.edit')
-                </span>
-                <span class="add-lection" style="display: none">
-                    @include('course.module.lections.create')
-                </span>
-            </div>
+@if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
+    @if ($lections->count() == 0)
+        <div id="right-side" data-countLections="0" class="col-xl pt-md-5 mt-md-4 tab-content edit-content">
+            @include('flash-message')
+            @include('course.module.lections.create')
+        </div>
+    @else
+        <div id="right-side" data-countLections="{{ count($lections) }}" class="col-xl pt-md-5 mt-md-4 tab-content edit-content">
+            @include('flash-message')
+            <!-- Single lection content -->
+            @foreach ($lections as $lection)
+                <div class="tab-pane fade @if ($loop->iteration == 1) show active @endif mt-xl-2 pt-xl-1" id="lection-{{ $loop->iteration }}" role="tabpanel" aria-labelledby="lection-2-tab">
+                    <span class="show-lection" style="display: none">
+                        @include('course.module.lections.show')
+                    </span>
+                    <span class="edit-lection" style="display: none">
+                        @include('course.module.lections.edit')
+                    </span>
+                    <span class="add-lection" style="display: none">
+                        @include('course.module.lections.create')
+                    </span>
+                </div>
 
-            <form method="post" id="delete-lection-form-{{ $loop->iteration }}" action="{{ route('lection.destroy', $lection->id) }}">
-                @csrf
-                @method('DELETE')
-            </form>
-        @endforeach
-        <!-- Single lection content END-->
+                <form method="post" id="delete-lection-form-{{ $loop->iteration }}" action="{{ route('lection.destroy', $lection->id) }}">
+                    @csrf
+                    @method('DELETE')
+                </form>
+            @endforeach
+            <!-- Single lection content END-->
+        </div>
+    @endif
+@else
+    <div id="right-side" data-countLections="0" class="col-xl pt-md-5 mt-md-4 tab-content edit-content">
+            @include('flash-message')
+            @include('course.student.lections')
     </div>
 @endif
 <!-- right side END -->

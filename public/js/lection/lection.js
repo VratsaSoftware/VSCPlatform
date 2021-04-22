@@ -19,6 +19,11 @@ $(document).ready(function() {
         $('.add-lection').toggle();
     });
 
+    $('.add-lection-button').click(function() {
+        $('.show-lection').toggle();
+        $('.add-lection').toggle();
+    });
+
     /* open edit lection section */
     $('.edit-lection-btn').click(function() {
         $('.show-lection').hide();

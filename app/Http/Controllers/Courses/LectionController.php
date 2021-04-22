@@ -175,12 +175,21 @@ class LectionController extends Controller
     public function show($user = 0, Course $course, Module $module)
     {
         $lections = Module::getLections($module->id, false);
+        $allModule = Module::where('course_id', $module->Course->id)->get();
+
         if (!$lections->isEmpty()) {
-            return view('course.lections', ['module' => $module->load('Course'), 'lections' => $lections]);
+            return view('course.module.left-lection', [
+                'module' => $module->load('Course'), 
+                'lections' => $lections,
+                'allModules' => $allModule,
+            ]);
         }
 
         $message = __('Няма добавени лекции за този модул!');
-        return redirect()->route('user.course', ['user' => Auth::user()->id, 'course' => $course->id])->with('error', $message);
+        return redirect()->route('user.course', [
+            'user' => Auth::user()->id,
+            'course' => $course->id
+        ])->with('error', $message);
     }
 
     /**
