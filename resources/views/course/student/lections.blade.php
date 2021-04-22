@@ -116,7 +116,14 @@
 			<div class="col-auto mx-auto">
 				КАЧИ ДОМАШНО
 				<br>
-				<div class="deadline-student">Краен срок 07.05</div>
+				<div class="deadline-student">
+					Краен срок 
+					@if ($lection->homework_end)
+                        {{ ($lection->homework_end->format('Y') == date('Y')) ? $lection->homework_end->format('d.m') : $lection->homework_end->format('d.m.Y') }}
+                    @else
+                        Няма
+                    @endif
+				</div>
 			</div>
 		</button>
 		<!--End mobil btn-->
@@ -135,7 +142,13 @@
 								Краен срок 
 								<br>
 								<div class="date-pill d-flex align-items-center data-07">
-									<div class="w-100 text-center fw-bold enddata1">10.05</div>
+									<div class="w-100 text-center fw-bold enddata1">
+										@if ($lection->homework_end)
+                        					{{ ($lection->homework_end->format('Y') == date('Y')) ? $lection->homework_end->format('d.m') : $lection->homework_end->format('d.m.Y') }}
+					                    @else
+					                        Няма
+					                    @endif
+									</div>
 								</div>
 							</div>
 						</div>

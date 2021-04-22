@@ -74,14 +74,10 @@
         <div class="col">
             <div class="row g-0">
                 @if ($lection->presentation)
-                    <div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end d-none d-lg-block">
+                    <div class="col-auto mb-lg-0 mb-3 text-lg-end d-none d-lg-block">
                         <div class="row g-0">
                             <div class="col-lg col-auto text-small align-self-end pe-3">
-                                @if ($lection->homework_criteria && $lection->presentation && $lection->demo)
-                                    Презентац.
-                                @else
-                                    Презентация
-                                @endif
+                                Презентация
                             </div>
                             <div class="col-auto">
                                 <a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/slides-'.$lection->id.'/'.$lection->presentation)}}" download>
