@@ -969,7 +969,36 @@ button {
   font-size: 20px;
   font-weight: bold;
 }
+.img-btn-ms {
+  margin-left: 50px;
+}
 /** Course as student END **/
+/** Course as teacher add module **/
+.text-title-module {
+  font-size: 30px;
+  color: #00214b;
+}
+.img-info {
+  margin-top: 5px;
+}
+.text-info-modul {
+  color: #d07d1e;
+}
+.form-module {
+  padding: 20px 20px;
+}
+.module-top {
+  margin-top: 79px;
+}
+.edit-content input,
+.input-button {
+  padding: 0 20px;
+}
+.text-status {
+  font-size: 25px;
+  color: #000;
+}
+/** Course as teacher add module END**/
 /** Media query**/
 @media only screen and (max-width: 1850px) {
   .edit-content {
@@ -1010,8 +1039,9 @@ button {
     border-radius: 10px;
   }
   .bell-img {
-    width: 35px;
+    width: 24px;
     height: 49px;
+    margin-top: 10px;
   }
   .text-uploaded-home {
     font-size: 15px;
@@ -1030,6 +1060,12 @@ button {
     width: 210px;
     height: 264px;
     margin: 56px 0 56px 30px;
+  }
+  .img-btn-ms {
+    margin-left: 10px;
+  }
+  .data-07 {
+    font-size: 17px;
   }
 }
 @media only screen and (max-width: 1546px) {
