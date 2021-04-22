@@ -1566,6 +1566,14 @@ button {
       font-size: 14px;
     }
     /**END Student application**/
+    /****/
+    .module-right {
+      background-color: #ffffff !important;
+    }
+    .module-body-right {
+      background-color: #ffffff !important;
+    }
+    /****/
   }
   @media only screen and (min-width: 992px) {
     .toggled .slide-item {
@@ -1678,6 +1686,24 @@ button {
     }
     .see-all {
       font-size: 18px;
+    }
+    .text-title-module {
+      font-size: 20px;
+    }
+    .img-info {
+      width: 26px;
+      height: 26px;
+    }
+    .close-module {
+      right: 0 !important;
+      top: 0 !important;
+    }
+    .text-title-module-sm {
+      color: #999999;
+      font-size: 14px;
+    }
+    .module-top {
+      margin-top: 0px;
     }
   }
   @media only screen and (max-width: 495px) {
