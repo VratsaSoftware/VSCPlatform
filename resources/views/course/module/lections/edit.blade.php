@@ -149,7 +149,7 @@
             </div>
         </div>
 
-        <div class="row g-0 home-work align-items-center p-3 mt-1">
+        <div class="row g-0 home-work align-items-center p-3 mt-1 homework-date-section" data-lection="{{ $loop->iteration }}">
             <div class="col-lg-3 ps-3 text-normal text-uppercase pe-4">
                 <a href="{{ route('homeworks.show',$lection->id) }}">ДОМАШНО</a>
             </div>
@@ -161,7 +161,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="date-pill d-flex align-items-center">
-                            <input name="homework_end" type="text" class="text-center fw-bold date-input ext-navy-blue" value="@if(isset($lection->homework_end)){{ $lection->homework_end->format('m/d/Y') }}@endif" placeholder="Няма">
+                            <input name="homework_end" id="homework-end-edit-{{ $loop->iteration }}" type="text" class="text-center fw-bold date-input ext-navy-blue" value="@if(isset($lection->homework_end)){{ $lection->homework_end->format('m/d/Y') }}@endif" placeholder="Няма" @if (!$lection->homework_criteria) disabled @endif>
                         </div>
                     </div>
                 </div>
@@ -174,7 +174,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="date-pill d-flex align-items-center">
-                            <input name="homework_check_end" class="text-center fw-bold date-input ext-navy-blue" value="@if(isset($lection->homework_check_end)){{ $lection->homework_check_end->format('m/d/Y') }}@endif" placeholder="Няма">
+                            <input name="homework_check_end" id="homework-check-end-edit-{{ $loop->iteration }}" class="text-center fw-bold date-input ext-navy-blue" value="@if(isset($lection->homework_check_end)){{ $lection->homework_check_end->format('m/d/Y') }}@endif" placeholder="Няма" @if (!$lection->homework_criteria) disabled @endif>
                         </div>
                     </div>
                 </div>

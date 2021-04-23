@@ -1,6 +1,18 @@
 $(document).ready(function() {
     $('.show-lection').show();
 
+    /* disabled input - date */
+    $('.homework-date-section').mouseenter(function() {
+        var lectionId = $(this).attr('data-lection');
+        var homeworkFile = '#homework-' + lectionId;
+        var homeworkEndDate = '#homework-end-edit-' + lectionId;
+        var homeworkCheckEndDate = '#homework-check-end-edit-' + lectionId;
+        if ($(homeworkFile).val()) {
+            $(homeworkEndDate).attr("disabled", false);
+            $(homeworkCheckEndDate).attr("disabled", false);
+        }
+    });
+
     /* toggle video url input */
     $('.edit-btn-video-url').click(function() {
         $('.video-url-edit').toggle().stop();

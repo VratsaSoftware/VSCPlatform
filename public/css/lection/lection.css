@@ -55,6 +55,9 @@
 .text-orange {
   color: #d07d1e;
 }
+.text-gray {
+  color: #999999;
+}
 .text-navy-blue {
   color: #00214b;
 }
@@ -363,9 +366,38 @@ button {
   bottom: 10px;
   right: 0px;
 }
+.big-gray-dot {
+  display: inline-block;
+  background-color: #999999;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  margin-right: 41px;
+  margin-top: 5px;
+}
+.big-gray-dot img {
+  bottom: 10px;
+  right: 0px;
+}
 .orange-dot {
   display: inline-block;
   background-color: #d07d1e;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  margin-right: 14px;
+}
+.green-dot-circle {
+  display: inline-block;
+  background-color: #69b501;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  margin-right: 14px;
+}
+.gray-dot {
+  display: inline-block;
+  background-color: #999999;
   width: 18px;
   height: 18px;
   border-radius: 50%;

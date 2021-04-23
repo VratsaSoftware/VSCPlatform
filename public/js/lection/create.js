@@ -1,4 +1,19 @@
 $(document).ready(function() {
+    /* disabled input - date */
+    $('.homework-section').mouseenter(function() {
+        var lectionId = $(this).attr('data-lection');
+        var homeworkFile = '#create-homework-' + lectionId;
+        var homeworkEndDate = '#homework-end-' + lectionId;
+        var homeworkCheckEndDate = '#homework-check-end-' + lectionId;
+        if (!$(homeworkFile).val()) {
+            $(homeworkEndDate).attr("disabled", true);
+            $(homeworkCheckEndDate).attr("disabled", true);
+        } else {
+            $(homeworkEndDate).attr("disabled", false);
+            $(homeworkCheckEndDate).attr("disabled", false);
+        }
+    });
+
     /* count lections */
     $('#right-side').mouseup(function() {
         var count = $(this).attr('data-countLections');

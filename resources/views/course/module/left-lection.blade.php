@@ -33,7 +33,7 @@
                         @else
                             <a class="tooltip-popup nav-link col-auto ps-0 @if ($module->id == $moduleNav->id) active @endif d-sm-block d-none" href="{{ asset('user/' . Auth::user()->id . '/course/' . $module->Course->id . '/module/' . $moduleNav->id . '/lections') }}" aria-controls="module-1" aria-selected="true" style="padding: .2rem 1rem;">
                                 М{{ $loop->iteration }}
-                                <span class="tooltiptext"> 
+                                <span class="tooltiptext">
                                     {{ $moduleNav->name }}
                                 </span>
                             </a>
@@ -148,7 +148,6 @@
                                         <div class="accordion-body py-lg-3 py-1">
                                             <div class="d-flex justify-content-between pb-4 text-small">
                                                 <div>
-                                                @if ($lection->homework_criteria)
                                                     <img src="{{ asset('assets/img/Homework.svg') }}">
                                                     @if (!is_null($lection->homework_end))
                                                         <span>
@@ -166,16 +165,16 @@
                                                             </div>
                                                         @else
                                                             <div class="text-green mt-2 ms-lg-0 ms-2 ps-lg-0 ps-4 pt-1 fw-bold row g-0 align-items-center">
-                                                                <span class="green-dot col-auto"></span>
-                                                                <span class=col>Качено</span>
+                                                                <span class="green-dot-circle col-auto"></span>
+                                                                <span class=col>Качено домашно</span>
                                                             </div>
                                                         @endif
                                                     @else
                                                     @if ($lection->homework_criteria)
                                                         @if ($validHomework)
                                                             <div class="text-green mt-2 ms-lg-0 ms-2 ps-lg-0 ps-4 pt-1 fw-bold row g-0 align-items-center">
-                                                                <span class="green-dot col-auto"></span>
-                                                                <span class=col>Качено</span>
+                                                                <span class="green-dot-circle col-auto"></span>
+                                                                <span class=col>Качено домашно</span>
                                                             </div>
                                                         @else
                                                             <div class="text-orange mt-2 ms-lg-0 ms-2 ps-lg-0 ps-4 pt-1 fw-bold row g-0 align-items-center">
@@ -183,7 +182,11 @@
                                                                 <span class=col>Не е качено</span>
                                                             </div>
                                                         @endif
-                                                    @endif
+                                                    @else
+                                                        <div class="text-gray mt-2 ms-lg-0 ms-2 ps-lg-0 ps-4 pt-1 fw-bold row g-0 align-items-center">
+                                                            <span class="gray-dot col-auto"></span>
+                                                            <span class=col>Няма домашно</span>
+                                                        </div>
                                                     @endif
                                                 @endif
                                                 </div>
@@ -204,20 +207,20 @@
                                     </div>
                                     <div class="btn-see row g-0">
                                         <div class="col eval text-normal">ОЦЕНКA:</div>
-                                        
+
                                         <div class="col-auto file-notification d-xxl-flex d-sm-flex d-none align-items-center">
-                                            @if ($lection->homework_criteria)
-                                                @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
-                                                    @if (!$lection->homework_criteria)
-                                                        <div class="big-orange-dot position-relative">
-                                                            <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
-                                                        </div>
-                                                    @else
-                                                        <div class="big-green-dot position-relative">
-                                                            <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
-                                                        </div>
-                                                    @endif
+                                            @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
+                                                @if (!$lection->homework_criteria)
+                                                    <div class="big-orange-dot position-relative">
+                                                        <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
+                                                    </div>
                                                 @else
+                                                    <div class="big-green-dot position-relative">
+                                                        <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
+                                                    </div>
+                                                @endif
+                                            @else
+                                                @if ($lection->homework_criteria)
                                                     @if ($validHomework)
                                                         <div class="big-green-dot position-relative">
                                                             <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
@@ -227,6 +230,10 @@
                                                             <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
                                                         </div>
                                                     @endif
+                                                @else
+                                                    <div class="big-gray-dot position-relative">
+                                                        <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
+                                                    </div>
                                                 @endif
                                             @endif
                                         </div>
