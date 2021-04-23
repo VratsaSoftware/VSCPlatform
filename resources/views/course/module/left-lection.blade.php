@@ -206,18 +206,18 @@
                                         <div class="col eval text-normal">ОЦЕНКA:</div>
                                         
                                         <div class="col-auto file-notification d-xxl-flex d-sm-flex d-none align-items-center">
-                                            @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
-                                                @if (!$lection->homework_criteria)
-                                                    <div class="big-orange-dot position-relative">
-                                                        <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
-                                                    </div>
+                                            @if ($lection->homework_criteria)
+                                                @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
+                                                    @if (!$lection->homework_criteria)
+                                                        <div class="big-orange-dot position-relative">
+                                                            <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
+                                                        </div>
+                                                    @else
+                                                        <div class="big-green-dot position-relative">
+                                                            <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
+                                                        </div>
+                                                    @endif
                                                 @else
-                                                    <div class="big-green-dot position-relative">
-                                                        <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
-                                                    </div>
-                                                @endif
-                                            @else
-                                                @if ($lection->homework_criteria)
                                                     @if ($validHomework)
                                                         <div class="big-green-dot position-relative">
                                                             <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
