@@ -849,6 +849,9 @@ button {
 .comments-table .collapse {
   height: 80px !important;
 }
+.b-size {
+  height: 100px;
+}
 /** Homework for Lecture END**/
 /** Comments**/
 .comments-header img {
@@ -998,8 +1001,44 @@ button {
   font-size: 25px;
   color: #000;
 }
+.btn-outline-green {
+  border-color: #69b501;
+  background-color: #69b501;
+  color: #ffffff;
+  border-radius: 15px;
+}
+.btn-outline-green:hover {
+  color: #ffffff !important;
+}
+.form-check-student {
+  width: 38px;
+  height: 38px;
+}
+.student-avatar-size {
+  width: 80px;
+  height: 80px;
+}
+.student-name-modul {
+  font-size: 20px;
+}
+.student-email-modul {
+  font-size: 17px;
+}
+.student-scrol-module {
+  width: 720px;
+  height: 420px;
+  overflow-y: scroll;
+  overflow-x: hidden !important;
+}
 /** Course as teacher add module END**/
 /** Media query**/
+@media only screen and (max-width: 1885px) {
+  .student-scrol-module {
+    width: 690px;
+    height: 420px;
+    overflow: scroll;
+  }
+}
 @media only screen and (max-width: 1850px) {
   .edit-content {
     padding-left: 20px;
@@ -1028,7 +1067,48 @@ button {
     border-radius: 10px;
     padding-bottom: 12px;
   }
+  .student-scrol-module {
+    width: 700px;
+    height: 420px;
+    overflow: scroll;
+  }
 }
+@media only screen and (max-width: 1735px) {
+  .form-check-student {
+    width: 30px;
+    height: 30px;
+  }
+  .student-avatar-size {
+    width: 65px;
+    height: 65px;
+  }
+  .student-name-modul {
+    font-size: 20px;
+  }
+  .student-email-modul {
+    font-size: 17px;
+  }
+  .student-scrol-module {
+    width: 620px;
+    height: 420px;
+    overflow: scroll;
+  }
+  .text-title-module {
+    font-size: 25px;
+    color: #00214b;
+  }
+}
+@media only screen and (max-width: 1653px) {
+  .student-scrol-module {
+    width: 550px;
+    height: 420px;
+    overflow: scroll;
+  }
+  .student-name-modul {
+    font-size: 22px;
+  }
+}
+
 @media only screen and (max-width: 1601px) {
   .card {
     width: 580px;
@@ -1217,9 +1297,21 @@ button {
       margin-left: 25px;
     }
   }
+  @media only screen and (max-width: 1350px) {
+    .student-scrol-module {
+      width: 520px;
+      height: 420px;
+      overflow: scroll;
+    }
+  }
   @media only screen and (max-width: 1280px) {
     .text-priem-sm {
       font-size: 14px;
+    }
+    .student-scrol-module {
+      width: 500px;
+      height: 420px;
+      overflow: scroll;
     }
   }
   @media only screen and (max-width: 992px) {
