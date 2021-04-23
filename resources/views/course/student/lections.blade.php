@@ -68,7 +68,7 @@
 			</div>
 			<div class="col-lg-4 col-auto order-lg-0 order-2 d-none d-lg-block">
 				<div class="row g-0">
-					<div class=" col-auto text-small align-self-end pe-3">Презентация1</div> 
+					<div class=" col-auto text-small align-self-end pe-3">Презентация</div> 
 					<div class="col-auto">
 						<a href="">
 							<img src="{{ asset('assets/img/download.svg') }}">
@@ -80,7 +80,7 @@
 				<div class="row g-0">
 					<div class="col-lg col mb-lg-0 mb-3 text-lg-end">
 						<div class="row g-0">
-							<div class="col-lg col-auto text-small align-self-end pe-3">Файл1</div> 
+							<div class="col-lg col-auto text-small align-self-end pe-3">Демо</div> 
 							<div class="col-auto">
 								<a href="">
 									<img src="{{ asset('assets/img/download.svg') }}">
@@ -90,7 +90,7 @@
 					</div>
 					<div class="col-lg col-auto mb-lg-0 mb-3 text-lg-end">
 						<div class="row g-0">
-							<div class="col-lg col-auto text-small align-self-end pe-3">Файл2</div> 
+							<div class="col-lg col-auto text-small align-self-end pe-3">Дома</div> 
 							<div class="col-auto">
 								<a href="">
 									<img src="{{ asset('assets/img/download.svg') }}">
@@ -99,83 +99,77 @@
 						</div>
 					</div>
 					<div class="col-lg col-6 mb-lg-0 mb-3 text-lg-end d-none d-lg-block">
-						<div class="row g-0">
-							<div class="col-lg col-auto text-small align-self-end pe-3">Файл3</div> 
-							<div class="col-auto">
-								<a href="">
-									<img src="{{ asset('assets/img/download.svg') }}">
-								</a>
-							</div>
-						</div>
 					</div>
 				</div>
 			</div>
 		</div>
 		<!--Mobil btn-->
-		<button class="ms-xxl-2 mt-xxl-0 mt-4 btn-view-1 btn-green row g-0 align-items-center d-lg-none">
-			<label for="homework-input-{{ $loop->iteration }}">
-				<div class="col-auto mx-auto upload-btn" data-lection-id="{{ $loop->iteration }}">
+		@if ($lection->homework_criteria)
+			<button class="ms-xxl-2 mt-xxl-0 mt-4 btn-view-1 btn-green row g-0 align-items-center d-lg-none">
+				<label for="homework-input-{{ $loop->iteration }}">
+					<div class="col-auto mx-auto upload-btn" data-lection-id="{{ $loop->iteration }}">
+						КАЧИ ДОМАШНО
+						<br>
+						<div class="deadline-student">
+							Краен срок 
+							@if ($lection->homework_end)
+		                        {{ ($lection->homework_end->format('Y') == date('Y')) ? $lection->homework_end->format('d.m') : $lection->homework_end->format('d.m.Y') }}
+		                    @else
+		                        Няма
+		                    @endif
+						</div>
+					</div>
+				</label>
+			</button>
+			<!--End mobil btn-->
+			<div class="row g-0 uploaded-home-1 align-items-center p-3 mt-4">
+				<div class="col ps-3 text-uploaded-home  text-uppercase text-white d-none d-lg-block">
 					КАЧИ ДОМАШНО
-					<br>
-					<div class="deadline-student">
-						Краен срок 
-						@if ($lection->homework_end)
-	                        {{ ($lection->homework_end->format('Y') == date('Y')) ? $lection->homework_end->format('d.m') : $lection->homework_end->format('d.m.Y') }}
-	                    @else
-	                        Няма
-	                    @endif
-					</div>
 				</div>
-			</label>
-		</button>
-		<!--End mobil btn-->
-		<div class="row g-0 uploaded-home-1 align-items-center p-3 mt-4">
-			<div class="col ps-3 text-uploaded-home  text-uppercase text-white d-none d-lg-block">
-				КАЧИ ДОМАШНО
-			</div>
-			<div class="col d-none d-lg-block">
-				<div class="row">
-					<div class="col-auto">
-						<img src="{{ asset('assets/img/bell.svg') }}" alt="" class="bell-img">
-					</div>
-					<div class="col d-none d-lg-block">
-						<div class="row g-0">
-							<div class="col text-white deadline-2">
-								Краен срок 
-								<br>
-								<div class="date-pill d-flex align-items-center data-07">
-									<div class="w-100 text-center fw-bold enddata1">
-										@if ($lection->homework_end)
-                        					{{ ($lection->homework_end->format('Y') == date('Y')) ? $lection->homework_end->format('d.m') : $lection->homework_end->format('d.m.Y') }}
-					                    @else
-					                        Няма
-					                    @endif
+				<div class="col d-none d-lg-block">
+					<div class="row">
+						<div class="col-auto">
+							<img src="{{ asset('assets/img/bell.svg') }}" alt="" class="bell-img">
+						</div>
+						<div class="col d-none d-lg-block">
+							<div class="row g-0">
+								<div class="col text-white deadline-2">
+									Краен срок 
+									<br>
+									<div class="date-pill d-flex align-items-center data-07">
+										<div class="w-100 text-center fw-bold enddata1">
+											@if ($lection->homework_end)
+	                        					{{ ($lection->homework_end->format('Y') == date('Y')) ? $lection->homework_end->format('d.m') : $lection->homework_end->format('d.m.Y') }}
+						                    @else
+						                        Няма
+						                    @endif
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-auto d-none d-lg-block">
-				<div class="row g-0 ps-1">
-					<div class="col">
-						<label for="homework-input-{{ $loop->iteration }}">
-							<div class="nav btn btn-green active py-0 pe-2 d-flex btn1-cs upload-btn" data-lection-id="{{ $loop->iteration }}" id="lection-1-tab">
-								<div class="row g-0 align-self-center">
-									<div class="col-auto text-start ms-3">
-										Прикачи
-									</div>
-									<div class="col text-end align-items-center d-flex img-btn-ms">
-										<img src="{{ asset('assets/img/action_icon.svg') }}">
+				<div class="col-auto d-none d-lg-block">
+					<div class="row g-0 ps-1">
+						<div class="col">
+							<label for="homework-input-{{ $loop->iteration }}">
+								<div class="nav btn btn-green active py-0 pe-2 d-flex btn1-cs upload-btn" data-lection-id="{{ $loop->iteration }}" id="lection-1-tab">
+									<div class="row g-0 align-self-center">
+										<div class="col-auto text-start ms-3">
+											Прикачи
+										</div>
+										<div class="col text-end align-items-center d-flex img-btn-ms">
+											<img src="{{ asset('assets/img/action_icon.svg') }}">
+										</div>
 									</div>
 								</div>
-							</div>
-						</label>
+							</label>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
+		@endif
 	</div>
 </div>
 

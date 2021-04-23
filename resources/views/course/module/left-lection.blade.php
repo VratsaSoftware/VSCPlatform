@@ -23,14 +23,32 @@
             <nav>
                 <div class="nav nav-tabs row align-items-center g-0 mb-4 p-sm-0 pt-3 pb-4">
                     @foreach ($allModules as $moduleNav)
-                        <a class="nav-link col-auto ps-0 @if ($module->id == $moduleNav->id) active @endif d-sm-block d-none" href="{{ asset('module/' . $moduleNav->id . '/edit') }}" aria-controls="module-1" aria-selected="true">{{ $moduleNav->name }}</a>
+                        @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
+                            <a class="tooltip-popup nav-link col-auto ps-0 @if ($module->id == $moduleNav->id) active @endif d-sm-block d-none" href="{{ asset('module/' . $moduleNav->id . '/edit') }}" aria-controls="module-1" aria-selected="true">
+                                М{{ $loop->iteration }}
+                                <span class="tooltiptext">
+                                    {{ $moduleNav->name }}
+                                </span>
+                            </a>
+                        @else
+                            <a class="tooltip-popup nav-link col-auto ps-0 @if ($module->id == $moduleNav->id) active @endif d-sm-block d-none" href="{{ asset('user/' . Auth::user()->id . '/course/' . $module->Course->id . '/module/' . $moduleNav->id . '/lections') }}" aria-controls="module-1" aria-selected="true" style="padding: .2rem 1rem;">
+                                М{{ $loop->iteration }}
+                                <span class="tooltiptext"> 
+                                    {{ $moduleNav->name }}
+                                </span>
+                            </a>
+                        @endif
                     @endforeach
 
                     <div class="col d-sm-none">
                         <div class="position-relative d-inline-block">
-                            <select class="border-0 form-control text-small text-green position-relative ps-0 py-0" id="tab_selector">
+                            <select class="border-0 w-25 form-control text-small text-green position-relative ps-0 py-0" id="tab_selector">
                                 @foreach ($allModules as $moduleNav)
-                                    <option value="{{ asset('module/' . $moduleNav->id . '/edit') }}" @if ($module->id == $moduleNav->id) selected @endif>{{ $moduleNav->name }}</option>
+                                    @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
+                                        <option value="{{ asset('module/' . $moduleNav->id . '/edit') }}" @if ($module->id == $moduleNav->id) selected @endif>{{ $moduleNav->name }}</option>
+                                    @else
+                                        <option value="{{ asset('user/' . Auth::user()->id . '/course/' . $module->Course->id . '/module/' . $moduleNav->id . '/lections') }}" @if ($module->id == $moduleNav->id) selected @endif>{{ $moduleNav->name }}</option>
+                                    @endif
                                 @endforeach
                             </select>
                             <img src="{{ asset('assets/img/arrow.svg') }}" class="position-absolute">
@@ -104,6 +122,16 @@
                         <!-- Accordion sections  -->
                         <div class="accordion accordion-flush position-relative" id="accordionExample">
                             @foreach ($lections as $lection)
+                                @if (!Auth::user()->isLecturer() || !Auth::user()->isAdmin())
+                                    @foreach ($homeworks as $homework)
+                                        @if ($homework == $lection->id)
+                                            @php
+                                                $validHomework = true;
+                                            @endphp
+                                            @break
+                                        @endif
+                                    @endforeach
+                                @endif
                                 <!-- Accordion item -->
                                 <div class="accordion-item">
                                     <button class="accordion-button @if ($loop->iteration !== 1) collapsed @endif" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapse{{ $loop->iteration }}">
@@ -112,7 +140,7 @@
                                                 {{ $loop->iteration }}. {{ $lection->title }}
                                             </div>
                                             <div class="col-auto ms-auto text-small time pe-2">
-                                                {{ $lection->first_date->format('H:i') }}
+                                                {{-- $lection->first_date->format('H:i') --}}
                                             </div>
                                         </div>
                                     </button>
@@ -120,23 +148,44 @@
                                         <div class="accordion-body py-lg-3 py-1">
                                             <div class="d-flex justify-content-between pb-4 text-small">
                                                 <div>
-                                                    @if (is_null($lection->homework_end))
-                                                        <img src="{{ asset('assets/img/Homework.svg') }}">
-                                                    @endif
+                                                @if ($lection->homework_criteria)
+                                                    <img src="{{ asset('assets/img/Homework.svg') }}">
                                                     @if (!is_null($lection->homework_end))
-                                                        <span class="">
+                                                        <span>
                                                             Домашно до
                                                         </span>
                                                         <span class="text-orange fw-bold">
-                                                            {{ $lection->homework_end->format('d.m.Y') }}
+                                                            {{ $lection->homework_end->format('d.m') }}
                                                         </span>
                                                     @endif
-                                                    @if (!$lection->homework_criteria)
-                                                        <div class="text-orange mt-2 ms-lg-0 ms-2 ps-lg-0 ps-4 pt-1 fw-bold row g-0 align-items-center">
-                                                            <span class="orange-dot col-auto"></span>
-                                                            <span class=col>Не е качено</span>
-                                                        </div>
+                                                    @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
+                                                        @if (!$lection->homework_criteria)
+                                                            <div class="text-orange mt-2 ms-lg-0 ms-2 ps-lg-0 ps-4 pt-1 fw-bold row g-0 align-items-center">
+                                                                <span class="orange-dot col-auto"></span>
+                                                                <span class=col>Не е качено</span>
+                                                            </div>
+                                                        @else
+                                                            <div class="text-green mt-2 ms-lg-0 ms-2 ps-lg-0 ps-4 pt-1 fw-bold row g-0 align-items-center">
+                                                                <span class="green-dot col-auto"></span>
+                                                                <span class=col>Качено</span>
+                                                            </div>
+                                                        @endif
+                                                    @else
+                                                    @if ($lection->homework_criteria)
+                                                        @if ($validHomework)
+                                                            <div class="text-green mt-2 ms-lg-0 ms-2 ps-lg-0 ps-4 pt-1 fw-bold row g-0 align-items-center">
+                                                                <span class="green-dot col-auto"></span>
+                                                                <span class=col>Качено</span>
+                                                            </div>
+                                                        @else
+                                                            <div class="text-orange mt-2 ms-lg-0 ms-2 ps-lg-0 ps-4 pt-1 fw-bold row g-0 align-items-center">
+                                                                <span class="orange-dot col-auto"></span>
+                                                                <span class=col>Не е качено</span>
+                                                            </div>
+                                                        @endif
                                                     @endif
+                                                    @endif
+                                                @endif
                                                 </div>
                                                 <div class="d-lg-inline-block d-none">
                                                     @if ($lection->homework_criteria || $lection->demo || $lection->slides)
@@ -155,14 +204,32 @@
                                     </div>
                                     <div class="btn-see row g-0">
                                         <div class="col eval text-normal">ОЦЕНКA:</div>
-                                        <!--  -->
-                                        @if (!$lection->homework_criteria)
-                                            <div class="col-auto file-notification d-xxl-flex d-sm-flex d-none align-items-center">
-                                                <div class="big-orange-dot position-relative">
-                                                    <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
-                                                </div>
-                                            </div>
-                                        @endif
+                                        
+                                        <div class="col-auto file-notification d-xxl-flex d-sm-flex d-none align-items-center">
+                                            @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
+                                                @if (!$lection->homework_criteria)
+                                                    <div class="big-orange-dot position-relative">
+                                                        <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
+                                                    </div>
+                                                @else
+                                                    <div class="big-green-dot position-relative">
+                                                        <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
+                                                    </div>
+                                                @endif
+                                            @else
+                                                @if ($lection->homework_criteria)
+                                                    @if ($validHomework)
+                                                        <div class="big-green-dot position-relative">
+                                                            <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
+                                                        </div>
+                                                    @else
+                                                        <div class="big-orange-dot position-relative">
+                                                            <img class="position-absolute" src="{{ asset('assets/img/Homework.svg') }}">
+                                                        </div>
+                                                    @endif
+                                                @endif
+                                            @endif
+                                        </div>
                                         <div class="col-auto">
                                             <button data-lections="{{ $lection }}" class="nav btn btn-green active py-0 pe-2 d-flex" id="lection-1-tab" data-bs-toggle="tab" href="#lection-{{ $loop->iteration }}" role="tab" aria-controls="lection-1" aria-selected="true">
                                                 <div class="row g-0 align-self-center">
@@ -176,6 +243,11 @@
                                     </div>
                                 </div>
                                 <!-- Accordion item END-->
+                                @if (!Auth::user()->isLecturer() || !Auth::user()->isAdmin())
+                                    @php
+                                        $validHomework = null;
+                                    @endphp
+                                @endif
                             @endforeach
                         </div>
                     </div>
