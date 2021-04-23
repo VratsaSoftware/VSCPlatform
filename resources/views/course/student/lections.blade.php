@@ -113,18 +113,20 @@
 		</div>
 		<!--Mobil btn-->
 		<button class="ms-xxl-2 mt-xxl-0 mt-4 btn-view-1 btn-green row g-0 align-items-center d-lg-none">
-			<div class="col-auto mx-auto">
-				КАЧИ ДОМАШНО
-				<br>
-				<div class="deadline-student">
-					Краен срок 
-					@if ($lection->homework_end)
-                        {{ ($lection->homework_end->format('Y') == date('Y')) ? $lection->homework_end->format('d.m') : $lection->homework_end->format('d.m.Y') }}
-                    @else
-                        Няма
-                    @endif
+			<label for="homework-input-{{ $loop->iteration }}">
+				<div class="col-auto mx-auto upload-btn" data-lection-id="{{ $loop->iteration }}">
+					КАЧИ ДОМАШНО
+					<br>
+					<div class="deadline-student">
+						Краен срок 
+						@if ($lection->homework_end)
+	                        {{ ($lection->homework_end->format('Y') == date('Y')) ? $lection->homework_end->format('d.m') : $lection->homework_end->format('d.m.Y') }}
+	                    @else
+	                        Няма
+	                    @endif
+					</div>
 				</div>
-			</div>
+			</label>
 		</button>
 		<!--End mobil btn-->
 		<div class="row g-0 uploaded-home-1 align-items-center p-3 mt-4">
@@ -158,17 +160,42 @@
 			<div class="col-auto d-none d-lg-block">
 				<div class="row g-0 ps-1">
 					<div class="col">
-						<button class="nav btn  btn-green active py-0 pe-2 d-flex btn1-cs" id="lection-1-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="lection-1" aria-selected="true">
-							<div class="row g-0 align-self-center">
-								<div class="col-auto text-start ms-3">Прикачи</div>
-								<div class="col text-end align-items-center d-flex img-btn-ms">
-									<img src="{{ asset('assets/img/action_icon.svg') }}">
+						<label for="homework-input-{{ $loop->iteration }}">
+							<div class="nav btn btn-green active py-0 pe-2 d-flex btn1-cs upload-btn" data-lection-id="{{ $loop->iteration }}" id="lection-1-tab">
+								<div class="row g-0 align-self-center">
+									<div class="col-auto text-start ms-3">
+										Прикачи
+									</div>
+									<div class="col text-end align-items-center d-flex img-btn-ms">
+										<img src="{{ asset('assets/img/action_icon.svg') }}">
+									</div>
 								</div>
 							</div>
-						</button>
+						</label>
 					</div>
 				</div>
 			</div>
 		</div>
 	</div>
 </div>
+
+@if(!is_null($lection->homework_end) && $lection->homework_end)
+	<form id="upload-homework-{{ $loop->iteration }}" action="{{ route('user.upload.homework') }}" method="post" enctype="multipart/form-data">
+		@csrf
+		<input type="hidden" name="lection" value="{{ $lection->id }}">
+		<input type="file" id="homework-input-{{ $loop->iteration }}" name="homework" class="homework-input" style="display: none">
+	</form>
+@endif
+
+<script type="text/javascript">
+$(document).ready(function() {
+	$('.upload-btn').click(function() {
+		var id = $(this).attr('data-lection-id');
+
+		$('.homework-input').change(function() {
+			var uploadHomework = '#upload-homework-' + id;
+			$(uploadHomework).submit();
+		});
+	});
+});
+</script>
