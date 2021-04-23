@@ -90,9 +90,6 @@ class LectionController extends Controller
                 //     return redirect()->back()->with('error', $message)->withInput(Input::all());
                 // }
 
-                $lection->homework_end = !is_null($request->homework_end) ? $this->dateParse($request->homework_end) : null;
-                $lection->homework_check_end = !is_null($request->homework_check_end) ? $this->dateParse($request->homework_check_end) : null;
-
                 $lection->description = $request->description;
                 // $lection->order = $request->order;
                 $lection->visibility = 'public';
@@ -138,6 +135,9 @@ class LectionController extends Controller
 
             $request->file('homework')->move($homeworkUrl, $name);
             $lection->homework_criteria = $name;
+
+            $lection->homework_end = !is_null($request->homework_end) ? $this->dateParse($request->homework_end) : null;
+            $lection->homework_check_end = !is_null($request->homework_check_end) ? $this->dateParse($request->homework_check_end) : null;
         }
 
         if ($request->has('demo') && !is_null($request->demo) && $store) {
@@ -182,7 +182,7 @@ class LectionController extends Controller
         if (!$lections->isEmpty()) {
             return view('course.module.left-lection', [
                 'homeworks' => $homeworks,
-                'module' => $module->load('Course'), 
+                'module' => $module->load('Course'),
                 'lections' => $lections,
                 'allModules' => $allModule,
             ]);
@@ -245,9 +245,6 @@ class LectionController extends Controller
             //     return redirect()->back()->with('error', $message)->withInput(Input::all());
             // }
 
-            $lection->homework_end = !is_null($request->homework_end) ? $this->dateParse($request->homework_end) : null;
-            $lection->homework_check_end = !is_null($request->homework_check_end) ? $this->dateParse($request->homework_check_end) : null;
-
             $lection->description = $request->description;
             // $lection->order = !is_null($request->order) ?: $request->order;
         // }
@@ -279,6 +276,11 @@ class LectionController extends Controller
             }
             $request->file('slides')->move($slidesUrl, $name);
             $lection->presentation = $name;
+        }
+
+        if (Input::hasFile('slides') || $request->homework_end || $request->homework_check_end) {
+            $lection->homework_end = !is_null($request->homework_end) ? $this->dateParse($request->homework_end) : null;
+            $lection->homework_check_end = !is_null($request->homework_check_end) ? $this->dateParse($request->homework_check_end) : null;
         }
 
         if (Input::hasFile('homework')) {
@@ -328,6 +330,9 @@ class LectionController extends Controller
             if (File::exists($oldhomework)) {
                 File::delete($oldhomework);
             }
+
+            $lection->homework_end = null;
+            $lection->homework_check_end = null;
         }
     }
 
