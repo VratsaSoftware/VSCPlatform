@@ -1682,6 +1682,15 @@ div.bio-description-large .row{
   word-break: break-word;
 }
 
+/* Alerts Style */
+
+div.alert-primary{
+  color: #00214b !important;
+  background-image: linear-gradient(336deg, #eef4ff 101%, #fff 6%) !important;
+  border: 1px solid #00214b !important;
+  box-shadow: 5px 5px 9px 0 rgba(0, 15, 67, 0.35);
+}
+
 @media only screen and (max-width: 1501px){
   .profile-details .separator{
       display: block;
