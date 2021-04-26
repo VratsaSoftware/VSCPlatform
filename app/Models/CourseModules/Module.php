@@ -32,11 +32,6 @@ class Module extends Model
         return $this->hasMany(ModulesStudent::class, 'course_modules_id');
     }
 
-    public function getNameAttribute($value)
-    {
-        return mb_strtoupper($value);
-    }
-
     public static function getLections($module, $lecturer = null)
     {
         if (!$lecturer) {

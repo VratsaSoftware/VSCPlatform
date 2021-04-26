@@ -5,17 +5,17 @@
 		<span class="close d-lg-none position-absolute">&times;</span>
 		<div class="row pt-lg-0 pt-4 g-0">
 			<div class="col pe-4 d-none d-lg-block">
-				<h2 class="text-l1">{{ $lection->title }}</h2>
+				<h2 class="text-l1">{{ strlen($lection->title) > 25 ? mb_substr($lection->title, 0, 25) . "..." : $lection->title }}</h2>
 			</div>
 			<div class="col-auto pe-4 d-block d-lg-none">
 				<h2 class="text-l1">{{ $lection->title }}</h2>
 			</div>
 			<div class="col-auto pe-4">
-				<div class="data1">{{ $lection->first_date->format('d.m.Y') }}</div>	
+				<div class="data1">{{ $lection->first_date->format('d.m.Y') }}</div>
 			</div>
 			<div class="col-auto align-self-stretch border d-none d-lg-block"></div>
 			<div class="col pe-4 ps-4 d-none d-lg-block">
-				<div class="data1">{{ $lection->second_date->format('d.m.Y') }}</div>	
+				<div class="data1">{{ $lection->second_date->format('d.m.Y') }}</div>
 			</div>
 			<div class="col-auto pe-5 d-none d-lg-block">
             <div class="pill1 d-flex align-items-center float-right rounded-circle overflow-hidden">
@@ -41,7 +41,11 @@
 	            <iframe width="762" height="375" src="{{ $lection->Video->url }}" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="border-radius: 45px;"></iframe>
 	        @else
 	            <div class="edit-lection-btn video-upload-btn position-absolute text-center">
-	                Няма видео
+					<div class="text-center fw-bold pt-lg-4 pt-3">
+	                    Няма
+	                    <br class="d-lg-block d-none">
+	                    видео
+	                </div>
 	            </div>
 	        @endif
 	    </div>
@@ -56,7 +60,7 @@
 					<div class="col-auto">
 						<img src="{{ asset('assets/img/download.svg') }}">
 					</div>
-					<div class="col-lg col-auto text-small align-self-end ps-3">Презентация</div> 
+					<div class="col-lg col-auto text-small align-self-end ps-3">Презентация</div>
 				</div>
 			</div>
 			<hr class="d-block d-lg-none mt-4">
@@ -68,7 +72,7 @@
 			</div>
 			<div class="col-lg-4 col-auto order-lg-0 order-2 d-none d-lg-block">
 				<div class="row g-0">
-					<div class=" col-auto text-small align-self-end pe-3">Презентация</div> 
+					<div class=" col-auto text-small align-self-end pe-3">Презентация</div>
 					<div class="col-auto">
 						<a href="">
 							<img src="{{ asset('assets/img/download.svg') }}">
@@ -80,7 +84,7 @@
 				<div class="row g-0">
 					<div class="col-lg col mb-lg-0 mb-3 text-lg-end">
 						<div class="row g-0">
-							<div class="col-lg col-auto text-small align-self-end pe-3">Демо</div> 
+							<div class="col-lg col-auto text-small align-self-end pe-3">Демо</div>
 							<div class="col-auto">
 								<a href="">
 									<img src="{{ asset('assets/img/download.svg') }}">
@@ -90,7 +94,7 @@
 					</div>
 					<div class="col-lg col-auto mb-lg-0 mb-3 text-lg-end">
 						<div class="row g-0">
-							<div class="col-lg col-auto text-small align-self-end pe-3">Дома</div> 
+							<div class="col-lg col-auto text-small align-self-end pe-3">Дома</div>
 							<div class="col-auto">
 								<a href="">
 									<img src="{{ asset('assets/img/download.svg') }}">
@@ -111,7 +115,7 @@
 						КАЧИ ДОМАШНО
 						<br>
 						<div class="deadline-student">
-							Краен срок 
+							Краен срок
 							@if ($lection->homework_end)
 		                        {{ ($lection->homework_end->format('Y') == date('Y')) ? $lection->homework_end->format('d.m') : $lection->homework_end->format('d.m.Y') }}
 		                    @else
@@ -134,7 +138,7 @@
 						<div class="col d-none d-lg-block">
 							<div class="row g-0">
 								<div class="col text-white deadline-2">
-									Краен срок 
+									Краен срок
 									<br>
 									<div class="date-pill d-flex align-items-center data-07">
 										<div class="w-100 text-center fw-bold enddata1">

@@ -1,3 +1,5 @@
+<link href="{{ asset('css/nav.css') }}" rel="stylesheet" type="text/css">
+
 <div class="col-lg-auto position-relative">
     <nav class="slide navbar-expand-lg navbar-light bg-white fw-bold" id="mySidenav">
         <a class="navbar-brand d-lg-block d-none mx-auto" href="{{ asset('myProfile') }}">
@@ -41,16 +43,16 @@
             <div class="pt-lg-5">
                 <ul class="nav d-block col-12 pb-2">
                     @if(Auth::user() && (Auth::user()->isLecturer() || Auth::user()->isAdmin()))
-                        <li class="nav-item align-items-center mb-lg-5">
+                        <li class="nav-item align-items-center mb-lg-5 @if (request()->routeIs('admin.applications')) active-link @endif">
                             <a href="{{ route('admin.applications') }}" class="d-flex align-items-center">
                                 <span class="icon">
                                     <img src="{{ asset('assets/img/Application.svg') }}" alt="">
                                 </span>
-                                <span class="slide-item text-navy-blue" style="font-size:16px;">Кандидатстване</span>
+                                <span class="slide-item text-navy-blue" style="font-size:16px; margin-right:10px">Кандидатстване</span>
                             </a>
                         </li>
                     @endif
-                    <li class="nav-item align-items-center mb-lg-5">
+                    <li class="nav-item align-items-center mb-lg-5 @if (request()->routeIs('module*') || request()->routeIs('user.module.lections') || request()->routeIs('all.courses') || (request()->routeIs('myProfile') && !Auth::user()->isAdmin())) active-link @endif">
                         <a href="{{ Auth::user() && Auth::user()->isAdmin() ? route('all.courses') : route('myProfile') }}" class="d-flex align-items-center">
                             <span class="icon">
                                 <img src="{{ asset('assets/img/Courses.svg') }}" alt="">
@@ -58,7 +60,7 @@
                             <span class="slide-item text-navy-blue" style="font-size:16px;">Курсове</span>
                         </a>
                     </li>
-                    <li class="nav-item align-items-center mb-lg-5">
+                    <li class="nav-item align-items-center mb-lg-5 @if (request()->routeIs('admin.events') || request()->routeIs('users.events')) active-link @endif">
                         <a href="@if(Auth::user() && Auth::user()->isAdmin()){{ route('admin.events') }}@else{{ route('users.events') }}@endif" class="d-flex align-items-center dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <span class="icon">
                                 <img src="{{ asset('assets/img/Events.svg') }}">
@@ -70,7 +72,7 @@
                     </li>
                     @if (Auth::user() && (Auth::user()->isLecturer() || Auth::user()->isAdmin()))
                         @if (Auth::user() && Auth::user()->isAdmin())
-                            <li class="nav-item align-items-center mb-lg-5">
+                            <li class="nav-item align-items-center mb-lg-5 @if (request()->routeIs('polls.index')) active-link @endif">
                                 <a href="{{route('polls.index')}}" class="d-flex align-items-center">
                                     <span class="icon">
                                         <img src="{{ asset('assets/img/Surveys.svg') }}">
@@ -81,7 +83,7 @@
                                 </a>
                             </li>
                         @endif
-                        <li class="nav-item align-items-center mb-lg-5">
+                        <li class="nav-item align-items-center mb-lg-5 @if (request()->routeIs('test*')) active-link @endif">
                             <a href="{{ route('test.index') }}" class="d-flex align-items-center">
                                 <span class="icon">
                                     <img src="{{ asset('assets/img/Tests.svg') }}" alt="">

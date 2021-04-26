@@ -23,7 +23,7 @@
             <nav>
                 <div class="nav nav-tabs row align-items-center g-0 mb-4 p-sm-0 pt-3 pb-4">
                     @foreach ($allModules as $moduleNav)
-                        @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
+                        @if (Auth::user()->isAdmin())
                             <a class="tooltip-popup nav-link col-auto ps-0 @if ($module->id == $moduleNav->id) active @endif d-sm-block d-none" href="{{ asset('module/' . $moduleNav->id . '/edit') }}" aria-controls="module-1" aria-selected="true">
                                 М{{ $loop->iteration }}
                                 <span class="tooltiptext">
@@ -42,7 +42,7 @@
 
                     <div class="col d-sm-none">
                         <div class="position-relative d-inline-block">
-                            <select class="border-0 w-25 form-control text-small text-green position-relative ps-0 py-0" id="tab_selector">
+                            <select class="border-0 form-control text-small text-green position-relative ps-0 py-0" id="tab_selector" style="width: 130px;">
                                 @foreach ($allModules as $moduleNav)
                                     @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
                                         <option value="{{ asset('module/' . $moduleNav->id . '/edit') }}" @if ($module->id == $moduleNav->id) selected @endif>{{ $moduleNav->name }}</option>
@@ -54,7 +54,7 @@
                             <img src="{{ asset('assets/img/arrow.svg') }}" class="position-absolute">
                         </div>
                     </div>
-                    @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
+                    @if (Auth::user()->isAdmin())
                         <div class="col add text-end align-self-end pb-lg-2 text-small">
                             <a href="{{ asset('module/create?course=' . $module->Course->id) }}">
                                 <span class="me-2"><img src="{{ asset('assets/img/plus.svg') }}"></span>
@@ -137,7 +137,7 @@
                                     <button class="accordion-button @if ($loop->iteration !== 1) collapsed @endif" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $loop->iteration }}" aria-expanded="false" aria-controls="collapse{{ $loop->iteration }}">
                                         <div class="row d-flex w-100 align-items-end g-0 text-start text-uppercase">
                                             <div class="col lection-title text-large">
-                                                {{ $loop->iteration }}. {{ $lection->title }}
+                                                {{ $loop->iteration }}. {{ strlen($lection->title) > 15 ? mb_substr($lection->title, 0, 15) . "..." : $lection->title }}
                                             </div>
                                             <div class="col-auto ms-auto text-small time pe-2">
                                                 {{-- $lection->first_date->format('H:i') --}}

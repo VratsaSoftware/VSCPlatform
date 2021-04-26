@@ -1,17 +1,17 @@
 /**Custom fonts for this template**/
 @font-face {
   font-family: "Roboto";
-  src: url("fonts/Roboto-Regular.ttf");
+  src: url("../fonts/Roboto-Regular.ttf");
   font-weight: normal;
 }
 @font-face {
   font-family: "Roboto";
-  src: url("fonts/Roboto-Medium.ttf");
+  src: url("../fonts/Roboto-Medium.ttf");
   font-weight: 500;
 }
 @font-face {
   font-family: "Roboto";
-  src: url("fonts/Roboto-Bold.ttf");
+  src: url("../fonts/Roboto-Bold.ttf");
   font-weight: bold;
 }
 /** custom boodstrap colors and fonts **/
@@ -129,11 +129,6 @@ button {
 .slide:not(.toggled) .nav-item a img {
   color: #00214b;
   margin-right: 25px;
-}
-.slide .logo {
-  max-width: 180px;
-  margin-bottom: 50px;
-  transition: all 0.5s;
 }
 .slide .avatar {
   width: 55px;

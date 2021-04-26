@@ -4,7 +4,7 @@
     <span class="close d-lg-none position-absolute">&times;</span>
     <div class="row pt-lg-0 pt-4 g-0">
         <div class="col pe-4 d-none d-lg-block">
-            <h2 class="text-l1">{{ $lection->title }}</h2>
+            <h2 class="text-l1">{{ strlen($lection->title) > 25 ? mb_substr($lection->title, 0, 25) . "..." : $lection->title }}</h2>
         </div>
         <div class="col-auto pe-4 d-block d-lg-none">
             <h2 class="text-l1">{{ $lection->title }}</h2>

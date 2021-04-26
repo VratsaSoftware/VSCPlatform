@@ -224,15 +224,18 @@ Route::group(['middleware' => 'auth'], function () {
             'Admin\AdminController@certificatePreview')->name('certificate.preview');
     });
 });
+
 Route::post('/lection/video/shown', 'Courses\LectionController@videoShown')->name('lection.video.show');
 
-//user course operations
-Route::get('/user/{user?}/course/{course}', 'Courses\CourseController@showUserCourse')->name('user.course');
-Route::get('/user/{user?}/course/{course}/module/{module}/lections',
-    'Courses\LectionController@show')->name('user.module.lections');
+/* user course operations */
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/user/{user?}/course/{course}', 'Courses\CourseController@showUserCourse')->name('user.course');
+    Route::get('/user/{user?}/course/{course}/module/{module}/lections',
+        'Courses\LectionController@show')->name('user.module.lections');
 
-Route::post('/user/{user?}/course/{course}/module/{module}/lection/{lection}/comment',
-    'Courses\LectionController@addComment')->name('user.module.lection.comment');
+    Route::post('/user/{user?}/course/{course}/module/{module}/lection/{lection}/comment',
+        'Courses\LectionController@addComment')->name('user.module.lection.comment');
+});
 
 
 //old routes redirects

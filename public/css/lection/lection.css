@@ -587,6 +587,16 @@ button {
     height: 12px;
     margin-right: 8px;
   }
+  .green-dot-circle {
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+  }
+  .gray-dot {
+    width: 12px;
+    height: 12px;
+    margin-right: 8px;
+  }
   .slide {
     padding-left: 25px;
     padding-right: 15px;

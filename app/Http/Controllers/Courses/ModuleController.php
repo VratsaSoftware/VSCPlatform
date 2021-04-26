@@ -140,13 +140,13 @@ class ModuleController extends Controller
         $module = $module->load('Course');
         $lections = $lections->load('Video');
 
-        $allModule = Module::where('course_id', $module->Course->id)->get();
+        $allModules = Module::where('course_id', $module->Course->id)->get();
 
         return view('course.module.left-lection', [
             'module' => $module,
             'lections' => $lections,
             'students' => $students,
-            'allModules' => $allModule
+            'allModules' => $allModules
         ]);
     }
 
