@@ -1303,6 +1303,10 @@ button {
       height: 420px;
       overflow: scroll;
     }
+    .text-title-module {
+      font-size: 20px;
+      margin-top: 15px;
+    }
   }
   @media only screen and (max-width: 1280px) {
     .text-priem-sm {
@@ -1665,6 +1669,9 @@ button {
     .module-body-right {
       background-color: #ffffff !important;
     }
+    .student-scrol-module {
+      width: 550px;
+    }
     /****/
   }
   @media only screen and (min-width: 992px) {
@@ -1737,6 +1744,11 @@ button {
       border-bottom: solid 1px #00214b;
     }
   }
+  @media only screen and (max-width: 655px) {
+    .student-scrol-module {
+      width: 500px;
+    }
+  }
 
   @media only screen and (max-width: 600px) {
     .deadline-2 {
@@ -1781,6 +1793,7 @@ button {
     }
     .text-title-module {
       font-size: 20px;
+      margin-top: 0px;
     }
     .img-info {
       width: 26px;
@@ -1797,6 +1810,9 @@ button {
     .module-top {
       margin-top: 0px;
     }
+    .student-scrol-module {
+      width: 450px;
+    }
   }
   @media only screen and (max-width: 495px) {
     .deadline-2 {
@@ -1812,6 +1828,21 @@ button {
     }
     .text-normal {
       font-size: 21px;
+    }
+    .student-scrol-module {
+      width: 290px;
+      height: 420px;
+      overflow: scroll;
+    }
+    .btn-name-module {
+      width: 180px;
+      height: 50px;
+    }
+    .text-title-module {
+      margin-bottom: 20px;
+    }
+    .student-scrol-module {
+      width: 350px;
     }
   }
   @media only screen and (max-width: 438px) {
@@ -1844,6 +1875,9 @@ button {
       width: 35px;
       height: 43px;
       margin-left: 15px;
+    }
+    .student-scrol-module {
+      width: 300px;
     }
   }
   @media only screen and (max-width: 346px) {
