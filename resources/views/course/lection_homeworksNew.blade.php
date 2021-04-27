@@ -41,13 +41,13 @@
                     <div class="col-lg-auto pe-lg-5">
                         <span class="text-small">Краен срок за домашно: </span>
                         <span class="text-normal text-orange">
-                            {{ $lection->homework_end ? $lection->homework_end->format('d.m H:i') : 'Няма' }}
+                            {{ $lection->homework_end ? $lection->homework_end->format('d.m') : 'Няма' }}
                         </span>
                     </div>
                     <div class="col-lg-auto ps-lg-2">
                         <span class="text-small">Краен срок за проверка:</span>
                         <span class="text-normal text-orange">
-                            {{ $lection->homework_check_end ? $lection->homework_check_end->format('d.m H:i') : 'Няма' }}
+                            {{ $lection->homework_check_end ? $lection->homework_check_end->format('d.m') : 'Няма' }}
                         </span>
                     </div>
                 </div>

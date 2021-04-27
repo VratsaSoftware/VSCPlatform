@@ -178,13 +178,14 @@ class LectionController extends Controller
         $allModule = Module::where('course_id', $module->Course->id)->get();
         $homeworks = Homework::where('user_id', Auth::user()->id)
             ->pluck('lection_id');
-
+$homeworksTest = Homework::where('user_id', Auth::user()->id);
         if (!$lections->isEmpty()) {
             return view('course.module.left-lection', [
                 'homeworks' => $homeworks,
                 'module' => $module->load('Course'),
                 'lections' => $lections,
                 'allModules' => $allModule,
+                'homeworksTest' => $homeworksTest,
             ]);
         }
 
@@ -278,7 +279,7 @@ class LectionController extends Controller
             $lection->presentation = $name;
         }
 
-        if (Input::hasFile('slides') || $request->homework_end || $request->homework_check_end) {
+        if (Input::hasFile('homework') || $lection->homework_end || $lection->homework_check_end) {
             $lection->homework_end = !is_null($request->homework_end) ? $this->dateParse($request->homework_end) : null;
             $lection->homework_check_end = !is_null($request->homework_check_end) ? $this->dateParse($request->homework_check_end) : null;
         }
@@ -416,16 +417,22 @@ class LectionController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        foreach ($homeWorks as $homework) {
-            $evaluated = new User;
-            $homework['evaluated'] = $evaluated->evalutedHomeWorksCount($homework->user_id, $lection);
-        }
-        $lection = Lection::find($lection);
+        if ($homeWorks->count() > 0) {
+            foreach ($homeWorks as $homework) {
+                $evaluated = new User;
+                $homework['evaluated'] = $evaluated->evalutedHomeWorksCount($homework->user_id, $lection);
+            }
+            $lection = Lection::find($lection);
 
-        return view('course.lection_homeworksNew', [
-            'homeworks' => $homeWorks,
-            'lection' => $lection
-        ]);
+            $view = view('course.lection_homeworksNew', [
+                'homeworks' => $homeWorks,
+                'lection' => $lection
+            ]);
+        } else {
+            $view = back()->with('info', 'Няма домашни за тази лекция!');
+        }
+
+        return $view;
     }
 
     public function homeworkComment($homework)
@@ -448,6 +455,7 @@ class LectionController extends Controller
             ['user_id', Auth::user()->id],
             ['homework_id', $homework]
         ])->first();
+
         if ($isExisting) {
             $isExisting->comment = $request->comment;
             $isExisting->save();

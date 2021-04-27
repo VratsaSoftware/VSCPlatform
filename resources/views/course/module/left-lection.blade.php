@@ -11,13 +11,15 @@
                         Курс {{ $module->Course->name }}
                     </h2>
                 </div>
-                <div class="col-auto">
-                    <a href="" class="settings">
-                        <span class="d-block"></span>
-                        <span class="d-block"></span>
-                        <span class="d-block"></span>
-                    </a>
-                </div>
+                @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
+                    <div class="col-auto">
+                        <a href="" class="settings">
+                            <span class="d-block"></span>
+                            <span class="d-block"></span>
+                            <span class="d-block"></span>
+                        </a>
+                    </div>
+                @endif
             </div>
             <!-- Nav tabs -->
             <nav>
@@ -129,6 +131,10 @@
                                                 $validHomework = true;
                                             @endphp
                                             @break
+                                        @else
+                                            @php
+                                                $validHomework = false;
+                                            @endphp
                                         @endif
                                     @endforeach
                                 @endif

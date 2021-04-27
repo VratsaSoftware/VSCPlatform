@@ -91,7 +91,7 @@
             </div>
         </div>
 
-        <div class="row g-0 home-work align-items-center p-3 mt-1 homework-section" data-lection="{{ $loop->iteration }}">
+        <div class="row g-0 home-work align-items-center p-3 mt-1 homework-section" data-lection="{{ isset($loop->iteration) ? $loop->iteration : '' }}">
             <div class="col-lg-3 ps-3 text-normal text-uppercase pe-4">
                 <a href="@if(isset($lection->id)){{ route('homeworks.show', $lection->id) }}@endif">ДОМАШНО</a>
             </div>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="date-pill d-flex align-items-center">
-                            <input name="homework_end" id="homework-end-{{ $loop->iteration }}" type="text" class="text-center fw-bold date-input ext-navy-blue" placeholder="Няма">
+                            <input name="homework_end" id="homework-end-{{ isset($loop->iteration) ? $loop->iteration : '' }}" type="text" class="text-center fw-bold date-input ext-navy-blue" placeholder="Няма">
                         </div>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="date-pill d-flex align-items-center">
-                            <input name="homework_check_end" id="homework-check-end-{{ $loop->iteration }}" class="text-center fw-bold date-input ext-navy-blue" placeholder="Няма">
+                            <input name="homework_check_end" id="homework-check-end-{{ isset($loop->iteration) ? $loop->iteration : '' }}" class="text-center fw-bold date-input ext-navy-blue" placeholder="Няма">
                         </div>
                     </div>
                 </div>
