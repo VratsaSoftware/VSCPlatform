@@ -1707,6 +1707,12 @@ div.alert-success{
   box-shadow: 5px 5px 9px 0 rgba(105, 181, 1, 0.4);
 }
 
+div.alert-warning{
+  color: #d07d1e !important;
+  font-weight: bold;
+  box-shadow: 5px 5px 9px 0 rgba(217, 139, 30, 0.38);
+}
+
 @media only screen and (max-width: 1501px){
   .profile-details .separator{
       display: block;
