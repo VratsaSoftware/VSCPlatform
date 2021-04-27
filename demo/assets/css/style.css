@@ -1698,13 +1698,13 @@ div.alert-primary{
 div.alert-danger{
   color: #ef4136 !important;
   font-weight: bold;
-  box-shadow: 10px 23px 40px 0 rgba(255, 0, 0, 0.3);
+  box-shadow: 5px 5px 9px 0 rgba(255, 0, 0, 0.3);
 }
 
 div.alert-success{
   color: #69b501 !important;
   font-weight: bold;
-  box-shadow: 10px 23px 40px 0 rgba(105, 181, 1, 0.4);
+  box-shadow: 5px 5px 9px 0 rgba(105, 181, 1, 0.4);
 }
 
 @media only screen and (max-width: 1501px){
