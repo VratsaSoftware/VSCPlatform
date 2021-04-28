@@ -523,7 +523,6 @@ button {
   border-radius: 10px;
   width: 103px;
   height: 45px;
-  border: solid 1px #00214b;
 }
 .enddata {
   margin-left: -18px;
@@ -535,7 +534,6 @@ button {
   font-size: 17px;
 }
 .btn1-d {
-  width: 70px;
   height: 45px;
   border-radius: 15px;
 }
@@ -973,7 +971,7 @@ button {
   font-weight: bold;
 }
 .img-btn-ms {
-  margin-left: 50px;
+  margin-left: 30px;
 }
 /** Course as student END **/
 /** Course as teacher add module **/
@@ -1031,6 +1029,12 @@ button {
   overflow-x: hidden !important;
 }
 /** Course as teacher add module END**/
+/****/
+.uploaded-home-2 {
+  border-radius: 20px;
+  border: solid 1px #00214b;
+}
+/****/
 /** Media query**/
 @media only screen and (max-width: 1885px) {
   .student-scrol-module {
@@ -1673,6 +1677,9 @@ button {
       width: 550px;
     }
     /****/
+    .uploaded-home-2 {
+      border: none;
+    }
   }
   @media only screen and (min-width: 992px) {
     .toggled .slide-item {
