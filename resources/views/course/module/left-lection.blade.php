@@ -80,7 +80,7 @@
                                 </button>
                             </div>
                             <div class="col-xxl col-xl-12 col-sm ms-xxl-3 ms-xl-0 ms-sm-3 d-flex justify-content-end">
-                                <button class="ms-xxl-2 mt-xxl-0 mt-xl-4 mt-sm-0 mt-4 mb-0 btn-edit row g-0 align-items-center">
+                                <button class="ms-xxl-2 mt-xxl-0 mt-xl-4 mt-sm-0 mt-4 mb-0 btn-edit row g-0 align-items-center module-edit-btn">
                                     <div class="col text-start">Редактирай модул</div>
                                     <div class="col-auto">
                                         <img src="{{ asset('assets/img/edit.svg') }}">
@@ -293,12 +293,15 @@
             @include('flash-message')
             @foreach ($lections as $lection)
                 <div class="tab-pane fade @if ($loop->iteration == 1) show active @endif mt-xl-2 pt-xl-1" id="lection-{{ $loop->iteration }}" role="tabpanel" aria-labelledby="lection-2-tab">
+                    <!-- show lection -->
                     <span class="show-lection" style="display: none">
                         @include('course.module.lections.show')
                     </span>
+                    <!-- edit lection -->
                     <span class="edit-lection" style="display: none">
                         @include('course.module.lections.edit')
                     </span>
+                    <!-- create lection -->
                     <span class="add-lection" style="display: none">
                         @include('course.module.lections.create')
                     </span>
@@ -316,6 +319,10 @@
             @include('course.student.lections')
         @endforeach
     @endif
+    <!-- edit module -->
+    <span class="module-edit" style="display: none">
+        @include('course.module.edit')
+    </span>
 </div>
 <!-- right side END -->
 </div>
@@ -323,5 +330,6 @@
 <script src="{{ asset('js/lection/lection.js') }}"></script>
 <script src="{{ asset('js/lection/create.js') }}"></script>
 <script src="{{ asset('js/lection/validation.js') }}"></script>
+<script src="{{ asset('js/module/module.js') }}"></script>
 
 @endsection
