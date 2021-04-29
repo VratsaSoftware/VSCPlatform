@@ -1035,6 +1035,14 @@ button {
   border: solid 1px #00214b;
 }
 /****/
+.btn2-d {
+  width: 180px;
+  height: 45px;
+  border-radius: 15px;
+}
+.img-btn1-ms {
+  margin-left: 40px;
+}
 /** Media query**/
 @media only screen and (max-width: 1885px) {
   .student-scrol-module {
@@ -1150,6 +1158,16 @@ button {
   }
   .data-07 {
     font-size: 17px;
+  }
+  .text-uploaded-home-sm {
+    font-size: 12px;
+  }
+  .btn2-d {
+    width: 130px;
+    border-radius: 10px;
+  }
+  .img-btn1-ms {
+    margin-left: 15px;
   }
 }
 @media only screen and (max-width: 1546px) {
@@ -1679,6 +1697,25 @@ button {
     /****/
     .uploaded-home-2 {
       border: none;
+    }
+    .text-grey-2 {
+      font-size: 17px;
+      color: #778aa4;
+    }
+    .btn2-mobil {
+      height: 50px;
+      border-radius: 12px;
+      border: solid 1px #00214b;
+    }
+    .text-evaluation {
+      font-size: 14px;
+      color: #00214b;
+    }
+    .text-data-yellow {
+      color: #d07d1e;
+    }
+    .text-evaluation-number {
+      color: #69b501;
     }
   }
   @media only screen and (min-width: 992px) {
