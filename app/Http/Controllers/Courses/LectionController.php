@@ -177,15 +177,14 @@ class LectionController extends Controller
         $lections = Module::getLections($module->id, false);
         $allModule = Module::where('course_id', $module->Course->id)->get();
         $homeworks = Homework::where('user_id', Auth::user()->id)
-            ->pluck('lection_id');
-$homeworksTest = Homework::where('user_id', Auth::user()->id);
+            ->get();
+
         if (!$lections->isEmpty()) {
             return view('course.module.left-lection', [
                 'homeworks' => $homeworks,
                 'module' => $module->load('Course'),
                 'lections' => $lections,
                 'allModules' => $allModule,
-                'homeworksTest' => $homeworksTest,
             ]);
         }
 

@@ -16,7 +16,7 @@
                         <div class="col">
                             <ul class="list-inline text-end social-links">
                                 <li class="list-inline-item me-3">
-                                    <img src="{{ asset('assets/icons/facebook.png') }}" alt="#">
+                                    <img src="{{ asset('images/profile/facebook-icon.svg') }}" alt="#" style="width: 20px">
                                 </li>
                                 <li class="list-inline-item me-3">
                                     <img src="{{ asset('images/profile/linkdin-icon.svg') }}" style="width: 20px">

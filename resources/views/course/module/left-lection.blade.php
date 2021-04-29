@@ -126,7 +126,7 @@
                             @foreach ($lections as $lection)
                                 @if (!Auth::user()->isLecturer() || !Auth::user()->isAdmin())
                                     @foreach ($homeworks as $homework)
-                                        @if ($homework == $lection->id)
+                                        @if ($homework->lection_id == $lection->id)
                                             @php
                                                 $validHomework = true;
                                             @endphp

@@ -18,7 +18,7 @@
                             <li>
                                 <div class="course">
                                     <div class="row g-0">
-                                        <div class="col-auto">
+                                        <div class="col-auto" style="width: 316px">
                                             @include ('profile.course-icon', [
                                                 'type' => $course->training_type
                                             ])
@@ -49,10 +49,6 @@
                                 </div>
                             </li>
                         @endforeach
-                    @else
-                        <li>
-                            <div class="col" style="width: 316px"></div>
-                        </li>
                     @endif
                     <li>
                         <p class="fw-bold text-uppercase courses-section-title">Отминали курсове</p>
@@ -61,7 +57,7 @@
                         <li>
                             <div class="course">
                                 <div class="row g-0">
-                                    <div class="col-auto">
+                                    <div class="col-auto" style="width: 316px">
                                         @include ('profile.course-icon', [
                                             'type' => $pastCourse->training_type
                                         ])
