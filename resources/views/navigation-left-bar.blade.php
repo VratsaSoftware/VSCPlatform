@@ -48,7 +48,7 @@
                                 <span class="icon">
                                     <img src="{{ asset('assets/img/Application.svg') }}" alt="">
                                 </span>
-                                <span class="slide-item text-navy-blue" style="font-size:16px; margin-right:10px">Кандидатстване</span>
+                                <span class="slide-item text-navy-blue" style="font-size:16px; margin-right:5px">Кандидатстване</span>
                             </a>
                         </li>
                     @endif

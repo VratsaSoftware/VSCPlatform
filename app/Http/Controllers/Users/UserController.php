@@ -29,6 +29,17 @@ use App\Models\Users\Interest;
 class UserController extends Controller
 {
     /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\User  $user
+     * @return \Illuminate\Http\Response
+     */
+    public function editMyProfile()
+    {
+        return view('profile.edit');
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request

@@ -93,6 +93,7 @@ Route::post('/user/{user}/event/{event}','Events\EventController@cwIsPresent')->
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/myProfile', 'HomeController@index')->name('myProfile');
+    Route::get('/myProfile/edit', 'Users\UserController@editMyProfile')->name('editMyProfile');
     Route::resource('user', 'Users\UserController')->names('user');
     //epay payments routes
     Route::get('course/payment/create', 'Admin\AdminController@createPayment')->name('course.payment.create');
