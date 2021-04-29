@@ -31,8 +31,13 @@
 	                @include('navigation-left-bar')
 					<!-- nav menu END -->
 					<!-- left profile - course section -->
-					@include('profile.left-profile.course')
-					@include('profile.left-profile.course-mobile')
+					@if (Auth::user()->isAdmin())
+						@include('profile.admin.left-profile.course')
+						@include('profile.admin.left-profile.course-mobile')
+					@else
+						@include('profile.left-profile.course')
+						@include('profile.left-profile.course-mobile')
+					@endif
 					<!-- left profile - course section END -->
 					<!-- content -->
 					@yield('content')

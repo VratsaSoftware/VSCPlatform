@@ -25,6 +25,7 @@ use App\Models\Users\WorkExperience;
 use App\Models\Users\WorkPosition;
 use App\Models\Users\Hobbie;
 use App\Models\Users\Interest;
+use App\Models\CourseModules\Module;
 
 class UserController extends Controller
 {
@@ -36,7 +37,15 @@ class UserController extends Controller
      */
     public function editMyProfile()
     {
-        return view('profile.edit');
+        $courses = Course::where('ends', '>', Carbon::now()->format('Y-m-d H:m:s'))->orderBy('ends', 'DESC')->get();
+        $courses = $courses->load('Modules');
+        $pastCourses = Course::where('ends', '<', Carbon::now()->format('Y-m-d H:m:s'))->orderBy('ends', 'DESC')->get();
+        $pastCourses = $pastCourses->load('Modules');
+
+        return view('profile.edit',[
+            'courses' => $courses,
+            'pastCourses' => $pastCourses,
+        ]);
     }
 
     /**
