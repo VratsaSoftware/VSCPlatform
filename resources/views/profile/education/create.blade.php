@@ -11,7 +11,7 @@
                     <div class="mb-3">
                         <label for="schoolInput" class="form-label">Учебно заведение</label>
                         <input name="institution_name" type="text" class="form-control" id="schoolInput"
-                        placeholder="Учебно заведение">
+                        placeholder="Учебно заведение" required>
                     </div>
                     <div class="mb-3 input-group">
                         <span class="input-group-text">От</span>
