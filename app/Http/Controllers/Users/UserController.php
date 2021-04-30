@@ -297,7 +297,7 @@ class UserController extends Controller
     {
         $experience->delete();
         $message = __('Успешно изтрит Работен Опит!');
-        return redirect()->route('myProfile/edit')->with('success', $message);
+        return redirect('myProfile/edit')->with('success', $message);
     }
 
     public function createHobbies(Request $request)

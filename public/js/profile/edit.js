@@ -4,6 +4,7 @@ $(document).ready(function() {
         $('.mobile-profile-edit').css('left', '0');
     }
 
+    /* edit work experience */
     $('.work-experience-btn').click(function() {
         var workExperience = $(this).attr('data-work-experience');
         var companyName = $(this).attr('data-work-experience-company');

@@ -147,6 +147,13 @@
                                 <span data-bs-toggle="modal" data-bs-target="#editWorkExperienceModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2 work-experience-btn" data-work-experience="{{ $workExperience }}" data-work-experience-company="{{ $workExperience->Company->name }}" data-work-position="{{ $workExperience->Position->position }}" data-work-y_from="{{ $workExperience->y_from->format('m/d/Y') }}" data-work-y_to="{{ $workExperience->y_to->format('m/d/Y') }}" data-work-id="{{ $workExperience->id }}">
                                     <i class="fas fa-pen"></i>
                                 </span>
+                                <form method="post" action="{{ url('/user/delete/work/' . $workExperience->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                        <button class="btn position-absolute bottom-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                </form>
                             </div>
                         @endforeach
                         <span class="bio-pill position-absolute bottom-0 start-0 m-2 p-0"
