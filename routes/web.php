@@ -165,6 +165,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/user/upload/homework','Courses\LectionController@userUploadHomework')->name('user.upload.homework');
     Route::post('/lection/homework/user/eval','Courses\LectionController@userEvalHomework')->name('user.eval.homeworks');
 
+    Route::get('/lection/random-homework/{lectionId}','Courses\LectionController@userRandomHomework');
+
     Route::get('/lection/homework/{homework}/coments','Courses\LectionController@homeworkComment');
 
     Route::post('/lection/homework/{homework}/user/eval','Courses\LectionController@addHomeworkStudentComment')->name('student.homework.comment');

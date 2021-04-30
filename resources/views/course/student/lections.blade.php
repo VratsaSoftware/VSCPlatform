@@ -5,7 +5,7 @@
 		@if ($homework->lection_id == $lection->id)
 			@php
 				$validHomework = true;
-				$homeworkFile = $homework->file;
+				$myHomework = $homework;
 			@endphp
 			@break
 		@else
@@ -205,7 +205,7 @@
 					<button class="nav btn active py-0 pe-2 d-flex w-100 btn2-mobil d-flex justify-content-center" id="lection-1-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="lection-1" aria-selected="true">
 						<div class="row g-0 align-self-center">
 							<div class="col-auto text-start text-evaluation"><b>Оцени домашни</b></div>
-							<div class="col-auto text-start ms-1 text-evaluation-number"><b>(2)</b></div>
+							<div class="col-auto text-start ms-1 text-evaluation-number"><b>({{ $myHomework->evaluation_user }}/{{ $lection->HomeWorks->count() - 1 }})</b></div>
 							<div class="col-auto  ms-3 text-data-yellow"><b>(до {{ $lection->homework_check_end->format('d.m') }})</b></div>
 							<div class="col  align-items-center d-flex img-btn-ms">
 								<img src="{{ asset('assets/img/action_icon _black.svg') }}">
@@ -216,7 +216,7 @@
 			</div>
 			<div class="row g-0 uploaded-home-2 align-items-center p-3 mt-4 mb-lg-5">
 				<div class="col ps-3 text-uploaded-home text-uppercase text-navy-blue d-none d-lg-block">
-					ОЦЕНИ ДОМАШНО <b class="text-orange ps-2">(2)</b>
+					ОЦЕНИ ДОМАШНО <b class="text-orange ps-2">({{ $myHomework->evaluation_user }}/{{ $lection->HomeWorks->count() - 1 }})</b>
 				</div>
 				<div class="col d-none d-lg-block">
 					<div class="row">
@@ -238,7 +238,7 @@
 				</div>
 				<div class="col-auto d-none d-lg-block">
 					<div class="row g-0 ps-1">
-						<div class="col" data-bs-toggle="modal" data-bs-target="#educationModal">
+						<div class="col lection-eval" data-bs-toggle="modal" data-bs-target="#evaluateModal" data-lection-eval="{{ $lection->id }}">
 							<button class="nav btn  btn-green active py-0 pe-2 d-flex btn1-cs" id="lection-1-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="lection-1" aria-selected="true">
 								<div class="row g-0 align-self-center">
 									<div class="col-auto text-start ms-3 text-uploaded-home-sm">Виж всички</div>
@@ -259,25 +259,25 @@
 				<div class="row ">
 					<div class="text-white text-xs d-flex justify-content-center d-lg-none">
 						<div class="mt-2 me-2">
-							Домашно
+							Домашно ({{ $myHomework->evaluated_count }})
 						</div>
-						<a href="{{ asset('/data/homeworks/' . $homeworkFile) }}" download>
+						<a href="{{ asset('/data/homeworks/' . $myHomework->file) }}" download>
 							<img src="{{ asset('assets/img/download.svg') }}" alt="">
 						</a>
 					</div>
 				</div>
-				<div data-bs-toggle="modal" data-bs-target="#educationModal" class="col-auto mx-lg-0 mx-auto d-lg-none">
+				<div data-bs-toggle="modal" data-bs-target="#evaluateModal" class="col-auto mx-lg-0 mx-auto d-lg-none lection-eval" data-lection-eval="{{ $lection->id }}">
 					<button class="ms-xxl-2 mt-xxl-0 mt-4 btn-view-1 btn-green row g-0 align-items-center ">
 						<div class="col-auto mx-auto fw-bold see-all">Виж всички <img src="{{ asset('assets/img/action_icon.svg') }}"></div>
 					</button>
 				</div>
 				<!--END mobil-->
 				<div class="col ps-3 text-normal text-uppercase text-white d-none d-lg-block">
-					ДОМАШНО
+					ДОМАШНО ({{ $myHomework->evaluated_count }})
 				</div>
 				<div class="col-auto text-small align-self-end pe-3 text-white mb-2 d-none d-lg-block">Домашно</div>
 				<div class="col d-none d-lg-block">
-					<a href="{{ asset('/data/homeworks/' . $homeworkFile) }}" download>
+					<a href="{{ asset('/data/homeworks/' . $myHomework->file) }}" download>
 						<img src="{{ asset('assets/img/download.svg') }}" alt="">
 					</a>
 				</div>
@@ -312,51 +312,5 @@
 
 @php
 	$validHomework = false;
-	$homeworkFile = null;
+	$myHomework = null;
 @endphp
-
-<!-- Education Modal -->
-<div class="modal fade" id="educationModal" tabindex="-1" aria-labelledby="educationModal" aria-hidden="true">
-	<div class="modal-dialog">
-		<div class="modal-content" style="border-radius: 20px">
-			<div class="modal-header">
-				Оцени домашно
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
-			</div>
-			<div class="modal-body">
-				<form class="d-flex flex-column" action="#" method="POST" onsubmit="return false;">
-					<div class="row mb-3">
-						<div class="col-6">
-	                        Свали домашно
-						</div>
-						<div class="col-6">
-							Домашно
-							<a href="{{ asset('/data/homeworks/' . $homeworkFile) }}" download>
-								<img src="{{ asset('assets/img/download.svg') }}">
-							</a>
-						</div>
-					</div>
-					<div class="mb-3 form-floating">
-                        <textarea class="form-control" placeholder="Коментар" id="workExperience" style="height: 100px"></textarea>
-                        <label for="workExperience">Коментар</label>
-                    </div>
-					<button class="btn align-self-end btn-navy-blue mt-2 col-4">Оцени</button>
-				</form>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- Education Modal End -->
-
-<script type="text/javascript">
-$(document).ready(function() {
-	$('.upload-btn').click(function() {
-		var id = $(this).attr('data-lection-id');
-
-		$('.homework-input').change(function() {
-			var uploadHomework = '#upload-homework-' + id;
-			$(uploadHomework).submit();
-		});
-	});
-});
-</script>

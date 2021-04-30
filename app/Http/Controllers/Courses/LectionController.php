@@ -195,6 +195,33 @@ class LectionController extends Controller
         ])->with('error', $message);
     }
 
+    public static function userRandomHomework($lectionId)
+    {
+        $isUploaded = Auth::user()->isHomeWorkUploadedByLection(null, $lectionId);
+        if ($isUploaded) {
+            $homeworks = Homework::where('user_id', '!=', Auth::user()->id)
+                ->where('lection_id', $lectionId)
+                ->get();
+
+            $dataHomeworks = [];
+            foreach ($homeworks as $homework) {
+                $homeworkComment = HomeworkComment::where('homework_id', $homework->id)
+                    ->where('user_id', Auth::user()->id)
+                    ->first();
+
+                if (!$homeworkComment) {
+                    $dataHomeworks[] = $homework;
+                }
+            }
+
+            $randHomework = $dataHomeworks[rand(0, count($dataHomeworks) - 1)];
+
+            $homework = $randHomework->toJson();
+        }
+
+        return $homework;
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -485,17 +512,23 @@ class LectionController extends Controller
             'comment' => 'required|min:3|max:255'
         ]);
 
-        $eval = HomeworkComment::where([
-            ['user_id',Auth::user()->id],
-            ['homework_id',$homework]
-        ])->first();
+        $eval = new HomeworkComment;
+
         $eval->comment = $data['comment'];
+        $eval->user_id = Auth::user()->id;
+        $eval->homework_id = $homework;
         $eval->is_evaluated = 1;
         $eval->save();
 
         $homeworkEval = Homework::find($homework);
         $homeworkEval->evaluated_count += 1;
         $homeworkEval->save();
+
+        $myHomework = Homework::where('lection_id', $homeworkEval->lection_id)
+            ->where('user_id', Auth::user()->id)
+            ->first();
+        $myHomework->evaluation_user += 1;
+        $myHomework->save();
 
         $message = __('Успешно оценихте домашно, сега можете да изтеглите ново!');
         return back()->with('success', $message);

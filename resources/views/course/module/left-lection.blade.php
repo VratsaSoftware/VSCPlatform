@@ -318,6 +318,9 @@
         @foreach ($lections as $lection)
             @include('course.student.lections')
         @endforeach
+        <!-- Еvaluate Modal -->
+        @include('course.student.еvaluate-modal')
+        <!-- Еvaluate Modal End -->
     @endif
     <!-- edit module -->
     <span class="module-edit" style="display: none">
