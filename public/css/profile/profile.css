@@ -376,7 +376,7 @@ button {
 
 /** Right side **/
 .edit-content {
-  padding-left: 70px;
+  /* padding-left: 70px; */
   padding-right: 50px;
 }
 .edit-content input,
@@ -1364,7 +1364,7 @@ button {
 /* End Courses Section */
 
 .student-info{
-  padding-left: 70px;
+  /* padding-left: 70px; */
 }
 
 .student-name{
@@ -1480,7 +1480,7 @@ textarea.bio-description-large{
 div.bio-description-large{
   position: relative;
   width: 100%;
-  
+  /* min-height: 203px; */
   padding-bottom: 38px;
   /*
   border: solid 0.5px #00214b;

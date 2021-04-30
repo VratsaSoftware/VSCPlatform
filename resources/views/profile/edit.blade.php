@@ -85,14 +85,14 @@
                 </div>
                 <div class="col">
                     <label class="d-flex align-items-center input mx-3">
-                        <img src="{{ asset('images/profile/linkdin-icon.svg') }}" width="20" alt="#">
+                        <img src="{{ asset('images/profile/linkdin-icon.svg') }}" width="20" alt="#" class="ms-2">
                         <input type="text" name="linkedin" placeholder="Linkedin"
                         value="{{ $linkedinLink }}">
                     </label>
                 </div>
                 <div class="col">
                     <label class="d-flex align-items-center input">
-                        <img src="{{ asset('images/profile/github-icon.svg') }}" width="20" alt="#">
+                        <img src="{{ asset('images/profile/github-icon.svg') }}" width="20" alt="#" class="ms-2">
                         <input type="text" name="github" placeholder="Github" value="{{ $githubLink }}">
                     </label>
                 </div>
@@ -216,101 +216,102 @@
 </div>
 <!-- Mobile Profile Edit Menu -->
 <div class="col-12 mobile-profile-edit">
-    <div class="row g-0 p-0 pb-5 m-0">
-        <div class="col-auto">
-            <div class="row g-0 p-0 m-0 d-flex align-items-center">
-                <div class="col">
-                    @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
-                        <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                    @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
-                        <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                    @else
-                        <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                    @endif
-                </div>
-                <div class="col-auto ps-2 ms-1">
-                    <div class="user_name fw-bold d-block">
-                        Ставри
+    @include('flash-message')
+    <form id="user-update-form" action="{{ route('user.update', Auth::user()->id) }}" method="post" enctype="multipart/form-data" files="true">
+        @method('PUT')
+        @csrf
+        <div class="row g-0 p-0 pb-5 m-0">
+            <div class="col-auto">
+                <div class="row g-0 p-0 m-0 d-flex align-items-center">
+                    <div class="col">
+                        @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
+                            <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                        @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
+                            <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                        @else
+                            <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                        @endif
                     </div>
-                    <div class="role text-xs text-warm-grey d-block">
-                        Учител
+                    <div class="col-auto ps-2 ms-1">
+                        <div class="user_name fw-bold d-block">
+                            {{ Auth::user()->name }}
+                        </div>
+                        <div class="role text-xs text-warm-grey d-block">
+                            @if (Auth::user()->isAdmin())
+                                Админ
+                            @elseif (Auth::user()->isLecturer())
+                                Лектор
+                            @else
+                                Ученик
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-        <div class="col d-flex align-items-center justify-content-end">
-            <span class="d-inline-block" id="close-edit-menu">&#10006;</span>
-        </div>
-    </div>
-    <div class="col profile-details">
-        <div class="row g-0 d-flex align-items-center flex-column">
-            <div class="col pb-2">
-                <label class="d-flex align-items-center input">
-                    <img src="{{ asset('assets/icons/facebook.png') }}" width="30" alt="#">
-                    <input type="text" name="facebook" placeholder="Facebook" value="{{ $facebookLink }}">
-                </label>
-            </div>
-            <div class="col pb-2">
-                <label class="d-flex align-items-center input">
-                    <img src="{{ asset('assets/icons/insta.png') }}" width="30" alt="#">
-                    <input type="text" name="linkedin" placeholder="Linkedin" value="Instagram/Kalin_Iliev">
-                </label>
-            </div>
-            <div class="col pb-2">
-                <label class="d-flex align-items-center input">
-                    <img src="{{ asset('assets/icons/facebook.png') }}" width="30" alt="#">
-                    <input type="text" name="facebook" placeholder="Facebook" value="FB/Kalin_Iliev">
-                </label>
+            <div class="col d-flex align-items-center justify-content-end">
+                <a href="{{ asset('myProfile') }}">
+                    <span class="d-inline-block" id="close-edit-menu">&#10006;</span>
+                </a>
             </div>
         </div>
-        <div class="row g-0 pt-4 d-flex justify-content-end flex-column">
-            <div class="col pb-2">
-                <label class="d-flex align-items-center input">
-                    <img src="{{ asset('assets/icons/location.svg') }}" width="24" alt="#">
-                    <input type="text" name="location" placeholder="Град" value="{{ Auth::user()->location }}" @if(!Auth::user()->isAdmin()) required @endif>
-                </label>
+        <div class="col profile-details">
+            <div class="row g-0 d-flex align-items-center flex-column">
+                <div class="col pb-2">
+                    <label class="d-flex align-items-center input">
+                        <img src="{{ asset('assets/icons/facebook.png') }}" width="30" alt="#">
+                        <input type="text" name="facebook" placeholder="Facebook" value="{{ $facebookLink }}">
+                    </label>
+                </div>
+                <div class="col pb-2">
+                    <label class="d-flex align-items-center input">
+                        <img src="{{ asset('images/profile/linkdin-icon.svg') }}" width="20" alt="#" class="ms-2">
+                        <input type="text" name="linkedin" placeholder="Linkedin"
+                        value="{{ $linkedinLink }}">
+                    </label>
+                </div>
+                <div class="col pb-2">
+                    <label class="d-flex align-items-center input">
+                        <img src="{{ asset('images/profile/github-icon.svg') }}" width="20" alt="#" class="ms-2">
+                        <input type="text" name="github" placeholder="Github" value="{{ $githubLink }}">
+                    </label>
+                </div>
             </div>
-            <div class="col pb-2">
-                <label class="d-flex align-items-center input">
-                    <img src="{{ asset('assets/icons/birthday.svg') }}" width="30" alt="#">
-                    <input type="text" name="birthdate" class="date-input" placeholder="Дата на раждане" value="01.11.1994">
-                </label>
+            <div class="row g-0 pt-4 d-flex justify-content-end flex-column">
+                <div class="col pb-2">
+                    <label class="d-flex align-items-center input">
+                        <img src="{{ asset('assets/icons/location.svg') }}" width="24" alt="#">
+                        <input type="text" name="location" placeholder="Град" value="{{ Auth::user()->location }}" @if(!Auth::user()->isAdmin()) required @endif>
+                    </label>
+                </div>
+                <div class="col pb-2">
+                    <label class="d-flex align-items-center input">
+                        <img src="{{ asset('assets/icons/birthday.svg') }}" width="30" alt="#">
+                        <input type="text" name="birthdate" class="date-input" placeholder="Дата на раждане" value="01.11.1994">
+                    </label>
+                </div>
+                <div class="col pb-2">
+                    <label class="d-flex align-items-center input">
+                        <img src="{{ asset('assets/icons/email.svg') }}" width="30" alt="#">
+                        <input type="text" name="email" placeholder="Електронна поща"
+                        value="Kalin.a.iliev@gmail.com">
+                    </label>
+                </div>
             </div>
-            <div class="col pb-2">
-                <label class="d-flex align-items-center input">
-                    <img src="{{ asset('assets/icons/email.svg') }}" width="30" alt="#">
-                    <input type="text" name="email" placeholder="Електронна поща"
-                    value="Kalin.a.iliev@gmail.com">
-                </label>
+            <div class="row g-0 pt-4 flex-column">
+                <div class="col pb-2">
+                    <p class="fw-bold bio-title">За мен</p>
+                    <textarea class="bio-description" name="bio">Lorem ipsum
+                    </textarea>
+                </div>
             </div>
-        </div>
+        </form>
         <div class="row g-0 pt-4 flex-column">
-            <div class="col pb-2">
-                <p class="fw-bold bio-title">За мен</p>
-                <textarea class="bio-description" name="bio">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-                    nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
-                    wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                    lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
-                    dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
-                    dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
-                    dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
-                    feugait nulla facilisi.
-                </textarea>
-            </div>
             <div class="col pb-2">
                 <p class="fw-bold bio-title">Образование</p>
                 <div class="bio-description-large">
                     <div class="row g-0">
                         <div class="col-auto pe-3 fw-bold item-number">1.</div>
-                        <div class="col mb-3 bio-description">Lorem ipsum dolor sit amet,
-                            consectetuer adipiscing elit,
-                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-                            erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-                            molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
-                            eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
-                            zzril delenit augue duis dolore te feugait nulla facilisi.
+                        <div class="col mb-3 bio-description">Lorem ipsum
                         </div>
                         <button data-bs-toggle="modal" data-bs-target="#educationModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
                             <i class="fas fa-pen"></i>
@@ -318,15 +319,7 @@
                     </div>
                     <div class="row g-0">
                         <div class="col-auto pe-3 fw-bold item-number">2.</div>
-                        <div class="col bio-description">Lorem ipsum dolor sit amet, consectetuer
-                            adipiscing elit,
-                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-                            erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-                            molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
-                            eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
-                            zzril delenit augue duis dolore te feugait nulla facilisi.
+                        <div class="col bio-description">Lorem ipsum
                         </div>
                         <button data-bs-toggle="modal" data-bs-target="#educationModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
                             <i class="fas fa-pen"></i>
@@ -341,15 +334,7 @@
                 <div class="bio-description-large">
                     <div class="row g-0">
                         <div class="col-auto pe-3 fw-bold item-number">1.</div>
-                        <div class="col mb-3 bio-description">Lorem ipsum dolor sit amet,
-                            consectetuer adipiscing elit,
-                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-                            erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-                            molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
-                            eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
-                            zzril delenit augue duis dolore te feugait nulla facilisi.
+                        <div class="col mb-3 bio-description">Lorem ipsum
                         </div>
                         <button data-bs-toggle="modal" data-bs-target="#workExperienceModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
                             <i class="fas fa-pen"></i>
@@ -357,15 +342,7 @@
                     </div>
                     <div class="row g-0">
                         <div class="col-auto pe-3 fw-bold item-number">2.</div>
-                        <div class="col bio-description">Lorem ipsum dolor sit amet, consectetuer
-                            adipiscing elit,
-                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-                            erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-                            molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
-                            eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
-                            zzril delenit augue duis dolore te feugait nulla facilisi.
+                        <div class="col bio-description">Lorem ipsum
                         </div>
                         <button data-bs-toggle="modal" data-bs-target="#workExperienceModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
                             <i class="fas fa-pen"></i>
@@ -381,15 +358,7 @@
                 <div class="bio-description-large">
                     <div class="row g-0">
                         <div class="col-auto pe-3 fw-bold item-number">1.</div>
-                        <div class="col mb-3 bio-description">Lorem ipsum dolor sit amet,
-                            consectetuer adipiscing elit,
-                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-                            erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-                            molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
-                            eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
-                            zzril delenit augue duis dolore te feugait nulla facilisi.
+                        <div class="col mb-3 bio-description">Lorem
                         </div>
                         <button data-bs-toggle="modal" data-bs-target="#interestsModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
                             <i class="fas fa-pen"></i>
@@ -397,15 +366,7 @@
                     </div>
                     <div class="row g-0">
                         <div class="col-auto pe-3 fw-bold item-number">2.</div>
-                        <div class="col bio-description">Lorem ipsum dolor sit amet, consectetuer
-                            adipiscing elit,
-                            sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-                            erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                            ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                            Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-                            molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
-                            eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
-                            zzril delenit augue duis dolore te feugait nulla facilisi.
+                        <div class="col bio-description">Lorem ipsum
                         </div>
                         <button data-bs-toggle="modal" data-bs-target="#interestsModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
                             <i class="fas fa-pen"></i>
@@ -419,7 +380,7 @@
     </div>
     <!-- Save Button -->
     <div class="col mt-2">
-        <button class="btn edit-profile-btn-filled d-flex align-items-center py-0 w-100">
+        <button form="user-update-form" class="btn edit-profile-btn-filled d-flex align-items-center py-0 w-100">
             <div class="row w-100 g-0">
                 <div class="col text-center">
                     <span class="fw-bold">Запази промени</span>
