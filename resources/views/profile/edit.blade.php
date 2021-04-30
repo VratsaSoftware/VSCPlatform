@@ -135,40 +135,22 @@
                 <div class="col pe-2 me-5">
                     <p class="fw-bold bio-title">Работен опит</p>
                     <div class="bio-description-large">
-                        <div class="row g-0">
-                            <div class="col-auto pe-3 fw-bold item-number">1.</div>
-                            <div class="col mb-3 bio-description">Lorem ipsum dolor sit amet,
-                                consectetuer adipiscing elit,
-                                sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-                                erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                                ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-                                molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
-                                eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
-                                zzril delenit augue duis dolore te feugait nulla facilisi.
+                        @foreach($allWorkExperience as $workExperience)
+                            <div class="row g-0">
+                                <div class="col-auto pe-3 fw-bold item-number">{{ $loop->iteration }}.</div>
+                                <div class="col mb-3 bio-description">
+                                    <span style="font-size: 18px">
+                                        <div class="col-auto pe-3 fw-bold item-number">{{ $workExperience->Company->name }}</div>
+                                        {{ $workExperience->y_from->format('d.m.Y') }}/{{ $workExperience->y_to ? $workExperience->y_to->format('d.m.Y') : 'В ход' }}
+                                    </span>
+                                </div>
+                                <span data-bs-toggle="modal" data-bs-target="#workExperienceModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
+                                    <i class="fas fa-pen"></i>
+                                </span>
                             </div>
-                            <butto data-bs-toggle="modal" data-bs-target="#workExperienceModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
-                                <i class="fas fa-pen"></i>
-                            </button>
-                        </div>
-                        <div class="row g-0">
-                            <div class="col-auto pe-3 fw-bold item-number">2.</div>
-                            <div class="col bio-description">Lorem ipsum dolor sit amet, consectetuer
-                                adipiscing elit,
-                                sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-                                erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                                ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-                                molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
-                                eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
-                                zzril delenit augue duis dolore te feugait nulla facilisi.
-                            </div>
-                            <butto data-bs-toggle="modal" data-bs-target="#workExperienceModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
-                                <i class="fas fa-pen"></i>
-                            </button>
-                        </div>
-                        <button class="bio-pill position-absolute bottom-0 start-0 m-2 p-0"
-                        data-bs-toggle="modal" data-bs-target="#workExperienceModal">+</button>
+                        @endforeach
+                        <span class="bio-pill position-absolute bottom-0 start-0 m-2 p-0"
+                        data-bs-toggle="modal" data-bs-target="#createWorkExperienceModal">+</span>
                     </div>
                 </div>
                 <div class="col">
@@ -176,38 +158,22 @@
                     <div class="bio-description-large">
                         <div class="row g-0">
                             <div class="col-auto pe-3 fw-bold item-number">1.</div>
-                            <div class="col mb-3 bio-description">Lorem ipsum dolor sit amet,
-                                consectetuer adipiscing elit,
-                                sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-                                erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                                ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-                                molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
-                                eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
-                                zzril delenit augue duis dolore te feugait nulla facilisi.
+                            <div class="col mb-3 bio-description">Lorem ipsum
                             </div>
-                            <button data-bs-toggle="modal" data-bs-target="#interestsModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
+                            <span data-bs-toggle="modal" data-bs-target="#interestsModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
                                 <i class="fas fa-pen"></i>
-                            </button>
+                            </span>
                         </div>
                         <div class="row g-0">
                             <div class="col-auto pe-3 fw-bold item-number">2.</div>
-                            <div class="col bio-description">Lorem ipsum dolor sit amet, consectetuer
-                                adipiscing elit,
-                                sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-                                erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                                ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-                                molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
-                                eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
-                                zzril delenit augue duis dolore te feugait nulla facilisi.
+                            <div class="col bio-description">Lorem ipsum
                             </div>
-                            <button data-bs-toggle="modal" data-bs-target="#interestsModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
+                            <span data-bs-toggle="modal" data-bs-target="#interestsModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
                                 <i class="fas fa-pen"></i>
-                            </button>
+                            </span>
                         </div>
-                        <button class="bio-pill position-absolute bottom-0 start-0 m-2 p-0"
-                        data-bs-toggle="modal" data-bs-target="#interestsModal">+</button>
+                        <span class="bio-pill position-absolute bottom-0 start-0 m-2 p-0"
+                        data-bs-toggle="modal" data-bs-target="#interestsModal">+</span>
                     </div>
                 </div>
                 <div class="w-100"></div>
@@ -216,38 +182,22 @@
                     <div class="bio-description-large">
                         <div class="row g-0">
                             <div class="col-auto pe-3 fw-bold item-number">1.</div>
-                            <div class="col mb-3 bio-description">Lorem ipsum dolor sit amet,
-                                consectetuer adipiscing elit,
-                                sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-                                erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                                ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-                                molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
-                                eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
-                                zzril delenit augue duis dolore te feugait nulla facilisi.
+                            <div class="col mb-3 bio-description">Lorem ipsum
                             </div>
-                            <button data-bs-toggle="modal" data-bs-target="#educationModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
+                            <span data-bs-toggle="modal" data-bs-target="#educationModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
                                 <i class="fas fa-pen"></i>
-                            </button>
+                            </span>
                         </div>
                         <div class="row g-0">
                             <div class="col-auto pe-3 fw-bold item-number">2.</div>
-                            <div class="col bio-description">Lorem ipsum dolor sit amet, consectetuer
-                                adipiscing elit,
-                                sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam
-                                erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-                                ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat.
-                                Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse
-                                molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero
-                                eros et accumsan et iusto odio dignissim qui blandit praesent luptatum
-                                zzril delenit augue duis dolore te feugait nulla facilisi.
+                            <div class="col bio-description">Lorem ipsum
                             </div>
-                            <button data-bs-toggle="modal" data-bs-target="#educationModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
+                            <span data-bs-toggle="modal" data-bs-target="#educationModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
                                 <i class="fas fa-pen"></i>
-                            </button>
+                            </span>
                         </div>
-                        <button class="bio-pill position-absolute bottom-0 start-0 m-2 p-0"
-                        data-bs-toggle="modal" data-bs-target="#educationModal">+</button>
+                        <span class="bio-pill position-absolute bottom-0 start-0 m-2 p-0"
+                        data-bs-toggle="modal" data-bs-target="#educationModal">+</span>
                     </div>
                 </div>
                 <div class="col"></div>
@@ -474,90 +424,13 @@
 
 <!-- Modals Start -->
 <!-- Work Experience Modal -->
-<div class="modal fade" id="workExperienceModal" tabindex="-1" aria-labelledby="workExperienceModal"
-aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                Работен опит
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
-            </div>
-            <div class="modal-body">
-                <form class="d-flex flex-column" action="#" method="POST" onsubmit="return false;">
-                    <div class="mb-3">
-                        <label for="workCompany" class="form-label">Работодател</label>
-                        <input type="text" class="form-control" id="workCompany" placeholder="VolaSoftware">
-                    </div>
-                    <div class="mb-3 input-group">
-                        <span class="input-group-text">От</span>
-                        <input type="text" class="form-control" placeholder="2015">
-                        <span class="input-group-text">До</span>
-                        <input type="text" class="form-control" placeholder="2019">
-                    </div>
-                    <div class="mb-3">
-                        <label for="workPosition" class="form-label">Длъжност</label>
-                        <input type="text" class="form-control" id="workPosition" placeholder="Junior Developer">
-                    </div>
-                    <button class="btn align-self-end btn-navy-blue mt-2 col-4">Запази</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+@include('profile.work-experience.create')
 <!-- Work Experience Modal End -->
 <!-- Education Modal -->
-<div class="modal fade" id="educationModal" tabindex="-1" aria-labelledby="educationModal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                Образование
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
-            </div>
-            <div class="modal-body">
-                <form class="d-flex flex-column" action="#" method="POST" onsubmit="return false;">
-                    <div class="mb-3">
-                        <label for="schoolInput" class="form-label">Учебно заведение</label>
-                        <input type="text" class="form-control" id="schoolInput"
-                        placeholder="ППМГ 'Акад. Иван Ценов'">
-                    </div>
-                    <div class="mb-3 input-group">
-                        <span class="input-group-text">От</span>
-                        <input type="text" class="form-control" placeholder="2015">
-                        <span class="input-group-text">До</span>
-                        <input type="text" class="form-control" placeholder="2019">
-                    </div>
-                    <div class="mb-3">
-                        <label for="schoolSpecialty" class="form-label">Специалност</label>
-                        <input type="text" class="form-control" id="schoolSpecialty" placeholder="Информатика">
-                    </div>
-                    <button class="btn align-self-end btn-navy-blue mt-2 col-4">Запази</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+@include('profile.education.create')
 <!-- Education Modal End -->
 <!-- Interests Modal -->
-<div class="modal fade" id="interestsModal" tabindex="-1" aria-labelledby="interestsModal" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                Интереси
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
-            </div>
-            <div class="modal-body">
-                <form class="d-flex flex-column" action="#" method="POST" onsubmit="return false;">
-                    <div class="form-floating">
-                        <textarea class="form-control" placeholder="Интереси" id="interests"
-                        style="height: 100px"></textarea>
-                        <label for="interests">Интереси</label>
-                    </div>
-                    <button class="btn align-self-end btn-navy-blue mt-2 col-4">Запази</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
+@include('profile.interests.create')
 <!-- Interests Modal End -->
 <!-- Modals End -->
 @endsection

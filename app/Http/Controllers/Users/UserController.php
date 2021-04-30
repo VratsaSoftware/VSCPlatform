@@ -42,6 +42,7 @@ class UserController extends Controller
         $pastCourses = Course::where('ends', '<', Carbon::now()->format('Y-m-d H:m:s'))->orderBy('ends', 'DESC')->get();
         $pastCourses = $pastCourses->load('Modules');
 
+        /* links */
         $facebookLink = SocialLink::where('cl_social_id', 1)
             ->pluck('link')
             ->first();
@@ -52,12 +53,16 @@ class UserController extends Controller
             ->pluck('link')
             ->first();
 
+        $allWorkExperience = WorkExperience::where('user_id', Auth::user()->id)
+            ->get();
+
         return view('profile.edit', [
             'courses' => $courses,
             'pastCourses' => $pastCourses,
             'facebookLink' => $facebookLink,
             'linkedinLink' => $linkedinLink,
             'githubLink' => $githubLink,
+            'allWorkExperience' => $allWorkExperience,
         ]);
     }
 
@@ -234,17 +239,17 @@ class UserController extends Controller
     public function createWorkExperience(Request $request)
     {
         $data = $request->validate([
-            'y_from' => 'required|date|date_format:Y-m-d',
-            'y_to' => 'sometimes|nullable|date|date_format:Y-m-d',
+            'y_from' => 'required|date|date_format:m/d/Y',
+            'y_to' => 'sometimes|nullable|date|date_format:m/d/Y',
             'work_company' => 'required|string',
             'work_position' => "required|string",
         ]);
 
         $createWorkExp = new WorkExperience;
         $createWorkExp->user_id = Auth::user()->id;
-        $createWorkExp->y_from = $request->y_from;
-        if(!is_null($request->y_to)) {
-            $createWorkExp->y_to = $request->y_to;
+        $createWorkExp->y_from = $this->dateParse($data['y_from']);
+        if(!is_null($data['y_to'])) {
+            $createWorkExp->y_to = $this->dateParse($data['y_to']);
         }
         $workCompany = WorkCompany::firstOrCreate(
             ['name' => $request->work_company]
@@ -257,7 +262,7 @@ class UserController extends Controller
         $createWorkExp->position_id = $workPosition->id;
         $createWorkExp->save();
         $message = __('Успешно добавен Работен Опит!');
-        return redirect()->route('myProfile')->with('success', $message);
+        return redirect('myProfile/edit')->with('success', $message);
     }
 
     public function updateWorkExperience(Request $request)
@@ -283,14 +288,14 @@ class UserController extends Controller
         $updWorkExp->position_id = $workPosition->id;
         $updWorkExp->save();
         $message = __('Успешно направени промени в секция Работен Опит!');
-        return redirect()->route('myProfile')->with('success', $message);
+        return redirect('myProfile/edit')->with('success', $message);
     }
 
     public function deleteWorkExperience(WorkExperience $experience)
     {
         $experience->delete();
         $message = __('Успешно изтрит Работен Опит!');
-        return redirect()->route('myProfile')->with('success', $message);
+        return redirect()->route('myProfile/edit')->with('success', $message);
     }
 
     public function createHobbies(Request $request)

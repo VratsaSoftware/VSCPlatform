@@ -1436,13 +1436,13 @@ button {
 }
 
 div.bio-description, p.bio-description{
-  min-height: 40px;
+  min-height: 10px;
   max-height: 100px;
-  font-size: 14px;
+  font-size: 18px;
   line-height: 1.21;
   letter-spacing: 0.28px;
-  overflow: hidden;
-  word-break: break-word;
+  /* overflow: hidden;
+  word-break: break-word; */
 }
 
 textarea.bio-description{
