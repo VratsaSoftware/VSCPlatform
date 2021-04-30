@@ -55,6 +55,8 @@ class UserController extends Controller
 
         $allWorkExperience = WorkExperience::where('user_id', Auth::user()->id)
             ->get();
+        $allEducation = Education::where('user_id', Auth::user()->id)
+            ->get();
 
         return view('profile.edit', [
             'courses' => $courses,
@@ -63,6 +65,7 @@ class UserController extends Controller
             'linkedinLink' => $linkedinLink,
             'githubLink' => $githubLink,
             'allWorkExperience' => $allWorkExperience,
+            'allEducation' => $allEducation,
         ]);
     }
 
@@ -150,21 +153,21 @@ class UserController extends Controller
 
     public function createEducation(Request $request)
     {
-        $request['valid_instTypes'] = \Config::get('institutionTypes');
-        $request['valid_types'] = \Config::get('eduTypes');
+        // $request['valid_instTypes'] = \Config::get('institutionTypes');
+        // $request['valid_types'] = \Config::get('eduTypes');
         $data = $request->validate([
             'y_from' => 'required|numeric|min:1900|max:2099',
             'y_to' => 'sometimes|nullable|numeric|min:'.((int)$request->y_from-1).'|max:2099',
-            'edu_type' => 'required|numeric',
-            'edu_institution_type' => "required|in_array:valid_instTypes.*",
+            // 'edu_type' => 'required|numeric',
+            // 'edu_institution_type' => "required|in_array:valid_instTypes.*",
             'institution_name' => 'required|string',
             'specialty' => 'string',
-            'edu_course' => 'sometimes',
-            'edu_type_second' => 'sometimes|in_array:valid_types.*'
+            // 'edu_course' => 'sometimes',
+            // 'edu_type_second' => 'sometimes|in_array:valid_types.*'
         ]);
 
         $eduInstitution = EducationInstitution::firstOrCreate(
-            ['type' => $request->edu_institution_type,'name' => $request->institution_name]
+            [/*'type' => $request->edu_institution_type,*/'name' => $request->institution_name]
         );
 
         $eduSpeciality = EducationSpeciality::firstOrCreate(
@@ -178,17 +181,17 @@ class UserController extends Controller
             $insEdu->user_id = Auth::user()->id;
             $insEdu->y_from = $request->y_from;
             $insEdu->y_to = $request->y_to;
-            $insEdu->cl_education_type_id = $request->edu_type;
+            // $insEdu->cl_education_type_id = $request->edu_type;
             $insEdu->institution_id = $eduInstitution->id;
             $insEdu->specialty_id = $eduSpeciality->id;
-            $insEdu->description = $request->edu_description;
-            if($request->edu_type_second !== 'null') {
-                $insEdu->type = $request->edu_type_second;
-            }
+            // $insEdu->description = $request->edu_description;
+            // if($request->edu_type_second !== 'null') {
+            //     $insEdu->type = $request->edu_type_second;
+            // }
             $insEdu->save();
 
             $message = __('Успешно добавено Образование!');
-            return redirect()->route('myProfile')->with('success', $message);
+            return redirect('myProfile/edit')->with('success', $message);
         }
         $message = __('Вече съществува такова Образование за този Потребител!');
         return redirect()->route('myProfile')->with('error', $message);
@@ -226,14 +229,14 @@ class UserController extends Controller
         $updEdu->save();
 
         $message = __('Успешно направени промени в секция Образование!');
-        return redirect()->route('myProfile')->with('success', $message);
+        return redirect('myProfile/edit')->with('success', $message);
     }
 
     public function deleteEducation(Education $education)
     {
         $education->delete();
         $message = __('Успешно изтрито Образование!');
-        return redirect()->route('myProfile')->with('success', $message);
+        return redirect('myProfile/edit')->with('success', $message);
     }
 
     public function createWorkExperience(Request $request)

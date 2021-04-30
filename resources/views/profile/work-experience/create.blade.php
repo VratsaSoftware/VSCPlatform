@@ -8,7 +8,7 @@ aria-hidden="true">
             </div>
             <div class="modal-body">
                 <form class="d-flex flex-column" action="{{ asset('/user/create/work/experience') }}" method="post">
-                        @csrf
+                    @csrf
                     <div class="mb-3">
                         <label for="workCompany" class="form-label">Компания/Фирма</label>
                         <input name="work_company" type="text" class="form-control" id="workCompany" placeholder="Компания/Фирма" required>

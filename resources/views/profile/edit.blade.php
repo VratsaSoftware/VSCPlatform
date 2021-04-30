@@ -135,7 +135,7 @@
                 <div class="col pe-2 me-5">
                     <p class="fw-bold bio-title">Работен опит</p>
                     <div class="bio-description-large">
-                        @foreach($allWorkExperience as $workExperience)
+                        @foreach ($allWorkExperience as $workExperience)
                             <div class="row g-0">
                                 <div class="col-auto pe-3 fw-bold item-number">{{ $loop->iteration }}.</div>
                                 <div class="col mb-3 bio-description">
@@ -187,24 +187,31 @@
                 <div class="col pe-2 me-5 mt-4">
                     <p class="fw-bold bio-title">Образование</p>
                     <div class="bio-description-large">
-                        <div class="row g-0">
-                            <div class="col-auto pe-3 fw-bold item-number">1.</div>
-                            <div class="col mb-3 bio-description">Lorem ipsum
+                        @foreach ($allEducation as $education)
+                            <div class="row g-0">
+                                <div class="col-auto pe-3 fw-bold item-number">{{ $loop->iteration }}.</div>
+                                <div class="col mb-3 bio-description">
+                                    <span style="font-size: 18px">
+                                        <div class="col-auto pe-3 fw-bold item-number">
+                                            {{ $education->EduInstitution->name }}
+                                        </div>
+                                        {{ $education->EduSpeciality->name }} - {{ $education->y_from }}/{{ $education->y_to ? $education->y_to : 'В ход' }}
+                                    </span>
+                                </div>
+                                <span data-bs-toggle="modal" data-bs-target="#educationModal-edit" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
+                                    <i class="fas fa-pen"></i>
+                                </span>
+                                <form method="post" action="{{ url('/user/delete/education/' . $education->id) }}">
+                                    @csrf
+                                    @method('DELETE')
+                                        <button class="btn position-absolute bottom-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
+                                </form>
                             </div>
-                            <span data-bs-toggle="modal" data-bs-target="#educationModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
-                                <i class="fas fa-pen"></i>
-                            </span>
-                        </div>
-                        <div class="row g-0">
-                            <div class="col-auto pe-3 fw-bold item-number">2.</div>
-                            <div class="col bio-description">Lorem ipsum
-                            </div>
-                            <span data-bs-toggle="modal" data-bs-target="#educationModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
-                                <i class="fas fa-pen"></i>
-                            </span>
-                        </div>
+                        @endforeach
                         <span class="bio-pill position-absolute bottom-0 start-0 m-2 p-0"
-                        data-bs-toggle="modal" data-bs-target="#educationModal">+</span>
+                        data-bs-toggle="modal" data-bs-target="#educationModal-create">+</span>
                     </div>
                 </div>
                 <div class="col"></div>
