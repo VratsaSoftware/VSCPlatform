@@ -268,15 +268,17 @@ class UserController extends Controller
     public function updateWorkExperience(Request $request)
     {
         $data = $request->validate([
-            'y_from' => 'required|date|date_format:Y-m-d',
-            'y_to' => 'required|date|date_format:Y-m-d',
+            'y_from' => 'required|date|date_format:m/d/Y',
+            'y_to' => 'date|date_format:m/d/Y',
             'work_company' => 'required|string',
             'work_position' => "required|string",
         ]);
 
         $updWorkExp = WorkExperience::find($request->work_id);
-        $updWorkExp->y_from = $request->y_from;
-        $updWorkExp->y_to = $request->y_to;
+        $updWorkExp->y_from = $this->dateParse($data['y_from']);
+        if(!is_null($data['y_to'])) {
+            $updWorkExp->y_to = $this->dateParse($data['y_to']);
+        }
         $workCompany = WorkCompany::firstOrCreate(
             ['name' => $request->work_company]
         );

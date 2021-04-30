@@ -144,7 +144,7 @@
                                         {{ $workExperience->y_from->format('d.m.Y') }}/{{ $workExperience->y_to ? $workExperience->y_to->format('d.m.Y') : 'В ход' }}
                                     </span>
                                 </div>
-                                <span data-bs-toggle="modal" data-bs-target="#workExperienceModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
+                                <span data-bs-toggle="modal" data-bs-target="#editWorkExperienceModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2 work-experience-btn" data-work-experience="{{ $workExperience }}" data-work-experience-company="{{ $workExperience->Company->name }}" data-work-position="{{ $workExperience->Position->position }}" data-work-y_from="{{ $workExperience->y_from->format('m/d/Y') }}" data-work-y_to="{{ $workExperience->y_to->format('m/d/Y') }}" data-work-id="{{ $workExperience->id }}">
                                     <i class="fas fa-pen"></i>
                                 </span>
                             </div>
@@ -425,6 +425,7 @@
 <!-- Modals Start -->
 <!-- Work Experience Modal -->
 @include('profile.work-experience.create')
+@include('profile.work-experience.edit')
 <!-- Work Experience Modal End -->
 <!-- Education Modal -->
 @include('profile.education.create')
@@ -433,4 +434,5 @@
 @include('profile.interests.create')
 <!-- Interests Modal End -->
 <!-- Modals End -->
+
 @endsection
