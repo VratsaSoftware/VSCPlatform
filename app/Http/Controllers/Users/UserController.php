@@ -42,9 +42,22 @@ class UserController extends Controller
         $pastCourses = Course::where('ends', '<', Carbon::now()->format('Y-m-d H:m:s'))->orderBy('ends', 'DESC')->get();
         $pastCourses = $pastCourses->load('Modules');
 
-        return view('profile.edit',[
+        $facebookLink = SocialLink::where('cl_social_id', 1)
+            ->pluck('link')
+            ->first();
+        $linkedinLink = SocialLink::where('cl_social_id', 2)
+            ->pluck('link')
+            ->first();
+        $githubLink = SocialLink::where('cl_social_id', 3)
+            ->pluck('link')
+            ->first();
+
+        return view('profile.edit', [
             'courses' => $courses,
             'pastCourses' => $pastCourses,
+            'facebookLink' => $facebookLink,
+            'linkedinLink' => $linkedinLink,
+            'githubLink' => $githubLink,
         ]);
     }
 
@@ -58,11 +71,11 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $data = $request->validate([
-            'picture' => 'file|image|mimes:jpeg,png,gif,webp,ico|max:4000',
-            'name' => 'sometimes|string|min:3|max:25|',
-            'location' => 'sometimes|min:3|max:10|string|',
-            'dob' => 'sometimes|date_format:Y-m-d|before:'.Carbon::now().'|after:1950-01-01',
-            'email' => ['sometimes','unique:users','email'],
+            'picture' => 'nullable|file|image|mimes:jpeg,png,gif,webp,ico|max:4000',
+            'name' => 'nullable|sometimes|string|min:3|max:25|',
+            'location' => 'nullable|sometimes|min:3|max:10|string|',
+            'dob' => 'nullable|sometimes|date_format:m/d/Y|before:'.Carbon::now().'|after:01/01/1950',
+            'email' => ['sometimes', 'email'],
             'facebook' => 'nullable|url|min:5|max:250',
             'linkedin' => 'nullable|url|min:5|max:250',
             'github' => 'nullable|url|min:5|max:250',
@@ -107,15 +120,27 @@ class UserController extends Controller
             $user->location = $data['location'];
         }
         if ($request->has('dob')) {
-            $user->dob = $data['dob'];
+            $user->dob = $data['dob'] ? $this->dateParse($data['dob']) : null;
         }
         if ($request->has('email')) {
             $user->email = $data['email'];
         }
+        if ($request->has('bio')) {
+            $user->bio = $request->bio;
+        }
+
         $updateLinks = SocialLink::updateLinks($user->id, $request);
         $user->save();
         $message = __('Успешно направени промени!');
-        return redirect()->route('myProfile')->with('success', $message);
+        return redirect('myProfile/edit')->with('success', $message);
+    }
+
+    /* date parse */
+    private function dateParse($date)
+    {
+        $parseDete = date_parse($date);
+
+        return $parseDete['year'] . '-' . $parseDete['month'] . '-' . $parseDete['day'];
     }
 
     public function createEducation(Request $request)

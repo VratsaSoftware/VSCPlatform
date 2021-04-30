@@ -3,7 +3,7 @@
 @section('content')
         <div class="content-wrap">
             <div class="section">
-                <form action="{{ route('user.update',Auth::user()->id) }}" method="post" id="update_user" enctype="multipart/form-data" files="true">
+                <form action="{{ route('user.update', Auth::user()->id) }}" method="post" id="update_user" enctype="multipart/form-data" files="true">
                     {{ method_field('PUT') }}
                     {{ csrf_field() }}
                     @if (!empty(Session::get('success')))

@@ -4,108 +4,131 @@
 @section('content')
 <script src="{{ asset('js/profile/edit.js') }}"></script>
 <div id="right-side" class="col-lg pt-md-5 mt-md-4 tab-content edit-content">
-    <div class="row g-0 m-0 p-0">
-        <div class="col-auto">
-            <p class="m-0 p-0 text-uppercase student-name">Калин илиев</p>
-            <p class="m-0 p-0 text-uppercase role-name">Студент</p>
-        </div>
-        <div class="col">
-            <div class="row g-0">
-                <div class="col d-flex flex-column">
-                    <div class="row g-0">
-                        <div class="col">
-                            <ul class="list-inline text-end social-links">
-                                <li class="list-inline-item me-3">
-                                    <img src="{{ asset('images/profile/facebook-icon.svg') }}" alt="#" style="width: 20px">
-                                </li>
-                                <li class="list-inline-item me-3">
-                                    <img src="{{ asset('images/profile/linkdin-icon.svg') }}" style="width: 20px">
-                                </li>
-                                <li class="list-inline-item me-3">
-                                    <img src="{{ asset('images/profile/github-icon.svg') }}" alt="#" style="width: 20px">
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="w-100"></div>
-                        <div class="col d-flex justify-content-end">
-                            <button
-                            class="btn edit-profile-btn-filled d-flex align-items-center py-0 px-3 me-4">
-                            <div class="row w-100 g-0">
-                                <div class="col text-center">
-                                    <span class="fw-bold">Запази промени</span>
-                                </div>
+    <form action="{{ route('user.update', Auth::user()->id) }}" method="post" enctype="multipart/form-data" files="true">
+        @method('PUT')
+        @csrf
+        <div class="row g-0 m-0 p-0">
+            @include('flash-message')
+            <div class="col-auto">
+                <p class="m-0 p-0 text-uppercase student-name">{{ Auth::user()->name }} {{ Auth::user()->last_name }}</p>
+                <p class="m-0 p-0 text-uppercase role-name">
+                    @if (Auth::user()->isAdmin())
+                        Админ
+                    @elseif (Auth::user()->isLecturer())
+                        Лектор
+                    @else
+                        Ученик
+                    @endif
+                </p>
+            </div>
+            <div class="col">
+                <div class="row g-0">
+                    <div class="col d-flex flex-column">
+                        <div class="row g-0">
+                            <div class="col">
+                                <ul class="list-inline text-end social-links">
+                                    @if ($facebookLink)
+                                        <li class="list-inline-item me-3">
+                                            <a href="{{ $facebookLink }}">
+                                                <img src="{{ asset('images/profile/facebook-icon.svg') }}" alt="#" style="width: 20px">
+                                            </a>
+                                        </li>
+                                    @endif
+                                    @if ($linkedinLink)
+                                        <li class="list-inline-item me-3">
+                                            <a href="{{ $linkedinLink }}">
+                                                <img src="{{ asset('images/profile/linkdin-icon.svg') }}" style="width: 20px">
+                                            </a>
+                                        </li>
+                                    @endif
+                                    @if ($githubLink)
+                                        <li class="list-inline-item me-3">
+                                            <a href="{{ $githubLink }}">
+                                                <img src="{{ asset('images/profile/github-icon.svg') }}" alt="#" style="width: 20px">
+                                            </a>
+                                        </li>
+                                    @endif
+                                </ul>
                             </div>
-                        </button>
+                            <div class="w-100"></div>
+                            <div class="col d-flex justify-content-end">
+                                <button
+                                class="btn edit-profile-btn-filled d-flex align-items-center py-0 px-3 me-4">
+                                <div class="row w-100 g-0">
+                                    <div class="col text-center">
+                                        <span class="fw-bold">Запази промени</span>
+                                    </div>
+                                </div>
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col-auto">
-                <img src="{{ asset('assets/img/avatar.png') }}" class="big-avatar" alt="Avatar" style="width: 70px">
-            </div>
-        </div>
-    </div>
-    <div class="w-100"></div>
-    <div class="col mt-5 pt-2 profile-details">
-        <div class="row g-0 d-flex align-items-center">
-            <div class="col">
-                <label class="d-flex align-items-center input">
-                    <img src="{{ asset('assets/icons/facebook.png') }}" width="30" alt="#">
-                    <input type="text" name="facebook" placeholder="Facebook" value="FB/Kalin_Iliev">
-                </label>
-            </div>
-            <div class="col">
-                <label class="d-flex align-items-center input mx-3">
-                    <img src="{{ asset('images/profile/linkdin-icon.svg') }}" width="20" alt="#">
-                    <input type="text" name="instagram" placeholder="Instagram"
-                    value="Instagram/Kalin_Iliev">
-                </label>
-            </div>
-            <div class="col">
-                <label class="d-flex align-items-center input">
-                    <img src="{{ asset('images/profile/github-icon.svg') }}" width="20" alt="#">
-                    <input type="text" name="facebook" placeholder="Facebook" value="FB/Kalin_Iliev">
-                </label>
+                <div class="col-auto">
+                    @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
+                        <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                    @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
+                        <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                    @else
+                        <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                    @endif
+                </div>
             </div>
         </div>
-        <div class="row g-0 mt-5 pt-4 d-flex justify-content-end">
-            <div class="col">
-                <label class="d-flex align-items-center input">
-                    <img src="{{ asset('assets/icons/location.svg') }}" width="24" alt="#">
-                    <input type="text" name="location" placeholder="Град" value="Враца">
-                </label>
+        <div class="w-100"></div>
+        <div class="col mt-5 pt-2 profile-details">
+            <div class="row g-0 d-flex align-items-center">
+                <div class="col">
+                    <label class="d-flex align-items-center input">
+                        <img src="{{ asset('assets/icons/facebook.png') }}" width="30" alt="#">
+                        <input type="text" name="facebook" placeholder="Facebook" value="{{ $facebookLink }}">
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="d-flex align-items-center input mx-3">
+                        <img src="{{ asset('images/profile/linkdin-icon.svg') }}" width="20" alt="#">
+                        <input type="text" name="linkedin" placeholder="Linkedin"
+                        value="{{ $linkedinLink }}">
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="d-flex align-items-center input">
+                        <img src="{{ asset('images/profile/github-icon.svg') }}" width="20" alt="#">
+                        <input type="text" name="github" placeholder="Github" value="{{ $githubLink }}">
+                    </label>
+                </div>
             </div>
-            <div class="col">
-                <label class="d-flex align-items-center input mx-3">
-                    <img src="{{ asset('assets/icons/birthday.svg') }}" width="30" alt="#">
-                    <input type="text" name="birthdate" placeholder="Дата на раждане"
-                    value="01.11.1994">
-                </label>
-            </div>
-            <div class="col">
-                <label class="d-flex align-items-center input">
-                    <img src="{{ asset('assets/icons/email.svg') }}" width="30" alt="#">
-                    <input type="text" name="email" placeholder="Електронна поща"
-                    value="Kalin.a.iliev@gmail.com">
-                </label>
+            <div class="row g-0 mt-5 pt-4 d-flex justify-content-end">
+                <div class="col">
+                    <label class="d-flex align-items-center input">
+                        <img src="{{ asset('assets/icons/location.svg') }}" width="24" alt="#">
+                        <input type="text" name="location" placeholder="Град" value="{{ Auth::user()->location }}"@if(!Auth::user()->isAdmin()) required @endif>
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="d-flex align-items-center input mx-3">
+                        <img src="{{ asset('assets/icons/birthday.svg') }}" width="30" alt="#">
+                        <input type="text" name="dob" class="date-input" placeholder="Дата на раждане"
+                        value="{{ !is_null(Auth::user()->dob) ? Auth::user()->dob->format('d/m/Y') : '' }}">
+                    </label>
+                </div>
+                <div class="col">
+                    <label class="d-flex align-items-center input">
+                        <img src="{{ asset('assets/icons/email.svg') }}" width="30" alt="#">
+                        <input type="email" name="email" placeholder="Електронна поща"
+                        value="{{ Auth::user()->email }}">
+                    </label>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="w-100"></div>
-    <div class="col mt-5 pt-4">
-        <div class="row g-0">
-            <div class="col">
-                <p class="fw-bold bio-title">За мен</p>
-                <textarea class="bio-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
-                    nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
-                    wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
-                    lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
-                    dolor in hendrerit in vulputate velit esse molestie consequat, vel illum
-                    dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio
-                    dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te
-                    feugait nulla facilisi.
-                </textarea>
+        <div class="w-100"></div>
+        <div class="col mt-5 pt-4">
+            <div class="row g-0">
+                <div class="col">
+                    <p class="fw-bold bio-title">За мен</p>
+                    <textarea class="bio-description" name="bio" placeholder="За мен">{{ Auth::user()->bio }}</textarea>
+                </div>
             </div>
-        </div>
+        </form>
         <div class="w-100"></div>
         <div class="col mt-4 pt-3">
             <div class="row g-0">
@@ -240,7 +263,13 @@
         <div class="col-auto">
             <div class="row g-0 p-0 m-0 d-flex align-items-center">
                 <div class="col">
-                    <img src="{{ asset('assets/img/avatar.png') }}" width="55" alt="Avatar">
+                    @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
+                        <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                    @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
+                        <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                    @else
+                        <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                    @endif
                 </div>
                 <div class="col-auto ps-2 ms-1">
                     <div class="user_name fw-bold d-block">
@@ -261,13 +290,13 @@
             <div class="col pb-2">
                 <label class="d-flex align-items-center input">
                     <img src="{{ asset('assets/icons/facebook.png') }}" width="30" alt="#">
-                    <input type="text" name="facebook" placeholder="Facebook" value="FB/Kalin_Iliev">
+                    <input type="text" name="facebook" placeholder="Facebook" value="{{ $facebookLink }}">
                 </label>
             </div>
             <div class="col pb-2">
                 <label class="d-flex align-items-center input">
                     <img src="{{ asset('assets/icons/insta.png') }}" width="30" alt="#">
-                    <input type="text" name="instagram" placeholder="Instagram" value="Instagram/Kalin_Iliev">
+                    <input type="text" name="linkedin" placeholder="Linkedin" value="Instagram/Kalin_Iliev">
                 </label>
             </div>
             <div class="col pb-2">
@@ -281,13 +310,13 @@
             <div class="col pb-2">
                 <label class="d-flex align-items-center input">
                     <img src="{{ asset('assets/icons/location.svg') }}" width="24" alt="#">
-                    <input type="text" name="location" placeholder="Град" value="Враца">
+                    <input type="text" name="location" placeholder="Град" value="{{ Auth::user()->location }}" @if(!Auth::user()->isAdmin()) required @endif>
                 </label>
             </div>
             <div class="col pb-2">
                 <label class="d-flex align-items-center input">
                     <img src="{{ asset('assets/icons/birthday.svg') }}" width="30" alt="#">
-                    <input type="text" name="birthdate" placeholder="Дата на раждане" value="01.11.1994">
+                    <input type="text" name="birthdate" class="date-input" placeholder="Дата на раждане" value="01.11.1994">
                 </label>
             </div>
             <div class="col pb-2">
@@ -301,7 +330,7 @@
         <div class="row g-0 pt-4 flex-column">
             <div class="col pb-2">
                 <p class="fw-bold bio-title">За мен</p>
-                <textarea class="bio-description">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
+                <textarea class="bio-description" name="bio">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy
                     nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut
                     wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit
                     lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure
