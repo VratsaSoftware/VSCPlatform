@@ -182,7 +182,7 @@
                             </span>
                         </div>
                         <span class="bio-pill position-absolute bottom-0 start-0 m-2 p-0"
-                        data-bs-toggle="modal" data-bs-target="#interestsModal">+</span>
+                        data-bs-toggle="modal" data-bs-target="#interestsModal-create">+</span>
                     </div>
                 </div>
                 <div class="w-100"></div>

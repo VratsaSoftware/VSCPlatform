@@ -37,9 +37,18 @@ class UserController extends Controller
      */
     public function editMyProfile()
     {
-        $courses = Course::where('ends', '>', Carbon::now()->format('Y-m-d H:m:s'))->orderBy('ends', 'DESC')->get();
+        if (Auth::user()->isAdmin()) {
+            $courses = Course::where('ends', '>', Carbon::now()->format('Y-m-d H:m:s'))->orderBy('ends', 'DESC')
+                ->get();
+
+            $pastCourses = Course::where('ends', '<', Carbon::now()->format('Y-m-d H:m:s'))->orderBy('ends', 'DESC')
+                ->get();
+        } else if (Auth::user()->isLecturer()) {
+            $courses = Auth::user()->lecturerGetCourses();
+            $pastCourses = Auth::user()->lecturerGetPastCourses();
+        }
+
         $courses = $courses->load('Modules');
-        $pastCourses = Course::where('ends', '<', Carbon::now()->format('Y-m-d H:m:s'))->orderBy('ends', 'DESC')->get();
         $pastCourses = $pastCourses->load('Modules');
 
         /* links */
@@ -315,12 +324,15 @@ class UserController extends Controller
 
         if (!empty($request->interests)) {
             $interest = Interest::find($request->interests);
-            $interestCheck = Interest::firstOrCreate(
-                ['cl_users_interest_type_id' => $request->int_type,'name' => $interest->name]
-            );
-            $insertHobbie = Hobbie::firstOrCreate(
-                ['cl_interest_id' => $interestCheck->id,'user_id' => Auth::user()->id]
-            );
+            $interestCheck = Interest::firstOrCreate([
+                'cl_users_interest_type_id' => $request->int_type,
+                'name' => $interest->name
+            ]);
+
+            $insertHobbie = Hobbie::firstOrCreate([
+                'cl_interest_id' => $interestCheck->id,
+                'user_id' => Auth::user()->id
+            ]);
         }
 
         if (!empty($request->int_other)) {

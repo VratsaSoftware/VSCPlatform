@@ -138,7 +138,19 @@ class User extends Authenticatable
     public function lecturerGetCourses()
     {
         $userId = Auth::user()->id;
-        return Course::with('Lecturers')->whereHas('Lecturers', function ($query) use ($userId) {
+        return Course::where('ends', '>', Carbon::now()->format('Y-m-d H:m:s'))
+            ->orderBy('ends', 'DESC')
+            ->with('Lecturers')->whereHas('Lecturers', function ($query) use ($userId) {
+            $query->where('user_id', $userId);
+        })->get();
+    }
+
+    public function lecturerGetPastCourses()
+    {
+        $userId = Auth::user()->id;
+        return Course::where('ends', '<', Carbon::now()->format('Y-m-d H:m:s'))
+            ->orderBy('ends', 'DESC')
+            ->with('Lecturers')->whereHas('Lecturers', function ($query) use ($userId) {
             $query->where('user_id', $userId);
         })->get();
     }

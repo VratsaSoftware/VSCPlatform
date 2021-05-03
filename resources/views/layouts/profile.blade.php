@@ -31,7 +31,7 @@
 	                @include('navigation-left-bar')
 					<!-- nav menu END -->
 					<!-- left profile - course section -->
-					@if (Auth::user()->isAdmin())
+					@if (Auth::user()->isAdmin() || Auth::user()->isLecturer())
 						@include('profile.admin.left-profile.course')
 						@include('profile.admin.left-profile.course-mobile')
 					@else
@@ -41,6 +41,7 @@
 					<!-- left profile - course section END -->
 					<!-- content -->
 					@yield('content')
+					<!-- content END -->
 				</div>
 			</div>
 		</div>
