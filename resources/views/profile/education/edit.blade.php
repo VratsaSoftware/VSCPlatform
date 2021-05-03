@@ -18,7 +18,7 @@
                         <span class="input-group-text">От</span>
                         <input type="number" id="edu-y_from" class="form-control" name="y_from" placeholder="Дата" min="1990" max="2099" required>
                         <span class="input-group-text">До</span>
-                        <input type="number" id="edu-y_to" name="y_to" class="form-control" min="{{ date('Y') }}" max="2099" placeholder="Дата">
+                        <input type="number" id="edu-y_to" name="y_to" class="form-control" min="1990" max="2099" placeholder="Дата">
                     </div>
                     <div class="mb-3">
                         <label for="schoolSpecialty" class="form-label">Специалност</label>

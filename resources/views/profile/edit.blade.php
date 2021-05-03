@@ -328,7 +328,7 @@
                                     {{ $education->y_from }}/{{ $education->y_to ? $education->y_to : 'В ход' }}
                                 </span>
                             </div>
-                            <span data-bs-toggle="modal" data-bs-target="#educationModal-edit" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2" data-education="{{ $education->id }}">
+                            <span data-bs-toggle="modal" data-bs-target="#educationModal-edit" class="btn education-btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2" data-education="{{ $education }}" data-edu-name="{{ $education->EduInstitution->name }}" data-specialty="{{ $education->EduSpeciality->name }}">
                                 <i class="fas fa-pen"></i>
                             </span>
                             <form method="post" action="{{ url('/user/delete/education/' . $education->id) }}">
@@ -340,8 +340,8 @@
                             </form>
                         </div>
                     @endforeach
-                    <button class="bio-pill position-absolute bottom-0 start-0 m-2 p-0" data-bs-toggle="modal"
-                    data-bs-target="#educationModal">+</button>
+                    <button onclick="return false;" class="bio-pill position-absolute bottom-0 start-0 m-2 p-0" data-bs-toggle="modal"
+                    data-bs-target="#educationModal-create">+</button>
                 </div>
             </div>
             <div class="col pb-2">
