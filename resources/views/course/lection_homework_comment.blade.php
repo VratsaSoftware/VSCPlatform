@@ -39,23 +39,28 @@
                 <div class="filter row comment-row g-0 fw-normal mb-3">
                     <div class="col-lg-auto col-12 comment-avatar">
                         <div class="row g-0 align-items-center">
-                            <div class="col-auto me-4">
-                                @if(!isset($comment->Author->picture) && $comment->Author->sex != 'male')
-                                    <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px" class="avatar">
-                                @elseif(!isset($comment->Author->picture) && $comment->Author->sex != 'female')
-                                    <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px" class="avatar">
-                                @else
-                                    <img src="{{ asset('images/user-pics/'. $comment->Author->picture) }}" alt="profile-pic" class="avatar" style="border-radius: 5px">
-                                @endif
-                            </div>
-                            <div class="col-auto text-small" title="{{ $comment->Author->email }}">
-                                <span></span>
-                                <span>
-                                    {{ $comment->Author->name }} {{ $comment->Author->last_name }}
-                                </span>
-                            </div>
+                            @if (Auth::user()->isLecturer() || Auth::user()->isAdmin() || $comment->is_lecturer_comment == 1)
+                                <div class="col-auto me-4">
+                                    @if(!isset($comment->Author->picture) && $comment->Author->sex != 'male')
+                                        <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px" class="avatar">
+                                    @elseif(!isset($comment->Author->picture) && $comment->Author->sex != 'female')
+                                        <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px" class="avatar">
+                                    @else
+                                        <img src="{{ asset('images/user-pics/'. $comment->Author->picture) }}" alt="profile-pic" class="avatar" style="border-radius: 5px">
+                                    @endif
+                                </div>
+                                <div class="col-auto text-small" title="{{ $comment->Author->email }}">
+                                    <span></span>
+                                    <span>
+                                        {{ $comment->Author->name }} {{ $comment->Author->last_name }}
+                                    </span>
+                                </div>
+                            @else
+                                <img class="h-10 w-10 rounded-full" style="border-radius: 100%" src="https://ui-avatars.com/api/?name=?&amp;color=7F9CF5&amp;background=EBF4FF">
+                            @endif
                         </div>
                     </div>
+
                     <div class="col-lg col-12 d-flex overflow-hidden">
                         <div class="col-lg-11 inline-block text-small align-self-center comment-text position-relative px-lg-5 me-lg-4 py-2">
                             {{ $comment->comment }}
@@ -75,8 +80,8 @@
                     </div>
                 </div>
             <!-- table content END-->
-            @endforeach
-        </div>
+            </div>
+        @endforeach
         <!-- table section END-->
     </div>
 </div>

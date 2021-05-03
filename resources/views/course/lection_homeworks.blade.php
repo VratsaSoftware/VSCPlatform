@@ -72,8 +72,8 @@
 									<!-- one comment -->
 										@if(!is_null($comment->Author))
 											@php
-												$isCommented[] = $comment->Author->id === Auth::user()->id?1:0;
-												if($comment->Author->id === Auth::user()->id){
+												$isCommented[] = $comment->Author->id === Auth::user()->id ? 1 : 0;
+												if($comment->Author->id === Auth::user()->id) {
 													$validComment[$homework->id] = $comment->comment;
 												}
 											@endphp

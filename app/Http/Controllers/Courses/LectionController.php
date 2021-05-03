@@ -467,12 +467,18 @@ class LectionController extends Controller
             ->orderBy('created_at', 'desc')
             ->get();
 
-        $comments = $comments->load('Author');
-        $comments = $comments->load('Homework');
+        if ($comments->count()) {
+            $comments = $comments->load('Author');
+            $comments = $comments->load('Homework');
 
-        return view('course.lection_homework_comment', [
-            'allComments' => $comments,
-        ]);
+            $view = view('course.lection_homework_comment', [
+                'allComments' => $comments,
+            ]);
+        } else {
+            $view = back()->with('info', 'Няма коментари за това домашно!');
+        }
+
+        return $view;
     }
 
     public function addHomeworkLecturerComment(Request $request, $homework)

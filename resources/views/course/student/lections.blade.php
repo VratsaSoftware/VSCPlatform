@@ -202,12 +202,12 @@
 		@if ($validHomework)
 			<div class="row g-0 ps-1">
 				<div class="col d-lg-none">
-					<button class="nav btn active py-0 pe-2 d-flex w-100 btn2-mobil d-flex justify-content-center" id="lection-1-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="lection-1" aria-selected="true">
+					<button data-bs-toggle="modal" data-bs-target="#evaluateModal" data-lection-eval="{{ $lection->id }}" class="nav btn active py-0 pe-2 d-flex w-100 btn2-mobil d-flex justify-content-center lection-eval" id="lection-1-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="lection-1" aria-selected="true">
 						<div class="row g-0 align-self-center">
 							<div class="col-auto text-start text-evaluation"><b>Оцени домашни</b></div>
 							<div class="col-auto text-start ms-1 text-evaluation-number"><b>({{ $myHomework->evaluation_user }}/{{ $lection->HomeWorks->count() - 1 }})</b></div>
-							<div class="col-auto  ms-3 text-data-yellow"><b>(до {{ $lection->homework_check_end->format('d.m') }})</b></div>
-							<div class="col  align-items-center d-flex img-btn-ms">
+							<div class="col-auto ms-3 text-data-yellow"><b>(до {{ $lection->homework_check_end->format('d.m') }})</b></div>
+							<div class="col align-items-center d-flex img-btn-ms">
 								<img src="{{ asset('assets/img/action_icon _black.svg') }}">
 							</div>
 						</div>
@@ -266,8 +266,8 @@
 						</a>
 					</div>
 				</div>
-				<div data-bs-toggle="modal" data-bs-target="#evaluateModal" class="col-auto mx-lg-0 mx-auto d-lg-none lection-eval" data-lection-eval="{{ $lection->id }}">
-					<button class="ms-xxl-2 mt-xxl-0 mt-4 btn-view-1 btn-green row g-0 align-items-center ">
+				<div class="col-auto mx-lg-0 mx-auto d-lg-none lection-eval">
+					<button onclick="window.location.href='{{ asset('lection/homework/' . $homework->id . '/coments') }}'" class="ms-xxl-2 mt-xxl-0 mt-4 btn-view-1 btn-green row g-0 align-items-center ">
 						<div class="col-auto mx-auto fw-bold see-all">Виж всички <img src="{{ asset('assets/img/action_icon.svg') }}"></div>
 					</button>
 				</div>
@@ -284,7 +284,7 @@
 				<div class="col-auto d-none d-lg-block">
 					<div class="row g-0 ps-1">
 						<div class="col">
-							<button class="nav btn  btn-green active py-0 pe-2 d-flex btn2-d" id="lection-1-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="lection-1" aria-selected="true">
+							<button onclick="window.location.href='{{ asset('lection/homework/' . $homework->id . '/coments') }}'" class="nav btn  btn-green active py-0 pe-2 d-flex btn2-d" id="lection-1-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="lection-1" aria-selected="true">
 								<div class="row g-0 align-self-center">
 									<div class="col-auto ms-3 text-uploaded-home-sm">
 										Коментари

@@ -124,7 +124,7 @@
                         <!-- Accordion sections  -->
                         <div class="accordion accordion-flush position-relative" id="accordionExample">
                             @foreach ($lections as $lection)
-                                @if (!Auth::user()->isLecturer() || !Auth::user()->isAdmin())
+                                @if (!Auth::user()->isLecturer() && !Auth::user()->isAdmin())
                                     @foreach ($homeworks as $homework)
                                         @if ($homework->lection_id == $lection->id)
                                             @php
