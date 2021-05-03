@@ -64,7 +64,7 @@
                     @endif
                 </div>
                 <div class="col-md-12 candidation-text">
-                
+
                 </div>
             @if(env('IS_APPLICATION_OPEN', false))
                 <!-- circle steps icons -->
@@ -82,7 +82,7 @@
                                 @endif
                             </div>
                         </li>
-                        
+
                         <li class="active-step">2
                             @endif
                             <span>предварителен тест</span>
@@ -159,16 +159,16 @@
                                     </div>
                                 </li>
                     </ul>
-                    
+
                     <!-- images -->
-                    
+
                     <div class="candidate-imgs col-md-12 flex-row flex-wrap text-center">
                         <div class="col-md-1"></div>
                         <div class="steps col-md-2 first-candidate-img">
                             <img src="{{asset('/images/candidate-img-step-1.png')}}" alt="step"
                                  class="img-fluid candidate-img">
                         </div>
-                        
+
                         <div class="steps col-md-2">
                             <img src="{{asset('/images/candidate-img-step-2.png')}}" alt="step"
                                  class="img-fluid candidate-img">
@@ -190,7 +190,7 @@
             </div>
         </div>
         <!-- end of course candidation statistic -->
-        
+
         <!-- opened courses -->
     {{-- <div class="col-md-12 events-now-text text-center">Отворени Курсове</div>
     <div class="available-events d-flex flex-row flex-wrap">
@@ -257,31 +257,31 @@
     </div>
     </div>
     </div>
-    
+
     <script src="./js/fixed-left-top-menu.js"></script>
     <script>
         $(function () {
             // $('.candidation-text').text($('.active-step > div').text());
-            
+
             $('li.active-step').prevAll().mouseenter(function () {
                 $(this).parent().prev('.candidation-text').html($(this).find('.personal-steps').html());
             });
-            
+
             $('li.active-step').prevAll().mouseleave(function () {
                 // $('.candidation-text').text($('.active-step').find('.personal-steps').text());
             });
-            
+
             $('.steps > li').mouseenter(function () {
                 $(this).parent().prev('.candidation-text').html($(this).find('.personal-steps').html());
             });
-            
+
             $('li.active-step').nextAll().mouseenter(function () {
                 $(this).css('background', '#ffcccc').attr('title', 'Този етап предстои!');
             });
-            
+
             $('li.active-step').nextAll().mouseleave(function () {
                 $(this).css('background', '#D3D3D3').attr('title', '');
             });
-            
+
         });
     </script>

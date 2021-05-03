@@ -108,7 +108,7 @@
                     <label class="d-flex align-items-center input mx-3">
                         <img src="{{ asset('assets/icons/birthday.svg') }}" width="30" alt="#">
                         <input type="text" name="dob" class="date-input" placeholder="Дата на раждане"
-                        value="{{ !is_null(Auth::user()->dob) ? Auth::user()->dob->format('d/m/Y') : '' }}">
+                        value="{{ Auth::user()->dob ? Auth::user()->dob->format('d/m/Y') : '' }}">
                     </label>
                 </div>
                 <div class="col">

@@ -46,6 +46,9 @@ class UserController extends Controller
         } else if (Auth::user()->isLecturer()) {
             $courses = Auth::user()->lecturerGetCourses();
             $pastCourses = Auth::user()->lecturerGetPastCourses();
+        } else {
+            $courses = Auth::user()->studentGetCourse();
+            $pastCourses = Auth::user()->studentGetPastCourse();
         }
 
         $courses = $courses->load('Modules');
@@ -70,6 +73,7 @@ class UserController extends Controller
         return view('profile.edit', [
             'courses' => $courses,
             'pastCourses' => $pastCourses,
+            'activCourses' => Auth::user()->activeGetCourse(),
             'facebookLink' => $facebookLink,
             'linkedinLink' => $linkedinLink,
             'githubLink' => $githubLink,
