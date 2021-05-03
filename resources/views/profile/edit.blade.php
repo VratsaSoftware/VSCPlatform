@@ -140,19 +140,21 @@
                                 <div class="col-auto pe-3 fw-bold item-number">{{ $loop->iteration }}.</div>
                                 <div class="col mb-3 bio-description">
                                     <span style="font-size: 18px">
-                                        <div class="col-auto pe-3 fw-bold item-number">{{ $workExperience->Company->name }}</div>
+                                        <div class="col-auto pe-3 fw-bold item-number">
+                                            {{ strlen($workExperience->Company->name) > 19 ? mb_substr($workExperience->Company->name, 0, 19) . "..." : $workExperience->Company->name }}
+                                        </div>
                                         {{ $workExperience->y_from->format('d.m.Y') }}/{{ $workExperience->y_to ? $workExperience->y_to->format('d.m.Y') : 'В ход' }}
                                     </span>
                                 </div>
-                                <span data-bs-toggle="modal" data-bs-target="#editWorkExperienceModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2 work-experience-btn" data-work-experience="{{ $workExperience }}" data-work-experience-company="{{ $workExperience->Company->name }}" data-work-position="{{ $workExperience->Position->position }}" data-work-y_from="{{ $workExperience->y_from->format('m/d/Y') }}" data-work-y_to="{{ $workExperience->y_to->format('m/d/Y') }}" data-work-id="{{ $workExperience->id }}">
+                                <span data-bs-toggle="modal" data-bs-target="#editWorkExperienceModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2 work-experience-btn" data-work-experience-company="{{ $workExperience->Company->name }}" data-work-position="{{ $workExperience->Position->position }}" data-work-y_from="{{ $workExperience->y_from->format('m/d/Y') }}" data-work-y_to="{{ $workExperience->y_to->format('m/d/Y') }}" data-work-id="{{ $workExperience->id }}">
                                     <i class="fas fa-pen"></i>
                                 </span>
                                 <form method="post" action="{{ url('/user/delete/work/' . $workExperience->id) }}">
                                     @csrf
                                     @method('DELETE')
-                                        <button class="btn position-absolute bottom-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                    <button class="btn position-absolute bottom-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </form>
                             </div>
                         @endforeach
@@ -193,12 +195,12 @@
                                 <div class="col mb-3 bio-description">
                                     <span style="font-size: 18px">
                                         <div class="col-auto pe-3 fw-bold item-number">
-                                            {{ $education->EduInstitution->name }}
+                                            {{ strlen($education->EduInstitution->name) > 19 ? mb_substr($education->EduInstitution->name, 0, 19) . "..." : $education->EduInstitution->name }}
                                         </div>
-                                        {{ $education->EduSpeciality->name }} - {{ $education->y_from }}/{{ $education->y_to ? $education->y_to : 'В ход' }}
+                                        {{ $education->y_from }}/{{ $education->y_to ? $education->y_to : 'В ход' }}
                                     </span>
                                 </div>
-                                <span data-bs-toggle="modal" data-bs-target="#educationModal-edit" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
+                                <span data-bs-toggle="modal" data-bs-target="#educationModal-edit" class="btn education-btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2" data-education="{{ $education }}" data-edu-name="{{ $education->EduInstitution->name }}" data-specialty="{{ $education->EduSpeciality->name }}">
                                     <i class="fas fa-pen"></i>
                                 </span>
                                 <form method="post" action="{{ url('/user/delete/education/' . $education->id) }}">
@@ -300,15 +302,14 @@
                     <label class="d-flex align-items-center input">
                         <img src="{{ asset('assets/icons/email.svg') }}" width="30" alt="#">
                         <input type="text" name="email" placeholder="Електронна поща"
-                        value="Kalin.a.iliev@gmail.com">
+                        value="{{ Auth::user()->email }}">
                     </label>
                 </div>
             </div>
             <div class="row g-0 pt-4 flex-column">
                 <div class="col pb-2">
                     <p class="fw-bold bio-title">За мен</p>
-                    <textarea class="bio-description" name="bio">Lorem ipsum
-                    </textarea>
+                    <textarea class="bio-description" name="bio" placeholder="За мен">{{ Auth::user()->bio }}</textarea>
                 </div>
             </div>
         </form>
@@ -322,12 +323,12 @@
                             <div class="col mb-3 bio-description">
                                 <span style="font-size: 18px">
                                     <div class="col-auto pe-3 fw-bold item-number">
-                                        {{ $education->EduInstitution->name }}
+                                        {{ strlen($education->EduInstitution->name) > 19 ? mb_substr($education->EduInstitution->name, 0, 19) . "..." : $education->EduInstitution->name }}
                                     </div>
                                     {{ $education->y_from }}/{{ $education->y_to ? $education->y_to : 'В ход' }}
                                 </span>
                             </div>
-                            <span data-bs-toggle="modal" data-bs-target="#educationModal-edit" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
+                            <span data-bs-toggle="modal" data-bs-target="#educationModal-edit" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2" data-education="{{ $education->id }}">
                                 <i class="fas fa-pen"></i>
                             </span>
                             <form method="post" action="{{ url('/user/delete/education/' . $education->id) }}">
@@ -351,11 +352,13 @@
                             <div class="col-auto pe-3 fw-bold item-number">{{ $loop->iteration }}.</div>
                             <div class="col mb-3 bio-description">
                                 <span style="font-size: 18px">
-                                    <div class="col-auto pe-3 fw-bold item-number">{{ $workExperience->Company->name }}</div>
+                                    <div class="col-auto pe-3 fw-bold item-number">
+                                        {{ strlen($workExperience->Company->name) > 19 ? mb_substr($workExperience->Company->name, 0, 19) . "..." : $workExperience->Company->name }}
+                                    </div>
                                     {{ $workExperience->y_from->format('d.m.Y') }}/{{ $workExperience->y_to ? $workExperience->y_to->format('d.m.Y') : 'В ход' }}
                                 </span>
                             </div>
-                            <span data-bs-toggle="modal" data-bs-target="#editWorkExperienceModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2 work-experience-btn" data-work-experience="{{ $workExperience }}" data-work-experience-company="{{ $workExperience->Company->name }}" data-work-position="{{ $workExperience->Position->position }}" data-work-y_from="{{ $workExperience->y_from->format('m/d/Y') }}" data-work-y_to="{{ $workExperience->y_to->format('m/d/Y') }}" data-work-id="{{ $workExperience->id }}">
+                            <span data-bs-toggle="modal" data-bs-target="#editWorkExperienceModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2 work-experience-btn" data-work-experience-company="{{ $workExperience->Company->name }}" data-work-position="{{ $workExperience->Position->position }}" data-work-y_from="{{ $workExperience->y_from->format('m/d/Y') }}" data-work-y_to="{{ $workExperience->y_to->format('m/d/Y') }}" data-work-id="{{ $workExperience->id }}">
                                 <i class="fas fa-pen"></i>
                             </span>
                             <form method="post" action="{{ url('/user/delete/work/' . $workExperience->id) }}">
@@ -415,6 +418,7 @@
 <!-- Work Experience Modal End -->
 <!-- Education Modal -->
 @include('profile.education.create')
+@include('profile.education.edit')
 <!-- Education Modal End -->
 <!-- Interests Modal -->
 @include('profile.interests.create')

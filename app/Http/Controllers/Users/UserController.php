@@ -204,28 +204,30 @@ class UserController extends Controller
         $data = $request->validate([
             'y_from' => 'required|numeric|min:1900|max:2099',
             'y_to' => 'sometimes|nullable|numeric|min:'.((int)$request->y_from-1).'|max:2099',
-            'edu_type' => 'required|numeric',
-            'edu_institution_type' => "required|in_array:valid_instTypes.*",
+            // 'edu_type' => 'required|numeric',
+            // 'edu_institution_type' => "required|in_array:valid_instTypes.*",
             'institution_name' => 'required|string',
             'specialty' => 'string',
-            'edu_type_second' => 'sometimes|in_array:valid_types.*'
+            // 'edu_course' => 'sometimes',
+            // 'edu_type_second' => 'sometimes|in_array:valid_types.*'
         ]);
         $updEdu = Education::find($request->edu_id);
         $updEdu->y_from = $request->y_from;
         $updEdu->y_to = $request->y_to;
-        $updEdu->cl_education_type_id = $request->edu_type;
-        $eduInstitution = EducationInstitution::firstOrCreate(
-            ['type' => $request->edu_institution_type,'name' => $request->institution_name]
-        );
+        // $updEdu->cl_education_type_id = $request->edu_type;
+        $eduInstitution = EducationInstitution::firstOrCreate([
+            /*'type' => $request->edu_institution_type,*/
+            'name' => $request->institution_name
+        ]);
         $updEdu->institution_id = $eduInstitution->id;
         $eduSpeciality = EducationSpeciality::firstOrCreate(
             ['name' => $request->specialty]
         );
         $updEdu->specialty_id = $eduSpeciality->id;
         $updEdu->description = $request->edu_description;
-        if($request->edu_type_second !== 'null') {
-            $updEdu->type = $request->edu_type_second;
-        }
+        // if($request->edu_type_second !== 'null') {
+        //     $updEdu->type = $request->edu_type_second;
+        // }
         $updEdu->save();
 
         $message = __('Успешно направени промени в секция Образование!');

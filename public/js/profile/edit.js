@@ -6,7 +6,6 @@ $(document).ready(function() {
 
     /* edit work experience */
     $('.work-experience-btn').click(function() {
-        var workExperience = $(this).attr('data-work-experience');
         var companyName = $(this).attr('data-work-experience-company');
         var y_from = $(this).attr('data-work-y_from');
         var y_to = $(this).attr('data-work-y_to');
@@ -18,5 +17,20 @@ $(document).ready(function() {
         $('#y_to').attr('value', y_to);
         $('#work-position').attr('value', position);
         $('#work-id').attr('value', id);
+    });
+
+    /* edit education */
+    $('.education-btn').click(function() {
+        var education = $(this).attr('data-education');
+        education = JSON.parse(education);
+
+        var eduName = $(this).attr('data-edu-name');
+        var specialty = $(this).attr('data-specialty');
+
+        $('#edu-name').attr('value', eduName);
+        $('#edu-y_from').attr('value', education.y_from);
+        $('#edu-y_to').attr('value', education.y_to);
+        $('#specialty').attr('value', specialty);
+        $('#education-id').attr('value', education.id);
     });
 });
