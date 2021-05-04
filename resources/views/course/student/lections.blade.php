@@ -239,11 +239,13 @@
 				<div class="col-auto d-none d-lg-block">
 					<div class="row g-0 ps-1">
 						<div class="col lection-eval" data-bs-toggle="modal" data-bs-target="#evaluateModal" data-lection-eval="{{ $lection->id }}">
-							<button class="nav btn  btn-green active py-0 pe-2 d-flex btn1-cs" id="lection-1-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="lection-1" aria-selected="true">
+							<button class="btn-green btn1-cs" id="lection-1-tab" data-bs-toggle="tab" role="tab" aria-controls="lection-1" aria-selected="true">
 								<div class="row g-0 align-self-center">
-									<div class="col-auto text-start ms-3 text-uploaded-home-sm">Виж всички</div>
-									<div class="col-auto text-end align-items-center d-flex img-btn-ms">
-										<img src="{{ asset('assets/img/action_icon.svg') }}" alt="">
+									<div class="col ps-2 text-start text-small">
+										Оцени
+									</div>
+									<div class="col-auto px-2">
+										<img src="{{ asset('assets/img/action_icon.svg') }}">
 									</div>
 								</div>
 							</button>
@@ -251,6 +253,7 @@
 					</div>
 				</div>
 			</div>
+
 			<!--Mobil-->
 			<div class="row g-0 home-work-1 align-items-center p-3 mt-3">
 				<div class="d-flex justify-content-center text-grey-2 text-uppercase d-lg-none ps-3">
@@ -268,7 +271,7 @@
 				</div>
 				<div class="col-auto mx-lg-0 mx-auto d-lg-none lection-eval">
 					<button onclick="window.location.href='{{ asset('lection/homework/' . $homework->id . '/coments') }}'" class="ms-xxl-2 mt-xxl-0 mt-4 btn-view-1 btn-green row g-0 align-items-center ">
-						<div class="col-auto mx-auto fw-bold see-all">Виж всички <img src="{{ asset('assets/img/action_icon.svg') }}"></div>
+						<div class="col-auto mx-auto fw-bold see-all">Виж коментари <img src="{{ asset('assets/img/action_icon.svg') }}"></div>
 					</button>
 				</div>
 				<!--END mobil-->

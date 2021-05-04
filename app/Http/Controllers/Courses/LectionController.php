@@ -464,7 +464,7 @@ class LectionController extends Controller
     public function homeworkComment($homework)
     {
         $userHomework = Homework::find($homework);
-        if ($userHomework->user_id == Auth::user()->id) {
+        if ($userHomework->user_id == Auth::user()->id || Auth::user()->isLecturer() || Auth::user()->isAdmin()) {
             $studentComments = HomeworkComment::where('homework_id', $homework)
                 ->where('is_lecturer_comment', null)
                 ->orderBy('created_at', 'desc')
