@@ -463,19 +463,33 @@ class LectionController extends Controller
 
     public function homeworkComment($homework)
     {
-        $comments = HomeworkComment::where('homework_id', $homework)
-            ->orderBy('created_at', 'desc')
-            ->get();
+        $userHomework = Homework::find($homework);
+        if ($userHomework->user_id == Auth::user()->id) {
+            $studentComments = HomeworkComment::where('homework_id', $homework)
+                ->where('is_lecturer_comment', null)
+                ->orderBy('created_at', 'desc')
+                ->get();
+            $lecturerComments = HomeworkComment::where('homework_id', $homework)
+                ->where('is_lecturer_comment', 1)
+                ->orderBy('created_at', 'desc')
+                ->get();
 
-        if ($comments->count()) {
-            $comments = $comments->load('Author');
-            $comments = $comments->load('Homework');
+            if ($studentComments->count() || $lecturerComments->count()) {
+                $studentComments = $studentComments->load('Author');
+                $studentComments = $studentComments->load('Homework');
 
-            $view = view('course.lection_homework_comment', [
-                'allComments' => $comments,
-            ]);
+                $lecturerComments = $lecturerComments->load('Author');
+                $lecturerComments = $lecturerComments->load('Homework');
+
+                $view = view('course.lection_homework_comment', [
+                    'studentComments' => $studentComments,
+                    'lecturerComments' => $lecturerComments,
+                ]);
+            } else {
+                $view = back()->with('info', 'Няма коментари за това домашно!');
+            }
         } else {
-            $view = back()->with('info', 'Няма коментари за това домашно!');
+            $view = back()->with('info', 'Няма достъп до тези коментари за това домашно!');
         }
 
         return $view;
