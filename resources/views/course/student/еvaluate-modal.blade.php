@@ -1,9 +1,9 @@
-<div class="modal fade" id="evaluateModal" tabindex="-1" aria-labelledby="evaluateModal" aria-hidden="true">
+<div class="modal fade" id="evaluateModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="evaluateModal" aria-hidden="true">
 	<div class="modal-dialog">
 		<div class="modal-content" style="border-radius: 20px">
 			<div class="modal-header">
 				Оцени домашно
-				<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Затвори"></button>
+				<button type="button" class="btn-close" aria-label="Затвори"></button>
 			</div>
 			<div class="modal-body">
 				<form class="d-flex flex-column" method="POST" id="eval-form">
@@ -49,12 +49,27 @@ $(document).ready(function() {
 	        type: 'get',
 	        dataType: 'JSON',
 	        success: function(data) {
-                $('#downloadFile').attr("href", "{{asset('/data/homeworks/')}}" + data.file);
+                $('#downloadFile').attr("href", "{{ asset('/data/homeworks/') }}" + data.file);
 
                 $('#eval-form').attr("action", "{{ url('/lection/homework') }}/" + data.id + "/user/eval");
+
+				$('#evaluted-btn-submit').attr("disabled", false);
+
+				$('.btn-close').click(function() {
+					var conf = confirm("Затварянето на този прозорец ще доведе до смяна на домашното за оценяване!");
+			        if (conf == true) {
+			            $('#evaluateModal').modal('toggle');
+			        } else {
+			            return false;
+			        }
+				});
 	        },
 			error: function (error) {
 			    $('#evaluted-btn-submit').attr("disabled", true);
+
+				$('.btn-close').click(function() {
+			        $('#evaluateModal').modal('toggle');
+				});
 			}
 	    });
 	});

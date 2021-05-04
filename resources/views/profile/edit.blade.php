@@ -174,8 +174,8 @@
                             </span>
                         </div>
                         <div class="row g-0">
-                            <div class="col-auto pe-3 fw-bold item-number">2.</div>
-                            <div class="col bio-description">Lorem ipsum
+                            <div class="col-auto pe-3 fw-bold item-number">1.</div>
+                            <div class="col mb-3 bio-description">Lorem ipsum
                             </div>
                             <span data-bs-toggle="modal" data-bs-target="#interestsModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
                                 <i class="fas fa-pen"></i>
@@ -206,9 +206,9 @@
                                 <form method="post" action="{{ url('/user/delete/education/' . $education->id) }}">
                                     @csrf
                                     @method('DELETE')
-                                        <button class="btn position-absolute bottom-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
-                                            <i class="fas fa-trash"></i>
-                                        </button>
+                                    <button class="btn position-absolute bottom-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
                                 </form>
                             </div>
                         @endforeach

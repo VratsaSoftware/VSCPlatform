@@ -23,6 +23,9 @@
                         </div>
                     @else
                         <img class="h-10 w-10 rounded-full" style="border-radius: 100%" src="https://loremflickr.com/320/240?sig={{ $loop->iteration }}">
+                        <div class="col-auto ms-4 d-lg-none text-small">
+                            Оценено
+                        </div>
                     @endif
                 </div>
             </div>
@@ -31,7 +34,7 @@
                 https://source.unsplash.com/random/200x200?sig={{ $loop->iteration }}
             -->
             <div class="col-lg col-12 d-flex overflow-hidden">
-                <div class="col-lg-11 inline-block text-small align-self-center comment-text position-relative px-lg-5 me-lg-4 py-2">
+                <div class="col-lg-11 inline-block text-small align-self-center comment-text position-relative px-lg-4 me-lg-4 py-2">
                     {{ $comment->comment }}
                 </div>
                 <!-- <div class="col-auto d-none d-lg-block mt-1 px-3">

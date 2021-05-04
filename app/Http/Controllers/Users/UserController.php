@@ -56,12 +56,15 @@ class UserController extends Controller
 
         /* links */
         $facebookLink = SocialLink::where('cl_social_id', 1)
+            ->where('user_id', Auth::user()->id)
             ->pluck('link')
             ->first();
         $linkedinLink = SocialLink::where('cl_social_id', 2)
+            ->where('user_id', Auth::user()->id)
             ->pluck('link')
             ->first();
         $githubLink = SocialLink::where('cl_social_id', 3)
+            ->where('user_id', Auth::user()->id)
             ->pluck('link')
             ->first();
 
@@ -104,6 +107,7 @@ class UserController extends Controller
             'dribbble' => 'nullable|url|min:5|max:250',
             'behance' => 'nullable|url|min:5|max:250',
         ]);
+
         if (Input::hasFile('picture')) {
             $userPic = Input::file('picture');
             $image = Image::make($userPic->getRealPath());
