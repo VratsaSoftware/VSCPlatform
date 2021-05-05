@@ -230,7 +230,7 @@
         <div class="col-auto d-none d-lg-block">
             <div class="row g-0 ps-1">
                 <div class="col">
-                    <button onclick="window.location.href='{{ route('homeworks.show',$lection->id) }}'" class="nav btn  btn-green active py-0 pe-2 d-flex btn1-d" id="lection-1-tab" data-bs-toggle="tab" role="tab" aria-controls="lection-1" aria-selected="true">
+                    <button onclick="window.location.href='{{ route('homeworks.show',$lection->id) }}'" class="nav btn btn-green active py-0 pe-2 d-flex btn1-d" id="lection-1-tab" data-bs-toggle="tab" role="tab" aria-controls="lection-1" aria-selected="true">
                         <div class="row g-0 align-self-center">
                             <div class="col text-end align-items-center d-flex ms-3">
                                 <img src="{{ asset('assets/img/action_icon.svg') }}">
@@ -242,17 +242,14 @@
         </div>
     </div>
     <hr class="my-5 d-none d-lg-block">
-
     <div class="row g-0">
         <div class="col-lg col-auto mx-lg-0 mx-auto d-none d-lg-block">
-            <div class="delete-lection" data-lection-title="{{ $lection->title }}">
-                <button form="delete-lection-form-{{ $loop->iteration }}" class="ms-xxl-2 mt-xxl-0 mt-3 btn-edit row g-0 align-items-center">
-                    <div class="col text-start fw-bold">Изтрий лекция</div>
-                    <div class="col-auto">
-                        <img src="{{ asset('assets/img/Delete.svg') }}">
-                    </div>
-                </button>
-            </div>
+            <button form="delete-lection-form-{{ $loop->iteration }}" class="ms-xxl-2 mt-xxl-0 mt-3 btn-edit row g-0 align-items-center delete-lection" data-lection-title="{{ $lection->title }}">
+                <div class="col text-start fw-bold">Изтрий лекция</div>
+                <div class="col-auto">
+                    <img src="{{ asset('assets/img/Delete.svg') }}">
+                </div>
+            </button>
         </div>
         <div class="col-auto mx-lg-0 mx-auto d-none d-lg-block">
             <button class="edit-lection-btn ms-xxl-2 mt-xxl-0 mt-3 btn-edit row g-0 align-items-center">

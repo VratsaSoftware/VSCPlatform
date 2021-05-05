@@ -185,14 +185,12 @@
 
         <div class="row g-0">
             <div class="col-lg col-auto mx-lg-0 mx-auto">
-                <div class="delete-lection" data-lection-title="{{ $lection->title }}">
-                    <button form="delete-lection-form-{{ $loop->iteration }}" class="ms-xxl-2 mt-xxl-0 mt-3 btn-edit row g-0 align-items-center">
-                        <div class="col text-start fw-bold">Изтрий лекция</div>
-                        <div class="col-auto">
-                            <img src="{{ asset('assets/img/Delete.svg') }}">
-                        </div>
-                    </button>
-                </div>
+                <button form="delete-lection-form-{{ $loop->iteration }}" class="ms-xxl-2 mt-xxl-0 mt-3 btn-edit row g-0 align-items-center delete-lection" data-lection-title="{{ $lection->title }}">
+                    <div class="col text-start fw-bold">Изтрий лекция</div>
+                    <div class="col-auto">
+                        <img src="{{ asset('assets/img/Delete.svg') }}">
+                    </div>
+                </button>
             </div>
             <div class="col-auto mx-lg-0 mx-auto">
                 <button class="submit-form ms-xxl-2 mt-xxl-0 mt-3 btn-edit btn-green row g-0 align-items-center" data-edit-lection-id="{{ $loop->iteration }}">

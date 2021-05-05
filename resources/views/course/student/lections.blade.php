@@ -34,23 +34,23 @@
 				<div class="data1">{{ $lection->second_date->format('d.m.Y') }}</div>
 			</div>
 			<div class="col-auto pe-5 d-none d-lg-block">
-            <div class="pill1 d-flex align-items-center float-right rounded-circle overflow-hidden">
-                <button class="nav btn py-0 pe-2 d-flex" id="lection-1-tab" data-bs-toggle="tab" href="#lection-{{ $loop->iteration - 1 }}" aria-controls="lection-1" aria-selected="true">
-                    <a class="btn px-2 col p-0 text-center" id="toggleNav">
-                        <img src="{{ asset('assets/img/arrow.svg') }}"class="arrow1">
-                    </a>
-                </button>
-            </div>
-        </div>
-        <div class="col-auto pe-4 d-none d-lg-block">
-            <div class="pill2 d-flex align-items-center float-right rounded-circle overflow-hidden">
-                <button class="nav btn py-0 pe-2 d-flex" id="lection-1-tab" data-bs-toggle="tab" href="#lection-{{ $loop->iteration + 1 }}" aria-controls="lection-1" aria-selected="true">
-                    <a class="btn px-2 col p-0 text-center" id="toggleNav">
-                        <img src="{{ asset('assets/img/arrow.svg') }}"class="arrow1">
-                    </a>
-                </button>
-            </div>
-        </div>
+	            <div class="pill1 d-flex align-items-center float-right rounded-circle overflow-hidden">
+	                <button class="nav btn py-0 pe-2 d-flex" id="lection-1-tab" data-bs-toggle="tab" href="#lection-{{ $loop->iteration - 1 }}" aria-controls="lection-1" aria-selected="true">
+	                    <a class="btn px-2 col p-0 text-center" id="toggleNav">
+	                        <img src="{{ asset('assets/img/arrow.svg') }}"class="arrow1">
+	                    </a>
+	                </button>
+	            </div>
+	        </div>
+	        <div class="col-auto pe-4 d-none d-lg-block">
+	            <div class="pill2 d-flex align-items-center float-right rounded-circle overflow-hidden">
+	                <button class="nav btn py-0 pe-2 d-flex" id="lection-1-tab" data-bs-toggle="tab" href="#lection-{{ $loop->iteration + 1 }}" aria-controls="lection-1" aria-selected="true">
+	                    <a class="btn px-2 col p-0 text-center" id="toggleNav">
+	                        <img src="{{ asset('assets/img/arrow.svg') }}"class="arrow1">
+	                    </a>
+	                </button>
+	            </div>
+	        </div>
 		</div>
 		<div class="video-upload row g-0 my-4 position-relative" @if (isset($lection->Video->url))style="background-color: transparent;"@endif>
 	        @if (isset($lection->Video->url))
@@ -71,14 +71,14 @@
 			</div>
 		</div>
 		@if ($lection->presentation)
-		<div class="row g-0 d-lg-none mt-2">
-			<div class="col-auto col-auto text-small align-self-end pe-3">Презентация</div>
-			<div class="col-auto">
-				<a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/slides-'.$lection->id.'/'.$lection->presentation)}}" download>
-					<img src="{{ asset('assets/img/download.svg') }}" alt="">
-				</a>
+			<div class="row g-0 d-lg-none mt-2">
+				<div class="col-auto col-auto text-small align-self-end pe-3">Презентация</div>
+				<div class="col-auto">
+					<a href="{{asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/slides-'.$lection->id.'/'.$lection->presentation)}}" download>
+						<img src="{{ asset('assets/img/download.svg') }}" alt="">
+					</a>
+				</div>
 			</div>
-		</div>
 		@endif
 		<hr class="mt-4 mb-4 d-lg-none">
 		<div class="row g-0 align-items-lg-center lh-1 pb-5">
@@ -187,7 +187,7 @@
 					<div class="row g-0 ps-1">
 						<div class="col">
 							<label for="homework-input-{{ $loop->iteration }}">
-								<div class="btn-green btn1-cs upload-btn upload-btn" id="lection-1-tab">
+								<div class="btn-green btn1-cs upload-btn upload-btn" data-lection-id="{{ $loop->iteration }}" id="lection-1-tab">
 									<div class="row g-0 align-self-center">
 										@if (($lection->homework_end && $lection->homework_end->addDays(1)->gt(\Carbon\Carbon::now())) || !$lection->homework_end)
 											<div class="col mt-2 ps-2 text-start text-small">
@@ -203,7 +203,7 @@
 										@endif
 									</div>
 								</div>
-							</div>
+							</lable>
 						</div>
 					</div>
 				</div>

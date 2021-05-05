@@ -70,12 +70,16 @@
 
 			@if(empty(old('sex')))
 				<div class="form-check form-check-inline">
-					<label id="male-label" for="male"><b>Мъж</b></label>
-					<input class="form-radio-inputs" type="radio" name="sex" id="male" value="male">
+				  	<input class="form-check-input" type="radio" name="sex" id="male" value="male">
+				  	<label class="form-check-label" for="male">
+				    	Мъж
+				  	</label>
 				</div>
 				<div class="form-check form-check-inline">
-					<label id="female-label" for="female"><b>Жена</b></label>
-					<input class="form-radio-inputs" type="radio" name="sex" id="female" value="female">
+				  	<input class="form-check-input" type="radio" name="sex" id="fmale" value="fmale">
+				  	<label class="form-check-label" for="fmale">
+				    	Жена
+				  	</label>
 				</div>
 			@endif
 		</p>
