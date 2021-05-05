@@ -305,7 +305,7 @@ class LectionController extends Controller
             $lection->presentation = $name;
         }
 
-        if (Input::hasFile('homework') || $lection->homework_end || $lection->homework_check_end) {
+        if ($lection->homework_criteria || Input::hasFile('homework') || $lection->homework_end || $lection->homework_check_end) {
             $lection->homework_end = !is_null($request->homework_end) ? $this->dateParse($request->homework_end) : null;
             $lection->homework_check_end = !is_null($request->homework_check_end) ? $this->dateParse($request->homework_check_end) : null;
         }

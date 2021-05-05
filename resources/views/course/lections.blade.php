@@ -49,11 +49,11 @@
                             <h2></h2>
                         </div>
                         <div class="copy text-center">
-                            
+
                             <p>
-                                
+
                             </p>
-                            
+
                         </form>
                     </div>
                     <div class="cf footer">
@@ -82,7 +82,7 @@
                             @if($lection->first_date)
                             &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->first_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->first_date->format('H:i')}}</span>
                             @endif
-                            
+
                             @if($lection->second_date)
                             /&nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->second_date->format('H:i')}}</span>
                             @endif
@@ -93,14 +93,14 @@
                                 &nbsp;<i class="far fa-clock"></i>&nbsp;{{isset($lection->homework_end)?$lection->homework_end->subDays(1)->addHours('23')->addMinutes('59')->format('H:i'):'-'}}
                             </div>
                         </span><br>
-                        
+
                         @if(!Auth::user() && $lection->visibility != Config::get('courseVisibility.public'))
                         <span class="lection-description">Тази лекция не е публична!</span>
                         <div class="cf footer text-center">
                             <a href="{{route('home')}}" class="btn close-modal">ВХОД</a>
                         </div>
                         @else
-                        
+
                         @if(strlen($lection->description) > 250)
                         <span class="lection-description">{{mb_substr($lection->description,0,250)}}...<a href="#modal" data="{{$lection->description}}" class="read-more">още</a></span>
                         @else
@@ -170,10 +170,10 @@
                                                     @endif
                                                 </div>
                                                 <div class="col-md-4">
-                                                    
+
                                                 </div>
                                                 <div class="col-md-4">
-                                                    
+
                                                 </div>
                                                 <div class="col-md-4 text-center">
                                                     <span class="">
@@ -185,14 +185,14 @@
                                                     </span>
                                                 </div>
                                                 <div class="col-md-4">
-                                                    
+
                                                 </div>
                                                 <div class="col-md-4 text-right">
                                                     <span class="">{{$comment->created_at->diffForHumans()}}</span>
                                                 </div>
-                                                
+
                                                 <div class="col-md-12">
-                                                    
+
                                                 </div>
                                                 <div class="col-md-12 comment-text">
                                                     {{$comment->comment}}
@@ -271,12 +271,12 @@
                             @if($lection->first_date)
                             &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->first_date->format('d-m-Y')}}&nbsp;
                             @endif
-                            
+
                             @if($lection->second_date)
                             /&nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;
                             @endif
                         </span><br>
-                        
+
                         @if(!Auth::user() && $lection->visibility != Config::get('courseVisibility.public'))
                         <span class="lection-description">Трябва да сте влезели в профила си !</span>
                         <div class="cf footer text-center">
@@ -306,12 +306,12 @@
                             @if($lection->first_date)
                             &nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->first_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->first_date->format('H:i')}}</span>
                             @endif
-                            
+
                             @if($lection->second_date)
                             /&nbsp;<i class="far fa-calendar-alt"></i>&nbsp;{{$lection->second_date->format('d-m-Y')}}&nbsp;<span class="lection-hour">&nbsp;<i class="far fa-clock"></i>&nbsp;{{$lection->second_date->format('H:i')}}</span>
                             @endif
                         </span><br>
-                        
+
                         @if(!Auth::user() && $lection->visibility != Config::get('courseVisibility.public'))
                         <span class="lection-description">Трябва да сте влезели в профила си !</span>
                         <div class="cf footer text-center">
@@ -329,10 +329,10 @@
                 </div>
                 <!-- end of test -->
                 @endif
-                
+
                 @endforeach
             </div>
-            
+
         </div>
     </div>
     <script src="{{asset('/js/lections.js')}}"></script>
