@@ -1,4 +1,4 @@
-<link rel= "stylesheet" href= "{{ asset('css/flash-message.css') }}"/>
+<link rel= "stylesheet" href="{{ asset('css/flash-message.css') }}"/>
 
 @if ($errors->any())
 	<div class="alert alert-danger" role="alert">

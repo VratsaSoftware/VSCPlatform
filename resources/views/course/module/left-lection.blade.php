@@ -115,7 +115,7 @@
                         <div class="fw-bold text-warm-grey text-small text-uppercase py-lg-4 pb-3 pt-4 my-lg-0 my-1">
                             Учебна програма
                             @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
-                                <button class="add-lection-button" style="float: right; color: #000; border: 0px">
+                                <button class="nav active py-0 pe-2 d-flex add-lection-button" data-bs-toggle="tab" href="#lection-1" role="tab" aria-controls="lection-1" aria-selected="true" style="float: right; color: #000; border: 0px;">
                                     <span class="me-2"><img src="{{ asset('assets/img/plus.svg') }}"></span>
                                     Добави лекция
                                 </button>
@@ -285,12 +285,11 @@
 </div>
 <!-- right side -->
 <div id="right-side" data-countLections="{{ count($lections) }}" class="col-xl pt-md-5 mt-md-4 tab-content edit-content">
+    @include('flash-message')
     @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
         @if ($lections->count() == 0)
-            @include('flash-message')
             @include('course.module.lections.create')
         @else
-            @include('flash-message')
             @foreach ($lections as $lection)
                 <div class="tab-pane fade @if ($loop->iteration == 1) show active @endif mt-xl-2 pt-xl-1" id="lection-{{ $loop->iteration }}" role="tabpanel" aria-labelledby="lection-2-tab">
                     <!-- show lection -->
@@ -314,12 +313,11 @@
             @endforeach
         @endif
     @else
-        @include('flash-message')
         @foreach ($lections as $lection)
             @include('course.student.lections')
         @endforeach
         <!-- Еvaluate Modal -->
-        @include('course.student.еvaluate-modal')
+        @include('course.student.evaluate-modal')
         <!-- Еvaluate Modal End -->
     @endif
     <!-- edit module -->

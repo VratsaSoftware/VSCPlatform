@@ -7,6 +7,10 @@ $(document).ready(function() {
         $('.btn-green.active').toggleClass("active");
     });
 
+    $('.add-lection-button').on('click', function () {
+        $('.add-lection-button.active').toggleClass("active");
+    });
+
     $('#tab_selector').on('change', function () {
         $('.nav-tabs a').eq($(this).val()).tab('show');
     });
@@ -25,6 +29,7 @@ $(document).ready(function() {
 
     if ($(window).width() < 992) {
         $("#right-side .tab-pane.active").removeClass("active");
+        $('.btn-green.active').removeClass("active");
         $('.btn-green.active').removeClass("active");
     }
 });
