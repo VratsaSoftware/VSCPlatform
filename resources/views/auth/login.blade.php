@@ -64,30 +64,9 @@
 			</div>
 		</div>
 	@else
-		<div class="mb-4 input-user">
-			<a href="{{ asset('myProfile') }}"><button type="button" class="w-100 btn-green btn-edit d-none d-lg-block btn-margin">Продължи към моя Профил</button></a>
-			<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><button type="button" class="w-100 btn-green btn-edit d-none d-lg-block btn-margin">Изход</button></a>
-
-			<div class="d-flex justify-content-center d-lg-none">
-				<form action="{{ asset('myProfile') }}">
-					<button class="btn-4 btn-program btn-green row g-0 align-items-center w-100 btn-margin">
-						<div class="col text-start text-5"><b>Към моя Профил</b></div>
-					</button>
-				</form>
-
-				<a href="{{ route('logout') }}" class="d-flex fw-bold" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-					<span class="slide-item text-navy-blue">
-						<button class="btn-4 btn-program btn-green row g-0 align-items-center w-100 btn-margin">
-							<div class="col text-start text-5"><b>
-								Изход
-							</b></div>
-						</button>
-					</span>
-				</a>
-				<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-					@csrf
-				</form>
-			</div>
+		<div class="mb-4 input-user mt-5">
+			<a href="{{ asset('myProfile') }}"><button type="button" class="w-100 btn-green btn-edit btn-margin">Продължи към моя Профил</button></a>
+			<a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();"><button type="button" class="w-100 btn-green btn-edit btn-margin">Изход</button></a>
 		</div>
 	@endif
 @endsection
