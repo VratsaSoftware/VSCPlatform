@@ -123,7 +123,7 @@
 								<div class="col-lg col-auto text-small align-self-end pe-3">Домашно</div>
 								<div class="col-auto">
 									<a href="{{ asset('/data/course-'.$module->Course->id.'/modules/'.$module->id.'/homework-'.$lection->id.'/'.$lection->homework_criteria) }}" download>
-										<img src="{{ asset('assets/img/download.svg') }}" alt="">
+										<img src="{{ asset('assets/img/download.svg') }}">
 									</a>
 								</div>
 							</div>
@@ -281,7 +281,7 @@
 							Домашно ({{ $myHomework->evaluated_count }})
 						</div>
 						<a href="{{ asset('/data/homeworks/' . $myHomework->file) }}" download>
-							<img src="{{ asset('assets/img/download.svg') }}" alt="">
+							<img src="{{ asset('assets/img/download.svg') }}">
 						</a>
 					</div>
 				</div>

@@ -95,7 +95,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $data = $request->validate([
-            'picture' => 'nullable|file|image|mimes:jpeg,png,gif,webp,ico|max:4000',
+            'picture' => 'nullable|mimes:jpeg,jpg,png,gif,webp,ico',
             'name' => 'nullable|sometimes|string|min:3|max:25|',
             'location' => 'nullable|sometimes|min:3|max:10|string|',
             'dob' => 'nullable|sometimes|date_format:m/d/Y|before:'.Carbon::now().'|after:01/01/1950',

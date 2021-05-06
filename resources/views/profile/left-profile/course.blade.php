@@ -104,8 +104,8 @@
                                     <p class="m-0 p-0 pe-4 course-title">{{ $activCourse->name }}</p>
                                 </div>
                                 <div class="col-auto">
-                                    <form action="{{route('application.create',[$course->training_type,$course->id])}}">
-                                        <button class="btn view-course-btn d-flex py-0 px-3">
+                                    <form action="{{route('application.create', [$course->training_type, $course->id])}}">
+                                        <button onclick="window.location.href='{{ asset('application/create/' . $activCourse->id) }}'" class="btn view-course-btn d-flex py-0 px-3">
                                             <div class="row w-100 g-0 align-self-center">
                                                 <div class="col text-start">
                                                     <span class="fw-bold">Виж</span>

@@ -8,7 +8,7 @@
         <div class="row g-0 d-lg-none d-flex pb-4 align-items-center">
             <div class="col">
                 <div class="row g-0 user-info justify-content-center">
-                    <div class="col-auto">
+                    <div class="col-auto"  id="avatar-menu">
                         @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
                             <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px" class="avatar">
                         @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
@@ -173,3 +173,6 @@
         </div>
     </nav>
 </div>
+
+<!-- Mobile Profile Menu -->
+@include('profile.mobile-profile')

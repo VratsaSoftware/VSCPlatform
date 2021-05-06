@@ -34,7 +34,7 @@
                             </a>
                         @else
                             <a class="tooltip-popup nav-link col-auto ps-0 @if ($module->id == $moduleNav->id) active @endif d-sm-block d-none" href="{{ asset('user/' . Auth::user()->id . '/course/' . $module->Course->id . '/module/' . $moduleNav->id . '/lections') }}" aria-controls="module-1" aria-selected="true" style="padding: .2rem 1rem;">
-                                М{{ $loop->iteration }}
+                                Модул {{ $loop->iteration }}
                                 <span class="tooltiptext">
                                     {{ $moduleNav->name }}
                                 </span>

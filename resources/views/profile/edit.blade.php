@@ -64,14 +64,17 @@
                     </div>
                 </div>
                 <div class="col-auto">
-                    @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
-                        <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                    @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
-                        <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                    @else
-                        <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                    @endif
+                    <label for="edit-picture">
+                        @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
+                            <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                        @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
+                            <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                        @else
+                            <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                        @endif
+                    </label>
                 </div>
+                <input type="file" name="picture" id="edit-picture" style="display: none">
             </div>
         </div>
         <div class="w-100"></div>
@@ -233,14 +236,18 @@
             <div class="col-auto">
                 <div class="row g-0 p-0 m-0 d-flex align-items-center">
                     <div class="col">
-                        @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
-                            <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                        @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
-                            <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                        @else
-                            <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                        @endif
+                        <label for="edit-picture-mobile">
+                            @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
+                                <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                            @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
+                                <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                            @else
+                                <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                            @endif
+                        </label>
                     </div>
+                    <input type="file" name="picture" id="edit-picture-mobile" style="display: none">
+
                     <div class="col-auto ps-2 ms-1">
                         <div class="user_name fw-bold d-block">
                             {{ Auth::user()->name }}
