@@ -68,13 +68,16 @@
                         <div class="flip-card">
                             <div class="flip-card-inner">
                                 <div class="flip-card-front">
-                                    @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
-                                        <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                                    @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
-                                        <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                                    @else
-                                        <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                                    @endif
+                                    <div class="edit-avatar">
+                                        @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
+                                            <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                                        @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
+                                            <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                                        @else
+                                            <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                                        @endif
+                                    </div>
+                                    <img id="preview-img-avatar" style="border-radius: 5px; width: 70px; display: none" class="avatar">
                                 </div>
                                 <div class="flip-card-back position-relative">
                                     <img src="{{ asset('assets/icons/edit-profile-icon.png') }}" style="width: 70px" class="position-absolute top-50 start-50 translate-middle">
@@ -246,13 +249,16 @@
                 <div class="row g-0 p-0 m-0 d-flex align-items-center">
                     <div class="col">
                         <label for="edit-picture-mobile">
-                            @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
-                                <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                            @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
-                                <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                            @else
-                                <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                            @endif
+                            <div class="edit-avatar">
+                                @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
+                                    <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                                @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
+                                    <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                                @else
+                                    <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                                @endif
+                            </div>
+                            <img id="preview-img-avatar-mobile" style="border-radius: 5px; width: 70px; display: none" class="avatar">
                         </label>
                     </div>
                     <input type="file" name="picture" id="edit-picture-mobile" style="display: none">
@@ -440,5 +446,31 @@
 @include('profile.interests.create')
 <!-- Interests Modal End -->
 <!-- Modals End -->
+
+<script>
+$(document).ready(function() {
+    editPicture('#edit-picture', '#preview-img-avatar');
+    editPicture('#edit-picture-mobile', '#preview-img-avatar-mobile');
+
+    function editPicture(editPictureId, previewAvatar) {
+        $(editPictureId).change(function() {
+            $('.edit-avatar').hide();
+            $(previewAvatar).show();
+
+            var file = $(editPictureId).get(0).files[0];
+
+            if(file){
+                var reader = new FileReader();
+
+                reader.onload = function(){
+                    $(previewAvatar).attr("src", reader.result);
+                }
+
+                reader.readAsDataURL(file);
+            }
+        });
+    }
+});
+</script>
 
 @endsection
