@@ -63,7 +63,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-auto">
+                <div class="col-auto position-relative">
                     <label for="edit-picture">
                         @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
                             <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
