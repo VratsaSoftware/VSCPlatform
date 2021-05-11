@@ -10,8 +10,9 @@
 	<title>@yield('title')</title>
 	<!-- favicon -->
     <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png.png')}}" />
-	<!-- Fonts and Icons -->
+	<!-- css links -->
 	<link href="{{ asset('assets/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+	<link href="{{ asset('css/profile/flip-card.css') }}" rel="stylesheet" type="text/css">
 	<!-- Bootstrap core CSS -->
 	<link href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet" />
 	<!-- CSS Files -->

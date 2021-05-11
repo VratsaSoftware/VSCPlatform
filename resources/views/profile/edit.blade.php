@@ -65,13 +65,22 @@
                 </div>
                 <div class="col-auto position-relative">
                     <label for="edit-picture">
-                        @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
-                            <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                        @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
-                            <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                        @else
-                            <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                        @endif
+                        <div class="flip-card">
+                            <div class="flip-card-inner">
+                                <div class="flip-card-front">
+                                    @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
+                                        <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                                    @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
+                                        <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                                    @else
+                                        <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
+                                    @endif
+                                </div>
+                                <div class="flip-card-back position-relative">
+                                    <img src="{{ asset('assets/icons/edit-profile-icon.png') }}" style="width: 70px" class="position-absolute top-50 start-50 translate-middle">
+                                </div>
+                            </div>
+                        </div>
                     </label>
                 </div>
                 <input type="file" name="picture" id="edit-picture" style="display: none">

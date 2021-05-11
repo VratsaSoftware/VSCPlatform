@@ -150,7 +150,7 @@ class UserController extends Controller
         if ($request->has('dob')) {
             $user->dob = $data['dob'] ? $this->dateParse($data['dob']) : null;
         }
-        if ($request->has('email')) {
+        if ($request->has('email') && $request->email !== Auth::user()->email) {
             $validEmail = User::where('email', $request->email)
                 ->first();
 
