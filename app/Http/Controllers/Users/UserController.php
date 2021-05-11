@@ -108,6 +108,9 @@ class UserController extends Controller
             'behance' => 'nullable|url|min:5|max:250',
         ]);
 
+        $message = __('Успешно направени промени!');
+        $messageType = 'success';
+
         if (Input::hasFile('picture')) {
             $userPic = Input::file('picture');
             $image = Image::make($userPic->getRealPath());
@@ -148,7 +151,15 @@ class UserController extends Controller
             $user->dob = $data['dob'] ? $this->dateParse($data['dob']) : null;
         }
         if ($request->has('email')) {
-            $user->email = $data['email'];
+            $validEmail = User::where('email', $request->email)
+                ->first();
+
+            if (!$validEmail) {
+                $user->email = $data['email'];
+            } else {
+                $message = __('Имейлът съществува!');
+                $messageType = 'error';
+            }
         }
         if ($request->has('bio')) {
             $user->bio = $request->bio;
@@ -156,8 +167,8 @@ class UserController extends Controller
 
         $updateLinks = SocialLink::updateLinks($user->id, $request);
         $user->save();
-        $message = __('Успешно направени промени!');
-        return redirect('myProfile/edit')->with('success', $message);
+
+        return redirect('myProfile/edit')->with($messageType, $message);
     }
 
     /* date parse */
