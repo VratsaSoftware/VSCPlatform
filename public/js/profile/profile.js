@@ -10,4 +10,17 @@ $(document).ready(function(){
     $('#right-side .tab-pane .close').on('click', function () {
         $("#right-side .tab-pane.active").removeClass("active");
     });
+
+    $('.filter').click(function () {
+        $("#filter-section").toggle();
+        $(".courses-section-title").toggleClass("active");
+
+        $("#activ-courses").click(function () {
+            $(".active-course-section").toggle();
+        });
+
+        $("#past-courses").click(function () {
+            $(".past-course-section").toggle();
+        });
+    });
 });

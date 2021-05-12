@@ -163,7 +163,7 @@ class User extends Authenticatable
         return Course::where('ends', '>', Carbon::now()->format('Y-m-d H:m:s'))
             ->orderBy('ends', 'DESC')
             ->with('Lecturers')
-            ->whereHas('Lecturers', function ($query) use ($lection_id) {
+            ->whereHas('Lecturers', function ($query) use ($userId) {
                 $query->where('user_id', $userId);
             })->get();
     }

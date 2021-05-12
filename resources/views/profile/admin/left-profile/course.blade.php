@@ -6,17 +6,27 @@
                     <li>
                         <div class="row g-0">
                             <div class="col">
-                                <p class="fw-bold text-uppercase courses-section-title">Активни курсове</p>
+                                <p class="fw-bold text-uppercase courses-section-title active-course-section">Активни курсове</p>
                             </div>
                             <div class="col-auto">
                                 <img src="{{ asset('assets/icons/filter.svg') }}" width="32" alt="#" class="filter">
+                            </div>
+                        </div>
+                        <div id="filter-section" class="row g-0 mb-4" style="display: none">
+                            <div class="col">
+                                <input type="checkbox" class="filter-checkbox" id="activ-courses" checked>
+                                <label for="activ-courses" class="fw-bold text-uppercase courses-section-title">Активни</label>
+                            </div>
+                            <div class="col-auto">
+                                <input type="checkbox" class="filter-checkbox" id="past-courses" checked>
+                                <label for="past-courses" class="fw-bold text-uppercase courses-section-title">Отминали</label>
                             </div>
                         </div>
                     </li>
                     @if ($courses->count())
                         @foreach ($courses as $course)
                             <li>
-                                <div class="course">
+                                <div class="course active-course-section">
                                     <div class="row g-0">
                                         <div class="col-auto" style="width: 316px">
                                             @include ('profile.course-icon', [
@@ -51,11 +61,11 @@
                         @endforeach
                     @endif
                     <li>
-                        <p class="fw-bold text-uppercase courses-section-title">Отминали курсове</p>
+                        <p class="fw-bold text-uppercase courses-section-title past-course-section">Отминали курсове</p>
                     </li>
                     @foreach ($pastCourses as $pastCourse)
                         <li>
-                            <div class="course">
+                            <div class="course past-course-section">
                                 <div class="row g-0">
                                     <div class="col-auto" style="width: 316px">
                                         @include ('profile.course-icon', [
