@@ -49,29 +49,15 @@
             <div class="d-block pb-3">
                 <img src="{{ asset('assets/icons/email.svg') }}" width="26.9" alt="#">
                 <span class="ps-4 fw-bold">{{ Auth::user()->email }}</span>
-                @if (!Auth::user()->bio)
-                    <div class="mt-3">
-                        <button onclick="window.location.href='{{ asset('myProfile') }}'" class="btn p-0 m-0 d-flex align-items-center">
-                            <span class="fw-bold pe-4">Виж повече</span>
-                            <img src="{{ asset('assets/img/action_icon _black.svg') }}" width="27.7" class="d-inline-block">
-                        </button>
-                    </div>
-                @endif
+                <div class="mt-3">
+                    <button onclick="window.location.href='{{ asset('myProfile') }}'" class="btn p-0 m-0 d-flex align-items-center">
+                        <span class="fw-bold pe-4">Виж повече</span>
+                        <img src="{{ asset('assets/img/action_icon _black.svg') }}" width="27.7" class="d-inline-block">
+                    </button>
+                </div>
             </div>
         </div>
     </div>
-    @if (Auth::user()->bio)
-        <div class="about row g-0 p-0 m-0">
-            <h3 class="mt-4">За мен</h3>
-            <p class="m-0 mt-3">
-                {{ strlen(Auth::user()->bio) > 298 ? mb_substr(Auth::user()->bio, 0, 298) . "..." : Auth::user()->bio }}
-            </p>
-            <button onclick="window.location.href='{{ asset('myProfile/edit') }}'" class="btn p-0 m-0 d-flex align-items-center">
-                <span class="fw-bold pe-4">Виж повече</span>
-                <img src="{{ asset('assets/img/action_icon _black.svg') }}" width="27.7" class="d-inline-block">
-            </button>
-        </div>
-    @endif
     <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
         <button class="btn mt-3 p-0 m-0 d-flex align-items-center">
             <img src="{{ asset('assets/img/Log_out.svg') }}" height="23" class="d-inline-block">

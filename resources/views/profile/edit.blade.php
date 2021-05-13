@@ -136,13 +136,6 @@
             </div>
         </div>
         <div class="w-100"></div>
-        <div class="col mt-5 pt-4">
-            <div class="row g-0">
-                <div class="col">
-                    <p class="fw-bold bio-title">За мен</p>
-                    <textarea class="bio-description" name="bio" placeholder="За мен">{{ Auth::user()->bio }}</textarea>
-                </div>
-            </div>
         </form>
         <div class="w-100"></div>
         <div class="col mt-4 pt-3">
@@ -178,30 +171,6 @@
                     </div>
                 </div>
                 <div class="col">
-                    <p class="fw-bold bio-title">Интереси</p>
-                    <div class="bio-description-large">
-                        <div class="row g-0">
-                            <div class="col-auto pe-3 fw-bold item-number">1.</div>
-                            <div class="col mb-3 bio-description">Lorem ipsum
-                            </div>
-                            <span data-bs-toggle="modal" data-bs-target="#interestsModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
-                                <i class="fas fa-pen"></i>
-                            </span>
-                        </div>
-                        <div class="row g-0">
-                            <div class="col-auto pe-3 fw-bold item-number">1.</div>
-                            <div class="col mb-3 bio-description">Lorem ipsum
-                            </div>
-                            <span data-bs-toggle="modal" data-bs-target="#interestsModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
-                                <i class="fas fa-pen"></i>
-                            </span>
-                        </div>
-                        <span class="bio-pill position-absolute bottom-0 start-0 m-2 p-0"
-                        data-bs-toggle="modal" data-bs-target="#interestsModal-create">+</span>
-                    </div>
-                </div>
-                <div class="w-100"></div>
-                <div class="col pe-2 me-5 mt-4">
                     <p class="fw-bold bio-title">Образование</p>
                     <div class="bio-description-large">
                         @foreach ($allEducation as $education)
@@ -231,7 +200,6 @@
                         data-bs-toggle="modal" data-bs-target="#educationModal-create">+</span>
                     </div>
                 </div>
-                <div class="col"></div>
             </div>
         </div>
     </div>
@@ -328,12 +296,6 @@
                     </label>
                 </div>
             </div>
-            <div class="row g-0 pt-4 flex-column">
-                <div class="col pb-2">
-                    <p class="fw-bold bio-title">За мен</p>
-                    <textarea class="bio-description" name="bio" placeholder="За мен">{{ Auth::user()->bio }}</textarea>
-                </div>
-            </div>
         </form>
         <div class="row g-0 pt-4 flex-column">
             <div class="col pb-2">
@@ -394,29 +356,6 @@
                     @endforeach
                     <span class="bio-pill position-absolute bottom-0 start-0 m-2 p-0"
                     data-bs-toggle="modal" data-bs-target="#createWorkExperienceModal">+</span>
-                </div>
-            </div>
-            <div class="col">
-                <p class="fw-bold bio-title">Интереси</p>
-                <div class="bio-description-large">
-                    <div class="row g-0">
-                        <div class="col-auto pe-3 fw-bold item-number">1.</div>
-                        <div class="col mb-3 bio-description">Lorem
-                        </div>
-                        <button data-bs-toggle="modal" data-bs-target="#interestsModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
-                            <i class="fas fa-pen"></i>
-                        </button>
-                    </div>
-                    <div class="row g-0">
-                        <div class="col-auto pe-3 fw-bold item-number">2.</div>
-                        <div class="col bio-description">Lorem ipsum
-                        </div>
-                        <button data-bs-toggle="modal" data-bs-target="#interestsModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2">
-                            <i class="fas fa-pen"></i>
-                        </button>
-                    </div>
-                    <button class="bio-pill position-absolute bottom-0 start-0 m-2 p-0" data-bs-toggle="modal"
-                    data-bs-target="#interestsModal">+</button>
                 </div>
             </div>
         </div>
