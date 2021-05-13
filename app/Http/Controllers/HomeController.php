@@ -33,74 +33,50 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $userId = Auth::user()->id;
-        $isAdmin = Auth::user()->isAdmin();
-        $isLecturer = Auth::user()->isLecturer();
-        $hasEducation = Auth::user()->hasEducation();
-        $hasCertification = Auth::user()->hasCertification();
-        $isOnCourse = Auth::user()->isOnCourse();
-        $socialLinks = Auth::user()->getSocialLinks();
-        $hasWorkExp = Auth::user()->hasWorkExp();
-        $hasHobbies = Auth::user()->hasHobbies();
-        $isInvited = Auth::user()->isEventInvited('not_confirmed');
+        if (Auth::user()->isAdmin()) {
+            $courses = Course::where('ends', '>', Carbon::now()->format('Y-m-d H:m:s'))->orderBy('ends', 'DESC')
+                ->get();
 
-        $educationTypes = EducationType::all();
-        $education = [];
-        $certificates = [];
-
-        $workExp = [];
-        $interestTypes = InterestsType::all();
-        $hobbies = [];
-
-        Session::put('locale', 'bg');
-        app()->setLocale('bg');
-
-        if ($hasEducation) {
-            $education = Auth::user()->getEducation();
-        }
-        if ($hasCertification) {
-            $certificates = Auth::user()->getCertificates();
-        }
-        if ($isOnCourse) {
-            $course = Auth::user()->studentGetCourse();
-        }
-        if ($hasWorkExp) {
-            $workExp = Auth::user()->getWorkExp();
-        }
-        if ($hasHobbies) {
-            $hobbies = Auth::user()->getHobbies();
+            $pastCourses = Course::where('ends', '<', Carbon::now()->format('Y-m-d H:m:s'))->orderBy('ends', 'DESC')
+                ->get();
+        } else if (Auth::user()->isLecturer()) {
+            $courses = Auth::user()->lecturerGetCourses();
+            $pastCourses = Auth::user()->lecturerGetPastCourses();
+        } else {
+            $courses = Auth::user()->studentGetCourse();
+            $pastCourses = Auth::user()->studentGetPastCourse();
         }
 
-        if ($isAdmin) {
-            $courses = Course::where('ends', '>', Carbon::now()->format('Y-m-d H:m:s'))->get();
-            $lecturer = User::find(Auth::user()->id);
-            return view('admin.my_profile', ['social_links' => $socialLinks,'certificates' => $certificates,'courses' => $courses,'lecturer' => $lecturer]);
-        }
-        if ($isLecturer) {
-            $courses = Course::with('Lecturers')->whereHas('Lecturers', function ($query) use ($userId) {
-                $query->where('user_id', $userId);
-            })->orderBy('created_at', 'desc')->get();
-            $lecturer = User::find(Auth::user()->id);
-            return view('lecturer.my_profile', ['social_links' => $socialLinks,'courses' => $courses, 'lecturer' => $lecturer]);
-        }
+        $courses = $courses->load('Modules');
+        $pastCourses = $pastCourses->load('Modules');
 
-        $poll = Auth::user()->getPolls();
+        /* links */
+        $facebookLink = SocialLink::where('cl_social_id', 1)
+            ->where('user_id', Auth::user()->id)
+            ->pluck('link')
+            ->first();
+        $linkedinLink = SocialLink::where('cl_social_id', 2)
+            ->where('user_id', Auth::user()->id)
+            ->pluck('link')
+            ->first();
+        $githubLink = SocialLink::where('cl_social_id', 3)
+            ->where('user_id', Auth::user()->id)
+            ->pluck('link')
+            ->first();
 
-        if($poll || !is_null($poll)) {
-            return view('user.my_profile', [
-                'social_links' => $socialLinks,
-                'certificates' => $certificates,
-                'education' => $education,
-                'eduTypes' => $educationTypes,
-                'workExp' => $workExp,
-                'hobbies' => $hobbies,
-                'interestTypes' => $interestTypes,
-                'isInvited' => $isInvited,
-                'poll' => $poll
-            ]);
-        }
+        $allWorkExperience = Auth::user()->getWorkExp();
+        $allEducation = Auth::user()->getEducation();
 
-        return view('user.my_profile', ['social_links' => $socialLinks,'certificates' => $certificates,'education' => $education,'eduTypes' => $educationTypes,'workExp' => $workExp,'hobbies' => $hobbies,'interestTypes' => $interestTypes,'isInvited' => $isInvited]);
+        return view('profile.dashboard', [
+            'courses' => $courses,
+            'pastCourses' => $pastCourses,
+            'activCourses' => Auth::user()->activeGetCourse(),
+            'facebookLink' => $facebookLink,
+            'linkedinLink' => $linkedinLink,
+            'githubLink' => $githubLink,
+            'allWorkExperience' => $allWorkExperience,
+            'allEducation' => $allEducation,
+        ]);
     }
 
     public function subscribe($email)

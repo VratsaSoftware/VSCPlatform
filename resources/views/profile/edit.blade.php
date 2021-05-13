@@ -436,9 +436,6 @@
 @include('profile.education.create')
 @include('profile.education.edit')
 <!-- Education Modal End -->
-<!-- Interests Modal -->
-@include('profile.interests.create')
-<!-- Interests Modal End -->
 <!-- Modals End -->
 
 <script>

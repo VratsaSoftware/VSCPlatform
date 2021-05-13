@@ -1840,8 +1840,14 @@ div.alert-success {
 
 /* remove autofill */
 input:-webkit-autofill,
-input:-webkit-autofill:hover, 
-input:-webkit-autofill:focus, 
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
 input:-webkit-autofill:active  {
   transition: background-color 500000s;
+}
+
+@media only screen and (min-width: 1479px) {
+    .card-course {
+        width: 339px;
+    }
 }

@@ -36,8 +36,8 @@
 						@include('profile.admin.left-profile.course')
 						@include('profile.admin.left-profile.course-mobile')
 					@else
-						@include('profile.left-profile.course')
-						@include('profile.left-profile.course-mobile')
+						@include('profile.user.left-profile.course')
+						@include('profile.user.left-profile.course-mobile')
 					@endif
 					<!-- left profile - course section END -->
 					<!-- content -->
