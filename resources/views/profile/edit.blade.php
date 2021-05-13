@@ -112,7 +112,7 @@
                     </label>
                 </div>
             </div>
-            <div class="row g-0 mt-5 pt-4 d-flex justify-content-end">
+            <div class="row g-0 mt-5 d-flex align-items-center">
                 <div class="col">
                     <label class="d-flex align-items-center input">
                         <img src="{{ asset('assets/icons/location.svg') }}" width="24" alt="#">
@@ -128,8 +128,8 @@
                 </div>
                 <div class="col">
                     <label class="d-flex align-items-center input">
-                        <img src="{{ asset('assets/icons/email.svg') }}" width="30" alt="#">
-                        <input type="email" name="email" placeholder="Електронна поща"
+                        <img src="{{ asset('assets/icons/email.svg') }}" alt="#">
+                        <input type="email" name="email" placeholder="Email"
                         value="{{ Auth::user()->email }}">
                     </label>
                 </div>
@@ -161,7 +161,7 @@
                                         {{ $workExperience->y_from->format('d.m.Y') }}/{{ $workExperience->y_to ? $workExperience->y_to->format('d.m.Y') : 'В ход' }}
                                     </span>
                                 </div>
-                                <span data-bs-toggle="modal" data-bs-target="#editWorkExperienceModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2 work-experience-btn" data-work-experience-company="{{ $workExperience->Company->name }}" data-work-position="{{ $workExperience->Position->position }}" data-work-y_from="{{ $workExperience->y_from->format('m/d/Y') }}" data-work-y_to="{{ $workExperience->y_to->format('m/d/Y') }}" data-work-id="{{ $workExperience->id }}">
+                                <span data-bs-toggle="modal" data-bs-target="#editWorkExperienceModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2 work-experience-btn" data-work-experience-company="{{ $workExperience->Company->name }}" data-work-position="{{ $workExperience->Position->position }}" data-work-y_from="{{ $workExperience->y_from->format('m/d/Y') }}" data-work-y_to="{{ $workExperience->y_to ? $workExperience->y_to->format('m/d/Y') : null }}" data-work-id="{{ $workExperience->id }}">
                                     <i class="fas fa-pen"></i>
                                 </span>
                                 <form method="post" action="{{ url('/user/delete/work/' . $workExperience->id) }}">
@@ -380,7 +380,7 @@
                                     {{ $workExperience->y_from->format('d.m.Y') }}/{{ $workExperience->y_to ? $workExperience->y_to->format('d.m.Y') : 'В ход' }}
                                 </span>
                             </div>
-                            <span data-bs-toggle="modal" data-bs-target="#editWorkExperienceModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2 work-experience-btn" data-work-experience-company="{{ $workExperience->Company->name }}" data-work-position="{{ $workExperience->Position->position }}" data-work-y_from="{{ $workExperience->y_from->format('m/d/Y') }}" data-work-y_to="{{ $workExperience->y_to->format('m/d/Y') }}" data-work-id="{{ $workExperience->id }}">
+                            <span data-bs-toggle="modal" data-bs-target="#editWorkExperienceModal" class="btn position-absolute top-0 end-0 d-flex justify-content-center align-items-center edit-area-btn m-2 work-experience-btn" data-work-experience-company="{{ $workExperience->Company->name }}" data-work-position="{{ $workExperience->Position->position }}" data-work-y_from="{{ $workExperience->y_from->format('m/d/Y') }}" data-work-y_to="{{ $workExperience->y_to ? $workExperience->y_to->format('m/d/Y') : null }}" data-work-id="{{ $workExperience->id }}">
                                 <i class="fas fa-pen"></i>
                             </span>
                             <form method="post" action="{{ url('/user/delete/work/' . $workExperience->id) }}">

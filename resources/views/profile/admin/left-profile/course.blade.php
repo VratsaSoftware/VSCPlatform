@@ -28,7 +28,7 @@
                             <li>
                                 <div class="course active-course-section">
                                     <div class="row g-0">
-                                        <div class="col-auto" style="width: 316px">
+                                        <div class="col-auto" style="">
                                             @include ('profile.course-icon', [
                                                 'type' => $course->training_type
                                             ])
@@ -67,7 +67,7 @@
                         <li>
                             <div class="course past-course-section">
                                 <div class="row g-0">
-                                    <div class="col-auto" style="width: 316px">
+                                    <div class="col-auto" style="">
                                         @include ('profile.course-icon', [
                                             'type' => $pastCourse->training_type
                                         ])

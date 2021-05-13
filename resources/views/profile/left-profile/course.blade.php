@@ -31,7 +31,7 @@
                                         <p class="m-0 p-0 pe-4 course-title">{{ $course->name }}</p>
                                     </div>
                                     <div class="col-auto">
-                                        <form action="{{ asset($course->Modules->Count() ? 'module/' . $course->Modules[0]->id . '/edit/' : '#') }}">
+                                        <form action="{{ asset($course->Modules->Count() ? 'user/' . Auth::user()->id . '/course/' . $course->id . '/module/' . $course->Modules[0]->id . '/lections' : '#') }}">
                                             <button class="btn view-course-btn d-flex py-0 px-3">
                                                 <div class="row w-100 g-0 align-self-center">
                                                     <div class="col text-start">

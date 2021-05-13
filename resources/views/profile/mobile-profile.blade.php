@@ -72,10 +72,16 @@
             </button>
         </div>
     @endif
-    <button class="btn mt-3 p-0 m-0 d-flex align-items-center">
-        <img src="{{ asset('assets/img/Log_out.svg') }}" height="23" class="d-inline-block">
-        <span class="fw-bold ps-4">Изход</span>
-    </button>
+    <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+        <button class="btn mt-3 p-0 m-0 d-flex align-items-center">
+            <img src="{{ asset('assets/img/Log_out.svg') }}" height="23" class="d-inline-block">
+            <span class="fw-bold ps-4">Изход</span>
+        </button>
+    </a>
+
+    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+        @csrf
+    </form>
 </div>
 
 <script>
