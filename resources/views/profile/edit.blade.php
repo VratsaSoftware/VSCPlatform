@@ -136,6 +136,32 @@
             </div>
         </div>
         <div class="w-100"></div>
+        <div class="col mt-5 pt-2 profile-details">
+            <div class="col">
+                <label class="d-flex align-items-center input">
+                    <img src="{{ asset('assets/img/user.svg') }}" alt="#" width="32px">
+                    <input type="text" name="name" placeholder="Име и фамилия" value="{{ Auth::user()->name }} {{ Auth::user()->last_name }}" required>
+                </label>
+            </div>
+            <div class="col mt-2">
+                <label class="d-flex align-items-center input">
+                    <img src="{{ asset('assets/icons/email.svg') }}" alt="#">
+                    <input type="password" name="currentPassword" placeholder="Настояща парола" style="">
+                </label>
+            </div>
+            <div class="col mt-2">
+                <label class="d-flex align-items-center input">
+                    <img src="{{ asset('assets/icons/email.svg') }}" alt="#">
+                    <input type="password" name="newPassword" placeholder="Нова парола">
+                </label>
+            </div>
+            <div class="col mt-2">
+                <label class="d-flex align-items-center input">
+                    <img src="{{ asset('assets/icons/email.svg') }}" alt="#">
+                    <input type="password" name="confirmPassword" placeholder="повтори парола">
+                </label>
+            </div>
+        </div>
         </form>
         <div class="w-100"></div>
         <div class="col mt-4 pt-3">
@@ -276,6 +302,14 @@
                 </div>
             </div>
             <div class="row g-0 pt-4 d-flex justify-content-end flex-column">
+                <!-- edit name -->
+                <div class="col pb-2">
+                    <label class="d-flex align-items-center input">
+                        <img src="{{ asset('assets/img/user.svg') }}" alt="#" width="32px">
+                        <input type="text" name="name" placeholder="Име и Фамилия"
+                        value="{{ Auth::user()->name }} {{ Auth::user()->last_name }}" required>
+                    </label>
+                </div>
                 <div class="col pb-2">
                     <label class="d-flex align-items-center input">
                         <img src="{{ asset('assets/icons/location.svg') }}" width="24" alt="#">
@@ -293,6 +327,27 @@
                         <img src="{{ asset('assets/icons/email.svg') }}" width="30" alt="#">
                         <input type="text" name="email" placeholder="Електронна поща"
                         value="{{ Auth::user()->email }}">
+                    </label>
+                </div>
+            </div>
+            <!-- edit password -->
+            <div class="row g-0 pt-4 d-flex justify-content-end flex-column">
+                <div class="col pb-2">
+                    <label class="d-flex align-items-center input">
+                        <img src="{{ asset('assets/icons/email.svg') }}" width="30" alt="#">
+                        <input type="password" name="currentPassword" placeholder="Настояща парола">
+                    </label>
+                </div>
+                <div class="col pb-2">
+                    <label class="d-flex align-items-center input">
+                        <img src="{{ asset('assets/icons/email.svg') }}" width="30" alt="#">
+                        <input type="password" name="newPassword" placeholder="Нова парола">
+                    </label>
+                </div>
+                <div class="col pb-2">
+                    <label class="d-flex align-items-center input">
+                        <img src="{{ asset('assets/icons/email.svg') }}" width="30" alt="#">
+                        <input type="password" name="confirmPassword" placeholder="Повтори парола">
                     </label>
                 </div>
             </div>

@@ -106,10 +106,22 @@ class UserController extends Controller
             'skype' => 'nullable|url|min:5|max:250',
             'dribbble' => 'nullable|url|min:5|max:250',
             'behance' => 'nullable|url|min:5|max:250',
+            'newPassword' => 'nullable|min:6',
+            'confirmPassword' => 'nullable|min:6',
         ]);
 
         $message = __('Успешно направени промени!');
         $messageType = 'success';
+
+        /* edit password */
+        if ($data['newPassword']) {
+            if (password_verify($request->currentPassword, Auth()->user()->password) && $data['newPassword'] == $data['confirmPassword']) {
+                $user->password = bcrypt($data['newPassword']);
+            } else {
+                $message = 'Грешна парола за удостоверяване!';
+                $messageType = 'error';
+            }
+        }
 
         if (Input::hasFile('picture')) {
             $userPic = Input::file('picture');
@@ -134,14 +146,8 @@ class UserController extends Controller
 
         if (isset($data['name']) && !is_null($data['name'])) {
             $name = explode(" ", $data['name']);
-            $user->name = $data['name'];
-            $user->last_name = "";
-            if (isset($name[0]) && isset($name[1])) {
-                $user->name = $name[0];
-                // array_shift($name);
-                // $user->last_name = implode(" ", $name);
-                $user->last_name = $name[1];
-            }
+            $user->name = $name[0];
+            $user->last_name = $name[1] ? $name[1] : null;
         }
 
         if ($request->has('location')) {
