@@ -76,6 +76,7 @@ class HomeController extends Controller
             'githubLink' => $githubLink,
             'allWorkExperience' => $allWorkExperience,
             'allEducation' => $allEducation,
+            'upcomingEvent' => Auth::user()->upcomingEvent(),
         ]);
     }
 

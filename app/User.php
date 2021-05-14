@@ -476,6 +476,15 @@ class User extends Authenticatable
         return $valid[0];
     }
 
+    public function upcomingEvent() {
+        return Event::where('visibility', 'public')
+        ->where('from', '>=', Carbon::now()->format('Y-m-d H:m:s'))
+            ->where('to', '>', Carbon::now()->format('Y-m-d H:m:s'))
+            ->where('visibility', 'public')
+            ->orderBy('from', 'ASC')
+            ->first();
+    }
+
     public function isHomeWorkUploadedByLection($user_id = null, $lection_id)
     {
         is_null($user_id) ? $user_id = Auth::user()->id : $user_id;
