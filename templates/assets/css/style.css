@@ -1767,6 +1767,12 @@ button {
     .text-evaluation-number {
       color: #d07d1e;
     }
+    .btn1-cs {
+      width: 500px;
+    }
+    .ms-record {
+      margin-left: 200px;
+    }
   }
   @media only screen and (min-width: 992px) {
     .toggled .slide-item {
@@ -1906,6 +1912,12 @@ button {
     }
     .student-scrol-module {
       width: 450px;
+    }
+    .btn1-cs {
+      width: 200px;
+    }
+    .ms-record {
+      margin-left: 50px;
     }
   }
   @media only screen and (max-width: 495px) {
