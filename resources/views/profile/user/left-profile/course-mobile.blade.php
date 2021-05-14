@@ -22,16 +22,15 @@
             @endif
         </div>
         <div class="col section-active-courses d-none d-flex flex-nowrap mobile-courses">
-            <!-- Courses -->
-                @if ($activCourses->count())
-                    @foreach ($activCourses as $course)
-                        @include('profile.course-mobile', [
-                            'courseStatus' => 'active',
-                            'course' => $course
-                        ])
-                    @endforeach
-                @endif
-            <!-- End courses -->
+            @if ($activCourses->count())
+                @foreach ($activCourses as $course)
+                    @include('profile.course-mobile', [
+                        'courseStatus' => 'active',
+                        'course' => $course,
+                        'application' => true
+                    ])
+                @endforeach
+            @endif
         </div>
     </div>
     <div class="col mb-5">
