@@ -1,220 +1,189 @@
-@extends('layouts.template')
-@section('title', 'Домашни')
+@extends('layouts.home')
+@section('title', 'Домашни - ' . $lection->title)
 @section('content')
-	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
-	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
-	<div class="">
-		<div class="section">
-			<div class="col-md-12 d-flex flex-row flex-wrap">
-				@if (!empty(Session::get('success')))
-					<p>
-						<div class="alert alert-success slide-on">
-					<p>{{ session('success') }}</p>
-			</div>
-			</p>
-			@endif
-			@if ($errors->any())
-				<div class="alert alert-danger slide-on">
-					<ul>
-						@foreach ($errors->all() as $error)
-							<li>{{ $error }}</li>
-						@endforeach
-					</ul>
-				</div>
-			@endif
-			@if ($message = Session::get('error'))
-				<div class="alert alert-danger slide-on">
-					<button type="button" class="close" data-dismiss="alert">
-					</button>
-					<p>{{ $message }}</p>
-				</div>
-			@endif
-		</div>
-		<div class="col-md-12 d-flex flex-row flex-wrap options-wrap">
-			<div class="col-md-12" style="margin-bottom:2vw;">
-				Лекция : {{$lection->title}}<br/>
-				Краен срок : {{$lection->homework_end->subDays(1)}}
-			</div>
-			<table class="table" id="forms">
-				<thead>
-				<tr>
-					<th scope="col">Изпратено</th>
-					<th scope="col">Име</th>
-					<th scope="col">Фамилия</th>
-					<th scope="col">Е-Поща</th>
-					<th scope="col">Файл/домашно</th>
-					<th scope="col">оценено домашно</th>
-					<th scope="col">оценени домашни (на други)</th>
-					<th>коментари</th>
-					<th style="text-align:center">добави коментар</th>
-					<th>коментиран ли е от теб </th>
-				</tr>
-				</thead>
-				<tbody>
+<!-- main content -->
+<div class="col ps-lg-4">
+    <div class="main pt-lg-5 px-xxl-5 px-lg-4">
+        <!-- flash-message -->
+		@include('flash-message')
+        <!-- header section -->
+        <div class="hw-section-header row align-items-center g-0">
+            <div class="col-auto d-lg-none d-block me-4">
+                <a href="{{ asset('module/' . $lection->course_modules_id . '/edit') }}">
+                    <img src="{{ asset('assets/img/arrow.svg') }}" class="me-1">
+                </a>
+            </div>
+            <div class="col">
+                <div class="row g-0 align-items-center">
+                    <div class="col-lg-auto text-xxl text-lg-uppercase fw-bold pe-lg-2 me-lg-1">
+                        Домашни({{ $homeworks->count() }})
+                    </div>
+                    <div class="line-straight col-auto border d-lg-block d-none my-3 align-self-stretch mx-4"></div>
+                    <div class="col-lg-auto text-large ps-lg-2">
+                        {{ $lection->title }}
+                    </div>
+                </div>
+            </div>
+            <div class="col-auto d-lg-none">
+                <span id="search-homework-user-btn">
+                    <i class="fas fa-search"></i>
+                </span>
+            </div>
+            <div class="tab-body position-relative d-lg-none mt-4" id="search-homework-user-input" style="display: none">
+                <div class="col-md-auto pe-md-3 me-xl-1">
+                    <div class="position-relative calendar d-flex justify-content-center">
+                        <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Търси по име" style="width: 270px; height: 50px">
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-auto pb-lg-0 pb-4 mb-lg-0 mb-3 mt-lg-0 mt-2">
+                <div class="row g-0">
+                    <div class="col-lg-auto pe-lg-5">
+                        <span class="text-small">Краен срок за домашно: </span>
+                        <span class="text-normal text-orange">
+                            {{ $lection->homework_end ? $lection->homework_end->format('d.m') : 'Няма' }}
+                        </span>
+                    </div>
+                    <div class="col-lg-auto ps-lg-2">
+                        <span class="text-small">Краен срок за проверка:</span>
+                        <span class="text-normal text-orange">
+                            {{ $lection->homework_check_end ? $lection->homework_check_end->format('d.m') : 'Няма' }}
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- header section END-->
+        <!-- table section -->
+        <div class="table-grid text-normal" id="myUL">
+            <!-- table header -->
+            <div class="row d-lg-flex d-none g-0 text-blue-grey pt-lg-5">
+                <div class="col-lg-auto number">
+                    No
+                </div>
+                <div class="col student-name px-lg-5">
+                    Име
+                </div>
+                <div class="col file">
+                    Файл
+                </div>
+                <div class="col comments">
+                    Коментари
+                </div>
+                <div class="col date">
+                    Дата/Час
+                </div>
+                <div class="col-lg-auto settings">
 
-				@foreach($homeworks as $num => $homework)
-					<tr class="text-center">
-						<th scope="row">{{$homework->created_at}}</th>
-						<td>{{$homework->user->name}}</td>
-						<td>{{$homework->user->last_name}}</td>
-						<td>{{$homework->user->email}}</td>
-						<td><a class="download-homeworks" data-name="{{$homework->user->name.'_'.$homework->user->last_name.'_['.$homework->created_at.']_'.$lection->title}}" href="{{asset('/data/homeworks/'.$homework->file)}}" download style="color:#00F">свали</a></td>
-						<td>{{is_null($homework->evaluated_count)?'0':$homework->evaluated_count}} пъти</td>
-						<td>
-							{{$homework->evaluated}}
-						</td>
-						<td>
-							<a class="show-comments" href="#modal" style="color:#00F">виж</a>
-							<div class="comments-homework" style="display:none;">
-								<div class="col-md-12 d-flex flex-row flex-wrap comment-modal-holder" style="align-content: flex-start">
-									<div class="comments-title col-md-12">Коментари</div>
-								@foreach ($homework->Comments as $comment)
-									<!-- one comment -->
-										@if(!is_null($comment->Author))
-											@php
-												$isCommented[] = $comment->Author->id === Auth::user()->id ? 1 : 0;
-												if($comment->Author->id === Auth::user()->id) {
-													$validComment[$homework->id] = $comment->comment;
-												}
-											@endphp
-											<div class="comment-pic-inside-modal col-md-12 d-flex flex-row flex-wrap">
-												<div class="col-md-4">
-													@if($comment->Author->picture)
-														<img src="{{asset('images/user-pics/'.$comment->Author->picture)}}" alt="botev" class="img-fluid modal-comment-pic">
-													@else
-														<img src="{{asset('images/men-no-avatar.png')}}" alt="profile-pic" class="img-fluid modal-comment-pic">
-													@endif
-												</div>
-												<div class="col-md-4">
+                </div>
+            </div>
+            <!-- table header END-->
+            <!-- table content-->
+            @foreach($homeworks as $homework)
+            <div class="filter row g-0 align-items-center">
+                <div class="col-lg-auto d-lg-block d-none number text-center">
+                    {{ $loop->iteration }}
+                </div>
+                <div class="col-lg col-6 student-name px-lg-5" title="{{ $homework->user->email }}">
+                    <span class="d-lg-none">1.</span>
+                    <span>
+                        {{ $homework->user->name }} {{ $homework->user->last_name }}
+                    </span>
+                </div>
+                <div class="col-lg col-auto mx-lg-0 ms-auto file fw-normal">
+                    <label for="file-1">
+                        <div class="row g-0 align-items-center">
+                            <div class="col-auto text-small fw-normal pe-4">
+                                <a href="{{ asset('/data/homeworks/'.$homework->file) }}">
+                                    Файл
+                                </a>
+                            </div>
+                            <div class="col-auto ps-1">
+                                <a class="download-homeworks" data-name="{{$homework->user->name.'_'.$homework->user->last_name.'_['.$homework->created_at.']_'.$lection->title}}" href="{{ asset('/data/homeworks/'.$homework->file) }}" download style="color:#00F">
+                                    <img src="{{ asset('assets/img/download.svg') }}">
+                                </a>
+                            </div>
+                        </div>
+                    </label>
+                </div>
+                <div class="col-lg col-6 comments pt-lg-0 pt-4 mt-lg-0 mt-2">
+                    <button class="btn-comments">
+                        <a href="{{ $homework->Comments->count() ? asset('lection/homework/' . $homework->id . '/coments') : '' }}">
+                            <div class="row g-0" style="color: white;">
+                                <div class="col text-start">
+                                    {{ $homework->Comments->count() }}
+                                </div>
+                                <div class="col-auto">
+                                    <i class="fas fa-chevron-right"></i>
+                                </div>
+                            </div>
+                        </a>
+                    </button>
+                </div>
+                <div class="col-lg col-auto ms-lg-0 ms-auto date fw-normal pt-lg-0 pt-4 mt-lg-0 mt-2">
+                    {{ $homework->created_at->format('d.m H:i') }}
+                </div>
+                @foreach ($homework->Comments as $comment)
+                    @if ($comment->user_id == Auth::user()->id)
+                        @php
+                            $validComment = true;
+                        @endphp
+                        @break
+                    @endif
+                @endforeach
 
-												</div>
-												<div class="col-md-4">
+                @if (isset($validComment) && $validComment)
+                    <div class="col-lg-auto col-sm-5 settings pt-lg-0 pt-4 mt-lg-0 mt-2">
+                        <button class="btn-edit edit-comment" data-comment-id="{{ $homework->id }}">
+                            <div class="row g-0 align-items-center">
+                                <div class="col text-start text-small">
+                                    Редактирай коментар
+                                </div>
+                                <div class="col-auto">
+                                    <img src="{{ asset('assets/img/action_icon _black.svg') }}">
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                @else
+                    <div class="col-lg-auto col-sm-5 settings pt-lg-0 pt-4 mt-lg-0 mt-2">
+                        <button class="btn-green btn-edit edit-comment" data-comment-id="{{ $homework->id }}">
+                            <div class="row g-0 align-items-center">
+                                <div class="col text-start text-small">
+                                    Остави коментар
+                                </div>
+                                <div class="col-auto">
+                                    <img src="{{ asset('assets/img/action_icon.svg') }}">
+                                </div>
+                            </div>
+                        </button>
+                    </div>
+                @endif
+                @php
+                    $validComment = null;
+                @endphp
 
-												</div>
-												<div class="col-md-4 text-center">
-                                                                <span class="">
-		                                                                {{$comment->Author->name}} {{$comment->Author->last_name}}
-                                                                </span>
-												</div>
-												<div class="col-md-4">
+                @include('course.module.lections.homework-comments.edit')
+            </div>
+            @endforeach
+            <!-- table content END-->
+        </div>
+        <!-- table section END-->
+    </div>
+</div>
+<!-- main content END-->
 
-												</div>
-												<div class="col-md-4 text-right">
-													<span class="">{{$comment->created_at->diffForHumans()}}</span>
-												</div>
+<script src="{{ asset('js/lection/homework.js') }}"></script>
 
-												<div class="col-md-12">
-
-												</div>
-												<div class="col-md-12 comment-text">
-													{{$comment->comment}}
-												</div>
-												<div class="col-md-12 text-right">
-													{{$comment->created_at->format('H:i A')}}
-												</div>
-											</div>
-										@endif
-									<!-- end of one comment -->
-									@endforeach
-								</div>
-							</div>
-						</td>
-						<td>
-							<a href="#modal" class="add-comment-homework">
-								<button class="btn btn-success">коментирай</button>
-							</a>
-							<div class="col-md-12 text-center comment-form-wrapper" style="display:none;">
-								<form action="{{route('lection.homework.lecturer.comment',['homework' => $homework->id])}}" id="comment_form-{{$homework->id}}" name="comment_form" method="POST">
-									{{ csrf_field() }}
-									<textarea name="comment" id="comment" cols="30" rows="10" placeholder="остави коментар">{{isset($validComment[$homework->id])?$validComment[$homework->id]:''}}</textarea><br>
-								</form>
-							</div>
-						</td>
-						<td style="width:12%">
-							@if(isset($isCommented) && in_array(1, $isCommented))
-								<img src="{{asset("/images/tick-y-big.png")}}" width="10%">
-							@else
-								<img src="{{asset("/images/profile/remove-icon.png")}}" width="13%">
-							@endif
-						</td>
-					</tr>
-					@php $isCommented = [];@endphp
-				@endforeach
-				</tbody>
-			</table>
-		</div>
-	</div>
-	<div class="col-md-12 download-stats" style="bottom:1%;font-size:200%;position:fixed;left:-1%"><i class="fas fa-download"></i></div>
-	<button onclick="downloadAll()" class="btn btn-outline-success" style="bottom:1%;font-size:200%;position:fixed;right:1%">свали всички</button>
-	<!-- modal for editing elements -->
-	<div id="modal" style="top:-140px">
-		<div class="modal-content print-body">
-			<div class="modal-header">
-				<h2></h2>
-			</div>
-			<div class="copy text-center">
-
-				<p>
-
-				</p>
-
-				</form>
-			</div>
-			<div class="cf footer">
-				<div></div>
-				<a href="#close" class="btn close-modal">Затвори</a>
-			</div>
-		</div>
-		<div class="overlay"></div>
-	</div>
-	<!-- end of modal -->
-	<script>
-        $('.show-comments').on('click', function(){
-            $('#modal').show();
-            $('.copy > p').html($(this).next('.comments-homework').html());
-            $('.copy > p').find('.comments-homework').css('display','block');
-        });
-
-        $('.add-comment-homework').on('click', function(){
-            $('#modal').show();
-            $('.copy > p').html($(this).next('.comment-form-wrapper').html());
-            $('.copy > p').find('.comment-form-wrapper').css('display','block');
-            $( '.modal-content > .cf > div' ).html( '<input class="btn close-modal" type="submit" name="submit" id="send_comment" value="Изпрати">' );
-            $( '#send_comment' ).on( 'click', function () {
-                $( '.copy > p > form' ).submit();
-            } );
-        });
-	</script>
-	<script>
-        $(document).ready(function() {
-            $('#forms').DataTable({
-                responsive: true,
-                order: [[0, "desc"]],
-            });
-        } );
-	</script>
-	<script>
-        function downloadAll() {
-            var urls = [];
-            var filenames = [];
-            $('.download-homeworks').each(function(k,v){
-                urls.push($(v).attr('href'));
-                filenames.push($(v).attr('data-name'));
-            });
-
-            var link = document.createElement('a');
-
-            link.setAttribute('download', null);
-            link.style.display = 'none';
-
-            document.body.appendChild(link);
-
-            for (var i = 0; i < urls.length; i++) {
-                link.setAttribute('href', urls[i]);
-                link.setAttribute('download',filenames[i]);
-                link.click();
-            }
-            document.body.removeChild(link);
-        }
-	</script>
+<script>
+$(document).ready(function() {
+    $('.edit-comment').click(function() {
+        var commentId = $(this).attr('data-comment-id');
+        var commentTextarea = '#comment-edit-textarea-' + commentId;
+        var btnSaveComment = '#btn-edit-comment-' + commentId;
+        $(commentTextarea).toggle();
+        $(btnSaveComment).toggle();
+    });
+});
+</script>
 @endsection

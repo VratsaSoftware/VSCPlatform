@@ -145,19 +145,19 @@
             </div>
             <div class="col mt-2">
                 <label class="d-flex align-items-center input">
-                    <img src="{{ asset('assets/icons/email.svg') }}" alt="#">
+                    <i class="fas fa-lock" style="font-size: 29px"></i>
                     <input type="password" name="currentPassword" placeholder="Настояща парола" style="">
                 </label>
             </div>
             <div class="col mt-2">
                 <label class="d-flex align-items-center input">
-                    <img src="{{ asset('assets/icons/email.svg') }}" alt="#">
+                    <i class="fas fa-lock" style="font-size: 29px"></i>
                     <input type="password" name="newPassword" placeholder="Нова парола">
                 </label>
             </div>
             <div class="col mt-2">
                 <label class="d-flex align-items-center input">
-                    <img src="{{ asset('assets/icons/email.svg') }}" alt="#">
+                    <i class="fas fa-lock" style="font-size: 29px"></i>
                     <input type="password" name="confirmPassword" placeholder="повтори парола">
                 </label>
             </div>
@@ -334,19 +334,19 @@
             <div class="row g-0 pt-4 d-flex justify-content-end flex-column">
                 <div class="col pb-2">
                     <label class="d-flex align-items-center input">
-                        <img src="{{ asset('assets/icons/email.svg') }}" width="30" alt="#">
+                        <i class="fas fa-lock" style="font-size: 29px"></i>
                         <input type="password" name="currentPassword" placeholder="Настояща парола">
                     </label>
                 </div>
                 <div class="col pb-2">
                     <label class="d-flex align-items-center input">
-                        <img src="{{ asset('assets/icons/email.svg') }}" width="30" alt="#">
+                        <i class="fas fa-lock" style="font-size: 29px"></i>
                         <input type="password" name="newPassword" placeholder="Нова парола">
                     </label>
                 </div>
                 <div class="col pb-2">
                     <label class="d-flex align-items-center input">
-                        <img src="{{ asset('assets/icons/email.svg') }}" width="30" alt="#">
+                        <i class="fas fa-lock" style="font-size: 29px"></i>
                         <input type="password" name="confirmPassword" placeholder="Повтори парола">
                     </label>
                 </div>

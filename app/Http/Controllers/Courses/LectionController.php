@@ -450,7 +450,7 @@ class LectionController extends Controller
             }
             $lection = Lection::find($lection);
 
-            $view = view('course.lection_homeworksNew', [
+            $view = view('course.lection_homeworks', [
                 'homeworks' => $homeWorks,
                 'lection' => $lection
             ]);
