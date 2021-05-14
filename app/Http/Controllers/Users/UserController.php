@@ -68,10 +68,8 @@ class UserController extends Controller
             ->pluck('link')
             ->first();
 
-        $allWorkExperience = WorkExperience::where('user_id', Auth::user()->id)
-            ->get();
-        $allEducation = Education::where('user_id', Auth::user()->id)
-            ->get();
+        $allWorkExperience = Auth::user()->getWorkExp();
+        $allEducation = Auth::user()->getEducation();
 
         return view('profile.edit', [
             'courses' => $courses,

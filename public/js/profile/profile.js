@@ -23,4 +23,22 @@ $(document).ready(function(){
             $(".past-course-section").toggle();
         });
     });
+
+    /* course mobile */
+    $(document).ready(function () {
+        $('#status').append("Активни курсове");
+        $('#tab_selector').change(function () {
+            if ($('#tab_selector').val() == 'Активни') {
+                $('#status').empty().prepend("Активни курсове");
+
+                $('.section-active-courses.d-none').removeClass("d-none");
+                $('.section-past-courses').addClass("d-none");
+            } else {
+                $('#status').empty().prepend("Отминали курсове");
+
+                $('.section-past-courses.d-none').removeClass("d-none");
+                $('.section-active-courses').addClass("d-none");
+            }
+        });
+    });
 });

@@ -1,182 +1,42 @@
 <div class="col-12 mobile mobile-courses-edit-profile">
-    <h2 class="text-uppercase">Записани курсове</h2>
+    <h2 class="text-uppercase"><span id="status"></span></h2>
     <div class="row g-0">
-        <div class="col d-flex flex-nowrap mobile-courses">
+        <div id="active-courses" class="col section-active-courses d-flex flex-nowrap mobile-courses">
             <!-- Courses -->
-            <div class="course">
-                <div class="row g-0">
-                    <div class="col-auto">
-                        <img src="{{ asset('assets/icons/Software.svg') }}" alt="#">
-                    </div>
-                    <div class="col text-end">
-                        <span class="fw-bold course-status-active">Активен</span>
-                    </div>
-                </div>
-                <div class="row g-0 mt-4 d-flex align-items-center">
-                    <div class="col">
-                        <p class="m-0 p-0 pe-4 course-title fw-bold">Програмиране</p>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn view-course-btn d-flex py-0 px-3">
-                            <div class="row w-100 g-0 align-self-center">
-                                <div class="col text-start">
-                                    <span class="fw-bold">Виж</span>
-                                </div>
-                                <div class="col-auto d-flex align-items-center">
-                                    <img src="{{ asset('assets/icons/action_icon.svg') }}" width="27" alt="#">
-                                </div>
-                            </div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="course">
-                <div class="row g-0">
-                    <div class="col-auto">
-                        <img src="{{ asset('assets/icons/Software.svg') }}" alt="#">
-                    </div>
-                    <div class="col text-end">
-                        <span class="fw-bold course-status-active">Активен</span>
-                    </div>
-                </div>
-                <div class="row g-0 mt-4 d-flex align-items-center">
-                    <div class="col">
-                        <p class="m-0 p-0 pe-4 course-title fw-bold">Програмиране</p>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn view-course-btn d-flex py-0 px-3">
-                            <div class="row w-100 g-0 align-self-center">
-                                <div class="col text-start">
-                                    <span class="fw-bold">Виж</span>
-                                </div>
-                                <div class="col-auto d-flex align-items-center">
-                                    <img src="{{ asset('assets/icons/action_icon.svg') }}" width="27" alt="#">
-                                </div>
-                            </div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-            <div class="course">
-                <div class="row g-0">
-                    <div class="col-auto">
-                        <img src="{{ asset('assets/icons/Software.svg') }}" alt="#">
-                    </div>
-                    <div class="col text-end">
-                        <span class="fw-bold course-status-active">Активен</span>
-                    </div>
-                </div>
-                <div class="row g-0 mt-4 d-flex align-items-center">
-                    <div class="col">
-                        <p class="m-0 p-0 pe-4 course-title fw-bold">Програмиране</p>
-                    </div>
-                    <div class="col-auto">
-                        <button class="btn view-course-btn d-flex py-0 px-3">
-                            <div class="row w-100 g-0 align-self-center">
-                                <div class="col text-start">
-                                    <span class="fw-bold">Виж</span>
-                                </div>
-                                <div class="col-auto d-flex align-items-center">
-                                    <img src="{{ asset('assets/icons/action icon.svg') }}" width="27" alt="#">
-                                </div>
-                            </div>
-                        </button>
-                    </div>
-                </div>
-            </div>
+                @if ($courses->count())
+                    @foreach ($courses as $course)
+                        @include('profile.course-mobile', [
+                            'courseStatus' => 'active',
+                            'course' => $course
+                        ])
+                    @endforeach
+                @endif
+            <!-- End courses -->
+        </div>
+        <div class="col section-past-courses d-none d-flex flex-nowrap mobile-courses">
+            <!-- Courses -->
+                @if ($courses->count())
+                    @foreach ($pastCourses as $course)
+                        @include('profile.course-mobile', [
+                            'courseStatus' => 'past',
+                            'course' => $course
+                        ])
+                    @endforeach
+                @endif
             <!-- End courses -->
         </div>
     </div>
-    <div class="col">
-        <h2 class="text-uppercase">Активни курсове</h2>
-        <div class="row g-0 p-0">
-            <div class="col d-flex flex-nowrap mobile-courses">
-                <!-- Courses -->
-                <div class="course">
-                    <div class="row g-0">
-                        <div class="col-auto">
-                            <img src="{{ asset('assets/icons/Software.svg') }}" alt="#">
-                        </div>
-                        <div class="col text-end">
-                            <span class="fw-bold course-status-active">Активен</span>
-                        </div>
-                    </div>
-                    <div class="row g-0 mt-4 d-flex align-items-center">
-                        <div class="col">
-                            <p class="m-0 p-0 pe-4 course-title fw-bold">Програмиране</p>
-                        </div>
-                        <div class="col-auto">
-                            <button class="btn view-course-btn d-flex py-0 px-3">
-                                <div class="row w-100 g-0 align-self-center">
-                                    <div class="col text-start">
-                                        <span class="fw-bold">Виж</span>
-                                    </div>
-                                    <div class="col-auto d-flex align-items-center">
-                                        <img src="{{ asset('assets/icons/action icon.svg') }}" width="27" alt="#">
-                                    </div>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="course">
-                    <div class="row g-0">
-                        <div class="col-auto">
-                            <img src="{{ asset('assets/icons/Software.svg') }}" alt="#">
-                        </div>
-                        <div class="col text-end">
-                            <span class="fw-bold course-status-active">Активен</span>
-                        </div>
-                    </div>
-                    <div class="row g-0 mt-4 d-flex align-items-center">
-                        <div class="col">
-                            <p class="m-0 p-0 pe-4 course-title fw-bold">Програмиране</p>
-                        </div>
-                        <div class="col-auto">
-                            <button class="btn view-course-btn d-flex py-0 px-3">
-                                <div class="row w-100 g-0 align-self-center">
-                                    <div class="col text-start">
-                                        <span class="fw-bold">Виж</span>
-                                    </div>
-                                    <div class="col-auto d-flex align-items-center">
-                                        <img src="{{ asset('assets/icons/action_icon.svg') }}" width="27" alt="#">
-                                    </div>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <div class="course">
-                    <div class="row g-0">
-                        <div class="col-auto">
-                            <img src="{{ asset('assets/icons/Software.svg') }}" alt="#">
-                        </div>
-                        <div class="col text-end">
-                            <span class="fw-bold course-status-active">Активен</span>
-                        </div>
-                    </div>
-                    <div class="row g-0 mt-4 d-flex align-items-center">
-                        <div class="col">
-                            <p class="m-0 p-0 pe-4 course-title fw-bold">Програмиране</p>
-                        </div>
-                        <div class="col-auto">
-                            <button class="btn view-course-btn d-flex py-0 px-3">
-                                <div class="row w-100 g-0 align-self-center">
-                                    <div class="col text-start">
-                                        <span class="fw-bold">Виж</span>
-                                    </div>
-                                    <div class="col-auto d-flex align-items-center">
-                                        <img src="{{ asset('assets/icons/action_icon.svg') }}" width="27" alt="#">
-                                    </div>
-                                </div>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                <!-- End courses -->
-            </div>
+    <div class="col mb-5">
+        <div class="position-relative d-inline-block">
+            <select class="border-0 form-control position-relative  py-0 text-uppercase" id="tab_selector" style="text-shadow: 0px 0px 0px black;">
+                <option value="Активни">Активни курсове</option>
+                <option value="Отминали">Отминали курсове</option>
+            </select>
+            <img src="{{ asset('assets/img/arrow.svg') }}" class="position-absolute">
         </div>
+        <hr>
     </div>
+        
     <!-- <div class="col upcoming-event">
         <h2 class="fw-bold">CODE WEEK VRATSA</h2>
         <div class="row g-0 d-flex align-items-center">
