@@ -1,5 +1,5 @@
 <div class="col-12 mobile mobile-courses-edit-profile">
-    <h2 class="text-uppercase"><span id="status"></span></h2>
+    <h2 class="text-uppercase"><span id="status">Активни курсове</span></h2>
     <div class="row g-0">
         <div id="active-courses" class="col section-active-courses d-flex flex-nowrap mobile-courses">
             <!-- Courses -->

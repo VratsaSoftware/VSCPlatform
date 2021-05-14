@@ -26,18 +26,25 @@ $(document).ready(function(){
 
     /* course mobile */
     $(document).ready(function () {
-        $('#status').append("Активни курсове");
         $('#tab_selector').change(function () {
             if ($('#tab_selector').val() == 'Активни') {
                 $('#status').empty().prepend("Активни курсове");
 
                 $('.section-active-courses.d-none').removeClass("d-none");
                 $('.section-past-courses').addClass("d-none");
-            } else {
+                $('.section-my-courses').addClass("d-none");
+            } else if ($('#tab_selector').val() == 'Отминали') {
                 $('#status').empty().prepend("Отминали курсове");
 
                 $('.section-past-courses.d-none').removeClass("d-none");
                 $('.section-active-courses').addClass("d-none");
+                $('.section-my-courses').addClass("d-none");
+            } else if ($('#tab_selector').val() == 'Записани') {
+                $('#status').empty().prepend("Записани курсове");
+
+                $('.section-my-courses.d-none').removeClass("d-none");
+                $('.section-active-courses').addClass("d-none");
+                $('.section-past-courses').addClass("d-none");
             }
         });
     });
