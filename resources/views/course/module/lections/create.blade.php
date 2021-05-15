@@ -93,7 +93,7 @@
 
         <div class="row g-0 home-work align-items-center p-3 mt-1 homework-section" data-lection="{{ isset($loop->iteration) ? $loop->iteration : '' }}">
             <div class="col-lg-3 ps-3 text-normal text-uppercase pe-4">
-                <a href="@if(isset($lection->id)){{ route('homeworks.show', $lection->id) }}@endif">ДОМАШНО</a>
+                ДОМАШНО
             </div>
             <div class="col pr-3">
                 <div class="row g-0 ps-3">

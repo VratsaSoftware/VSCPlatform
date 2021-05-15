@@ -126,19 +126,19 @@ $(document).ready(function() {
 
     /* Messages for what type of files are selected for upload */
     $('.lection-slides').change(function() {
-        if ($(this).val() != null) {
+        if ($(this).val() != null && !$('.lection-select-element').text().includes('Презентация')) {
             $('.lection-select-element').append(' Презентация');
         }
     });
 
     $('.demo-edit-url-input').change(function() {
-        if ($(this).val() != null) {
+        if ($(this).val() != null && !$('.lection-select-element').text().includes('Демо')) {
             $('.lection-select-element').append(' Демо');
         }
     });
 
     $('.lection-homework').change(function() {
-        if ($(this).val() != null) {
+        if ($(this).val() != null && !$('.lection-select-element').text().includes('Домашно')) {
             $('.lection-select-element').append(' Домашно');
         }
     });

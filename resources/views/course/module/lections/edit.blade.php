@@ -151,7 +151,7 @@
 
         <div class="row g-0 home-work align-items-center p-3 mt-1 homework-date-section" data-lection="{{ $loop->iteration }}">
             <div class="col-lg-3 ps-3 text-normal text-uppercase pe-4">
-                <a href="{{ route('homeworks.show',$lection->id) }}">ДОМАШНО</a>
+                ДОМАШНО
             </div>
             <div class="col pr-3">
                 <div class="row g-0 ps-3">

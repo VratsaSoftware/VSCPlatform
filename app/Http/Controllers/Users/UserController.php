@@ -80,6 +80,7 @@ class UserController extends Controller
             'githubLink' => $githubLink,
             'allWorkExperience' => $allWorkExperience,
             'allEducation' => $allEducation,
+            'upcomingEvent' => Auth::user()->upcomingEvent(),
         ]);
     }
 
@@ -116,7 +117,7 @@ class UserController extends Controller
             if (password_verify($request->currentPassword, Auth()->user()->password) && $data['newPassword'] == $data['confirmPassword']) {
                 $user->password = bcrypt($data['newPassword']);
             } else {
-                $message = 'Грешна парола за удостоверяване!';
+                $message = 'Грешна парола за удостоверяване или паролите не съвпадат!';
                 $messageType = 'error';
             }
         }
