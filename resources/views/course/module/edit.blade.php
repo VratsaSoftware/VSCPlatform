@@ -65,8 +65,8 @@
             </div>
             <div class="col-auto">
                 <div class="input-group mb-3">
-                    <input type="text" class="btn-name-module" placeholder="Име на струдент" aria-label="Име на струдент" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-green border-end" type="button" id="button-addon2"><img src="{{ asset('assets/img/plus.svg') }}" class="me-2">Добави</button>
+                    <input type="text" name="addStudent" id="add-student" class="btn-name-module" placeholder="Email на струдент(и)" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-green border-end add-student-btn" type="button" id="button-addon2"><img src="{{ asset('assets/img/plus.svg') }}" class="me-2">Добави</button>
                 </div>
             </div>
         </div>
@@ -359,3 +359,20 @@
         </div>
     </div>
 </form>
+
+<form action="{{ route('module.add.student') }}" method="POST" name="addStudent" id="addStudent">
+    @csrf
+
+    <input type="hidden" name="module_id" value="{{ $module->id }}">
+    <input type="hidden" name="mail" id="student">
+</form>
+
+<script>
+$(document).ready(function() {
+    /* disabled input - date */
+    $('.add-student-btn').click(function() {
+        $('#student').attr('value', $('#add-student').val());
+        $('#addStudent').submit();
+    });
+});
+</script>

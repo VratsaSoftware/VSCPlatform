@@ -62,12 +62,16 @@
                     <b>Добави курсисти</b>
                 </div>
             </div>
-            <div class="col-auto">
-                <div class="input-group mb-3">
-                    <input type="text" class="btn-name-module" placeholder="Име на струдент" aria-label="Име на струдент" aria-describedby="button-addon2">
-                    <button class="btn btn-outline-green border-end" type="button" id="button-addon2"><img src="{{ asset('assets/img/plus.svg') }}" class="me-2">Добави</button>
+            <!-- <form action="{{ route('module.add.student') }}" method="POST" name="addStudent" id="addStudent">
+                {{ csrf_field() }}
+                <div class="col-auto">
+                    <div class="input-group mb-3">
+                        <input type="text" class="btn-name-module" placeholder="Email на струдент(и)" aria-describedby="button-addon2">
+                        <button form="addStudent" class="btn btn-outline-green border-end" type="button" id="button-addon2"><img src="{{ asset('assets/img/plus.svg') }}" class="me-2">Добави</button>
+                    </div>
                 </div>
-            </div>
+                <input type="hidden" name="module_id" id="module_id" value="{{ $module->id }}">
+            </form> -->
         </div>
         <!--Mobil scrol-->
         <div class="student-scrol-module d-flex d-lg-none">

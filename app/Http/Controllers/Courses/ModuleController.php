@@ -201,6 +201,7 @@ class ModuleController extends Controller
             'mail' => 'required',
             'module_id' => 'required|numeric',
         ]);
+
         $emails = explode (",", $data['mail']);
         foreach($emails as $mail) {
             $user = User::where('email', $mail)->first();
