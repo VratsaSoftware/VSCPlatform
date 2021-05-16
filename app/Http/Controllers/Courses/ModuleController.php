@@ -137,12 +137,17 @@ class ModuleController extends Controller
             ->pluck('User')
             ->flatten();
 
+        $moduleStudents = ModulesStudent::where('course_modules_id', $module->id)
+            ->with('User')
+            ->get();
+
         return view('course.module.left-lection', [
             'module' => $module,
             'lections' => $lections,
             'students' => $students,
             'allModules' => $allModules,
             'candidates' => $candidates,
+            'moduleStudents' => $moduleStudents,
         ]);
     }
 
@@ -220,7 +225,7 @@ class ModuleController extends Controller
     public function removeUser(Request $request)
     {
         $student = ModulesStudent::where([
-            ['course_modules_id',$request->module],
+            ['course_modules_id', $request->module],
             ['user_id',$request->user],
         ])->delete();
 

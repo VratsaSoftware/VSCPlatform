@@ -26,8 +26,9 @@
  	showOptions( $( this ).parent().parent().parent() );
  } );
 
- $( '.remove-student > img' ).on( 'click', function () {
+ $( '.remove-student' ).on( 'click', function () {
 	 var userId = $( this ).attr( 'data' );
+
 	 if($('#create_test').length) {
 		 $('#create_test').find('#user-'+userId).remove();
 	 }

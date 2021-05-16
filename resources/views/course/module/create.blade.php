@@ -76,7 +76,7 @@
         <!--Mobil scrol-->
         <div class="student-scrol-module d-flex d-lg-none">
             <div class="d-flex flex-column bd-highlight mb-3">
-                @include('course.module.module-students', [
+                @include('course.module.module-students.create', [
                     'allUsers' => $candidates,
                     'resolution' => 'mobile',
                 ])
@@ -98,9 +98,9 @@
     <!--END mobil scrol-->
     <div class="student-scrol-module d-flex d-none d-lg-block">
         <div class="d-flex flex-column bd-highlight mb-3">
-            @include('course.module.module-students', [
+            @include('course.module.module-students.create', [
                 'allUsers' => $candidates,
-                'resolution' => 'desctop',
+                'resolution' => 'desktop',
             ])
         </div>
     </div>
