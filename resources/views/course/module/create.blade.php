@@ -191,7 +191,7 @@
     </div>
     <div class="row g-0 d-flex justify-content-center">
         <div class="col-auto mt-3 d-lg-none ">
-            <button onclick="this.form.submit()" class="nav btn  btn-green active py-0 pe-2 d-flex btn1-cs" id="lection-1-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="lection-1" aria-selected="true">
+            <button onclick="this.form.submit()" class="nav btn btn-green active py-0 pe-2 d-flex btn1-cs" id="lection-1-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="lection-1" aria-selected="true">
                 <div class="row g-0 align-self-center">
                     <div class="col-auto text-start ms-record">Запази</div>
                     <div class="col text-end align-items-center d-flex img-btn-ms">

@@ -286,9 +286,15 @@
     @include('flash-message')
     @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
         @if ($lections->count() == 0)
+            <!-- create lection -->
             <span class="add-lection">
                 @include('course.module.lections.create')
             </span>
+            <!-- edit module -->
+            <span class="module-edit" style="display: none">
+                @include('course.module.edit')
+            </span>
+            <!-- create module -->
             <span class="module-create" style="display: none">
                 @include('course.module.create')
             </span>

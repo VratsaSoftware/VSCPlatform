@@ -147,50 +147,27 @@ class ModuleController extends Controller
     {
         $request['valid_visibility'] = \Config::get('courseVisibility');
         $data = $request->validate([
-            'picture' => 'sometimes|file|image|mimes:jpeg,png,gif,webp,ico,jpg|max:4000',
-            'name' => 'sometimes',
+            'name' => 'required|sometimes',
             'description' => 'sometimes',
-            'starts' => 'sometimes|date_format:Y-m-d',
-            'ends' => 'sometimes|date_format:Y-m-d|after:starts',
+            'starts' => 'sometimes|date_format:m/d/Y',
+            'ends' => 'sometimes|date_format:m/d/Y|after:starts',
             'visibility' => 'sometimes|in_array:valid_visibility.*',
             'course_id' => 'sometimes|numeric|exists:courses,id',
-            'order' => 'sometimes|numeric',
             'students' => 'sometimes|array',
         ]);
         $module = Module::find($id);
-        if (Input::hasFile('picture')) {
-            $modulePic = Input::file('picture');
-            $image = Image::make($modulePic->getRealPath());
-            $image->fit(800, 600, function ($constraint) {
-                $constraint->upsize();
-            });
-            $name = time()."_".$modulePic->getClientOriginalName();
-            $name = str_replace(' ', '', strtolower($name));
-            $name = md5($name);
-            $course = Course::find($request->course_id);
-            if (file_exists(public_path().'/images/course-'.$course->id.'/module-'.$module->id.'/'.$module->picture)) {
-                File::delete(public_path().'/images/course-'.$course->id.'/module-'.$module->id.'/'.$module->picture);
-            }
-            if ($modulePic->getClientOriginalExtension() == 'gif') {
-                copy($modulePic->getRealPath(), public_path().'/images/course-'.$course->id.'/module-'.$module->id.'/'.$name);
-            } else {
-                $image->save(public_path().'/images/course-'.$course->id.'/module-'.$module->id.'/'.$name, 50);
-            }
-            $module->picture = $name;
-        }
 
         $module->course_id = $request->course_id;
-        $module->order = $request->order;
         $module->name = $request->name;
         $module->description = $request->description;
 
-        $module->starts = $request->starts;
-        $module->ends = $request->ends;
+        $module->starts = $this->dateParse($request->starts);
+        $module->ends = $this->dateParse($request->ends);
         $module->visibility = $request->visibility;
         $module->save();
 
         $message = __('Успешно направени промени!');
-        return redirect()->back()->with('success', $message);
+        return back()->with('success', $message);
     }
 
     /**
