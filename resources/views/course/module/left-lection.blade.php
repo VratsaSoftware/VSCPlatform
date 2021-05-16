@@ -56,7 +56,7 @@
                             <img src="{{ asset('assets/img/arrow.svg') }}" class="position-absolute">
                         </div>
                     </div>
-                    @if (Auth::user()->isAdmin())
+                    @if (Auth::user()->isAdmin() || Auth::user()->isLecturer())
                         <div class="col add text-end align-self-end pb-lg-2 text-small">
                             <a href="{{ asset('module/create?course=' . $module->Course->id) }}">
                                 <span class="me-2"><img src="{{ asset('assets/img/plus.svg') }}"></span>
@@ -79,8 +79,8 @@
                                     </div>
                                 </button>
                             </div>
-                            <div class="col-xxl col-xl-12 col-sm ms-xxl-3 ms-xl-0 ms-sm-3 d-flex justify-content-end">
-                                <button class="ms-xxl-2 mt-xxl-0 mt-xl-4 mt-sm-0 mt-4 mb-0 btn-edit row g-0 align-items-center module-edit-btn">
+                            <div class="nav active col-xxl col-xl-12 col-sm ms-xxl-3 ms-xl-0 ms-sm-3 d-flex justify-content-end">
+                                <button class="ms-xxl-2 mt-xxl-0 mt-xl-4 mt-sm-0 mt-4 mb-0 btn-edit row g-0 align-items-center module-edit-btn" id="lection-1-tab" data-bs-toggle="tab" href="#lection-1" role="tab" aria-controls="lection-1" aria-selected="true">
                                     <div class="col text-start">Редактирай модул</div>
                                     <div class="col-auto">
                                         <img src="{{ asset('assets/img/edit.svg') }}">
@@ -244,7 +244,7 @@
                                             @endif
                                         </div>
                                         <div class="col-auto">
-                                            <button data-lections="{{ $lection }}" class="nav btn btn-green active py-0 pe-2 d-flex" id="lection-1-tab" data-bs-toggle="tab" href="#lection-{{ $loop->iteration }}" role="tab" aria-controls="lection-1" aria-selected="true">
+                                            <button data-lections="{{ $lection }}" class="nav active btn btn-green py-0 pe-2 d-flex nav-lection" id="lection-1-tab" data-bs-toggle="tab" href="#lection-{{ $loop->iteration }}" role="tab" aria-controls="lection-1" aria-selected="true">
                                                 <div class="row g-0 align-self-center">
                                                     <div class="col-auto text-start text-small">Виж</div>
                                                     <div class="col text-end align-items-center d-flex">
@@ -291,7 +291,7 @@
             @include('course.module.lections.create')
         @else
             @foreach ($lections as $lection)
-                <div class="tab-pane fade @if ($loop->iteration == 1) show active @endif mt-xl-2 pt-xl-1" id="lection-{{ $loop->iteration }}" role="tabpanel" aria-labelledby="lection-2-tab">
+                <div class="tab-pane fade @if ($loop->iteration == 1) show active @endif mt-xl-2 pt-xl-1 right-part" id="lection-{{ $loop->iteration }}" role="tabpanel" aria-labelledby="lection-2-tab">
                     <!-- show lection -->
                     <span class="show-lection" style="display: none">
                         @include('course.module.lections.show')
@@ -303,6 +303,10 @@
                     <!-- create lection -->
                     <span class="add-lection" style="display: none">
                         @include('course.module.lections.create')
+                    </span>
+                    <!-- edit module -->
+                    <span class="module-edit" style="display: none">
+                        @include('course.module.edit')
                     </span>
                 </div>
 
@@ -320,13 +324,26 @@
         @include('course.student.evaluate-modal')
         <!-- Еvaluate Modal End -->
     @endif
-    <!-- edit module -->
-    <span class="module-edit" style="display: none">
-        @include('course.module.edit')
-    </span>
 </div>
 <!-- right side END -->
 </div>
+
+<!-- Modal - Module info -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                Информация
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-info-modul">
+                Lorem ipsum dolor sit amet, consectetuer
+                adipiscing elit, sed diam nonummy nibh euismod
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END Modal -->
 
 <script src="{{ asset('js/lection/lection.js') }}"></script>
 <script src="{{ asset('js/lection/create.js') }}"></script>

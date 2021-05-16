@@ -24,7 +24,7 @@ $(document).ready(function() {
         $('.video-edit-upload-message').toggle();
     });
 
-    /* open create lection section */
+    /* close create lection section */
     $('.btn-form-close').click(function() {
         $('.edit-lection').hide();
         $('.show-lection').show();
@@ -43,6 +43,14 @@ $(document).ready(function() {
         $('.show-lection').hide();
         $('.edit-lection').show();
         $('.add-lection').hide();
+    });
+
+    $('.nav-lection').click(function() {
+        $(".right-part.module-right").removeClass("module-right");
+        $('.add-lection').hide();
+        $('.edit-lection').hide();
+        $('.show-lection').show();
+        $('.module-edit').hide();
     });
 
     $('#tab_selector').change(function() {

@@ -11,6 +11,10 @@ $(document).ready(function() {
         $('.add-lection-button.active').toggleClass("active");
     });
 
+    $('.module-edit-btn').click('click', function () {
+        $('.module-edit-btn.active').toggleClass("active");
+    });
+
     $('#tab_selector').on('change', function () {
         $('.nav-tabs a').eq($(this).val()).tab('show');
     });

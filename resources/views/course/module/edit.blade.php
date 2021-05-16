@@ -1,1 +1,346 @@
-Редакция на модул
+<link href="{{ asset('css/course/module.css') }}" rel="stylesheet" />
+
+<!-- Single lection content -->
+<div class="tab-body module-body-right position-relative">
+    <span class="close d-flex justify-content-start d-lg-none position-absolute module-close-btn">&times;</span>
+    <div class="row g-0 me-5">
+        <div class="col">
+            <div class="text-title-module">
+                <b>Добави модул</b>
+                <br>
+                <p class="text-title-module-sm d-lg-none">Photoshop & illustrator</p>
+            </div>
+        </div>
+        <div class="col-auto d-lg-none">
+            <button type="button" class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                <img src="{{ asset('assets/img/info.svg') }}" class="img-info">
+            </button>
+        </div>
+        <div class="col-auto me-lg-5 d-none d-lg-block">
+            <img src="{{ asset('assets/img/info.svg') }}" class="img-info">
+        </div>
+        <div class="col-auto text-info-modul d-none d-lg-block">
+            Lorem ipsum dolor sit amet, consectetuer
+            <br>
+            adipiscing elit, sed diam nonummy nibh euismod
+        </div>
+    </div>
+
+    <div class="row g-0 module-top">
+        <div class="col">
+            <input type="text" class="form-module w-100" placeholder="Име на модула" aria-label="Име на модула" aria-describedby="addon-wrapping">
+        </div>
+    </div>
+    <div class="row g-0 mt-5">
+        <div class="col">
+            <textarea class="form-module w-100" id="exampleFormControlTextarea1" rows="8" placeholder="Име на модула" aria-label="Име на модула"></textarea>
+        </div>
+    </div>
+    <div class="row g-0 mt-5">
+        <div class="col me-lg-4">
+            <input type="text" class="form-module w-100" placeholder="Начало (дата)" aria-label="Начало (дата)" aria-describedby="addon-wrapping">
+        </div>
+        <div class="col ms-3">
+            <input type="text" class="form-module w-100" placeholder="Край (дата)" aria-label="Край (дата)" aria-describedby="addon-wrapping">
+        </div>
+    </div>
+    <div class="row g-0 mt-5">
+        <div class="col">
+            <div class="text-title-module text-uppercase mt-lg-3">
+                <b>Добави курсисти</b>
+            </div>
+        </div>
+        <div class="col-auto">
+            <div class="input-group mb-3">
+                <input type="text" class="btn-name-module" placeholder="Име на струдент" aria-label="Име на струдент" aria-describedby="button-addon2">
+                <button class="btn btn-outline-green border-end" type="button" id="button-addon2"><img src="{{ asset('assets/img/plus.svg') }}" class="me-2">Добави</button>
+            </div>
+        </div>
+    </div>
+    <!--Mobil scrol-->
+    <div class="student-scrol-module d-flex d-lg-none">
+        <div class="d-flex flex-column bd-highlight mb-3">
+            <div class="p-2 bd-highlight">
+                <div class="row g-0 mt-3">
+                    <div class="col-auto me-3 mt-3">
+                        <input type="checkbox" class="checkbox" id="fruit-1" name="fruit-2" value="Apple">
+                        <label for="fruit-1"></label>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="student-name-modul mt-4">
+                                    <b>Ставри Георгиев</b>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="student-email-modul mt-4">
+                                    stavrigeorgiev@gmail.com
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr-add-stydents">
+            <div class="p-2 bd-highlight">
+                <div class="row g-0 mt-3">
+                    <div class="col-auto me-3">
+                        <input type="checkbox" class="checkbox" id="fruit-2" name="fruit-2" value="Apple">
+                        <label for="fruit-2"></label>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="student-name-modul mt-4">
+                                    <b>Ставри Георгиев</b>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="student-email-modul mt-4">
+                                    stavrigeorgiev@gmail.com
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr-add-stydents">
+            <div class="p-2 bd-highlight">
+                <div class="row g-0 mt-3">
+                    <div class="col-auto me-3">
+                        <input type="checkbox" class="checkbox" id="fruit-3" name="fruit-1" value="Apple">
+                        <label for="fruit-3"></label>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="student-name-modul mt-4">
+                                    <b>Ставри Георгиев</b>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="student-email-modul mt-4">
+                                    stavrigeorgiev@gmail.com
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr-add-stydents">
+            <div class="p-2 bd-highlight">
+                <div class="row g-0 mt-3">
+                    <div class="col-auto me-3">
+                        <input type="checkbox" class="checkbox" id="fruit-4" name="fruit-1" value="Apple">
+                        <label for="fruit-4"></label>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="student-name-modul mt-4">
+                                    <b>Ставри Георгиев</b>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="student-email-modul mt-4">
+                                    stavrigeorgiev@gmail.com
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr class="hr-add-stydents">
+            <div class="p-2 bd-highlight">
+                <div class="row g-0 mt-3">
+                    <div class="col-auto me-3">
+                        <input type="checkbox" class="checkbox" id="fruit-5" name="fruit-1" value="Apple">
+                        <label for="fruit-5"></label>
+                    </div>
+                    <div class="col">
+                        <div class="row">
+                            <div class="col-auto">
+                                <div class="student-name-modul mt-4">
+                                    <b>Ставри Георгиев</b>
+                                </div>
+                            </div>
+                            <div class="col-auto">
+                                <div class="student-email-modul mt-4">
+                                    stavrigeorgiev@gmail.com
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row g-0 d-flex justify-content-center">
+    <div class="col-auto mt-3 d-lg-none ">
+        <button class="nav btn  btn-green active py-0 pe-2 d-flex btn1-cs" id="lection-1-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="lection-1" aria-selected="true">
+            <div class="row g-0 align-self-center">
+                <div class="col-auto text-start ms-record">Запази</div>
+                <div class="col text-end align-items-center d-flex img-btn-ms">
+                    <img src="{{ asset('assets/img/action_icon.svg') }}" alt="">
+                </div>
+            </div>
+        </button>
+    </div>
+</div>
+<!--END mobil scrol-->
+<div class="student-scrol-module d-flex d-none d-lg-block">
+    <div class="d-flex flex-column bd-highlight mb-3">
+        <div class="p-2 bd-highlight">
+            <div class="row g-0 mt-3">
+                <div class="col-auto me-5 mt-4">
+                    <input type="checkbox" class="checkbox" id="fruit1" name="fruit-2" value="Apple">
+                    <label for="fruit1"></label>
+                </div>
+                <div class="col-auto me-5">
+                    <img src="{{ asset('assets/img/avatar.png') }}" class="student-avatar-size">
+                </div>
+                <div class="col me-5">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="student-name-modul mt-3">
+                                <b>Ставри Георгиев</b>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="student-email-modul mt-lg-2 mt-xxl-3">
+                                stavrigeorgiev@gmail.com
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="hr-add-stydents">
+        <div class="p-2 bd-highlight">
+            <div class="row g-0 mt-3">
+                <div class="col-auto me-5 mt-4">
+                    <input type="checkbox" class="checkbox" id="fruit2" name="fruit-2" value="Apple">
+                    <label for="fruit2"></label>
+                </div>
+                <div class="col-auto me-5">
+                    <img src="{{ asset('assets/img/avatar.png') }}" class="student-avatar-size">
+                </div>
+                <div class="col me-5">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="student-name-modul mt-3">
+                                <b>Ставри Георгиев</b>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="student-email-modul mt-lg-2 mt-xxl-3">
+                                stavrigeorgiev@gmail.com
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="hr-add-stydents">
+        <div class="p-2 bd-highlight">
+            <div class="row g-0 mt-3">
+                <div class="col-auto me-5 mt-4">
+                    <input type="checkbox" class="checkbox" id="fruit3" name="fruit-3" value="Apple">
+                    <label for="fruit3"></label>
+                </div>
+                <div class="col-auto me-5">
+                    <img src="{{ asset('assets/img/avatar.png') }}" class="student-avatar-size">
+                </div>
+                <div class="col me-5">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="student-name-modul mt-3">
+                                <b>Ставри Георгиев</b>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="student-email-modul mt-lg-2 mt-xxl-3">
+                                stavrigeorgiev@gmail.com
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="hr-add-stydents">
+        <div class="p-2 bd-highlight">
+            <div class="row g-0 mt-3">
+                <div class="col-auto me-5 mt-4">
+                    <input type="checkbox" class="checkbox" id="fruit4" name="fruit-4" value="Apple">
+                    <label for="fruit4"></label>
+                </div>
+                <div class="col-auto me-5">
+                    <img src="{{ asset('assets/img/avatar.png') }}" class="student-avatar-size">
+                </div>
+                <div class="col me-5">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="student-name-modul mt-3">
+                                <b>Ставри Георгиев</b>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="student-email-modul mt-lg-2 mt-xxl-3">
+                                stavrigeorgiev@gmail.com
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr class="hr-add-stydents">
+        <div class="p-2 bd-highlight">
+            <div class="row g-0 mt-3">
+                <div class="col-auto me-5 mt-4">
+                    <input type="checkbox" class="checkbox" id="fruit5" name="fruit-5" value="Apple">
+                    <label for="fruit5"></label>
+                </div>
+                <div class="col-auto me-5">
+                    <img src="{{ asset('assets/img/avatar.png') }}" class="student-avatar-size">
+                </div>
+                <div class="col me-5">
+                    <div class="row">
+                        <div class="col-auto">
+                            <div class="student-name-modul mt-3">
+                                <b>Ставри Георгиев</b>
+                            </div>
+                        </div>
+                        <div class="col-auto">
+                            <div class="student-email-modul mt-lg-2 mt-xxl-3">
+                                stavrigeorgiev@gmail.com
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr class="mt-5 d-none d-lg-block">
+<div class="row g-0">
+    <div class="col d-none d-lg-block">
+        <select class="border-0 status-1 text-uppercase ps-0 py-0 mt-5" id="status">
+            <option value="0">Статус</option>
+            <option value="1">Mодул 2</option>
+            <option value="2">Mодул 3</option>
+        </select>
+    </div>
+    <div class="col-auto mt-3 d-none d-lg-block">
+        <button class="nav btn  btn-green active py-0 pe-2 d-flex btn1-cs mt-4" id="lection-1-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="lection-1" aria-selected="true">
+            <div class="row g-0 align-self-center">
+                <div class="col-auto text-start ms-3">Запази</div>
+                <div class="col text-end align-items-center d-flex img-btn-ms">
+                    <img src="{{ asset('assets/img/action_icon.svg') }}" alt="">
+                </div>
+            </div>
+        </button>
+    </div>
+</div>
