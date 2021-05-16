@@ -59,47 +59,25 @@ class ModuleController extends Controller
     {
         $request['valid_visibility'] = \Config::get('courseVisibility');
         $data = $request->validate([
-            'picture' => 'required|file|image|mimes:jpeg,png,gif,webp,ico,jpg|max:4000',
             'name' => 'required',
             'description' => 'required',
-            'starts' => 'required|date_format:Y-m-d',
-            'ends' => 'required|date_format:Y-m-d|after:starts',
+            'starts' => 'required|date_format:m/d/Y',
+            'ends' => 'required|date_format:m/d/Y|after:starts',
             'visibility' => 'required|in_array:valid_visibility.*',
             'course_id' => 'required|numeric|exists:courses,id',
-            'order' => 'required|numeric',
             'students' => 'sometimes|array',
         ]);
 
-        $modulePic = Input::file('picture');
-        $image = Image::make($modulePic->getRealPath());
-        $image->fit(800, 600, function ($constraint) {
-            $constraint->upsize();
-        });
-        $name = time()."_".$modulePic->getClientOriginalName();
-        $name = str_replace(' ', '', strtolower($name));
-        $name = md5($name);
-
         $createModule = new Module;
         $createModule->course_id = $request->course_id;
-        $createModule->order = $request->order;
         $createModule->name = $request->name;
         $createModule->description = $request->description;
-        $createModule->picture = $name;
-        $createModule->starts = $request->starts;
-        $createModule->ends = $request->ends;
+        $createModule->starts = $this->dateParse($request->starts);
+        $createModule->ends = $this->dateParse($request->ends);
         $createModule->visibility = $request->visibility;
         $createModule->save();
 
         $course = Course::find($request->course_id);
-        if ($modulePic->getClientOriginalExtension() == 'gif') {
-            copy($modulePic->getRealPath(), public_path().'/images/course-'.$course->id.'/module-'.$createModule->id.'/'.$name);
-        } else {
-            $path = public_path().'/images/course-'.$course->id.'/module-'.$createModule->id;
-            if (!File::exists($path)) {
-                $folder = mkdir($path, 0777, true);
-            }
-            $image->save($path.'/'.$name, 90);
-        }
 
         if (isset($data['students'])) {
             foreach ($request->students as $student) {
@@ -111,7 +89,15 @@ class ModuleController extends Controller
         }
 
         $message = __('Успешно създаден Модул '.ucfirst($data['name']).'!');
-        return redirect()->route('lecturer.show.course', ['course' => $request->course_id])->with('success', $message);
+        return back()->with('success', $message);
+    }
+
+    /* date parse */
+    private function dateParse($date)
+    {
+        $parseDete = date_parse($date);
+
+        return $parseDete['year'] . '-' . $parseDete['month'] . '-' . $parseDete['day'];
     }
 
     /**

@@ -26,4 +26,8 @@ $(document).ready(function() {
         $('.show-lection').show();
         $('.module-edit').hide();
     });
+
+    $('#delete-module-btn').click(function() {
+        return confirm("Найстина ли искате да изтриете този Модул?");
+    });
 });

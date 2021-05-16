@@ -70,10 +70,10 @@
                     @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
                         <div class="row g-0 pb-4 mb-2">
                             <div class="col-xxl col-xl-12 col-sm d-flex justify-content-start">
-                                <button class="btn-edit row g-0 align-items-center mb-0">
-                                    <div class="col text-start">Добави курсист</div>
+                                <button form="delete-module-form" id="delete-module-btn" class="btn-edit row g-0 align-items-center mb-0">
+                                    <div class="col text-start">Изтрий модул</div>
                                     <div class="col-auto">
-                                        <i class="fas fa-arrow-right"></i>
+                                        <img src="{{ asset('assets/img/Delete.svg') }}">
                                     </div>
                                 </button>
                             </div>
@@ -286,7 +286,12 @@
     @include('flash-message')
     @if (Auth::user()->isLecturer() || Auth::user()->isAdmin())
         @if ($lections->count() == 0)
-            @include('course.module.lections.create')
+            <span class="add-lection">
+                @include('course.module.lections.create')
+            </span>
+            <span class="module-create" style="display: none">
+                @include('course.module.create')
+            </span>
         @else
             @foreach ($lections as $lection)
                 <div class="tab-pane fade @if ($loop->iteration == 1) show active @endif mt-xl-2 pt-xl-1 right-part" id="lection-{{ $loop->iteration }}" role="tabpanel" aria-labelledby="lection-2-tab">
@@ -346,6 +351,11 @@
     </div>
 </div>
 <!-- END Modal -->
+
+<form id="delete-module-form" action="{{ route('module.destroy', $module->Course->id) }}" method="POST">
+    {{ method_field('DELETE') }}
+    @csrf
+</form>
 
 <script src="{{ asset('js/lection/lection.js') }}"></script>
 <script src="{{ asset('js/lection/create.js') }}"></script>
