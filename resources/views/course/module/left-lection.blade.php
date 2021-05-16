@@ -57,12 +57,10 @@
                         </div>
                     </div>
                     @if (Auth::user()->isAdmin() || Auth::user()->isLecturer())
-                        <div class="col add text-end align-self-end pb-lg-2 text-small">
-                            <a href="{{ asset('module/create?course=' . $module->Course->id) }}">
-                                <span class="me-2"><img src="{{ asset('assets/img/plus.svg') }}"></span>
-                                Добави модул
-                            </a>
-                        </div>
+                        <button class="col border-0 active add text-end align-self-end pb-lg-2 text-small module-create-btn" id="lection-1-tab" data-bs-toggle="tab" href="#lection-1" role="tab" aria-controls="lection-1" aria-selected="true">
+                            <span class="me-2"><img src="{{ asset('assets/img/plus.svg') }}"></span>
+                            Добави модул
+                        </button>
                     @endif
                 </div>
             </nav>
@@ -307,6 +305,10 @@
                     <!-- edit module -->
                     <span class="module-edit" style="display: none">
                         @include('course.module.edit')
+                    </span>
+                    <!-- create module -->
+                    <span class="module-create" style="display: none">
+                        @include('course.module.create')
                     </span>
                 </div>
 

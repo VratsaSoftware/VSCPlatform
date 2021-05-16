@@ -15,6 +15,10 @@ $(document).ready(function() {
         $('.module-edit-btn.active').toggleClass("active");
     });
 
+    $('.module-create-btn').click('click', function () {
+        $('.module-create-btn.active').toggleClass("active");
+    });
+
     $('#tab_selector').on('change', function () {
         $('.nav-tabs a').eq($(this).val()).tab('show');
     });
@@ -35,5 +39,8 @@ $(document).ready(function() {
         $("#right-side .tab-pane.active").removeClass("active");
         $('.btn-green.active').removeClass("active");
         $('.btn-green.active').removeClass("active");
+        $('.module-create-btn.active').removeClass("active");
+        $('.module-edit-btn.active').removeClass("active");
+        $('.add-lection-button.active').removeClass("active");
     }
 });

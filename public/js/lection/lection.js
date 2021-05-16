@@ -29,6 +29,8 @@ $(document).ready(function() {
         $('.edit-lection').hide();
         $('.show-lection').show();
         $('.add-lection').hide();
+        $('.module-edit').hide();
+        $('.module-create').hide();
     });
 
     /* open create lection section */
@@ -36,6 +38,8 @@ $(document).ready(function() {
         $('.show-lection').hide();
         $('.add-lection').show();
         $('.edit-lection').hide();
+        $('.module-edit').hide();
+        $('.module-create').hide();
     });
 
     /* open edit lection section */
@@ -43,6 +47,8 @@ $(document).ready(function() {
         $('.show-lection').hide();
         $('.edit-lection').show();
         $('.add-lection').hide();
+        $('.module-edit').hide();
+        $('.module-create').hide();
     });
 
     $('.nav-lection').click(function() {
