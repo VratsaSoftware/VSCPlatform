@@ -175,7 +175,9 @@ class LectionController extends Controller
     public function show($user = 0, Course $course, Module $module)
     {
         $lections = Module::getLections($module->id, false);
-        $allModule = Module::where('course_id', $module->Course->id)->get();
+        $allModule = Module::where('course_id', $module->Course->id)
+            ->where('visibility', 'public')
+            ->get();
         $homeworks = Homework::where('user_id', Auth::user()->id)
             ->get();
 

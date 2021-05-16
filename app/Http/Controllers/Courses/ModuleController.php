@@ -126,13 +126,23 @@ class ModuleController extends Controller
         $module = $module->load('Course');
         $lections = $lections->load('Video');
 
-        $allModules = Module::where('course_id', $module->Course->id)->get();
+        $allModules = Module::where('course_id', $module->Course->id)
+            ->get();
+
+        $course_id = $module->Course->id;
+        $candidates = Entry::with('User', 'Form')
+            ->whereHas('Form', function ($q) use ($course_id) {
+                $q->where('course_id', $course_id);
+            })->get()
+            ->pluck('User')
+            ->flatten();
 
         return view('course.module.left-lection', [
             'module' => $module,
             'lections' => $lections,
             'students' => $students,
-            'allModules' => $allModules
+            'allModules' => $allModules,
+            'candidates' => $candidates,
         ]);
     }
 
@@ -179,12 +189,10 @@ class ModuleController extends Controller
     public function destroy($id)
     {
         $module = Module::find($id);
-        $course = Course::find($module->course_id);
-        File::delete(public_path().'/images/course-'.$course->id.'/module-'.$module->id.'/'.$module->picture);
         $module->delete();
 
         $message = __('Успешно изтрит модул!');
-        return redirect()->back()->with('success', $message);
+        return redirect('myProfile')->with('success', $message);
     }
 
     public function addUser(Request $request)

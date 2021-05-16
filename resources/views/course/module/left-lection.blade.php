@@ -358,7 +358,7 @@
 </div>
 <!-- END Modal -->
 
-<form id="delete-module-form" action="{{ route('module.destroy', $module->Course->id) }}" method="POST">
+<form id="delete-module-form" action="{{ route('module.destroy', $module->id) }}" method="POST">
     {{ method_field('DELETE') }}
     @csrf
 </form>
