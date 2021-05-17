@@ -1,9 +1,9 @@
 @foreach ($allUsers as $user)
     <div class="p-2 bd-highlight">
         <div class="row g-0 mt-3">
-            <div class="col-auto me-5 mt-4 remove-student" data-module="{{ $module->id }}" data-url="{{ route('module.remove.student') }}" data-user="{{ $user->User->id }}">
-                <input type="checkbox" name="students[]" class="checkbox" id="edit-{{ $resolution }}-{{ $loop->iteration }}" checked>
-                <label for="edit-{{ $resolution }}-{{ $loop->iteration }}"></label>
+            <div class="col-auto me-5 mt-4" >
+                <input type="checkbox" name="remove_students[]" class="checkbox edit-{{ $resolution }}" id="edit-{{ $resolution }}-{{ $loop->iteration }}" value="{{ $user->User->id }}">
+                <label title="Изтрий" for="edit-{{ $resolution }}-{{ $loop->iteration }}"></label>
             </div>
             <div class="col-auto me-5">
                 @if(!$user->User->picture && $user->User->sex != 'male')

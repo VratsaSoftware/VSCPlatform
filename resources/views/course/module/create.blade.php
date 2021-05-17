@@ -74,14 +74,16 @@
             </form> -->
         </div>
         <!--Mobil scrol-->
-        <div class="student-scrol-module d-flex d-lg-none">
-            <div class="d-flex flex-column bd-highlight mb-3">
-                @include('course.module.module-students.create', [
-                    'allUsers' => $candidates,
-                    'resolution' => 'mobile',
-                ])
+        @if ($candidates->count())
+            <div class="student-scrol-module d-flex d-lg-none">
+                <div class="d-flex flex-column bd-highlight mb-3">
+                    @include('course.module.module-students.create', [
+                        'allUsers' => $candidates,
+                        'resolution' => 'mobile',
+                    ])
+                </div>
             </div>
-        </div>
+        @endif
     </div>
     <div class="row g-0 d-flex justify-content-center">
         <div class="col-auto mt-3 d-lg-none ">
@@ -96,14 +98,16 @@
         </div>
     </div>
     <!--END mobil scrol-->
-    <div class="student-scrol-module d-flex d-none d-lg-block">
-        <div class="d-flex flex-column bd-highlight mb-3">
-            @include('course.module.module-students.create', [
-                'allUsers' => $candidates,
-                'resolution' => 'desktop',
-            ])
+    @if ($candidates->count())
+        <div class="student-scrol-module d-flex d-none d-lg-block">
+            <div class="d-flex flex-column bd-highlight mb-3">
+                @include('course.module.module-students.create', [
+                    'allUsers' => $candidates,
+                    'resolution' => 'desktop',
+                ])
+            </div>
         </div>
-    </div>
+    @endif
 
     <hr class="mt-5 d-none d-lg-block">
     <div class="row g-0">

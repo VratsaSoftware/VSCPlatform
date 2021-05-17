@@ -168,7 +168,7 @@ class ModuleController extends Controller
             'ends' => 'sometimes|date_format:m/d/Y|after:starts',
             'visibility' => 'sometimes|in_array:valid_visibility.*',
             'course_id' => 'sometimes|numeric|exists:courses,id',
-            'students' => 'sometimes|array',
+            'remove_students' => 'sometimes|array',
         ]);
         $module = Module::find($id);
 
@@ -180,6 +180,10 @@ class ModuleController extends Controller
         $module->ends = $this->dateParse($request->ends);
         $module->visibility = $request->visibility;
         $module->save();
+
+        $removeModulesStudent = ModulesStudent::where('course_modules_id', $id)
+            ->whereIn('user_id', $request->remove_students)
+            ->delete();
 
         $message = __('Успешно направени промени!');
         return back()->with('success', $message);
