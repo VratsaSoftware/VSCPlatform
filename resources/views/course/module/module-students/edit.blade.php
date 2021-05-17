@@ -17,13 +17,8 @@
             <div class="col me-5">
                 <div class="row">
                     <div class="col-auto">
-                        <div class="student-name-modul mt-3">
-                            <b>{{ $user->User->name }} {{ $user->User->last_name }}</b>
-                        </div>
-                    </div>
-                    <div class="col-auto">
-                        <div class="student-email-modul mt-lg-2 mt-xxl-3">
-                            {{ $user->User->email }}
+                        <div class="student-name-modul mt-4">
+                            <b style="margin-right: 30px">{{ $user->User->name }} {{ $user->User->last_name }}</b> {{ $user->User->email }}
                         </div>
                     </div>
                 </div>

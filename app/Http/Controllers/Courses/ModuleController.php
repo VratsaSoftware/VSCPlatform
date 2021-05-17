@@ -181,9 +181,11 @@ class ModuleController extends Controller
         $module->visibility = $request->visibility;
         $module->save();
 
-        $removeModulesStudent = ModulesStudent::where('course_modules_id', $id)
-            ->whereIn('user_id', $request->remove_students)
-            ->delete();
+        if ($request->remove_students) {
+            $removeModulesStudent = ModulesStudent::where('course_modules_id', $id)
+                ->whereIn('user_id', $request->remove_students)
+                ->delete();
+        }
 
         $message = __('Успешно направени промени!');
         return back()->with('success', $message);

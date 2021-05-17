@@ -119,12 +119,14 @@
                 <option value="draft">Чернова</option>
             </select>
         </div>
-        <div class="col-auto mt-3 d-none d-lg-block">
-            <button onclick="this.form.submit()" class="nav btn  btn-green active py-0 pe-2 d-flex btn1-cs mt-4" id="lection-1-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="lection-1" aria-selected="true">
+        <div class="col-auto mt-5 d-none d-lg-block">
+            <button class="btn-green btn1-cs">
                 <div class="row g-0 align-self-center">
-                    <div class="col-auto text-start ms-3">Запази</div>
-                    <div class="col text-end align-items-center d-flex img-btn-ms">
-                        <img src="{{ asset('assets/img/action_icon.svg') }}" alt="">
+                    <div class="col ps-2 text-start text-small">
+                        Запази
+                    </div>
+                    <div class="col-auto px-2">
+                        <img src="{{ asset('assets/img/action_icon.svg') }}">
                     </div>
                 </div>
             </button>
