@@ -1082,6 +1082,47 @@ button {
 .img-btn1-ms {
   margin-left: 40px;
 }
+/**application form**/
+.existing-forms {
+  font-size: 25px;
+  background-color: #f8fafe;
+  margin-top: 139px;
+}
+.form-app-input {
+  width: 326px;
+  padding: 20px 20px;
+}
+.form-select-app {
+  height: 60px;
+  border: solid 1px #00214b;
+  border-radius: 15px;
+  outline: none !important;
+  font-weight: bold;
+  background-color: transparent;
+  color: #666666;
+}
+.form-info-titel {
+  width: 272px;
+  color: #00214b;
+  font-size: 17px;
+}
+.form-info-small {
+  width: 332px;
+  font-size: 14px;
+  color: #666666;
+}
+.form-textarel {
+  width: 324px;
+  height: 132px;
+  border: solid 1px #00214b;
+  border-radius: 15px;
+  outline: none !important;
+  font-weight: bold;
+  background-color: transparent;
+  padding: 20px 20px;
+}
+
+/** END application form**/
 /** Media query**/
 @media only screen and (max-width: 1885px) {
   .student-scrol-module {
