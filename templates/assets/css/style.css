@@ -1121,7 +1121,10 @@ button {
   background-color: transparent;
   padding: 20px 20px;
 }
-
+.margin-create {
+  margin-left: 15px;
+  margin-right: 30px;
+}
 /** END application form**/
 /** Media query**/
 @media only screen and (max-width: 1885px) {
@@ -1199,6 +1202,21 @@ button {
   .student-name-modul {
     font-size: 22px;
   }
+  .form-app-input {
+    width: 250px;
+  }
+  .form-info-titel {
+    width: 250px;
+  }
+  .form-info-small {
+    width: 250px;
+  }
+  .form-textarel {
+    width: 250px;
+  }
+  .text-create {
+    font-size: 13px;
+  }
 }
 
 @media only screen and (max-width: 1601px) {
@@ -1248,6 +1266,9 @@ button {
   }
   .img-btn1-ms {
     margin-left: 15px;
+  }
+  .margin-create {
+    margin-right: 10px;
   }
 }
 @media only screen and (max-width: 1546px) {
@@ -1419,6 +1440,18 @@ button {
     }
     .deadline-2 {
       font-size: 15px;
+    }
+    .form-app-input {
+      width: 230px;
+    }
+    .form-info-titel {
+      width: 230px;
+    }
+    .form-info-small {
+      width: 230px;
+    }
+    .form-textarel {
+      width: 230px;
     }
   }
   @media only screen and (max-width: 1280px) {
@@ -1814,6 +1847,21 @@ button {
     .ms-record {
       margin-left: 200px;
     }
+    .existing-forms {
+      margin-top: 60px;
+      font-size: 18px;
+    }
+    .btn1-form {
+      width: 480px;
+      height: 45px;
+      border-radius: 10px;
+    }
+    .margin-form-app {
+      margin-left: 200px;
+    }
+    .me-3-input {
+      margin-right: 16px;
+    }
   }
   @media only screen and (min-width: 992px) {
     .toggled .slide-item {
@@ -1959,6 +2007,26 @@ button {
     }
     .ms-record {
       margin-left: 50px;
+    }
+    .form-app-position {
+      text-align: center;
+    }
+    .mb-4-input {
+      margin-bottom: 24px;
+    }
+    .existing-forms {
+      font-size: 18px;
+    }
+    .btn1-form {
+      width: 300px;
+      height: 45px;
+      border-radius: 10px;
+    }
+    .margin-form-app {
+      margin-left: 100px;
+    }
+    .me-3-input {
+      margin-right: 0px;
     }
   }
   @media only screen and (max-width: 495px) {

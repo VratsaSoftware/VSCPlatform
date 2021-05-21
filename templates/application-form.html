@@ -183,96 +183,108 @@
 		<!-- main content --> 
 		<div class="col ms-lg-5">
             <div class="row g-0"> 
-                <div class="col-7 mb-5">
-                    <div class="col">
+                <div class="col-lg-7 mb-5">
+                    <div class="col d-flex justify-content-center">
                         <div class="text-xxl text-uppercase mt-5">
                             <b>Форма за кандидатстване</b>
                         </div>
                     </div>
-                    <div class="col">
+                    <div class="col d-flex justify-content-center d-lg-none">
                         <select class="border-0 existing-forms text-uppercase ps-0 py-0 mb-lg-4" id="existing-forms">
                             <option value="0">Съществуващи форми</option>
                             <option value="1">Съществуващи форми 2</option>
                             <option value="2">Съществуващи форми 3</option>
                         </select>
                     </div>
-                    <div class="col">
-                        <div class="text-large text-dark mt-lg-5">
+					<div class="col d-none d-lg-block">
+                        <select class="border-0 existing-forms text-uppercase ps-0 py-0 mb-lg-4" id="existing-forms">
+                            <option value="0">Съществуващи форми</option>
+                            <option value="1">Съществуващи форми 2</option>
+                            <option value="2">Съществуващи форми 3</option>
+                        </select>
+                    </div>
+                    <div class="col d-flex justify-content-center">
+                        <div class="text-large text-dark mt-5 mb-4-input d-lg-none">
                             1. ЕЛЕКТРОННА ФОРМА
                         </div>
                     </div>
-                    <div class="row g-0 module-top">
-                        <div class="col">
-                                <input type="text" class="form-module form-app-input me-5" placeholder="Име и фамилия" aria-label="Име на модула" aria-describedby="addon-wrapping">
-                                <input type="text" class="form-module form-app-input me-5" placeholder="Телефон" aria-label="Име на модула" aria-describedby="addon-wrapping">
+					<div class="col">
+                        <div class="text-large text-dark mt-5 mb-4-input d-none d-lg-block">
+                            1. ЕЛЕКТРОННА ФОРМА
                         </div>
                     </div>
-                    <div class="row g-0 module-top">
-                        <div class="col">
-                                <input type="text" class="form-module form-app-input me-5" placeholder="Имейл" aria-label="Име на модула" aria-describedby="addon-wrapping">
-                                <input type="text" class="form-module form-app-input me-5" placeholder="Възраст" aria-label="Име на модула" aria-describedby="addon-wrapping">
+                    <div class="row g-0 module-top d-flex justify-content-center">
+                        <div class="col-auto form-app-position">
+                                <input type="text" class="form-module form-app-input me-lg-5 mb-4-input me-3-input" placeholder="Име и фамилия" aria-label="Име на модула" aria-describedby="addon-wrapping">
+                                <input type="text" class="form-module form-app-input mb-4-input" placeholder="Телефон" aria-label="Име на модула" aria-describedby="addon-wrapping">
                         </div>
                     </div>
-                    <div class="row g-0 module-top">
-                        <div class="col-auto me-5">
-                            <select class="form-app-input form-select-app" id="inputGroupSelect01">
+                    <div class="row g-0 module-top d-flex justify-content-center">
+                        <div class="col-auto form-app-position">
+                                <input type="text" class="form-module form-app-input me-lg-5 mb-4-input me-3-input" placeholder="Имейл" aria-label="Име на модула" aria-describedby="addon-wrapping">
+                                <input type="text" class="form-module form-app-input mb-4-input" placeholder="Възраст" aria-label="Име на модула" aria-describedby="addon-wrapping">
+                        </div>
+                    </div>
+                    <div class="row g-0 module-top d-flex justify-content-center">
+                        <div class="col-auto form-app-position">
+                            <select class="form-app-input form-select-app me-lg-5 mb-4-input me-3-input" id="inputGroupSelect01">
                               <option selected>Направление</option>
                               <option value="1">One</option>
                               <option value="2">Two</option>
                               <option value="3">Three</option>
                             </select>
-                          </div>
-                          <div class="col">
-                            <select class="form-app-input form-select-app" id="inputGroupSelect01">
+                            <select class="form-app-input form-select-app mb-4-input" id="inputGroupSelect01">
                               <option selected>Занимание</option>
                               <option value="1">One</option>
                               <option value="2">Two</option>
                               <option value="3">Three</option>
                             </select>
-                          </div>
+                        </div>
                     </div>
-                    <div class="row g-0">
-                        <div class="col-auto me-lg-1 mt-lg-4">
+                    <div class="row g-0 d-flex justify-content-center">
+                        <div class="col-auto me-lg-1 mt-4 ms-3 me-3-input">
                             <div class="form-info-titel">
                                 <b>Защо смятате, че тези обучения са подходящ за Вас?</b>
                             </div>
-                            <div class="form-info-small mt-2">
-                                (защо искате да учите Нямам предпочитания 2020/2021 , Програмиране с Java 2020/2021 , Уеб разработка с РНР 2020/2021 )
-                            </div>
+                            <div class="col form-app-position">
+								<textarea class="form-textarel mt-5 me-lg-1 mb-4-input me-3-input" placeholder="100-500" aria-label="With textarea"></textarea>
+							</div>
                         </div>
-                        <div class="col-auto ms-lg-5 mt-lg-4">
+                        <div class="col-auto ms-lg-5 ms-4 mt-4">
                             <div class="form-info-titel">
                                 <b>Защо смятате, че тези обучения са подходящ за Вас?</b>
                             </div>
-                            <div class="form-info-small mt-2">
-                                (защо искате да учите Нямам предпочитания 2020/2021 , Програмиране с Java 2020/2021 , Уеб разработка с РНР 2020/2021 )
-                            </div>
+                            <div class="col-auto form-app-position">
+								<textarea class="form-textarel mb-4-input mt-5" placeholder="100-500" aria-label="With textarea"></textarea>
+							</div>
                         </div>
                     </div>
-                    <div class="row g-0">
-                        <div class="col-auto">
-                            <div class="mt-5 me-lg-1">
-                                <textarea class="form-textarel" placeholder="100-500" aria-label="With textarea"></textarea>
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="mt-5 ms-lg-5">
-                                <textarea class="form-textarel" placeholder="100-500" aria-label="With textarea"></textarea>
-                            </div>
-                        </div>
-                    </div>
+					<div class="row g-0 d-flex justify-content-center">
+						<div class="col-auto mt-3 d-lg-none">
+							<button class="nav btn  btn-green active py-0 pe-2 d-flex btn1-form mt-5" id="lection-1-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="lection-1" aria-selected="true">
+								<div class="row g-0 align-self-center">
+									<div class="col-auto text-start margin-form-app text-create">СЪЗДАЙ</div>
+									<div class="col text-end align-items-center d-flex img-btn-ms">
+										<img src="assets/img/action_icon.svg" alt="">
+									</div>
+								</div>
+							</button>
+						</div>
+					</div>
                 </div>
-                <div class="col-5 d-flex justify-content-end">
-                    <div class="col-auto mt-3 d-none d-lg-block me-5 mt-3">
-                        <button class="nav btn  btn-green active py-0 pe-2 d-flex btn1-cs mt-5" id="lection-1-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="lection-1" aria-selected="true">
-                            <div class="row g-0 align-self-center">
-                                <div class="col-auto text-start ms-3 me-4">СЪЗДАЙ</div>
-                                <div class="col text-end align-items-center d-flex img-btn-ms">
-                                    <img src="assets/img/action_icon.svg" alt="">
-                                </div>
-                            </div>
-                        </button>
-                    </div>
+                <div class="col-5">
+					<div class="row g-0 d-flex justify-content-end">
+						<div class="col-auto mt-3 d-none d-lg-block me-5 mt-3">
+							<button class="nav btn  btn-green active py-0 pe-2 d-flex btn1-cs mt-5" id="lection-1-tab" data-bs-toggle="tab" href="#" role="tab" aria-controls="lection-1" aria-selected="true">
+								<div class="row g-0 align-self-center">
+									<div class="col-auto text-start margin-create text-create">СЪЗДАЙ</div>
+									<div class="col text-end align-items-center d-flex img-btn-ms">
+										<img src="assets/img/action_icon.svg" alt="">
+									</div>
+								</div>
+							</button>
+						</div>
+					</div>
                 </div>
             </div>
 		</div>	
