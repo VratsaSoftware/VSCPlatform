@@ -106,7 +106,7 @@
 									<br/>
 									<span class="no-show">Модул <span class="req-star-form">*</span></span>
 									<select class="section-el-bold no-show" name="module" id="module">
-									
+
 									</select>
 									<script>
                                         $(function () {
@@ -219,7 +219,7 @@
 									@endforeach
 								</select>
 							</p>
-							
+
 							<p>
 								<label for="source">От къде научихте за това обучение? <span class="req-star-form">*</span></label><br/>
 								@if ($errors->has('source'))
@@ -233,7 +233,7 @@
 									@endforeach
 								</select>
 							</p>
-							
+
 							<p>
 								<label for="cv">Автобиография <span class="req-star-form">*</span></label>
 								@if ($errors->has('cv'))

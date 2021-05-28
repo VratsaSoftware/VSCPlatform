@@ -268,7 +268,7 @@
                         </div>
                     </div>
                 </div>
-        
+
                 <div class="col-md-4">
                     <div class="card card-2 text-center card-programing">
                         <div class="details-info col-md-12 d-flex flex-row flex-wrap">
@@ -284,7 +284,7 @@
                         </div>
                     </div>
                 </div>
-        
+
                 <div class="col-md-4">
                     <div class="card card-2 text-center card-programing">
                         <div class="details-info col-md-12 d-flex flex-row flex-wrap">
@@ -300,9 +300,9 @@
                         </div>
                     </div>
                 </div>
-        
+
                 <div class="col-md-12 spacer-program"></div>
-        
+
                 <div class="col-md-4">
                     <div class="card card-2 text-center card-programing">
                         <div class="details-info col-md-12 d-flex flex-row flex-wrap">
@@ -318,7 +318,7 @@
                         </div>
                     </div>
                 </div>
-        
+
                 <div class="col-md-4">
                     <div class="card card-2 text-center card-programing">
                         <div class="details-info col-md-12 d-flex flex-row flex-wrap">
@@ -334,7 +334,7 @@
                         </div>
                     </div>
                 </div>
-        
+
                 <div class="col-md-4">
                     <div class="card card-2 text-center card-programing">
                         <div class="details-info col-md-12 d-flex flex-row flex-wrap">

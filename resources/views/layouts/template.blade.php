@@ -26,7 +26,9 @@
         <div class="col-xl-auto pe-xl-0 pe-lg-5">
             <div class="row g-0">
                 <!-- nav menu -->
-                @include('navigation-left-bar')
+                @if (Auth::user())
+                    @include('navigation-left-bar')
+                @endif
                 <!-- nav menu END -->
 
                 <!-- Content START -->
