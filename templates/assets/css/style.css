@@ -1126,6 +1126,49 @@ button {
   margin-right: 30px;
 }
 /** END application form**/
+/****/
+.title-electonic {
+  font-size: 25px;
+}
+.star-elect {
+  font-size: 20px;
+}
+.text-info-elect {
+  font-size: 17px;
+  color: #69b501;
+}
+.text-info-elect-blue {
+  font-size: 17px;
+  color: #00214b;
+}
+.card-small-electro {
+  border: none;
+  border-radius: 4px;
+  width: 7px;
+  height: 300px;
+  background: linear-gradient(
+    180deg,
+    rgba(105, 181, 1, 1) 3%,
+    rgba(141, 226, 25, 1) 5%,
+    rgba(204, 204, 204, 1) 7%
+  );
+}
+.electro-avatar-img {
+  margin-left: -22px;
+}
+.form-elec-input {
+  width: 40%;
+  padding: 20px 20px;
+}
+.form-textarel-elec {
+  width: 110%;
+  height: 130px;
+  padding: 20px 20px;
+}
+.ms-elect {
+  margin-left: 80px;
+}
+/****/
 /** Media query**/
 @media only screen and (max-width: 1885px) {
   .student-scrol-module {
@@ -1191,6 +1234,15 @@ button {
   .text-title-module {
     font-size: 25px;
     color: #00214b;
+  }
+  .form-textarel-elec {
+    width: 100%;
+  }
+  .ms-elect {
+    margin-left: 60px;
+  }
+  .form-info-titel {
+    width: 250px;
   }
 }
 @media only screen and (max-width: 1653px) {
@@ -1345,6 +1397,15 @@ button {
   .priem-img {
     width: 150px;
   }
+  .form-textarel-elec {
+    width: 90%;
+  }
+  .ms-elect {
+    margin-left: 50px;
+  }
+  .form-info-titel {
+    width: 200px;
+  }
 }
 @media only screen and (max-width: 1460px) {
   .card-mini {
@@ -1362,6 +1423,9 @@ button {
   }
   .edit-content .btn-edit {
     width: 240px;
+  }
+  .card-small-electro {
+    height: 244px;
   }
   @media only screen and (max-width: 1400px) and (min-width: 992px) {
     .card {
@@ -1422,6 +1486,15 @@ button {
       width: 130px;
       margin-left: 25px;
     }
+    .form-textarel-elec {
+      width: 100%;
+    }
+    .ms-elect {
+      margin-left: 50px;
+    }
+    .form-info-titel {
+      width: 220px;
+    }
   }
   @media only screen and (max-width: 1350px) {
     .student-scrol-module {
@@ -1452,6 +1525,15 @@ button {
     }
     .form-textarel {
       width: 230px;
+    }
+    .form-textarel-elec {
+      width: 85%;
+    }
+    .form-info-titel {
+      width: 190px;
+    }
+    .ms-elect {
+      margin-left: 40px;
     }
   }
   @media only screen and (max-width: 1280px) {
@@ -1862,6 +1944,40 @@ button {
     .me-3-input {
       margin-right: 16px;
     }
+    /**electronic**/
+    .card-small-electro {
+      width: 7px;
+      height: 260px;
+      border-radius: 4px;
+      background: linear-gradient(
+        180deg,
+        rgba(105, 181, 1, 1) 4%,
+        rgba(141, 226, 25, 1) 6%,
+        rgba(204, 204, 204, 1) 15%
+      );
+    }
+    .btn-mobile {
+      background-color: #f6f9ff !important;
+    }
+    .tab-body-electronic {
+      max-width: 600px;
+      padding: 30px 20px;
+      margin: 30px auto;
+    }
+    .close {
+      font-size: 28px;
+      font-weight: bold;
+      top: 10px;
+      right: 20px;
+      cursor: pointer;
+    }
+    .form-elec-input {
+      width: 80%;
+    }
+    .form-elec-input {
+      margin-top: 0px;
+    }
+    /**electronic end**/
   }
   @media only screen and (min-width: 992px) {
     .toggled .slide-item {
