@@ -1427,6 +1427,9 @@ button {
   .card-small-electro {
     height: 244px;
   }
+  .form-textarel-elec {
+    width: 100%;
+  }
   @media only screen and (max-width: 1400px) and (min-width: 992px) {
     .card {
       width: 500px;
@@ -1490,10 +1493,13 @@ button {
       width: 100%;
     }
     .ms-elect {
-      margin-left: 50px;
+      margin-left: 60px;
     }
     .form-info-titel {
       width: 220px;
+    }
+    .form-textarel-elec {
+      width: 105%;
     }
   }
   @media only screen and (max-width: 1350px) {
@@ -1544,6 +1550,12 @@ button {
       width: 500px;
       height: 420px;
       overflow: scroll;
+    }
+    .form-textarel-elec {
+      width: 90%;
+    }
+    .ms-elect {
+      margin-left: 30px;
     }
   }
   @media only screen and (max-width: 992px) {
@@ -1892,7 +1904,7 @@ button {
     /**END Student application**/
     /****/
     .module-right {
-      background-color: #ffffff !important;
+      background-color: #e9eef4 !important;
     }
     .module-body-right {
       background-color: #ffffff !important;
@@ -1963,6 +1975,7 @@ button {
       max-width: 600px;
       padding: 30px 20px;
       margin: 30px auto;
+      background-color: #e9eef4;
     }
     .close {
       font-size: 28px;
@@ -1972,9 +1985,12 @@ button {
       cursor: pointer;
     }
     .form-elec-input {
-      width: 80%;
+      width: 100%;
     }
     .form-elec-input {
+      margin-top: 0px;
+    }
+    .module-top {
       margin-top: 0px;
     }
     /**electronic end**/
@@ -2175,6 +2191,18 @@ button {
     .student-scrol-module {
       width: 350px;
     }
+    .form-textarel-elec {
+      width: 300px;
+    }
+    .ms-elect {
+      margin-left: 0px;
+    }
+    .form-elec-input {
+      width: 80%;
+    }
+    .form-info-titel {
+      margin-left: 50px;
+    }
   }
   @media only screen and (max-width: 438px) {
     .deadline-2 {
@@ -2209,6 +2237,9 @@ button {
     }
     .student-scrol-module {
       width: 300px;
+    }
+    .form-textarel-elec {
+      width: 230px;
     }
   }
   @media only screen and (max-width: 346px) {
