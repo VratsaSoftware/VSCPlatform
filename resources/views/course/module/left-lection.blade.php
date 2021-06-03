@@ -1,5 +1,10 @@
 @extends('layouts.template')
 @section('title', 'Курс „' . $module->Course->name . '“ Лекции')
+
+@section('head')
+    <link href="{{ asset('css/lection/lection.css') }}" rel="stylesheet" />
+@endsection
+
 @section('content')
 <!-- left side -->
 <div class="col-xl-auto col ps-xxl-0 ps-lg-4">
