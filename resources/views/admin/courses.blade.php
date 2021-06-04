@@ -1,5 +1,10 @@
 @extends('layouts.template')
 @section('title', 'Admin Курсове')
+
+@section('head')
+    <link href="{{ asset('css/lection/lection.css') }}" rel="stylesheet" />
+@endsection
+
 @section('content')
 <div class="content-wrap">
   <div class="section">

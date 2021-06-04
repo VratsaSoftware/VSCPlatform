@@ -1,10 +1,15 @@
 @extends('layouts.template')
 @section('title', 'Admin Кандидаствания')
+
+@section('head')
+    <link href="{{ asset('css/lection/lection.css') }}" rel="stylesheet" />
+@endsection
+
 @section('content')
 	<link rel="stylesheet" href="{{asset('css/applications.css')}}">
 	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
 	<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
-	
+
 	<div class="col-md-12 d-flex flex-row flex-wrap text-center justify-content-center lvl-title filter-apps">
 		<div class="col-md-12 text-center">Филтър Кандидадставния</div>
 		<div id="app-router" style="display: none;" data-url="{{route('admin.ajax.applications')}}"></div>
@@ -30,7 +35,7 @@
 		</div>
 	</div>
 	<div id="apps-content" class="col-md-12">
-	
+
 	</div>
 	<script>
 		$('.filter-holder > a').on('click', function(){

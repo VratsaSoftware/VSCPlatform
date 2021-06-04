@@ -35,6 +35,12 @@ $(document).ready(function() {
         $("#right-side .tab-pane.active").removeClass("active");
     });
 
+    $('.comment-toggler').on('click', function () {
+        var toggler =  $(this).parent();
+        toggler.prev().children().toggleClass("active");
+        $(this).toggleClass("active");
+    }); 
+
     if ($(window).width() < 992) {
         $("#right-side .tab-pane.active").removeClass("active");
         $('.btn-green.active').removeClass("active");

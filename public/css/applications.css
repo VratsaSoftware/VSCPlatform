@@ -2275,3 +2275,7 @@ button {
     }
   }
 }
+
+.input-automatically-filled {
+    background-color: #e0e6f1
+}
