@@ -47,6 +47,6 @@ class CourseApplicationCreated extends Mailable implements ShouldQueue
          ел.поща: school@vratsasoftware.com
             ';
         return $this->from('info@vratsasoftware.com')
-            ->markdown('user.mails.courseApplicationCreated', compact('url','text','webSite'));
+            ->markdown('user.mails.courseApplicationCreated', compact('text'));
     }
 }

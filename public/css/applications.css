@@ -14,6 +14,7 @@
   src: url("fonts/Roboto-Bold.ttf");
   font-weight: bold;
 }
+
 /** custom boodstrap colors and fonts **/
 .text-xxl {
   font-size: 50px;
@@ -112,7 +113,7 @@ button {
   border: none !important;
   color: #ffffff !important;
 }
-/** nav menu **/
+/** Nav menu **/
 .slide {
   height: 1080px;
   transition: all 1s ease;
@@ -179,7 +180,7 @@ button {
 .icon {
   width: 27px;
 }
-/** nav menu END **/
+/** Nav menu END **/
 
 /** Left side **/
 .card {
@@ -1168,7 +1169,23 @@ button {
 .ms-elect {
   margin-left: 80px;
 }
+.ms-body-elect-none-menu {
+  padding: 50px 30px 20px 200px;
+}
+.form-textarel-elec-2 {
+  width: 100%;
+  height: 130px;
+  padding: 20px 20px;
+}
 /****/
+.textarea-elec-2 {
+  width: 84%;
+  padding: 20px 20px;
+  height: 130px;
+}
+.form-textarel-elec-2 {
+  width: 500px;
+}
 /** Media query**/
 @media only screen and (max-width: 1885px) {
   .student-scrol-module {
@@ -1407,7 +1424,7 @@ button {
     width: 200px;
   }
 }
-@media only screen and (max-width: 1960px) {
+@media only screen and (max-width: 1460px) {
   .card-mini {
     margin: 56px 0 56px 30px;
   }
@@ -1557,8 +1574,17 @@ button {
     .ms-elect {
       margin-left: 30px;
     }
+    .form-textarel-elec-2 {
+      width: 80%;
+      height: 130px;
+      padding: 20px 20px;
+    }
   }
   @media only screen and (max-width: 992px) {
+    .submit-btn-elect-form {
+        margin-left: 0px;
+    }
+
     .text-xxl {
       font-size: 20px;
     }
@@ -1994,6 +2020,15 @@ button {
       margin-top: 0px;
     }
     /**electronic end**/
+    .ms-body-elect-none-menu {
+      padding: 0px;
+    }
+    .ms-body-elect-none-menu {
+      background-color: #e9eef4;
+    }
+    .textarea-elec-2 {
+      width: 100%;
+    }
   }
   @media only screen and (min-width: 992px) {
     .toggled .slide-item {
@@ -2203,6 +2238,13 @@ button {
     .form-info-titel {
       margin-left: 50px;
     }
+    .textarea-elec-2 {
+      width: 80%;
+    }
+    .form-info-titel-2 {
+      width: 250px;
+      padding: 0px 0px 0px 60px;
+    }
   }
   @media only screen and (max-width: 438px) {
     .deadline-2 {
@@ -2276,6 +2318,53 @@ button {
   }
 }
 
-.input-automatically-filled {
-    background-color: #e0e6f1
+/* nav */
+@media only screen and (min-width: 1920px) {
+  .toggled .slide-item {
+    max-width: 0;
+    margin-left: 0;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .toggled {
+    margin-right: 35px;
+  }
+  .toggled .pill {
+    right: 0;
+  }
+  .toggled .pill a {
+    -ms-transform: rotate(180deg); /* IE 9 */
+    transform: rotate(180deg);
+  }
+  .toggled .logo {
+    max-width: 90px;
+    margin-bottom: 86px;
+    transition: all 0.5s;
+  }
+  .toggled .nav-item a {
+    justify-content: center;
+    transition: all 0.5s;
+  }
+  .toggled .user-info .col {
+    display: none;
+  }
+  .slide.toggled {
+    padding: 50px 27px 50px 33px !important;
+    transition: all 0.5s;
+  }
+
+  /* ms body elect none menu */
+  .ms-body-elect-none-menu {
+    padding: 50px 30px 20px 269px;
+  }
+}
+
+.submit-btn-elect-form {
+    margin-left: 67%;
+}
+
+@media only screen and (max-width: 992px) {
+  .submit-btn-elect-form {
+      margin-left: 0px;
+  }
 }

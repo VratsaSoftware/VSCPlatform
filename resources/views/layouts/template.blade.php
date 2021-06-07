@@ -22,21 +22,23 @@
     <link rel="stylesheet" href="{{ asset('css/tooltip.css') }}"/>
 </head>
 <body>
-    <div class="row g-0 p-lg-0 px-4 py-4 mt-lg-0 mt-2">
-        <div class="col-xl-auto pe-xl-0 pe-lg-5">
-            <div class="row g-0">
-                <!-- nav menu -->
-                @if (Auth::user())
-                    @include('navigation-left-bar')
-                @endif
-                <!-- nav menu END -->
+    @if (Auth::user())
+        <div class="row g-0 p-lg-0 px-4 py-4 mt-lg-0 mt-2">
+            <div class="col-xl-auto pe-xl-0 pe-lg-5">
+                <div class="row g-0">
+                    <!-- nav menu -->
+                        @include('navigation-left-bar')
+                    <!-- nav menu END -->
 
-                <!-- Content START -->
-                @yield('content')
-                <!-- Content END -->
+                    <!-- Content START -->
+                    @yield('content')
+                    <!-- Content END -->
+                </div>
             </div>
         </div>
-    </div>
+    @else
+        @yield('content')
+    @endif
     <!-- Bootstrap core JS Files -->
     <script src="{{ asset('assets/bootstrap/js/bootstrap.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('assets/js/main.js') }}" type="text/javascript"></script>

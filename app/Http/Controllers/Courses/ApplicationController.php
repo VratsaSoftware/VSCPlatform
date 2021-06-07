@@ -109,10 +109,19 @@ class ApplicationController extends Controller
 
         if (Auth::user()) {
             $user = User::find(Auth::user()->id);
-            return view('user.application_form', ['user' => $user, 'occupations' => $occupations, 'course' => $course, 'module' => $module, 'applicationFor' => $applicationFor]);
+            return view('user.application_form', [
+                'user' => $user,
+                'occupations' => $occupations,
+                'course' => $course,
+                'module' => $module,
+                'applicationFor' => $applicationFor
+            ]);
         }
 
-        return view('user.non_register_application_form', ['occupations' => $occupations, 'applicationFor' => $applicationFor]);
+        return view('user.non_register_application_form', [
+            'occupations' => $occupations,
+            'applicationFor' => $applicationFor
+        ]);
     }
 
 
@@ -134,30 +143,36 @@ class ApplicationController extends Controller
         $request['valid_use'] = \Config::get('applicationForm.use');
         $request['valid_source'] = \Config::get('applicationForm.source');
 
-        if (Auth::user()) {
+        $userId = User::where('email', $request->email)
+            ->pluck('id')
+            ->first();
+
+        if ($userId) {
             $data = $request->validate([
-                "username" => 'sometimes|string|max:255',
-                "lastname" => 'sometimes|string|max:255',
-                "email" => 'sometimes|string|email|max:255|unique:users',
+                "names" => 'sometimes|string|max:255',
+                "email" => 'sometimes|string|email|max:255',
                 "phone" => 'required|digits:10',
                 "occupation" => 'required',
                 'course' => 'required',
-//                "course" => 'required|in_array:valid_course.*',
                 "suitable_candidate" => 'required|min:100|max:500',
                 "suitable_training" => 'required|min:100|max:500',
                 "accompliments" => 'required|min:100|max:500',
                 "expecatitions" => 'required|min:100|max:500',
-                "use" => 'required|in_array:valid_use.*',
-                "source" => 'required|in_array:valid_source.*',
-                "cv" => 'required|file',
+                // "use" => 'required|in_array:valid_use.*',
+                // "source" => 'required|in_array:valid_source.*',
+                // "cv" => 'required|file',
                 "module" => 'sometimes|string|in_array:valid_modules.*',
                 "source_url" => 'sometimes'
             ]);
+
             $data['course_id'] = $data['course'];
-            $course = Course::where('id', $data['course_id'])->select('name')->first();
+            $course = Course::where('id', $data['course_id'])
+                ->select('name')
+                ->first();
+
             $data['course'] = $course->name;
 
-            $user = User::find(Auth::user()->id);
+            $user = User::find($userId);
             $user->cl_occupation_id = $data['occupation'];
             if (isset($request->userage)) {
                 $year = Carbon::now()->subYears($request->userage)->format('Y');
@@ -166,13 +181,14 @@ class ApplicationController extends Controller
                 $user->dob = $dob;
             }
             $user->save();
-            $cv = $user->name . time() . '.' . $request->cv->getClientOriginalExtension();
-            $cvName = str_replace(' ', '', strtolower($cv));
-            // $cvName = md5($cvName);
+            // $cv = $user->name . time() . '.' . $request->cv->getClientOriginalExtension();
+            // $cvName = str_replace(' ', '', strtolower($cv));
 
-            $data['cv'] = $cvName;
-            $request->cv->move(public_path() . '/entry/cv/', $cvName);
+            // $data['cv'] = $cvName;
+            // $request->cv->move(public_path() . '/entry/cv/', $cvName);
             unset($data['occupation']);
+            unset($data['names']);
+            unset($data['email']);
             if (isset($request->source_url)) {
                 $data['source_url'] = $request->source_url;
             }
@@ -187,22 +203,20 @@ class ApplicationController extends Controller
         }
         // not registered
         $data = $request->validate([
-            "username" => 'required|string|max:255',
-            "lastname" => 'required|string|max:255',
-            "email" => 'required|string|email|max:255|unique:users',
-            "userage" => 'required|numeric|max:120',
+            "names" => 'sometimes|string|max:255',
+            "email" => 'sometimes|string|email|max:255|unique:users',
             "phone" => 'required|digits:10',
             "occupation" => 'required',
             'course' => 'required',
-//            "course" => 'required|in_array:valid_course.*',
             "suitable_candidate" => 'required|min:100|max:500',
             "suitable_training" => 'required|min:100|max:500',
             "accompliments" => 'required|min:100|max:500',
             "expecatitions" => 'required|min:100|max:500',
-            "use" => 'required|in_array:valid_use.*',
-            "source" => 'required|in_array:valid_source.*',
-            "cv" => 'required|file',
-            "module" => 'sometimes|string|in_array:valid_modules.*',
+            // "use" => 'required|in_array:valid_use.*',
+            // "source" => 'required|in_array:valid_source.*',
+            // "cv" => 'required|file',
+            // "module" => 'sometimes|string|in_array:valid_modules.*',
+            "source_url" => 'sometimes'
         ]);
         $data['course_id'] = $data['course'];
         $course = Course::where('id', $data['course_id'])->select('name')->first();
@@ -213,10 +227,13 @@ class ApplicationController extends Controller
         $year = Carbon::now()->subYears($request->userage)->format('Y');
         $year .= '-01-01';
         $dob = Carbon::parse($year)->format('Y-m-d');
+
         unset($data['userage']);
+
+        $name = explode(" ", $data['names']);
         $newUser = User::create([
-            'name' => $data['username'],
-            'last_name' => $data['lastname'],
+            'name' => $name[0],
+            'last_name' => $name[1] ? $name[1] : null,
             'email' => $data['email'],
             'cl_role_id' => $role->id,
             'dob' => $dob,
@@ -224,13 +241,14 @@ class ApplicationController extends Controller
             'password' => Hash::make(str_random(12)),
         ]);
 
+        unset($data['names']);
 
-        $cv = $newUser->name . time() . '.' . $request->cv->getClientOriginalExtension();
-        $cvName = str_replace(' ', '', strtolower($cv));
-        // $cvName = md5($cvName);
-
-        $data['cv'] = $cvName;
-        $request->cv->move(public_path() . '/entry/cv/', $cvName);
+        // $cv = $newUser->name . time() . '.' . $request->cv->getClientOriginalExtension();
+        // $cvName = str_replace(' ', '', strtolower($cv));
+        // // $cvName = md5($cvName);
+        //
+        // $data['cv'] = $cvName;
+        // $request->cv->move(public_path() . '/entry/cv/', $cvName);
         unset($data['occupation']);
         unset($data['username']);
         unset($data['lastname']);
@@ -247,7 +265,7 @@ class ApplicationController extends Controller
         $token = Password::getRepository()->create($newUser);
         $newUser->sendPasswordResetNotification($token);
 
-        return redirect('password/reset/' . $token);
+        return redirect('password/reset/' . $token)->with('success', 'Успешно кандидатствахте! Задайте парола на акаунта си!');
     }
 
     /**

@@ -18,6 +18,8 @@ class CreateCoursesTable extends Migration
             $table->string('name');
             $table->string('picture')->nullable();
             $table->longText('description')->nullable();
+            $table->longText('forWhom')->nullable();
+            $table->longText('conditions')->nullable();
             $table->dateTime('starts');
             $table->dateTime('ends');
             $table->string('visibility');
