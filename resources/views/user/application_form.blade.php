@@ -28,7 +28,7 @@
                                 <div class="text-title-module">
                                     <b>Електронна форма</b>
                                     <br>
-                                    <p class="text-title-module-sm d-lg-none">{{ $applicationFor->count() > 0 ? $applicationFor->first()->name : 'Кандидатстване' }}</p>
+                                    <p class="text-title-module-sm d-lg-none">{{ $applicationFor->count() ? $applicationFor->first()->name : 'Кандидатстване' }}</p>
                                 </div>
                             </div>
                         </div>

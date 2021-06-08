@@ -129,6 +129,8 @@ class ApplicationController extends Controller
 
         return view('user.non_register_application_form', [
             'occupations' => $occupations,
+            'course' => $course,
+            'module' => $module,
             'applicationFor' => $applicationFor
         ]);
     }
@@ -174,14 +176,14 @@ class ApplicationController extends Controller
                 "source_url" => 'sometimes'
             ]);
 
-            $data['course_id'] = $data['course'];
+            $data['course_id'] = is_numeric($data['course']) ? $data['course'] : null;
             $course = Course::where('id', $data['course_id'])
                 ->select('name')
                 ->first();
 
-            $data['course'] = $course->name;
+            $data['course'] = $course ? $course->name : $data['course'];
 
-            $user = User::find(Auth::user()->id);
+            $user = User::find(Auth::user() ? Auth::user()->id : $userId);
             $user->cl_occupation_id = $data['occupation'];
             if (isset($request->userage)) {
                 $year = Carbon::now()->subYears($request->userage)->format('Y');
@@ -227,9 +229,12 @@ class ApplicationController extends Controller
             // "module" => 'sometimes|string|in_array:valid_modules.*',
             "source_url" => 'sometimes'
         ]);
-        $data['course_id'] = $data['course'];
-        $course = Course::where('id', $data['course_id'])->select('name')->first();
-        $data['course'] = $course->name;
+
+        $data['course_id'] = is_numeric($data['course']) ? $data['course'] : null;
+        $course = Course::where('id', $data['course_id'])
+            ->select('name')
+            ->first();
+        $data['course'] = $course ? $course->name : $data['course'];
 
         $role = Role::where('role', 'user')->select('id')->first();
         $dob = null;

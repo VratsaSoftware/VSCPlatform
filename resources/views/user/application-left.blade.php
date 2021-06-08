@@ -1,65 +1,73 @@
 <div class="col-lg-auto col-12 comment-avatar">
     <div class="row g-0 align-items-center">
         <div class="col fw-bold card-title-application-mobil">
-            <b>{{ $applicationFor->count() > 0 ? $applicationFor->first()->name : 'Кандидатстване' }}</b>
+            <b>{{ $applicationFor->count() ? $applicationFor->first()->name : 'Кандидатстване' }}</b>
         </div>
         <div class="col-auto me-4">
             <img src="{{ asset('assets/img/Design.svg') }}" alt="" class="img-design">
         </div>
     </div>
-    <div class="row g-0 mt-4">
-        <div class="col pe-lg-0 pe-4 me-xxl-3">
-            <span class="text-small">
-                <b>Начало:</b>
-            </span>
-            <br>
-            <span class="text-small pt-lg-0 pt-2 mt-lg-0 mt-1 d-inline-block">
-                {{ $applicationFor->first()->starts->format('d.m.Y') }}
-            </span>
-        </div>
-        <div class="col-xxl-auto col">
-            <span class="text-small">
-                <b>Продължителност:</b>
-            </span>
-            <br>
-            <span class="text-small pt-lg-0 pt-2 mt-lg-0 mt-1 d-inline-block">
-                {{ $applicationFor->first()->ends->format('d.m.Y') }}
-            </span>
-        </div>
-    </div>
-</div>
-<div class="col-lg col-12 d-flex overflow-hidden">
-    <div class="d-inline-block text-small align-self-center comment-text position-relative px-lg-5 me-lg-4 py-2">
+    @if ($applicationFor->count())
         <div class="row g-0 mt-4">
-            <div class="col-auto pe-lg-0 pe-4 me-xxl-3">
-                <span class="text-small d-inline-block">
-                    <b>За кого е?</b>
+            <div class="col pe-lg-0 pe-4 me-xxl-3">
+                <span class="text-small">
+                    <b>Начало:</b>
                 </span>
                 <br>
-                <span class="text-small mt-4 d-inline-block">
-                    {{ $applicationFor->first()->forWhom }}
+                <span class="text-small pt-lg-0 pt-2 mt-lg-0 mt-1 d-inline-block">
+                    {{ $applicationFor->first()->starts->format('d.m.Y') }}
                 </span>
             </div>
-            <div class="col-xxl-auto col mt-5">
-                <span class="text-small d-inline-block">
-                    <b>Условия</b>
+            <div class="col-xxl-auto col">
+                <span class="text-small">
+                    <b>Продължителност:</b>
                 </span>
                 <br>
-                <span class="text-small mt-4 d-inline-block">
-                    {{ $applicationFor->first()->conditions }}
+                <span class="text-small pt-lg-0 pt-2 mt-lg-0 mt-1 d-inline-block">
+                    {{ $applicationFor->first()->ends->format('d.m.Y') }}
                 </span>
+            </div>
+        </div>
+    @endif
+</div>
+@if ($applicationFor->count())
+    <div class="col-lg col-12 d-flex overflow-hidden">
+        <div class="d-inline-block text-small align-self-center comment-text position-relative px-lg-5 me-lg-4 py-2">
+            <div class="row g-0 mt-4">
+                <div class="col-auto pe-lg-0 pe-4 me-xxl-3">
+                    <span class="text-small d-inline-block">
+                        <b>За кого е?</b>
+                    </span>
+                    <br>
+                    <span class="text-small mt-4 d-inline-block">
+                        {{ $applicationFor->first()->forWhom }}
+                    </span>
+                </div>
+                <div class="col-xxl-auto col mt-5">
+                    <span class="text-small d-inline-block">
+                        <b>Условия</b>
+                    </span>
+                    <br>
+                    <span class="text-small mt-4 d-inline-block">
+                        {{ $applicationFor->first()->conditions }}
+                    </span>
+                </div>
             </div>
         </div>
     </div>
-</div>
-<div class="col d-flex justify-content-center">
-    <button class="btn-edit comment-toggler btn-white btn-top-mobil row g-0">
-        <div class="col text-btn-sm fw-bold">Виж повече</div>
-        <div class="col-auto ms-4">
-            <img src="{{ asset('assets/img/arrow-right-blue.svg') }}">
-        </div>
-    </button>
-</div>
+    <div class="col d-flex justify-content-center">
+        <button class="btn-edit comment-toggler btn-white btn-top-mobil row g-0">
+            <div class="col text-btn-sm fw-bold">Виж повече</div>
+            <div class="col-auto ms-4">
+                <img src="{{ asset('assets/img/arrow-right-blue.svg') }}">
+            </div>
+        </button>
+    </div>
+@else
+    <div class="col d-flex justify-content-center mt-3 mb-3">
+        Това е първата стъпка при кандидатстване. След кандидатстването си  ще може да следите прогреса на кандидатстване от този профил.
+    </div>
+@endif
 </div>
 <div class="row g-0 mt-4 ms-3 d-flex justify-content-center">
 <div class="col-auto mt-5 me-3">
@@ -123,7 +131,7 @@
             <div class="row g-0 pb-lg-4 mb-lg-3">
                 <div class="col pt-lg-0 pt-2 mt-lg-0 mt-1">
                     <h2 class="card-title-application text-uppercase m-0">
-                        {{ $applicationFor->first()->name }}
+                        {{ $applicationFor->count() ? $applicationFor->first()->name : 'Кандидатстване' }}
                     </h2>
                 </div>
                 <div class="col-auto">
@@ -133,46 +141,50 @@
             <div class="tab-content pt-lg-2">
                 <!--First tab-->
                 <div class="tab-pane fade show active" id="module-1" role="tabpanel" aria-labelledby="module-1-tab">
-                    <div class="row g-0 pb-4 mb-lg-0 mb-1 pt-lg-0 pt-1">
-                        <div class="col-auto pe-5 me-5">
-                            <div class="text-normal">
-                                Начало:
+                    @if ($applicationFor->count())
+                        <div class="row g-0 pb-4 mb-lg-0 mb-1 pt-lg-0 pt-1">
+                            <div class="col-auto pe-5 me-5">
+                                <div class="text-normal">
+                                    Начало:
+                                </div>
+                                <br>
+                                <div class="text-small pt-lg-0 pt-2 mt-lg-0 mt-1 d-inline-block">
+                                    {{ $applicationFor->first()->starts->format('d.m.Y') }}
+                                </div>
                             </div>
-                            <br>
-                            <div class="text-small pt-lg-0 pt-2 mt-lg-0 mt-1 d-inline-block">
-                                {{ $applicationFor->first()->starts->format('d.m.Y') }}
-                            </div>
-                        </div>
-                        <div class="col">
-                            <div class="text-normal">
-                                Продължителност до:
-                            </div>
-                            <br>
-                            <div class="text-small pt-lg-0 pt-2 mt-lg-0 mt-1 d-inline-block">
-                                {{ $applicationFor->first()->ends->format('d.m.Y') }}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row g-0 mt-5">
-                        <div class="col-10">
-                            <div class="text-normal">
-                                За кого е?
-                            </div>
-                            <div class="mt-3 text-grey ">
-                                {{ $applicationFor->first()->forWhom }}
+                            <div class="col">
+                                <div class="text-normal">
+                                    Продължителност до:
+                                </div>
+                                <br>
+                                <div class="text-small pt-lg-0 pt-2 mt-lg-0 mt-1 d-inline-block">
+                                    {{ $applicationFor->first()->ends->format('d.m.Y') }}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="row g-0 mt-5">
-                        <div class="col-10">
-                            <div class="text-normal">
-                                Условия
-                            </div>
-                            <div class="mt-3 text-grey">
-                                {{ $applicationFor->first()->conditions }}
+                        <div class="row g-0 mt-5">
+                            <div class="col-10">
+                                <div class="text-normal">
+                                    За кого е?
+                                </div>
+                                <div class="mt-3 text-grey ">
+                                    {{ $applicationFor->first()->forWhom }}
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="row g-0 mt-5">
+                            <div class="col-10">
+                                <div class="text-normal">
+                                    Условия
+                                </div>
+                                <div class="mt-3 text-grey">
+                                    {{ $applicationFor->first()->conditions }}
+                                </div>
+                            </div>
+                        </div>
+                    @else
+                        Това е първата стъпка при кандидатстване. След кандидатстването си  ще може да следите прогреса на кандидатстване от този профил.
+                    @endif
                     <div class="row g-0 mt-4">
                         <div class="col-auto mt-5 me-3">
                             <div class="card-small-electro">

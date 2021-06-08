@@ -84,7 +84,8 @@
 											<option value="{{$key}}" {{ (old("course") == $key ? "selected":"") }} selected="selected" data-count="{{count($modules)}}">{{ucfirst($key)}}</option>
 										@else
 											<option value="{{$key}}"
-												{{ (old("course") == $key ? "selected":"") }} data-count="{{count($modules)}}">{{ucfirst($key)}}</option>
+												{{ (old("course") == $key ? "selected":"") }} data-count="{{count($modules)}}">{{ucfirst($key)}}
+											</option>
 										@endif
 									@endforeach
 								</select>
