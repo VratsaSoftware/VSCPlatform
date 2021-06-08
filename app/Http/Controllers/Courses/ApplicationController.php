@@ -147,7 +147,7 @@ class ApplicationController extends Controller
             ->pluck('id')
             ->first();
 
-        if ($userId) {
+        if (Auth::user() || $userId) {
             $data = $request->validate([
                 "names" => 'sometimes|string|max:255',
                 "email" => 'sometimes|string|email|max:255',
@@ -172,7 +172,7 @@ class ApplicationController extends Controller
 
             $data['course'] = $course->name;
 
-            $user = User::find($userId);
+            $user = User::find(Auth::user()->id);
             $user->cl_occupation_id = $data['occupation'];
             if (isset($request->userage)) {
                 $year = Carbon::now()->subYears($request->userage)->format('Y');

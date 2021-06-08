@@ -39,7 +39,7 @@ $(document).ready(function() {
         var toggler =  $(this).parent();
         toggler.prev().children().toggleClass("active");
         $(this).toggleClass("active");
-    }); 
+    });
 
     if ($(window).width() < 992) {
         $("#right-side .tab-pane.active").removeClass("active");

@@ -134,7 +134,7 @@
                                             @endforeach
                                         </select>
                                     @endif
-                                    <select name="occupation" class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" required>
+                                    <select name="occupation" class="form-elec-input form-select-app mb-4-input me-3-input mt-lg-0 mt-4" required>
                                         <option value="" selected>Занимание</option>
                                         @foreach ($occupations as $occupation)
     										<option value="{{$occupation->id}}" {{ (old("occupation") == $occupation->id ? "selected":"") }}>{{$occupation->occupation}}</option>
