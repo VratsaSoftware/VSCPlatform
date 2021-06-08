@@ -31,7 +31,7 @@
 					1. ЕЛЕКТРОННА ФОРМА
 				</div>
 				<div class="row g-0">
-					<div class="col-auto star-elect mt-4 d-none d-lg-block">
+					<div class="col-auto text-info-elect star-elect mt-4 d-none d-lg-block">
 						<i class="fas fa-star"></i>
 					</div>
 					<div class="col-auto text-info-elect mt-4 ms-4 d-none d-lg-block"> След формата, ще бъдете регистрирани в платформата, и от профила си ще може да следите прогреса на кандидатстване
@@ -48,16 +48,16 @@
 					@endif
 					<div class="row g-0 module-top">
 						<div class="col form-app-position">
-							<input type="text" name="names" class="form-module form-elec-input me-lg-5 mb-4-input me-3-input" placeholder="Име и фамилия" aria-label="Име на модула" aria-describedby="addon-wrapping" required>
+							<input type="text" name="names" class="form-module form-elec-input me-lg-5 mb-4-input me-3-input" placeholder="Име и фамилия" aria-describedby="addon-wrapping" required>
 
-							<input type="text" name="phone" class="form-module form-elec-input mb-4-input mt-lg-0 mt-4" placeholder="Телефон" aria-label="Име на модула" aria-describedby="addon-wrapping" required>
+							<input type="text" name="phone" minlength="10" maxlength="10" class="form-module form-elec-input mb-4-input mt-lg-0 mt-4" placeholder="Телефон" aria-describedby="addon-wrapping" required>
 						</div>
 					</div>
 					<div class="row g-0 module-top">
 						<div class="col form-app-position">
-							<input type="email" name="email" class="form-module form-elec-input me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" placeholder="Имейл" aria-label="Име на модула" aria-describedby="addon-wrapping" required>
+							<input type="email" name="email" class="form-module form-elec-input me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" placeholder="Имейл" aria-describedby="addon-wrapping" required>
 
-							<input type="text" class="form-module form-elec-input mb-4-input mt-lg-0 mt-4" placeholder="Възраст" aria-label="Име на модула" aria-describedby="addon-wrapping" required>
+							<input type="text" name="userage" class="form-module form-elec-input mb-4-input mt-lg-0 mt-4" placeholder="Възраст" aria-describedby="addon-wrapping" required>
 						</div>
 					</div>
 					<div class="row g-0 module-top">
@@ -123,7 +123,7 @@
 									@endforeach
 								</select>
 							@endif
-							<select name="occupation" class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" required>
+							<select id="occupation" name="occupation" class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" required>
 								<option value="" selected>Занимание</option>
 								@foreach ($occupations as $occupation)
 									<option value="{{$occupation->id}}" {{ (old("occupation") == $occupation->id ? "selected":"") }}>{{$occupation->occupation}}</option>
@@ -135,7 +135,7 @@
 						<div class="col">
 							<div class="row">
 								<div class="form-info-titel-2 my-3">
-									<b>Защо смятате, че тези обучения са подходящ за Вас?</b>
+									<b>Защо смятате, че тези обучения са подходящ за Вас? <span class="counter mt-lg-0 ms-lg-3" id="candidate-span"></span></b>
 								</div>
 							</div>
 							<div class="col-lg-auto col form-app-position">
@@ -147,7 +147,7 @@
 						<div class="col">
 							<div class="row">
 								<div class="form-info-titel-2 my-3">
-									<b>Защо смятате, че Вие сте подходящ за ИТ обучение?</b>
+									<b>Защо смятате, че Вие сте подходящ за ИТ обучение? <span class="counter mt-lg-0 ms-lg-3" id="training-span"></span></b>
 								</div>
 							</div>
 							<div class="col-lg-auto col form-app-position">
@@ -159,7 +159,7 @@
 						<div class="col">
 							<div class="row">
 								<div class="form-info-titel-2 my-3">
-									<b>Опишете три(3) Ваши постижения</b>
+									<b>Опишете три(3) Ваши постижения <span class="counter mt-lg-0 ms-lg-3" id="accompliments-span"></span></b>
 								</div>
 							</div>
 							<div class="col-lg-auto col form-app-position">
@@ -171,7 +171,7 @@
 						<div class="col">
 							<div class="row">
 								<div class="form-info-titel-2 my-3">
-									<b>Какви са очакванията Ви за това обучение?</b>
+									<b>Какви са очакванията Ви за това обучение? <span class="counter mt-lg-0 ms-lg-3" id="expecatitions-span"></span></b>
 								</div>
 							</div>
 							<div class="col-lg-auto col form-app-position">
@@ -198,4 +198,7 @@
 	</div>
 </div>
 <!-- Single lection content END-->
+
+<script src="{{ asset('js/application/application-form-text-counter.js') }}" charset="utf-8"></script>
+<script src="{{ asset('js/application/validation-form.js') }}" charset="utf-8"></script>
 @endsection

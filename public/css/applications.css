@@ -2363,8 +2363,29 @@ button {
     margin-left: 67%;
 }
 
+.counter {
+    position: absolute;
+    z-index: -1;
+    margin-top: -25px;
+}
+
 @media only screen and (max-width: 992px) {
-  .submit-btn-elect-form {
-      margin-left: 0px;
-  }
+    .submit-btn-elect-form {
+        margin-left: 0px;
+    }
+
+    .counter {
+        position: relative;
+        z-index: 0;
+        margin-top: 0px;
+        display: block;
+    }
+
+    .counter-position {
+        margin-left:-110px;
+    }
+}
+
+.input-automatically-filled {
+    background-color: rgba(0, 33, 75, 0.08);
 }

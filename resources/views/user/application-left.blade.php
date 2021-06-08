@@ -1,7 +1,7 @@
 <div class="col-lg-auto col-12 comment-avatar">
     <div class="row g-0 align-items-center">
         <div class="col fw-bold card-title-application-mobil">
-            <b>{{ $applicationFor->first()->name }}</b>
+            <b>{{ $applicationFor->count() > 0 ? $applicationFor->first()->name : 'Кандидатстване' }}</b>
         </div>
         <div class="col-auto me-4">
             <img src="{{ asset('assets/img/Design.svg') }}" alt="" class="img-design">
@@ -19,7 +19,7 @@
         </div>
         <div class="col-xxl-auto col">
             <span class="text-small">
-                <b>Продължителност до:</b>
+                <b>Продължителност:</b>
             </span>
             <br>
             <span class="text-small pt-lg-0 pt-2 mt-lg-0 mt-1 d-inline-block">

@@ -55,16 +55,25 @@ class ApplicationController extends Controller
         $notSubmited = TestUserAssign::where([
             ['user_id', Auth::user()->id],
         ])->whereNotIn('test_id', $submited)->get();
+
         if (count($notSubmited) > 0 || !$notSubmited->isEmpty()) {
             $entry['test_count'] = count($notSubmited);
             $entry['more_test'] = true;
         }
         //open courses for applications
-        $courses = Course::where('visibility','public')->whereNotNull('form_active')->where('applications_to','>=',Carbon::now())->orderBy('id','DESC')->get();
+        $courses = Course::where('visibility','public')
+            ->whereNotNull('form_active')
+            ->where('applications_to','>=',Carbon::now())
+            ->orderBy('id','DESC')
+            ->get();
+
         $courses->load('Lecturers');
         $courses->load('Lecturers.User');
 
-        return view('user.application', ['entry' => $entry,'courses' => $courses]);
+        return view('user.application', [
+            'entry' => $entry,
+            'courses' => $courses
+        ]);
     }
 
     /**

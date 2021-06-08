@@ -28,7 +28,7 @@
                                 <div class="text-title-module">
                                     <b>Електронна форма</b>
                                     <br>
-                                    <p class="text-title-module-sm d-lg-none">{{ $applicationFor->first()->name }}</p>
+                                    <p class="text-title-module-sm d-lg-none">{{ $applicationFor->count() > 0 ? $applicationFor->first()->name : 'Кандидатстване' }}</p>
                                 </div>
                             </div>
                         </div>
@@ -42,7 +42,7 @@
                                 1. ЕЛЕКТРОННА ФОРМА
                             </div>
                             <div class="row g-0">
-                                <div class="col-auto star-elect mt-4 d-none d-lg-block">
+                                <div class="col-auto text-info-elect star-elect mt-4 d-none d-lg-block">
                                     <i class="fas fa-star"></i>
                                 </div>
                                 <div class="col-auto text-info-elect mt-4 ms-4 d-none d-lg-block">
@@ -53,7 +53,7 @@
                                 <div class="col form-app-position">
                                     <input type="text" name="names" class="form-module input-automatically-filled form-elec-input me-lg-5 mb-4-input me-3-input" placeholder="Име и фамилия" aria-describedby="addon-wrapping" value="{{ Auth::user()->name . ' ' . Auth::user()->last_name }}" disabled required>
 
-                                    <input type="text" name="phone" class="form-module form-elec-input mb-4-input mt-lg-0 mt-4" placeholder="Телефон" aria-describedby="addon-wrapping" required>
+                                    <input type="text" minlength="10" maxlength="10" name="phone" class="form-module form-elec-input mb-4-input mt-lg-0 mt-4" placeholder="Телефон" aria-describedby="addon-wrapping" required>
                                 </div>
                             </div>
                             <div class="row g-0 module-top">
@@ -63,39 +63,31 @@
                                     <input name="userage" type="text" class="form-module {!! Auth::user()->dob ? 'input-automatically-filled' : '' !!} form-elec-input mb-4-input mt-lg-0 mt-4" placeholder="Възраст" aria-describedby="addon-wrapping" value="{{ Auth::user()->dob ? date('Y') - Auth::user()->dob->format('Y') : null }}" {!! Auth::user()->dob ? 'disabled' : '' !!} required>
                                 </div>
                             </div>
-                            <div class="row g-0">
-                                <div class="col-auto star-elect mt-5 d-none d-lg-block">
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="col-auto text-info-elect-blue mt-5 ms-4 d-none d-lg-block">
-                                    Информация взета от профила
-                                </div>
-                            </div>
-                            <div class="row g-0 mt-lg-4">
+                            <div class="row g-0 module-top">
                                 <div class="col form-app-position">
-                                    @if(is_null($applicationFor) || empty($applicationFor) || count($applicationFor) < 1)
+                                    @if (is_null($applicationFor) || empty($applicationFor) || count($applicationFor) < 1)
                                         @if ($errors->has('course'))
                                             <span class="invalid-feedback" role="alert" style="display: block !important;">
                                                 <strong>{{ $errors->first('course') }}</strong>
                                             </span>
                                         @endif
                                         <select class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" name="course" id="course-select">
-                                            <option value="0" disabled selected="selected">Направление</option>
+                                            <option value="" disabled selected="selected">Направление</option>
                                             @foreach(Config::get('applicationForm.courses') as $key => $modules)
-                                                @if(is_array($modules))
-                                                    @foreach($modules as $sub)
-                                                        @if($module == $sub)
-                                                            <option class="no-show course-{{str_replace(' ', '', $key)}}" value="{{$sub}}" selected="selected">{{$sub}}</option>
+                                                @if (is_array($modules))
+                                                    @foreach ($modules as $sub)
+                                                        @if ($module == $sub)
+                                                            <option class="no-show course-{{ str_replace(' ', '', $key) }}" value="{{ $sub }}" selected="selected">{{$sub}}</option>
                                                         @else
-                                                            <option class="no-show course-{{str_replace(' ', '', $key)}}" value="{{$sub}}">{{$sub}}</option>
+                                                            <option class="no-show course-{{ str_replace(' ', '', $key) }}" value="{{ $sub }}">{{$sub}}</option>
                                                         @endif
                                                     @endforeach
                                                 @endif
-                                                @if(!is_null($course) && $course == $key)
-                                                    <option value="{{$key}}" {{ (old("course") == $key ? "selected":"") }} selected="selected" data-count="{{count($modules)}}">{{ucfirst($key)}}</option>
+                                                @if (!is_null($course) && $course == $key)
+                                                    <option value="{{ $key }}" {{ (old("course") == $key ? "selected":"") }} selected="selected" data-count="{{ count($modules) }}">{{ ucfirst($key) }}</option>
                                                 @else
-                                                    <option value="{{$key}}"
-                                                        {{ (old("course") == $key ? "selected":"") }} data-count="{{count($modules)}}">{{ucfirst($key)}}</option>
+                                                    <option value="{{ $key }}"
+                                                        {{ (old("course") == $key ? "selected":"") }} data-count="{{ count($modules) }}">{{ ucfirst($key) }}</option>
                                                 @endif
                                             @endforeach
                                         </select>
@@ -127,14 +119,15 @@
                                                     }
                                                 }
                                             </script> -->
-                                        @else
-                                            <select class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" name="course" id="course-select">
-                                            @foreach($applicationFor as $course)
-                                                <option value="{{$course->id}}" {{Request::segment(4) == $course->id?'selected':''}}>{{$course->name}}</option>
-                                            @endforeach
+                                    @else
+                                        <select class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" name="course" id="course-select">
+                                            <option value="" disabled selected="selected">Направление</option>
+                                                @foreach($applicationFor as $course)
+                                                    <option value="{{ $course->id }}" {{ Request::segment(4) == $course->id?'selected':'' }}>{{ $course->name }}</option>
+                                                @endforeach
                                         </select>
                                     @endif
-                                    <select name="occupation" class="form-elec-input form-select-app mb-4-input me-3-input mt-lg-0 mt-4" required>
+                                    <select id="occupation" name="occupation" class="form-elec-input form-select-app mb-4-input me-3-input mt-lg-0 mt-4" required>
                                         <option value="" selected>Занимание</option>
                                         @foreach ($occupations as $occupation)
     										<option value="{{$occupation->id}}" {{ (old("occupation") == $occupation->id ? "selected":"") }}>{{$occupation->occupation}}</option>
@@ -147,16 +140,18 @@
                                     <div class="form-info-titel">
                                         <b>Защо смятате, че тези обучения са подходящ за Вас?</b>
                                     </div>
-                                    <div class="col-lg-auto col form-app-position">
-                                        <textarea name="suitable_candidate" class="form-textarel-elec mt-5 mb-4-input me-3-input" placeholder="100-500" aria-label="With textarea" minlength="100" maxlength="500" required></textarea>
+                                    <div class="col-lg-auto col form-app-position mt-lg-5">
+                                        <b><span class="counter counter-position" id="candidate-span"></span></b>
+                                        <textarea name="suitable_candidate" class="form-textarel-elec mb-4-input me-3-input" placeholder="100-500" aria-label="With textarea" minlength="100" maxlength="500" required></textarea>
                                     </div>
                                 </div>
                                 <div class="col-lg-auto col ms-elect mt-4">
                                     <div class="form-info-titel">
                                         <b>Защо смятате, че Вие сте подходящ за ИТ обучение?</b>
                                     </div>
-                                    <div class="col-lg-auto col form-app-position">
-                                        <textarea name="suitable_training" class="form-textarel-elec mb-4-input mt-5" placeholder="100-500" aria-label="With textarea" minlength="100" maxlength="500" required></textarea>
+                                    <div class="col-lg-auto col form-app-position mt-lg-5">
+                                        <b><span class="counter counter-position" id="training-span"></span><b>
+                                        <textarea name="suitable_training" class="form-textarel-elec mb-4-input" placeholder="100-500" aria-label="With textarea" minlength="100" maxlength="500" required></textarea>
                                     </div>
                                 </div>
                             </div>
@@ -165,20 +160,22 @@
                                     <div class="form-info-titel">
                                         <b>Опишете три(3) Ваши постижения</b>
                                     </div>
-                                    <div class="col-lg-auto col form-app-position">
-                                        <textarea name="accompliments" class="form-textarel-elec mt-5 me-lg-1 mb-4-input me-3-input" placeholder="100-500" aria-label="With textarea" minlength="100" maxlength="500" required></textarea>
+                                    <div class="col-lg-auto col form-app-position mt-lg-5">
+                                        <b><span class="counter counter-position" id="accompliments-span"></span></b>
+                                        <textarea name="accompliments" class="form-textarel-elec me-lg-1 mb-4-input me-3-input" placeholder="100-500" aria-label="With textarea" minlength="100" maxlength="500" required></textarea>
                                     </div>
                                 </div>
                                 <div class="col-lg-auto col ms-elect mt-4">
                                     <div class="form-info-titel ">
                                         <b>Какви са очакванията Ви за това обучение?</b>
                                     </div>
-                                    <div class="col-lg-auto col form-app-position">
-                                        <textarea name="expecatitions" class="form-textarel-elec mb-4-input mt-5" placeholder="100-500" aria-label="With textarea" minlength="100" maxlength="500" required></textarea>
+                                    <div class="col-lg-auto col form-app-position mt-lg-5">
+                                        <b><span class="counter counter-position" id="expecatitions-span"></span></b>
+                                        <textarea name="expecatitions" class="form-textarel-elec mb-4-input" placeholder="100-500" aria-label="With textarea" minlength="100" maxlength="500" required></textarea>
                                     </div>
                                 </div>
                             </div>
-                            <div class="row g-0">
+                            <div class="row g-0 mt-3 mb-5">
                                 <div class="col-lg-auto col-1 me-lg-1 mt-4 me-3-input">
                                     <div class="form-info-titel"></div>
                                 </div>
@@ -199,4 +196,7 @@
         </form>
     </div>
 </div>
+
+<script src="{{ asset('js/application/application-form-text-counter.js') }}" charset="utf-8"></script>
+<script src="{{ asset('js/application/validation-form.js') }}" charset="utf-8"></script>
 @endsection
