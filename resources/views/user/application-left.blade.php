@@ -40,7 +40,7 @@
                     </span>
                     <br>
                     <span class="text-small mt-4 d-inline-block">
-                        {{ $applicationFor->first()->forWhom }}
+                        {{ $applicationFor->first()->for_whom }}
                     </span>
                 </div>
                 <div class="col-xxl-auto col mt-5">
@@ -168,7 +168,7 @@
                                     За кого е?
                                 </div>
                                 <div class="mt-3 text-grey ">
-                                    {{ $applicationFor->first()->forWhom }}
+                                    {{ $applicationFor->first()->for_whom }}
                                 </div>
                             </div>
                         </div>
