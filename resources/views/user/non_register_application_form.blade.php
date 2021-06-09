@@ -57,7 +57,7 @@
 						<div class="col form-app-position">
 							<input type="email" name="email" class="form-module form-elec-input me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" placeholder="Имейл" aria-describedby="addon-wrapping" required>
 
-							<input type="text" name="userage" class="form-module form-elec-input mb-4-input mt-lg-0 mt-4" placeholder="Възраст" aria-describedby="addon-wrapping" required>
+							<input type="number" name="userage" class="form-module form-elec-input mb-4-input mt-lg-0 mt-4" placeholder="Възраст" aria-describedby="addon-wrapping" required>
 						</div>
 					</div>
 					<div class="row g-0 module-top">
@@ -68,23 +68,23 @@
 										<strong>{{ $errors->first('course') }}</strong>
 									</span>
 								@endif
-								<select class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" name="course" id="course-select">
-									<option value="0" disabled selected="selected">Направление</option>
+								<select class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" name="course" id="course-select" required>
+									<option value="" disabled selected="selected">Направление</option>
 									@foreach(Config::get('applicationForm.courses') as $key => $modules)
 										@if(is_array($modules))
 											@foreach($modules as $sub)
 												@if($module == $sub)
-													<option class="no-show course-{{str_replace(' ', '', $key)}}" value="{{$sub}}" selected="selected">{{$sub}}</option>
+													<option class="no-show course-{{ str_replace(' ', '', $key) }}" value="{{ $sub }}" selected="selected">{{ $sub }}</option>
 												@else
-													<option class="no-show course-{{str_replace(' ', '', $key)}}" value="{{$sub}}">{{$sub}}</option>
+													<option class="no-show course-{{ str_replace(' ', '', $key) }}" value="{{ $sub }}">{{ $sub }}</option>
 												@endif
 											@endforeach
 										@endif
 										@if(!is_null($course) && $course == $key)
-											<option value="{{$key}}" {{ (old("course") == $key ? "selected":"") }} selected="selected" data-count="{{count($modules)}}">{{ucfirst($key)}}</option>
+											<option value="{{ $key }}" {{ (old("course") == $key ? "selected" : "") }} selected="selected" data-count="{{ count($modules) }}">{{ ucfirst($key) }}</option>
 										@else
 											<option value="{{$key}}"
-												{{ (old("course") == $key ? "selected":"") }} data-count="{{count($modules)}}">{{ucfirst($key)}}
+												{{ (old("course") == $key ? "selected" : "") }} data-count="{{ count($modules) }}">{{ ucfirst($key) }}
 											</option>
 										@endif
 									@endforeach
@@ -117,17 +117,18 @@
 											}
 										}
 									</script> -->
-								@else
-									<select class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" name="course" id="course-select">
+							@else
+								<select class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" name="course" id="course-select" required>
+									<option value="" disabled selected="selected">Направление</option>
 									@foreach($applicationFor as $course)
-										<option value="{{$course->id}}" {{Request::segment(4) == $course->id?'selected':''}}>{{$course->name}}</option>
+										<option value="{{ $course->id }}" {{ Request::segment(4) == $course->id ? 'selected' : '' }}>{{ $course->name }}</option>
 									@endforeach
 								</select>
 							@endif
 							<select id="occupation" name="occupation" class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" required>
 								<option value="" selected>Занимание</option>
 								@foreach ($occupations as $occupation)
-									<option value="{{$occupation->id}}" {{ (old("occupation") == $occupation->id ? "selected":"") }}>{{$occupation->occupation}}</option>
+									<option value="{{ $occupation->id }}" {{ (old("occupation") == $occupation->id ? "selected" : "") }}>{{ $occupation->occupation }}</option>
 								@endforeach
 							</select>
 						</div>

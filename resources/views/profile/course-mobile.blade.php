@@ -45,7 +45,7 @@
             @endif
 
             @if (isset($application))
-                <button onclick="window.location.href='{{ asset('application/create/' . $course->id) }}'" class="btn view-course-btn d-flex py-0 px-3">
+                <button onclick="window.location.href='{{ asset('application/create/' . $course->training_type . '/' . $course->id) }}'" class="btn view-course-btn d-flex py-0 px-3">
                     <div class="row w-100 g-0 align-self-center">
                         <div class="col text-start">
                             <span class="fw-bold">Виж</span>

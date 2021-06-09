@@ -117,12 +117,14 @@ class ApplicationController extends Controller
         $occupations = Occupation::all();
 
         if (Auth::user()) {
-            $user = User::find(Auth::user()->id);
+            $date = Carbon::parse(Auth::user()->dob);
+            $userBirthDate = $date->diffInYears(Carbon::now());
+
             return view('user.application_form', [
-                'user' => $user,
                 'occupations' => $occupations,
                 'course' => $course,
                 'module' => $module,
+                'userBirthDate' => $userBirthDate,
                 'applicationFor' => $applicationFor
             ]);
         }
@@ -144,13 +146,6 @@ class ApplicationController extends Controller
      */
     public function store(Request $request)
     {
-//        $courses = \Config::get('applicationForm.courses');
-//        foreach ($courses as $course => $module) {
-//            $coursesOnly[] = $course;
-//            $modulesOnly[] = $module;
-//        }
-//        $request['valid_course'] = $coursesOnly;
-//        $request['valid_modules'] = $modulesOnly;
         $request['valid_use'] = \Config::get('applicationForm.use');
         $request['valid_source'] = \Config::get('applicationForm.source');
 
@@ -275,7 +270,9 @@ class ApplicationController extends Controller
         $newEntry->user_id = $newUser->id;
         $newEntry->entry_form_id = $newForm->id;
         $newEntry->save();
+
         Mail::to($newUser->email)->send(new CourseApplicationCreated($request->course));
+
         $token = Password::getRepository()->create($newUser);
         $newUser->sendPasswordResetNotification($token);
 

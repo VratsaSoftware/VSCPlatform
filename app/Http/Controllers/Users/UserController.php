@@ -146,7 +146,7 @@ class UserController extends Controller
         if (isset($data['name']) && !is_null($data['name'])) {
             $name = explode(" ", $data['name']);
             $user->name = $name[0];
-            $user->last_name = $name[1] ? $name[1] : null;
+            $user->last_name = isset($name[1]) ? $name[1] : null;
         }
 
         if ($request->has('location')) {

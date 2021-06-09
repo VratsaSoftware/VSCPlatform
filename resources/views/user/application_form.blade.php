@@ -58,9 +58,9 @@
                             </div>
                             <div class="row g-0 module-top">
                                 <div class="col form-app-position">
-                                    <input type="text" name="email" class="form-module input-automatically-filled form-elec-input me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" placeholder="Имейл" aria-describedby="addon-wrapping" value="{{ Auth::user()->email }}" disabled required>
+                                    <input type="email" name="email" class="form-module input-automatically-filled form-elec-input me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" placeholder="Имейл" aria-describedby="addon-wrapping" value="{{ Auth::user()->email }}" disabled required>
 
-                                    <input name="userage" type="text" class="form-module {!! Auth::user()->dob ? 'input-automatically-filled' : '' !!} form-elec-input mb-4-input mt-lg-0 mt-4" placeholder="Възраст" aria-describedby="addon-wrapping" value="{{ Auth::user()->dob ? date('Y') - Auth::user()->dob->format('Y') : null }}" {!! Auth::user()->dob ? 'disabled' : '' !!} required>
+                                    <input type="number" name="userage" class="form-module {!! Auth::user()->dob ? 'input-automatically-filled' : '' !!} form-elec-input mb-4-input mt-lg-0 mt-4" placeholder="Възраст" aria-describedby="addon-wrapping" value="{{ Auth::user()->dob ? $userBirthDate : null }}" {!! Auth::user()->dob ? 'disabled' : '' !!} required>
                                 </div>
                             </div>
                             <div class="row g-0 module-top">
@@ -71,7 +71,7 @@
                                                 <strong>{{ $errors->first('course') }}</strong>
                                             </span>
                                         @endif
-                                        <select class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" name="course" id="course-select">
+                                        <select class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" name="course" id="course-select" required>
                                             <option value="" disabled selected="selected">Направление</option>
                                             @foreach(Config::get('applicationForm.courses') as $key => $modules)
                                                 @if (is_array($modules))
@@ -120,10 +120,9 @@
                                                 }
                                             </script> -->
                                     @else
-                                        <select class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" name="course" id="course-select">
-                                            <option value="" disabled selected="selected">Направление</option>
+                                        <select class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" name="course" id="course-select" required>
                                                 @foreach($applicationFor as $course)
-                                                    <option value="{{ $course->id }}" {{ Request::segment(4) == $course->id?'selected':'' }}>{{ $course->name }}</option>
+                                                    <option value="{{ $course->id }}" {{ Request::segment(4) == $course->id ? 'selected' : '' }}>{{ $course->name }}</option>
                                                 @endforeach
                                         </select>
                                     @endif
