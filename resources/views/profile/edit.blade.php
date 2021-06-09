@@ -69,13 +69,10 @@
                             <div class="flip-card-inner">
                                 <div class="flip-card-front">
                                     <div class="edit-avatar">
-                                        @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
-                                            <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                                        @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
-                                            <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                                        @else
-                                            <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                                        @endif
+                                        @include ('profile.profile-picture', [
+                                            'user' => Auth::user(),
+                                            'style' => 'border-radius: 5px; width: 70px',
+                                        ])
                                     </div>
                                     <img id="preview-img-avatar" style="border-radius: 5px; width: 70px; display: none" class="avatar">
                                 </div>
@@ -158,7 +155,7 @@
             <div class="col mt-2">
                 <label class="d-flex align-items-center input">
                     <i class="fas fa-lock" style="font-size: 29px"></i>
-                    <input type="password" name="confirmPassword" placeholder="повтори парола">
+                    <input type="password" name="confirmPassword" placeholder="Повтори парола">
                 </label>
             </div>
         </div>
@@ -244,13 +241,10 @@
                     <div class="col">
                         <label for="edit-picture-mobile">
                             <div class="edit-avatar">
-                                @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
-                                    <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                                @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
-                                    <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                                @else
-                                    <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                                @endif
+                                @include ('profile.profile-picture', [
+                                    'user' => Auth::user(),
+                                    'style' => 'border-radius: 5px; width: 70px',
+                                ])
                             </div>
                             <img id="preview-img-avatar-mobile" style="border-radius: 5px; width: 70px; display: none" class="avatar">
                         </label>

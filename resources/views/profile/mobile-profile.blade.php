@@ -5,13 +5,10 @@
         <div class="col-auto">
             <div class="row g-0 p-0 m-0 d-flex align-items-center">
                 <div class="col">
-                    @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
-                        <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" width="55" style="border-radius: 5px" class="avatar">
-                    @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
-                        <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" width="55" style="border-radius: 5px" class="avatar">
-                    @else
-                        <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" width="55" alt="profile-pic" style="border-radius: 5px" class="avatar">
-                    @endif
+                    @include ('profile.profile-picture', [
+                        'user' => Auth::user(),
+                        'style' => 'border-radius: 5px; width: 55px',
+                    ])
                 </div>
                 <div class="col-auto ps-2 ms-1">
                     <div class="user_name fw-bold d-block">
