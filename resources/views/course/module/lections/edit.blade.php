@@ -10,13 +10,13 @@
             </div>
             <div class="col-md-auto pe-md-3 me-xl-1">
                 <div class="position-relative calendar">
-                    <input type="text" name="first_date" value="@if (isset($lection->first_date)){{ $lection->first_date->format('m/d/Y') }}@endif" class="edit-lection-first_date date-input ext-navy-blue" id="edit-first_date-lection-{{ $loop->iteration }}" placeholder="Начало*" required>
+                    <input type="text" name="first_date" value="@if (isset($lection->first_date)){{ $lection->first_date->format('m/d/Y') }}@endif" class="edit-lection-first_date date-input ext-navy-blue" id="edit-first_date-lection-{{ $loop->iteration }}" placeholder="Начало*" autocomplete="off" required>
                     <img src="{{ asset('assets/img/arrow.svg') }}">
                 </div>
             </div>
             <div class="col-md-auto pe-md-3 me-xl-1">
                 <div class="position-relative calendar">
-                    <input type="text" name="second_date" value="@if (isset($lection->second_date)){{ $lection->second_date->format('m/d/Y') }}@endif" class="edit-lection-second_date date-input ext-navy-blue" id="edit-second_date-lection-{{ $loop->iteration }}" placeholder="Край*" required>
+                    <input type="text" name="second_date" value="@if (isset($lection->second_date)){{ $lection->second_date->format('m/d/Y') }}@endif" class="edit-lection-second_date date-input ext-navy-blue" id="edit-second_date-lection-{{ $loop->iteration }}" placeholder="Край*" autocomplete="off" required>
                     <img src="{{ asset('assets/img/arrow.svg') }}">
                 </div>
             </div>
@@ -161,7 +161,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="date-pill d-flex align-items-center">
-                            <input name="homework_end" id="homework-end-edit-{{ $loop->iteration }}" type="text" class="text-center fw-bold date-input ext-navy-blue" value="@if(isset($lection->homework_end)){{ $lection->homework_end->format('m/d/Y') }}@endif" placeholder="Няма" @if (!$lection->homework_criteria) disabled @endif>
+                            <input name="homework_end" id="homework-end-edit-{{ $loop->iteration }}" type="text" class="text-center fw-bold date-input ext-navy-blue" value="@if(isset($lection->homework_end)){{ $lection->homework_end->format('m/d/Y') }}@endif" placeholder="Няма" autocomplete="off" @if (!$lection->homework_criteria) disabled @endif>
                         </div>
                     </div>
                 </div>
@@ -174,7 +174,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="date-pill d-flex align-items-center">
-                            <input name="homework_check_end" id="homework-check-end-edit-{{ $loop->iteration }}" class="text-center fw-bold date-input ext-navy-blue" value="@if(isset($lection->homework_check_end)){{ $lection->homework_check_end->format('m/d/Y') }}@endif" placeholder="Няма" @if (!$lection->homework_criteria) disabled @endif>
+                            <input name="homework_check_end" id="homework-check-end-edit-{{ $loop->iteration }}" class="text-center fw-bold date-input ext-navy-blue" value="@if(isset($lection->homework_check_end)){{ $lection->homework_check_end->format('m/d/Y') }}@endif" autocomplete="off" placeholder="Няма" @if (!$lection->homework_criteria) disabled @endif>
                         </div>
                     </div>
                 </div>
