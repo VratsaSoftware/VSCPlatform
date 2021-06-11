@@ -42,10 +42,10 @@
         </div>
         <div class="row g-0 mt-5">
             <div class="col me-lg-4">
-                <input name="starts" type="text" class="form-module date-input w-100" placeholder="Начало (дата)" aria-label="Начало (дата)" aria-describedby="addon-wrapping">
+                <input name="starts" type="text" class="form-module date-input w-100" placeholder="Начало (дата)" aria-label="Начало (дата)" aria-describedby="addon-wrapping" autocomplete="off">
             </div>
             <div class="col ms-3">
-                <input name="ends" type="text" class="form-module date-input w-100" placeholder="Край (дата)" aria-label="Край (дата)" aria-describedby="addon-wrapping">
+                <input name="ends" type="text" class="form-module date-input w-100" placeholder="Край (дата)" aria-label="Край (дата)" aria-describedby="addon-wrapping" autocomplete="off">
             </div>
         </div>
         <div class="row g-0 position-relative mt-5 d-lg-none">

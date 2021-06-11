@@ -173,7 +173,7 @@ class UserController extends Controller
         $updateLinks = SocialLink::updateLinks($user->id, $request);
         $user->save();
 
-        return redirect('myProfile/edit')->with($messageType, $message);
+        return redirect('myProfile')->with($messageType, $message);
     }
 
     /* date parse */

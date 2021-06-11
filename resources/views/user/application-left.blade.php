@@ -34,22 +34,13 @@
     <div class="col-lg col-12 d-flex overflow-hidden">
         <div class="d-inline-block text-small align-self-center comment-text position-relative px-lg-5 me-lg-4 py-2">
             <div class="row g-0 mt-4">
-                <div class="col-auto pe-lg-0 pe-4 me-xxl-3">
-                    <span class="text-small d-inline-block">
-                        <b>За кого е?</b>
-                    </span>
-                    <br>
-                    <span class="text-small mt-4 d-inline-block">
-                        {{ $applicationFor->first()->for_whom }}
-                    </span>
-                </div>
                 <div class="col-xxl-auto col mt-5">
                     <span class="text-small d-inline-block">
-                        <b>Условия</b>
+                        <b>Описание</b>
                     </span>
                     <br>
                     <span class="text-small mt-4 d-inline-block">
-                        {{ $applicationFor->first()->conditions }}
+                        {{ $applicationFor->first()->description }}
                     </span>
                 </div>
             </div>
@@ -165,20 +156,10 @@
                         <div class="row g-0 mt-5">
                             <div class="col-10">
                                 <div class="text-normal">
-                                    За кого е?
-                                </div>
-                                <div class="mt-3 text-grey ">
-                                    {{ $applicationFor->first()->for_whom }}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row g-0 mt-5">
-                            <div class="col-10">
-                                <div class="text-normal">
-                                    Условия
+                                    Описание
                                 </div>
                                 <div class="mt-3 text-grey">
-                                    {{ $applicationFor->first()->conditions }}
+                                    {{ $applicationFor->first()->description }}
                                 </div>
                             </div>
                         </div>

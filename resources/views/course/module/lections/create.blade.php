@@ -11,13 +11,13 @@
             </div>
             <div class="col-md-auto pe-md-3 me-xl-1">
                 <div class="position-relative calendar">
-                    <input type="text" name="first_date" class="create-lection-first_date date-input ext-navy-blue" placeholder="Начало*" required>
+                    <input type="text" name="first_date" class="create-lection-first_date date-input ext-navy-blue" placeholder="Начало*" autocomplete="off" required>
                     <img src="{{ asset('assets/img/arrow.svg') }}">
                 </div>
             </div>
             <div class="col-md-auto pe-md-3 me-xl-1">
                 <div class="position-relative calendar">
-                    <input type="text" name="second_date" class="create-lection-second_date date-input ext-navy-blue" placeholder="Край*" required>
+                    <input type="text" name="second_date" class="create-lection-second_date date-input ext-navy-blue" placeholder="Край*" autocomplete="off" required>
                     <img src="{{ asset('assets/img/arrow.svg') }}">
                 </div>
             </div>
@@ -103,7 +103,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="date-pill d-flex align-items-center">
-                            <input name="homework_end" id="homework-end-{{ isset($loop->iteration) ? $loop->iteration : '' }}" type="text" class="text-center fw-bold date-input ext-navy-blue" placeholder="Няма">
+                            <input name="homework_end" id="homework-end-{{ isset($loop->iteration) ? $loop->iteration : '' }}" type="text" class="text-center fw-bold date-input ext-navy-blue" autocomplete="off" placeholder="Няма">
                         </div>
                     </div>
                 </div>
@@ -116,7 +116,7 @@
                     </div>
                     <div class="col-auto">
                         <div class="date-pill d-flex align-items-center">
-                            <input name="homework_check_end" id="homework-check-end-{{ isset($loop->iteration) ? $loop->iteration : '' }}" class="text-center fw-bold date-input ext-navy-blue" placeholder="Няма">
+                            <input name="homework_check_end" id="homework-check-end-{{ isset($loop->iteration) ? $loop->iteration : '' }}" class="text-center fw-bold date-input ext-navy-blue" autocomplete="off" placeholder="Няма">
                         </div>
                     </div>
                 </div>
