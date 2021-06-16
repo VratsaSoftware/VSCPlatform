@@ -62,13 +62,10 @@
                     </div>
                 </div>
                 <div class="col-auto">
-                    @if(!isset(Auth::user()->picture) && Auth::user()->sex != 'male')
-                        <img src="{{ asset('images/women-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                    @elseif(!isset(Auth::user()->picture) && Auth::user()->sex != 'female')
-                        <img src="{{ asset('images/men-no-avatar.png') }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                    @else
-                        <img src="{{ asset('images/user-pics/'.Auth::user()->picture) }}" alt="profile-pic" style="border-radius: 5px; width: 70px" class="avatar">
-                    @endif
+                    @include ('profile.profile-picture', [
+                        'user' => Auth::user(),
+                        'style' => 'border-radius: 5px; width: 60px',
+                    ])
                 </div>
             </div>
         </div>
