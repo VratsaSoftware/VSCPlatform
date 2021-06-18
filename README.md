@@ -1,2 +1,0 @@
-# VSCPlatform
-Laravel Platform

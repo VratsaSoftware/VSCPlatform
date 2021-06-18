@@ -1,0 +1,492 @@
+ <!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<title>VSO</title>
+	<!-- Fonts and Icons -->
+	<link href="assets/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+	<!-- Bootstrap core CSS -->
+	<link href="assets/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+	<!-- CSS Files -->
+    <link href="assets/css/style.css" rel="stylesheet" />
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link rel= "stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="row g-0 p-lg-0 px-4 py-4 mt-lg-0 mt-2">
+		<div class="col-xl-auto pe-xl-0 pe-lg-5">
+			<div class="row g-0">
+				<!-- nav menu -->
+				<div class="col-lg-auto position-relative">
+					<nav class="slide navbar-expand-lg navbar-light bg-white fw-bold" id="mySidenav">
+						<a class="navbar-brand d-lg-block d-none mx-auto" href="#">
+							<img src="assets/img/logo.png" alt="" class="logo">
+						</a>
+						<div class="row g-0 d-lg-none d-flex pb-4 align-items-center">
+							<div class="col">
+								<div class="row g-0 user-info justify-content-center">
+									<div class="col-auto">
+										<img src="assets/img/avatar2.png" alt="" class="avatar">
+									</div>
+									<div class="col align-self-center ps-2 ms-1">
+										<div class="user_name fw-bold d-block">
+											Kalin
+										</div>
+										<div class="role text-xs text-warm-grey d-block">
+											Студент
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="col-auto ms-auto">
+								<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+									<span class="navbar-toggler-icon"></span>
+								</button>
+							</div>
+						</div>
+						<div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+							<div class="pt-lg-5">
+								<ul class="nav d-block col-12 pb-2">
+									<li class="nav-item align-items-center mb-lg-5">
+										<div class="dropdown">
+											<a href="" class="d-flex align-items-center dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<span class="icon">
+													<img src="assets/img/Courses.svg" alt="">
+												</span>
+												<span class="slide-item text-navy-blue">
+													Курсове 
+													<span>
+														<img src="assets/img/arrow.svg" alt="" class="ms-4">
+													</span>
+												</span>
+											</a>
+											
+										</div>
+									</li>
+									<li class="nav-item align-items-center mb-lg-5">
+										<div class="dropdown">
+											<a href="" class="d-flex align-items-center dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+												<span class="icon">
+													<img src="assets/img/Events.svg" alt="">
+												</span>
+												<span class="slide-item text-navy-blue">
+													Събития
+													<img src="assets/img/arrow.svg" alt="" class="ms-4">
+												</span>
+											</a>
+											
+										</div>
+									</li>
+								</ul>
+								<div class="row  d-lg-flex d-none g-0 user-info py-lg-4 justify-content-center">
+									<div class="col-auto">
+										<img src="assets/img/avatar2.png" alt="" class="avatar">
+									</div>
+									<div class="col align-self-center ps-4">
+										<div class="user_name fw-bold lh-xs d-block">
+											Kalin Iliev
+										</div>
+										<div class="role fw-normal lh-xs d-block text-xs text-warm-grey">
+											Студент
+										</div>
+									</div>
+								</div>
+								<div class="row g-0 pt-lg-2">
+									<ul class="nav">
+										<li class="nav-item w-100">
+											<a href="" class="d-flex fw-bold">
+												<img src="assets/img/Log_out.svg" alt="">
+												<span class="slide-item text-navy-blue">
+													Изход
+												</span>
+											</a>
+										</li>
+									</ul>
+								</div>
+								<div class="toogler d-flex justify-content-end mb-lg-4 d-lg-block d-none">
+									<div class="pill d-flex align-items-center float-right rounded-circle overflow-hidden">
+										<a class="btn px-2 col p-0 text-center" id="toggleNav">
+											<img src="assets/img/arrow.svg" alt="">
+										</a>
+									</div>
+								</div>
+								<div class="position-relative d-lg-block d-none">
+									<div class="notifications-bar text-center pt-lg-4 position-absolute">
+										<div class="notification-icon">
+											<img src="assets/img/bell.svg" alt="">
+										</div>
+										<div class="notification-text fw-bold pt-4 mt-2 mx-auto">
+											<div>Нещо</div>
+											<div>важно</div>
+										</div>
+										<div class="row g-0 py-3 mb-2">
+											<div class="col text-left ps-4 ms-2">
+												Виж
+											</div>
+											<div class="col text-right pe-4 me-2">
+												<i class="fas fa-arrow-right"></i>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</nav>
+				</div>	
+				<!-- nav menu END -->  
+		<!--Mobil-->
+		<div class=" d-lg-none row g-0">
+			<div class="hw-section-header row align-items-center g-0">
+				<div class="col-auto d-lg-none d-block me-4">
+					<a href="">
+						<img src="assets/img/arrow.svg" class="me-1" alt="">
+					</a>
+				</div>
+				<div class="col">
+					<div class="row g-0 align-items-center">
+						<div class="col-lg-auto text-xxl text-lg-uppercase fw-bold pe-lg-2 me-lg-1">
+							Прием
+						</div>
+						<div class="col-auto border d-lg-block d-none my-3 align-self-stretch mx-4"></div>
+						<div class="col-lg-auto text-large text-warm-grey ps-lg-2">
+							Photoshop & illustrator
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="d-flex justify-content-center d-lg-none mt-5 mb-5 ">
+				<img src="assets/img/interviu.svg" class=""  alt="">
+			</div>
+			<div class="row g-0 align-items-center ms-2 mb-4">
+				<div class="col-lg-auto text-xxl text-lg-uppercase text-uppercase fw-bold pe-lg-2 me-lg-1 text-navy-blue">
+					КАНДИДАТИ ЗА ИНТЕРВЮ
+				</div>
+			
+			</div>
+			<div class="row">
+				<div class="col">
+				   <div class="row g-0 align-items-center">
+					   <div class="col-lg-auto text-lg-uppercase fw-bold text-small pe-lg-2 me-lg-1">
+						   1. Ставри Георгиев
+					   </div>
+					   <div class="col-auto border d-lg-block d-none my-3 align-self-stretch mx-4"></div>
+					   <div class="col-lg-auto text-large text-warm-grey ps-lg-2">
+						<div class=" row text-normal">
+							<div class="col">23/10  |  15:30ч.</div>
+						</div>
+					   </div>
+				   </div>
+				</div>
+				<div class="col-1">
+				   <div class=" d-flex justify-content-center">
+					   <button class="btn-edit btn-add-candidates btn-green row g-0 align-items-center">
+						   <div class="col-auto">
+							   <img src="assets/img/action_icon.svg" alt="">
+						   </div>
+					   </button>
+				   </div>
+				</div>
+			</div>
+				 <hr class="line-add-candidates mt-2 mb-4">
+
+				 <div class="row">
+					<div class="col">
+					   <div class="row g-0 align-items-center">
+						   <div class="col-lg-auto text-lg-uppercase fw-bold text-small pe-lg-2 me-lg-1">
+							   1. Ставри Георгиев
+						   </div>
+						   <div class="col-auto border d-lg-block d-none my-3 align-self-stretch mx-4"></div>
+						   <div class="col-lg-auto text-large text-warm-grey ps-lg-2">
+							<div class=" row text-normal">
+								<div class="col">23/10  |  15:30ч.</div>
+							</div>
+						   </div>
+					   </div>
+					</div>
+					<div class="col-1">
+					   <div class=" d-flex justify-content-center">
+						   <button class="btn-edit btn-add-candidates btn-green row g-0 align-items-center">
+							   <div class="col-auto">
+								   <img src="assets/img/action_icon.svg" alt="">
+							   </div>
+						   </button>
+					   </div>
+					</div>
+				</div>
+					 <hr class="line-add-candidates mt-2 mb-4">
+					 <div class="row">
+						<div class="col">
+						   <div class="row g-0 align-items-center">
+							   <div class="col-lg-auto text-lg-uppercase fw-bold text-small pe-lg-2 me-lg-1">
+								   1. Ставри Георгиев
+							   </div>
+							   <div class="col-auto border d-lg-block d-none my-3 align-self-stretch mx-4"></div>
+							   <div class="col-lg-auto text-large text-warm-grey ps-lg-2">
+								<div class=" row text-normal">
+									<div class="col">23/10  |  15:30ч.</div>
+								</div>
+							   </div>
+						   </div>
+						</div>
+						<div class="col-1">
+						   <div class=" d-flex justify-content-center">
+							   <button class="btn-edit btn-add-candidates btn-green row g-0 align-items-center">
+								   <div class="col-auto">
+									   <img src="assets/img/action_icon.svg" alt="">
+								   </div>
+							   </button>
+						   </div>
+						</div>
+					</div>
+						 <hr class="line-add-candidates mt-2 mb-4">
+						 <div class="row">
+							<div class="col">
+							   <div class="row g-0 align-items-center">
+								   <div class="col-lg-auto text-lg-uppercase fw-bold text-small pe-lg-2 me-lg-1">
+									   1. Ставри Георгиев
+								   </div>
+								   <div class="col-auto border d-lg-block d-none my-3 align-self-stretch mx-4"></div>
+								   <div class="col-lg-auto text-large text-warm-grey ps-lg-2">
+									<div class=" row text-normal">
+										<div class="col">23/10  |  15:30ч.</div>
+									</div>
+								   </div>
+							   </div>
+							</div>
+							<div class="col-1">
+							   <div class=" d-flex justify-content-center">
+								   <button class="btn-edit btn-add-candidates btn-green row g-0 align-items-center">
+									   <div class="col-auto">
+										   <img src="assets/img/action_icon.svg" alt="">
+									   </div>
+								   </button>
+							   </div>
+							</div>
+						</div>
+							 <hr class="line-add-candidates mt-2 mb-4">
+				
+		</div>
+		<!-- end mobil-->
+			  	<!-- left side -->
+				<div class="col-xl-auto col ps-xxl-0 ps-lg-4 d-none d-lg-block">
+					<div class="card">
+						<div class="card-body-application">
+							<div class="row g-0 pb-lg-4 mb-lg-3">
+								<div class="col pt-lg-0 pt-2 mt-lg-0 mt-1">
+									<h2 class="card-title-application text-uppercase m-0">
+										Photoshop & Illustrator
+									</h2>
+								</div>
+								<div class="col-auto">
+									<img src="assets/img/Design.svg" class="img-design">
+								</div>
+							</div>
+							<div class="tab-content pt-lg-2">
+								<!--First tab-->
+								<div class="tab-pane fade show active" id="module-1" role="tabpanel" aria-labelledby="module-1-tab">
+									<div class="row g-0 pb-4 mb-lg-0 mb-1 pt-lg-0 pt-1">
+										<div class="col-auto pe-5 me-5">
+											<div class="text-normal">
+												Начало:
+                                            </div>
+                                            <br>
+											<div class="text-small pt-lg-0 pt-2 mt-lg-0 mt-1 d-inline-block">10.09.2020</div>
+										</div>
+										<div class="col">
+											<div class="text-normal">
+												Продължителност:
+                                            </div>
+                                            <br>
+											<div class="text-small pt-lg-0 pt-2 mt-lg-0 mt-1 d-inline-block">10 седмици</div>
+										</div>
+									</div>
+                                    <div class="row g-0 mt-5">
+                                        <div class="col-10">
+                                            <div class="text-normal">
+												За кого е?
+                                            </div>
+                                            <div class="mt-3 text-grey text-xs">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</div>
+                                        </div>
+                                    </div>
+                                    <div class="row g-0 mt-5">
+                                        <div class="col-10">
+                                            <div class="text-normal">
+												Условия
+                                            </div>
+                                            <div class="mt-3 text-grey text-xs">Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue duis dolore te feugait nulla facilisi.</div>
+                                        </div>
+                                    </div>
+                                    <div class="row g-0 mt-4">
+										<div class="col-auto mt-5 me-3">
+											<div class="card-small"> 
+												<img src="assets/img/6e60d6347b6158f26c4be31ea988c23c.png" class="priem-avatar-img">
+											</div>
+										</div>
+										<div class="col-auto ms-3 mt-5">
+											<div class=" row g-0 text-kermit-green text-priem-sm pb-2">
+												<div class="col-auto">
+													<b class="pe-3 text-priem-xl">1.</b>
+												</div>
+												<div class="col">
+													<b>Електронна 
+												форма
+														</b>
+												</div>
+											</div>
+											<div class="text-navy-blue text-priem-sm pb-2">
+												<b class="pe-3 text-priem-xl">2.</b>
+												<b>Предварителен
+												<br>
+												тест</b>
+											</div>
+											<div class="text-warm-grey text-priem-sm pb-2">
+												<b class="pe-3 text-priem-xl">3.</b>
+												<b>Самостоятелна
+												<br>
+												задача</b>
+											</div>
+											<div class="text-warm-grey text-priem-sm pb-2">
+												<b class="pe-3 text-priem-xl">4.</b>
+												<b>Интервю</b>
+											</div>
+											<div class="text-warm-grey text-priem-sm">
+												<b class="pe-3 text-priem-xl">5.</b>
+												<b>Прием</b>
+											</div>
+										</div>
+										<div class="col-auto d-none d-lg-block">
+											<div class="card-mini">
+												<img src="assets/img/interviu.svg" class="img-card">
+											</div>
+										</div>
+									</div>
+								</div>
+								<!--First tab END-->
+							</div>
+							<!-- Nav tabs END--> 
+						</div>
+					</div>
+				</div>
+				<!-- left side END -->
+			</div>
+		</div>		
+		<!-- right side -->
+		<div id="right-side" class="col-xl d-none d-lg-block pt-md-5 mt-md-4 tab-content edit-content">
+			<!-- Single lection content -->	
+			<div class="col pt-5 mt-lg-0 mt-1">
+				<h2 class="card-title-application text-uppercase m-0">
+					Кандидати за интервю
+				</h2>
+			</div>
+            <div class="row mt-5">
+               <div class="col-4 text-navy-blue text-normal mt-2 ms-2 me-4 me-xl-1 ms-xl-1">
+				1. Ставри Георгиев
+			   </div>
+			   <div class="col-auto mt-2 ms-3 ms-xl-1">
+				<div class=" row text-normal">
+					<div class="col">23/10 </div>
+						<hr class=" col trait">
+					<div class="col">
+						15:00
+					</div>
+				</div>
+				<br>
+			</div>
+			   <div class="col">
+				<button class=" btn-green candidates-interview-admin-btn row g-0 align-items-center">
+					<div class="col text-start fw-bold btn-form-admission">Виж</div>
+					<div class="col-auto ms-xxl-2 ms-xl-2">
+						<img  src="assets/img/action_icon.svg" alt="">
+					</div>
+				</button>
+			</div>
+			</div>
+			<hr class="line-interview-admin">
+			<div class="row mt-5">
+				<div class="col-4 text-navy-blue text-normal mt-2 ms-2 me-4 me-xl-1 ms-xl-1">
+				 2. Ставри Георгиев
+				</div>
+				<div class="col-auto mt-2 ms-3 ms-xl-1">
+				 <div class=" row text-normal">
+					 <div class="col">23/10 </div>
+						 <hr class=" col trait">
+					 <div class="col">
+						 15:00
+					 </div>
+				 </div>
+				 <br>
+			 </div>
+				<div class="col">
+				 <button class=" btn-green candidates-interview-admin-btn row g-0 align-items-center">
+					 <div class="col text-start fw-bold btn-form-admission">Виж</div>
+					 <div class="col-auto ms-xxl-2 ms-xl-2">
+						 <img  src="assets/img/action_icon.svg" alt="">
+					 </div>
+				 </button>
+			 </div>
+			 </div>
+			 <hr class="line-interview-admin">
+			 <div class="row mt-5">
+				<div class="col-4 text-navy-blue text-normal mt-2 ms-2 me-4 me-xl-1 ms-xl-1">
+				 1. Ставри Георгиев
+				</div>
+				<div class="col-auto mt-2 ms-3 ms-xl-1">
+				 <div class=" row text-normal">
+					 <div class="col">23/10 </div>
+						 <hr class=" col trait">
+					 <div class="col">
+						 15:00
+					 </div>
+				 </div>
+				 <br>
+			 </div>
+				<div class="col">
+				 <button class=" btn-green candidates-interview-admin-btn row g-0 align-items-center">
+					 <div class="col text-start fw-bold btn-form-admission">Виж</div>
+					 <div class="col-auto ms-xxl-2 ms-xl-2">
+						 <img  src="assets/img/action_icon.svg" alt="">
+					 </div>
+				 </button>
+			 </div>
+			 </div>
+			 <hr class="line-interview-admin">
+			 <div class="row mt-5">
+				 <div class="col-4 text-navy-blue text-normal mt-2 ms-2 me-4 me-xl-1 ms-xl-1">
+				  2. Ставри Георгиев
+				 </div>
+				 <div class="col-auto mt-2 ms-3 ms-xl-1">
+				  <div class=" row text-normal">
+					  <div class="col">23/10 </div>
+						  <hr class=" col trait">
+					  <div class="col">
+						  15:00
+					  </div>
+				  </div>
+				  <br>
+			  </div>
+				 <div class="col">
+				  <button class=" btn-green candidates-interview-admin-btn row g-0 align-items-center">
+					  <div class="col text-start fw-bold btn-form-admission">Виж</div>
+					  <div class="col-auto ms-xxl-2 ms-xl-2">
+						  <img  src="assets/img/action_icon.svg" alt="">
+					  </div>
+				  </button>
+			  </div>
+			  </div>
+			  <hr class="line-interview-admin">
+		</div>
+		<!-- right side END -->
+		
+	</div>
+	<!-- Bootstrap core JS Files -->
+	<script src="assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+	<script src="assets/js/main.js" type="text/javascript"></script>
+	<script type= "text/javascript" src= "https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+</body>
+</html>
