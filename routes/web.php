@@ -93,8 +93,8 @@ Route::get('/course/payment/finish',function(){
 
 Auth::routes();
 
-Route::get('/application/create/{type?}/{course?}/{module?}', function () {
-    dd(1);
+Route::get('/application/create/{type?}/{course?}/{module?}', function ($type, $course = null, $module = null) {
+    return \Redirect::intended(config('consts.LMS_LOGIN') . '/' . \Request::path());
 })->name('application.create');
 
 Route::get('/{lang}/team', function ($lang) {

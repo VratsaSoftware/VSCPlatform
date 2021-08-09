@@ -57,7 +57,7 @@
 		<i class="fas fa-times"></i>
 	</span>
 
-		<form method="POST" action="{{ route('login') }}" id="login-form">
+		<form method="POST" action="{{ config('consts.LMS_LOGIN') }}" id="login-form">
 			@csrf
 			<div>
 				@if (Request::has('previous'))

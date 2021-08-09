@@ -28,7 +28,7 @@
 
             <div class="row buttons-right col-md-2">
                 <div id="login-btn" class="col-md-2">
-                    <span id="log-in"><a href="{{route('login')}}">ВХОД</a></span>
+                    <span id="log-in"><a href="{{ config('consts.LMS_LOGIN') }}">ВХОД</a></span>
                 </div>
                 <!--<div id="candidate-btn" class="col-md-2">-->
             <!--    <span id="candidate"><a href="{{route('application.create')}}">Кандидатствай</a></span>-->
@@ -370,14 +370,14 @@
                 <div class="p-3 col-md-3 sponsors-6" data-img="{{asset('/images/partners/mindhub-logo.png')}}"><a href="https://mindhub.bg/" target=" _blank"><img src=" " alt="mindhub-logo" class="img-fluid"></a></div>
                 <div class="p-3 col-md-3 sponsors-7" data-img="{{asset('/images/partners/CDB-logo.png')}}"><a href="https://www.coderdojo.bg/" target=" _blank"><img src=" " alt="Coder Dojo Bulgaria" class="img-fluid"></a></div>
                 <div class="p-3 col-md-3 sponsors-8" data-img="{{asset('/images/partners/movebg-logo2.png')}}"><a href="https://move.bg/" target=" _blank"><img src=" " alt="movebg-logo" class="img-fluid"></a></div>
-                
+
                 <div class="col-md-2"></div>
                 <div class="p-3 col-md-3 sponsors-9" data-img="{{asset('/images/partners/NMD-Logo.gif')}}"><a href="http://nmd.bg/" target=" _blank"><img src=" " alt="NMD-Logo" class="img-fluid"></a></div>
-                
+
                 <div class="p-3 col-md-3 sponsors-10" data-img="{{asset('/images/partners/Startup-logo-main.png')}}"><a href="http://startup.bg/" target=" _blank"><img src=" " alt="Startup-logo-main" class="img-fluid"></a></div>
 
                 <div class="p-3 col-md-3 sponsors-9" data-img="{{asset('/images/partners/eSkills-For-Future-logo.png')}}"><a href="http://eskills.tto-bait.bg/" target=" _blank"><img src=" " alt="eSkills-For-Future-logo" class="img-fluid"></a></div>
-                
+
                 <div class="col-md-2"></div>
             </div>
             <div class="col-md-5">

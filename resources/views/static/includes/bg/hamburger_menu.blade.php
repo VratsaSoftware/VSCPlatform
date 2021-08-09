@@ -15,7 +15,7 @@
             <li class="edu-go bg-secondary"><a class="text-light" href="{{route('digitalMarketing')}}">Дигитален Маркетинг</a></li>
             <li class="edu-go bg-secondary"><a class="text-light" href="{{route('design')}}">Дизайн</a></li>
             <li class="edu-go bg-secondary"><a class="text-light" href="{{route('qualityAssurance')}}">Софтуерно тестване</a></li>
-            <li class="nav-item"><a href="{{route('login')}}" class="right-mobile">Вход</a></li>
+            <li class="nav-item"><a href="{{ config('consts.LMS_LOGIN') }}" class="right-mobile">Вход</a></li>
             {{-- <li class="nav-item"><a href="#" class="right-mobile">Кандидатствай</a></li> --}}
             <li>
                 <a href="{{ route('langroute', 'en') }}"><img src="{{asset('/images/en.png')}}" width="25px"></a>
@@ -31,7 +31,7 @@
         $('.edu-hamburger').click();
         $('.edu-hamburger').click();
     });
-    
+
     $('.about-hamburger').on('click',function(){
         if(!$(this).hasClass('opened')){
             $(this).addClass('opened');

@@ -25,7 +25,7 @@
 
         <div class="row buttons-right col-md-2">
             <div id="candidate-btn" class="col-md-2">
-                <span id="candidate"><a href="{{route('login')}}">Login</a></span>
+                <span id="candidate"><a href="{{ config('consts.LMS_LOGIN') }}">Login</a></span>
             </div>
         </div>
         <!-- hamburger -->

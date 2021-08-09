@@ -28,7 +28,7 @@
 
             <div class="row buttons-right col-md-2">
                 <div id="login-btn" class="col-md-2">
-                    <span id="log-in"><a href="{{route('login')}}">LOGIN</a></span>
+                    <span id="log-in"><a href="{{ config('consts.LMS_LOGIN') }}">LOGIN</a></span>
                 </div>
                 <!--<div id="candidate-btn" class="col-md-2">-->
             <!--    <span id="candidate"><a href="{{route('application.create')}}">Кандидатствай</a></span>-->
