@@ -67,3 +67,10 @@
     background: #fff !important;
     color: #1C8800;
 }
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    .send-subscribe{
+        height:100%;
+    }
+}

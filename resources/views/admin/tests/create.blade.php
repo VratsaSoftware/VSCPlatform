@@ -26,7 +26,7 @@
                     </div>
                 @endif
 
-                <div action="{{route('test.store')}}" method="POST" class="col-md-12" id="create_test"
+                <form action="{{route('test.store')}}" method="POST" class="col-md-12" id="create_test"
                       name="create_test">
                     {{ csrf_field() }}
 
@@ -85,7 +85,6 @@
                             </p>
                         </div>
                     </div>
-                </div>
             </div>
         </div>
     </div>

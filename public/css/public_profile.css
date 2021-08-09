@@ -4,6 +4,19 @@ body {
     background: #F7F7F7;
 }
 
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+body::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: #1B8500;
+    outline: 1px solid slategrey;
+}
+
 @font-face {
     font-family: Ubuntu;
     font-display: block;
@@ -146,7 +159,21 @@ body {
     height: 20vw !important;
 }
 
+.stats-text::-webkit-scrollbar, .edu-comment::-webkit-scrollbar, .work-description::-webkit-scrollbar, #edu_description::-webkit-scrollbar, #work_description::-webkit-scrollbar, .other-interests::-webkit-scrollbar, .all-students-pool::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
 
+.stats-text::-webkit-scrollbar-track, .edu-comment::-webkit-scrollbar-track, .work-description::-webkit-scrollbar-track, #edu_description::-webkit-scrollbar-track, #work_description::-webkit-scrollbar-track, .other-interests::-webkit-scrollbar-track, .all-students-pool::-webkit-scrollbar-track {
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+}
+
+.stats-text::-webkit-scrollbar-thumb, .edu-comment::-webkit-scrollbar-thumb, .work-description::-webkit-scrollbar-thumb, #edu_description::-webkit-scrollbar-thumb, #work_description::-webkit-scrollbar-thumb, .other-interests::-webkit-scrollbar-thumb, .all-students-pool::-webkit-scrollbar-thumb {
+    border-radius: 4px;
+    background-color: #1B8500;
+    outline: 1px solid #778899;
+}
 
 .work-description, .edu-comment {
     border: #778899 1px solid;

@@ -29,8 +29,8 @@
 					<td>{{$entry->User->last_name}}</td>
 					<td>{{$entry->User->email}}</td>
 					<td>{{$entry->User->location}}</td>
-					<td>{{(Carbon\Carbon::now()->format('Y') - $entry->User->dob->format('Y'))}}</td>
-					<td>{{$entry->User->Occupation->occupation}}</td>
+					<td>{{$entry->User->dob?(Carbon\Carbon::now()->format('Y') - $entry->User->dob->format('Y')):''}}</td>
+					<td>{{isset($entry->User->Occupation)?$entry->User->Occupation->occupation : ''}}</td>
 					<td>{{$entry->Form->phone}}</td>
 					<td>{{$entry->Form->source_url}}</td>
 					<td>{{$entry->Form->course}}</td>
@@ -41,8 +41,9 @@
 					</td>
 					<td>
 						@if(isset($entry['testScoreTest']))
+						    общо - {{$entry['hidden']}}
 							@foreach($entry['testScoreTest'] as $tkey => $test)
-								{{$entry['hidden']}}
+								
 								<p>
 									{{$test->title}} =>
 									отговорени:{{$entry['testScore'][$tkey][1]['answered'] .'/'. $entry['testScore'][$tkey][0]['questionsCount']}}<br/>
@@ -143,6 +144,28 @@
 		<div class="overlay"></div>
 	</div>
 	<div class="col-md-12 download-stats" style="bottom:1%;font-size:200%;position:fixed;left:-1%"><i class="fas fa-download"></i></div>
+	<script>
+            $('.download-stats').on('click', function(){
+                    var table = 'forms';
+                    var uri = 'data:application/vnd.ms-excel;base64,'
+
+                        , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>'
+
+                        , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+
+                        , format = function(s, c) { return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; }) }
+
+
+
+                        var table = document.getElementById(table)
+                        var name = 'test';
+
+                        var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+
+                        window.location.href = uri + base64(format(template, ctx))
+
+            });
+        </script>
 	<!-- end of modal -->
 	<script type="text/javascript">
         $('.show-form').on('click',function(){

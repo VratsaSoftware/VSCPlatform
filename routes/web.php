@@ -11,15 +11,6 @@
 |
 */
 
-/* auth */
-Route::get('user/register', function () {
-    return view('auth.register');
-})->name('user/register');
-
-Route::get('user/forgotPassword', function () {
-    return view('auth.passwords.forgot');
-})->name('auth.password.reset');
-
 Route::get('language/{lang}', function ($lang) {
     Session::put('locale', $lang);
     \Cookie::forget('locale');
@@ -53,10 +44,26 @@ Route::get('/train-devs', function () {
 Route::get('/digital-marketing', function () {
     $type = App\Models\Courses\TrainingType::where('type','Дигитален Маркетинг')->first();
     if (Session::get('locale') == 'en') {
-        return view('static.en.digital_marketing',['type' => $type->id]);
+        return view('static.digital_marketing',['type' => $type->id]);
     }
     return view('static.digital_marketing',['type' => $type->id]);
 })->name('digitalMarketing');
+
+Route::get('/quality-assurance', function () {
+    $type = App\Models\Courses\TrainingType::where('type','QA')->first();
+    if (Session::get('locale') == 'en') {
+        return view('static.quality_assurance',['type' => $type->id]);
+    }
+    return view('static.quality_assurance',['type' => $type->id]);
+})->name('qualityAssurance');
+
+Route::get('/design', function () {
+    $type = App\Models\Courses\TrainingType::where('type','Дизайн')->first();
+    if (Session::get('locale') == 'en') {
+        return view('static.en.design',['type' => $type->id]);
+    }
+    return view('static.design',['type' => $type->id]);
+})->name('design');
 
 Route::get('/mission-2', function () {
     if (Session::get('locale') == 'en') {
@@ -80,6 +87,9 @@ Route::get('/contacts', function () {
 })->name('contacts');
 
 Route::get('/subscribe/{email}', 'HomeController@subscribe');
+Route::get('/course/payment/finish',function(){
+        return view('course.paymentThankYouPage');
+    })->name('course.payment.finish');
 
 Auth::routes();
 
@@ -93,15 +103,12 @@ Route::post('/user/{user}/event/{event}','Events\EventController@cwIsPresent')->
 
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/myProfile', 'HomeController@index')->name('myProfile');
-    Route::get('/myProfile/edit', 'Users\UserController@editMyProfile')->name('editMyProfile');
     Route::resource('user', 'Users\UserController')->names('user');
+    
     //epay payments routes
     Route::get('course/payment/create', 'Admin\AdminController@createPayment')->name('course.payment.create');
     Route::post('course/payment/store', 'Admin\AdminController@storePayment')->name('course.payment.store');
-    Route::get('/course/payment/finish',function(){
-        return view('course.paymentThankYouPage');
-    })->name('course.payment.finish');
-
+    
     //polls vote
     Route::post('poll/user/vote', 'Admin\PollController@userVote')->name('user.vote.poll');
 
@@ -164,11 +171,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/user/event/{event}','Events\EventController@show')->name('event.show');
     Route::post('/user/upload/homework','Courses\LectionController@userUploadHomework')->name('user.upload.homework');
     Route::post('/lection/homework/user/eval','Courses\LectionController@userEvalHomework')->name('user.eval.homeworks');
-
-    Route::get('/lection/random-homework/{lectionId}','Courses\LectionController@userRandomHomework');
-
-    Route::get('/lection/homework/{homework}/coments','Courses\LectionController@homeworkComment');
-
     Route::post('/lection/homework/{homework}/user/eval','Courses\LectionController@addHomeworkStudentComment')->name('student.homework.comment');
     Route::group(['middleware' => 'isLecturer'], function () {
         // lecturer routes
@@ -192,7 +194,7 @@ Route::group(['middleware' => 'auth'], function () {
             'Courses\LectionController@changeVisibility')->name('lection.visibility');
         Route::get('/lection/{lection}/homeworks', 'Courses\LectionController@showHomeworks')->name('homeworks.show');
         Route::post('/lection/homework/{homework}','Courses\LectionController@addHomeworkLecturerComment')->name('lection.homework.lecturer.comment');
-
+        
         //tests routes
         Route::resource('test', 'Admin\TestController')->names('test');
         Route::post('test/add/student','Admin\TestController@addUser')->name('test.add.student');
@@ -205,6 +207,7 @@ Route::group(['middleware' => 'auth'], function () {
             'Admin\TestController@deleteQuestion')->name('delete.question');
         Route::get('applications/all/{type?}', 'Courses\ApplicationController@applicationsAll')->name('admin.applications');
         Route::post('applications/filter','Courses\ApplicationController@loadApplications')->name('admin.ajax.applications');
+        Route::get('applications/all', 'Courses\ApplicationController@applicationsAll')->name('admin.applications');
         Route::post('/add/student/to/course','Courses\CourseController@addStudent')->name('add.student.to.course');
     });
 
@@ -227,18 +230,14 @@ Route::group(['middleware' => 'auth'], function () {
             'Admin\AdminController@certificatePreview')->name('certificate.preview');
     });
 });
-
 Route::post('/lection/video/shown', 'Courses\LectionController@videoShown')->name('lection.video.show');
 
-/* user course operations */
-Route::group(['middleware' => 'auth'], function () {
-    Route::get('/user/{user?}/course/{course}', 'Courses\CourseController@showUserCourse')->name('user.course');
-    Route::get('/user/{user?}/course/{course}/module/{module}/lections',
-        'Courses\LectionController@show')->name('user.module.lections');
-
-    Route::post('/user/{user?}/course/{course}/module/{module}/lection/{lection}/comment',
-        'Courses\LectionController@addComment')->name('user.module.lection.comment');
-});
+//user course operations
+Route::get('/user/{user?}/course/{course}', 'Courses\CourseController@showUserCourse')->name('user.course');
+Route::get('/user/{user?}/course/{course}/module/{module}/lections',
+    'Courses\LectionController@show')->name('user.module.lections');
+Route::post('/user/{user?}/course/{course}/module/{module}/lection/{lection}/comment',
+    'Courses\LectionController@addComment')->name('user.module.lection.comment');
 
 
 //old routes redirects

@@ -12,14 +12,14 @@
                 </div>
 
                 <div class="header-title col-md-12 text-center">
-                    <span>Conquer new heights in<br /> Digital Marketing</span>
+                    <span>Conquer the tops of<br /> Digital Marketing</span>
                 </div>
                 {{-- <div class="header-sub-title col-md-12 text-center">
                     <span>Курса започва след</span><br/>
                 </br/>
                     <span class="timer-digital"><img src="{{asset('/images/loaders/load-32.gif')}}" alt="timer"/></span>
                 </div> --}}
-                <div class="header-button col-md-12 text-center mb-5">
+                <div class="header-button col-md-12 text-center mb-5" style="visibility:hidden">
                     <span id="prepare"><a href="#application">Apply now</a></span>
                 </div>
 
@@ -97,49 +97,62 @@
     <div class="section">
         <div id="program">
             <div class="program-title text-center">Program</div>
-            <div class="section d-flex flex-row flex-wrap text-center">
-                <div class="col-md-4 text-center">
-                    <div class="snip1527">
-                        <div class="image"><img src="{{asset('images/digi_marketing/software-development-4165307_1920.jpg')}}" alt="pr-sample23" /></div>
-                        <figcaption>
-                            <div class="date"><span class="day">1</span><span class="month">ниво</span></div>
-                            <h3>Основи на дигиталния маркетинг</h3>
-                            <p>
-                        
-                                You know what we need, Hobbes? We need an attitude. Yeah, you can't be cool if you don't have an attitude.
-                            </p>
-                        </figcaption>
-                        <a href="#"></a>
-                    </div>
-                </div>
-        
-                <div class="col-md-4 text-center">
-                    <div class="snip1527">
-                        <div class="image"><img src="{{asset('images/digi_marketing/student-849822_1920.jpg')}}" alt="pr-sample24" /></div>
-                        <figcaption>
-                            <div class="date"><span class="day">2</span><span class="month">ниво</span></div>
-                            <h3>Бизнесът и социалните мрежи</h3>
-                            <p>
-                        
-                                Sometimes the surest sign that intelligent life exists elsewhere in the universe is that none of it has tried to contact us.
-                            </p>
-                        </figcaption>
-                        <a href="#"></a>
-                    </div>
-                </div>
-        
-                <div class="col-md-4 text-center">
-                    <div class="snip1527">
-                        <div class="image"><img src="{{asset('images/digi_marketing/success-4165306_1920.jpg')}}" alt="pr-sample25" /></div>
-                        <figcaption>
-                            <div class="date"><span class="day">3</span><span class="month">ниво</span></div>
-                            <h3>Анализ на потребителкси данни</h3>
-                            <p>
-                        
-                                I don't need to compromise my principles, because they don't have the slightest bearing on what happens to me anyway.
-                            </p>
-                        </figcaption>
-                        <a href="#"></a>
+            <div class="program-scheme col-md-12 text-center program-no-tabs">
+                <div id="tabs">
+                    <div class="program-holder d-flex justify-content-center">
+                        <!-- php tab -->
+                        <div id="tabs-1" class="p-3 php">
+                            <div class="col-md-12 d-flex flex-row flex-wrap php-program-holder">
+                                <!-- first lvl -->
+                                <div class="col-md-12 d-flex flex-row flex-wrap">
+                                    <div class="col-md-7 lvl-info lvl-marketing">
+                                        <p class="program-info">
+                                            Marketing basic
+                                        </p>
+                                    </div>
+                                    <div class="col-md-1 clear-tick tick-marketing"><img src="{{asset('/images/tick-y-big-orange.png')}}" alt="tick"></div>
+                                    <div class="col-md-4 program-info-img info-marketing">
+                                        <p class="program-mentors">
+                                            <a href="https://www.linkedin.com/in/aleksey-potebnya-7523b152/" target=" _blank">lector Alexei Pottebnia</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- end of first-lvl -->
+
+                                <!-- second lvl -->
+                                <div class="col-md-12 d-flex flex-row flex-wrap">
+                                    <div class="col-md-7 lvl-info lvl-marketing">
+                                        <p class="program-info">
+                                            Creating online content
+                                        </p>
+                                    </div>
+                                    <div class="col-md-1 clear-tick tick-marketing"><img src="{{asset('/images/tick-y-big-orange.png')}}" alt="tick"></div>
+                                    <div class="col-md-4 program-info-img info-marketing">
+                                        <p class="program-mentors">
+                                            <a href="https://www.linkedin.com/in/ivaylo-yordanov/" target=" _blank">lector Ivailo Yordanov</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- end of second lvl -->
+
+                                <!-- third lvl -->
+                                <div class="col-md-12 d-flex flex-row flex-wrap">
+                                    <div class="col-md-7 lvl-info lvl-marketing">
+                                        <p class="program-info">
+                                            Social Network advertising
+                                        </p>
+                                    </div>
+                                    <div class="col-md-1 clear-tick tick-marketing"><img src="{{asset('/images/tick-y-big-orange.png')}}" alt="tick"></div>
+                                    <div class="col-md-4 program-info-img info-marketing">
+                                        <p class="program-mentors">
+                                            <a href="https://www.linkedin.com/in/ivaylo-yordanov/" target=" _blank">lector Ivailo Yordanov</a>
+                                        </p>
+                                    </div>
+                                </div>
+                                <!-- end of third lvl -->
+                            </div>
+                        </div>
+                        <!-- end of php tab -->
                     </div>
                 </div>
             </div>
@@ -154,103 +167,74 @@
         <div id="details" class="marketing-details">
             <div class="details-title text-center">Details</div>
             <div class="details-container col-md-12 d-flex flex-wrap flex-row">
-                <div class="col-md-4">
-                    <div class="card card-2 text-center">
-                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
-                            <div class="col-md-12">
-                                <img src="{{asset('/images/digi_marketing/icons/calendar_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/calendar.png')}}">
-                            </div>
-                            <div class="col-md-12 title-details-digi">
-                                Speed Optimization
-                            </div>
-                            <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-4 first-detail text-center">
+                    <img src="{{asset('/images/detail-1-marketing.png')}}" alt="info-php-second" class="img-fluid">
+                    <br />
+                    <span class="detail-text">
+                        Duration: 4 months
+                    </span>
                 </div>
-        
-                <div class="col-md-4">
-                    <div class="card card-2 text-center">
-                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
-                            <div class="col-md-12">
-                                <img src="{{asset('/images/digi_marketing/icons/startup_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/startup.png')}}">
-                            </div>
-                            <div class="col-md-12 title-details-digi">
-                                Speed Optimization
-                            </div>
-                            <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-4 second-detail text-center">
+                    <img src="{{asset('/images/detail-2-marketing.png')}}" alt="icon" class="img-fluid">
+                    <br />
+                    <span class="detail-text">
+                        Twice a week
+                    </span>
                 </div>
-        
-                <div class="col-md-4">
-                    <div class="card card-2 text-center">
-                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
-                            <div class="col-md-12">
-                                <img src="{{asset('/images/digi_marketing/icons/contract_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/contract.png')}}">
-                            </div>
-                            <div class="col-md-12 title-details-digi">
-                                Speed Optimization
-                            </div>
-                            <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
-                            </div>
-                        </div>
-                    </div>
+                <div class="col-md-4 third-detail text-center">
+                    <img src="{{asset('/images/rocket-extra-small-marketing.png')}}" alt="icon" class="img-fluid">
+                    <br />
+                    <span class="detail-text">
+                        Good for beginners
+                    </span>
                 </div>
-        
-                <div class="col-md-12 spacer-program"></div>
-        
-                <div class="col-md-4">
-                    <div class="card card-2 text-center">
-                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
-                            <div class="col-md-12">
-                                <img src="{{asset('/images/digi_marketing/icons/medal_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/medal.png')}}">
-                            </div>
-                            <div class="col-md-12 title-details-digi">
-                                Speed Optimization
-                            </div>
-                            <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
-                            </div>
-                        </div>
-                    </div>
+
+                <div class="col-md-2"></div>
+
+                <div class="col-md-3 fourth-detail text-center">
+                    <img src="{{asset('/images/detail-4-marketing.png')}}" alt="info-php-second" class="img-fluid">
+                    <br />
+                    <span class="detail-text">
+                        ~ 10h. of a week work from home
+                    </span>
                 </div>
-        
-                <div class="col-md-4">
-                    <div class="card card-2 text-center">
-                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
-                            <div class="col-md-12">
-                                <img src="{{asset('/images/digi_marketing/icons/payment_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/payment.png')}}">
-                            </div>
-                            <div class="col-md-12 title-details-digi">
-                                Speed Optimization
-                            </div>
-                            <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
-                            </div>
-                        </div>
-                    </div>
+
+                <div class="col-md-2"></div>
+
+                <div class="col-md-3 fifth-detail text-center">
+                    <img src="{{asset('/images/detail-5-marketing.png')}}" alt="icon" class="img-fluid">
+                    <br />
+                    <span class="detail-text">
+                        every level ends with<br/>
+                        test and project
+                    </span>
                 </div>
-        
-                <div class="col-md-4">
-                    <div class="card card-2 text-center">
-                        <div class="details-info col-md-12 d-flex flex-row flex-wrap">
-                            <div class="col-md-12">
-                                <img src="{{asset('/images/digi_marketing/icons/goal_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/goal.png')}}">
-                            </div>
-                            <div class="col-md-12 title-details-digi">
-                                Speed Optimization
-                            </div>
-                            <div class="col-md-12">
-                                Far far away, behind the word mountains, far from the countries Vokalia Separated...
-                            </div>
-                        </div>
-                    </div>
+
+                <div class="col-md-2"></div>
+
+                <div class="col-md-2"></div>
+
+                <div class="col-md-3 sixth-detail text-center">
+                    <img src="{{asset('/images/detail-6-marketing.png')}}" alt="info-php-second" class="img-fluid">
+                    <br />
+                    <span class="detail-text">
+                        Certificates:<br />
+                        Proffesional<br /> (above 80%)<br />
+                        Basic<br /> (above 50%)<br />
+                    </span>
                 </div>
+
+                <div class="col-md-2"></div>
+
+                <div class="col-md-3 seventh-detail text-center">
+                    <img src="{{asset('/images/detail-7-marketing.png')}}" alt="icon" class="img-fluid">
+                    <br />
+                    <span class="detail-text">
+                        Mentorship program
+                    </span>
+                </div>
+
+                <div class="col-md-2"></div>
             </div>
         </div>
     </div>
@@ -307,9 +291,9 @@
         </div>
     </div>
     </div>
-    <div class="col-md-12 text-center">
-        <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="{{route('application.create',['type' => $type])}}">APPLY NOW</a></span>
-    </div>
+    {{-- <div class="col-md-12 text-center">
+        <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="#">APPLY NOW</a></span>
+    </div> --}}
     </div>
     <script>
         // Set the date we're counting down to

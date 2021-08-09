@@ -11,7 +11,7 @@
             страната на автогарата)
         </p>
         <p>
-            <a href="tel:+359 88 207 6174"><i class="fas fa-mobile-alt"></i> тел.: +359 88 207 6174</a>
+            <a href="tel:+359 88 81 34 358"><i class="fas fa-mobile-alt"></i> тел.: +359 88 81 34 358</a>
         </p>
         <p>
             <a href="mailto:school@vratsasoftware.com"><i class="far fa-envelope"></i> ел.поща:

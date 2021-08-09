@@ -10,7 +10,7 @@
             <i class="fas fa-search-location"></i> Vratsa, 3000, str. Kokiche 14 (between the bus station and the Language School in Vratsa)
         </p>
         <p>
-            <a href="tel:+359 88 207 6174"><i class="fas fa-mobile-alt"></i> mobile: +359 88 207 6174</a>
+            <a href="tel:+359 88 81 34 358"><i class="fas fa-mobile-alt"></i> тел.: +359 88 81 34 358</a>
         </p>
         <p>
             <a href="mailto:school@vratsasoftware.com"><i class="far fa-envelope"></i> e-mail: school@vratsasoftware.com</a>

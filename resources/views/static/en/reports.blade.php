@@ -12,6 +12,12 @@
             <i class="far fa-file-alt"></i> Report
         </div>
         <div class="col-md-4 reports-year">
+            2020
+        </div>
+        <div class="col-md-8 reports-holder">
+            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC_Report_2020_(EN).pdf')}}" target=" _blank" class="reports-links">Vratsa Software report</a>
+        </div>
+        <div class="col-md-4 reports-year">
             2018
         </div>
         <div class="col-md-8 reports-holder">

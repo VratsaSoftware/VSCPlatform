@@ -84,6 +84,12 @@ input[type=text], textarea, .options-title, .name-course, .phone-input, #color {
 
 .homework-stats{
     font-size: 75%;
+    margin-top:3%;
+}
+
+.homework-stats-user{
+    font-size: 15px;
+    margin-bottom: 2vw;
 }
 
 .lectures-wrapper {
@@ -714,12 +720,13 @@ input[type=range]:focus {
     }
 
     .homework-time-user{
-        font-size:65%;
-        padding-left: 35%;
+        /*font-size:65%;*/
+        /*padding-left: 35%;*/
         color:#f00;
+        padding-left:6px;
     }
 
     .home-work-time-text{
-        margin-left:10%;
+        /*margin-left:10%;*/
     }
 }

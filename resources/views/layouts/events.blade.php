@@ -115,7 +115,7 @@
                                             отбори
                                         </div>
                                     @else
-                                        <a href="http://codeweek.net/" target="_blank">
+                                        <a href="https://codeweek.vratsasoftware.com/" target="_blank">
                                             <div class="event-body-text show-more-event info-btn-in">
                                                 информация
                                             </div>
@@ -391,7 +391,7 @@
                                       отбори
                                     </div>
                                     @else
-                                        <a href="http://codeweek.net/" target="_blank">
+                                        <a href="https://codeweek.vratsasoftware.com/" target="_blank">
                                             <div class="event-body-text show-more-event info-btn-in">
                                                 информация
                                             </div>

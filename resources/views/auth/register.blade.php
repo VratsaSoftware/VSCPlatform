@@ -1,97 +1,77 @@
-@extends('layouts.auth')
-
-@section('title', 'Регистрация')
+@extends('layouts.app')
 
 @section('content')
-	<div class="row g-0">
-		<div class="col-auto pe-3">
-			<img class="logo-black" src="{{ asset('assets/img/logo.png') }}">
-		</div>
-	</div>
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Register') }}</div>
 
-	<div class="login text-uppercase">
-		Регистрация
-	</div>
+                <div class="card-body">
+                    <form method="POST" action="{{ route('register') }}">
+                        @csrf
 
-	<form method="POST" action="{{ route('register') }}" id="register-form">
-		@csrf
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
-		@if (Request::has('previous'))
-			<input type="hidden" name="previous" value="{{ Request::get('previous') }}">
-		@else
-			<input type="hidden" name="previous" value="{{ URL::previous() }}">
-		@endif
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" required autofocus>
 
-		<div class="mb-3 mt-lg-5">
-			<input type="text" class="w-100 btn-edit" name="name" placeholder="Име" value="{{ old('name') }}" required autofocus>
-		</div>
+                                @if ($errors->has('name'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('name') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
-		<div class="mb-3">
-			<input type="text" class="w-100 btn-edit" name="last_name" placeholder="Фамилия" value="{{ old('last_name') }}" required autofocus>
-		</div>
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
 
-		<div class="mb-3">
-			<input type="email" class="w-100 btn-edit" id="register_email" name="email" placeholder="E-mail" value="{{ old('email') }}" required>
-		</div>
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
 
-		<div class="mb-3">
-			<input type="password" class="w-100 btn-edit" id="register_password" name="password" placeholder="Парола" autocomplete="password" required>
-		</div>
+                                @if ($errors->has('email'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
-		<div class="mb-3">
-			<input id="register_password_confirm" class="w-100 btn-edit" type="password" class="form-control" name="password_confirmation"  placeholder="Повтори парола" autocomplete="password"  required>
-		</div>
+                        <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
 
-		<div class="mb-3">
-			<label for="location">Населено място</label>
-			<select style="border-radius: 15px; background-color: #f6f9ff" id="location" class="w-100 btn-edit" name="location"></select>
-		</div>
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
 
-		<p class="sex-options">
-			@if(!empty(old('sex')) && old('sex') != 'male')
-				<div class="form-check form-check-inline">
-					<label id="male-label" for="male">Мъж</label>
-					<input class="form-radio-inputs" type="radio" name="sex" id="male" value="male">
-				</div>
-				<div class="form-check form-check-inline">
-					<label id="female-label" for="female">Жена</label>
-					<input class="form-radio-inputs" type="radio" name="sex" id="female" value="female" checked="checked">
-				</div>
-			@elseif(!empty(old('sex')) && old('sex') != 'female')
-				<div class="form-check form-check-inline">
-					<label id="male-label" for="male">Мъж</label>
-					<input class="form-radio-inputs" type="radio" name="sex" id="male" value="male" checked="checked">
-				</div>
-				<div class="form-check form-check-inline">
-					<label id="female-label" for="female">Жена</label>
-					<input class="form-radio-inputs" type="radio" name="sex" id="female" value="female">
-				</div>
-			@endif
+                                @if ($errors->has('password'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('password') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                        </div>
 
-			@if(empty(old('sex')))
-				<div class="form-check form-check-inline">
-				  	<input class="form-check-input" type="radio" name="sex" id="male" value="male">
-				  	<label class="form-check-label" for="male">
-				    	Мъж
-				  	</label>
-				</div>
-				<div class="form-check form-check-inline">
-				  	<input class="form-check-input" type="radio" name="sex" id="fmale" value="fmale">
-				  	<label class="form-check-label" for="fmale">
-				    	Жена
-				  	</label>
-				</div>
-			@endif
-		</p>
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirm Password') }}</label>
 
-		<input type="submit" id="register-btn-send" class="w-100 btn-green btn-edit d-none d-lg-block btn-margin" value="Регистрация">
-		<div class="d-flex justify-content-center d-lg-none">
-			<button class="btn-4 btn-program btn-green row g-0 align-items-center w-100 btn-margin">
-				<div class="col text-start text-5"><b>Регистрация</b></div>
-				<div class="col-auto">
-					<img src="{{ asset('assets/img/action_icon.svg') }}">
-				</div>
-			</button>
-		</div>
-	</form>
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-md-4">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Register') }}
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 @endsection

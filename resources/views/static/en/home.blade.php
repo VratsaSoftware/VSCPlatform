@@ -44,22 +44,22 @@
         <div id="carousel">
             <div class="slideshow-container">
                 {{-- title = 33 characters, text min = 125 / max = 290 --}}
-                <div class="mySlides" data-src="{{asset('/images/home-top-slider/hack.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
-                    <img src="" width="100%" alt="events">
-                    <div class="text text-wrap-gallery col-md-12 text-center">
-                        <p>
-                            <span class="slider-title">Hack Vratsa</span>
-                        <p />
-                        <p>
-                        <p class="slider-subtitle-content">
-                            All students, students and workers with interest in programming, design and entrepreneurship can participate in HackVratsa. The goal of the initiative is to team together to formulate a concept for a software product and to start work on its development.
-                        </p>
-                        <br/>
+                <!--<div class="mySlides" data-src="{{asset('/images/home-top-slider/hack.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">-->
+                <!--    <img src="" width="100%" alt="events">-->
+                <!--    <div class="text text-wrap-gallery col-md-12 text-center">-->
+                <!--        <p>-->
+                <!--            <span class="slider-title">Hack Vratsa</span>-->
+                <!--        <p />-->
+                <!--        <p>-->
+                <!--        <p class="slider-subtitle-content">-->
+                <!--            All students, students and workers with interest in programming, design and entrepreneurship can participate in HackVratsa. The goal of the initiative is to team together to formulate a concept for a software product and to start work on its development.-->
+                <!--        </p>-->
+                <!--        <br/>-->
 
-                        <span class="title-btns-content"><a class="sub-btn" href="http://hack.vratsa.net/" target=" _blank">read more</a></span>
-                        </p>
-                    </div>
-                </div>
+                <!--        <span class="title-btns-content"><a class="sub-btn" href="http://hack.vratsa.net/" target=" _blank">read more</a></span>-->
+                <!--        </p>-->
+                <!--    </div>-->
+                <!--</div>-->
 
                 <div class="mySlides" data-src="{{asset('/images/home-top-slider/cws_fb_cover2 (1).png')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                     <img src="" width="100%" alt="events">
@@ -70,32 +70,32 @@
                         <p>
                         <p class="slider-subtitle-content text-center">
                             "The Nest" is the first shared workspace in Northwestern Bulgaria and is a project of <br/> "Vratsa Software Society."<br/>
-                                                                <br/>We are currently working on its creation!
+                                                                <!--<br/>We are currently working on its creation!-->
                         </p>
                         <br/>
 
-                        <span class="title-btns-content"><a class="sub-btn" href="http://gnezdoto.vratsasoftware.com/" target=" _blank">read more</a></span>
+                        <span class="title-btns-content"><a class="sub-btn" href="http://nestcoworking.bg/" target=" _blank">read more</a></span>
                         </p>
                     </div>
                 </div>
 
-                <div class="mySlides" data-src="{{asset('/images/home-top-slider/arduino.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
-                    <img src="" width="100%" alt="events">
-                    <div class="text text-wrap-gallery col-md-12 text-center">
-                        <p>
-                            <span class="slider-title">Arduino</span>
-                        <p />
-                        <p>
-                        <p class="slider-subtitle-content">
-                            Soon we start an Arduino course!<br />
-                                                                 Arduino is one of the most popular platforms for robotics hobby. It is a microcontroller with a huge user community, and over the years has been used for thousands of diverse projects.
-                        </p>
-                        <br/>
+                <!--<div class="mySlides" data-src="{{asset('/images/home-top-slider/arduino.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">-->
+                <!--    <img src="" width="100%" alt="events">-->
+                <!--    <div class="text text-wrap-gallery col-md-12 text-center">-->
+                <!--        <p>-->
+                <!--            <span class="slider-title">Arduino</span>-->
+                <!--        <p />-->
+                <!--        <p>-->
+                <!--        <p class="slider-subtitle-content">-->
+                <!--            Soon we start an Arduino course!<br />-->
+                <!--                                                 Arduino is one of the most popular platforms for robotics hobby. It is a microcontroller with a huge user community, and over the years has been used for thousands of diverse projects.-->
+                <!--        </p>-->
+                <!--        <br/>-->
 
-                        <span class="title-btns-content"><a class="sub-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSf5-bKSKqJcMDONIrp93ggmYvaW84x3DR9e2em-uQf5LhH6aA/viewform" target=" _blank">apply</a></span>
-                        </p>
-                    </div>
-                </div>
+                <!--        <span class="title-btns-content"><a class="sub-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSf5-bKSKqJcMDONIrp93ggmYvaW84x3DR9e2em-uQf5LhH6aA/viewform" target=" _blank">apply</a></span>-->
+                <!--        </p>-->
+                <!--    </div>-->
+                <!--</div>-->
 
                 <div class="mySlides" data-src="{{asset('/images/home-top-slider/mindhub.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                     <img src="" width="100%" alt="events">
@@ -140,11 +140,11 @@
             <br>
 
             <div id="thumbnails" class="col-md-12">
-                <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/hack_thumb.png')}}" width="100%" alt="gallery-nav"></span>
-                <span class="dot" onclick="currentSlide(2)"><img src="{{asset('/images/home-top-slider/gnezdoto_logo_cropped.jpg')}}" width="100%" alt="gallery-nav"></span>
-                <span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/arduino_logo.png')}}" width="100%" alt="gallery-nav"></span>
-                <span class="dot" onclick="currentSlide(4)"><img src="{{asset('/images/home-top-slider/mind-hub-crop.png')}}" width="100%" alt="gallery-nav"></span>
-                <span class="dot" onclick="currentSlide(5)"><img src="{{asset('/images/home-top-slider/vsc-thumb-big-2.png')}}" width="100%" alt="gallery-nav"></span>
+                <!--<span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/hack_thumb.png')}}" width="100%" alt="gallery-nav"></span>-->
+                <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/gnezdoto_logo_cropped.jpg')}}" width="100%" alt="gallery-nav"></span>
+                <!--<span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/arduino_logo.png')}}" width="100%" alt="gallery-nav"></span>-->
+                <span class="dot" onclick="currentSlide(2)"><img src="{{asset('/images/home-top-slider/mind-hub-crop.png')}}" width="100%" alt="gallery-nav"></span>
+                <span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/vsc-thumb-big-2.png')}}" width="100%" alt="gallery-nav"></span>
             </div>
 
         </div>
@@ -229,11 +229,11 @@
                     </div>
                 </div>
                 <div class="p-6 col-md-6 text-center main-event-second">
-                    <a href="https://hunt.vratsa.net/" target=" _blank">
+                    <a href="" target=" _blank">
                         <img src="" data-img="{{asset('/images/home-events/th.jpg')}}" alt="events">
                     </a>
                     <div class="event-title-top">
-                        <a href="https://hunt.vratsa.net/" target=" _blank" class="event-top-link">TreasureHunt</a>
+                        <a href="" target=" _blank" class="event-top-link">TreasureHunt</a>
                     </div>
                 </div>
                 <div class="p-6 col-md-6 text-center main-event-first">
@@ -290,11 +290,11 @@
                         </div>
                     </div>
                     <div>
-                        <a href="http://hunt.vratsa.net/" target=" _blank" class="event-top-link">
+                        <a href="" target=" _blank" class="event-top-link">
                             <img src="{{asset('/images/home-events/th.jpg')}}" alt="events">
                         </a>
                         <div class="event-title-top-small">
-                            <a href="http://hunt.vratsa.net/" target=" _blank" class="event-top-link">TreasureHunt</a>
+                            <a href="" target=" _blank" class="event-top-link">TreasureHunt</a>
                         </div>
                     </div>
                     <div>
@@ -330,7 +330,7 @@
                 <div class="p-3 col-md-3 sponsors-1"><a href="https://www.us4bg.org/" target=" _blank"><img src="{{asset('/images/partners/us4bg-logo.png')}}" alt="us4bg-logo" class="img-fluid"></a></div>
                 <div class="p-3 col-md-3 sponsors-2"><a href="https://nova.bg/promyanata" target=" _blank"><img src="{{asset('/images/partners/promianata-logo.png')}}" alt="promianata-logo" class="img-fluid"></a></div>
                 <div class="p-3 col-md-3 sponsors-3"><a href="http://www.vratza.bg/" target=" _blank"><img src="{{asset('/images/partners/vratsa-municipality-logo.jpg')}}" alt="vratsa-municipality-logo" class="img-fluid"></a></div>
-                <div class="p-3 col-md-3 sponsors-4"><a href="https://www.telerikacademy.com/" target=" _blank"><img src="{{asset('/images/partners/Telerik_Academy_Logo.png')}}" alt="Telerik_Academy_Logo" class="img-fluid"></a></div>
+                <div class="p-3 col-md-3 sponsors-4"><a href="https://www.telerikacademy.com/school/" target=" _blank"><img src="{{asset('/images/partners/Telerik-Academy-School.png')}}" alt="Telerik_Academy_Logo" class="img-fluid"></a></div>
 
                 <div class="p-3 col-md-3 sponsors-5" data-img="{{asset('/images/partners/mindhub-logo.png')}}"><a href="https://mindhub.bg/" target=" _blank"><img src=" " alt="mindhub-logo" class="img-fluid"></a></div>
                 <div class="p-3 col-md-3 sponsors-6" data-img="{{asset('/images/partners/CDB-logo.png')}}"><a href="https://www.coderdojo.bg/" target=" _blank"><img src=" " alt="Coder Dojo Bulgaria" class="img-fluid"></a></div>

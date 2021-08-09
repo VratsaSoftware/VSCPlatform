@@ -17,6 +17,8 @@
             <div class="dropdown-content">
                 <a href="{{route('programmingCourses')}}">Програмиране</a>
                 <a href="{{route('digitalMarketing')}}">Дигитален Маркетинг</a>
+                <a href="{{route('design')}}">Дизайн</a>
+                <a href="{{route('qualityAssurance')}}">Софтуерно тестване</a>
             </div>
         </li>
         <li>

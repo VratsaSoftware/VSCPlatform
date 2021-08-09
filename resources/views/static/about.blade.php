@@ -105,16 +105,16 @@
 
             <div class="col-md-4 leaders">
                 <div class="team-holder">
-                    <img src="{{asset('/images/men-no-avatar.png')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team_pictures/e_smaller_original.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
-                        Тонко Влахов
+                        Емилия Иванова
                     </div>
                     <div class="team-txt">
-                        Тонко е завършил политология в УНСС. Присъединява се към екипа на Враца софтуер през 2016 и от тогава се занимава с организационно развитие, маркетинг и организиране на събития. Един от капитаните на CoderDojo Bulgaria. Запален меломан и любител на кино изкуството и комиксите.
+                        Емилия е завършила Предучилищна и начална училищна педагогика в СУ "Св. Климент Охридски" и е успешно реализиран учител. Присъединява се към екипа на Враца Софтуер през 2020 и се занимава с организационните дейности. Запален читател е и също така обича да прекарва времето си извън градския шум.
                     </div>
                     <div class="team-contact">
                         <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid">
-                        <span> tonko@vratsasoftware.com</span>
+                        <span> epetrovai@vratsasoftware.com</span>
                     </div>
                 </div>
             </div>

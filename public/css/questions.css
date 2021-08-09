@@ -29,7 +29,7 @@ body{
 }
 
 .questions-holder,.current-question{
-    height: 80vh;
+    height: 85vh;
     overflow-y:auto;
 }
 

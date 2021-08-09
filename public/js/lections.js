@@ -8,19 +8,19 @@ $(function () {
             var parsedVideo =  arrayUrls[index].split("=");
             if(parsedVideo[1] !== undefined){
                 var noList = parsedVideo[1].split('&')[0];
-            }else {
+            }else{
                 noList = parsedVideo;
             }
             var embeddedUrl = "https://www.youtube.com/embed/"+noList;
-            if($('.copy > p').find('iframe').length){
-                $('.copy > p').find('iframe').after('<iframe width="auto" height="auto" src="" class="video-'+index+'"></iframe>')
-                $('.copy > p').find('.video-'+index).attr('src',embeddedUrl);
-            }else{
-                $('.copy > p').html('<iframe width="auto" height="auto" src="" class="video-'+index+'"></iframe>');
-                $('.copy > p').find('.video-'+index).attr('src',embeddedUrl);
-            }
-            parsedVideo = '';
-            embeddedUrl = '';
+          if($('.copy > p').find('iframe').length){
+              $('.copy > p').find('iframe').after('<iframe allowfullscreen="0" width="auto" height="auto" src="" class="video-'+index+'"></iframe>')
+              $('.copy > p').find('.video-'+index).attr('src',embeddedUrl);
+          }else{
+              $('.copy > p').html('<iframe allowfullscreen="0" width="auto" height="auto" src="" class="video-'+index+'"></iframe>');
+              $('.copy > p').find('.video-'+index).attr('src',embeddedUrl);
+          }
+          parsedVideo = '';
+          embeddedUrl = '';
         });
         $('.modal-header').find('h2').html($(this).next('.video-holder').find('.video-title').html());
         $('#modal').show();
@@ -72,7 +72,7 @@ $(function () {
         $('.modal-header > h2').text('');
         $('.modal-header > h2').text('Изпрати Домашно');
         $('.copy > p').html('');
-        $('.copy > p').html('<form action="' + action + '" method="POST" id="homework-form" enctype="multipart/form-data" files="true"><input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '"><input type="hidden" name="lection" id="lection" value="' + lection + '"><label>Файл:</label><br><input type="file" name="homework" id="homework">(max:50mb,extension:zip,rar,txt)</form>');
+        $('.copy > p').html('<form action="' + action + '" method="POST" id="homework-form" enctype="multipart/form-data" files="true"><input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '"><input type="hidden" name="lection" id="lection" value="' + lection + '"><label>Файл:</label><br><input type="file" name="homework" id="homework">(max:50mb,extension:zip)</form>');
         $('.modal-content > .cf > div').html('<input class="btn close-modal send-homework-form" type="submit" name="submit" value="Изпрати">');
 
         $('.send-homework-form').on('click', function () {

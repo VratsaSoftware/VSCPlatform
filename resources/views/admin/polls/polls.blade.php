@@ -1,10 +1,5 @@
 @extends('layouts.template')
 @section('title', 'Анкети')
-
-@section('head')
-    <link href="{{ asset('css/lection/lection.css') }}" rel="stylesheet" />
-@endsection
-
 @section('content')
     <div class="col-md-12">
         @if (!empty(Session::get('success')))

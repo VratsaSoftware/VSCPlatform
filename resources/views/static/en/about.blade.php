@@ -101,16 +101,16 @@
 
             <div class="col-md-4 leaders">
                 <div class="team-holder">
-                    <img src="{{asset('/images/men-no-avatar.png')}}" alt="team-photo" class="img-fluid team-pic">
+                    <img src="{{asset('/team_pictures/e_smaller_original.jpg')}}" alt="team-photo" class="img-fluid team-pic">
                     <div class="team-title">
-                        Tonko Vlahov
+                        Emilia Ivanova
                     </div>
                     <div class="team-txt">
-                        Tonko graduated from the University of National and World Economy. He joined Vratsa Software’s team three years ago and since then he has been involved in organizational development, marketing and event management. One of the captains CoderDojo Bulgaria. He loves listening to music, watching movies and reading comics.
+                       Emilia graduated in Preschool and Primary School Pedagogy at Sofia University "St. Kliment Ohridski", and has been working as a successful teacher for several years in Sofia and Vratsa. Emilia became part of the Vratsa Software team in 2020 and is involved in organizational activities. She is an avid reader and also enjoys spending time outside the city noise.
                     </div>
                     <div class="team-contact">
                         <img src="{{asset('/images/mail-icon.png')}}" alt="mail-icon" class="img-fluid">
-                        <span> tonko@vratsasoftware.com</span>
+                        <span> epetrovai@vratsasoftware.comm</span>
                     </div>
                 </div>
             </div>

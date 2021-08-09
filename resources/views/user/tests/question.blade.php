@@ -17,6 +17,9 @@
     </br/>
     <span class="timer-programming" data-time="{{$finishTime}}"><img src="{{asset('/images/loaders/load-31.gif')}}"
                                                                      width="5%" alt="timer"/></span>
+    <div class="col-md-11 text-right" style="position:absolute;margin-top:-3%;">
+        <a href="{{route('test.submit')}}"><button class="btn btn-warning" id="submit-test-btn">ПРЕДАЙ</button></a>
+    </div>
 </div>
 <div class="col-md-12 d-flex flex-row flex-wrap main-holder">
     <div class="col-md-9 current-question">
@@ -241,9 +244,6 @@
                 </div>
             </div>
         @endforeach
-    </div>
-    <div class="col-md-11 text-right">
-        <a href="{{route('test.submit')}}"><button class="btn btn-outline-warning" id="submit-test-btn">ПРЕДАЙ</button></a>
     </div>
 </div>
 </div>

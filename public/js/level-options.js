@@ -194,17 +194,17 @@ $(function () {
                 noList = parsedVideo;
             }
             var embeddedUrl = "https://www.youtube.com/embed/"+noList;
-            if($('.copy > p').find('iframe').length){
-                $('.copy > p').find('iframe').after('<iframe width="auto" height="auto" src="" class="video-'+index+'"></iframe>')
-                $('.copy > p').find('.video-'+index).attr('src',embeddedUrl);
-            }else{
-                $('.copy > p').html('<iframe width="auto" height="auto" src="" class="video-'+index+'"></iframe>');
-                $('.copy > p').find('.video-'+index).attr('src',embeddedUrl);
-            }
-            parsedVideo = '';
-            embeddedUrl = '';
+          if($('.copy > p').find('iframe').length){
+              $('.copy > p').find('iframe').after('<iframe width="auto" height="auto" src="" class="video-'+index+'"></iframe>')
+              $('.copy > p').find('.video-'+index).attr('src',embeddedUrl);
+          }else{
+              $('.copy > p').html('<iframe width="auto" height="auto" src="" class="video-'+index+'"></iframe>');
+              $('.copy > p').find('.video-'+index).attr('src',embeddedUrl);
+          }
+          parsedVideo = '';
+          embeddedUrl = '';
         });
-
+        
         $('.copy > p').append('<form action="' + action + '" id="change_video" method="POST"><input type="hidden" name="_token" value="' + $('meta[name="csrf-token"]').attr('content') + '"><input name="_method" type="hidden" value="PUT"><label>Линк:</label><br><input type="text" name="video" id="video" value="' + $(this).attr('data') + '">');
         $('.modal-header').find('h2').html($(this).next('.video-holder').find('.video-title').html());
         $('.modal-content > .cf > div').html('<input class="btn close-modal" type="submit" name="submit" id="change_video_btn" value="Изпрати"></form>');

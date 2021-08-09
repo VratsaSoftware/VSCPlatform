@@ -44,6 +44,55 @@
         <div id="carousel">
             <div class="slideshow-container">
                 {{-- title = 33 characters, text min = 125 / max = 290 --}}
+                <!--<div class="mySlides" data-src="{{asset('/images/home-top-slider/online_course_big2.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">-->
+                <!--    <img src="" width="100%" alt="events">-->
+                <!--    <div class="text text-wrap-gallery col-md-12 text-center">-->
+                <!--        <p>-->
+                <!--            <span class="slider-title">Безплатни онлайн курсове</span>-->
+                <!--        </p>-->
+                <!--        <p>-->
+                <!--        <p class="slider-subtitle-content">-->
+                <!--            Искаш да стартираш собствен бизнес, но незнаеш как? Може би пък търсиш начин да смениш професията си бързо и лесно? Ако е така, значи нашите онлайн курсове са именно за теб! Сега е идеалния момент да го направиш, разбери повече на фейсбук страницата ни!-->
+                <!--        </p>-->
+                <!--        <br/>-->
+
+                <!--        <span class="title-btns-content"><a class="sub-btn" href="https://www.facebook.com/vratsasoftware/" target=" _blank">виж още</a></span>-->
+                <!--        </p>-->
+                <!--    </div>-->
+                <!--</div>-->
+                <!--<div class="mySlides" data-src="{{asset('/images/home-top-slider/digi_20_20.jpeg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">-->
+                <!--    <img src="" width="100%" alt="events">-->
+                <!--    <div class="text text-wrap-gallery col-md-12 text-center">-->
+                <!--        <p>-->
+                <!--            <span class="slider-title">Нов курс по Дигитален Маркетинг</span>-->
+                <!--        </p>-->
+                <!--        <p>-->
+                <!--        <p class="slider-subtitle-content">-->
+                <!--            Търсиш вълнуваща работа в дигиталната сфера? Искаш да работиш за клиенти от България и света или да ползваш наученото за своя собствен бизнес? Кандидатствай за курса ни по дигитален маркетинг до 20 февруари.-->
+                <!--        </p>-->
+                <!--        <br/>-->
+
+                <!--        <span class="title-btns-content"><a class="sub-btn" href="{{url('/digital-marketing')}}" target=" _blank">виж още</a></span>-->
+                <!--        </p>-->
+                <!--    </div>-->
+                <!--</div>-->
+                <!--<div class="mySlides" data-src="{{asset('/images/home-top-slider/konkurs1.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">-->
+                <!--    <img src="" width="100%" alt="events">-->
+                <!--    <div class="text text-wrap-gallery col-md-12 text-center">-->
+                <!--        <p>-->
+                <!--            <span class="slider-title">Изложба на тема “Графичните символи на Враца”</span>-->
+                <!--        </p>-->
+                <!--        <p>-->
+                <!--        <p class="slider-subtitle-content">-->
+                <!--            Враца Софтуер Общество и Младежки дом Враца, с подкрепата на Програма “Ти и Lidl за по-добър живот” организират за първа година благотворителна ОНЛАЙН изложба на тема “Графичните символи на Враца”.-->
+                <!--        </p>-->
+                <!--        <br/>-->
+
+                <!--        <span class="title-btns-content"><a class="sub-btn" href="https://www.facebook.com/vratsasoftware" target=" _blank">виж още</a></span>-->
+                <!--        </p>-->
+                <!--    </div>-->
+                <!--</div>-->
+
                 <div class="mySlides" data-src="{{asset('/images/home-top-slider/cws_fb_cover2 (1).png')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                     <img src="" width="100%" alt="events">
                     <div class="text text-wrap-gallery col-md-12 text-center">
@@ -53,14 +102,32 @@
                         <p>
                         <p class="slider-subtitle-content">
                             "Гнездото" е първото споделено работно пространство в Северозападна България и е проект на <b>"Враца софтуер общество".</b>
-                            <br />В момента работим по неговото създаване!
+                            <!--<br />В момента работим по неговото създаване!-->
                         </p>
                         <br/>
 
-                        <span class="title-btns-content"><a class="sub-btn" href="http://gnezdoto.vratsasoftware.com/" target=" _blank">виж още</a></span>
+                        <span class="title-btns-content"><a class="sub-btn" href="http://nestcoworking.bg/" target=" _blank">виж още</a></span>
                         </p>
                     </div>
                 </div>
+
+                <!--<div class="mySlides" data-src="{{asset('/images/home-top-slider/arduino.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">-->
+                <!--    <img src="" width="100%" alt="events">-->
+                <!--    <div class="text text-wrap-gallery col-md-12 text-center">-->
+                <!--        <p>-->
+                <!--            <span class="slider-title">Arduino</span>-->
+                <!--        </p>-->
+                <!--        <p>-->
+                <!--        <p class="slider-subtitle-content">-->
+                <!--            Скоро стартираме курс по Arduino!-->
+                <!--            Arduino е една от най-разпространените платформи за хоби роботика. Това е микроконтролер с огромно общество от потребители, като през годините е използван за хиляди разнообразни проекти.-->
+                <!--        </p>-->
+                <!--        <br/>-->
+
+                <!--        <span class="title-btns-content"><a class="sub-btn" href="https://docs.google.com/forms/d/e/1FAIpQLSf5-bKSKqJcMDONIrp93ggmYvaW84x3DR9e2em-uQf5LhH6aA/viewform" target=" _blank">кандидатствай</a></span>-->
+                <!--        </p>-->
+                <!--    </div>-->
+                <!--</div>-->
 
                 <div class="mySlides" data-src="{{asset('/images/home-top-slider/mindhub.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                     <img src="" width="100%" alt="events">
@@ -70,8 +137,7 @@
                         </p>
                         <p>
                         <p class="slider-subtitle-content">
-                            MindHub e първият иновативен клуб по програмиране за деца на възраст между 6 и 11 години.
-                            През учебната 2018/2019г за първи път и във Враца ще се провеждат курсове на Майнд хъб (mindhub).
+                            MindHub e първият иновативен клуб по програмиране за деца на възраст между 6 и 11 години. За трета поредна година във Враца ще се провеждат курсове на Майнд хъб (mindhub).
                         </p>
                         <br/>
 
@@ -80,20 +146,20 @@
                     </div>
                 </div>
 
-                <div class="mySlides" data-src="{{asset('/images/home-top-slider/cws_fb_cover2 (1).png')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
+                <div class="mySlides" data-src="{{asset('/images/home-top-slider/programming-pic.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">
                     <img src="" width="100%" alt="events">
                     <div class="text text-wrap-gallery col-md-12 text-center">
                         <p>
-                            <span class="slider-title">Гнездото</span>
+                            <span class="slider-title">9-месечни курсове по програмиране</span>
                         </p>
                         <p>
                         <p class="slider-subtitle-content">
-                            "Гнездото" е първото споделено работно пространство в Северозападна България и е проект на <b>"Враца софтуер общество".</b>
-                            <br />В момента работим по неговото създаване!
+                            Обучението ще ви помогне да придобиете основни познания по програмиране и да имате възможност да започнете стаж в софтуерна компания във Враца!
+                            Към момента 30 човека завършили курсовете работят в ИТ сферата във Враца и 4 компании отвориха офиси в града.
                         </p>
                         <br/>
 
-                        <span class="title-btns-content"><a class="sub-btn" href="http://gnezdoto.vratsasoftware.com/" target=" _blank">виж още</a></span>
+                        <span class="title-btns-content"><a class="sub-btn" href="{{route('programmingCourses')}}">виж още</a></span>
                         </p>
                     </div>
                 </div>
@@ -105,7 +171,11 @@
             <br>
 
             <div id="thumbnails" class="col-md-12">
+                <!--<span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/hack_thumb.png')}}" width="100%" alt="gallery-nav"></span>-->
+                <!--<span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/online_course_small2.jpg')}}" width="100%" alt="gallery-nav"></span>-->
+                <!--<span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/konkurs_small.jpg')}}" width="100%" alt="gallery-nav"></span>-->
                 <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/gnezdoto_logo_cropped.jpg')}}" width="100%" alt="gallery-nav"></span>
+                <!--<span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/arduino_logo.png')}}" width="100%" alt="gallery-nav"></span>-->
                 <span class="dot" onclick="currentSlide(2)"><img src="{{asset('/images/home-top-slider/mind-hub-crop.png')}}" width="100%" alt="gallery-nav"></span>
                 <span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/vsc-thumb-big-2.png')}}" width="100%" alt="gallery-nav"></span>
             </div>
@@ -193,11 +263,11 @@
                     </div>
                 </div>
                 <div class="p-6 col-md-6 text-center main-event-second">
-                    <a href="https://hunt.vratsa.net/" target=" _blank">
+                    <a href="" target=" _blank">
                         <img src="" data-img="{{asset('/images/home-events/th.jpg')}}" alt="events">
                     </a>
                     <div class="event-title-top">
-                        <a href="{{asset('/images/home-events/th.jpg')}}" target=" _blank" class="event-top-link">TreasureHunt</a>
+                        <a href="" target=" _blank" class="event-top-link">TreasureHunt</a>
                     </div>
                 </div>
                 <div class="p-6 col-md-6 text-center main-event-first">
@@ -292,21 +362,23 @@
             <!-- only 4 visible -->
             <div class="col-md-12 flex-wrap sponsors-logos b-description_readmore js-description_readmore text-center more-sponsors">
                 <div class="p-3 col-md-3 sponsors-1"><a href="https://www.us4bg.org/" target=" _blank"><img src="{{asset('/images/partners/us4bg-logo.png')}}" alt="us4bg-logo" class="img-fluid"></a></div>
-                <div class="p-3 col-md-3 sponsors-2"><a href="https://nova.bg/promyanata" target=" _blank"><img src="{{asset('/images/partners/promianata-logo.png')}}" alt="promianata-logo" class="img-fluid"></a></div>
-                <div class="p-3 col-md-3 sponsors-3"><a href="http://www.vratza.bg/" target=" _blank"><img src="{{asset('/images/partners/vratsa-municipality-logo.jpg')}}" alt="vratsa-municipality-logo" class="img-fluid"></a></div>
-                <div class="p-3 col-md-3 sponsors-4"><a href="https://www.telerikacademy.com/" target=" _blank"><img src="{{asset('/images/partners/Telerik_Academy_Logo.png')}}" alt="Telerik_Academy_Logo" class="img-fluid"></a></div>
+                <div class="p-3 col-md-3 sponsors-2"><a href="https://bulgaria.reachforchange.org/bg/da-otvorim-kraga" target=" _blank"><img src="{{asset('/images/partners/OTC-Logo-BG-V-DarkBlue.png')}}" alt="us4bg-logo" class="img-fluid"></a></div>
+                <div class="p-3 col-md-3 sponsors-3"><a href="https://nova.bg/promyanata" target=" _blank"><img src="{{asset('/images/partners/promianata-logo.png')}}" alt="promianata-logo" class="img-fluid"></a></div>
+                <div class="p-3 col-md-3 sponsors-4"><a href="http://www.vratza.bg/" target=" _blank"><img src="{{asset('/images/partners/vratsa-municipality-logo.jpg')}}" alt="vratsa-municipality-logo" class="img-fluid"></a></div>
+                <div class="p-3 col-md-3 sponsors-5"><a href="https://www.telerikacademy.com/school/" target=" _blank"><img src="{{asset('/images/partners/Telerik-Academy-School.png')}}" alt="Telerik_Academy_Logo" class="img-fluid"></a></div>
 
-                <div class="p-3 col-md-3 sponsors-5" data-img="{{asset('/images/partners/mindhub-logo.png')}}"><a href="https://mindhub.bg/" target=" _blank"><img src=" " alt="mindhub-logo" class="img-fluid"></a></div>
-                <div class="p-3 col-md-3 sponsors-6" data-img="{{asset('/images/partners/CDB-logo.png')}}"><a href="https://www.coderdojo.bg/" target=" _blank"><img src=" " alt="Coder Dojo Bulgaria" class="img-fluid"></a></div>
-                <div class="p-3 col-md-3 sponsors-7" data-img="{{asset('/images/partners/movebg-logo2.png')}}"><a href="https://move.bg/" target=" _blank"><img src=" " alt="movebg-logo" class="img-fluid"></a></div>
-                <div class="p-3 col-md-3 sponsors-8" data-img="{{asset('/images/partners/NMD-Logo.gif')}}"><a href="http://nmd.bg/" target=" _blank"><img src=" " alt="NMD-Logo" class="img-fluid"></a></div>
-
-                <div class="col-md-3"></div>
+                <div class="p-3 col-md-3 sponsors-6" data-img="{{asset('/images/partners/mindhub-logo.png')}}"><a href="https://mindhub.bg/" target=" _blank"><img src=" " alt="mindhub-logo" class="img-fluid"></a></div>
+                <div class="p-3 col-md-3 sponsors-7" data-img="{{asset('/images/partners/CDB-logo.png')}}"><a href="https://www.coderdojo.bg/" target=" _blank"><img src=" " alt="Coder Dojo Bulgaria" class="img-fluid"></a></div>
+                <div class="p-3 col-md-3 sponsors-8" data-img="{{asset('/images/partners/movebg-logo2.png')}}"><a href="https://move.bg/" target=" _blank"><img src=" " alt="movebg-logo" class="img-fluid"></a></div>
+                
+                <div class="col-md-2"></div>
+                <div class="p-3 col-md-3 sponsors-9" data-img="{{asset('/images/partners/NMD-Logo.gif')}}"><a href="http://nmd.bg/" target=" _blank"><img src=" " alt="NMD-Logo" class="img-fluid"></a></div>
+                
+                <div class="p-3 col-md-3 sponsors-10" data-img="{{asset('/images/partners/Startup-logo-main.png')}}"><a href="http://startup.bg/" target=" _blank"><img src=" " alt="Startup-logo-main" class="img-fluid"></a></div>
 
                 <div class="p-3 col-md-3 sponsors-9" data-img="{{asset('/images/partners/eSkills-For-Future-logo.png')}}"><a href="http://eskills.tto-bait.bg/" target=" _blank"><img src=" " alt="eSkills-For-Future-logo" class="img-fluid"></a></div>
-
-                <div class="p-3 col-md-3 sponsors-10" data-img="{{asset('/images/partners/Startup-logo-main.png')}}"><a href="http://startup.bg/" target=" _blank"><img src=" " alt="Startup-logo-main" class="img-fluid"></a></div>
-                <div class="col-md-3"></div>
+                
+                <div class="col-md-2"></div>
             </div>
             <div class="col-md-5">
 

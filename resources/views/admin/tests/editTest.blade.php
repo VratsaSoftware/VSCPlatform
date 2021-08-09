@@ -181,6 +181,7 @@
                 <input type="hidden" name="test_id" value="{{$test->id}}">
                 <img src="{{asset('/images/profile/add-icon.png')}}" alt="add" class="img-fluid add-by-mail">
             </form>
+            <p class="col-md-12"><button id="refresh" class="btn btn-success">refresh</button></p>
         </div>
     </div>
     <div class="col-md-12 d-flex flex-row flex-wrap text-center all-students-pool" id="assigned">
@@ -245,6 +246,9 @@
         $(function(){
             var addedStudents = $('.hidden-users-ids').html();
             $('#create_test').append(addedStudents);
+            $('#refresh').on('click', function(){
+               location.reload(); 
+            });
         });
     </script>
 @endsection

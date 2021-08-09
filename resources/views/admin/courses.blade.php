@@ -1,10 +1,5 @@
 @extends('layouts.template')
 @section('title', 'Admin Курсове')
-
-@section('head')
-    <link href="{{ asset('css/lection/lection.css') }}" rel="stylesheet" />
-@endsection
-
 @section('content')
 <div class="content-wrap">
   <div class="section">
@@ -45,6 +40,9 @@
         @forelse($pastCourses as $course)
             <div class="col-md-6">
                 <div class="event-title col-md-12 title-signed">{{$course->name}}</div>
+                <div class="col-md-12 text-right">
+                            <a href="{{route('course.cert.create')}}">Сертификат</a>
+                        </div>
                 <div class="event-body col-md-12">
                   <a href="{{route('lecturer.show.course',['course' => $course->id])}}">
                     <div class="event-body-text button-signed">

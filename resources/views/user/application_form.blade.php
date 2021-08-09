@@ -1,201 +1,320 @@
 @extends('layouts.template')
 @section('title', 'Форма за кандидатстване')
-
-@section('head')
-    <link href="{{ asset('css/applications.css') }}" rel="stylesheet" />
-@endsection
-
 @section('content')
-<!-- Mobil -->
-<div class="col-auto d-lg-none">
-    <div class="row card-mobil g-0 fw-normal mb-3">
-        <form action="{{route('application.store')}}" method="POST" class="col-md-12" id="application" name="application" enctype="multipart/form-data">
-            {{ csrf_field() }}
-            @if (collect(request()->segments())->last() !== 'create')
-                <input type="hidden" name="source_url" value="{{collect(request()->segments())->last()}}">
-            @endif
-            @include('user.application-left')
-            <!-- right side -->
-            <div id="right-side" class="col-xl pt-md-5 mt-md-4 tab-content edit-content">
-                <!-- flash message -->
-                @include('flash-message')
-                <!-- Single lection content -->
-                <div class="tab-pane module-right fade show active mt-xl-2 pt-xl-1" id="lection-1" role="tabpanel" aria-labelledby="lection-1-tab">
-                    <div class="tab-body-electronic position-relative">
-                        <span class="close d-lg-none position-absolute">&times;</span>
-                        <div class="row g-0 d-lg-none">
-                            <div class="col">
-                                <div class="text-title-module">
-                                    <b>Електронна форма</b>
-                                    <br>
-                                    <p class="text-title-module-sm d-lg-none">{{ $applicationFor->count() ? $applicationFor->first()->name : 'Кандидатстване' }}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row g-0 d-flex justify-content-center">
-                            <div class="col-auto d-lg-none mt-5 mb-5">
-                                <img src="{{ asset('assets/img/Elektronna_forma.svg') }}">
-                            </div>
-                        </div>
-                        <div class="row g-0">
-                            <div class="col-auto title-electonic mt-3 d-none d-lg-block">
-                                1. ЕЛЕКТРОННА ФОРМА
-                            </div>
-                            <div class="row g-0">
-                                <div class="col-auto text-info-elect star-elect mt-4 d-none d-lg-block">
-                                    <i class="fas fa-star"></i>
-                                </div>
-                                <div class="col-auto text-info-elect mt-4 ms-4 d-none d-lg-block">
-                                    Информация взета от профила
-                                </div>
-                            </div>
-                            <div class="row g-0 module-top">
-                                <div class="col form-app-position">
-                                    <input type="text" name="names" class="form-module input-automatically-filled form-elec-input me-lg-5 mb-4-input me-3-input" placeholder="Име и фамилия" aria-describedby="addon-wrapping" value="{{ Auth::user()->name . ' ' . Auth::user()->last_name }}" disabled required>
-
-                                    <input type="text" minlength="10" maxlength="10" name="phone" class="form-module form-elec-input mb-4-input mt-lg-0 mt-4" placeholder="Телефон" aria-describedby="addon-wrapping" required>
-                                </div>
-                            </div>
-                            <div class="row g-0 module-top">
-                                <div class="col form-app-position">
-                                    <input type="email" name="email" class="form-module input-automatically-filled form-elec-input me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" placeholder="Имейл" aria-describedby="addon-wrapping" value="{{ Auth::user()->email }}" disabled required>
-
-                                    <input type="number" name="userage" class="form-module {!! Auth::user()->dob ? 'input-automatically-filled' : '' !!} form-elec-input mb-4-input mt-lg-0 mt-4" placeholder="Възраст" aria-describedby="addon-wrapping" value="{{ Auth::user()->dob ? $userBirthDate : null }}" {!! Auth::user()->dob ? 'disabled' : '' !!} required>
-                                </div>
-                            </div>
-                            <div class="row g-0 module-top">
-                                <div class="col form-app-position">
-                                    @if (is_null($applicationFor) || empty($applicationFor) || count($applicationFor) < 1)
-                                        @if ($errors->has('course'))
-                                            <span class="invalid-feedback" role="alert" style="display: block !important;">
-                                                <strong>{{ $errors->first('course') }}</strong>
-                                            </span>
+    <div class="content-wrap">
+        <div class="section">
+            <div class="col-md-12 d-flex flex-row flex-wrap">
+                <div class="col-md-12 level-title-holder d-flex flex-row flex-wrap">
+                    <div class="col-md-12 text-center" style="margin-top:7vw;">
+                        @if(!env('HIDE_APPLICATION_FORM'))
+                        <p>
+                        <p>
+                            <label for="">информацията е взета от профила ви</label>
+                        </p>
+                        <form action="{{route('application.store')}}" method="POST" class="col-md-12" id="application"
+                              name="application" enctype="multipart/form-data">
+                            {{ csrf_field() }}
+                            @if(collect(request()->segments())->last() !== 'create')
+                                <input type="hidden" name="source_url" value="{{collect(request()->segments())->last()}}">
+                            @endif
+                            <p>
+                                <label for="username">Име <span class="req-star-form">*</span></label>
+                                @if ($errors->has('username'))
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                        <strong>{{ $errors->first('username') }}</strong>
+                                    </span>
+                                @endif
+                                @if(!is_null($user->name) && !empty($user->name))
+                                    <input type="text" name="username" value="{{$user->name}}" disabled
+                                           class="small-field-register"><br/>
+                                @else
+                                    <input type="text" name="username" value="" class="small-field-register"><br/>
+                                @endif
+                            </p>
+                            <p>
+                                <label for="userlastname">Фамилия <span class="req-star-form">*</span></label>
+                                @if ($errors->has('userlastname'))
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                        <strong>{{ $errors->first('userlastname') }}</strong>
+                                    </span>
+                                @endif
+                                @if(!is_null($user->last_name) && !empty($user->last_name))
+                                    <input type="text" name="userlastname" value="{{$user->last_name}}" disabled
+                                           class="small-field-register"><br/>
+                                @else
+                                    <input type="text" name="userlastname" value="" class="small-field-register"><br/>
+                                @endif
+                            </p>
+                            <p>
+                                <label for="email">Е-Mail <span class="req-star-form">*</span></label>
+                                <input type="text" name="email" value="{{$user->email}}" disabled
+                                       class="small-field-register">
+                            </p>
+                            <p>
+                                <label for="phone">Телефон <span class="req-star-form">*</span></label>
+                                @if ($errors->has('phone'))
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                        <strong>{{ $errors->first('phone') }}</strong>
+                                    </span>
+                                @endif
+                                @if(!is_null($user->phone) && !empty($user->last_name))
+                                    <input type="number" name="phone" value="{{$user->phone}}" disabled
+                                           class="small-field-register">
+                                @else
+                                    <input type="number" name="phone" value="{{old('phone')}}"
+                                           class="small-field-register phone-input">
+                                @endif
+                            </p>
+                            <p>
+                                <label for="userage">Възраст <span class="req-star-form">*</span></label>
+                                @if ($errors->has('userage'))
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                        <strong>{{ $errors->first('userage') }}</strong>
+                                    </span>
+                                @endif
+                                @if(!is_null($user->dob))
+                                    <input type="text" name="userage"
+                                           value="{{(\Carbon\Carbon::now()->format('Y') - $user->dob->format('Y'))}}"
+                                           disabled class="small-field-register">
+                                @else
+                                    <input type="text" name="userage" value="{{old('userage')}}"
+                                           placeholder="въведете години..." class="small-field-register">
+                                @endif
+                            </p>
+                            @if(!$disableExtraFields)
+                            <p>
+                                <label for="occupation">Занимание <span class="req-star-form">*</span></label><br>
+                                @if ($errors->has('occupation'))
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                        <strong>{{ $errors->first('occupation') }}</strong>
+                                    </span>
+                                @endif
+                                <select class="occupation section-el-bold col-md-8" name="occupation" id="occupation">
+                                    @foreach ($occupations as $occupation)
+                                        @if(!is_null($user->cl_occupation_id) && $user->cl_occupation_id == $occupation->id)
+                                            <option value="{{$occupation->id}}"
+                                                    selected>{{$occupation->occupation}}</option>
+                                        @else
+                                            <option value="{{$occupation->id}}" {{ (old("occupation") == $occupation->id ? "selected":"") }}>{{$occupation->occupation}}</option>
                                         @endif
-                                        <select class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" name="course" id="course-select" required>
-                                            <option value="" disabled selected="selected">Направление</option>
-                                            @foreach(Config::get('applicationForm.courses') as $key => $modules)
-                                                @if (is_array($modules))
-                                                    @foreach ($modules as $sub)
-                                                        @if ($module == $sub)
-                                                            <option class="no-show course-{{ str_replace(' ', '', $key) }}" value="{{ $sub }}" selected="selected">{{$sub}}</option>
-                                                        @else
-                                                            <option class="no-show course-{{ str_replace(' ', '', $key) }}" value="{{ $sub }}">{{$sub}}</option>
-                                                        @endif
-                                                    @endforeach
-                                                @endif
-                                                @if (!is_null($course) && $course == $key)
-                                                    <option value="{{ $key }}" {{ (old("course") == $key ? "selected":"") }} selected="selected" data-count="{{ count($modules) }}">{{ ucfirst($key) }}</option>
-                                                @else
-                                                    <option value="{{ $key }}"
-                                                        {{ (old("course") == $key ? "selected":"") }} data-count="{{ count($modules) }}">{{ ucfirst($key) }}</option>
-                                                @endif
-                                            @endforeach
-                                        </select>
-                                        <!-- <span class="no-show">Модул <span class="req-star-form">*</span></span>
-                                        <select class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" name="sub" id="sub"></select>
-                                            <script>
-                                                $(function () {
-                                                    addSub();
-                                                });
-                                                $('#course-select').on('change', function () {
-                                                    addSub();
-                                                });
-
-                                                function addSub(){
-                                                    $('#sub').html(' ');
-                                                    var selectedCourse = $('#course-select').find(':selected').text().replace(/ /g, '');
-
-                                                    if ($('#course-select').find(':selected').attr('data-count') > 0) {
-                                                        var clonedOptions = $('.course-' + selectedCourse).clone();
-                                                        $.each(clonedOptions, function (k, option) {
-                                                            $('#sub').append(option);
-                                                            $('#sub').find('option').removeClass('no-show');
-                                                        });
-                                                        $('#sub').removeClass('no-show');
-                                                        $('#sub').prev('span').removeClass('no-show');
-                                                    } else {
-                                                        $('#sub').addClass('no-show');
-                                                        $('#sub').prev('span').addClass('no-show');
-                                                    }
-                                                }
-                                            </script> -->
-                                    @else
-                                        <select class="form-elec-input form-select-app me-lg-5 mb-4-input me-3-input mt-lg-0 mt-4" name="course" id="course-select" required>
-                                                @foreach($applicationFor as $course)
-                                                    <option value="{{ $course->id }}" {{ Request::segment(4) == $course->id ? 'selected' : '' }}>{{ $course->name }}</option>
-                                                @endforeach
-                                        </select>
+                                    @endforeach
+                                </select>
+                            </p>
+                            @endif
+                            <p>
+                                <label for="course">Направление <span class="req-star-form">*</span></label><br/>
+                                @if(is_null($applicationFor) || empty($applicationFor) || count($applicationFor) < 1)
+                                    @if ($errors->has('course'))
+                                        <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                            <strong>{{ $errors->first('course') }}</strong>
+                                        </span>
                                     @endif
-                                    <select id="occupation" name="occupation" class="form-elec-input form-select-app mb-4-input me-3-input mt-lg-0 mt-4" required>
-                                        <option value="" selected>Занимание</option>
-                                        @foreach ($occupations as $occupation)
-    										<option value="{{$occupation->id}}" {{ (old("occupation") == $occupation->id ? "selected":"") }}>{{$occupation->occupation}}</option>
-    									@endforeach
+                                    <select class="section-el-bold col-md-8" name="course" id="course-select">
+                                        <option value="0" disabled selected="selected">-----</option>
+                                        @foreach(Config::get('applicationForm.courses') as $key => $modules)
+                                            @if(is_array($modules))
+                                                @foreach($modules as $sub)
+                                                    @if($module == $sub)
+                                                        <option class="no-show course-{{str_replace(' ', '', $key)}}"
+                                                                value="{{$sub}}" selected="selected">{{$sub}}</option>
+                                                    @else
+                                                        <option class="no-show course-{{str_replace(' ', '', $key)}}"
+                                                                value="{{$sub}}">{{$sub}}</option>
+                                                    @endif
+                                                @endforeach
+                                            @endif
+                                            @if(!is_null($course) && $course == $key)
+                                                <option value="{{$key}}"
+                                                        {{ (old("course") == $key ? "selected":"") }} selected="selected"
+                                                        data-count="{{count($modules)}}">{{ucfirst($key)}}</option>
+                                            @else
+                                                <option value="{{$key}}"
+                                                        {{ (old("course") == $key ? "selected":"") }} data-count="{{count($modules)}}">{{ucfirst($key)}}</option>
+                                            @endif
+                                        @endforeach
                                     </select>
-                                </div>
+                                    <br>
+                                    <br/>
+                                    <span class="no-show">Модул <span class="req-star-form">*</span></span>
+                                    <select class="section-el-bold no-show col-md-8" name="sub" id="sub">
+                                    
+                                    </select>
+                                    <script>
+                                        $(function () {
+                                            addSub();
+                                        });
+                                        $('#course-select').on('change', function () {
+                                            addSub();
+                                        });
+                                        
+                                        function addSub(){
+                                            $('#sub').html(' ');
+                                            var selectedCourse = $('#course-select').find(':selected').text().replace(/ /g, '');
+                                            
+                                            if ($('#course-select').find(':selected').attr('data-count') > 0) {
+                                                var clonedOptions = $('.course-' + selectedCourse).clone();
+                                                $.each(clonedOptions, function (k, option) {
+                                                    $('#sub').append(option);
+                                                    $('#sub').find('option').removeClass('no-show');
+                                                });
+                                                $('#sub').removeClass('no-show');
+                                                $('#sub').prev('span').removeClass('no-show');
+                                            } else {
+                                                $('#sub').addClass('no-show');
+                                                $('#sub').prev('span').addClass('no-show');
+                                            }
+                                        }
+                                    </script>
+                                @else
+                                    <select class="section-el-bold col-md-8" name="course" id="course-select">
+                                        @foreach($applicationFor as $course)
+                                            <option value="{{$course->id}}" {{Request::segment(4) == $course->id?'selected':''}}>{{strpos($course->name, 'предпочитания')?substr($course->name, 0, -9):$course->name}}</option>
+                                        @endforeach
+                                    </select>
+                                @endif
+                            </p>
+                            @if(!$disableExtraFields)
+                            <p>
+                                <label for="suitable_candidate">Защо смятате, че тези обучения са подходящ за Вас?
+                                    <br/>
+                                    <small>(защо искате да учите
+                                    @if(!is_null($applicationFor))
+                                        @forelse($applicationFor as $course)
+                                            {{$course->name}}
+                                            @if(!$loop->last)
+                                                ,
+                                            @endif
+                                        @empty
+                                        @endforelse
+                                    @endif
+                                        )</small>
+                                    <span id="candidate-label"></span> <span class="req-star-form">*</span></label>
+                                @if ($errors->has('suitable_candidate'))
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                        <strong>{{ $errors->first('suitable_candidate') }}</strong>
+                                    </span>
+                                @endif
+                                <textarea maxlength="500" name="suitable_candidate" rows="8" cols="80"
+                                          placeholder="между 100 и 500 символа"
+                                          class="section-el-bold">{{old('suitable_candidate')}}</textarea>
+                            </p>
+                            <!--<p>-->
+                            <!--    <label for="suitable_training">Защо смятате, че именно Вие сте подходящ за ИТ обучение?-->
+                            <!--        <br>-->
+                            <!--        <small>(кои ваши качества и интереси ви правят подходящ участник в курс по-->
+                            <!--        @if(!is_null($applicationFor))-->
+                            <!--            @forelse($applicationFor as $course)-->
+                            <!--                {{$course->name}}-->
+                            <!--                @if(!$loop->last)-->
+                            <!--                    ,-->
+                            <!--                @endif-->
+                            <!--            @empty-->
+                            <!--            @endforelse-->
+                            <!--        @endif-->
+                            <!--            )</small>-->
+                            <!--        <span id="training-label"></span> <span class="req-star-form">*</span></label>-->
+                            <!--    @if ($errors->has('suitable_training'))-->
+                            <!--        <span class="invalid-feedback" role="alert" style="display: block !important;">-->
+                            <!--            <strong>{{ $errors->first('suitable_training') }}</strong>-->
+                            <!--        </span>-->
+                            <!--    @endif-->
+                            <!--    <textarea maxlength="500" name="suitable_training" rows="8" cols="80"-->
+                            <!--              placeholder="между 100 и 500 символа"-->
+                            <!--              class="section-el-bold">{{old('suitable_training')}}</textarea>-->
+                            <!--</p>-->
+                            <p>
+                                <label for="accompliments">Разкажете ни за 3 постижения, с които се гордеете и защо. (те могат да бъдат в личен, професионален план или свързани с учене)<span
+                                            id="accompliments-label"></span> <span
+                                            class="req-star-form">*</span></label>
+                                @if ($errors->has('accompliments'))
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                        <strong>{{ $errors->first('accompliments') }}</strong>
+                                    </span>
+                                @endif
+                                <textarea maxlength="500" name="accompliments" rows="8" cols="80"
+                                          placeholder="между 100 и 500 символа"
+                                          class="section-el-bold">{{old('accompliments')}}</textarea>
+                            </p>
+                            <!--<p>-->
+                            <!--    <label for="expecatitions">Какви са очакванията Ви за това обучение? <span-->
+                            <!--                id="expecatitions-label"></span><span class="req-star-form">*</span></label>-->
+                            <!--    @if ($errors->has('expecatitions'))-->
+                            <!--        <span class="invalid-feedback" role="alert" style="display: block !important;">-->
+                            <!--            <strong>{{ $errors->first('expecatitions') }}</strong>-->
+                            <!--        </span>-->
+                            <!--    @endif-->
+                            <!--    <textarea maxlength="500" name="expecatitions" rows="8" cols="80"-->
+                            <!--              placeholder="между 100 и 500 символа"-->
+                            <!--              class="section-el-bold">{{old('expecatitions')}}</textarea>-->
+                            <!--</p>-->
+                            <p>
+                                <label for="use">Как смятате да използвате наученото от това обучение? <span
+                                            class="req-star-form">*</span></label><br/>
+                                @if ($errors->has('use'))
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                        <strong>{{ $errors->first('use') }}</strong>
+                                    </span>
+                                @endif
+                                <select class="section-el-bold col-md-8" name="use">
+                                    @foreach(Config::get('applicationForm.use') as $use)
+                                        <option value="{{$use}}" {{ (old("use") == $use ? "selected":"") }}>{{ucfirst($use)}}</option>
+                                    @endforeach
+                                </select>
+                            </p>
+                            
+                            <p>
+                                <label for="source">От къде научихте за това обучение? <span
+                                            class="req-star-form">*</span></label><br/>
+                                @if ($errors->has('source'))
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                        <strong>{{ $errors->first('source') }}</strong>
+                                    </span>
+                                @endif
+                                <select class="section-el-bold col-md-8" name="source">
+                                    @foreach(Config::get('applicationForm.source') as $source)
+                                        <option value="{{$source}}" {{ (old("source") == $source ? "selected":"") }}>{{$source}}</option>
+                                    @endforeach
+                                </select>
+                            </p>
+                            @endif
+                            @if(!$disableCV)
+                            <p>
+                                <label for="cv">Автобиография <span class="req-star-form">*</span></label>
+                                @if ($errors->has('cv'))
+                                    <span class="invalid-feedback" role="alert" style="display: block !important;">
+                                        <strong>{{ $errors->first('cv') }}</strong>
+                                    </span>
+                                @endif
+                                <input type="file" name="cv" value="">
+                            </p>
+                            @endif
+                            <br/>
+                            <p>
+                            <div class="col-md-12 create-course-button text-center">
+                                <a href="#" id="submit_form" class="create-course-btn"><span class="create-course">Кандидаствай</span></a>
                             </div>
-                            <div class="row g-0">
-                                <div class="col-lg-auto col me-lg-1 mt-4 me-3-input">
-                                    <div class="form-info-titel">
-                                        <b>Защо смятате, че тези обучения са подходящ за Вас?</b>
-                                    </div>
-                                    <div class="col-lg-auto col form-app-position mt-lg-5">
-                                        <b><span class="counter counter-position" id="candidate-span"></span></b>
-                                        <textarea name="suitable_candidate" class="form-textarel-elec mb-4-input me-3-input" placeholder="100-500" aria-label="With textarea" minlength="100" maxlength="500" required></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-lg-auto col ms-elect mt-4">
-                                    <div class="form-info-titel">
-                                        <b>Защо смятате, че Вие сте подходящ за ИТ обучение?</b>
-                                    </div>
-                                    <div class="col-lg-auto col form-app-position mt-lg-5">
-                                        <b><span class="counter counter-position" id="training-span"></span><b>
-                                        <textarea name="suitable_training" class="form-textarel-elec mb-4-input" placeholder="100-500" aria-label="With textarea" minlength="100" maxlength="500" required></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row g-0">
-                                <div class="col-lg-auto col mt-4 me-3-input">
-                                    <div class="form-info-titel">
-                                        <b>Опишете три(3) Ваши постижения</b>
-                                    </div>
-                                    <div class="col-lg-auto col form-app-position mt-lg-5">
-                                        <b><span class="counter counter-position" id="accompliments-span"></span></b>
-                                        <textarea name="accompliments" class="form-textarel-elec me-lg-1 mb-4-input me-3-input" placeholder="100-500" aria-label="With textarea" minlength="100" maxlength="500" required></textarea>
-                                    </div>
-                                </div>
-                                <div class="col-lg-auto col ms-elect mt-4">
-                                    <div class="form-info-titel ">
-                                        <b>Какви са очакванията Ви за това обучение?</b>
-                                    </div>
-                                    <div class="col-lg-auto col form-app-position mt-lg-5">
-                                        <b><span class="counter counter-position" id="expecatitions-span"></span></b>
-                                        <textarea name="expecatitions" class="form-textarel-elec mb-4-input" placeholder="100-500" aria-label="With textarea" minlength="100" maxlength="500" required></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="row g-0 mt-3 mb-5">
-                                <div class="col-lg-auto col-1 me-lg-1 mt-4 me-3-input">
-                                    <div class="form-info-titel"></div>
-                                </div>
-                                <div class="col-lg-auto col ms-elect mt-4">
-                                    <button class="submit-form ms-xxl-2 mt-xxl-0 mt-3 btn-edit btn-green row g-0 align-items-center">
-                                        <div class="col text-start fw-bold">Изпрати</div>
-                                        <div class="col-auto">
-                                            <img src="{{ asset('assets/icons/action_icon.svg') }}">
-                                        </div>
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
+                            </p>
+                        </form>
+                        </p>
+                        @else
+                        <p> <p>Кандидатстването за сезон 2020/2021г на курсовете приключи!<br/> Очаквайте да отворим кандидатстване за следващ сезон курсове.</p></p>
+                        @endif
                     </div>
                 </div>
             </div>
-            <!-- right side END -->
-        </form>
+        </div>
     </div>
-</div>
-
-<script src="{{ asset('js/application/application-form-text-counter.js') }}" charset="utf-8"></script>
-<script src="{{ asset('js/application/validation-form.js') }}" charset="utf-8"></script>
+    <script src="{{asset('js/application-form-text-counter.js')}}" charset="utf-8"></script>
+    <script>
+        $('#submit_form').on('click', function(e){
+            e.preventDefault();
+            if($('#application').hasClass('submited')){
+                $(this).fadeOut();
+                $('.create-course-button').html('<p>Моля изчакайте, докато заявката се обработи...</p>');
+            }else{
+                $('#application').addClass('submited');
+                $('#application').submit()
+            }
+        });
+    </script>
 @endsection

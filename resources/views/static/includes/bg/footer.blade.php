@@ -18,6 +18,8 @@
         <div class="col-md-12">
             <p><a href="{{route('programmingCourses')}}">Програмиране</a></p>
             <p><a href="{{route('digitalMarketing')}}">Дигитален Маркетинг</a></p>
+            <p><a href="{{route('design')}}">Дизайн</a></p>
+            <p><a href="{{route('qualityAssurance')}}">Софтуерно тестване</a></p>
         </div>
     </div>
 
@@ -28,7 +30,7 @@
         <div class="col-md-12 f-contacts">
             <p><i class="far fa-envelope"></i><br/><a href="mailto:school@vratsasoftware.com">school@vratsasoftware.com</a></p>
             <p><i class="fab fa-facebook-square"></i><br/><a href="https://www.facebook.com/vratsasoftware/">vratsasoftware</a></p>
-            <p><i class="fas fa-phone"></i><br/><a href="tel:+359 88 207 6174">+359 88 207 6174</a></p>
+            <p><i class="fas fa-phone"></i><br/><a href="tel:+359 88 81 34 358">+359 88 81 34 358</a></p>
         </div>
     </div>
 
@@ -42,7 +44,7 @@
         <p>Vratsa Software &copy; {{\Carbon\Carbon::now()->format('Y')}}</p>
     </div>
     <div class="col-md-6 text-right">
-        <input type="text" name="subscribe" value="" placeholder="example@gmail.com" id="subscribe" name="subscribe"> <button type="button" name="button" class="send-subscribe" id="subscribe-btn" data-url="{!! url('/') !!}">Изпрати</button>
+        <input type="text" name="subscribe" value="" placeholder="твоятимейл@gmail.com" id="subscribe" name="subscribe" style="height:40px"> <button type="button" name="button" class="send-subscribe" id="subscribe-btn" data-url="{!! url('/') !!}">Изпрати</button>
     </div>
 </div>
 

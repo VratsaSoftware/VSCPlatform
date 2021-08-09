@@ -1,13 +1,12 @@
 @extends('layouts.template')
 @section('title', 'Admin Кандидаствания')
 @section('content')
-    <meta charset="UTF-8" />
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
     <script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.js"></script>
     @if (!empty(Session::get('success')))
-        <div class="alert alert-success slide-on" style="margin-top:-54px!important">
-            <p>{{ session('success') }}</p>
-        </div>
+            <div class="alert alert-success slide-on" style="margin-top:-54px!important">
+                <p>{{ session('success') }}</p>
+            </div>
     @endif
     @if ($errors->any())
         <div class="alert alert-danger slide-on" style="margin-top:-54px!important">
@@ -39,46 +38,48 @@
                 </tr>
                 </thead>
                 <tbody>
-                @foreach($applications as $entry)
-                    <tr>
-                        <th scope="row">{{$entry->User->id}}</th>
-                        <td>{{$entry->User->name}}</td>
-                        <td>{{$entry->User->last_name}}</td>
-                        <td>{{$entry->User->email}}</td>
-                        <td>{{$entry->User->location}}</td>
-                        @if($entry->User->dob)
-                            <td>{{(Carbon\Carbon::now()->format('Y') - $entry->User->dob->format('Y'))}}</td>
-                        @else
-                            <td>-</td>
-                        @endif
-                        <td>{{$entry->User->sex}}</td>
-                        <td>{{$entry->User->Occupation->occupation}}</td>
-                        <ul>
-                            @foreach($entry->fields as $column => $data)
-                                @if($column == 'days')
-                                    <td class="text-center"> {{$data > 0?'2':'1'}}</td>
-                                @else
-                                    <td class="text-center"> {{$data}}</td>
-                                @endif
-                            @endforeach
-                        </ul>
-                        </td>
-                        <td>
-                            {{$entry->is_present}}
-                            <br/>
-                            <form action="{{route('events.cw.is_present',[$entry->User->id,$entry->event_id])}}" method="POST">
-                                {{ csrf_field() }}
-                                <input type="number" name="present" class="form-control" min="0" max="3">
-                                <button class="btn btn-outline-primary">изпрати</button>
-                            </form>
-                        </td>
-                        <td>
-                            <p>
-                                <b>{{$entry->created_at}}</b>
-                            </p>
-                        </td>
-                    </tr>
-                @endforeach
+                @if(count($applications)>0)
+                    @foreach($applications as $entry)
+                        <tr>
+                            <th scope="row">{{$entry->User->id}}</th>
+                            <td>{{$entry->User->name}}</td>
+                            <td>{{$entry->User->last_name}}</td>
+                            <td>{{$entry->User->email}}</td>
+                            <td>{{$entry->User->location}}</td>
+                            @if($entry->User->dob)
+                                <td>{{(Carbon\Carbon::now()->format('Y') - $entry->User->dob->format('Y'))}}</td>
+                            @else
+                                <td>-</td>
+                            @endif
+                            <td>{{$entry->User->sex}}</td>
+                            <td>{{isset($entry->User->Occupation)?$entry->User->Occupation->occupation:''}}</td>
+                                <ul>
+                                   @foreach($entry->fields as $column => $data)
+                                       @if($column == 'days')
+                                            <td class="text-center"> {{$data > 0?'2':'1'}}</td>
+                                       @else
+                                            <td class="text-center"> {{$data}}</td>
+                                       @endif
+                                   @endforeach
+                                </ul>
+                            </td>
+                            <td>
+                                {{$entry->is_present}}
+                                <br/>
+                                <form action="{{route('events.cw.is_present',[$entry->User->id,$entry->event_id])}}" method="POST">
+                                    {{ csrf_field() }}
+                                    <input type="number" name="present" class="form-control" min="0" max="3">
+                                    <button class="btn btn-outline-primary">изпрати</button>
+                                </form>
+                            </td>
+                            <td>
+                                <p>
+                                   <b>{{$entry->created_at}}</b>
+                                </p>
+                            </td>
+                        </tr>
+                    @endforeach
+                @endif
                 </tbody>
             </table>
         </div>
@@ -104,8 +105,8 @@
         <!-- end of modal -->
         <script type="text/javascript">
             $('.show-form').on('click',function(){
-                $('.copy > p').html($(this).next('.no-show').html());
-                $('.copy > p').find('.no-show').removeClass('no-show');
+               $('.copy > p').html($(this).next('.no-show').html());
+               $('.copy > p').find('.no-show').removeClass('no-show');
 
                 $( '#modal' ).show();
                 $( '#modal' ).css({opacity:100,visibility:'visible'});

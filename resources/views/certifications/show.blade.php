@@ -42,10 +42,12 @@
         font-family: 'Candara';
         color: #595757;
         font-weight: bold;
+        margin-left:25%;
+        margin-top:1%;
     }
 
     #number {
-        font-size: 24pt;
+        font-size: 27pt;
     }
 
     #title {
@@ -79,14 +81,15 @@
     }
 
     #footer {
-        margin-top: 20px;
+        /*margin-top: 20px;*/
     }
 
     #logo {
         width: 180px;
         height: 110px;
-        margin-top: -20px;
+        margin-top: -25px;
     }
+    
 
     #lecturer {
         margin-top: -5px;
@@ -159,5 +162,30 @@
                     @endif
                 </div>
         </div>
+        @if(Auth::user() && Auth::user()->isAdmin())
+        <a href="#" id="download">download</a>
+        <div id="previewImage" style="display:none"></div>
+    
+        <script type="text/javascript" src="{{ asset('/js/jquery.min.js') }}"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.4.1/jspdf.debug.js"></script>
+        <script>
+            var element = $("#cert-holder"); 
+            var getCanvas; 
+            $('document').ready(function(){
+              html2canvas(element, {
+                onrendered: function (canvas) {
+                  $("#previewImage").append(canvas);
+                  getCanvas = canvas;
+                }
+              });
+            });
+            $("#download").on('click', function () {
+              var imageData = getCanvas.toDataURL("image/png");
+              var newData = imageData.replace(/^data:image\/png/, "data:application/octet-stream");
+              var name = "cert_{{$certificate->username}}_{{$certificate->number}}.png";
+              $("#download").attr("download", name).attr("href", newData);
+            });
+        </script>
+        @endif
 </body>
 </html>

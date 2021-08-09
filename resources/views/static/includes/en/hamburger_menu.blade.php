@@ -13,6 +13,7 @@
             <li class="nav-item"><a class="edu-hamburger" href="#">Courses <i class="fas fa-angle-down"></i></a></li>
             <li class="edu-go bg-secondary"><a class="text-light" href="{{route('programmingCourses')}}">Programming</a></li>
             <li class="edu-go bg-secondary"><a class="text-light" href="{{route('digitalMarketing')}}">Digital Marketing</a></li>
+            <li class="edu-go bg-secondary"><a href="{{route('design')}}">Design</a></li>
             <li class="nav-item"><a href="{{route('login')}}" class="right-mobile">Login</a></li>
             {{-- <li class="nav-item"><a href="#" class="right-mobile">APPLY NOW</a></li> --}}
             <li>

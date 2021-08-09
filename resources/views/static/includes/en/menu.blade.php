@@ -17,6 +17,7 @@
             <div class="dropdown-content">
                 <a href="{{route('programmingCourses')}}">Programming</a>
                 <a href="{{route('digitalMarketing')}}">Digital Marketing</a>
+                <a href="{{route('design')}}">Design</a>
             </div>
         </li>
         <li>

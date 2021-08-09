@@ -8,11 +8,12 @@
                 <div class="col-md-12 candidation text-center d-flex flex-row flex-wrap">
                     @if (!empty(Session::get('success')))
                         <p>
-                            <div class="alert alert-success slide-on">
+                            <div class="alert alert-success slide-on" style="margin-top:7vw">
                         <p>{{ session('success') }}</p>
+                        @endif
                 </div>
                 </p>
-            @endif
+            
             <!-- course candidation statistic -->
                 <div class="col-md-12 candidation-title">
                         <div class="form-group">
@@ -23,10 +24,7 @@
                     @if(isset($entry->approved) && is_null($entry->approved))
                         все още нямате оценка
                     @else
-                        @if(!env('IS_APPLICATION_OPEN', false))
-                            <b>Регистрацията за записване на курсовете все още не е отворена!</b><br/>
-                            <i>Записването ще стане след : {{env('APPLICATION_DATE', 'Септември')}}</i>
-                        @else
+                       
                             @if(isset($entry) && is_null($entry->test_score) || isset($entry->more_test))
                                 <a href="{{route('prepare.test')}}" id="test" style="display: inline-block;margin-bottom:3%;">
                                     <button type="button" class="btn btn-success">ТЕСТ</button>
@@ -38,7 +36,7 @@
                                     Очаквайте скоро да ви се покаже тук бутона за Тест
                                 @endif
                             @endif
-                        @endif
+                        
                         @if(isset($entry->test_stats))
                             @foreach($entry->test_stats as $sKey => $stats)
                                 <div class="col-md-12 d-flex flex-row flex-wrap"
@@ -64,13 +62,12 @@
                     @endif
                 </div>
                 <div class="col-md-12 candidation-text">
-
+                
                 </div>
-            @if(env('IS_APPLICATION_OPEN', false))
                 <!-- circle steps icons -->
                     <ul class="steps col-md-12" style="margin-top:7%">
                         <li>1
-                            <span>електронна форма</span>
+                            <span style="margin-left:-4vw">електронна форма</span>
                             <div class="personal-steps">
                                 @if(is_null($entry) || !is_null($entry) && is_null($entry->entry_form_id))
 {{--                                    <a href="{{route('application.create')}}" id="candidate"--}}
@@ -78,13 +75,12 @@
 {{--                                        <button type="button" class="btn btn-success">Кандидаствай</button>--}}
 {{--                                    </a>--}}
                                 @else
-                                    вече сте изпратили своята форма
+                                    <!--вече сте изпратили своята форма-->
                                 @endif
                             </div>
                         </li>
-
-                        <li class="active-step">2
-                            @endif
+                        
+                        <li>2
                             <span>предварителен тест</span>
                             <div class="personal-steps">
                             @if(isset($entry) && !is_null($entry->entry_form_id))
@@ -121,54 +117,49 @@
                                     <!--        <br/>-->
                                     <!--    @endforeach-->
                                     <!--@endif-->
-                                    @else
-                                        тази стъпка предстои
-                                    @endif
+                            @else
+                                <!--тази стъпка предстои-->
+                            @endif
                             </div>
                         </li>
-                        @if(isset($entry->task) && is_null($entry->interview))
-                            <li class="active-step">3
-                        @else
-                            <li>3
+                       
+                        <li>3
+                            <span>самостоятелна задача</span>
+                            <div class="personal-steps">
+                                @if(isset($entry))
+                                    <!--{{!is_null($entry->task)?$entry->task:'тази стъпка предстои'}}-->
                                 @endif
-                                <span>самостоятелна задача</span>
-                                <div class="personal-steps">
-                                    @if(isset($entry))
-                                        {{!is_null($entry->task)?$entry->task:'тази стъпка предстои'}}
-                                    @endif
-                                </div>
-                            </li>
-                            @if(isset($entry->interview) && is_null($entry->approved))
-                                <li class="active-step">4
-                            @else
-                                <li>4
-                                    @endif
-                                    <span>интервю</span>
-                                    <div class="personal-steps">
-                                        @if(isset($entry))
-                                            {{!is_null($entry->interview)?$entry->interview:'тази стъпка предстои'}}
-                                        @endif
-                                    </div>
-                                </li>
-                                <li>5
-                                    <span>прием</span>
-                                    <div class="personal-steps">
-                                        @if(isset($entry))
-                                            {{!is_null($entry->approved)?$entry->approved:'тази стъпка предстои'}}
-                                        @endif
-                                    </div>
-                                </li>
+                            </div>
+                        </li>
+                          
+                        <li>4
+                           
+                            <span>интервю</span>
+                            <div class="personal-steps">
+                                @if(isset($entry))
+                                    <!--{{!is_null($entry->interview)?$entry->interview:'тази стъпка предстои'}}-->
+                                @endif
+                            </div>
+                        </li>
+                        <li class="active-step">5
+                            <span>прием</span>
+                            <div class="personal-steps">
+                                @if(isset($entry))
+                                    {{!is_null($entry->approved)?$entry->approved:'тази стъпка предстои'}}
+                                @endif
+                            </div>
+                        </li>
                     </ul>
-
+                    
                     <!-- images -->
-
+                    
                     <div class="candidate-imgs col-md-12 flex-row flex-wrap text-center">
                         <div class="col-md-1"></div>
                         <div class="steps col-md-2 first-candidate-img">
                             <img src="{{asset('/images/candidate-img-step-1.png')}}" alt="step"
                                  class="img-fluid candidate-img">
                         </div>
-
+                        
                         <div class="steps col-md-2">
                             <img src="{{asset('/images/candidate-img-step-2.png')}}" alt="step"
                                  class="img-fluid candidate-img">
@@ -190,98 +181,69 @@
             </div>
         </div>
         <!-- end of course candidation statistic -->
-
-        <!-- opened courses -->
-    {{-- <div class="col-md-12 events-now-text text-center">Отворени Курсове</div>
-    <div class="available-events d-flex flex-row flex-wrap">
-      <div class="col-md-6">
-        <div class="event-title col-md-12">Програмиране с JAVA</div>
-        <div class="event-body col-md-12 text-center">
-          <a href="">
-            <div class="event-body-text">
-              Запиши се
-            </div>
-          </a>
-          <img src="./images/code-logos/javalogo-big.png" alt="event-body">
-        </div>
-        <div class="event-footer col-md-12 d-flex flex-row flex-wrap">
-          <div class="col-md-6">Лектор: Теодор Костадинов</div>
-          <div class="col-md-6">Начало: 15 Септември</div>
-        </div>
-      </div>
-
-      <div class="col-md-6">
-        <div class="event-title col-md-12">Angular JS</div>
-        <div class="event-body col-md-12 text-center">
-          <a href="">
-            <div class="event-body-text">
-              Кандидаствай
-            </div>
-          </a>
-          <img src="./images/code-logos/angular-big.png" alt="event-body">
-        </div>
-        <div class="event-footer col-md-12 d-flex flex-row flex-wrap">
-          <div class="col-md-6">Лектор:Лилия Михайлова</div>
-          <div class="col-md-6">Начало: 1 Февруари</div>
-        </div>
-      </div> --}}
-    <!-- end of opened courses -->
+        
     </div>
     <!-- opened courses -->
-    <div class="col-md-12 events-now-text text-center" style="border-top:1px solid #d3d3d3;padding-top: 1%;">Отворени Курсове</div>
-    <div class="col-md-12 available-events d-flex flex-row flex-wrap">
-        @foreach($courses as $course)
-            <div class="col-md-6">
-                <div class="event-title col-md-12" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">{{$course->name}}</div>
-                <div class="event-body col-md-12 text-center">
-                    <a href="{{route('application.create',[$course->training_type,$course->id])}}">
-                        <div class="event-body-text levels-btn" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">
-                            Запиши се
+     @if(env('IS_APPLICATION_OPEN'))
+        <div class="col-md-12 events-now-text text-center" style="border-top:1px solid #d3d3d3;padding-top: 1%;">Отворени Курсове</div>
+        <div class="col-md-12 available-events d-flex flex-row flex-wrap">
+           
+                @foreach($courses as $course)
+                    @if(!strpos($course->name, 'предпочитания'))
+                        <div class="col-md-6">
+                            <div class="event-title col-md-12" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">{{$course->name}}</div>
+                            <div class="event-body col-md-12 text-center">
+                                <a href="{{route('application.create',[$course->training_type,$course->id])}}">
+                                    <div class="event-body-text levels-btn" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">
+                                        Запиши се
+                                    </div>
+                                </a>
+                                <img src="{{asset('images/course-'.$course->id.'/'.$course->picture)}}" style="height:auto" alt="event-body">
+                            </div>
+                            <div class="event-footer col-md-12 d-flex flex-row flex-wrap" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">
+                                <div class="col-md-6">Лектори:<br/>
+                                    @foreach($course->Lecturers as $lecturer)
+                                        {{$lecturer->User->name}} {{$lecturer->User->last_name}} <br/>
+                                    @endforeach
+                                </div>
+                                <div class="col-md-6">Начало: <br/>
+                                    {{$course->starts->format('d-m-Y')}}
+                                </div>
+                            </div>
                         </div>
-                    </a>
-                    <img src="{{asset('images/course-'.$course->id.'/'.$course->picture)}}" style="height:auto" alt="event-body">
-                </div>
-                <div class="event-footer col-md-12 d-flex flex-row flex-wrap" style="border:1px solid {{is_null($course->color)?'':$course->color}};background: {{is_null($course->color)?'':$course->color}}">
-                    <div class="col-md-6">Лектор(и):<br/>
-                        @foreach($course->Lecturers as $lecturer)
-                            {{$lecturer->User->name}} {{$lecturer->User->last_name}} <br/>
-                        @endforeach
-                    </div>
-                    <div class="col-md-6">Начало: <br/>
-                        {{$course->starts->format('d-m-Y')}}
-                    </div>
-                </div>
-            </div>
-    @endforeach
-    <!-- end of opened courses -->
+                    @endif
+                @endforeach
+           
+        <!-- end of opened courses -->
+        </div>
+     @endif
     </div>
     </div>
-    </div>
-
+    
     <script src="./js/fixed-left-top-menu.js"></script>
     <script>
         $(function () {
             // $('.candidation-text').text($('.active-step > div').text());
-
+            
             $('li.active-step').prevAll().mouseenter(function () {
                 $(this).parent().prev('.candidation-text').html($(this).find('.personal-steps').html());
             });
-
+            
             $('li.active-step').prevAll().mouseleave(function () {
                 // $('.candidation-text').text($('.active-step').find('.personal-steps').text());
             });
-
+            
             $('.steps > li').mouseenter(function () {
                 $(this).parent().prev('.candidation-text').html($(this).find('.personal-steps').html());
             });
-
+            
             $('li.active-step').nextAll().mouseenter(function () {
                 $(this).css('background', '#ffcccc').attr('title', 'Този етап предстои!');
             });
-
+            
             $('li.active-step').nextAll().mouseleave(function () {
                 $(this).css('background', '#D3D3D3').attr('title', '');
             });
-
+            
         });
     </script>

@@ -26,9 +26,8 @@
  	showOptions( $( this ).parent().parent().parent() );
  } );
 
- $( '.remove-student' ).on( 'click', function () {
+ $( '.remove-student > img' ).on( 'click', function () {
 	 var userId = $( this ).attr( 'data' );
-
 	 if($('#create_test').length) {
 		 $('#create_test').find('#user-'+userId).remove();
 	 }
@@ -49,6 +48,7 @@
  		if($('#create_test').length){
 			removeStudentT($(this).parent().attr('data-url'), $(this).parent().attr('data-test'), $(this).attr('data'));
 			location.reload();
+			window.location = window.location;
  		}else {
 			removeStudent($(this).parent().attr('data-url'), $(this).parent().attr('data-module'), $(this).attr('data'));
 		}

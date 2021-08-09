@@ -14,12 +14,12 @@
                 <div class="header-title col-md-12 text-center">
                     <span>Покори върховете на<br /> Дигиталния Маркетинг</span>
                 </div>
-                <div class="header-button col-md-12 text-center mb-5" style="visibility:visible">
-                    <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="{{route('application.create',['type' => $type])}}">Кандидаствай</a></span>
+               <div class="header-button col-md-12 text-center mb-5" style="visibility:hidden">
+                    <span id="prepare" class="end-candidate marketing-candidate-btn"><a href="{{route('application.create',['type' => $type])}}">Кандидатствай</a></span>
                 </div>
-                <div class="header-sub-title col-md-12 text-center">
-                    <span class="timer-digital"><img src="{{asset('/images/loaders/load-32.gif')}}" alt="timer"/></span>
-                </div>
+                <!--<div class="header-sub-title col-md-12 text-center">-->
+                <!--    <span class="timer-digital"><img src="{{asset('/images/loaders/load-32.gif')}}" alt="timer"/></span>-->
+                <!--</div>-->
 
                 <div class="header-menu col-md-12 header-marketing" id="header-sticky">
                     <nav class="text-center">
@@ -30,7 +30,7 @@
                             <li class="p-3"><a href="#program-holder">Програма</a></li>
                             <li class="p-3"><a href="#lecturers-holder">Лектори</a></li>
                             <li class="p-3"><a href="#details-holder">Детайли</a></li>
-                            <li class="p-3"><a href="#application-holder">Кандидастване</a></li>
+                            <li class="p-3"><a href="#application-holder">Кандидатстване</a></li>
                             <!-- <li class=""><a href="">Такса</a></li> -->
                         </ul>
                     </nav>
@@ -40,8 +40,12 @@
     </div>
 
     <div id="information-holder">
-
+        
     </div>
+    <div class="col-md-12 text-center">
+        <img src="{{asset('/images/iceland-liechten-norway.png')}}" alt="norwaygrants-logo" class="img-fluid">
+    </div>
+        
     <div class="section">
         <div id="information" class="d-flex flex-wrap flex-row">
             <div class="col-md-8 d-flex flex-wrap text-center info-text-container">
@@ -84,7 +88,7 @@
             </div>
             <div class="col-md-4 info-pic">
                 <div class="info-img">
-                    <img src="{{asset('/images/digital-marketing-1.jpg')}}" alt="info-pic" class="img-fluid">
+                    <img src="{{asset('/images/digi_marketing/DM_2.jpg')}}" alt="info-pic" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -145,6 +149,9 @@
         <!-- Team -->
         <section id="team" class="pb-5">
                 <div class="d-flex flex-row flex-wrap text-center">
+                    <div class="col-md-4">
+                    </div>
+                    
                     <!-- Team member -->
                     <div class="col-md-4">
                         <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
@@ -175,65 +182,7 @@
                     </div>
                     <!-- ./Team member -->
     
-                    <!-- Team member -->
-                    <div class="col-md-4">
-                        <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                            <div class="mainflip">
-                                <div class="frontside">
-                                    <div class="card">
-                                        <div class="card-body text-center">
-                                            <p><img class=" img-fluid" src="{{asset('images/digi_marketing/katya_small.jpg')}}" alt="card image"></p>
-                                            <h4 class="card-title under-program">Катя Тодорова</h4>
-                                            <p class="card-text">Founder & CEO, MEmotion <br/> Managing Partner & CMO, Clientric Group</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="backside">
-                                    <div class="card">
-                                        <div class="card-body text-center mt-4">
-                                            <h4 class="card-title under-program">Катя Тодорова</h4>
-                                            <p class="card-text">Катя основава бутиковата дигитална бранд агенция <a href="https://memotion.net/" target="_blank">MЕmotion</a> през 2013 г. През 2015 MEmotion става част от
-                                                <a href="https://www.clientric.bg/" target="_blank">CLIENTRIC</a> Group. - консорциум от компании в сферата на иновативните софтуерни и интерактивни маркетинг решения, в който Катя е управляващ партньор.</p>
-                                            <ul class="list-inline">
-                                                <li><a href="https://www.linkedin.com/in/katyatodorova/" target="_blank" class="lecturer-in-link"><img src="{{asset('images/digi_marketing/linkedin.png')}}" data-hover-img="{{asset('images/digi_marketing/linkedin.png')}}" alt="linkedin"></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ./Team member -->
-    
-                    <!-- Team member -->
-                    <div class="col-md-4">
-                        <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
-                            <div class="mainflip">
-                                <div class="frontside">
-                                    <div class="card">
-                                        <div class="card-body text-center">
-                                            <p><img class=" img-fluid" src="{{asset('images/digi_marketing/kalin_georgiev.jpg')}}" alt="card image"></p>
-                                            <h4 class="card-title under-program">Калин Георгиев</h4>
-                                            <p class="card-text">Управител на дигитална агенция <br/> Тракиада</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="backside">
-                                    <div class="card">
-                                        <div class="card-body text-center mt-4">
-                                            <h4 class="card-title under-program">Калин Георгиев</h4>
-                                            <p class="card-text">Калин Георгиев е енергичен и бързомислещ предприемач с 20 години опит в дигиталната индустрия. Започнал като web developer за агенция в Лондон, след това маркетинг консултант във Валенсия и Малта, а сега управляващ дигитална агенция
-                                                <a href="https://www.trakiada.com/" target="_blank">Тракиада</a>  във Враца.</p>
-                                            <ul class="list-inline">
-                                                <li><a href="https://www.linkedin.com/in/kalin-gueorguiev-91255612a/" target="_blank" class="lecturer-in-link"><img src="{{asset('images/digi_marketing/linkedin.png')}}" data-hover-img="{{asset('images/digi_marketing/linkedin.png')}}" alt="linkedin"></a></li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <!-- ./Team member -->
+                    
                 </div>
         </section>
         <!-- Team -->
@@ -322,7 +271,7 @@
                                 Цена
                             </div>
                             <div class="col-md-12">
-                                Първо ниво е безплатно. <br/>Пакетната цена за второ и трето ниво е 150лв.
+                                Целият курс е БЕЗПЛАТЕН, тъй като е в рамките на проект „Посока професия", изпълняван с финансовата подкрепа на Исландия, Лихтенщайн и Норвегия по Фонд Младежка безработица!
                             </div>
                         </div>
                     </div>
@@ -335,10 +284,10 @@
                                 <img src="{{asset('/images/digi_marketing/icons/goal_orange.png')}}" alt="digi-icon" data-hover-img="{{asset('/images/digi_marketing/icons/goal.png')}}">
                             </div>
                             <div class="col-md-12 title-details-digi">
-                                Менторска програма
+                                Стажантска програма
                             </div>
                             <div class="col-md-12">
-                                Успешните курсисти имат възможност да работят заедно с опитен ментор по реален проект за НПО.
+                                Най-добре представилите се курсисти ще имат възможност да започнат платен стаж.
                             </div>
                         </div>
                     </div>
@@ -390,13 +339,23 @@
             </div>
         </div>
     </div>
-    <div class="col-md-12 text-center">
+    <!--<div class="col-md-12 text-center">
         <span id="prepare-digi" class="end-candidate marketing-candidate-btn"><a href="{{route('application.create',['type' => $type])}}">КАНДИДАТСТВАЙ</a></span>
+    </div>-->
+    
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div class="col-md-10 text-center">
+            Това обучение е в рамките на проект „Посока професия", изпълняван с финансовата подкрепа на Исландия, Лихтенщайн и Норвегия по Фонд Младежка безработица,  
+            в рамките на финансовия механизъм на Европейското икономическо пространство и Норвежкия финансов механизъм. 
+            В България проектът се изпълнява от Фондация "Работилница за граждански инициативи". Доставчик на обучението е Вола Софтуер ООД.
+        </div>
     </div>
+    
     </div>
     <script>
         // Set the date we're counting down to
-        var digitalDate = new Date("Feb 07, 2020 00:00:00").getTime();
+        var digitalDate = new Date("Feb 20, 2020 00:00:00").getTime();
         var timerClass = '.timer-digital';
 
         // Update the count down every 1 second

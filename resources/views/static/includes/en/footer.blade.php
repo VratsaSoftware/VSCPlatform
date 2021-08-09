@@ -28,7 +28,7 @@
         <div class="col-md-12 f-contacts">
             <p><i class="far fa-envelope"></i><br/><a href="mailto:school@vratsasoftware.com">school@vratsasoftware.com</a></p>
             <p><i class="fab fa-facebook-square"></i><br/><a href="https://www.facebook.com/vratsasoftware/">vratsasoftware</a></p>
-            <p><i class="fas fa-phone"></i><br/><a href="tel:+359 88 207 6174">+359 88 207 6174</a></p>
+            <p><i class="fas fa-phone"></i><br/><a href="tel:+359 88 81 34 358">+359 88 81 34 358</a></p>
         </div>
     </div>
 

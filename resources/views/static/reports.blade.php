@@ -12,6 +12,18 @@
             <i class="far fa-file-alt"></i> Отчет
         </div>
         <div class="col-md-4 reports-year">
+            2020
+        </div>
+        <div class="col-md-8 reports-holder">
+            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2020.pdf')}}" target=" _blank" class="reports-links">Враца софтуер общество отчет</a>
+        </div>
+        <div class="col-md-4 reports-year">
+            2019
+        </div>
+        <div class="col-md-8 reports-holder">
+            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2019.pdf')}}" target=" _blank" class="reports-links">Враца софтуер общество отчет</a>
+        </div>
+        <div class="col-md-4 reports-year">
             2018
         </div>
         <div class="col-md-8 reports-holder">

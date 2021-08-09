@@ -1,10 +1,5 @@
 @extends('layouts.template')
 @section('title', 'Admin Събития')
-
-@section('head')
-    <link href="{{ asset('css/lection/lection.css') }}" rel="stylesheet" />
-@endsection
-
 @section('content')
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.18/datatables.min.css"/>
 
