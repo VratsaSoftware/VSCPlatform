@@ -43,8 +43,8 @@
     <div class="section">
         <div id="carousel">
             <div class="slideshow-container">
-                {{-- title = 33 characters, text min = 125 / max = 290 --}}
-                <!--<div class="mySlides" data-src="{{asset('/images/home-top-slider/online_course_big2.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">-->
+            {{-- title = 33 characters, text min = 125 / max = 290 --}}
+            <!--<div class="mySlides" data-src="{{asset('/images/home-top-slider/online_course_big2.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">-->
                 <!--    <img src="" width="100%" alt="events">-->
                 <!--    <div class="text text-wrap-gallery col-md-12 text-center">-->
                 <!--        <p>-->
@@ -60,7 +60,7 @@
                 <!--        </p>-->
                 <!--    </div>-->
                 <!--</div>-->
-                <!--<div class="mySlides" data-src="{{asset('/images/home-top-slider/digi_20_20.jpeg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">-->
+            <!--<div class="mySlides" data-src="{{asset('/images/home-top-slider/digi_20_20.jpeg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">-->
                 <!--    <img src="" width="100%" alt="events">-->
                 <!--    <div class="text text-wrap-gallery col-md-12 text-center">-->
                 <!--        <p>-->
@@ -72,11 +72,11 @@
                 <!--        </p>-->
                 <!--        <br/>-->
 
-                <!--        <span class="title-btns-content"><a class="sub-btn" href="{{url('/digital-marketing')}}" target=" _blank">виж още</a></span>-->
+            <!--        <span class="title-btns-content"><a class="sub-btn" href="{{url('/digital-marketing')}}" target=" _blank">виж още</a></span>-->
                 <!--        </p>-->
                 <!--    </div>-->
                 <!--</div>-->
-                <!--<div class="mySlides" data-src="{{asset('/images/home-top-slider/konkurs1.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">-->
+            <!--<div class="mySlides" data-src="{{asset('/images/home-top-slider/konkurs1.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">-->
                 <!--    <img src="" width="100%" alt="events">-->
                 <!--    <div class="text text-wrap-gallery col-md-12 text-center">-->
                 <!--        <p>-->
@@ -111,7 +111,7 @@
                     </div>
                 </div>
 
-                <!--<div class="mySlides" data-src="{{asset('/images/home-top-slider/arduino.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">-->
+            <!--<div class="mySlides" data-src="{{asset('/images/home-top-slider/arduino.jpg')}}" data-loader="{{asset('/images/loaders/load-22.gif')}}">-->
                 <!--    <img src="" width="100%" alt="events">-->
                 <!--    <div class="text text-wrap-gallery col-md-12 text-center">-->
                 <!--        <p>-->
@@ -171,11 +171,11 @@
             <br>
 
             <div id="thumbnails" class="col-md-12">
-                <!--<span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/hack_thumb.png')}}" width="100%" alt="gallery-nav"></span>-->
-                <!--<span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/online_course_small2.jpg')}}" width="100%" alt="gallery-nav"></span>-->
-                <!--<span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/konkurs_small.jpg')}}" width="100%" alt="gallery-nav"></span>-->
+            <!--<span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/hack_thumb.png')}}" width="100%" alt="gallery-nav"></span>-->
+            <!--<span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/online_course_small2.jpg')}}" width="100%" alt="gallery-nav"></span>-->
+            <!--<span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/konkurs_small.jpg')}}" width="100%" alt="gallery-nav"></span>-->
                 <span class="dot" onclick="currentSlide(1)"><img src="{{asset('/images/home-top-slider/gnezdoto_logo_cropped.jpg')}}" width="100%" alt="gallery-nav"></span>
-                <!--<span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/arduino_logo.png')}}" width="100%" alt="gallery-nav"></span>-->
+            <!--<span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/arduino_logo.png')}}" width="100%" alt="gallery-nav"></span>-->
                 <span class="dot" onclick="currentSlide(2)"><img src="{{asset('/images/home-top-slider/mind-hub-crop.png')}}" width="100%" alt="gallery-nav"></span>
                 <span class="dot" onclick="currentSlide(3)"><img src="{{asset('/images/home-top-slider/vsc-thumb-big-2.png')}}" width="100%" alt="gallery-nav"></span>
             </div>
@@ -370,14 +370,14 @@
                 <div class="p-3 col-md-3 sponsors-6" data-img="{{asset('/images/partners/mindhub-logo.png')}}"><a href="https://mindhub.bg/" target=" _blank"><img src=" " alt="mindhub-logo" class="img-fluid"></a></div>
                 <div class="p-3 col-md-3 sponsors-7" data-img="{{asset('/images/partners/CDB-logo.png')}}"><a href="https://www.coderdojo.bg/" target=" _blank"><img src=" " alt="Coder Dojo Bulgaria" class="img-fluid"></a></div>
                 <div class="p-3 col-md-3 sponsors-8" data-img="{{asset('/images/partners/movebg-logo2.png')}}"><a href="https://move.bg/" target=" _blank"><img src=" " alt="movebg-logo" class="img-fluid"></a></div>
-                
+
                 <div class="col-md-2"></div>
                 <div class="p-3 col-md-3 sponsors-9" data-img="{{asset('/images/partners/NMD-Logo.gif')}}"><a href="http://nmd.bg/" target=" _blank"><img src=" " alt="NMD-Logo" class="img-fluid"></a></div>
-                
+
                 <div class="p-3 col-md-3 sponsors-10" data-img="{{asset('/images/partners/Startup-logo-main.png')}}"><a href="http://startup.bg/" target=" _blank"><img src=" " alt="Startup-logo-main" class="img-fluid"></a></div>
 
                 <div class="p-3 col-md-3 sponsors-9" data-img="{{asset('/images/partners/eSkills-For-Future-logo.png')}}"><a href="http://eskills.tto-bait.bg/" target=" _blank"><img src=" " alt="eSkills-For-Future-logo" class="img-fluid"></a></div>
-                
+
                 <div class="col-md-2"></div>
             </div>
             <div class="col-md-5">
