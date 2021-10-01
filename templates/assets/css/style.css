@@ -1043,6 +1043,56 @@ button {
 .img-btn1-ms {
   margin-left: 40px;
 }
+/** Apply Modal **/
+.modal {
+  opacity: 0.55;
+  -webkit-backdrop-filter: blur(28.2px);
+  backdrop-filter: blur(28.2px);
+  background-color: #00214b;
+}
+.modal-dialog {
+  max-width: 1071px;
+  margin-top: 183px;
+}
+.modal-content {
+  box-shadow: 0 3px 99px 0 rgba(0, 0, 0, 0.16);
+  border: none;
+  border-radius: 57px;
+  background-color: #ffffff;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+.modal-title {
+  font-size: 30px;
+  font-weight: 900;
+  letter-spacing: 0.6px;
+  color: #00214b;
+}
+.modal .nav-tabs {
+  border-bottom: solid 6px #cccccc;
+}
+.modal .nav-link.active {
+  font-size: 20px;
+  font-weight: bold;
+  line-height: 1.15;
+  letter-spacing: 0.4px;
+  color: #00214b;
+}
+.modal .nav-link {
+  padding-bottom: 28px;
+}
+.modal .nav-tabs .nav-link.active {
+  border-bottom: solid 6px #69b501;
+  margin-bottom: -6px;
+}
+.modal .score {
+  font-size: 50px;
+  font-weight: 900;
+  line-height: 1.34;
+  letter-spacing: 1px;
+  color: #69b501;
+}
+/** Apply Modal END **/
 /** Media query**/
 @media only screen and (max-width: 1885px) {
   .student-scrol-module {
