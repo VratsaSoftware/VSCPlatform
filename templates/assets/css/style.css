@@ -1085,6 +1085,9 @@ button {
   border-bottom: solid 6px #69b501;
   margin-bottom: -6px;
 }
+.modal .score-title {
+  font-weight: 900;
+}
 .modal .score {
   font-size: 50px;
   font-weight: 900;
