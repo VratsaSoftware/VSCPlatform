@@ -543,6 +543,192 @@ button {
   color: #ffffff !important;
 }
 /** END Course-as-teacher **/
+/** Create admin **/
+.form-create-adm-input {
+  width: 700px;
+  padding: 20px 20px;
+}
+.form-create-adm-textarel {
+  width: 700px !important;
+  min-height: 369px;
+}
+.create-lectur {
+  font-size: 30px;
+  font-weight: 900;
+  color: #778aa4;
+}
+.search-name-lectur {
+  width: 700px;
+  height: 50px;
+  border-radius: 15px;
+  padding: 13px 31.5px 13.2px 17px;
+}
+.lectur-scrol {
+  width: 720px;
+}
+.form-creat-input {
+  width: 326px;
+  padding: 20px 20px;
+}
+@media only screen and (max-width: 1800px) {
+  .form-create-adm-input {
+    width: 500px;
+    padding: 20px 20px;
+  }
+  .form-create-adm-textarel {
+    width: 500px !important;
+    min-height: 369px;
+  }
+  .create-lectur {
+    font-size: 30px;
+    font-weight: 900;
+    color: #778aa4;
+  }
+  .search-name-lectur {
+    width: 500px;
+    height: 50px;
+    border-radius: 15px;
+    padding: 13px 31.5px 13.2px 17px;
+  }
+  .form-creat-input {
+    width: 225px;
+  }
+  .lectur-scrol {
+    width: 520px;
+  }
+}
+@media only screen and (max-width: 1340px) {
+  .form-create-adm-input {
+    width: 400px;
+    margin-bottom: 5%;
+  }
+  .form-create-adm-textarel {
+    width: 400px !important;
+    min-height: 369px;
+  }
+  .search-name-lectur {
+    width: 450px;
+    height: 50px;
+    border-radius: 15px;
+    padding: 13px 31.5px 13.2px 17px;
+  }
+  .form-creat-input {
+    width: 175px;
+    margin-bottom: 5%;
+  }
+  .lectur-scrol {
+    width: 420px;
+  }
+}
+@media only screen and (max-width: 992px) {
+  .form-create-adm-input {
+    width: 480px;
+    padding: 20px 20px;
+  }
+  .form-create-adm-textarel {
+    width: 480px !important;
+    min-height: 369px;
+  }
+  .search-name-lectur {
+    width: 450px;
+    height: 50px;
+  }
+  .form-creat-input {
+    width: 230px;
+  }
+  .lectur-scrol {
+    width: 420px;
+  }
+  .text-posi {
+    text-align: center;
+    padding-bottom: 10px;
+  }
+  .create-lectur {
+    text-align: center;
+  }
+}
+@media only screen and (max-width: 530px) {
+  .form-create-adm-input {
+    width: 380px;
+  }
+  .form-create-adm-textarel {
+    width: 380px !important;
+    min-height: 369px;
+  }
+  .search-name-lectur {
+    width: 350px;
+  }
+  .form-creat-input {
+    width: 190px;
+  }
+  .lectur-scrol {
+    width: 320px;
+  }
+  .me-2-input {
+    margin-right: 10px;
+  }
+}
+@media only screen and (max-width: 410px) {
+  .form-create-adm-input {
+    width: 300px;
+  }
+  .form-create-adm-textarel {
+    width: 300px !important;
+    min-height: 369px;
+  }
+  .search-name-lectur {
+    width: 300px;
+  }
+  .form-creat-input {
+    width: 190px;
+  }
+  .lectur-scrol {
+    width: 320px;
+  }
+}
+@media only screen and (max-width: 350px) {
+  .form-create-adm-input {
+    width: 270px;
+  }
+  .form-create-adm-textarel {
+    width: 270px !important;
+    min-height: 369px;
+  }
+  .search-name-lectur {
+    width: 270px;
+  }
+  .form-creat-input {
+    width: 190px;
+  }
+  .lectur-scrol {
+    width: 260px;
+  }
+  .btn1-form {
+    width: 260px !important;
+  }
+}
+@media only screen and (max-width: 290px) {
+  .form-create-adm-input {
+    width: 240px;
+  }
+  .form-create-adm-textarel {
+    width: 240px !important;
+    min-height: 369px;
+  }
+  .search-name-lectur {
+    width: 240px;
+  }
+  .form-creat-input {
+    width: 190px;
+  }
+  .lectur-scrol {
+    width: 240px;
+  }
+  .btn1-form {
+    width: 240px !important;
+  }
+}
+/** End create admin **/
 /** Login**/
 .logo-black {
   width: 180px;
@@ -1217,14 +1403,116 @@ button {
 .avatar-test-img {
   width: 55px;
 }
-.pagination {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.tab-body-test {
+  padding: 50px;
 }
-
+.page-item {
+  float: left;
+  display: block;
+  margin: 12px;
+}
+.page-item .page-link {
+  color: #00214b;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 50px;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 50px;
+  width: 70px;
+  height: 70px;
+  display: block;
+  background-color: #fff;
+  border: solid 1px #00214b;
+}
+.page-item .page-link:hover,
+.activ-test {
+  color: #fff;
+  background-color: #00214b;
+}
+.v-4 {
+  font-size: 30px;
+}
+.width-test-text {
+  width: 526px;
+}
+.text-v {
+  font-size: 17px;
+}
+.btn1-lg-test {
+  width: 180px;
+  height: 45px;
+  border-radius: 15px;
+}
+.mb-test {
+  margin-bottom: 64px;
+}
+.ps-test-info {
+  padding: 0px 0px 0px 60px;
+}
+.mt-v-test {
+  margin-top: 114px;
+}
+.card-test {
+  width: 323px;
+  height: 200px;
+  border-radius: 77px;
+  background-color: #fff;
+  margin-top: -30px;
+}
+.clock-test {
+  width: 103px;
+  height: 103px;
+}
+.pill-test {
+  position: absolute;
+  right: 280px;
+  background-color: #fff;
+  border: solid 11px #f8fafe;
+  height: 64px;
+  width: 64px;
+}
+.toggled-test-msg {
+  width: 443px;
+}
+.test-msg {
+  display: none;
+}
+.pill-test-2 {
+  margin-right: 7%;
+  transform: rotate(180deg);
+}
+#test-time {
+  display: none;
+}
+.time-test {
+  color: #d07d1e;
+  font-size: 50px;
+}
+.form-module-test {
+  width: 500px;
+}
+.test-img-v {
+  width: 200px;
+  height: 200px;
+  border-radius: 20px;
+}
 /**text end**/
+/**application**/
+.search-name-student {
+  width: 500px;
+  height: 50px;
+  border-radius: 15px;
+  padding: 13px 31.5px 13.2px 17px;
+}
+.category-text {
+  font-size: 25px;
+  background-color: #f6f9ff;
+  border: none;
+  color: #00214b;
+  font-weight: 900;
+}
+/**application end**/
 /** Media query**/
 @media only screen and (max-width: 1885px) {
   .student-scrol-module {
@@ -1617,6 +1905,9 @@ button {
     }
     .ms-elect {
       margin-left: 40px;
+    }
+    .pill-test-2 {
+      margin-right: 9%;
     }
   }
   @media only screen and (max-width: 1280px) {
@@ -2091,6 +2382,16 @@ button {
     .btn1-elec {
       width: 50px;
     }
+    .pill-test-2 {
+      margin-right: 17%;
+    }
+    .width-test-text {
+      width: 300px;
+      font-size: 13px;
+    }
+    .pill-test-2 {
+      margin-right: 16%;
+    }
   }
   @media only screen and (min-width: 992px) {
     .toggled .slide-item {
@@ -2189,6 +2490,12 @@ button {
     .deadline-student {
       font-size: 14px;
       font-weight: 200;
+    }
+    .pill-test-2 {
+      margin-right: 22%;
+    }
+    .form-module-test {
+      width: 400px;
     }
   }
   @media only screen and (max-width: 550px) {
@@ -2307,6 +2614,9 @@ button {
       width: 250px;
       padding: 0px 0px 0px 60px;
     }
+    .form-module-test {
+      width: 300px;
+    }
   }
   @media only screen and (max-width: 438px) {
     .deadline-2 {
@@ -2325,6 +2635,16 @@ button {
     }
     .see-all {
       font-size: 14px;
+    }
+    .time-test {
+      font-size: 30px;
+    }
+    .clock-test {
+      width: 90px;
+      height: 90px;
+    }
+    .pill-test-2 {
+      margin-right: 8%;
     }
   }
   @media only screen and (max-width: 393px) {

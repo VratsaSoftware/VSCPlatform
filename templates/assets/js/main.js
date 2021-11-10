@@ -1,7 +1,14 @@
-$(document).ready(function(){
+$(document).ready(function () {
 
-    $("#toggleNav").click(function(){
+    $("#toggleNav").click(function () {
         $("#mySidenav").toggleClass("toggled");
+    });
+
+    $("#toggleTEST").click(function () {
+        $("#mySidetest").toggleClass("toggled-test-msg");
+        $("#test-msg").toggleClass("test-msg");
+        $(".pill-test").toggleClass("pill-test-2");
+        $('#test-time').toggle();
     });
 
     $('.btn-green').on('click', function () {
@@ -18,10 +25,10 @@ $(document).ready(function(){
         $("#right-side .tab-pane.active").removeClass("active");
     });
     $('.comment-toggler').on('click', function () {
-        var toggler =  $(this).parent();
+        var toggler = $(this).parent();
         toggler.prev().children().toggleClass("active");
         $(this).toggleClass("active");
-    });    
+    });
     if ($(window).width() < 992) {
         $("#right-side .tab-pane.active").removeClass("active");
         $('.btn-green.active').removeClass("active");
