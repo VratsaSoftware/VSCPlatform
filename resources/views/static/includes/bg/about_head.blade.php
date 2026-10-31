@@ -1,6 +1,6 @@
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Екипът на Враца Софтуер Общество – основатели, управленски екип и лектори, които развиват ИТ общността и обученията по програмиране във Враца.">
+    <meta name="description" content="Основателите на Враца Софтуер Общество – Емилиян Кадийски, Теодор Костадинов и Илиян Димов, които развиват ИТ общността и обученията по програмиране във Враца.">
     <meta name="keywords" content="Враца Софтуер,Програмиране,Курсове,Програмисти,Обучения,Враца">
     <meta name="author" content="Враца Софутер Общество">
 
@@ -32,7 +32,7 @@
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Екип | Враца Софтуер Общество" />
-    <meta property="og:description" content="Екипът на Враца Софтуер Общество – основатели, управленски екип и лектори, които развиват ИТ общността и обученията по програмиране във Враца." />
+    <meta property="og:description" content="Основателите на Враца Софтуер Общество – Емилиян Кадийски, Теодор Костадинов и Илиян Димов, които развиват ИТ общността и обученията по програмиране във Враца." />
     <meta property="og:image" content="{{asset('/images/vso-png-big-2.png')}}" />
 
     <link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}" />

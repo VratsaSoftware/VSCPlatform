@@ -1,6 +1,6 @@
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="The Vratsa Software team – founders, management and lecturers who build the IT community and programming courses in Vratsa.">
+    <meta name="description" content="The founders of Vratsa Software – Emiliyan Kadiyski, Teodor Kostadinov and Iliyan Dimov – who build the IT community and programming courses in Vratsa.">
     <meta name="keywords" content="Vraca Software,Programming,Courses,Programmers,Education,Vratsa,Vraca">
     <meta name="author" content="Vratsa Software">
 
@@ -32,7 +32,7 @@
     <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content="Team | Vratsa Software" />
-    <meta property="og:description" content="The Vratsa Software team – founders, management and lecturers who build the IT community and programming courses in Vratsa." />
+    <meta property="og:description" content="The founders of Vratsa Software – Emiliyan Kadiyski, Teodor Kostadinov and Iliyan Dimov – who build the IT community and programming courses in Vratsa." />
     <meta property="og:image" content="{{asset('/images/vso-png-big-2.png')}}" />
 
     <link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}" />

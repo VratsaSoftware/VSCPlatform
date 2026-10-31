@@ -11,8 +11,7 @@
             <li class="about-go bg-secondary"><a class="text-light" href="{{route('contacts')}}">Контакти</a></li>
             <li class="nav-item"><a href="http://gnezdoto.vratsasoftware.com/" target=" _blank">Гнездото</a></li>
             <li class="nav-item"><a class="edu-hamburger" href="#">Обучения <i class="fas fa-angle-down"></i></a></li>
-            <li class="edu-go bg-secondary"><a class="text-light" href="{{route('programmingCourses')}}">Програмиране</a></li>
-            <li class="edu-go bg-secondary"><a class="text-light" href="{{route('digitalMarketing')}}">Дигитален Маркетинг</a></li>
+            <li class="edu-go bg-secondary"><a class="text-light" href="https://ai-course.vratsasoftware.com" target="_blank" rel="noopener">AI за стартиращ бизнес</a></li>
             <li class="nav-item"><a href="{{route('login')}}" class="right-mobile">Вход</a></li>
             {{-- <li class="nav-item"><a href="#" class="right-mobile">Кандидатствай</a></li> --}}
             <li>

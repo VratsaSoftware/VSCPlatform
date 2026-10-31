@@ -12,6 +12,48 @@
             <i class="far fa-file-alt"></i> Отчет
         </div>
         <div class="col-md-4 reports-year">
+            2025
+        </div>
+        <div class="col-md-8 reports-holder">
+            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2025.pdf')}}" target=" _blank" class="reports-links">Враца софтуер общество отчет</a>
+        </div>
+        <div class="col-md-4 reports-year">
+            2024
+        </div>
+        <div class="col-md-8 reports-holder">
+            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2024.pdf')}}" target=" _blank" class="reports-links">Враца софтуер общество отчет</a>
+        </div>
+        <div class="col-md-4 reports-year">
+            2023
+        </div>
+        <div class="col-md-8 reports-holder">
+            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2023.pdf')}}" target=" _blank" class="reports-links">Враца софтуер общество отчет</a>
+        </div>
+        <div class="col-md-4 reports-year">
+            2022
+        </div>
+        <div class="col-md-8 reports-holder">
+            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2022.pdf')}}" target=" _blank" class="reports-links">Враца софтуер общество отчет</a>
+        </div>
+        <div class="col-md-4 reports-year">
+            2021
+        </div>
+        <div class="col-md-8 reports-holder">
+            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2021.pdf')}}" target=" _blank" class="reports-links">Враца софтуер общество отчет</a>
+        </div>
+        <div class="col-md-4 reports-year">
+            2020
+        </div>
+        <div class="col-md-8 reports-holder">
+            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2020.pdf')}}" target=" _blank" class="reports-links">Враца софтуер общество отчет</a>
+        </div>
+        <div class="col-md-4 reports-year">
+            2019
+        </div>
+        <div class="col-md-8 reports-holder">
+            <i class="fas fa-external-link-alt"></i> <a href="{{asset('/year_reports/VSC-Report-2019.pdf')}}" target=" _blank" class="reports-links">Враца софтуер общество отчет</a>
+        </div>
+        <div class="col-md-4 reports-year">
             2018
         </div>
         <div class="col-md-8 reports-holder">
