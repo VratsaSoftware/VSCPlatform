@@ -10,7 +10,7 @@ use App\Models\CourseModules\Module;
 use App\Models\CourseModules\ModulesStudent;
 use App\Models\CourseModules\LectionComment;
 use App\User;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request as Input;
 use Image;
 use File;
 use Validator;

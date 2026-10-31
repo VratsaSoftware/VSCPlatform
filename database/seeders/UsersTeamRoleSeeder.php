@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class UsersTeamRoleSeeder extends Seeder
@@ -13,7 +15,7 @@ class UsersTeamRoleSeeder extends Seeder
     {
         $roles = ['капитан','участник'];
         foreach ($roles as $key => $role) {
-            App\Models\Users\UsersTeamRole::create([
+            \App\Models\Users\UsersTeamRole::create([
                 'role' => $role,
             ]);
         }

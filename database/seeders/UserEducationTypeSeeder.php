@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class UserEducationTypeSeeder extends Seeder
@@ -13,7 +15,7 @@ class UserEducationTypeSeeder extends Seeder
     {
         $types = ['Средно Образование','Професионално Образование','Бакалавър','Магистърска Степен','Докторска степен'];
         foreach ($types as $key => $type) {
-            App\Models\Users\EducationType::create([
+            \App\Models\Users\EducationType::create([
                 'type' => $type,
             ]);
         }

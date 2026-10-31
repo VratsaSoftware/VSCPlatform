@@ -10,7 +10,7 @@ use App\Models\CourseModules\Lection;
 class Module extends Model
 {
     protected $table = 'courses_modules';
-    protected $dates = ['starts','ends'];
+    protected $casts = ['starts' => 'datetime', 'ends' => 'datetime'];
     protected $guarded = [];
 
     public function Course()

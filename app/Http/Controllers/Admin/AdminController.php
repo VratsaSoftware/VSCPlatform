@@ -13,7 +13,7 @@ use App\Models\Courses\Course;
 use App\Models\Events\Event;
 use App\Models\Courses\CerfticiationTemplate;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request as Input;
 use View;
 use App\User;
 use Image;

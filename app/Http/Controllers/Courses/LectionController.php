@@ -16,7 +16,7 @@ use App\User;
 use Illuminate\Support\Facades\Auth;
 use Redirect;
 use File;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request as Input;
 use Carbon\Carbon;
 
 class LectionController extends Controller

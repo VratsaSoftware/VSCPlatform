@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class TeamEventCategorySeeder extends Seeder
@@ -13,7 +15,7 @@ class TeamEventCategorySeeder extends Seeder
     {
         $categories = ['Уеб сайт или уеб приложение','Мобилно приложение','Десктоп приложение', 'Embedded системи(хардуер)'];
         foreach ($categories as $key => $category) {
-        		App\Models\Events\TeamCategory::create([
+        		\App\Models\Events\TeamCategory::create([
                 'category' => $category,
             ]);
         }

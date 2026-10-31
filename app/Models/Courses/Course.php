@@ -12,7 +12,7 @@ use App\Models\CourseModules\ModulesStudent;
 class Course extends Model
 {
     protected $table = 'courses';
-    protected $dates = ['starts','ends','applications_from','applications_to'];
+    protected $casts = ['starts' => 'datetime', 'ends' => 'datetime', 'applications_from' => 'datetime', 'applications_to' => 'datetime'];
     protected $guarded = [];
 
     public function Modules()

@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class TrainingTypeSeeder extends Seeder
@@ -13,7 +15,7 @@ class TrainingTypeSeeder extends Seeder
     {
         $types = ['Програмиране','Дигитален Маркетинг','Дизайн', 'друго'];
         foreach ($types as $key => $type) {
-            App\Models\Courses\TrainingType::create([
+            \App\Models\Courses\TrainingType::create([
                 'type' => $type,
             ]);
         }

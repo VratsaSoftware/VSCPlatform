@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class ShirtSizeSeeder extends Seeder
@@ -13,7 +15,7 @@ class ShirtSizeSeeder extends Seeder
     {
         $sizes = ['S', 'M', 'L', 'XL', 'XXL'];
         foreach ($sizes as $key => $size) {
-            App\Models\Users\ShirtSize::create([
+            \App\Models\Users\ShirtSize::create([
                 'size' => $size,
             ]);
         }

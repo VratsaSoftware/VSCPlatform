@@ -63,6 +63,8 @@
                     $('head').append('<link rel="stylesheet" href="{{asset('/css/lecturer_courses.css')}}" />');
                     });
     </script>
+    {{-- verbatim: Blade (7+) would otherwise parse the <x:...> Excel XML tags below as components --}}
+    @verbatim
     <script>
         $('.download-stats').on('click', function(){
             var table = 'forms';
@@ -85,5 +87,6 @@
 
         });
     </script>
+    @endverbatim
 
 </html>

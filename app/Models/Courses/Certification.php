@@ -10,7 +10,7 @@ use App\Models\CourseModules\Module;
 class Certification extends Model
 {
     protected $table = 'course_certifications';
-    protected $dates = ['started','finished'];
+    protected $casts = ['started' => 'datetime', 'finished' => 'datetime'];
 
     public function Users()
     {

@@ -46,7 +46,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $guarded = [];
-    protected $dates = ['dob'];
+    protected $casts = ['dob' => 'datetime'];
 
     /**
      * The attributes that should be hidden for arrays.

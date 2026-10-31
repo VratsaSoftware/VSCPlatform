@@ -11,7 +11,7 @@ use App\Models\Events\Team;
 use App\Models\Events\TeamMember;
 use App\Models\Events\TeamCategory;
 use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request as Input;
 use Illuminate\Support\Facades\Password;
 use Image;
 use File;
@@ -691,7 +691,7 @@ class EventController extends Controller
                 'cl_occupation_id' => $data['occupation'],
                 'location' => $data['location'],
                 'sex' => $data['sex'],
-                'password' => Hash::make(str_random(12)),
+                'password' => Hash::make(\Illuminate\Support\Str::random(12)),
             ]);
             $data = $request->except([
                 '_token',

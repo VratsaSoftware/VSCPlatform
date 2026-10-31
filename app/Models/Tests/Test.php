@@ -9,7 +9,7 @@ class Test extends Model
 {
     protected $guarded = [];
     protected $table = 'tests';
-    protected $dates = ['start_at','expire_at'];
+    protected $casts = ['start_at' => 'datetime', 'expire_at' => 'datetime'];
 
     public function getDurationAttribute($value)
     {

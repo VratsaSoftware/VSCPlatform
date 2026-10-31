@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class PersonalCertificate extends Model
 {
     protected $table = 'personal_certificate';
-    protected $dates = ['date','created_at','updated_at','deleted_at'];
+    protected $casts = ['date' => 'datetime', 'created_at' => 'datetime', 'updated_at' => 'datetime', 'deleted_at' => 'datetime'];
     protected $guarded = [];
 
     public function User()

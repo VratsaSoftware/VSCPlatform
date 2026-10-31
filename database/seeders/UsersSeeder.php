@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class UsersSeeder extends Seeder
@@ -11,8 +13,8 @@ class UsersSeeder extends Seeder
      */
     public function run()
     {
-        $role = App\Models\Users\Role::where('role','admin')->first();
-        App\User::create([
+        $role = \App\Models\Users\Role::where('role','admin')->first();
+        \App\User::create([
                 'name' => 'Admin',
                 'email' => 'admin@vsc.com',
                 'last_name' => 'admin',

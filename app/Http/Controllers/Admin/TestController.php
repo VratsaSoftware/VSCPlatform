@@ -15,7 +15,7 @@ use App\Models\Tests\BankAnswer;
 use App\Models\Tests\BankType;
 use App\Models\Tests\TestUserAnswer;
 use App\User;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request as Input;
 use Image;
 use File;
 
@@ -402,7 +402,7 @@ class TestController extends Controller
                     'correct_one_answer',
                     'answers'
                 ]);
-                for ($r = 0; $r < count($request->answers); $r++) {
+                for ($r = 0; $r < count($request->answers ?? []); $r++) {
                     unset($data['image_for_' . $r]);
                     unset($data['image_for_']);
                 }
@@ -455,7 +455,7 @@ class TestController extends Controller
                     'correct_many_answer',
                     'answers'
                 ]);
-                for ($r = 0; $r < count($request->answers); $r++) {
+                for ($r = 0; $r < count($request->answers ?? []); $r++) {
                     unset($data['image_for_' . $r]);
                     unset($data['image_for_']);
                 }
@@ -583,7 +583,7 @@ class TestController extends Controller
                     'answers',
                     'answers_before'
                 ]);
-                for ($r = 0; $r < count($request->answers); $r++) {
+                for ($r = 0; $r < count($request->answers ?? []); $r++) {
                     unset($data['image_for_' . $r]);
                     unset($data['image_for_']);
                 }
@@ -648,7 +648,7 @@ class TestController extends Controller
                     'correct_many_answer',
                     'answers'
                 ]);
-                for ($r = 0; $r < count($request->answers); $r++) {
+                for ($r = 0; $r < count($request->answers ?? []); $r++) {
                     unset($data['image_for_' . $r]);
                     unset($data['image_for_']);
                     unset($data['old_image_' . $r]);

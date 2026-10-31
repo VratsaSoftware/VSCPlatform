@@ -221,7 +221,7 @@ class ApplicationController extends Controller
             'cl_role_id' => $role->id,
             'dob' => $dob,
             'cl_occupation_id' => $data['occupation'],
-            'password' => Hash::make(str_random(12)),
+            'password' => Hash::make(\Illuminate\Support\Str::random(12)),
         ]);
 
 

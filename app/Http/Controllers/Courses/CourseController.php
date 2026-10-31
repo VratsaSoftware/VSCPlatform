@@ -14,7 +14,7 @@ use App\Models\Courses\CourseLecturer;
 use App\Models\CourseModules\Module;
 use App\User;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request as Input;
 use Image;
 use File;
 use Illuminate\Support\Facades\Storage;

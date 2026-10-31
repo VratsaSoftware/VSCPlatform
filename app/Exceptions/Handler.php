@@ -3,10 +3,10 @@
 namespace App\Exceptions;
 
 use Exception;
+use Throwable;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Mail;
-use Symfony\Component\Debug\Exception\FlattenException;
-use Symfony\Component\Debug\ExceptionHandler as SymfonyExceptionHandler;
+use Symfony\Component\ErrorHandler\ErrorRenderer\HtmlErrorRenderer;
 use App\Mail\ExceptionOccured;
 
 class Handler extends ExceptionHandler
@@ -33,10 +33,10 @@ class Handler extends ExceptionHandler
     /**
      * Report or log an exception.
      *
-     * @param  \Exception  $exception
+     * @param  \Throwable  $exception
      * @return void
      */
-    public function report(Exception $exception)
+    public function report(Throwable $exception)
     {
         if(env('ON_ERROR_SEND_MAIL',true)) {
             $this->sendEmail($exception);
@@ -48,10 +48,10 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \Exception  $exception
-     * @return \Illuminate\Http\Response
+     * @param  \Throwable  $exception
+     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function render($request, Exception $exception)
+    public function render($request, Throwable $exception)
     {
         return parent::render($request, $exception);
     }
@@ -59,17 +59,13 @@ class Handler extends ExceptionHandler
     /**
      * Sends an email to the developer about the exception.
      *
-     * @param  \Exception  $exception
+     * @param  \Throwable  $exception
      * @return void
      */
-    public function sendEmail(Exception $exception)
+    public function sendEmail(Throwable $exception)
     {
         try {
-            $e = FlattenException::create($exception);
-
-            $handler = new SymfonyExceptionHandler();
-
-            $html = $handler->getHtml($e);
+            $html = (new HtmlErrorRenderer(true))->render($exception)->getAsString();
             $mailsToSend = config('ExceptionsEmails');
             foreach($mailsToSend as $mailMe) {
                 Mail::to($mailMe)->send(new ExceptionOccured($html));

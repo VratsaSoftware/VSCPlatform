@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class UserSocialSeeder extends Seeder
@@ -13,7 +15,7 @@ class UserSocialSeeder extends Seeder
     {
         $socials = ['facebook','linkedin','github','skype','dribbble','behance'];
         foreach ($socials as $key => $social) {
-            App\Models\Users\Social::create([
+            \App\Models\Users\Social::create([
                 'name' => $social,
             ]);
         }

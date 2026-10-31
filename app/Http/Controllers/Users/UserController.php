@@ -6,7 +6,7 @@ use App\Models\Courses\PersonalCertificate;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\User;
-use Illuminate\Support\Facades\Input;
+use Illuminate\Support\Facades\Request as Input;
 use Image;
 use File;
 use Carbon\Carbon;

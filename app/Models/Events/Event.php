@@ -9,7 +9,7 @@ class Event extends Model
 {
     protected $guarded = [];
     protected $table = 'events';
-    protected $dates = ['from','to'];
+    protected $casts = ['from' => 'datetime', 'to' => 'datetime'];
 
     public function Teams()
     {

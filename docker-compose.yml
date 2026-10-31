@@ -1,0 +1,27 @@
+services:
+  mysql:
+    # MySQL 5.7 matches the Laravel 5.7 / PHP 7.1 era of this project
+    # (avoids MySQL 8's caching_sha2_password auth issues with older PDO drivers)
+    image: mysql:5.7
+    container_name: vscplatform-mysql
+    restart: unless-stopped
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_DATABASE: vscplatform
+      MYSQL_USER: vscplatform
+      MYSQL_PASSWORD: secret
+      MYSQL_ROOT_PASSWORD: root
+    command:
+      - --character-set-server=utf8mb4
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot", "-proot"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  mysql_data:

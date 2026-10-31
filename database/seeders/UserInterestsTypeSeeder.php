@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class UserInterestsTypeSeeder extends Seeder
@@ -13,7 +15,7 @@ class UserInterestsTypeSeeder extends Seeder
     {
         $types = ['Програмиране','Дизайн','Дигитален Маркетинг','Предприемачеството','Спорт','други'];
         foreach ($types as $key => $type) {
-            App\Models\Users\InterestsType::create([
+            \App\Models\Users\InterestsType::create([
                 'type' => $type,
             ]);
         }

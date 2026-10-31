@@ -1,5 +1,7 @@
 <?php
 
+namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class UserOccupationSeeder extends Seeder
@@ -13,7 +15,7 @@ class UserOccupationSeeder extends Seeder
     {
         $occupations = ['ученик-гимназия','ученик-университет','работещ','безработен','по-часово','друго'];
         foreach ($occupations as $key => $occupation) {
-            App\Models\Users\Occupation::create([
+            \App\Models\Users\Occupation::create([
                 'occupation' => $occupation,
             ]);
         }

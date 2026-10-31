@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Model;
 class Poll extends Model
 {
     protected $table = 'polls';
-    protected $dates = ['start','ends'];
+    protected $casts = ['start' => 'datetime', 'ends' => 'datetime'];
     protected $guarded = [];
 
     public function Options()

@@ -9,7 +9,7 @@ use App\Models\Courses\Course;
 class CourseLecturer extends Model
 {
     protected $table = 'courses_lecturers';
-    protected $dates = ['created_at'];
+    protected $casts = ['created_at' => 'datetime'];
 
     public function User()
     {
