@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="bg">
+<html lang="en">
 
 @include('static.includes.en.single_head')
 

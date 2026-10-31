@@ -15,8 +15,7 @@
         <li class="nav-item dropdown-el">
             <a href="#">Courses</a>
             <div class="dropdown-content">
-                <a href="{{route('programmingCourses')}}">Programming</a>
-                <a href="{{route('digitalMarketing')}}">Digital Marketing</a>
+                <a href="https://ai-course.vratsasoftware.com" target="_blank" rel="noopener">AI training for startups</a>
             </div>
         </li>
         <li>

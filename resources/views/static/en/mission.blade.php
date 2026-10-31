@@ -1,6 +1,6 @@
 @extends('static.en.single_layout')
 @section('title', 'Mission')
-@section('description', 'The mission of Vratsa Software is to build an IT society in Vratsa that, through quality education, gives people the opportunity to work a challenging and well-paid job in their hometown.')
+@section('description', 'The mission of Vratsa Software is to build an IT society in Vratsa that, through quality education, gives people the opportunity to work a challenging and well-paid job in their hometown. We run trainings on using artificial intelligence for business development and founded the AI Community Vratsa.')
 @section('content')
 @include('static.includes.en.lang_btn')
             <h1 class="col-md-12 header-about-text text-center">
@@ -11,6 +11,9 @@
 				<div class="col-md-12">
 					<p>
                         Establishing an IT Society, which through quality education gives people in Vratsa an opportunity  to work a challenging and well-paid job in their hometown.
+                    </p>
+                    <p>
+                        In recent years, we have been running trainings on using artificial intelligence for business development, and we founded the AI Community Vratsa.
                     </p>
                     <p>
                         Information about what we have done so far can be found in our <a href="{{route('year_reports')}}" class="reports-links">annual reports.</a>
