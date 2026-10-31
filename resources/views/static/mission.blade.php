@@ -1,9 +1,10 @@
 @extends('static.single_layout')
 @section('title', 'Мисия')
+@section('description', 'Мисията на Враца Софтуер Общество е да създаде ИТ общество във Враца, което чрез качествено образование дава възможност на врачани да работят предизвикателна и добре платена работа в родния си град.')
 @section('content')
-    <div class="col-md-12 header-about-text text-center">
+    <h1 class="col-md-12 header-about-text text-center">
         Мисия на „Враца софтуер общество”
-    </div>
+    </h1>
 
     <div id="single-text" class="col-md-12 d-flex flex-row flex-wrap text-center">
         <div class="col-md-12">

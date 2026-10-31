@@ -1,10 +1,11 @@
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Развиваме дигитална индустрия във Враца">
+    <meta name="description" content="Екипът на Враца Софтуер Общество – основатели, управленски екип и лектори, които развиват ИТ общността и обученията по програмиране във Враца.">
     <meta name="keywords" content="Враца Софтуер,Програмиране,Курсове,Програмисти,Обучения,Враца">
     <meta name="author" content="Враца Софутер Общество">
 
-    <title>Екип</title>
+    <title>Екип | Враца Софтуер Общество</title>
+    <link rel="canonical" href="{{ url()->current() }}" />
 
     <link rel="stylesheet" href="{{asset('/css/landing.css')}}">
 
@@ -28,10 +29,10 @@
     <link rel="shortcut icon" type="image/png" href="{{asset('/images/vso-png.png')}}" />
 
     <!-- facebook -->
-    <meta property="og:url" content="" />
+    <meta property="og:url" content="{{ url()->current() }}" />
     <meta property="og:type" content="website" />
-    <meta property="og:title" content="Враца Софтуер Общество" />
-    <meta property="og:description" content="Курсове по програмиране" />
+    <meta property="og:title" content="Екип | Враца Софтуер Общество" />
+    <meta property="og:description" content="Екипът на Враца Софтуер Общество – основатели, управленски екип и лектори, които развиват ИТ общността и обученията по програмиране във Враца." />
     <meta property="og:image" content="{{asset('/images/vso-png-big-2.png')}}" />
 
     <link rel="stylesheet" href="{{asset('/css/font-awesome.min.css')}}" />

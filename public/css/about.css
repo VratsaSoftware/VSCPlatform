@@ -3,6 +3,17 @@ body {
     padding: 0;
 }
 
+/* These classes are now on real h1/h2/h3 elements (for crawlers and screen
+   readers). Neutralise Bootstrap's heading defaults so they look like the
+   former divs; the class rules further down still override this. */
+.header-about-text, .founders-title, .team-title {
+    font-size: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 @font-face {
     font-family: Ubuntu;
     src: url(fonts/ubuntu/Ubuntu-Regular.ttf);
@@ -73,7 +84,7 @@ body {
 }
 
 /*end of team section*/
-#team>div {
+#team>div, #team>h2 {
     margin-bottom: 2vw;
     margin-top: 5vw;
     /*padding-left: 10vw;
@@ -198,7 +209,7 @@ body {
         font-size: 5vw;
     }
 
-    #team>div {
+    #team>div, #team>h2 {
         margin-bottom: 15vw;
     }
 
@@ -248,7 +259,7 @@ body {
         font-size: 3vw;
     }
 
-    #team>div {
+    #team>div, #team>h2 {
         margin-bottom: 15vw;
     }
 
@@ -296,7 +307,7 @@ body {
         text-align: center;
     }
 
-    #team>div {
+    #team>div, #team>h2 {
         margin-bottom: 10vw;
     }
 
@@ -343,7 +354,7 @@ body {
         text-align: center;
     }
 
-    #team>div {
+    #team>div, #team>h2 {
         margin-bottom: 5vw;
     }
 
@@ -391,7 +402,7 @@ body {
         text-align: center;
     }
 
-    #team>div {
+    #team>div, #team>h2 {
         margin-bottom: 1vw;
     }
 

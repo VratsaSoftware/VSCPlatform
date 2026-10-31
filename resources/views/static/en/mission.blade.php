@@ -1,10 +1,11 @@
 @extends('static.en.single_layout')
 @section('title', 'Mission')
+@section('description', 'The mission of Vratsa Software is to build an IT society in Vratsa that, through quality education, gives people the opportunity to work a challenging and well-paid job in their hometown.')
 @section('content')
 @include('static.includes.en.lang_btn')
-            <div class="col-md-12 header-about-text text-center">
+            <h1 class="col-md-12 header-about-text text-center">
                 Vratsa Software Mission
-            </div>
+            </h1>
 
 			<div id="single-text" class="col-md-12 d-flex flex-row flex-wrap text-center">
 				<div class="col-md-12">
